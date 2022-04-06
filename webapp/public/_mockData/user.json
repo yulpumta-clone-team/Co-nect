@@ -1,0 +1,97 @@
+{
+  "data": {
+    "user_id": 409918278,
+    "name": "홍길동",
+    "content": "# 임시 데이터\n# 이런식으로하면 됩니다.\n\n### 알겠습니다\n\n안녕하세요. **프론트**입니다.",
+    "session": "string",
+    "img": "string",
+    "read": "int",
+    "job": "string",
+    "comment_cnt": 0,
+    "skills": ["react", "js", "ts"],
+    "like_cnt": 0,
+    "createdAt": "2022-02-23 00:24:15.510341",
+    "updatedAt": "2022-02-24 00:24:15.510341",
+    "comments": [
+      {
+        "id": "1",
+        "writter_id": 140192931,
+        "nickname": "front_temp",
+        "users_like": [901092146501, 92719182999999, 927191821029312],
+        "like_cnt": 0,
+        "content": "연습용 댓글입니다.",
+        "img": null,
+        "createdAt": "2022-03-01 00:24:15.510341",
+        "updatedAt": "2022-03-04 00:24:15.510341",
+        "isSecret": false,
+        "replies": [
+          {
+            "id": "1123",
+            "parent_id": "1",
+            "writter_id": 140192931,
+            "nickname": "front_temp",
+            "users_like": [901092146501, 92719182999999],
+            "like_cnt": 0,
+            "content": "연습용 eoeomt.",
+            "img": null,
+            "createdAt": "2022-03-01 00:24:15.510341",
+            "updatedAt": "2022-03-04 00:24:15.510341",
+            "isSecret": false
+          },
+          {
+            "id": "4441",
+            "parent_id": "1",
+            "writter_id": 140192931,
+            "nickname": "front_temp",
+            "users_like": [901092146501, 92719182999999, 927191821029312],
+            "like_cnt": 0,
+            "content": "연습용 대댓글.",
+            "img": null,
+            "createdAt": "2022-03-01 00:24:15.510341",
+            "updatedAt": "2022-03-04 00:24:15.510341",
+            "isSecret": false
+          },
+          {
+            "id": "15151",
+            "parent_id": "1",
+            "writter_id": 140192931,
+            "nickname": "front_temp",
+            "users_like": [901092146501, 92719182999999],
+            "like_cnt": 0,
+            "content": "대댓글.",
+            "img": null,
+            "createdAt": "2022-03-01 00:24:15.510341",
+            "updatedAt": "2022-03-04 00:24:15.510341",
+            "isSecret": false
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "users_like": [901092146501, 92719182999999],
+        "writter_id": 134124131,
+        "nickname": "server_temp",
+        "isLike": false,
+        "content": "안녕하세요",
+        "img": null,
+        "createdAt": "2022-03-02 00:24:15.510341",
+        "updatedAt": "2022-03-04 00:24:15.510341",
+        "isSecret": false,
+        "replies": []
+      },
+      {
+        "id": "4",
+        "users_like": [901092146501, 92719182999999, 927191821029312],
+        "writter_id": 140192931,
+        "nickname": "front_temp",
+        "isLike": false,
+        "content": "연습용 댓글입니다.",
+        "img": null,
+        "createdAt": "2022-03-01 00:24:15.510341",
+        "updatedAt": "2022-03-04 00:24:15.510341",
+        "isSecret": true,
+        "replies": []
+      }
+    ]
+  }
+}

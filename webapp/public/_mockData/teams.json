@@ -1,0 +1,118 @@
+{
+  "status": "000",
+  "isSuccess": true,
+  "code": 1000,
+  "message": "요청 성공",
+  "data": [
+    {
+      "user_id": 123123123,
+      "team_id": 1,
+      "name": "코넥트",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 10,
+      "skills": ["react", "js", "java", "nodejs"]
+    },
+    {
+      "user_id": 456456456,
+      "team_id": 2,
+      "name": "애플팀플",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 30,
+      "skills": ["js", "ts", "java", "nodejs"]
+    },
+    {
+      "user_id": 789789789,
+      "team_id": 3,
+      "name": "윈도우팀플",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 5,
+      "skills": ["js", "ts", "java", "spring"]
+    },
+    {
+      "user_id": 789789789,
+      "team_id": 4,
+      "name": "444",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 3,
+      "skills": ["js", "ts", "java", "spring", "xd"]
+    },
+    {
+      "user_id": 789789789,
+      "team_id": 5,
+      "name": "555",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 7,
+      "skills": ["react", "js", "ts", "nodejs", "spring"]
+    },
+    {
+      "user_id": 789789789,
+      "team_id": 6,
+      "name": "66",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 9,
+      "skills": ["react", "js", "ts", "java", "spring", "xd"]
+    },
+    {
+      "user_id": 789789789,
+      "team_id": 7,
+      "name": "777",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 10,
+      "skills": ["react", "js", "java", "spring"]
+    },
+    {
+      "user_id": 789789789,
+      "team_id": 8,
+      "name": "8888",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 4,
+      "skills": ["react", "js", "ts", "java", "spring"]
+    },
+    {
+      "user_id": 789789789,
+      "team_id": 9,
+      "name": "99",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 2,
+      "skills": ["react", "ts", "nodejs", "figma"]
+    },
+    {
+      "user_id": 3010101010101111,
+      "team_id": 10,
+      "name": "10",
+      "session": "희망기간",
+      "img": "stirng",
+      "read": 0,
+      "comment_cnt": 0,
+      "like_cnt": 6,
+      "skills": ["react", "js", "ts", "nodejs", "figma"]
+    }
+  ]
+}
