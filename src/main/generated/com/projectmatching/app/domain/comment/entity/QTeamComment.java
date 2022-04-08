@@ -24,6 +24,8 @@ public class QTeamComment extends EntityPathBase<TeamComment> {
 
     public final com.projectmatching.app.domain.QBaseTimeEntity _super = new com.projectmatching.app.domain.QBaseTimeEntity(this);
 
+    public final SetPath<TeamComment, QTeamComment> comments = this.<TeamComment, QTeamComment>createSet("comments", TeamComment.class, QTeamComment.class, PathInits.DIRECT2);
+
     public final StringPath content = createString("content");
 
     //inherited
@@ -31,7 +33,7 @@ public class QTeamComment extends EntityPathBase<TeamComment> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final NumberPath<Long> parentId = createNumber("parentId", Long.class);
+    public final QTeamComment parent;
 
     public final BooleanPath secret = createBoolean("secret");
 
@@ -44,6 +46,8 @@ public class QTeamComment extends EntityPathBase<TeamComment> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
+
+    public final StringPath writer = createString("writer");
 
     public QTeamComment(String variable) {
         this(TeamComment.class, forVariable(variable), INITS);
@@ -63,6 +67,7 @@ public class QTeamComment extends EntityPathBase<TeamComment> {
 
     public QTeamComment(Class<? extends TeamComment> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.parent = inits.isInitialized("parent") ? new QTeamComment(forProperty("parent"), inits.get("parent")) : null;
         this.team = inits.isInitialized("team") ? new com.projectmatching.app.domain.team.entity.QTeam(forProperty("team")) : null;
     }
 
