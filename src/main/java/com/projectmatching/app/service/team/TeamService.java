@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 
 @RequiredArgsConstructor
@@ -88,13 +89,13 @@ public class TeamService {
 
             for(Team team : teams){
                 TeamResponseDto teamResponseDto = new TeamResponseDto();
-                BeanUtils.copyProperties(team, teamResponseDto);
+                copyProperties(team, teamResponseDto);
                 teamResponseDto.setUserId(findTeamUser(team));
                 teamResponseDto.setSkills(findTeamTech(team));
                 teamResponseDto.setCommentCnt(team.getTeamComments().size());
                 teamResponseDto.setLikeCnt(team.getTeamLikings().size());
 
-                if(team.getStatus()=="NA") {
+                if(team.getStatus()=="removed") {
                     teamResponseDto.setStatus(Boolean.FALSE);
                 } else{
                     teamResponseDto.setStatus(Boolean.TRUE);
@@ -112,21 +113,20 @@ public class TeamService {
     public TeamDetailResponseDto getTeam(Long team_id) throws ResponeException {
         Team team = teamRepository.findById(team_id).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
         try{
-            TeamDetailResponseDto teamResponseDto = new TeamDetailResponseDto();
-            BeanUtils.copyProperties(team, teamResponseDto);
-            teamResponseDto.setUserId(findTeamUser(team));
-            teamResponseDto.setSkills(findTeamTech(team));
-            teamResponseDto.setTeamComments(findTeamComment(team));
-            teamResponseDto.setCommentCnt(team.getTeamComments().size());
-            teamResponseDto.setLikeCnt(team.getTeamLikings().size());
+            TeamDetailResponseDto teamDetailResponseDto = new TeamDetailResponseDto();
+            copyProperties(team, teamDetailResponseDto);
+            teamDetailResponseDto.setUserId(findTeamUser(team));
+            teamDetailResponseDto.setSkills(findTeamTech(team));
+            teamDetailResponseDto.setCommentCnt(team.getTeamComments().size());
+            teamDetailResponseDto.setLikeCnt(team.getTeamLikings().size());
 
-            if(team.getStatus()=="NA") {
-                teamResponseDto.setStatus(Boolean.FALSE);
+            if(team.getStatus()=="removed") {
+                teamDetailResponseDto.setStatus(Boolean.FALSE);
             } else{
-                teamResponseDto.setStatus(Boolean.TRUE);
+                teamDetailResponseDto.setStatus(Boolean.TRUE);
             }
 
-            return teamResponseDto;
+            return teamDetailResponseDto;
         }catch (Exception e){
             throw new ResponeException(GET_TEAM_ERROR);
         }
@@ -151,11 +151,6 @@ public class TeamService {
         return findTeamTech;
     }
 
-    public List<TeamCommentDto> findTeamComment(Team team){
-        List<TeamCommentDto> findComment = team.getTeamComments().stream().
-                map(teamComment -> TeamCommentDto.of(teamComment)).collect(Collectors.toList());
-        return findComment;
-    }
 
     public void delete(Long team_id, String email) throws ResponeException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
