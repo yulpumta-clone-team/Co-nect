@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@AllArgsConstructor
 public class UserProfileDto {
 
     @Builder.Default
