@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/team")
 @Slf4j
@@ -49,5 +51,11 @@ public class TeamCommentController {
     public ResponseTemplate<Boolean> likingTeamComment(@PathVariable(name = "comment_id") Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         Boolean result = commentService.likingTeamComment(userDetails, commentId);
         return ResponseTemplate.valueOf(result);
+    }
+
+    @ApiOperation(value = "팀 게시글 댓글 리스트 조회")
+    @GetMapping("/comment/{team_id}")
+    public ResponseTemplate<List<TeamCommentDto>> getTeamCommentList(@PathVariable(name = "team_id") Long teamId){
+        return ResponseTemplate.valueOf(commentService.getTeamComment(teamId));
     }
 }

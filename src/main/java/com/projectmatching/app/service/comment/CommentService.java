@@ -10,7 +10,7 @@ import java.util.List;
 public interface CommentService {
 //
 //    //조회
-//    List<TeamComment> getTeamComment(Long teamPostId);
+    List<TeamCommentDto> getTeamComment(Long teamPostId);
     List<UserCommentDto> getUserComment(Long userPostId);
 //
 //    //댓글 생성 및 수정 삭제

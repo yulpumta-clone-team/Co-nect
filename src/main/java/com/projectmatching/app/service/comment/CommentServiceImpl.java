@@ -271,7 +271,15 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<TeamCommentDto> getTeamComment(Long teamPostId) {
+        List<TeamCommentDto> teamCommentDtos = teamCommentRepository.findAllByTeam_Id(teamPostId).stream()
+                .map(TeamCommentDto::of)
+                .collect(Collectors.toList());
 
+        return teamCommentDtos;
+    }
 
     private TeamComment updateCommentToTeam(TeamCommentDto teamCommentDto){
         try{
