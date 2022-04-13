@@ -204,32 +204,23 @@ public class CommentServiceImpl implements CommentService {
 
 
     /**
-     * team 댓글 추가
+     * team (대)댓글 추가
      */
     @Override
     @Transactional(rollbackFor = ResponeException.class)
     public TeamCommentDto addTeamComment(TeamCommentDto teamCommentDto) {
         TeamComment teamComment = addCommentToTeam(teamCommentDto);
+        if(teamCommentDto.getParentId()!=null){
+            teamComment.setParent(teamCommentRepository.findById(teamCommentDto.getParentId()).orElseThrow(NullPointerException::new));
+        }
         return teamCommentDto.of(teamCommentRepository.save(teamComment));
 
     }
 
-    @Override
-    @Transactional(rollbackFor = ResponeException.class)
-    public TeamCommentDto addTeamNestedComment(TeamCommentDto teamCommentDto) {
-        try{
-            if(teamCommentDto.getParentId()==null) throw new ResponeException(ResponseTemplateStatus.ADD_NESTED_FAILED);
-            TeamComment teamComment = addCommentToTeam(teamCommentDto);
-            teamComment.setParent(teamCommentRepository.findById(teamCommentDto.getParentId()).orElseThrow(NullPointerException::new));
-            return teamCommentDto.of(teamCommentRepository.save(teamComment));
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            throw new ResponeException(ResponseTemplateStatus.ADD_NESTED_FAILED);
-        }
-    }
+
 
     /**
-     * team 댓글 수정
+     * team (대)댓글 수정
      */
     @Override
     @Transactional(rollbackFor = ResponeException.class)
@@ -238,12 +229,6 @@ public class CommentServiceImpl implements CommentService {
         return teamCommentDto.of(teamCommentRepository.save(teamComment));
     }
 
-    @Override
-    @Transactional(rollbackFor = ResponeException.class)
-    public TeamCommentDto updateTeamNestedComment(TeamCommentDto teamCommentDto) {
-        TeamComment teamComment = updateCommentToTeam(teamCommentDto);
-        return teamCommentDto.of(teamCommentRepository.save(teamComment));
-    }
 
 
     /**
@@ -286,7 +271,15 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<TeamCommentDto> getTeamComment(Long teamPostId) {
+        List<TeamCommentDto> teamCommentDtos = teamCommentRepository.findAllByTeam_Id(teamPostId).stream()
+                .map(TeamCommentDto::of)
+                .collect(Collectors.toList());
 
+        return teamCommentDtos;
+    }
 
     private TeamComment updateCommentToTeam(TeamCommentDto teamCommentDto){
         try{

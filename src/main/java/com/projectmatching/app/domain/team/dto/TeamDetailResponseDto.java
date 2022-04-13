@@ -37,7 +37,6 @@ public class TeamDetailResponseDto {
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
-    private List<TeamCommentDto> teamComments;
 
     public static TeamDetailResponseDto createEmpty(){return new TeamDetailResponseDto();}
 
@@ -50,7 +49,7 @@ public class TeamDetailResponseDto {
         teamResponseDto.commentCnt = team.getTeamComments().size();
         teamResponseDto.likeCnt = team.getTeamLikings().size();
 
-        teamResponseDto.status = team.getStatus()=="NA" ? Boolean.FALSE : Boolean.TRUE;
+        teamResponseDto.status = team.getStatus()=="removed" ? Boolean.FALSE : Boolean.TRUE;
 
         return teamResponseDto;
     }

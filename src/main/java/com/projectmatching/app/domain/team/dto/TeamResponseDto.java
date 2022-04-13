@@ -43,7 +43,7 @@ public class TeamResponseDto {
         teamResponseDto.commentCnt = team.getTeamComments().size();
         teamResponseDto.likeCnt = team.getTeamLikings().size();
 
-        teamResponseDto.status = team.getStatus()=="NA" ? Boolean.FALSE : Boolean.TRUE;
+        teamResponseDto.status = team.getStatus()=="removed" ? Boolean.FALSE : Boolean.TRUE;
 
         return teamResponseDto;
     }
