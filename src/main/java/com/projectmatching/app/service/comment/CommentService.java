@@ -25,9 +25,6 @@ public interface CommentService {
     void deleteTeamComment(UserDetailsImpl userDetails, Long commentId);
 //
 //
-//    //대댓글 생성 및 수정 삭제
-    TeamCommentDto updateTeamNestedComment(TeamCommentDto teamCommentDto);
-    TeamCommentDto addTeamNestedComment(TeamCommentDto teamCommentDto);
 //
     UserCommentDto updateUserNestedComment(UserCommentDto userCommentDto);
     UserCommentDto addUserNestedComment(UserCommentDto userCommentDto);

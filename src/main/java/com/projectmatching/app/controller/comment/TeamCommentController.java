@@ -21,33 +21,21 @@ public class TeamCommentController {
 
     private final CommentService commentService;
 
-    @ApiOperation(value = "팀 댓글 달기")
+    @ApiOperation(value = "팀 (대)댓글 달기")
     @PostMapping("/comment")
     public ResponseTemplate<TeamCommentDto> addTeamComment(@RequestBody TeamCommentDto teamCommentDto) {
 
         return ResponseTemplate.valueOf(commentService.addTeamComment(teamCommentDto));
-
     }
 
-    @ApiOperation(value = "팀 대댓글 달기")
-    @PostMapping("/nested_comment")
-    public ResponseTemplate<TeamCommentDto> addTeamNestedComment(@RequestBody TeamCommentDto teamCommentDto){
-        return ResponseTemplate.valueOf(commentService.addTeamNestedComment(teamCommentDto));
-    }
 
-    @ApiOperation(value = "팀 게시글 댓글 수정")
+    @ApiOperation(value = "팀 게시글 (대)댓글 수정")
     @PatchMapping("/comment")
     public ResponseTemplate<TeamCommentDto> updateTeamComment(@RequestBody TeamCommentDto teamCommentDto) {
 
         return ResponseTemplate.valueOf(commentService.updateTeamComment(teamCommentDto));
     }
 
-    @ApiOperation(value = "팀 게시글 대댓글 수정")
-    @PatchMapping("/nested_comment")
-    public ResponseTemplate<TeamCommentDto> updateTeamNestedComment(@RequestBody TeamCommentDto teamCommentDto) {
-
-        return ResponseTemplate.valueOf(commentService.updateTeamNestedComment(teamCommentDto));
-    }
 
     @ApiOperation(value = "팀 게시글 (대)댓글 삭제")
     @DeleteMapping("/comment/{comment_id}")
