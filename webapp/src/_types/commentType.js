@@ -1,0 +1,9 @@
+export const POST_COMMENT = 'postComment';
+export const PATCH_COMMENT = 'patchComment';
+export const DELETE_COMMENT = 'deleteComment';
+export const HANDLE_SECRET_COMMENT = 'handleSecretComment';
+export const POST_REPLY = 'postReply';
+export const PATCH_REPLY = 'patchReply';
+export const DELETE_REPLY = 'deleteReply';
+export const HANDLE_SECRET_REPLY = 'handleSecretReply';
+export const PATCH_COMMENT_LIKE = 'patchCommentLike';

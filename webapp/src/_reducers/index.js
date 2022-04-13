@@ -3,12 +3,14 @@ import global from './global_reducer';
 import auth from './auth_reducer';
 import user from './user_reducer';
 import team from './team_reducer';
+import comment from './comment_reducer';
 
 const rootReducer = combineReducers({
   auth,
+  global,
   user,
   team,
-  global,
+  comment,
 });
 
 export default rootReducer;
