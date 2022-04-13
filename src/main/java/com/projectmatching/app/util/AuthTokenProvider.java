@@ -8,7 +8,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseCookie;
@@ -26,6 +28,7 @@ import static com.projectmatching.app.constant.JwtConstant.*;
 @Slf4j
 @RequiredArgsConstructor
 @Component
+@Getter @Setter
 public class AuthTokenProvider {
 
 
@@ -42,6 +45,7 @@ public class AuthTokenProvider {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         this.tokenValidTime = 30 * 60 * 1000L;
     }
+
 
 
     // JWT 토큰 생성
@@ -118,7 +122,7 @@ public class AuthTokenProvider {
             return !claims.getBody().getExpiration().before(new Date());
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            throw e;
         }
     }
 
@@ -126,15 +130,16 @@ public class AuthTokenProvider {
      * 토큰 쿠키에 저장
      *
      */
-    public void createCookie(HttpServletResponse response,String token){
-        ResponseCookie Rcookie = ResponseCookie.from("Authorization",token)
-            .httpOnly(false)
-            .sameSite("lax")
-            .maxAge(60*60)
-            .path("/")
-            .build();
-
-        response.addHeader("Set-Cookie",Rcookie.toString());
+    public Cookie createCookie(HttpServletResponse response,String token){
+//        ResponseCookie Rcookie = ResponseCookie.from("Authorization",token)
+//            .httpOnly(false)
+//            .sameSite("lax")
+//            .maxAge(60*60)
+//            .path("/")
+//            .build();
+        Cookie cookie = new Cookie("Authorization",token);
+        response.addCookie(cookie);
+        return cookie;
 
     }
 
@@ -146,7 +151,7 @@ public class AuthTokenProvider {
     public String resolveCookie(HttpServletRequest request){
 
         final Cookie[] cookies = request.getCookies();
-        if(cookies == null)return  null;
+        if(cookies == null)return null;
         for(Cookie cookie : cookies){
             log.info("쿠키 이름 : {}",cookie.getName());
             log.info("쿠키 값 : {}",cookie.getValue());
