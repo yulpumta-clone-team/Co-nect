@@ -64,6 +64,7 @@ function SignUp() {
       userSlogan,
       mdcontent,
     };
+    console.log(signUpInfo);
     // TODO: input validation 추가해야함.
     const {
       payload: { status, code, data, message },
