@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'pages/Loader';
 import MarkdownViewer from 'components/MdViewer';
-import CommentContainer from 'components/CommentContainer';
 import { getUserDetail } from 'apiAction/user';
-import { handleComment } from 'utils/handleComment';
 import { getCookie } from 'utils/cookie';
 import { USER } from 'constant';
 import { Board, Button, Box, Box2, Box3 } from './styleu';
@@ -24,7 +22,6 @@ function UserPost() {
   });
   const { userId } = useParams();
   const dispatch = useDispatch();
-  const dispatchComment = handleComment(USER, dispatch);
   const navigate = useNavigate();
   // const [commentValue, commentHander, setCommentValue] = useInput('');
   const onClickback = () => {
@@ -49,7 +46,6 @@ function UserPost() {
         nickname: myNickname,
         isSecret: false,
       };
-      dispatchComment.postComment(newCommentData);
       setValue('commentValue', '');
     }
     // setError('extraError', { message: 'Server offLine.' });
@@ -98,7 +94,6 @@ function UserPost() {
           <span>{errors?.extraError?.message}</span>
           <button type="submit">작성</button>
         </form>
-        <CommentContainer postId={user_id} comments={comments} dispatchComment={dispatchComment} />
       </Board>
     </div>
   );

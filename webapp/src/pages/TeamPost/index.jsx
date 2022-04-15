@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Loader from 'pages/Loader';
 import MarkdownViewer from 'components/MdViewer';
-import CommentContainer from 'components/CommentContainer';
 import { getTeamDetail } from 'apiAction/team';
-import { handleComment } from 'utils/handleComment';
 import { getCookie } from 'utils/cookie';
 import { TEAM } from 'constant';
 import { Board, Button, Box, Box2, Box3 } from './stylep';
@@ -24,7 +22,6 @@ function TeamPost() {
   });
   const { teamId } = useParams();
   const dispatch = useDispatch();
-  const dispatchComment = handleComment(TEAM, dispatch);
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
@@ -48,7 +45,6 @@ function TeamPost() {
         nickname: myNickname,
         isSecret: false,
       };
-      dispatchComment.postComment(newCommentData);
       setValue('commentValue', '');
     }
     // setError('extraError', { message: 'Server offLine.' });
@@ -97,7 +93,6 @@ function TeamPost() {
           <span>{errors?.extraError?.message}</span>
           <button type="submit">작성</button>
         </form>
-        <CommentContainer postId={team_id} comments={comments} dispatchComment={dispatchComment} />
       </Board>
       <Link to="./edit" state={{ team_name, content, name, img, like_cnt }}>
         <Button>Edit</Button>
