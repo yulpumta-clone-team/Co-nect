@@ -1,45 +1,54 @@
-import { handleSignUp } from 'apiAction/auth';
-import { isStatusOk } from 'constant/serverStatus';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { handleSignUp } from 'apiAction/auth';
+import { isStatusOk } from 'constant/serverStatus';
+
 import MarkdownEditor from 'components/MdEditor';
 
 function SignUp() {
+  const skillOptions = [
+    { id: 0, value: 'javascript', label: 'javascript' },
+    { id: 1, value: 'java', label: 'java' },
+    { id: 2, value: 'typescript', label: 'typescript' },
+    { id: 3, value: 'python', label: 'python' },
+    { id: 4, value: 'react', label: 'react' },
+    { id: 5, value: 'spring', label: 'spring' },
+    { id: 6, value: 'xd', label: 'xd' },
+  ];
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [userName, setName] = useState('');
-  const [userImg, setImg] = useState('');
-  const [userJob, setJob] = useState('');
-  const [userPortfolio, setPortfolio] = useState('');
-  const [userSkill, setSkill] = useState('');
-  const [userSlogan, setSlogan] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userImg, setUserImg] = useState('');
+  const [userJob, setUserJob] = useState('');
+  const [userPortfolio, setUserPortfolio] = useState('');
+  const [userSkill, setUserSkill] = useState('');
+  const [userSlogan, setUserSlogan] = useState('');
   const [mdcontent, setContent] = useState('');
-  const onNameChange = (e) => {
-    setName(e.target.value);
-  };
-  const onImgChange = (e) => {
-    setImg(e.target.value);
-  };
-  const onJobChange = (e) => {
-    setJob(e.target.value);
-  };
-  const onPortfolioChange = (e) => {
-    setPortfolio(e.target.value);
-  };
-  const onSkillChange = (e) => {
-    setSkill(e.target.value);
-  };
-  const onSloganChange = (e) => {
-    setSlogan(e.target.value);
-  };
+  const onNameChange = useCallback((e) => {
+    setUserName(e.target.value);
+  }, []);
+  const onImgChange = useCallback((e) => {
+    setUserImg(e.target.value);
+  }, []);
+  const onJobChange = useCallback((e) => {
+    setUserJob(e.target.value);
+  }, []);
+  const onPortfolioChange = useCallback((e) => {
+    setUserPortfolio(e.target.value);
+  }, []);
+  const onSkillChange = useCallback((e) => {
+    setUserSkill(e.target.value);
+  }, []);
+  const onSloganChange = useCallback((e) => {
+    setUserSlogan(e.target.value);
+  }, []);
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
-    // watch,
   } = useForm({
     defaultValues: {},
   });
@@ -51,7 +60,6 @@ function SignUp() {
     const {
       payload: { status, code, data, message },
     } = await dispatch(handleSignUp(submitData));
-    console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
     if (isStatusOk(status)) {
       navigate('/login');
     }
@@ -59,9 +67,6 @@ function SignUp() {
   return (
     <div>
       <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onValid)}>
-        <div>
-          <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
-        </div>
         <input
           {...register('email', {
             required: 'Email is required',
@@ -73,23 +78,14 @@ function SignUp() {
           placeholder="email"
         />
         <span>{errors?.email?.message}</span>
-        <input name="원하는 세션" onChange={onNameChange} value={userName} />
-        <input type="file" name="사진" onChange={onImgChange} value={userImg} />
-        <input name="직업" onChange={onJobChange} value={userJob} />
         <input
           {...register('nickname', {
             required: '2자리 이상 닉네임을 입력해주세요.',
             minLength: 2,
-            validate: {
-              // async로 만들어서  비동기로 서버에서 요청받을 수도 있음
-              // noYun: (value) => (value.includes('yun') ? 'no yun allowed' : true),
-              // noHo: (value) => (value.includes('ho') ? 'no ho allowed' : true),
-            },
           })}
           placeholder="nickname"
         />
         <span>{errors?.nickname?.message}</span>
-        <input type="file" name="포트폴리오" onChange={onPortfolioChange} value={userPortfolio} />
         <input
           {...register('password', {
             required: '4자리 이상 비밀번호를 입력해주세요.',
@@ -110,9 +106,26 @@ function SignUp() {
           placeholder="verifiedPassword"
         />
         <span>{errors?.verifiedPassword?.message}</span>
-        <input name="능력" onChange={onSkillChange} value={userSkill} />
-        <input name="슬로건" onChange={onSloganChange} value={userSlogan} />
+        <span>기술 스킬 </span>
+        <select value={userSkill} onChange={onSkillChange}>
+          {skillOptions.map(({ id, value, label }) => (
+            <option key={id} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+        <input name="slogan" onChange={onSloganChange} value={userSlogan} placeholder="slogan" />
+        <input name="job" onChange={onJobChange} value={userJob} placeholder="직업" />
+        <input
+          name="portfolio"
+          onChange={onPortfolioChange}
+          value={userPortfolio}
+          placeholder="포트폴리오"
+        />
         <button>가입</button>
+        <div>
+          <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
+        </div>
         <span>{errors?.extraError?.message}</span>
       </form>
     </div>
