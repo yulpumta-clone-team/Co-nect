@@ -19,16 +19,13 @@ function SignUp() {
   ];
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [userName, setUserName] = useState('');
   const [userImg, setUserImg] = useState('');
   const [userJob, setUserJob] = useState('');
   const [userPortfolio, setUserPortfolio] = useState('');
   const [userSkill, setUserSkill] = useState('');
+  const [selectedSkills, setSelectedSkills] = useState([]);
   const [userSlogan, setUserSlogan] = useState('');
-  const [mdcontent, setContent] = useState('');
-  const onNameChange = useCallback((e) => {
-    setUserName(e.target.value);
-  }, []);
+  const [mdcontent, setMdContent] = useState('');
   const onImgChange = useCallback((e) => {
     setUserImg(e.target.value);
   }, []);
@@ -40,6 +37,7 @@ function SignUp() {
   }, []);
   const onSkillChange = useCallback((e) => {
     setUserSkill(e.target.value);
+    setSelectedSkills((prev) => [...prev, e.target.value]);
   }, []);
   const onSloganChange = useCallback((e) => {
     setUserSlogan(e.target.value);
@@ -57,9 +55,19 @@ function SignUp() {
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
+    const signUpInfo = {
+      ...submitData,
+      userImg,
+      userJob,
+      userPortfolio,
+      selectedSkills,
+      userSlogan,
+      mdcontent,
+    };
+    // TODO: input validation 추가해야함.
     const {
       payload: { status, code, data, message },
-    } = await dispatch(handleSignUp(submitData));
+    } = await dispatch(handleSignUp(signUpInfo));
     if (isStatusOk(status)) {
       navigate('/login');
     }
@@ -106,7 +114,7 @@ function SignUp() {
           placeholder="verifiedPassword"
         />
         <span>{errors?.verifiedPassword?.message}</span>
-        <span>기술 스킬 </span>
+        <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
         <select value={userSkill} onChange={onSkillChange}>
           {skillOptions.map(({ id, value, label }) => (
             <option key={id} value={value}>
@@ -114,6 +122,12 @@ function SignUp() {
             </option>
           ))}
         </select>
+        <input
+          name="profile-image"
+          onChange={onImgChange}
+          value={userImg}
+          placeholder="임시 프로필 이미지 문자열로 입력"
+        />
         <input name="slogan" onChange={onSloganChange} value={userSlogan} placeholder="slogan" />
         <input name="job" onChange={onJobChange} value={userJob} placeholder="직업" />
         <input
@@ -124,7 +138,7 @@ function SignUp() {
         />
         <button>가입</button>
         <div>
-          <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
+          <MarkdownEditor mdValue={mdcontent} setContent={setMdContent} />
         </div>
         <span>{errors?.extraError?.message}</span>
       </form>
