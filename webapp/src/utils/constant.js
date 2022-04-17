@@ -5,4 +5,7 @@ export function setDefaultProfileImage(img) {
   );
 }
 
-export const temp = '';
+export const POST_TYPE = {
+  USER: 'userPost',
+  TEAM: 'teamPost',
+};
