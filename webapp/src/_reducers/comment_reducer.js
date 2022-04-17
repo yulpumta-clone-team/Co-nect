@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   POST_COMMENT,
   PATCH_COMMENT,
@@ -8,14 +9,21 @@ import {
   DELETE_REPLY,
   HANDLE_SECRET_REPLY,
   PATCH_COMMENT_LIKE,
+  GET_COMMENT,
 } from '_types/commentType';
 
 const initState = {
+  postType: null,
+  postId: null,
   commentData: null,
 };
 
 const commentReducer = (state = initState, action) => {
-  switch (action.type) {
+  const { payload, type } = action;
+  switch (type) {
+    case GET_COMMENT:
+      const { comments, postType, postId } = payload;
+      return { ...state, commentData: comments, postType, postId };
     case POST_COMMENT:
       return { ...state };
     case PATCH_COMMENT:

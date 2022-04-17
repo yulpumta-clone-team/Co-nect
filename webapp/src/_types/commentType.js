@@ -1,3 +1,4 @@
+export const GET_COMMENT = 'getComment';
 export const POST_COMMENT = 'postComment';
 export const PATCH_COMMENT = 'patchComment';
 export const DELETE_COMMENT = 'deleteComment';
