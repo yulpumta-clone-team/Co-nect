@@ -21,6 +21,7 @@ const userApi = {
       method: 'get',
     });
   },
+
   POST_USER_COMMENT(data) {
     return instance({
       url: '/user/comment',

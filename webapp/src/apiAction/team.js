@@ -5,7 +5,7 @@ import { actionGetTeamList, actionGetTeamDetail, actionPatchTeamLike } from '_ac
 
 export function getTeamDetail(dataTosubmit) {
   return async (dispatch) => {
-    console.log('TeamDetail ID: ', dataTosubmit);
+    // console.log('TeamDetail ID: ', dataTosubmit);
     const { data } = await axios.get('../_mockData/team.json').then((response) => response.data);
     return dispatch(actionGetTeamDetail({ ...data, team_id: dataTosubmit }));
   };
@@ -13,7 +13,7 @@ export function getTeamDetail(dataTosubmit) {
 
 export function getTeamList({ page }) {
   return async (dispatch) => {
-    console.log('TeamBoard page count: ', page);
+    // console.log('TeamBoard page count: ', page);
     const { data } = await axios.get('../_mockData/teams.json').then((response) => response.data);
     return dispatch(actionGetTeamList(data));
   };
