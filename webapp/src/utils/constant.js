@@ -1,8 +1,7 @@
+import { DEFAULT_PROFILE_IMG } from 'constant';
+
 export function setDefaultProfileImage(img) {
-  return (
-    img ||
-    'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png'
-  );
+  return (!img || img.length < 10) && DEFAULT_PROFILE_IMG;
 }
 
 export const temp = '';
