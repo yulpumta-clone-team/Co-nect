@@ -7,16 +7,24 @@ import { isStatusOk } from 'constant/serverStatus';
 
 import MarkdownEditor from 'components/MdEditor';
 
+const skillOptions = [
+  { id: 0, value: 'javascript', label: 'javascript' },
+  { id: 1, value: 'java', label: 'java' },
+  { id: 2, value: 'typescript', label: 'typescript' },
+  { id: 3, value: 'python', label: 'python' },
+  { id: 4, value: 'react', label: 'react' },
+  { id: 5, value: 'spring', label: 'spring' },
+  { id: 6, value: 'xd', label: 'xd' },
+];
+const hopeSessionOption = [
+  { id: 0, value: '무관' },
+  { id: 1, value: '1개월 이하' },
+  { id: 2, value: '3개월 이하' },
+  { id: 3, value: '6개월 이하' },
+  { id: 4, value: '6개월 이상' },
+];
+
 function SignUp() {
-  const skillOptions = [
-    { id: 0, value: 'javascript', label: 'javascript' },
-    { id: 1, value: 'java', label: 'java' },
-    { id: 2, value: 'typescript', label: 'typescript' },
-    { id: 3, value: 'python', label: 'python' },
-    { id: 4, value: 'react', label: 'react' },
-    { id: 5, value: 'spring', label: 'spring' },
-    { id: 6, value: 'xd', label: 'xd' },
-  ];
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userImg, setUserImg] = useState('');
@@ -24,6 +32,7 @@ function SignUp() {
   const [userPortfolio, setUserPortfolio] = useState('');
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
+  const [hopeSession, setHopeSession] = useState('무관');
   const [userSlogan, setUserSlogan] = useState('');
   const [mdcontent, setMdContent] = useState('');
   const onImgChange = useCallback((e) => {
@@ -39,6 +48,9 @@ function SignUp() {
     setUserSkill(e.target.value);
     setSelectedSkills((prev) => [...prev, e.target.value]);
   }, []);
+  const onHopeSessionChange = useCallback((e) => {
+    setHopeSession(e.target.value);
+  }, []);
   const onSloganChange = useCallback((e) => {
     setUserSlogan(e.target.value);
   }, []);
@@ -51,20 +63,22 @@ function SignUp() {
     defaultValues: {},
   });
   const onValid = async (submitData) => {
-    const { password, verifiedPassword } = submitData;
+    const { email, nickname, password, verifiedPassword } = submitData;
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
     const signUpInfo = {
-      ...submitData,
-      userImg,
-      userJob,
-      userPortfolio,
-      selectedSkills,
-      userSlogan,
-      mdcontent,
+      email,
+      name: nickname,
+      pwd: password,
+      content: mdcontent,
+      hope_session: hopeSession,
+      img: userImg,
+      job: userJob,
+      portfolio: userPortfolio,
+      skills: selectedSkills,
+      slogan: userSlogan,
     };
-    console.log(signUpInfo);
     // TODO: input validation 추가해야함.
     const {
       payload: { status, code, data, message },
@@ -120,6 +134,14 @@ function SignUp() {
           {skillOptions.map(({ id, value, label }) => (
             <option key={id} value={value}>
               {label}
+            </option>
+          ))}
+        </select>
+        <span>희망 작업 기간</span>
+        <select value={hopeSession} onChange={onHopeSessionChange}>
+          {hopeSessionOption.map(({ id, value }) => (
+            <option key={id} value={value}>
+              {value}
             </option>
           ))}
         </select>
