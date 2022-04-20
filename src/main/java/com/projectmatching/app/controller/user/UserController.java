@@ -88,9 +88,7 @@ public class UserController {
     @ApiImplicitParam(name = "id",example = "1",required = true,value = "유저 id")
     @GetMapping("/{id}")
     public ResponseTemplate<UserDto> getUserDetail(@PathVariable(name="id") Long id){
-
         return ResponseTemplate.valueOf(userService.getUserDetail(id));
-
     }
 
 
@@ -148,8 +146,6 @@ public class UserController {
     @PatchMapping("/myprofile")
     public ResponseTemplate<UserDto> updateUserPosting(@RequestBody PostUserProfileDto postUserProfileDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return ResponseTemplate.valueOf(userService.updateUserPosting(postUserProfileDto,userDetails));
-
-
     }
 
 

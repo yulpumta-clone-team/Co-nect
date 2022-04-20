@@ -128,9 +128,7 @@ public class CommentServiceImpl implements CommentService {
         List<UserCommentDto> userComments = userCommentRepository.getUserCommentByPostId(userPostId).stream()
                 .map(UserCommentDto::of)
                 .collect(Collectors.toList());
-
         return userComments;
-
     }
 
     /**
