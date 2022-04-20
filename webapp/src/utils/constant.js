@@ -9,3 +9,15 @@ export const POST_TYPE = {
   USER: 'userPost',
   TEAM: 'teamPost',
 };
+
+export function checkIsUserPost(postType) {
+  return postType === POST_TYPE.USER;
+}
+
+export function setPostId(postType, submitData) {
+  const id = checkIsUserPost(postType) ? 'userId' : 'teamId';
+  return {
+    [id]: checkIsUserPost(postType),
+    ...submitData,
+  };
+}
