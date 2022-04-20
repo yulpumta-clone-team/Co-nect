@@ -1,4 +1,4 @@
-import { GET_COMMENT } from '_types/commentType';
+import { GET_COMMENT, POST_COMMENT } from '_types/commentType';
 
 export function actionGetComment(responseData) {
   return {
@@ -6,7 +6,13 @@ export function actionGetComment(responseData) {
     payload: responseData,
   };
 }
-export function actionPostComment() {}
+export function actionPostComment(responseData) {
+  console.log(responseData);
+  return {
+    type: POST_COMMENT,
+    payload: responseData,
+  };
+}
 export function actionPatchComment() {}
 export function actionDeleteComment() {}
 export function actionhandleSecretComment() {}

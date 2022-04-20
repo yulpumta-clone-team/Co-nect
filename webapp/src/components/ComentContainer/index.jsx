@@ -2,10 +2,11 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { getCookie, getLoginUserInfo } from 'utils/cookie';
-import { getComment } from 'apiAction/comment';
+import { getComment, postComment } from 'apiAction/comment';
 import { isStatusOk } from 'constant/serverStatus';
 import { useNavigate } from 'react-router-dom';
+import { setPostId } from 'utils/constant';
+import { getLoginUserInfo } from 'utils/cookie';
 
 function CommentContainer({ postType, postId }) {
   console.log('Comment Container Type: ', postType);
@@ -22,18 +23,29 @@ function CommentContainer({ postType, postId }) {
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const userInfo = getLoginUserInfo(); // {name, img, id}
+
   const onSubmit = useCallback(
     async ({ commentValue }) => {
       if (!userInfo) {
         alert('로그인을 먼저해주세요');
       } else {
-        const newCommentData = { commentValue, ...userInfo };
-        console.log(newCommentData);
+        const { name, id } = userInfo;
+        const newCommentData = setPostId(postType, {
+          writer: name, // 작성자 이름
+          parentId: null, // 아무것도 안넣으면 대댓글아님
+          secret: false,
+          content: commentValue,
+        });
+
+        const {
+          payload: { status, comments },
+        } = await dispatch(postComment(newCommentData));
         setValue('commentValue', '');
       }
     },
     [setValue, userInfo],
   );
+
   const fetchComments = useCallback(async () => {
     const {
       payload: { status, comments },
@@ -42,9 +54,11 @@ function CommentContainer({ postType, postId }) {
       setComments(comments);
     }
   }, [dispatch, postId, postType]);
+
   useEffect(() => {
     fetchComments();
   }, [fetchComments]);
+
   return (
     <div>
       <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onSubmit)}>

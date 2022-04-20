@@ -1,7 +1,9 @@
-import teamApi from 'api/team';
 import axios from 'axios';
+import { POST_TYPE } from 'utils/constant';
 import { actionGetComment, actionPostComment } from '_actions/comment_actions';
 import { catchError } from '_actions/global_action';
+
+console.log(POST_TYPE, process.env.REACT_APP_MOCK_SERVER_API);
 
 export function getComment(dataTosubmit) {
   return (dispatch) => {
@@ -13,9 +15,14 @@ export function getComment(dataTosubmit) {
 }
 
 export function postComment(dataTosubmit) {
-  return async (dispatch) => {
+  return (dispatch) => {
     // console.log('TeamDetail ID: ', dataTosubmit);
-    const { data } = await axios.get('../_mockData/team.json').then((response) => response.data);
-    return dispatch(actionPostComment({ ...data, team_id: dataTosubmit }));
+    return axios
+      .get('../_mockData/newComment.json')
+      .then((response) => dispatch(actionPostComment({ ...response.data, ...dataTosubmit })))
+      .catch((error) => {
+        console.log(error);
+        // dispatch(catchError(error))
+      });
   };
 }
