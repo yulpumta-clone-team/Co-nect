@@ -6,6 +6,7 @@ import { handleSignUp } from 'apiAction/auth';
 import { isStatusOk } from 'constant/serverStatus';
 
 import MarkdownEditor from 'components/MdEditor';
+import useInput from 'hooks/useInput';
 
 const skillOptions = [
   { id: 0, value: 'javascript', label: 'javascript' },
@@ -27,32 +28,18 @@ const hopeSessionOption = [
 function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [userImg, setUserImg] = useState('');
-  const [userJob, setUserJob] = useState('');
-  const [userPortfolio, setUserPortfolio] = useState('');
-  const [userSkill, setUserSkill] = useState('');
+  const [userImg, onImgChange] = useInput('');
+  const [userJob, onJobChange] = useInput('');
+  const [userPortfolio, onPortfolioChange] = useInput('');
+  const [hopeSession, onHopeSessionChange] = useInput('무관');
+  const [userSlogan, onSloganChange] = useInput('');
+  const [userSkill, setUserSkill] = useInput('');
+  const [mdcontent, setMdContent] = useInput('');
+
   const [selectedSkills, setSelectedSkills] = useState([]);
-  const [hopeSession, setHopeSession] = useState('무관');
-  const [userSlogan, setUserSlogan] = useState('');
-  const [mdcontent, setMdContent] = useState('');
-  const onImgChange = useCallback((e) => {
-    setUserImg(e.target.value);
-  }, []);
-  const onJobChange = useCallback((e) => {
-    setUserJob(e.target.value);
-  }, []);
-  const onPortfolioChange = useCallback((e) => {
-    setUserPortfolio(e.target.value);
-  }, []);
   const onSkillChange = useCallback((e) => {
     setUserSkill(e.target.value);
     setSelectedSkills((prev) => [...prev, e.target.value]);
-  }, []);
-  const onHopeSessionChange = useCallback((e) => {
-    setHopeSession(e.target.value);
-  }, []);
-  const onSloganChange = useCallback((e) => {
-    setUserSlogan(e.target.value);
   }, []);
   const {
     register,
