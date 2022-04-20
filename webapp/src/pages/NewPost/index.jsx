@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
-// import { Board, Box2, Box3 } from './style';
+import useFileUploader from 'hooks/useFileUploader';
 
 function NewPost() {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function NewPost() {
   };
   const [userName, setName] = useState('');
   const [teamName, setTeam] = useState('');
-  const [userImg, setImg] = useState('');
+  const [userImg, onImgChange] = useFileUploader('');
   const [mdcontent, setContent] = useState('');
   // console.log(team_name);
   const onNameChange = (e) => {
@@ -26,14 +26,11 @@ function NewPost() {
   const onTeamChange = (e) => {
     setTeam(e.target.value);
   };
-  const onImgChange = (e) => {
-    setImg(e.target.value);
-  };
   return (
     <>
       <button onClick={onClickback}>back</button>
-      <input type="file" name="사진" onChange={onImgChange} value={userImg} />
       <form onSubmit={handleSubmit}>
+        <input type="file" name="image" onChange={onImgChange} />
         <div>
           <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
         </div>
