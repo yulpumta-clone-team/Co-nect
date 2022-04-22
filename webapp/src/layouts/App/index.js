@@ -25,7 +25,7 @@ import Navigation from 'components/Navigation';
 import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
 import UsersList from 'pages/UsersList';
-import NewPost from 'pages/NewPost';
+import NewPost from 'pages/NewTeamPost';
 import MyPost from 'pages/MyPost';
 import WindowModal from 'components/WindowModal';
 import ErrorModal from 'components/ErrorModal';

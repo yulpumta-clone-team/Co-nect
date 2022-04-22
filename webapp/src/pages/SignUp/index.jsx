@@ -3,11 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { handleSignUp } from 'apiAction/auth';
-import { isStatusOk } from 'constant/serverStatus';
-
 import MarkdownEditor from 'components/MdEditor';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
+import { isStatusOk } from 'constant/serverStatus';
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -17,10 +16,10 @@ function SignUp() {
   const [userPortfolio, onPortfolioChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
   const [userSlogan, onSloganChange] = useInput('');
-  const [userSkill, setUserSkill] = useInput('');
-  const [mdcontent, setMdContent] = useInput('');
-
+  const [mdcontent, setMdContent] = useState('');
+  const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
+
   const onSkillChange = useCallback((e) => {
     setUserSkill(e.target.value);
     setSelectedSkills((prev) => [...prev, e.target.value]);
