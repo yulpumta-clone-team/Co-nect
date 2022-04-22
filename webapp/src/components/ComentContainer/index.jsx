@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { getComment, postComment } from 'apiAction/comment';
 import { isStatusOk } from 'constant/serverStatus';
 import { useNavigate } from 'react-router-dom';
-import { setPostId } from 'utils/constant';
+import { setPostId } from 'utils';
 import { getLoginUserInfo } from 'utils/cookie';
 
 function CommentContainer({ postType, postId }) {

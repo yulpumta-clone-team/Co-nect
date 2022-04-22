@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { POST_TYPE } from 'utils/constant';
+import { POST_TYPE } from 'utils';
 import { actionGetComment, actionPostComment } from '_actions/comment_actions';
 import { catchError } from '_actions/global_action';
 

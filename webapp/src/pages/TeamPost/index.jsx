@@ -5,7 +5,7 @@ import Loader from 'pages/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
 import { getTeamDetail } from 'apiAction/team';
-import { POST_TYPE } from 'utils/constant';
+import { POST_TYPE } from 'utils';
 import { Board, Button, Box, Box2, Box3 } from './stylep';
 
 function TeamPost() {
