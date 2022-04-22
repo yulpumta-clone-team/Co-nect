@@ -7,23 +7,7 @@ import { isStatusOk } from 'constant/serverStatus';
 
 import MarkdownEditor from 'components/MdEditor';
 import useInput from 'hooks/useInput';
-
-const skillOptions = [
-  { id: 0, value: 'javascript', label: 'javascript' },
-  { id: 1, value: 'java', label: 'java' },
-  { id: 2, value: 'typescript', label: 'typescript' },
-  { id: 3, value: 'python', label: 'python' },
-  { id: 4, value: 'react', label: 'react' },
-  { id: 5, value: 'spring', label: 'spring' },
-  { id: 6, value: 'xd', label: 'xd' },
-];
-const hopeSessionOption = [
-  { id: 0, value: '무관' },
-  { id: 1, value: '1개월 이하' },
-  { id: 2, value: '3개월 이하' },
-  { id: 3, value: '6개월 이하' },
-  { id: 4, value: '6개월 이상' },
-];
+import { hopeSessionOption, skillOptions } from 'constant';
 
 function SignUp() {
   const dispatch = useDispatch();
