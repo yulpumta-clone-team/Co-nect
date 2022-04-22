@@ -1,3 +1,4 @@
+import { MOCK_SERVER_URL } from 'constant/route';
 import instance from './core';
 
 const teamApi = {
@@ -18,6 +19,12 @@ const teamApi = {
   GET_TEAM_LIKES() {
     return instance({
       url: '/team/liking',
+      method: 'get',
+    });
+  },
+  GET_TEAM_COMMENT(teamId) {
+    return instance({
+      url: `${MOCK_SERVER_URL}/team/comment/${teamId}`,
       method: 'get',
     });
   },
