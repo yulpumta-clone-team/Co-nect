@@ -4,8 +4,8 @@ import { getAuthCookie } from 'utils/cookie';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_API,
-  headers: { 'Access-Control-Allow-Origin': process.env.REACT_APP_SERVER_API },
-  withCredentials: true,
+  // headers: { 'Access-Control-Allow-Origin': process.env.REACT_APP_SERVER_API },
+  // withCredentials: true,
 });
 
 instance.defaults.timeout = 2500;
