@@ -7,6 +7,7 @@ import { isStatusOk } from 'constant/serverStatus';
 import { useNavigate } from 'react-router-dom';
 import { setPostId } from 'utils';
 import { getLoginUserInfo } from 'utils/cookie';
+import Comment from 'components/Comment';
 
 function CommentContainer({ postType, postId }) {
   console.log('Comment Container Type: ', postType);
@@ -48,8 +49,12 @@ function CommentContainer({ postType, postId }) {
 
   const fetchComments = useCallback(async () => {
     const {
-      payload: { status, comments },
+      status,
+      payload: {
+        data: { comments },
+      },
     } = await dispatch(getComment({ postType, postId }));
+    console.log(comments);
     if (isStatusOk(status)) {
       setComments(comments);
     }
@@ -72,6 +77,11 @@ function CommentContainer({ postType, postId }) {
         <span>{errors?.extraError?.message}</span>
         <button type="submit">작성</button>
       </form>
+      {comments.length !== 0 &&
+        comments.map(({ id, teamId, userId, ...commentInfo }) => {
+          const postId = teamId || userId;
+          return <Comment key={id} id={id} postId={postId} commentInfo={commentInfo} />;
+        })}
     </div>
   );
 }
