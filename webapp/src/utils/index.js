@@ -1,3 +1,6 @@
+import { isStatusOk } from 'constant/serverStatus';
+import { catchError } from '_actions/global_action';
+
 export function setDefaultProfileImage(img) {
   return (
     img ||
@@ -6,18 +9,38 @@ export function setDefaultProfileImage(img) {
 }
 
 export const POST_TYPE = {
-  USER: 'userPost',
-  TEAM: 'teamPost',
+  USER: 'user',
+  TEAM: 'team',
 };
 
 export function checkIsUserPost(postType) {
   return postType === POST_TYPE.USER;
 }
 
-export function setPostId(postType, submitData) {
+export function setPostIdOnSubmitData(postType, submitData) {
   const id = checkIsUserPost(postType) ? 'userId' : 'teamId';
   return {
     [id]: checkIsUserPost(postType),
     ...submitData,
   };
+}
+
+export async function handleFetcher(fetcher, submitData, dispatch) {
+  const fetchResult = {
+    isError: true,
+    value: null,
+  };
+  try {
+    const {
+      status,
+      data: { data },
+    } = await fetcher(submitData);
+    if (isStatusOk(status)) {
+      fetchResult.value = data;
+      fetchResult.isError = false;
+    }
+  } catch (error) {
+    dispatch(catchError(error));
+  }
+  return fetchResult;
 }
