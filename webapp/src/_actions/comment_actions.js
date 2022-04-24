@@ -7,7 +7,6 @@ export function actionGetComment(responseData) {
   };
 }
 export function actionPostComment(responseData) {
-  console.log(responseData);
   return {
     type: POST_COMMENT,
     payload: responseData,

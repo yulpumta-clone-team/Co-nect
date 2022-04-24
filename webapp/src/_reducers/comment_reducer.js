@@ -25,7 +25,8 @@ const commentReducer = (state = initState, action) => {
       const { comments, postType, postId } = payload;
       return { ...state, commentData: comments, postType, postId };
     case POST_COMMENT:
-      return { ...state };
+      console.log(initState, payload);
+      return { ...state, commentData: [...state.commentData, payload.data.data] };
     case PATCH_COMMENT:
       return { ...state };
     case DELETE_COMMENT:
