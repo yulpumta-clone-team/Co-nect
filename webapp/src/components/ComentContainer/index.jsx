@@ -2,12 +2,14 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { getComment, postComment } from 'apiAction/comment';
+import { getComment, patchComment, postComment } from 'apiAction/comment';
 import { isStatusOk } from 'constant/serverStatus';
 import { useNavigate } from 'react-router-dom';
 import { handleFetcher, setPostIdOnSubmitData } from 'utils';
 import { getLoginUserInfo } from 'utils/cookie';
 import Comment from 'components/Comment';
+
+const DEFAULT_TARGET = -1;
 
 function CommentContainer({ postType, postId }) {
   console.log('Comment Container Type: ', postType);
@@ -22,7 +24,12 @@ function CommentContainer({ postType, postId }) {
   });
   const dispatch = useDispatch();
   const [comments, setComments] = useState([]);
+  const [targetCommentId, setTargetCommentId] = useState(DEFAULT_TARGET);
   const userInfo = getLoginUserInfo(); // {name, img, id}
+
+  const resetTarget = useCallback(() => {
+    setTargetCommentId(DEFAULT_TARGET);
+  }, []);
 
   const onSubmit = useCallback(
     async ({ commentValue }) => {
@@ -39,7 +46,7 @@ function CommentContainer({ postType, postId }) {
 
         const { isError, value: newComment } = await handleFetcher(
           postComment,
-          newCommentData,
+          { postType, newCommentData },
           dispatch,
         );
         if (isError) {
@@ -49,8 +56,29 @@ function CommentContainer({ postType, postId }) {
         setValue('commentValue', '');
       }
     },
-    [postType, setValue, userInfo],
+    [dispatch, postType, setValue, userInfo],
   );
+
+  const handleSubmitEditComment = useCallback(
+    async (editContent) => {
+      const newCommentData = setPostIdOnSubmitData(postType, editContent);
+      const { isError, value: editedComment } = await handleFetcher(
+        patchComment,
+        { postType, postId, newCommentData },
+        dispatch,
+      );
+      if (isError) {
+        return;
+      }
+      const newComments = comments.map((comment) =>
+        comment.id === editedComment.id ? editedComment : comment,
+      );
+      setComments(newComments);
+      resetTarget();
+    },
+    [comments, dispatch, postId, postType, resetTarget],
+  );
+  const handleClickDeleteButton = useCallback(() => {}, []);
 
   const fetchComments = useCallback(async () => {
     const { isError, value: comments } = await handleFetcher(
@@ -62,7 +90,7 @@ function CommentContainer({ postType, postId }) {
       return;
     }
     setComments(comments);
-  }, [postId, postType]);
+  }, [dispatch, postId, postType]);
 
   useEffect(() => {
     fetchComments();
@@ -84,7 +112,17 @@ function CommentContainer({ postType, postId }) {
       {comments.length !== 0 &&
         comments.map(({ id, teamId, userId, ...commentInfo }) => {
           const postId = teamId || userId;
-          return <Comment key={id} id={id} postId={postId} commentInfo={commentInfo} />;
+          return (
+            <Comment
+              key={id}
+              id={id}
+              postId={postId}
+              commentInfo={commentInfo}
+              targetCommentId={targetCommentId}
+              setTargetCommentId={setTargetCommentId}
+              handleSubmitEditComment={handleSubmitEditComment}
+            />
+          );
         })}
     </div>
   );

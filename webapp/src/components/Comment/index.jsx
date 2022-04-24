@@ -1,13 +1,50 @@
 /* eslint-disable react/require-default-props */
-import React from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { setDefaultProfileImage } from 'utils';
-import { Container, Image, Info } from './style';
+import { setDefaultProfileImage, setPostIdOnSubmitData } from 'utils';
+import useInput from 'hooks/useInput';
+import { Buttons, Container, EditForm, Image, Info } from './style';
 
-function Comment({ id, postId, commentInfo }) {
+function Comment({
+  id,
+  postId,
+  commentInfo,
+  targetCommentId,
+  setTargetCommentId,
+  handleSubmitEditComment,
+}) {
   const { img, secret, writer, feeling, content, parentId, replies } = commentInfo;
   // console.log(id, img, postId, secret, writer, feeling, content, parentId, replies);
   const feelingCount = feeling.length;
+  const isTargetEditCommnt = id === targetCommentId;
+  const [editContent, onEditContentChange] = useInput(content);
+
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      const newCommentData = {
+        writer,
+        parentId,
+        secret,
+        content: editContent,
+      };
+      handleSubmitEditComment(newCommentData);
+    },
+    [editContent, handleSubmitEditComment, parentId, secret, writer],
+  );
+
+  const checkEditForm = () =>
+    isTargetEditCommnt ? (
+      <EditForm onSubmit={handleSubmit}>
+        <input type="text" value={editContent} onChange={onEditContentChange} />
+        <button>수정완료</button>
+      </EditForm>
+    ) : (
+      <Info>
+        <span>{content}</span>
+      </Info>
+    );
+
   return (
     <Container>
       <Image>
@@ -18,10 +55,13 @@ function Comment({ id, postId, commentInfo }) {
         />
         <h3>{writer}</h3>
       </Image>
-      <Info>
-        <span>{content}</span>
-        <span>좋아요수: {feelingCount}</span>
-      </Info>
+      {checkEditForm()}
+      <span>좋아요수: {feelingCount}</span>
+      <Buttons>
+        <button onClick={() => setTargetCommentId(id)}>수정</button>
+        <button>삭제</button>
+        <button>비공개로 전환</button>
+      </Buttons>
     </Container>
   );
 }
@@ -38,6 +78,9 @@ Comment.propTypes = {
     replies: PropTypes.array.isRequired,
     parentId: PropTypes.number,
   }),
+  targetCommentId: PropTypes.number.isRequired,
+  setTargetCommentId: PropTypes.func.isRequired,
+  handleSubmitEditComment: PropTypes.func.isRequired,
 };
 
-export default Comment;
+export default memo(Comment);
