@@ -10,7 +10,7 @@ const commentApi = {
   },
   POST_COMMENT({ postType, data }) {
     return instance({
-      url: `/${postType}/comment`,
+      url: `${MOCK_SERVER_URL}/${postType}/comment`,
       method: 'post',
       data,
     });

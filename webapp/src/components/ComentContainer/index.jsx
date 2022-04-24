@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { getComment, postComment } from 'apiAction/comment';
 import { isStatusOk } from 'constant/serverStatus';
 import { useNavigate } from 'react-router-dom';
-import { setPostId } from 'utils';
+import { handleFetcher, setPostIdOnSubmitData } from 'utils';
 import { getLoginUserInfo } from 'utils/cookie';
 import Comment from 'components/Comment';
 
@@ -21,7 +21,6 @@ function CommentContainer({ postType, postId }) {
     defaultValues: {},
   });
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const userInfo = getLoginUserInfo(); // {name, img, id}
 
@@ -31,34 +30,39 @@ function CommentContainer({ postType, postId }) {
         alert('로그인을 먼저해주세요');
       } else {
         const { name, id } = userInfo;
-        const newCommentData = setPostId(postType, {
+        const newCommentData = setPostIdOnSubmitData(postType, {
           writer: name, // 작성자 이름
           parentId: null, // 아무것도 안넣으면 대댓글아님
           secret: false,
           content: commentValue,
         });
 
-        const {
-          payload: { status, comments },
-        } = await dispatch(postComment(newCommentData));
+        const { isError, value: newComment } = await handleFetcher(
+          postComment,
+          newCommentData,
+          dispatch,
+        );
+        if (isError) {
+          return;
+        }
+        setComments((prev) => [...prev, newComment]);
         setValue('commentValue', '');
       }
     },
-    [setValue, userInfo],
+    [postType, setValue, userInfo],
   );
 
   const fetchComments = useCallback(async () => {
-    const {
-      status,
-      payload: {
-        data: { comments },
-      },
-    } = await dispatch(getComment({ postType, postId }));
-    console.log(comments);
-    if (isStatusOk(status)) {
-      setComments(comments);
+    const { isError, value: comments } = await handleFetcher(
+      getComment,
+      { postType, postId },
+      dispatch,
+    );
+    if (isError) {
+      return;
     }
-  }, [dispatch, postId, postType]);
+    setComments(comments);
+  }, [postId, postType]);
 
   useEffect(() => {
     fetchComments();

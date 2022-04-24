@@ -6,7 +6,7 @@ import { Container, Image, Info } from './style';
 
 function Comment({ id, postId, commentInfo }) {
   const { img, secret, writer, feeling, content, parentId, replies } = commentInfo;
-  console.log(id, img, postId, secret, writer, feeling, content, parentId, replies);
+  // console.log(id, img, postId, secret, writer, feeling, content, parentId, replies);
   const feelingCount = feeling.length;
   return (
     <Container>
