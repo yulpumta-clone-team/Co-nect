@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { deleteComment, getComment, patchComment, postComment } from 'apiAction/comment';
-import { isStatusOk } from 'constant/serverStatus';
-import { useNavigate } from 'react-router-dom';
 import { handleFetcher, setPostIdOnSubmitData } from 'utils';
 import { getLoginUserInfo } from 'utils/cookie';
 import Comment from 'components/Comment';
@@ -90,6 +88,16 @@ function CommentContainer({ postType, postId }) {
     [comments, dispatch, postType],
   );
 
+  const handleChangeToSecret = useCallback(
+    (id) => {
+      const newComments = comments.map((comment) =>
+        comment.id === id ? { ...comment, secret: !comment.secret } : comment,
+      );
+      setComments(newComments);
+    },
+    [comments],
+  );
+
   const fetchComments = useCallback(async () => {
     const { isError, value: comments } = await handleFetcher(
       getComment,
@@ -132,6 +140,7 @@ function CommentContainer({ postType, postId }) {
               setTargetCommentId={setTargetCommentId}
               handleSubmitEditComment={handleSubmitEditComment}
               handleClickDeleteButton={handleClickDeleteButton}
+              handleChangeToSecret={handleChangeToSecret}
             />
           );
         })}

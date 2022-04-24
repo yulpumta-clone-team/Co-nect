@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { setDefaultProfileImage, setPostIdOnSubmitData } from 'utils';
+import { setDefaultProfileImage } from 'utils';
 import useInput from 'hooks/useInput';
 import { Buttons, Container, EditForm, Image, Info } from './style';
 
@@ -13,6 +13,7 @@ function Comment({
   setTargetCommentId,
   handleSubmitEditComment,
   handleClickDeleteButton,
+  handleChangeToSecret,
 }) {
   const { img, secret, writer, feeling, content, parentId, replies } = commentInfo;
   // console.log(id, img, postId, secret, writer, feeling, content, parentId, replies);
@@ -48,21 +49,27 @@ function Comment({
 
   return (
     <Container>
-      <Image>
-        <img
-          style={{ width: '50px', heigth: '50px' }}
-          src={setDefaultProfileImage(img)}
-          alt="profile"
-        />
-        <h3>{writer}</h3>
-      </Image>
-      {checkEditForm()}
-      <span>좋아요수: {feelingCount}</span>
-      <Buttons>
-        <button onClick={() => setTargetCommentId(id)}>수정</button>
-        <button onClick={() => handleClickDeleteButton(id)}>삭제</button>
-        <button>비공개로 전환</button>
-      </Buttons>
+      {secret ? (
+        <div>비밀댓글입니다.</div>
+      ) : (
+        <>
+          <Image>
+            <img
+              style={{ width: '50px', heigth: '50px' }}
+              src={setDefaultProfileImage(img)}
+              alt="profile"
+            />
+            <h3>{writer}</h3>
+          </Image>
+          {checkEditForm()}
+          <span>좋아요수: {feelingCount}</span>
+          <Buttons>
+            <button onClick={() => setTargetCommentId(id)}>수정</button>
+            <button onClick={() => handleClickDeleteButton(id)}>삭제</button>
+            <button onClick={() => handleChangeToSecret(id)}>비공개로 전환</button>
+          </Buttons>
+        </>
+      )}
     </Container>
   );
 }
@@ -83,6 +90,7 @@ Comment.propTypes = {
   setTargetCommentId: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
+  handleChangeToSecret: PropTypes.func.isRequired,
 };
 
 export default memo(Comment);
