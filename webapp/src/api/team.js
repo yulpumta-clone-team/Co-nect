@@ -22,69 +22,6 @@ const teamApi = {
       method: 'get',
     });
   },
-  GET_TEAM_COMMENT(teamId) {
-    return instance({
-      url: `${MOCK_SERVER_URL}/team/comment/${teamId}`,
-      method: 'get',
-    });
-  },
-  POST_TEAM_COMMENT(data) {
-    return instance({
-      url: '/team/comment',
-      method: 'post',
-      data,
-    });
-  },
-  POST_TEAM_REPLY(data) {
-    return instance({
-      url: '/team/nested_comment',
-      method: 'post',
-      data,
-    });
-  },
-  DELETE_TEAM_COMMENT({ comment_id }) {
-    return instance({
-      url: '/team/comment',
-      method: 'delete',
-      params: { comment_id },
-    });
-  },
-  // DELETE_TEAM_REPLY() {
-  //   return instance({
-  //     url: '/team/logout',
-  //   });
-  // },
-  PATCH_TEAM_LIKE({ team_id }) {
-    return instance({
-      url: '/team/liking',
-      method: 'patch',
-      params: { team_id },
-    });
-  },
-  PATCH_TEAM_COMMENT(data) {
-    return instance({
-      url: '/team/comment',
-      method: 'patch',
-      data,
-    });
-  },
-  PATCH_TEAM_REPLY(data) {
-    return instance({
-      url: '/team/nested_comment',
-      method: 'patch',
-      data,
-    });
-  },
-  // HANDLE_SECRET_TEAM_REPLY() {
-  //   return instance({
-  //     url: '/team/logout',
-  //   });
-  // },
-  // HANDLE_SECRET_TEAM_COMMENT() {
-  //   return instance({
-  //     url: '/team/logout',
-  //   });
-  // },
 };
 
 export default teamApi;
