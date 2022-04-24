@@ -22,6 +22,12 @@ const commentApi = {
       data,
     });
   },
+  DELETE_COMMENT({ postType, id }) {
+    return instance({
+      url: `${MOCK_SERVER_URL}/${postType}/comment/${id}`,
+      method: 'delete',
+    });
+  },
   // POST_REPLY({ postType, data }) {
   //   return instance({
   //     url: `/${postType}/nested_comment`,

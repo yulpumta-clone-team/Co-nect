@@ -13,3 +13,7 @@ export function patchComment({ postType, postId, newCommentData }) {
     .PATCH_COMMENT({ postType, postId, data: newCommentData })
     .then((response) => response);
 }
+
+export function deleteComment({ postType, id }) {
+  return commentApi.DELETE_COMMENT({ postType, id }).then((response) => response);
+}

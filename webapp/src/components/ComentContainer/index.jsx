@@ -2,7 +2,7 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { getComment, patchComment, postComment } from 'apiAction/comment';
+import { deleteComment, getComment, patchComment, postComment } from 'apiAction/comment';
 import { isStatusOk } from 'constant/serverStatus';
 import { useNavigate } from 'react-router-dom';
 import { handleFetcher, setPostIdOnSubmitData } from 'utils';
@@ -78,7 +78,17 @@ function CommentContainer({ postType, postId }) {
     },
     [comments, dispatch, postId, postType, resetTarget],
   );
-  const handleClickDeleteButton = useCallback(() => {}, []);
+  const handleClickDeleteButton = useCallback(
+    async (id) => {
+      const { isError } = await handleFetcher(deleteComment, { postType, id }, dispatch);
+      if (isError) {
+        return;
+      }
+      const newComments = comments.filter((comment) => comment.id !== id);
+      setComments(newComments);
+    },
+    [comments, dispatch, postType],
+  );
 
   const fetchComments = useCallback(async () => {
     const { isError, value: comments } = await handleFetcher(
@@ -121,6 +131,7 @@ function CommentContainer({ postType, postId }) {
               targetCommentId={targetCommentId}
               setTargetCommentId={setTargetCommentId}
               handleSubmitEditComment={handleSubmitEditComment}
+              handleClickDeleteButton={handleClickDeleteButton}
             />
           );
         })}

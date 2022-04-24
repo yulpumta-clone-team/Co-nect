@@ -12,6 +12,7 @@ function Comment({
   targetCommentId,
   setTargetCommentId,
   handleSubmitEditComment,
+  handleClickDeleteButton,
 }) {
   const { img, secret, writer, feeling, content, parentId, replies } = commentInfo;
   // console.log(id, img, postId, secret, writer, feeling, content, parentId, replies);
@@ -59,7 +60,7 @@ function Comment({
       <span>좋아요수: {feelingCount}</span>
       <Buttons>
         <button onClick={() => setTargetCommentId(id)}>수정</button>
-        <button>삭제</button>
+        <button onClick={() => handleClickDeleteButton(id)}>삭제</button>
         <button>비공개로 전환</button>
       </Buttons>
     </Container>
@@ -81,6 +82,7 @@ Comment.propTypes = {
   targetCommentId: PropTypes.number.isRequired,
   setTargetCommentId: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
+  handleClickDeleteButton: PropTypes.func.isRequired,
 };
 
 export default memo(Comment);
