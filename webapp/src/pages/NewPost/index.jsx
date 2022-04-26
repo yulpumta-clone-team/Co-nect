@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
-import { Board, Box2, Box3 } from './style';
+// import { Board, Box2, Box3 } from './style';
 
 function NewPost() {
   const navigate = useNavigate();
