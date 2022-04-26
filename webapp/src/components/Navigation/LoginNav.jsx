@@ -16,13 +16,11 @@ import {
   USERS_LIST,
   USER_BOARD,
 } from 'constant/route';
-import { DEFAULT_PROFILE_IMG } from 'constant';
 import { Ul } from './style';
 
 function LoginNav({ userInfo }) {
   const navigate = useNavigate();
-  const { name, img } = userInfo;
-  const image = (!img || img === 'string') && DEFAULT_PROFILE_IMG;
+  const { name, img: image } = userInfo;
   const [showModal, onCloseModal, openModal] = useModal();
   const triggerLogOut = useCallback(() => {
     removeLoginCookie();
