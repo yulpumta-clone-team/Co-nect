@@ -22,11 +22,11 @@ function CommentContainer({ postType, postId }) {
   });
   const dispatch = useDispatch();
   const [comments, setComments] = useState([]);
-  const [targetCommentId, setTargetCommentId] = useState(DEFAULT_TARGET);
+  const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
   const userInfo = getLoginUserInfo(); // {name, img, id}
 
   const resetTarget = useCallback(() => {
-    setTargetCommentId(DEFAULT_TARGET);
+    setEditTargetCommentId(DEFAULT_TARGET);
   }, []);
 
   const onSubmit = useCallback(
@@ -136,8 +136,8 @@ function CommentContainer({ postType, postId }) {
               id={id}
               postId={postId}
               commentInfo={commentInfo}
-              targetCommentId={targetCommentId}
-              setTargetCommentId={setTargetCommentId}
+              editTargetCommentId={editTargetCommentId}
+              setEditTargetCommentId={setEditTargetCommentId}
               handleSubmitEditComment={handleSubmitEditComment}
               handleClickDeleteButton={handleClickDeleteButton}
               handleChangeToSecret={handleChangeToSecret}

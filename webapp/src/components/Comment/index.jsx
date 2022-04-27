@@ -9,8 +9,8 @@ function Comment({
   id,
   postId,
   commentInfo,
-  targetCommentId,
-  setTargetCommentId,
+  editTargetCommentId,
+  setEditTargetCommentId,
   handleSubmitEditComment,
   handleClickDeleteButton,
   handleChangeToSecret,
@@ -18,7 +18,7 @@ function Comment({
   const { img, secret, writer, feeling, content, parentId, replies } = commentInfo;
   // console.log(id, img, postId, secret, writer, feeling, content, parentId, replies);
   const feelingCount = feeling.length;
-  const isTargetEditCommnt = id === targetCommentId;
+  const isTargetEditCommnt = id === editTargetCommentId;
   const [editContent, onEditContentChange] = useInput(content);
 
   const handleSubmit = useCallback(
@@ -64,7 +64,7 @@ function Comment({
           {checkEditForm()}
           <span>좋아요수: {feelingCount}</span>
           <Buttons>
-            <button onClick={() => setTargetCommentId(id)}>수정</button>
+            <button onClick={() => setEditTargetCommentId(id)}>수정</button>
             <button onClick={() => handleClickDeleteButton(id)}>삭제</button>
             <button onClick={() => handleChangeToSecret(id)}>비공개로 전환</button>
           </Buttons>
@@ -86,8 +86,8 @@ Comment.propTypes = {
     replies: PropTypes.array.isRequired,
     parentId: PropTypes.number,
   }),
-  targetCommentId: PropTypes.number.isRequired,
-  setTargetCommentId: PropTypes.func.isRequired,
+  editTargetCommentId: PropTypes.number.isRequired,
+  setEditTargetCommentId: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleChangeToSecret: PropTypes.func.isRequired,
