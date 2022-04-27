@@ -23,6 +23,7 @@ import java.util.Set;
 public class User extends BaseTimeEntity  {
 
     @Id
+    @GeneratedValue
     private Long id;
 
 
