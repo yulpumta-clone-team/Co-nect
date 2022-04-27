@@ -1,22 +1,23 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
+import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { postTeamPost } from 'apiAction/team';
 import { useDispatch } from 'react-redux';
 import { isStatusOk } from 'constant/serverStatus';
 import { hopeSessionOption, skillOptions } from 'constant';
-// import { Board, Box2, Box3 } from './style';
 
-function NewPost() {
+function NewTeamPost() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
   };
+  const [imageFile, fileHandler] = useFileUploader('');
 
   const [teamName, onTeamChange] = useInput('');
-  const [userImg, onImgChange] = useInput('');
+  // const [userImg, onImgChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -35,28 +36,30 @@ function NewPost() {
       e.preventDefault();
       const submitData = {
         name: teamName,
-        img: userImg,
+        img: imageFile,
         session: hopeSession,
         techs: selectedSkills,
         content: mdcontent,
       };
+
       const {
-        status,
-        payload: { code, data, message },
+        payload: { status, data },
       } = await dispatch(postTeamPost(submitData));
-      console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-      // if (isStatusOk(status)) {
+      console.log('\nstatus: ', status, '\ndata: ', data);
+      // if (status && isStatusOk(status)) {
       //   navigate('/');
-      //   window.location.reload();
       // }
     },
-    [dispatch, hopeSession, mdcontent, navigate, selectedSkills, teamName, userImg],
+    [dispatch, hopeSession, imageFile, mdcontent, selectedSkills, teamName],
   );
   return (
     <>
       <button onClick={onClickback}>back</button>
+      <br />
+      <h3> 프로필 이미지 </h3>
+      <input type="file" accept="image/*" onChange={fileHandler} />
+      {/* <button onClick={fileHandler}> 이미지 업로드 ㅈ</button> */}
       <form onSubmit={handleSubmit}>
-        <input type="text" name="사진" onChange={onImgChange} value={userImg} />
         <div>
           팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />
         </div>
@@ -85,4 +88,4 @@ function NewPost() {
   );
 }
 
-export default NewPost;
+export default NewTeamPost;
