@@ -52,6 +52,7 @@ public class UserController {
     @ApiOperation(value = "일반 로그인, 성공시 유저 id 반환 및 헤더에 토큰 생성")
     @PostMapping("/login")
     public ResponseTemplate<?> login(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
+
             return ResponseTemplate.valueOf(userSignInService.userLogin(userLoginDto,response));
     }
 
