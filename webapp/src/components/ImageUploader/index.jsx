@@ -13,7 +13,6 @@ const myBucket = new AWS.S3({
 });
 
 function ImageUploader() {
-  console.log(process.env.REACT_APP_S3_BUCKET);
   const [progress, setProgress] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
 
