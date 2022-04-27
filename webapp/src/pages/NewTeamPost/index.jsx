@@ -8,13 +8,13 @@ import { useDispatch } from 'react-redux';
 import { isStatusOk } from 'constant/serverStatus';
 import { hopeSessionOption, skillOptions } from 'constant';
 
-function NewPost() {
+function NewTeamPost() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
   };
-  const [imageFile, fileHandler, setImageFile] = useFileUploader('');
+  const [imageFile, fileHandler] = useFileUploader('');
 
   const [teamName, onTeamChange] = useInput('');
   // const [userImg, onImgChange] = useInput('');
@@ -88,4 +88,4 @@ function NewPost() {
   );
 }
 
-export default NewPost;
+export default NewTeamPost;

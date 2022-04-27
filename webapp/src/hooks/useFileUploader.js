@@ -3,7 +3,6 @@ import { useCallback, useState } from 'react';
 
 const useFileUploader = (initialValue) => {
   const [file, setFile] = useState(initialValue);
-  console.log('file', file);
   const fileHandler = useCallback(async (event) => {
     const imageFile = event.target.files[0];
     if (imageFile.size > 10000) {
@@ -12,6 +11,10 @@ const useFileUploader = (initialValue) => {
     }
     const formData = new FormData();
     formData.append('file', imageFile);
+    // FormData값확인
+    for (const key of formData.keys()) {
+      console.log('제출할 데이터', formData.get(key));
+    }
     try {
       const res = await axios.post(`${process.env.REACT_APP_SERVER_API}upload`, formData, {
         headers: {
