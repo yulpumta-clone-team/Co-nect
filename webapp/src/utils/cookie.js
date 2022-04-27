@@ -24,11 +24,11 @@ export const removeLoginCookie = () => {
   removeCookie(USER_INFO);
 };
 
-const tempUserInfo = {
-  name: '임시',
-  id: 1901941,
-  img: '',
-};
+// const tempUserInfo = {
+//   name: '임시',
+//   id: 1901941,
+//   img: '',
+// };
 
-setCookie('userInfo', tempUserInfo);
+// setCookie('userInfo', tempUserInfo);
 // removeCookie('userInfo');

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { deleteComment, getComment, patchComment, postComment } from 'apiAction/comment';
 import { handleFetcher, setPostIdOnSubmitData } from 'utils';
-import { getLoginUserInfo } from 'utils/cookie';
+import { getUserCookie } from 'utils/cookie';
 import Comment from 'components/Comment';
 
 const DEFAULT_TARGET = -1;
@@ -23,7 +23,7 @@ function CommentContainer({ postType, postId }) {
   const dispatch = useDispatch();
   const [comments, setComments] = useState([]);
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
-  const userInfo = getLoginUserInfo(); // {name, img, id}
+  const userInfo = getUserCookie(); // {name, img, id}
 
   const resetTarget = useCallback(() => {
     setEditTargetCommentId(DEFAULT_TARGET);

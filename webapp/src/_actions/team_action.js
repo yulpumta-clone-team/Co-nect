@@ -1,4 +1,4 @@
-import { GET_TEAM_DETAIL, GET_TEAM__ARR, PATCH_TEAM_LIKE } from '_types/teamTypes';
+import { GET_TEAM_DETAIL, GET_TEAM__ARR, PATCH_TEAM_LIKE, POST_TEAM_POST } from '_types/teamTypes';
 
 export async function actionGetTeamDetail(responseData) {
   return {
@@ -17,6 +17,13 @@ export async function actionGetTeamList(responseData) {
 export async function actionPatchTeamLike(responseData) {
   return {
     type: PATCH_TEAM_LIKE,
+    payload: responseData,
+  };
+}
+
+export async function actionPostTeamPost(responseData) {
+  return {
+    type: POST_TEAM_POST,
     payload: responseData,
   };
 }

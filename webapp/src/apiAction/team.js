@@ -1,7 +1,12 @@
 import teamApi from 'api/team';
 import axios from 'axios';
 import { catchError } from '_actions/global_action';
-import { actionGetTeamList, actionGetTeamDetail, actionPatchTeamLike } from '_actions/team_action';
+import {
+  actionGetTeamList,
+  actionGetTeamDetail,
+  actionPatchTeamLike,
+  actionPostTeamPost,
+} from '_actions/team_action';
 
 export function getTeamDetail(dataTosubmit) {
   return async (dispatch) => {
@@ -24,6 +29,15 @@ export function patchTeamlike({ teamId }) {
     return teamApi
       .PATCH_TEAM_LIKE({ team_id: teamId })
       .then((response) => dispatch(actionPatchTeamLike(response)))
+      .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+export function postTeamPost(dataTosubmit) {
+  return async (dispatch) => {
+    return teamApi
+      .POST_TEAM_POST(dataTosubmit)
+      .then((response) => dispatch(actionPostTeamPost(response)))
       .catch((error) => dispatch(catchError(error)));
   };
 }
