@@ -53,6 +53,7 @@ public class JwtServiceTest extends ServiceTest {
             .email("test@email.com")
             .build();
 
+
     private UserDto userDto = UserDto.builder()
             .name("testName")
             .email("test@email.com")
