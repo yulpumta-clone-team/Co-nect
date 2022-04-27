@@ -25,7 +25,6 @@ import static com.projectmatching.app.constant.ServiceConstant.PAGING_SIZE;
 
 
 @Slf4j
-@RequestMapping("/api")
 @RequiredArgsConstructor
 @RestController
 @Api(tags = "팀 컨트롤러")
