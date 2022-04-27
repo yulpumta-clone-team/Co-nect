@@ -56,9 +56,9 @@ public class TeamService {
 
             Long teamId = teamRepository.save(team).getId();
 
-            List<String> techs = requestDto.getTechs();
-            for (String t : techs){
-                TechStack techStack = techStackRepository.findByName(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
+            List<Long> techs = requestDto.getTechs();
+            for (Long t : techs){
+                TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
                 TeamTech teamTech = TeamTech.builder()
                         .team(team)
                         .techStack(techStack)
@@ -175,9 +175,9 @@ public class TeamService {
             team.update(teamRequestDto);
             teamTechRepository.deleteAllByTeam_Id(team.getId());
 
-            List<String> techs = teamRequestDto.getTechs();
-            for (String t : techs) {
-                TechStack techStack = techStackRepository.findByName(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
+            List<Long> techs = teamRequestDto.getTechs();
+            for (Long t : techs) {
+                TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
                 TeamTech teamTech = TeamTech.builder()
                         .team(team)
                         .techStack(techStack)
