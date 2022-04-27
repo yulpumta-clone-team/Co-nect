@@ -21,6 +21,13 @@ const teamApi = {
       method: 'get',
     });
   },
+  POST_TEAM_POST(data) {
+    return instance({
+      url: 'api/team',
+      method: 'post',
+      data,
+    });
+  },
   POST_TEAM_COMMENT(data) {
     return instance({
       url: '/team/comment',

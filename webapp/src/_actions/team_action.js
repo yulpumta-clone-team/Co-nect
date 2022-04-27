@@ -11,6 +11,7 @@ import {
   HANDLE_SECRET_TEAM_REPLY,
   PATCH_TEAM_LIKE,
   PATCH_TEAM_COMMENT_LIKE,
+  POST_TEAM_POST,
 } from '_types/teamTypes';
 
 export async function actionGetTeamDetail(responseData) {
@@ -23,6 +24,13 @@ export async function actionGetTeamDetail(responseData) {
 export async function actionGetTeamList(responseData) {
   return {
     type: GET_TEAM__ARR,
+    payload: responseData,
+  };
+}
+
+export async function actionPostTeamPost(responseData) {
+  return {
+    type: POST_TEAM_POST,
     payload: responseData,
   };
 }

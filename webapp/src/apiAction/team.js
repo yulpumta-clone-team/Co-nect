@@ -15,6 +15,7 @@ import {
   actionPatchTeamReply,
   actionSecretTeamReply,
   actionPatchTeamLike,
+  actionPostTeamPost,
 } from '_actions/team_action';
 
 export function getTeamDetail(dataTosubmit) {
@@ -30,6 +31,15 @@ export function getTeamList({ page }) {
     console.log('TeamBoard page count: ', page);
     const { data } = await axios.get('../_mockData/teams.json').then((response) => response.data);
     return dispatch(actionGetTeamList(data));
+  };
+}
+
+export function postTeamPost(dataTosubmit) {
+  return async (dispatch) => {
+    return teamApi
+      .POST_TEAM_POST(dataTosubmit)
+      .then((response) => dispatch(actionPostTeamPost(response)))
+      .catch((error) => dispatch(catchError(error)));
   };
 }
 
