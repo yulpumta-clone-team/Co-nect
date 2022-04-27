@@ -8,14 +8,14 @@ spring:
       matching-strategy: ant_path_matcher
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/MPTest
+    url: jdbc:h2:mem:testdb;MODE=MySQL
     driver-class-name: org.h2.Driver
     username: sa
     password:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         # show_sql: true
