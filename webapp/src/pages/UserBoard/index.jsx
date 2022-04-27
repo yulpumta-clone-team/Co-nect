@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserList } from 'apiAction/user';
 import UserCard from 'components/UserCard';
-import Loader from 'pages/Loader';
+import Loader from 'components/Loader';
 import UpperButton from 'components/UpperButton';
 import CheckBox from 'components/CheckBox';
 import NoDataMessage from 'components/NoDataMessage';

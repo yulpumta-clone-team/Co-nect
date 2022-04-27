@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import Loader from 'pages/Loader';
+import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import { getUserDetail } from 'apiAction/user';
 import { getCookie } from 'utils/cookie';

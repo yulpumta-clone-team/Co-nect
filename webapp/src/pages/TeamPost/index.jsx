@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import Loader from 'pages/Loader';
+import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
 import { getTeamDetail } from 'apiAction/team';
