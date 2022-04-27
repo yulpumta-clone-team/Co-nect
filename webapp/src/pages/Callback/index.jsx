@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from 'pages/Loader';
+import Loader from 'components/Loader';
 
 function Callback() {
   return <Loader />;

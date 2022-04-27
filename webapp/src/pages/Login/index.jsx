@@ -26,11 +26,6 @@ function Login() {
     const {
       payload: { status },
     } = await dispatch(handleLogin(submitData));
-    // const {
-    //   status,
-    //   payload: { code, data, message },
-    // } = await dispatch(handleLogin(submitData));
-    // console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
     if (isStatusOk(status) && status) {
       navigate('/');
       window.location.reload();
