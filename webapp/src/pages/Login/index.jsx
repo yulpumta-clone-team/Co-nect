@@ -24,11 +24,9 @@ function Login() {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
     const {
-      status,
-      payload: { code, data, message },
+      payload: { status },
     } = await dispatch(handleLogin(submitData));
-    console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (isStatusOk(status)) {
+    if (status && isStatusOk(status)) {
       navigate('/');
       window.location.reload();
     }
