@@ -5,7 +5,7 @@ import { AUTH, LOGIN_USER, SIGNUP_USER } from '_types/authType';
 export function actionLogin(responseData) {
   const { data } = responseData;
   const { data: userInfo } = data;
-  setCookie(USER_INFO, userInfo, { maxAge: 60 * 60, path: '/' });
+  // setCookie(USER_INFO, userInfo, { maxAge: 60 * 60, path: '/' });
   return {
     type: LOGIN_USER,
     payload: data,
