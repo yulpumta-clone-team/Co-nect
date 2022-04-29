@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGIN_USER_ERROR;
+import static com.projectmatching.app.util.AuthTokenProvider.createCookie;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +49,7 @@ public class UserSignInServiceImpl implements UserSignInService {
                 UserLoginResDto userLoginResDto = Optional.ofNullable(qUserRepository.login(userLoginDto))
                         .map(UserLoginResDto::toUserLoginResDto)
                         .orElseThrow(NullPointerException::new);
-                jwtTokenProvider.createCookie(response, jwtTokenProvider.createToken(userLoginResDto)); //쿠키 생성
+                createCookie(response, jwtTokenProvider.createToken(userLoginResDto)); //쿠키 생성
                 return userLoginResDto;
             }
 

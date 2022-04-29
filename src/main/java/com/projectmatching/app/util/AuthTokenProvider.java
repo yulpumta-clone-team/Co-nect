@@ -130,16 +130,16 @@ public class AuthTokenProvider {
      * 토큰 쿠키에 저장
      *
      */
-    public Cookie createCookie(HttpServletResponse response,String token){
-//        ResponseCookie Rcookie = ResponseCookie.from("Authorization",token)
-//            .httpOnly(false)
-//            .sameSite("lax")
-//            .maxAge(60*60)
-//            .path("/")
-//            .build();
-        Cookie cookie = new Cookie("Authorization",token);
-        response.addCookie(cookie);
-        return cookie;
+    public static void createCookie(HttpServletResponse response,String token){
+        ResponseCookie AuthCookie = ResponseCookie.from("Authorization",token)
+            .httpOnly(false)
+            .sameSite("lax")
+            .maxAge(60*60)
+            .path("/")
+            .build();
+
+        response.addHeader("Set-Cookie",AuthCookie.toString());
+
 
     }
 

@@ -71,7 +71,7 @@ function SignUp() {
       payload: { status, code, data, message },
     } = await dispatch(handleSignUp(signUpInfo));
     if (isStatusOk(status)) {
-      navigate('/login');
+      // navigate('/login');
     }
   };
   return (
