@@ -8,7 +8,7 @@ export function actionLogin(responseData) {
   // setCookie(USER_INFO, userInfo, { maxAge: 60 * 60, path: '/' });
   return {
     type: LOGIN_USER,
-    payload: data,
+    payload: responseData,
   };
 }
 

@@ -3,27 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { handleSignUp } from 'apiAction/auth';
-import { isStatusOk } from 'constant/serverStatus';
-
 import MarkdownEditor from 'components/MdEditor';
 import useInput from 'hooks/useInput';
-
-const skillOptions = [
-  { id: 0, value: 'javascript', label: 'javascript' },
-  { id: 1, value: 'java', label: 'java' },
-  { id: 2, value: 'typescript', label: 'typescript' },
-  { id: 3, value: 'python', label: 'python' },
-  { id: 4, value: 'react', label: 'react' },
-  { id: 5, value: 'spring', label: 'spring' },
-  { id: 6, value: 'xd', label: 'xd' },
-];
-const hopeSessionOption = [
-  { id: 0, value: '무관' },
-  { id: 1, value: '1개월 이하' },
-  { id: 2, value: '3개월 이하' },
-  { id: 3, value: '6개월 이하' },
-  { id: 4, value: '6개월 이상' },
-];
+import { hopeSessionOption, skillOptions } from 'constant';
+import { isStatusOk } from 'constant/serverStatus';
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -33,10 +16,10 @@ function SignUp() {
   const [userPortfolio, onPortfolioChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
   const [userSlogan, onSloganChange] = useInput('');
-  const [userSkill, setUserSkill] = useInput('');
-  const [mdcontent, setMdContent] = useInput('');
-
+  const [mdcontent, setMdContent] = useState('');
+  const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
+
   const onSkillChange = useCallback((e) => {
     setUserSkill(e.target.value);
     setSelectedSkills((prev) => [...prev, e.target.value]);
