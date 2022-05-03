@@ -53,7 +53,7 @@ function TeamPost() {
           이름 : {name} / 팀명 : {team_name}
         </Box2>
         <Box2>좋아요 개수 : {like_cnt}</Box2>
-        <CommentContainer postType={POST_TYPE.TEAM} postId={teamId} />
+        <CommentContainer postType={POST_TYPE.TEAM} postWriter={name} postId={teamId} />
       </Board>
     </div>
   );

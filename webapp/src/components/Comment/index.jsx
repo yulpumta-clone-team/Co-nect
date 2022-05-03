@@ -1,13 +1,15 @@
 /* eslint-disable react/require-default-props */
 import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { setDefaultProfileImage } from 'utils';
 import useInput from 'hooks/useInput';
+import { setDefaultProfileImage } from 'utils';
+import { getUserCookie } from 'utils/cookie';
 import { Buttons, Container, EditForm, Image, Info } from './style';
 
 function Comment({
   id,
   postId,
+  postWriter,
   commentInfo,
   editTargetCommentId,
   setEditTargetCommentId,
@@ -15,29 +17,56 @@ function Comment({
   handleClickDeleteButton,
   handleChangeToSecret,
 }) {
-  const { img, secret, writer, feeling, content, parentId, replies } = commentInfo;
-  // console.log(id, img, postId, secret, writer, feeling, content, parentId, replies);
+  const userInfo = getUserCookie(); // {name, img, id}
+  const loggedInUserName = userInfo?.name;
+  const { img, secret, writer: commenWriter, feeling, content, parentId, replies } = commentInfo;
   const feelingCount = feeling.length;
   const isTargetEditCommnt = id === editTargetCommentId;
   const [editContent, onEditContentChange] = useInput(content);
 
-  const handleSubmit = useCallback(
+  const showSecretButtonText = (secret) => (secret ? '공개로 전환' : '비공개로 전환');
+
+  const checkSecretComment = (postWriterName, commentWriterName, loggedInUserName) => {
+    // true: 가리기 , false: 보여주기
+    if (!loggedInUserName) {
+      return true;
+    }
+    const isSameCommentWriter = () => postWriterName === loggedInUserName;
+    const isSamePostWriter = () => commentWriterName === loggedInUserName;
+    if (isSameCommentWriter() || isSamePostWriter()) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const isShowSecretComment = (secret, postWriterName, commentWriterName, loggedInUserName) => {
+    // secret ? 가리기 : 보여주기
+    if (secret) {
+      console.log(secret, postWriterName, commentWriterName, loggedInUserName);
+      const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
+      return isShow;
+    }
+    return false;
+  };
+
+  const handleEditSubmit = useCallback(
     (event) => {
       event.preventDefault();
       const newCommentData = {
-        writer,
+        writer: commenWriter,
         parentId,
         secret,
         content: editContent,
       };
       handleSubmitEditComment(newCommentData);
     },
-    [editContent, handleSubmitEditComment, parentId, secret, writer],
+    [commenWriter, editContent, handleSubmitEditComment, parentId, secret],
   );
 
   const checkEditForm = () =>
     isTargetEditCommnt ? (
-      <EditForm onSubmit={handleSubmit}>
+      <EditForm onSubmit={handleEditSubmit}>
         <input type="text" value={editContent} onChange={onEditContentChange} />
         <button>수정완료</button>
       </EditForm>
@@ -49,7 +78,7 @@ function Comment({
 
   return (
     <Container>
-      {secret ? (
+      {isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName) ? (
         <div>비밀댓글입니다.</div>
       ) : (
         <>
@@ -59,14 +88,14 @@ function Comment({
               src={setDefaultProfileImage(img)}
               alt="profile"
             />
-            <h3>{writer}</h3>
+            <h3>{commenWriter}</h3>
           </Image>
           {checkEditForm()}
           <span>좋아요수: {feelingCount}</span>
           <Buttons>
             <button onClick={() => setEditTargetCommentId(id)}>수정</button>
             <button onClick={() => handleClickDeleteButton(id)}>삭제</button>
-            <button onClick={() => handleChangeToSecret(id)}>비공개로 전환</button>
+            <button onClick={() => handleChangeToSecret(id)}>{showSecretButtonText(secret)}</button>
           </Buttons>
         </>
       )}
@@ -77,6 +106,7 @@ function Comment({
 Comment.propTypes = {
   id: PropTypes.number.isRequired,
   postId: PropTypes.number.isRequired,
+  postWriter: PropTypes.string.isRequired,
   commentInfo: PropTypes.shape({
     img: PropTypes.string.isRequired,
     secret: PropTypes.bool.isRequired,

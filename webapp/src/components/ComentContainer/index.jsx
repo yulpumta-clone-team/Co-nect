@@ -9,8 +9,8 @@ import Comment from 'components/Comment';
 
 const DEFAULT_TARGET = -1;
 
-function CommentContainer({ postType, postId }) {
-  console.log('Comment Container Type: ', postType);
+function CommentContainer({ postType, postWriter, postId }) {
+  // console.log('Comment Container Type: ',postWriter,  postType);
   const {
     register,
     handleSubmit,
@@ -82,10 +82,10 @@ function CommentContainer({ postType, postId }) {
       if (isError) {
         return;
       }
-      const newComments = comments.filter((comment) => comment.id !== id);
-      setComments(newComments);
+      const removeDeletedTarget = (prev) => prev.filter((comment) => comment.id !== id);
+      setComments(removeDeletedTarget);
     },
-    [comments, dispatch, postType],
+    [dispatch, postType],
   );
 
   const handleChangeToSecret = useCallback(
@@ -135,6 +135,7 @@ function CommentContainer({ postType, postId }) {
               key={id}
               id={id}
               postId={postId}
+              postWriter={postWriter}
               commentInfo={commentInfo}
               editTargetCommentId={editTargetCommentId}
               setEditTargetCommentId={setEditTargetCommentId}
@@ -149,6 +150,7 @@ function CommentContainer({ postType, postId }) {
 }
 CommentContainer.propTypes = {
   postType: PropTypes.string.isRequired,
+  postWriter: PropTypes.string.isRequired,
   postId: PropTypes.number.isRequired,
 };
 
