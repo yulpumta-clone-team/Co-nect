@@ -27,8 +27,8 @@ export const removeLoginCookie = () => {
 };
 
 // const tempUserInfo = {
-//   name: '임시',
-//   id: 1901941,
+//   name: 'back',
+//   id: 903092346503,
 //   img: '',
 // };
 
