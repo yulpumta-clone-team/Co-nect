@@ -8,6 +8,10 @@ export function postComment({ postType, newCommentData }) {
   return commentApi.POST_COMMENT({ postType, data: newCommentData }).then((response) => response);
 }
 
+export function postCommentLike({ postType, id }) {
+  return commentApi.POST_COMMENT_LIKE({ postType, id }).then((response) => response);
+}
+
 export function patchComment({ postType, postId, newCommentData }) {
   return commentApi
     .PATCH_COMMENT({ postType, postId, data: newCommentData })

@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import useInput from 'hooks/useInput';
 import { setDefaultProfileImage } from 'utils';
@@ -21,20 +21,35 @@ function Comment({
   const userInfo = getUserCookie(); // {name, img, id}
   const loggedInUserName = userInfo?.name;
   const loggedInUserId = userInfo?.id;
-  const { img, secret, writer: commenWriter, feeling, content, parentId, replies } = commentInfo;
-  const feelingCount = feeling.length;
+  const {
+    img,
+    secret,
+    writer: commenWriter,
+    feeling: likedUserIds,
+    content,
+    parentId,
+    replies,
+  } = commentInfo;
+  const likesCount = likedUserIds.length;
   const isTargetEditCommnt = id === editTargetCommentId;
   const [editContent, onEditContentChange] = useInput(content);
 
-  const checkUserLikeTarget = (userId, targetLikesArray) => {
+  const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
     const findUser = targetLikesArray.find((id) => id === userId);
     return !!findUser;
-  };
-  const isLikesContainUserId = checkUserLikeTarget(loggedInUserId, feeling);
+  }, []);
 
-  const showSecretButtonText = (secret) => (secret ? '공개로 전환' : '비공개로 전환');
+  const isLikesContainUserId = useMemo(
+    () => checkUserLikeTarget(loggedInUserId, likedUserIds),
+    [checkUserLikeTarget, likedUserIds, loggedInUserId],
+  );
 
-  const checkSecretComment = (postWriterName, commentWriterName, loggedInUserName) => {
+  const showSecretButtonText = useCallback(
+    (secret) => (secret ? '공개로 전환' : '비공개로 전환'),
+    [],
+  );
+
+  const checkSecretComment = useCallback((postWriterName, commentWriterName, loggedInUserName) => {
     // true: 가리기 , false: 보여주기
     if (!loggedInUserName) {
       return true;
@@ -46,17 +61,21 @@ function Comment({
     }
 
     return true;
-  };
+  }, []);
 
-  const isShowSecretComment = (secret, postWriterName, commentWriterName, loggedInUserName) => {
-    // secret ? 가리기 : 보여주기
-    if (secret) {
-      const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
-      return isShow;
-    }
-    return false;
-  };
+  const isShowSecretComment = useCallback(
+    (secret, postWriterName, commentWriterName, loggedInUserName) => {
+      // secret ? 가리기 : 보여주기
+      if (secret) {
+        const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
+        return isShow;
+      }
+      return false;
+    },
+    [checkSecretComment],
+  );
 
+  // FIXME: handleSubmitEditComment()로직을 commentContainer에서 넘겨받을 필요가 있을까? 여기서 선언해도 될 거 같은데 고민해보기
   const handleEditSubmit = useCallback(
     (event) => {
       event.preventDefault();
@@ -102,7 +121,7 @@ function Comment({
             <h3>{commenWriter}</h3>
           </Image>
           <CheckEditForm />
-          <span>좋아요수: {feelingCount}</span>
+          <span>좋아요수: {likesCount}</span>
           <LikeThumbStyled
             isFill={isLikesContainUserId}
             onClick={() => handleClickLikeThumb(id, loggedInUserId, isLikesContainUserId)}

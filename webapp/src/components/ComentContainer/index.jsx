@@ -74,10 +74,10 @@ function CommentContainer({ postType, postWriter, postId }) {
       if (isError) {
         return;
       }
-      const newComments = comments.map((comment) =>
+      const getNewComments = comments.map((comment) =>
         comment.id === editedComment.id ? editedComment : comment,
       );
-      setComments(newComments);
+      setComments(getNewComments);
       resetTarget();
     },
     [comments, dispatch, postId, postType, resetTarget],
@@ -97,11 +97,11 @@ function CommentContainer({ postType, postWriter, postId }) {
 
   // TODO: 서버와 api 연결하기
   const handleChangeToSecret = useCallback((id) => {
-    const newComments = (prev) =>
+    const getNewComments = (prev) =>
       prev.map((comment) =>
         comment.id === id ? { ...comment, secret: !comment.secret } : comment,
       );
-    setComments(newComments);
+    setComments(getNewComments);
   }, []);
 
   const handleClickLikeThumb = useCallback(
@@ -119,9 +119,9 @@ function CommentContainer({ postType, postWriter, postId }) {
         targetLikes.push(loggedInUserId);
         return { ...oldComment, feeling: targetLikes };
       };
-      const newComments = (prev) =>
+      const getNewComments = (prev) =>
         prev.map((comment) => (comment.id === id ? handleLikeUserId(comment) : comment));
-      setComments(newComments);
+      setComments(getNewComments);
     },
     [dispatch, postType],
   );
