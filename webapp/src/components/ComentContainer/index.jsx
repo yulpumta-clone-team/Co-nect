@@ -12,20 +12,11 @@ import {
 import { handleFetcher, setPostIdOnSubmitData } from 'utils';
 import { getUserCookie } from 'utils/cookie';
 import Comment from 'components/ComentContainer/Comment';
+import CommentForm from './CommentForm';
 
 const DEFAULT_TARGET = -1;
 
 function CommentContainer({ postType, postWriter, postId }) {
-  // console.log('Comment Container Type: ',postWriter,  postType);
-  const {
-    register,
-    handleSubmit,
-    setError,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {},
-  });
   const dispatch = useDispatch();
   const [comments, setComments] = useState([]);
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
@@ -35,8 +26,8 @@ function CommentContainer({ postType, postWriter, postId }) {
     setEditTargetCommentId(DEFAULT_TARGET);
   }, []);
 
-  const onSubmit = useCallback(
-    async ({ commentValue }) => {
+  const handlePostComment = useCallback(
+    async ({ commentValue, secret }) => {
       if (!userInfo) {
         alert('로그인을 먼저해주세요');
       } else {
@@ -44,7 +35,7 @@ function CommentContainer({ postType, postWriter, postId }) {
         const newCommentData = setPostIdOnSubmitData(postType, {
           writer: name, // 작성자 이름
           parentId: null, // 아무것도 안넣으면 대댓글아님
-          secret: false,
+          secret,
           content: commentValue,
         });
 
@@ -57,10 +48,9 @@ function CommentContainer({ postType, postWriter, postId }) {
           return;
         }
         setComments((prev) => [...prev, newComment]);
-        setValue('commentValue', '');
       }
     },
-    [dispatch, postType, setValue, userInfo],
+    [dispatch, postType, userInfo],
   );
 
   const handleSubmitEditComment = useCallback(
@@ -144,20 +134,13 @@ function CommentContainer({ postType, postWriter, postId }) {
 
   return (
     <div>
-      <form
-        style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px' }}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <input
-          {...register('commentValue', {
-            required: '내용을 입력해주세요.',
-          })}
-          placeholder="댓글을 입력하세요."
-        />
-        <span>{errors?.commentValue?.message}</span>
-        <span>{errors?.extraError?.message}</span>
-        <button type="submit">작성</button>
-      </form>
+      <CommentForm
+        initialText=""
+        submitCallback={handlePostComment}
+        commentInfo={{ id: -1, parentId: -1 }}
+        hasCancelButton={false}
+        handleCancel={() => {}}
+      />
       {comments.length !== 0 &&
         comments.map(({ id, teamId, userId, ...commentInfo }) => {
           const postId = teamId || userId;
