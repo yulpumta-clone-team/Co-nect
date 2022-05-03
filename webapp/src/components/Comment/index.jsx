@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useInput from 'hooks/useInput';
 import { setDefaultProfileImage } from 'utils';
 import { getUserCookie } from 'utils/cookie';
-import { Buttons, Container, EditForm, Image, Info } from './style';
+import { Buttons, Container, EditForm, Image, Info, LikeThumbStyled } from './style';
 
 function Comment({
   id,
@@ -16,13 +16,21 @@ function Comment({
   handleSubmitEditComment,
   handleClickDeleteButton,
   handleChangeToSecret,
+  handleClickLikeThumb,
 }) {
   const userInfo = getUserCookie(); // {name, img, id}
   const loggedInUserName = userInfo?.name;
+  const loggedInUserId = userInfo?.id;
   const { img, secret, writer: commenWriter, feeling, content, parentId, replies } = commentInfo;
   const feelingCount = feeling.length;
   const isTargetEditCommnt = id === editTargetCommentId;
   const [editContent, onEditContentChange] = useInput(content);
+
+  const checkUserLikeTarget = (userId, targetLikesArray) => {
+    const findUser = targetLikesArray.find((id) => id === userId);
+    return !!findUser;
+  };
+  const isLikesContainUserId = checkUserLikeTarget(loggedInUserId, feeling);
 
   const showSecretButtonText = (secret) => (secret ? '공개로 전환' : '비공개로 전환');
 
@@ -43,7 +51,6 @@ function Comment({
   const isShowSecretComment = (secret, postWriterName, commentWriterName, loggedInUserName) => {
     // secret ? 가리기 : 보여주기
     if (secret) {
-      console.log(secret, postWriterName, commentWriterName, loggedInUserName);
       const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
       return isShow;
     }
@@ -64,17 +71,21 @@ function Comment({
     [commenWriter, editContent, handleSubmitEditComment, parentId, secret],
   );
 
-  const checkEditForm = () =>
-    isTargetEditCommnt ? (
-      <EditForm onSubmit={handleEditSubmit}>
-        <input type="text" value={editContent} onChange={onEditContentChange} />
-        <button>수정완료</button>
-      </EditForm>
-    ) : (
-      <Info>
-        <span>{content}</span>
-      </Info>
-    );
+  const CheckEditForm = useCallback(
+    () =>
+      isTargetEditCommnt ? (
+        <EditForm onSubmit={handleEditSubmit}>
+          <input type="text" value={editContent} onChange={onEditContentChange} />
+          <button>수정완료</button>
+        </EditForm>
+      ) : (
+        <Info>
+          <span>{content}</span>
+        </Info>
+      ),
+
+    [content, editContent, handleEditSubmit, isTargetEditCommnt, onEditContentChange],
+  );
 
   return (
     <Container>
@@ -90,8 +101,12 @@ function Comment({
             />
             <h3>{commenWriter}</h3>
           </Image>
-          {checkEditForm()}
+          <CheckEditForm />
           <span>좋아요수: {feelingCount}</span>
+          <LikeThumbStyled
+            isFill={isLikesContainUserId}
+            onClick={() => handleClickLikeThumb(id, loggedInUserId, isLikesContainUserId)}
+          />
           <Buttons>
             <button onClick={() => setEditTargetCommentId(id)}>수정</button>
             <button onClick={() => handleClickDeleteButton(id)}>삭제</button>
@@ -121,6 +136,7 @@ Comment.propTypes = {
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleChangeToSecret: PropTypes.func.isRequired,
+  handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
 export default memo(Comment);

@@ -15,6 +15,19 @@ const commentApi = {
       data,
     });
   },
+  POST_COMMENT_LIKE({ postType, id }) {
+    return instance({
+      url: `${MOCK_SERVER_URL}/${postType}/comment/liking/${id}`,
+      method: 'post',
+    });
+  },
+
+  DELETE_COMMENT({ postType, id }) {
+    return instance({
+      url: `${MOCK_SERVER_URL}/${postType}/comment/${id}`,
+      method: 'delete',
+    });
+  },
   PATCH_COMMENT({ postType, postId, data }) {
     return instance({
       url: `${MOCK_SERVER_URL}/${postType}/comment/${postId}`,
@@ -22,12 +35,7 @@ const commentApi = {
       data,
     });
   },
-  DELETE_COMMENT({ postType, id }) {
-    return instance({
-      url: `${MOCK_SERVER_URL}/${postType}/comment/${id}`,
-      method: 'delete',
-    });
-  },
+
   // POST_REPLY({ postType, data }) {
   //   return instance({
   //     url: `/${postType}/nested_comment`,

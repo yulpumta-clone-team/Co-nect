@@ -2,7 +2,13 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { deleteComment, getComment, patchComment, postComment } from 'apiAction/comment';
+import {
+  deleteComment,
+  getComment,
+  patchComment,
+  postComment,
+  postCommentLike,
+} from 'apiAction/comment';
 import { handleFetcher, setPostIdOnSubmitData } from 'utils';
 import { getUserCookie } from 'utils/cookie';
 import Comment from 'components/Comment';
@@ -76,6 +82,7 @@ function CommentContainer({ postType, postWriter, postId }) {
     },
     [comments, dispatch, postId, postType, resetTarget],
   );
+
   const handleClickDeleteButton = useCallback(
     async (id) => {
       const { isError } = await handleFetcher(deleteComment, { postType, id }, dispatch);
@@ -88,14 +95,35 @@ function CommentContainer({ postType, postWriter, postId }) {
     [dispatch, postType],
   );
 
-  const handleChangeToSecret = useCallback(
-    (id) => {
-      const newComments = comments.map((comment) =>
+  // TODO: 서버와 api 연결하기
+  const handleChangeToSecret = useCallback((id) => {
+    const newComments = (prev) =>
+      prev.map((comment) =>
         comment.id === id ? { ...comment, secret: !comment.secret } : comment,
       );
+    setComments(newComments);
+  }, []);
+
+  const handleClickLikeThumb = useCallback(
+    async (id, loggedInUserId, isLikesContainUserId) => {
+      const { isError } = await handleFetcher(postCommentLike, { postType, id }, dispatch);
+      if (isError) {
+        return;
+      }
+      const handleLikeUserId = (oldComment) => {
+        const targetLikes = [...oldComment.feeling];
+        if (isLikesContainUserId) {
+          const newLikes = targetLikes.filter((id) => id !== loggedInUserId);
+          return { ...oldComment, feeling: newLikes };
+        }
+        targetLikes.push(loggedInUserId);
+        return { ...oldComment, feeling: targetLikes };
+      };
+      const newComments = (prev) =>
+        prev.map((comment) => (comment.id === id ? handleLikeUserId(comment) : comment));
       setComments(newComments);
     },
-    [comments],
+    [dispatch, postType],
   );
 
   const fetchComments = useCallback(async () => {
@@ -142,6 +170,7 @@ function CommentContainer({ postType, postWriter, postId }) {
               handleSubmitEditComment={handleSubmitEditComment}
               handleClickDeleteButton={handleClickDeleteButton}
               handleChangeToSecret={handleChangeToSecret}
+              handleClickLikeThumb={handleClickLikeThumb}
             />
           );
         })}
