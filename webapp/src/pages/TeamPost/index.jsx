@@ -6,7 +6,7 @@ import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
 import { getTeamDetail } from 'apiAction/team';
 import { POST_TYPE } from 'utils';
-import { Board, Button, Box, Box2, Box3 } from './stylep';
+import { Board, Button } from './style';
 
 function TeamPost() {
   const { teamId: id } = useParams();
@@ -45,14 +45,12 @@ function TeamPost() {
         <Button>Edit</Button>
       </Link>
       <Board>
-        <Box3>{img}</Box3>
-        <Box2>
-          <MarkdownViewer mdValue={content} />
-        </Box2>
-        <Box2>
+        <img src={img} alt="게시글" />
+        <MarkdownViewer mdValue={content} />
+        <div>
           이름 : {name} / 팀명 : {team_name}
-        </Box2>
-        <Box2>좋아요 개수 : {like_cnt}</Box2>
+        </div>
+        <div>좋아요 개수 : {like_cnt}</div>
         <CommentContainer postType={POST_TYPE.TEAM} postWriter={name} postId={teamId} />
       </Board>
     </div>
