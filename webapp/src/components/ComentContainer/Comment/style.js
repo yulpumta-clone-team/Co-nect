@@ -2,8 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
+  margin-bottom: 8px;
+  border: 1px solid black;
 `;
+
 export const Image = styled.div``;
 
 export const Info = styled.div``;

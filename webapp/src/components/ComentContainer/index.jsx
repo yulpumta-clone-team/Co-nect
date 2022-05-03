@@ -11,7 +11,7 @@ import {
 } from 'apiAction/comment';
 import { handleFetcher, setPostIdOnSubmitData } from 'utils';
 import { getUserCookie } from 'utils/cookie';
-import Comment from 'components/Comment';
+import Comment from 'components/ComentContainer/Comment';
 
 const DEFAULT_TARGET = -1;
 
@@ -144,7 +144,10 @@ function CommentContainer({ postType, postWriter, postId }) {
 
   return (
     <div>
-      <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px' }}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <input
           {...register('commentValue', {
             required: '내용을 입력해주세요.',

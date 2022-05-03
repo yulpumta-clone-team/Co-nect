@@ -111,7 +111,7 @@ function Comment({
       {isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName) ? (
         <div>비밀댓글입니다.</div>
       ) : (
-        <>
+        <div style={{ display: 'flex' }}>
           <Image>
             <img
               style={{ width: '50px', heigth: '50px' }}
@@ -131,8 +131,23 @@ function Comment({
             <button onClick={() => handleClickDeleteButton(id)}>삭제</button>
             <button onClick={() => handleChangeToSecret(id)}>{showSecretButtonText(secret)}</button>
           </Buttons>
-        </>
+        </div>
       )}
+      {/* <ul>
+        {!replies || replies.length === 0 ? (
+          <div>답글이 없어요</div>
+        ) : (
+          replies.map(({ id, teamId, userId, ...replyInfo }) => (
+            <NestedComment
+              key={id}
+              id={id}
+              postId={postId}
+              postWriter={postWriter}
+              replyInfo={replyInfo}
+            />
+          ))
+        )}
+      </ul> */}
     </Container>
   );
 }
