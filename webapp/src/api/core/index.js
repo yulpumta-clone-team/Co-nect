@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { AUTH_KEY } from 'constant';
+import { ROOT_URL } from 'constant/route';
 // import { getAuthCookie } from 'utils/cookie';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_API,
+  baseURL: ROOT_URL,
   // headers: { 'Access-Control-Allow-Origin': process.env.REACT_APP_SERVER_API },
   // withCredentials: true,
 });
