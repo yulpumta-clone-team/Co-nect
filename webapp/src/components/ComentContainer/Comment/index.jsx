@@ -1,17 +1,19 @@
 /* eslint-disable react/require-default-props */
 import React, { memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import useInput from 'hooks/useInput';
 import { setDefaultProfileImage } from 'utils';
 import { getUserCookie } from 'utils/cookie';
 import { Buttons, Container, EditForm, Image, Info, LikeThumbStyled } from './style';
+import CommentForm from '../CommentForm';
 
 function Comment({
   id,
   postId,
+  postType,
   postWriter,
   commentInfo,
   editTargetCommentId,
+  resetTarget,
   setEditTargetCommentId,
   handleSubmitEditComment,
   handleClickDeleteButton,
@@ -32,7 +34,6 @@ function Comment({
   } = commentInfo;
   const likesCount = likedUserIds.length;
   const isTargetEditCommnt = id === editTargetCommentId;
-  const [editContent, onEditContentChange] = useInput(content);
 
   const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
     const findUser = targetLikesArray.find((id) => id === userId);
@@ -75,35 +76,34 @@ function Comment({
     [checkSecretComment],
   );
 
-  // FIXME: handleSubmitEditComment()로직을 commentContainer에서 넘겨받을 필요가 있을까? 여기서 선언해도 될 거 같은데 고민해보기
-  const handleEditSubmit = useCallback(
-    (event) => {
-      event.preventDefault();
-      const newCommentData = {
-        writer: commenWriter,
-        parentId,
-        secret,
-        content: editContent,
-      };
-      handleSubmitEditComment(newCommentData);
-    },
-    [commenWriter, editContent, handleSubmitEditComment, parentId, secret],
-  );
-
   const CheckEditForm = useCallback(
     () =>
       isTargetEditCommnt ? (
-        <EditForm onSubmit={handleEditSubmit}>
-          <input type="text" value={editContent} onChange={onEditContentChange} />
-          <button>수정완료</button>
-        </EditForm>
+        <CommentForm
+          postType={postType}
+          postId={postId}
+          initialText={content}
+          submitCallback={handleSubmitEditComment}
+          commentInfo={{ id, parentId }}
+          hasCancelButton
+          handleCancel={resetTarget}
+        />
       ) : (
         <Info>
           <span>{content}</span>
         </Info>
       ),
 
-    [content, editContent, handleEditSubmit, isTargetEditCommnt, onEditContentChange],
+    [
+      content,
+      handleSubmitEditComment,
+      id,
+      isTargetEditCommnt,
+      parentId,
+      postId,
+      postType,
+      resetTarget,
+    ],
   );
 
   return (
@@ -154,6 +154,7 @@ function Comment({
 
 Comment.propTypes = {
   id: PropTypes.number.isRequired,
+  postType: PropTypes.string.isRequired,
   postId: PropTypes.number.isRequired,
   postWriter: PropTypes.string.isRequired,
   commentInfo: PropTypes.shape({
@@ -166,6 +167,7 @@ Comment.propTypes = {
     parentId: PropTypes.number,
   }),
   editTargetCommentId: PropTypes.number.isRequired,
+  resetTarget: PropTypes.func.isRequired,
   setEditTargetCommentId: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,

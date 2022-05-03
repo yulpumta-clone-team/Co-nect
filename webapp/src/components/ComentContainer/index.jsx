@@ -1,7 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { useForm } from 'react-hook-form';
 import {
   deleteComment,
   getComment,
@@ -27,35 +26,22 @@ function CommentContainer({ postType, postWriter, postId }) {
   }, []);
 
   const handlePostComment = useCallback(
-    async ({ commentValue, secret }) => {
-      if (!userInfo) {
-        alert('로그인을 먼저해주세요');
-      } else {
-        const { name, id } = userInfo;
-        const newCommentData = setPostIdOnSubmitData(postType, {
-          writer: name, // 작성자 이름
-          parentId: null, // 아무것도 안넣으면 대댓글아님
-          secret,
-          content: commentValue,
-        });
-
-        const { isError, value: newComment } = await handleFetcher(
-          postComment,
-          { postType, newCommentData },
-          dispatch,
-        );
-        if (isError) {
-          return;
-        }
-        setComments((prev) => [...prev, newComment]);
+    async (newCommentData) => {
+      const { isError, value: newComment } = await handleFetcher(
+        postComment,
+        { postType, newCommentData },
+        dispatch,
+      );
+      if (isError) {
+        return;
       }
+      setComments((prev) => [...prev, newComment]);
     },
-    [dispatch, postType, userInfo],
+    [dispatch, postType],
   );
 
   const handleSubmitEditComment = useCallback(
-    async (editContent) => {
-      const newCommentData = setPostIdOnSubmitData(postType, editContent);
+    async (newCommentData) => {
       const { isError, value: editedComment } = await handleFetcher(
         patchComment,
         { postType, postId, newCommentData },
@@ -135,9 +121,11 @@ function CommentContainer({ postType, postWriter, postId }) {
   return (
     <div>
       <CommentForm
+        postType={postType}
+        postId={postId}
         initialText=""
         submitCallback={handlePostComment}
-        commentInfo={{ id: -1, parentId: -1 }}
+        commentInfo={{ id: null, parentId: null }}
         hasCancelButton={false}
         handleCancel={() => {}}
       />
@@ -148,10 +136,12 @@ function CommentContainer({ postType, postWriter, postId }) {
             <Comment
               key={id}
               id={id}
+              postType={postType}
               postId={postId}
               postWriter={postWriter}
               commentInfo={commentInfo}
               editTargetCommentId={editTargetCommentId}
+              resetTarget={resetTarget}
               setEditTargetCommentId={setEditTargetCommentId}
               handleSubmitEditComment={handleSubmitEditComment}
               handleClickDeleteButton={handleClickDeleteButton}
