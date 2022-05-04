@@ -25,3 +25,9 @@ export function deleteComment({ postType, id }) {
 export function postReply({ postType, newCommentData }) {
   return commentApi.POST_REPLY({ postType, data: newCommentData }).then((response) => response);
 }
+
+export function patchReply({ postType, id, newCommentData }) {
+  return commentApi
+    .PATCH_REPLY({ postType, id, data: newCommentData })
+    .then((response) => response);
+}

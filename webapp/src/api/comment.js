@@ -42,13 +42,13 @@ const commentApi = {
       data,
     });
   },
-  // PATCH_USER_REPLY({ postType, data }) {
-  //   return instance({
-  //     url: '/user/nested_comment',
-  //     method: 'patch',
-  //     data,
-  //   });
-  // },
+  PATCH_REPLY({ postType, id, data }) {
+    return instance({
+      url: `${MOCK_SERVER_URL}/${postType}/nested_comment/${id}`,
+      method: 'patch',
+      data,
+    });
+  },
   // HANDLE_SECRET_USER_REPLY() {
   //   return instance({
   //     url: '/user/logout',

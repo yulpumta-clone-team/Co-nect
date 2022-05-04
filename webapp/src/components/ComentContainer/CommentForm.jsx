@@ -42,7 +42,7 @@ function CommentForm({
         secret: isSecret,
         content: commentValue,
       });
-      await submitCallback(newCommentData, commentId);
+      await submitCallback(newCommentData, commentId, parentId);
       setValue(USE_FORM_COMMENT_KEY, '');
     },
     [commentId, isSecret, parentId, postId, postType, setValue, submitCallback, userInfo],

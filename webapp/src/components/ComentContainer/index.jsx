@@ -5,6 +5,7 @@ import {
   deleteComment,
   getComment,
   patchComment,
+  patchReply,
   postComment,
   postCommentLike,
   postReply,
@@ -104,23 +105,60 @@ function CommentContainer({ postType, postWriter, postId }) {
     [addCommentOnNested, addCommentOnRoot],
   );
 
-  const handleSubmitEditComment = useCallback(
-    async (newCommentData, id) => {
+  const editCommentOnRoot = useCallback(
+    async (newCommentData, commentId) => {
       const { isError, value: editedComment } = await handleFetcher(
-        patchComment,
-        { postType, newCommentData, id },
+        patchReply,
+        { postType, newCommentData, id: commentId },
         dispatch,
       );
       if (isError) {
         return;
       }
-      const getNewComments = comments.map((comment) =>
+      const editTargetComment = comments.map((comment) =>
         comment.id === editedComment.id ? editedComment : comment,
       );
-      setComments(getNewComments);
+      setComments(editTargetComment);
       resetTarget();
     },
     [comments, dispatch, postType, resetTarget],
+  );
+
+  const editCommentOnNested = useCallback(
+    async (newCommentData, commentId, parentId) => {
+      const { isError, value: editedComment } = await handleFetcher(
+        patchComment,
+        { postType, newCommentData, id: commentId },
+        dispatch,
+      );
+      if (isError) {
+        return;
+      }
+      const editTargetNestedComment = (comments) =>
+        comments.map((comment) => {
+          if (comment.id === parentId) {
+            const clone = [...comment.replies];
+            comment.replies = clone.map((reply) =>
+              reply.id === commentId ? editedComment : reply,
+            );
+          }
+          return comment;
+        });
+      setComments(editTargetNestedComment);
+      resetTarget();
+    },
+    [dispatch, postType, resetTarget],
+  );
+
+  const handleSubmitEditComment = useCallback(
+    async (newCommentData, commentId, parentId) => {
+      if (parentId) {
+        editCommentOnNested(newCommentData, commentId, parentId);
+      } else {
+        editCommentOnRoot(newCommentData, commentId);
+      }
+    },
+    [editCommentOnNested, editCommentOnRoot],
   );
 
   const handleClickDeleteButton = useCallback(
@@ -187,7 +225,7 @@ function CommentContainer({ postType, postWriter, postId }) {
     fetchComments();
   }, [fetchComments]);
 
-  console.log('comments :>> ', comments);
+  // console.log('comments :>> ', comments);
   const CommentList = ({ id, comments }) => {
     return comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
       const { secret, writer: commenWriter, parentId } = commentInfo;
