@@ -18,7 +18,6 @@ function Comment({
   setEditTargetCommentId,
   handleSubmitEditComment,
   handleClickDeleteButton,
-  handleChangeToSecret,
   handleClickLikeThumb,
 }) {
   const userInfo = getUserCookie(); // {name, img, id}
@@ -59,7 +58,7 @@ function Comment({
           postId={postId}
           initialText={content}
           submitCallback={handleSubmitEditComment}
-          commentInfo={{ id, parentId }}
+          commentInfo={{ id, parentId, secret }}
           hasCancelButton
           handleCancel={resetTarget}
         />
@@ -77,6 +76,7 @@ function Comment({
       postId,
       postType,
       resetTarget,
+      secret,
     ],
   );
 
@@ -103,7 +103,6 @@ function Comment({
           <Buttons>
             <button onClick={() => setEditTargetCommentId(id)}>수정</button>
             <button onClick={() => handleClickDeleteButton(id, parentId)}>삭제</button>
-            <button onClick={() => handleChangeToSecret(id)}>{showSecretButtonText(secret)}</button>
           </Buttons>
         </div>
       )}
@@ -130,7 +129,6 @@ Comment.propTypes = {
   setEditTargetCommentId: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
-  handleChangeToSecret: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
 };
 

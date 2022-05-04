@@ -288,15 +288,6 @@ function CommentContainer({ postType, postWriter, postId }) {
     [addLike, postType, removeLike],
   );
 
-  // TODO: 서버와 api 연결하기
-  const handleChangeToSecret = useCallback((id) => {
-    const getNewComments = (prev) =>
-      prev.map((comment) =>
-        comment.id === id ? { ...comment, secret: !comment.secret } : comment,
-      );
-    setComments(getNewComments);
-  }, []);
-
   const fetchComments = useCallback(async () => {
     const { isError, value: comments } = await handleFetcher(
       getComment,
@@ -334,7 +325,6 @@ function CommentContainer({ postType, postWriter, postId }) {
             setEditTargetCommentId={setEditTargetCommentId}
             handleSubmitEditComment={handleSubmitEditComment}
             handleClickDeleteButton={handleClickDeleteButton}
-            handleChangeToSecret={handleChangeToSecret}
             handleClickLikeThumb={handleClickLikeThumb}
           />
           {!isSecret && !parentId && (
@@ -344,7 +334,7 @@ function CommentContainer({ postType, postWriter, postId }) {
               postId={postId}
               initialText=""
               submitCallback={handlePostComment}
-              commentInfo={{ id, parentId }}
+              commentInfo={{ id, parentId, secret }}
               hasCancelButton={false}
               handleCancel={() => {}}
             />
@@ -364,7 +354,7 @@ function CommentContainer({ postType, postWriter, postId }) {
         postId={postId}
         initialText=""
         submitCallback={handlePostComment}
-        commentInfo={{ id: null, parentId: null }}
+        commentInfo={{ id: null, parentId: null, secret: false }}
         hasCancelButton={false}
         handleCancel={() => {}}
       />

@@ -25,10 +25,10 @@ function CommentForm({
   } = useForm({
     defaultValues: {},
   });
-  const { id: commentId, parentId } = commentInfo;
+  const { id: commentId, parentId, secret } = commentInfo;
   const formId = commentId || 'rootForm';
   const userInfo = getUserCookie(); // {name, img, id}
-  const [isSecret, setIsSecret] = useState(false);
+  const [isSecret, setIsSecret] = useState(secret);
   const commentValue = watch(USE_FORM_COMMENT_KEY);
   const isTextareaDisabled = commentValue?.length === 0;
   const onSubmit = useCallback(
@@ -87,6 +87,7 @@ CommentForm.propTypes = {
   commentInfo: PropTypes.shape({
     id: PropTypes.number,
     parentId: PropTypes.number,
+    secret: PropTypes.bool,
   }).isRequired,
   hasCancelButton: PropTypes.bool.isRequired,
   handleCancel: PropTypes.func.isRequired,
