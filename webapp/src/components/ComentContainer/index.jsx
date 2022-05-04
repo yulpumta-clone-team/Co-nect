@@ -20,6 +20,8 @@ function CommentContainer({ postType, postWriter, postId }) {
   const [comments, setComments] = useState([]);
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
   const userInfo = getUserCookie(); // {name, img, id}
+  const loggedInUserName = userInfo?.name;
+  const loggedInUserId = userInfo?.id;
 
   const resetTarget = useCallback(() => {
     setEditTargetCommentId(DEFAULT_TARGET);
@@ -118,6 +120,61 @@ function CommentContainer({ postType, postWriter, postId }) {
     fetchComments();
   }, [fetchComments]);
 
+  const checkSecretComment = useCallback((postWriterName, commentWriterName, loggedInUserName) => {
+    // true: 가리기 , false: 보여주기
+    if (!loggedInUserName) {
+      return true;
+    }
+    const isSameCommentWriter = () => postWriterName === loggedInUserName;
+    const isSamePostWriter = () => commentWriterName === loggedInUserName;
+    if (isSameCommentWriter() || isSamePostWriter()) {
+      return false;
+    }
+
+    return true;
+  }, []);
+
+  const isShowSecretComment = useCallback(
+    (secret, postWriterName, commentWriterName, loggedInUserName) => {
+      // secret ? 가리기 : 보여주기
+      if (secret) {
+        const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
+        return isShow;
+      }
+      return false;
+    },
+    [checkSecretComment],
+  );
+
+  const CommentList = ({ id, comments }) => {
+    return comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
+      const { secret, writer: commenWriter } = commentInfo;
+      const postId = teamId || userId;
+      const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
+      return (
+        <div key={id}>
+          <Comment
+            id={id}
+            isSecret={isSecret}
+            postType={postType}
+            postId={postId}
+            postWriter={postWriter}
+            commentInfo={commentInfo}
+            editTargetCommentId={editTargetCommentId}
+            resetTarget={resetTarget}
+            setEditTargetCommentId={setEditTargetCommentId}
+            handleSubmitEditComment={handleSubmitEditComment}
+            handleClickDeleteButton={handleClickDeleteButton}
+            handleChangeToSecret={handleChangeToSecret}
+            handleClickLikeThumb={handleClickLikeThumb}
+          />
+          {!isSecret && replies && replies.length !== 0 && (
+            <CommentList id={`${id + postId}`} comments={replies} />
+          )}
+        </div>
+      );
+    });
+  };
   return (
     <div>
       <CommentForm
@@ -129,27 +186,7 @@ function CommentContainer({ postType, postWriter, postId }) {
         hasCancelButton={false}
         handleCancel={() => {}}
       />
-      {comments.length !== 0 &&
-        comments.map(({ id, teamId, userId, ...commentInfo }) => {
-          const postId = teamId || userId;
-          return (
-            <Comment
-              key={id}
-              id={id}
-              postType={postType}
-              postId={postId}
-              postWriter={postWriter}
-              commentInfo={commentInfo}
-              editTargetCommentId={editTargetCommentId}
-              resetTarget={resetTarget}
-              setEditTargetCommentId={setEditTargetCommentId}
-              handleSubmitEditComment={handleSubmitEditComment}
-              handleClickDeleteButton={handleClickDeleteButton}
-              handleChangeToSecret={handleChangeToSecret}
-              handleClickLikeThumb={handleClickLikeThumb}
-            />
-          );
-        })}
+      {comments && comments.length !== 0 && <CommentList comments={comments} />}
     </div>
   );
 }

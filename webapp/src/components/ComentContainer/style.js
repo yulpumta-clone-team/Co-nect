@@ -6,6 +6,7 @@ export const Container = styled.div`
   width: 100%;
   margin-bottom: 8px;
   border: 1px solid black;
+  padding-left: ${({ isNested }) => isNested && '50px'};
 `;
 
 export const Image = styled.div``;

@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserCookie } from 'utils/cookie';
 import { Buttons, Container, EditForm, Image, Info, LikeThumbStyled } from './style';
-import CommentForm from '../CommentForm';
+import CommentForm from './CommentForm';
 
 function Comment({
   id,
+  isSecret,
   postId,
   postType,
   postWriter,
@@ -30,7 +31,6 @@ function Comment({
     feeling: likedUserIds,
     content,
     parentId,
-    replies,
   } = commentInfo;
   const likesCount = likedUserIds.length;
   const isTargetEditCommnt = id === editTargetCommentId;
@@ -48,32 +48,6 @@ function Comment({
   const showSecretButtonText = useCallback(
     (secret) => (secret ? '공개로 전환' : '비공개로 전환'),
     [],
-  );
-
-  const checkSecretComment = useCallback((postWriterName, commentWriterName, loggedInUserName) => {
-    // true: 가리기 , false: 보여주기
-    if (!loggedInUserName) {
-      return true;
-    }
-    const isSameCommentWriter = () => postWriterName === loggedInUserName;
-    const isSamePostWriter = () => commentWriterName === loggedInUserName;
-    if (isSameCommentWriter() || isSamePostWriter()) {
-      return false;
-    }
-
-    return true;
-  }, []);
-
-  const isShowSecretComment = useCallback(
-    (secret, postWriterName, commentWriterName, loggedInUserName) => {
-      // secret ? 가리기 : 보여주기
-      if (secret) {
-        const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
-        return isShow;
-      }
-      return false;
-    },
-    [checkSecretComment],
   );
 
   const CheckEditForm = useCallback(
@@ -107,8 +81,8 @@ function Comment({
   );
 
   return (
-    <Container>
-      {isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName) ? (
+    <Container isNested={parentId}>
+      {isSecret ? (
         <div>비밀댓글입니다.</div>
       ) : (
         <div style={{ display: 'flex' }}>
@@ -133,27 +107,13 @@ function Comment({
           </Buttons>
         </div>
       )}
-      {/* <ul>
-        {!replies || replies.length === 0 ? (
-          <div>답글이 없어요</div>
-        ) : (
-          replies.map(({ id, teamId, userId, ...replyInfo }) => (
-            <NestedComment
-              key={id}
-              id={id}
-              postId={postId}
-              postWriter={postWriter}
-              replyInfo={replyInfo}
-            />
-          ))
-        )}
-      </ul> */}
     </Container>
   );
 }
 
 Comment.propTypes = {
   id: PropTypes.number.isRequired,
+  isSecret: PropTypes.bool.isRequired,
   postType: PropTypes.string.isRequired,
   postId: PropTypes.number.isRequired,
   postWriter: PropTypes.string.isRequired,
@@ -163,7 +123,6 @@ Comment.propTypes = {
     writer: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     feeling: PropTypes.array.isRequired,
-    replies: PropTypes.array.isRequired,
     parentId: PropTypes.number,
   }),
   editTargetCommentId: PropTypes.number.isRequired,

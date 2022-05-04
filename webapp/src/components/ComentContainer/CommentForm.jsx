@@ -24,7 +24,7 @@ function CommentForm({
   } = useForm({
     defaultValues: {},
   });
-  const { id: commentId } = commentInfo;
+  const { id: commentId, parentId } = commentInfo;
   const formId = commentId || 'rootForm';
   const userInfo = getUserCookie(); // {name, img, id}
   const [isSecret, setIsSecret] = useState(false);
@@ -42,7 +42,6 @@ function CommentForm({
         secret: isSecret,
         content: commentValue,
       });
-      console.log('newCommentData', newCommentData);
       await submitCallback(newCommentData);
       setValue(USE_FORM_COMMENT_KEY, '');
     },
