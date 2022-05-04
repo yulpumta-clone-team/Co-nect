@@ -5,9 +5,10 @@ import {
   deleteComment,
   getComment,
   patchComment,
+  patchCommentLike,
+  patchCommentUnLike,
   patchReply,
   postComment,
-  postCommentLike,
   postReply,
 } from 'apiAction/comment';
 import { handleFetcher, setPostIdOnSubmitData } from 'utils';
@@ -16,6 +17,8 @@ import Comment from 'components/ComentContainer/Comment';
 import CommentForm from './CommentForm';
 
 const DEFAULT_TARGET = -1;
+
+const deepClone = (originalObject) => JSON.parse(JSON.stringify(originalObject));
 
 function CommentContainer({ postType, postWriter, postId }) {
   const dispatch = useDispatch();
@@ -72,7 +75,7 @@ function CommentContainer({ postType, postWriter, postId }) {
 
   const addCommentOnNested = useCallback(
     async (newCommentData, commentId) => {
-      console.log('commentId :>> ', commentId, newCommentData);
+      // console.log('commentId :>> ', commentId, newCommentData);
       const { isError, value: newComment } = await handleFetcher(
         postReply,
         { postType, newCommentData },
@@ -193,30 +196,96 @@ function CommentContainer({ postType, postWriter, postId }) {
     [deleteCommentOnNested, deleteCommentOnRoot, dispatch, postType],
   );
 
-  const handleClickLikeThumb = useCallback(
-    async (id, loggedInUserId, isLikesContainUserId) => {
-      const { isError } = await handleFetcher(postCommentLike, { postType, id }, dispatch);
+  const addLikeToComment = (prevComments, id, loggedInUserId) =>
+    prevComments.map((comment) => {
+      if (comment.id === id) {
+        const clone = deepClone(comment);
+        clone.feeling.push(loggedInUserId);
+        return clone;
+      }
+      return comment;
+    });
 
+  const removeLikeToComment = (prevComments, id, loggedInUserId) =>
+    prevComments.map((comment) => {
+      if (comment.id === id) {
+        const clone = deepClone(comment);
+        clone.feeling = [...clone.feeling].filter((userId) => userId !== loggedInUserId);
+        return clone;
+      }
+      return comment;
+    });
+
+  const addLikeToNestComment = useCallback(
+    (prevComments, parentId, id, loggedInUserId) =>
+      prevComments.map((comment) => {
+        if (comment.id === parentId) {
+          const clone = deepClone(comment);
+          clone.replies = addLikeToComment(clone.replies, id, loggedInUserId);
+          return clone;
+        }
+        return comment;
+      }),
+    [],
+  );
+
+  const removeLikeToNestComment = useCallback(
+    (prevComments, parentId, id, loggedInUserId) =>
+      prevComments.map((comment) => {
+        if (comment.id === parentId) {
+          const clone = deepClone(comment);
+          clone.replies = removeLikeToComment(clone.replies, id, loggedInUserId);
+          return clone;
+        }
+        return comment;
+      }),
+    [],
+  );
+
+  const addLike = useCallback(
+    async (postType, idObj) => {
+      const { id, loggedInUserId, parentId } = idObj;
+      const { isError } = await handleFetcher(patchCommentLike, { postType, id }, dispatch);
       if (isError) {
         return;
       }
-
-      const handleLikeUserId = (oldComment) => {
-        const targetLikes = [...oldComment.feeling];
-        if (isLikesContainUserId) {
-          const newLikes = targetLikes.filter((id) => id !== loggedInUserId);
-          return { ...oldComment, feeling: newLikes };
-        }
-        targetLikes.push(loggedInUserId);
-        return { ...oldComment, feeling: targetLikes };
-      };
-
-      const getNewComments = (prev) =>
-        prev.map((comment) => (comment.id === id ? handleLikeUserId(comment) : comment));
-
-      setComments(getNewComments);
+      if (parentId) {
+        setComments((prev) => addLikeToNestComment(prev, parentId, id, loggedInUserId));
+      } else {
+        setComments((prev) => addLikeToComment(prev, id, loggedInUserId));
+      }
     },
-    [dispatch, postType],
+    [addLikeToNestComment, dispatch],
+  );
+
+  const removeLike = useCallback(
+    async (postType, idObj) => {
+      const { id, loggedInUserId, parentId } = idObj;
+      const { isError } = await handleFetcher(patchCommentUnLike, { postType, id }, dispatch);
+      if (isError) {
+        return;
+      }
+      if (parentId) {
+        setComments((prev) => removeLikeToNestComment(prev, parentId, id, loggedInUserId));
+      } else {
+        setComments((prev) => removeLikeToComment(prev, id, loggedInUserId));
+      }
+    },
+    [dispatch, removeLikeToNestComment],
+  );
+
+  const handleClickLikeThumb = useCallback(
+    async (id, loggedInUserId, isLikesContainUserId, parentId) => {
+      const idObj = { id, loggedInUserId, parentId };
+      if (isLikesContainUserId) {
+        // 좋아요 취소
+        removeLike(postType, idObj);
+      } else {
+        // 좋아요 등록
+        addLike(postType, idObj);
+      }
+    },
+    [addLike, postType, removeLike],
   );
 
   // TODO: 서버와 api 연결하기

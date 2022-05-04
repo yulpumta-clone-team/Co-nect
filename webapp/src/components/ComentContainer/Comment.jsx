@@ -98,7 +98,7 @@ function Comment({
           <span>좋아요수: {likesCount}</span>
           <LikeThumbStyled
             isFill={isLikesContainUserId}
-            onClick={() => handleClickLikeThumb(id, loggedInUserId, isLikesContainUserId)}
+            onClick={() => handleClickLikeThumb(id, loggedInUserId, isLikesContainUserId, parentId)}
           />
           <Buttons>
             <button onClick={() => setEditTargetCommentId(id)}>수정</button>

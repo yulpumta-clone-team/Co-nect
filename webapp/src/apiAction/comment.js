@@ -8,10 +8,6 @@ export function postComment({ postType, newCommentData }) {
   return commentApi.POST_COMMENT({ postType, data: newCommentData }).then((response) => response);
 }
 
-export function postCommentLike({ postType, id }) {
-  return commentApi.POST_COMMENT_LIKE({ postType, id }).then((response) => response);
-}
-
 export function patchComment({ postType, id, newCommentData }) {
   return commentApi
     .PATCH_COMMENT({ postType, id, data: newCommentData })
@@ -30,4 +26,12 @@ export function patchReply({ postType, id, newCommentData }) {
   return commentApi
     .PATCH_REPLY({ postType, id, data: newCommentData })
     .then((response) => response);
+}
+
+export function patchCommentLike({ postType, id }) {
+  return commentApi.PATCH_COMMENT_LIKE({ postType, id }).then((response) => response);
+}
+
+export function patchCommentUnLike({ postType, id }) {
+  return commentApi.PATCH_COMMENT_UN_LIKE({ postType, id }).then((response) => response);
 }

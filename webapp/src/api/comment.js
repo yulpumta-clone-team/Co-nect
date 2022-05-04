@@ -15,13 +15,6 @@ const commentApi = {
       data,
     });
   },
-  POST_COMMENT_LIKE({ postType, id }) {
-    return instance({
-      url: `${MOCK_SERVER_URL}/${postType}/comment/liking/${id}`,
-      method: 'post',
-    });
-  },
-
   DELETE_COMMENT({ postType, id }) {
     return instance({
       url: `${MOCK_SERVER_URL}/${postType}/comment/${id}`,
@@ -49,11 +42,18 @@ const commentApi = {
       data,
     });
   },
-  // HANDLE_SECRET_USER_REPLY() {
-  //   return instance({
-  //     url: '/user/logout',
-  //   });
-  // },
+  PATCH_COMMENT_LIKE({ postType, id }) {
+    return instance({
+      url: `${MOCK_SERVER_URL}/${postType}/comment/liking/${id}`,
+      method: 'patch',
+    });
+  },
+  PATCH_COMMENT_UN_LIKE({ postType, id }) {
+    return instance({
+      url: `${MOCK_SERVER_URL}/${postType}/comment/unliking/${id}`,
+      method: 'patch',
+    });
+  },
   // HANDLE_SECRET_COMMENT() {
   //   return instance({
   //     url: '/user/logout',
