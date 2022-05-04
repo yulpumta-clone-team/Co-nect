@@ -20,6 +20,53 @@ const DEFAULT_TARGET = -1;
 
 const deepClone = (originalObject) => JSON.parse(JSON.stringify(originalObject));
 
+const findParentAndDoCallback = (parents, parentId, callback, callbackParams) => {
+  return parents.map((comment) => {
+    if (comment.id === parentId) {
+      const clone = deepClone(comment);
+      clone.replies = callback({ prevComments: clone.replies, ...callbackParams });
+      return clone;
+    }
+    return comment;
+  });
+};
+
+const addComment = ({ prevComments, newComment }) => {
+  return [...prevComments, newComment];
+};
+
+const editComment = ({ prevComments, editedComment }) => {
+  return deepClone(prevComments).map((comment) =>
+    comment.id === editedComment.id ? editedComment : comment,
+  );
+};
+
+const removeComment = ({ prevComments, id }) => {
+  return prevComments.filter((comment) => comment.id !== id);
+};
+
+const addLikeToComment = ({ prevComments, id, loggedInUserId }) => {
+  return prevComments.map((comment) => {
+    if (comment.id === id) {
+      const clone = deepClone(comment);
+      clone.feeling.push(loggedInUserId);
+      return clone;
+    }
+    return comment;
+  });
+};
+
+const removeLikeToComment = ({ prevComments, id, loggedInUserId }) => {
+  return prevComments.map((comment) => {
+    if (comment.id === id) {
+      const clone = deepClone(comment);
+      clone.feeling = [...clone.feeling].filter((userId) => userId !== loggedInUserId);
+      return clone;
+    }
+    return comment;
+  });
+};
+
 function CommentContainer({ postType, postWriter, postId }) {
   const dispatch = useDispatch();
   const [comments, setComments] = useState([]);
@@ -41,7 +88,7 @@ function CommentContainer({ postType, postWriter, postId }) {
       if (isError) {
         return;
       }
-      setComments((prev) => [...prev, newComment]);
+      setComments((prevComments) => addComment({ prevComments, newComment }));
     },
     [dispatch, postType],
   );
@@ -56,21 +103,14 @@ function CommentContainer({ postType, postWriter, postId }) {
       if (isError) {
         return;
       }
-      const findParentComment = (comments) =>
-        comments.map((comment) => {
-          if (comment.id === commentId) {
-            comment.replies.push(newComment);
-          }
-          return comment;
-        });
-      setComments(findParentComment);
+      const callbackParams = { newComment };
+      setComments((prev) => findParentAndDoCallback(prev, commentId, addComment, callbackParams));
     },
     [dispatch, postType],
   );
 
   const handlePostComment = useCallback(
     async (newCommentData, commentId) => {
-      // post의 경우 commentId로 구분
       if (commentId) {
         addCommentOnNested(newCommentData, commentId);
       } else {
@@ -83,25 +123,6 @@ function CommentContainer({ postType, postWriter, postId }) {
   const editCommentOnRoot = useCallback(
     async (newCommentData, commentId) => {
       const { isError, value: editedComment } = await handleFetcher(
-        patchReply,
-        { postType, newCommentData, id: commentId },
-        dispatch,
-      );
-      if (isError) {
-        return;
-      }
-      const editTargetComment = comments.map((comment) =>
-        comment.id === editedComment.id ? editedComment : comment,
-      );
-      setComments(editTargetComment);
-      resetTarget();
-    },
-    [comments, dispatch, postType, resetTarget],
-  );
-
-  const editCommentOnNested = useCallback(
-    async (newCommentData, commentId, parentId) => {
-      const { isError, value: editedComment } = await handleFetcher(
         patchComment,
         { postType, newCommentData, id: commentId },
         dispatch,
@@ -109,17 +130,24 @@ function CommentContainer({ postType, postWriter, postId }) {
       if (isError) {
         return;
       }
-      const editTargetNestedComment = (comments) =>
-        comments.map((comment) => {
-          if (comment.id === parentId) {
-            const clone = [...comment.replies];
-            comment.replies = clone.map((reply) =>
-              reply.id === commentId ? editedComment : reply,
-            );
-          }
-          return comment;
-        });
-      setComments(editTargetNestedComment);
+      setComments((prevComments) => editComment({ prevComments, editedComment }));
+      resetTarget();
+    },
+    [dispatch, postType, resetTarget],
+  );
+
+  const editCommentOnNested = useCallback(
+    async (newCommentData, commentId, parentId) => {
+      const { isError, value: editedComment } = await handleFetcher(
+        patchReply,
+        { postType, newCommentData, id: commentId },
+        dispatch,
+      );
+      if (isError) {
+        return;
+      }
+      const callbackParams = { editedComment };
+      setComments((prev) => findParentAndDoCallback(prev, parentId, editComment, callbackParams));
       resetTarget();
     },
     [dispatch, postType, resetTarget],
@@ -128,6 +156,7 @@ function CommentContainer({ postType, postWriter, postId }) {
   const handleSubmitEditComment = useCallback(
     async (newCommentData, commentId, parentId) => {
       if (parentId) {
+        console.log('parentId :>> ', parentId);
         editCommentOnNested(newCommentData, commentId, parentId);
       } else {
         editCommentOnRoot(newCommentData, commentId);
@@ -137,20 +166,12 @@ function CommentContainer({ postType, postWriter, postId }) {
   );
 
   const deleteCommentOnRoot = useCallback((id) => {
-    const deleteTargetComment = (prev) => prev.filter((comment) => comment.id !== id);
-    setComments(deleteTargetComment);
+    setComments((prevComments) => removeComment({ prevComments, id }));
   }, []);
 
   const deleteCommentOnNested = useCallback((id, parentId) => {
-    const deleteTargetNestedComent = (comments) =>
-      comments.map((comment) => {
-        if (comment.id === parentId) {
-          const clone = [...comment.replies];
-          comment.replies = clone.filter((reply) => reply.id !== id);
-        }
-        return comment;
-      });
-    setComments(deleteTargetNestedComent);
+    const callbackParams = { id };
+    setComments((prev) => findParentAndDoCallback(prev, parentId, removeComment, callbackParams));
   }, []);
 
   const handleClickDeleteButton = useCallback(
@@ -168,52 +189,6 @@ function CommentContainer({ postType, postWriter, postId }) {
     [deleteCommentOnNested, deleteCommentOnRoot, dispatch, postType],
   );
 
-  const addLikeToComment = (prevComments, id, loggedInUserId) =>
-    prevComments.map((comment) => {
-      if (comment.id === id) {
-        const clone = deepClone(comment);
-        clone.feeling.push(loggedInUserId);
-        return clone;
-      }
-      return comment;
-    });
-
-  const removeLikeToComment = (prevComments, id, loggedInUserId) =>
-    prevComments.map((comment) => {
-      if (comment.id === id) {
-        const clone = deepClone(comment);
-        clone.feeling = [...clone.feeling].filter((userId) => userId !== loggedInUserId);
-        return clone;
-      }
-      return comment;
-    });
-
-  const addLikeToNestComment = useCallback(
-    (prevComments, parentId, id, loggedInUserId) =>
-      prevComments.map((comment) => {
-        if (comment.id === parentId) {
-          const clone = deepClone(comment);
-          clone.replies = addLikeToComment(clone.replies, id, loggedInUserId);
-          return clone;
-        }
-        return comment;
-      }),
-    [],
-  );
-
-  const removeLikeToNestComment = useCallback(
-    (prevComments, parentId, id, loggedInUserId) =>
-      prevComments.map((comment) => {
-        if (comment.id === parentId) {
-          const clone = deepClone(comment);
-          clone.replies = removeLikeToComment(clone.replies, id, loggedInUserId);
-          return clone;
-        }
-        return comment;
-      }),
-    [],
-  );
-
   const addLike = useCallback(
     async (postType, idObj) => {
       const { id, loggedInUserId, parentId } = idObj;
@@ -222,12 +197,15 @@ function CommentContainer({ postType, postWriter, postId }) {
         return;
       }
       if (parentId) {
-        setComments((prev) => addLikeToNestComment(prev, parentId, id, loggedInUserId));
+        const callbackParams = { id, loggedInUserId };
+        setComments((prev) =>
+          findParentAndDoCallback(prev, parentId, addLikeToComment, callbackParams),
+        );
       } else {
-        setComments((prev) => addLikeToComment(prev, id, loggedInUserId));
+        setComments((prevComments) => addLikeToComment({ prevComments, id, loggedInUserId }));
       }
     },
-    [addLikeToNestComment, dispatch],
+    [dispatch],
   );
 
   const removeLike = useCallback(
@@ -238,12 +216,15 @@ function CommentContainer({ postType, postWriter, postId }) {
         return;
       }
       if (parentId) {
-        setComments((prev) => removeLikeToNestComment(prev, parentId, id, loggedInUserId));
+        const callbackParams = { id, loggedInUserId };
+        setComments((prev) =>
+          findParentAndDoCallback(prev, parentId, removeLikeToComment, callbackParams),
+        );
       } else {
-        setComments((prev) => removeLikeToComment(prev, id, loggedInUserId));
+        setComments((prevComments) => removeLikeToComment({ prevComments, id, loggedInUserId }));
       }
     },
-    [dispatch, removeLikeToNestComment],
+    [dispatch],
   );
 
   const handleClickLikeThumb = useCallback(
@@ -296,8 +277,8 @@ function CommentContainer({ postType, postWriter, postId }) {
         comments={comments}
         editTargetCommentId={editTargetCommentId}
         resetTarget={resetTarget}
-        handlePostComment={handlePostComment}
         setEditTargetCommentId={setEditTargetCommentId}
+        handlePostComment={handlePostComment}
         handleSubmitEditComment={handleSubmitEditComment}
         handleClickDeleteButton={handleClickDeleteButton}
         handleClickLikeThumb={handleClickLikeThumb}
