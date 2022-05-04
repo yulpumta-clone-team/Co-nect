@@ -68,7 +68,6 @@ function Comment({
           <span>{content}</span>
         </Info>
       ),
-
     [
       content,
       handleSubmitEditComment,
@@ -103,7 +102,7 @@ function Comment({
           />
           <Buttons>
             <button onClick={() => setEditTargetCommentId(id)}>수정</button>
-            <button onClick={() => handleClickDeleteButton(id)}>삭제</button>
+            <button onClick={() => handleClickDeleteButton(id, parentId)}>삭제</button>
             <button onClick={() => handleChangeToSecret(id)}>{showSecretButtonText(secret)}</button>
           </Buttons>
         </div>

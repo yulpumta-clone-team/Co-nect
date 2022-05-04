@@ -161,16 +161,36 @@ function CommentContainer({ postType, postWriter, postId }) {
     [editCommentOnNested, editCommentOnRoot],
   );
 
+  const deleteCommentOnRoot = useCallback((id) => {
+    const deleteTargetComment = (prev) => prev.filter((comment) => comment.id !== id);
+    setComments(deleteTargetComment);
+  }, []);
+
+  const deleteCommentOnNested = useCallback((id, parentId) => {
+    const deleteTargetNestedComent = (comments) =>
+      comments.map((comment) => {
+        if (comment.id === parentId) {
+          const clone = [...comment.replies];
+          comment.replies = clone.filter((reply) => reply.id !== id);
+        }
+        return comment;
+      });
+    setComments(deleteTargetNestedComent);
+  }, []);
+
   const handleClickDeleteButton = useCallback(
-    async (id) => {
+    async (id, parentId) => {
       const { isError } = await handleFetcher(deleteComment, { postType, id }, dispatch);
       if (isError) {
         return;
       }
-      const removeDeletedTarget = (prev) => prev.filter((comment) => comment.id !== id);
-      setComments(removeDeletedTarget);
+      if (parentId) {
+        deleteCommentOnNested(id, parentId);
+      } else {
+        deleteCommentOnRoot(id);
+      }
     },
-    [dispatch, postType],
+    [deleteCommentOnNested, deleteCommentOnRoot, dispatch, postType],
   );
 
   const handleClickLikeThumb = useCallback(
