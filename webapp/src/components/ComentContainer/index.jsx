@@ -7,6 +7,7 @@ import {
   patchComment,
   postComment,
   postCommentLike,
+  postReply,
 } from 'apiAction/comment';
 import { handleFetcher, setPostIdOnSubmitData } from 'utils';
 import { getUserCookie } from 'utils/cookie';
@@ -26,99 +27,6 @@ function CommentContainer({ postType, postWriter, postId }) {
   const resetTarget = useCallback(() => {
     setEditTargetCommentId(DEFAULT_TARGET);
   }, []);
-
-  const handlePostComment = useCallback(
-    async (newCommentData) => {
-      const { isError, value: newComment } = await handleFetcher(
-        postComment,
-        { postType, newCommentData },
-        dispatch,
-      );
-      if (isError) {
-        return;
-      }
-      setComments((prev) => [...prev, newComment]);
-    },
-    [dispatch, postType],
-  );
-
-  const handleSubmitEditComment = useCallback(
-    async (newCommentData) => {
-      const { isError, value: editedComment } = await handleFetcher(
-        patchComment,
-        { postType, postId, newCommentData },
-        dispatch,
-      );
-      if (isError) {
-        return;
-      }
-      const getNewComments = comments.map((comment) =>
-        comment.id === editedComment.id ? editedComment : comment,
-      );
-      setComments(getNewComments);
-      resetTarget();
-    },
-    [comments, dispatch, postId, postType, resetTarget],
-  );
-
-  const handleClickDeleteButton = useCallback(
-    async (id) => {
-      const { isError } = await handleFetcher(deleteComment, { postType, id }, dispatch);
-      if (isError) {
-        return;
-      }
-      const removeDeletedTarget = (prev) => prev.filter((comment) => comment.id !== id);
-      setComments(removeDeletedTarget);
-    },
-    [dispatch, postType],
-  );
-
-  // TODO: 서버와 api 연결하기
-  const handleChangeToSecret = useCallback((id) => {
-    const getNewComments = (prev) =>
-      prev.map((comment) =>
-        comment.id === id ? { ...comment, secret: !comment.secret } : comment,
-      );
-    setComments(getNewComments);
-  }, []);
-
-  const handleClickLikeThumb = useCallback(
-    async (id, loggedInUserId, isLikesContainUserId) => {
-      const { isError } = await handleFetcher(postCommentLike, { postType, id }, dispatch);
-      if (isError) {
-        return;
-      }
-      const handleLikeUserId = (oldComment) => {
-        const targetLikes = [...oldComment.feeling];
-        if (isLikesContainUserId) {
-          const newLikes = targetLikes.filter((id) => id !== loggedInUserId);
-          return { ...oldComment, feeling: newLikes };
-        }
-        targetLikes.push(loggedInUserId);
-        return { ...oldComment, feeling: targetLikes };
-      };
-      const getNewComments = (prev) =>
-        prev.map((comment) => (comment.id === id ? handleLikeUserId(comment) : comment));
-      setComments(getNewComments);
-    },
-    [dispatch, postType],
-  );
-
-  const fetchComments = useCallback(async () => {
-    const { isError, value: comments } = await handleFetcher(
-      getComment,
-      { postType, postId },
-      dispatch,
-    );
-    if (isError) {
-      return;
-    }
-    setComments(comments);
-  }, [dispatch, postId, postType]);
-
-  useEffect(() => {
-    fetchComments();
-  }, [fetchComments]);
 
   const checkSecretComment = useCallback((postWriterName, commentWriterName, loggedInUserName) => {
     // true: 가리기 , false: 보여주기
@@ -146,9 +54,143 @@ function CommentContainer({ postType, postWriter, postId }) {
     [checkSecretComment],
   );
 
+  const addCommentOnRoot = useCallback(
+    async (newCommentData) => {
+      const { isError, value: newComment } = await handleFetcher(
+        postComment,
+        { postType, newCommentData },
+        dispatch,
+      );
+      if (isError) {
+        return;
+      }
+      setComments((prev) => [...prev, newComment]);
+    },
+    [dispatch, postType],
+  );
+
+  const addCommentOnNested = useCallback(
+    async (newCommentData, commentId) => {
+      console.log('commentId :>> ', commentId, newCommentData);
+      const { isError, value: newComment } = await handleFetcher(
+        postReply,
+        { postType, newCommentData },
+        dispatch,
+      );
+      if (isError) {
+        return;
+      }
+      const findParentComment = (comments) =>
+        comments.map((comment) => {
+          if (comment.id === commentId) {
+            comment.replies.push(newComment);
+          }
+          return comment;
+        });
+      setComments(findParentComment);
+    },
+    [dispatch, postType],
+  );
+
+  const handlePostComment = useCallback(
+    async (newCommentData, commentId) => {
+      // post의 경우 commentId로 구분
+      if (commentId) {
+        addCommentOnNested(newCommentData, commentId);
+      } else {
+        addCommentOnRoot(newCommentData);
+      }
+    },
+    [addCommentOnNested, addCommentOnRoot],
+  );
+
+  const handleSubmitEditComment = useCallback(
+    async (newCommentData, id) => {
+      const { isError, value: editedComment } = await handleFetcher(
+        patchComment,
+        { postType, newCommentData, id },
+        dispatch,
+      );
+      if (isError) {
+        return;
+      }
+      const getNewComments = comments.map((comment) =>
+        comment.id === editedComment.id ? editedComment : comment,
+      );
+      setComments(getNewComments);
+      resetTarget();
+    },
+    [comments, dispatch, postType, resetTarget],
+  );
+
+  const handleClickDeleteButton = useCallback(
+    async (id) => {
+      const { isError } = await handleFetcher(deleteComment, { postType, id }, dispatch);
+      if (isError) {
+        return;
+      }
+      const removeDeletedTarget = (prev) => prev.filter((comment) => comment.id !== id);
+      setComments(removeDeletedTarget);
+    },
+    [dispatch, postType],
+  );
+
+  const handleClickLikeThumb = useCallback(
+    async (id, loggedInUserId, isLikesContainUserId) => {
+      const { isError } = await handleFetcher(postCommentLike, { postType, id }, dispatch);
+
+      if (isError) {
+        return;
+      }
+
+      const handleLikeUserId = (oldComment) => {
+        const targetLikes = [...oldComment.feeling];
+        if (isLikesContainUserId) {
+          const newLikes = targetLikes.filter((id) => id !== loggedInUserId);
+          return { ...oldComment, feeling: newLikes };
+        }
+        targetLikes.push(loggedInUserId);
+        return { ...oldComment, feeling: targetLikes };
+      };
+
+      const getNewComments = (prev) =>
+        prev.map((comment) => (comment.id === id ? handleLikeUserId(comment) : comment));
+
+      setComments(getNewComments);
+    },
+    [dispatch, postType],
+  );
+
+  // TODO: 서버와 api 연결하기
+  const handleChangeToSecret = useCallback((id) => {
+    const getNewComments = (prev) =>
+      prev.map((comment) =>
+        comment.id === id ? { ...comment, secret: !comment.secret } : comment,
+      );
+    setComments(getNewComments);
+  }, []);
+
+  const fetchComments = useCallback(async () => {
+    const { isError, value: comments } = await handleFetcher(
+      getComment,
+      { postType, postId },
+      dispatch,
+    );
+    if (isError) {
+      return;
+    }
+
+    setComments(comments);
+  }, [dispatch, postId, postType]);
+
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
+
+  console.log('comments :>> ', comments);
   const CommentList = ({ id, comments }) => {
     return comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
-      const { secret, writer: commenWriter } = commentInfo;
+      const { secret, writer: commenWriter, parentId } = commentInfo;
       const postId = teamId || userId;
       const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
       return (
@@ -168,6 +210,18 @@ function CommentContainer({ postType, postWriter, postId }) {
             handleChangeToSecret={handleChangeToSecret}
             handleClickLikeThumb={handleClickLikeThumb}
           />
+          {!isSecret && !parentId && (
+            <CommentForm
+              isChild
+              postType={postType}
+              postId={postId}
+              initialText=""
+              submitCallback={handlePostComment}
+              commentInfo={{ id, parentId }}
+              hasCancelButton={false}
+              handleCancel={() => {}}
+            />
+          )}
           {!isSecret && replies && replies.length !== 0 && (
             <CommentList id={`${id + postId}`} comments={replies} />
           )}
@@ -178,6 +232,7 @@ function CommentContainer({ postType, postWriter, postId }) {
   return (
     <div>
       <CommentForm
+        isChild={false}
         postType={postType}
         postId={postId}
         initialText=""

@@ -7,6 +7,7 @@ import { getUserCookie } from 'utils/cookie';
 const USE_FORM_COMMENT_KEY = 'commentValue';
 
 function CommentForm({
+  isChild,
   postType,
   postId,
   initialText,
@@ -35,17 +36,16 @@ function CommentForm({
       if (!userInfo) {
         alert('로그인을 먼저해주세요');
       }
-      const newCommentData = setPostIdOnSubmitData(postType, {
-        ...commentInfo,
-        postId,
+      const newCommentData = setPostIdOnSubmitData(postType, postId, {
+        parentId,
         writer: userInfo?.name,
         secret: isSecret,
         content: commentValue,
       });
-      await submitCallback(newCommentData);
+      await submitCallback(newCommentData, commentId);
       setValue(USE_FORM_COMMENT_KEY, '');
     },
-    [commentInfo, isSecret, postId, postType, setValue, submitCallback, userInfo],
+    [commentId, isSecret, parentId, postId, postType, setValue, submitCallback, userInfo],
   );
   return (
     <div style={{ marginBottom: '12px' }}>
@@ -79,6 +79,7 @@ function CommentForm({
 }
 
 CommentForm.propTypes = {
+  isChild: PropTypes.bool.isRequired,
   postId: PropTypes.number.isRequired,
   postType: PropTypes.string.isRequired,
   initialText: PropTypes.string.isRequired,

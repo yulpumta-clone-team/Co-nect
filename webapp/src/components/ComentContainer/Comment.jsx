@@ -54,6 +54,7 @@ function Comment({
     () =>
       isTargetEditCommnt ? (
         <CommentForm
+          isChild
           postType={postType}
           postId={postId}
           initialText={content}

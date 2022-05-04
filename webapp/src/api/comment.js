@@ -28,47 +28,20 @@ const commentApi = {
       method: 'delete',
     });
   },
-  PATCH_COMMENT({ postType, postId, data }) {
+  PATCH_COMMENT({ postType, id, data }) {
     return instance({
-      url: `${MOCK_SERVER_URL}/${postType}/comment/${postId}`,
+      url: `${MOCK_SERVER_URL}/${postType}/comment/${id}`,
       method: 'patch',
       data,
     });
   },
-
-  // POST_REPLY({ postType, data }) {
-  //   return instance({
-  //     url: `/${postType}/nested_comment`,
-  //     method: 'post',
-  //     data,
-  //   });
-  // },
-  // DELETE_COMMENT({ postType, comment_id }) {
-  //   return instance({
-  //     url: `/${postType}/comment`,
-  //     method: 'delete',
-  //     params: { comment_id },
-  //   });
-  // },
-  // DELETE_REPLY() {
-  //   return instance({
-  //     url: '/user/logout',
-  //   });
-  // },
-  // PATCH_LIKE({ user_id }) {
-  //   return instance({
-  //     url: '/user/liking',
-  //     method: 'patch',
-  //     params: { user_id },
-  //   });
-  // },
-  // PATCH_COMMENT_LIKE({ user_id }) {
-  //   return instance({
-  //     url: '/user/liking',
-  //     method: 'patch',
-  //     params: { user_id },
-  //   });
-  // },
+  POST_REPLY({ postType, data }) {
+    return instance({
+      url: `${MOCK_SERVER_URL}/${postType}/nested_comment`,
+      method: 'post',
+      data,
+    });
+  },
   // PATCH_USER_REPLY({ postType, data }) {
   //   return instance({
   //     url: '/user/nested_comment',
