@@ -11,10 +11,10 @@ import {
   postComment,
   postReply,
 } from 'apiAction/comment';
-import { handleFetcher, setPostIdOnSubmitData } from 'utils';
+import { handleFetcher } from 'utils';
 import { getUserCookie } from 'utils/cookie';
-import Comment from 'components/ComentContainer/Comment';
 import CommentForm from './CommentForm';
+import CommentList from './CommentList';
 
 const DEFAULT_TARGET = -1;
 
@@ -26,37 +26,10 @@ function CommentContainer({ postType, postWriter, postId }) {
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
   const userInfo = getUserCookie(); // {name, img, id}
   const loggedInUserName = userInfo?.name;
-  const loggedInUserId = userInfo?.id;
 
   const resetTarget = useCallback(() => {
     setEditTargetCommentId(DEFAULT_TARGET);
   }, []);
-
-  const checkSecretComment = useCallback((postWriterName, commentWriterName, loggedInUserName) => {
-    // true: 가리기 , false: 보여주기
-    if (!loggedInUserName) {
-      return true;
-    }
-    const isSameCommentWriter = () => postWriterName === loggedInUserName;
-    const isSamePostWriter = () => commentWriterName === loggedInUserName;
-    if (isSameCommentWriter() || isSamePostWriter()) {
-      return false;
-    }
-
-    return true;
-  }, []);
-
-  const isShowSecretComment = useCallback(
-    (secret, postWriterName, commentWriterName, loggedInUserName) => {
-      // secret ? 가리기 : 보여주기
-      if (secret) {
-        const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
-        return isShow;
-      }
-      return false;
-    },
-    [checkSecretComment],
-  );
 
   const addCommentOnRoot = useCallback(
     async (newCommentData) => {
@@ -75,7 +48,6 @@ function CommentContainer({ postType, postWriter, postId }) {
 
   const addCommentOnNested = useCallback(
     async (newCommentData, commentId) => {
-      // console.log('commentId :>> ', commentId, newCommentData);
       const { isError, value: newComment } = await handleFetcher(
         postReply,
         { postType, newCommentData },
@@ -305,47 +277,6 @@ function CommentContainer({ postType, postWriter, postId }) {
     fetchComments();
   }, [fetchComments]);
 
-  // console.log('comments :>> ', comments);
-  const CommentList = ({ id, comments }) => {
-    return comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
-      const { secret, writer: commenWriter, parentId } = commentInfo;
-      const postId = teamId || userId;
-      const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
-      return (
-        <div key={id}>
-          <Comment
-            id={id}
-            isSecret={isSecret}
-            postType={postType}
-            postId={postId}
-            postWriter={postWriter}
-            commentInfo={commentInfo}
-            editTargetCommentId={editTargetCommentId}
-            resetTarget={resetTarget}
-            setEditTargetCommentId={setEditTargetCommentId}
-            handleSubmitEditComment={handleSubmitEditComment}
-            handleClickDeleteButton={handleClickDeleteButton}
-            handleClickLikeThumb={handleClickLikeThumb}
-          />
-          {!isSecret && !parentId && (
-            <CommentForm
-              isChild
-              postType={postType}
-              postId={postId}
-              initialText=""
-              submitCallback={handlePostComment}
-              commentInfo={{ id, parentId, secret }}
-              hasCancelButton={false}
-              handleCancel={() => {}}
-            />
-          )}
-          {!isSecret && replies && replies.length !== 0 && (
-            <CommentList id={`${id + postId}`} comments={replies} />
-          )}
-        </div>
-      );
-    });
-  };
   return (
     <div>
       <CommentForm
@@ -358,7 +289,19 @@ function CommentContainer({ postType, postWriter, postId }) {
         hasCancelButton={false}
         handleCancel={() => {}}
       />
-      {comments && comments.length !== 0 && <CommentList comments={comments} />}
+      <CommentList
+        postType={postType}
+        postWriter={postWriter}
+        loggedInUserName={loggedInUserName}
+        comments={comments}
+        editTargetCommentId={editTargetCommentId}
+        resetTarget={resetTarget}
+        handlePostComment={handlePostComment}
+        setEditTargetCommentId={setEditTargetCommentId}
+        handleSubmitEditComment={handleSubmitEditComment}
+        handleClickDeleteButton={handleClickDeleteButton}
+        handleClickLikeThumb={handleClickLikeThumb}
+      />
     </div>
   );
 }

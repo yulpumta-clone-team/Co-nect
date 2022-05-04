@@ -3,7 +3,7 @@ import React, { memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserCookie } from 'utils/cookie';
-import { Buttons, Container, EditForm, Image, Info, LikeThumbStyled } from './style';
+import { Buttons, Container, Image, Info, LikeThumbStyled } from './style';
 import CommentForm from './CommentForm';
 
 function Comment({
@@ -11,7 +11,6 @@ function Comment({
   isSecret,
   postId,
   postType,
-  postWriter,
   commentInfo,
   editTargetCommentId,
   resetTarget,
@@ -21,7 +20,6 @@ function Comment({
   handleClickLikeThumb,
 }) {
   const userInfo = getUserCookie(); // {name, img, id}
-  const loggedInUserName = userInfo?.name;
   const loggedInUserId = userInfo?.id;
   const {
     img,
@@ -42,11 +40,6 @@ function Comment({
   const isLikesContainUserId = useMemo(
     () => checkUserLikeTarget(loggedInUserId, likedUserIds),
     [checkUserLikeTarget, likedUserIds, loggedInUserId],
-  );
-
-  const showSecretButtonText = useCallback(
-    (secret) => (secret ? '공개로 전환' : '비공개로 전환'),
-    [],
   );
 
   const CheckEditForm = useCallback(
@@ -115,7 +108,6 @@ Comment.propTypes = {
   isSecret: PropTypes.bool.isRequired,
   postType: PropTypes.string.isRequired,
   postId: PropTypes.number.isRequired,
-  postWriter: PropTypes.string.isRequired,
   commentInfo: PropTypes.shape({
     img: PropTypes.string.isRequired,
     secret: PropTypes.bool.isRequired,

@@ -54,11 +54,6 @@ const commentApi = {
       method: 'patch',
     });
   },
-  // HANDLE_SECRET_COMMENT() {
-  //   return instance({
-  //     url: '/user/logout',
-  //   });
-  // },
 };
 
 export default commentApi;
