@@ -1,5 +1,4 @@
 import { isStatusOk } from 'constant/serverStatus';
-import { catchError } from '_actions/global_action';
 
 export function setDefaultProfileImage(img) {
   return (
@@ -17,30 +16,31 @@ export function checkIsUserPost(postType) {
   return postType === POST_TYPE.USER;
 }
 
-export function setPostIdOnSubmitData(postType, submitData) {
+export function setPostIdOnSubmitData(postType, postId, submitData) {
   const id = checkIsUserPost(postType) ? 'userId' : 'teamId';
   return {
-    [id]: checkIsUserPost(postType),
+    [id]: postId,
     ...submitData,
   };
 }
 
-export async function handleFetcher(fetcher, submitData, dispatch) {
+export async function handleFetcher(fetcher, submitData) {
   const fetchResult = {
     isError: true,
     value: null,
+    error: null,
   };
   try {
     const {
       status,
       data: { data },
     } = await fetcher(submitData);
-    if (isStatusOk(status)) {
-      fetchResult.value = data;
-      fetchResult.isError = false;
-    }
+    fetchResult.value = data;
+    fetchResult.isError = false;
   } catch (error) {
-    dispatch(catchError(error));
+    fetchResult.value = null;
+    fetchResult.isError = true;
+    fetchResult.error = error;
   }
   return fetchResult;
 }
