@@ -3,24 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
+import CommentContainer from 'components/ComentContainer';
 import { getUserDetail } from 'apiAction/user';
-import { getCookie } from 'utils/cookie';
-import { Board, Button, Box, Box2, Box3 } from './styleu';
+import { POST_TYPE } from 'utils';
+import { Board } from './style';
 
 function UserPost() {
-  const { userId } = useParams();
+  const { userId: id } = useParams();
+  const userId = Number(id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
   };
-  const userInfo = getCookie('userInfo');
-  // const { myData } = useSelector((state) => state.auth);
-  const myNickname = userInfo?.name;
-  const myId = userInfo?.id;
   const { targetUser } = useSelector((state) => state.user);
   useEffect(() => {
-    dispatch(getUserDetail(Number(userId)));
+    dispatch(getUserDetail(userId));
   }, [dispatch, userId]);
   if (!targetUser) {
     return <Loader />;
@@ -43,20 +41,14 @@ function UserPost() {
     <div>
       <button onClick={onClickback}>back</button>
       <Board>
-        <Box3>{img}</Box3>
-        <Box2>
-          <MarkdownViewer mdValue={content} />
-        </Box2>
-        <div>
-          <p>user 아이디 : {userId}</p>
-          <p>이름 : {name}</p>
-        </div>
-        <Box2>좋아요 개수 : {like_cnt}</Box2>
+        <img src={img} alt="게시글" />
+        <MarkdownViewer mdValue={content} />
+        <div>이름 : {name}</div>
+        <div>좋아요 개수 : {like_cnt}</div>
+        <CommentContainer postType={POST_TYPE.TEAM} postWriter={name} postId={userId} />
       </Board>
     </div>
   );
 }
-
-UserPost.propTypes = {};
 
 export default UserPost;
