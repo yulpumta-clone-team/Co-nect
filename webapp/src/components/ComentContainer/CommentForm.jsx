@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
@@ -14,7 +14,9 @@ function CommentForm({
   submitCallback,
   commentInfo,
   hasCancelButton,
+  hasDeleteButton,
   handleCancel,
+  handleClickDeleteButton,
 }) {
   const {
     register,
@@ -29,7 +31,6 @@ function CommentForm({
   const formId = commentId || 'rootForm';
   const userInfo = getUserCookie(); // {name, img, id}
   const [isSecret, setIsSecret] = useState(secret);
-  const textArea = useRef(null);
   const commentValue = watch(USE_FORM_COMMENT_KEY);
   console.log('commentValue :>> ', commentValue);
   const onSubmit = useCallback(
@@ -70,6 +71,9 @@ function CommentForm({
       <button form={formId} type="submit">
         작성
       </button>
+      {hasDeleteButton && (
+        <button onClick={() => handleClickDeleteButton(commentId, parentId)}>삭제</button>
+      )}
       {hasCancelButton && <button onClick={handleCancel}>취소</button>}
     </S.FormBox>
   );
@@ -86,7 +90,9 @@ CommentForm.propTypes = {
     secret: PropTypes.bool,
   }).isRequired,
   hasCancelButton: PropTypes.bool.isRequired,
+  hasDeleteButton: PropTypes.bool.isRequired,
   handleCancel: PropTypes.func.isRequired,
+  handleClickDeleteButton: PropTypes.func.isRequired,
 };
 
 export default memo(CommentForm);

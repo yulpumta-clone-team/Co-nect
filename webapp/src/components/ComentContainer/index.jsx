@@ -278,7 +278,9 @@ function CommentContainer({ postType, postWriter, postId }) {
         submitCallback={handlePostComment}
         commentInfo={{ id: null, parentId: null, secret: false }}
         hasCancelButton={false}
+        hasDeleteButton={false}
         handleCancel={() => {}}
+        handleClickDeleteButton={handleClickDeleteButton}
       />
       <CommentList
         isReplies={false}

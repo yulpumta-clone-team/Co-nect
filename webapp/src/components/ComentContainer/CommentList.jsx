@@ -3,6 +3,7 @@ import React, { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import CommentForm from './CommentForm';
 import Comment from './Comment';
+import * as S from './style';
 
 const DEFAULT_TARGET = -1;
 
@@ -53,7 +54,7 @@ function CommentList({
     [checkSecretComment],
   );
   return (
-    <ul>
+    <S.ListBox>
       {comments &&
         comments.length !== 0 &&
         comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
@@ -76,15 +77,17 @@ function CommentList({
                 handleClickDeleteButton={handleClickDeleteButton}
                 handleClickLikeThumb={handleClickLikeThumb}
               />
-              {!isSecret && !isReplies && !isShowReplies && (
-                <button onClick={handleShowReplies}>답글 보여주기</button>
-              )}
-              {!isSecret && !isReplies && isShowReplies && (
-                <button onClick={handleShowReplies}>답글 가리기</button>
-              )}
-              {!isSecret && !isReplies && replyFormCommentId !== id && (
-                <button onClick={() => setReplyFormCommentId(id)}>답글 작성하기</button>
-              )}
+              <S.ReplyButtons>
+                {!isSecret && !isReplies && !isShowReplies && (
+                  <button onClick={handleShowReplies}>답글 보여주기</button>
+                )}
+                {!isSecret && !isReplies && isShowReplies && (
+                  <button onClick={handleShowReplies}>답글 가리기</button>
+                )}
+                {!isSecret && !isReplies && replyFormCommentId !== id && (
+                  <button onClick={() => setReplyFormCommentId(id)}>답글 작성하기</button>
+                )}
+              </S.ReplyButtons>
               {!isSecret && !parentId && replyFormCommentId === id && (
                 <CommentForm
                   postType={postType}
@@ -93,7 +96,9 @@ function CommentList({
                   submitCallback={handlePostComment}
                   commentInfo={{ id, parentId, secret }}
                   hasCancelButton
+                  hasDeleteButton
                   handleCancel={() => setReplyFormCommentId(DEFAULT_TARGET)}
+                  handleClickDeleteButton={handleClickDeleteButton}
                 />
               )}
               {!isSecret && replies && replies.length !== 0 && isShowReplies && (
@@ -116,7 +121,7 @@ function CommentList({
             </li>
           );
         })}
-    </ul>
+    </S.ListBox>
   );
 }
 

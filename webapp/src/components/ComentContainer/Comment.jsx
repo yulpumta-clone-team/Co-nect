@@ -31,6 +31,7 @@ function Comment({
   } = commentInfo;
   const likesCount = likedUserIds.length;
   const isTargetEditCommnt = id === editTargetCommentId;
+  const isNested = Boolean(parentId);
 
   const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
     const findUser = targetLikesArray.find((id) => id === userId);
@@ -42,63 +43,51 @@ function Comment({
     [checkUserLikeTarget, likedUserIds, loggedInUserId],
   );
 
-  const CheckEditForm = useCallback(
-    () =>
-      isTargetEditCommnt ? (
-        <CommentForm
-          postType={postType}
-          postId={postId}
-          initialText={content}
-          submitCallback={handleSubmitEditComment}
-          commentInfo={{ id, parentId, secret }}
-          hasCancelButton
-          handleCancel={resetTarget}
-        />
-      ) : (
-        <S.Info>
-          <span>{content}</span>
-        </S.Info>
-      ),
-    [
-      content,
-      handleSubmitEditComment,
-      id,
-      isTargetEditCommnt,
-      parentId,
-      postId,
-      postType,
-      resetTarget,
-      secret,
-    ],
-  );
-
   return (
-    <S.Container isNested={parentId}>
+    <S.CommentBox isNested={isNested}>
       {isSecret ? (
-        <div>비밀댓글입니다.</div>
+        <S.SecretCommentBox>비밀댓글입니다.</S.SecretCommentBox>
       ) : (
-        <div style={{ display: 'flex' }}>
-          <S.Image>
-            <img
-              style={{ width: '50px', heigth: '50px' }}
-              src={setDefaultProfileImage(img)}
-              alt="profile"
+        <>
+          <S.NormalCommentBox style={{ display: 'flex' }}>
+            <S.UserInfo>
+              <img src={setDefaultProfileImage(img)} alt="profile" />
+              <h3>{commenWriter}</h3>
+            </S.UserInfo>
+            {!isTargetEditCommnt && (
+              <S.ContentInfo>
+                <span>{content}</span>
+                <button onClick={() => setEditTargetCommentId(id)}>수정</button>
+              </S.ContentInfo>
+            )}
+            <S.LikeInfo>
+              <S.ThumbSVG
+                isFill={isLikesContainUserId}
+                onClick={() =>
+                  handleClickLikeThumb(id, loggedInUserId, isLikesContainUserId, parentId)
+                }
+              >
+                👍
+              </S.ThumbSVG>
+              <span>: {likesCount}</span>
+            </S.LikeInfo>
+          </S.NormalCommentBox>
+          {isTargetEditCommnt && (
+            <CommentForm
+              postType={postType}
+              postId={postId}
+              initialText={content}
+              submitCallback={handleSubmitEditComment}
+              commentInfo={{ id, parentId, secret }}
+              hasCancelButton
+              hasDeleteButton
+              handleCancel={resetTarget}
+              handleClickDeleteButton={handleClickDeleteButton}
             />
-            <h3>{commenWriter}</h3>
-          </S.Image>
-          <CheckEditForm />
-          <span>좋아요수: {likesCount}</span>
-          <S.LikeThumbStyled
-            isFill={isLikesContainUserId}
-            onClick={() => handleClickLikeThumb(id, loggedInUserId, isLikesContainUserId, parentId)}
-          />
-          <S.Buttons>
-            <button onClick={() => setEditTargetCommentId(id)}>수정</button>
-            <button onClick={() => handleClickDeleteButton(id, parentId)}>삭제</button>
-          </S.Buttons>
-        </div>
+          )}
+        </>
       )}
-    </S.Container>
+    </S.CommentBox>
   );
 }
 
