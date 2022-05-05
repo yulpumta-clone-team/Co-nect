@@ -282,20 +282,24 @@ function CommentContainer({ postType, postWriter, postId }) {
         handleCancel={() => {}}
         handleClickDeleteButton={handleClickDeleteButton}
       />
-      <CommentList
-        isReplies={false}
-        postType={postType}
-        postWriter={postWriter}
-        loggedInUserName={loggedInUserName}
-        comments={comments}
-        editTargetCommentId={editTargetCommentId}
-        resetTarget={resetTarget}
-        setEditTargetCommentId={setEditTargetCommentId}
-        handlePostComment={handlePostComment}
-        handleSubmitEditComment={handleSubmitEditComment}
-        handleClickDeleteButton={handleClickDeleteButton}
-        handleClickLikeThumb={handleClickLikeThumb}
-      />
+      {!comments && comments?.length !== 0 ? (
+        <div>댓글이 없어요.</div>
+      ) : (
+        <CommentList
+          isReplies={false}
+          postType={postType}
+          postWriter={postWriter}
+          loggedInUserName={loggedInUserName}
+          comments={comments}
+          editTargetCommentId={editTargetCommentId}
+          resetTarget={resetTarget}
+          setEditTargetCommentId={setEditTargetCommentId}
+          handlePostComment={handlePostComment}
+          handleSubmitEditComment={handleSubmitEditComment}
+          handleClickDeleteButton={handleClickDeleteButton}
+          handleClickLikeThumb={handleClickLikeThumb}
+        />
+      )}
     </div>
   );
 }

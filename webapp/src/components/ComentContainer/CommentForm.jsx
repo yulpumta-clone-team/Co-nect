@@ -22,7 +22,6 @@ function CommentForm({
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {},
@@ -31,8 +30,6 @@ function CommentForm({
   const formId = commentId || 'rootForm';
   const userInfo = getUserCookie(); // {name, img, id}
   const [isSecret, setIsSecret] = useState(secret);
-  const commentValue = watch(USE_FORM_COMMENT_KEY);
-  console.log('commentValue :>> ', commentValue);
   const onSubmit = useCallback(
     async ({ commentValue }) => {
       if (!userInfo) {
