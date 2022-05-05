@@ -7,7 +7,6 @@ import { getUserCookie } from 'utils/cookie';
 const USE_FORM_COMMENT_KEY = 'commentValue';
 
 function CommentForm({
-  isChild,
   postType,
   postId,
   initialText,
@@ -19,7 +18,6 @@ function CommentForm({
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors },
   } = useForm({
@@ -29,8 +27,6 @@ function CommentForm({
   const formId = commentId || 'rootForm';
   const userInfo = getUserCookie(); // {name, img, id}
   const [isSecret, setIsSecret] = useState(secret);
-  const commentValue = watch(USE_FORM_COMMENT_KEY);
-  const isTextareaDisabled = commentValue?.length === 0;
   const onSubmit = useCallback(
     async ({ commentValue }) => {
       if (!userInfo) {
@@ -69,17 +65,12 @@ function CommentForm({
       <button form={formId} type="submit">
         작성
       </button>
-      {hasCancelButton && (
-        <button disabled={isTextareaDisabled} onClick={handleCancel}>
-          취소
-        </button>
-      )}
+      {hasCancelButton && <button onClick={handleCancel}>취소</button>}
     </div>
   );
 }
 
 CommentForm.propTypes = {
-  isChild: PropTypes.bool.isRequired,
   postId: PropTypes.number.isRequired,
   postType: PropTypes.string.isRequired,
   initialText: PropTypes.string.isRequired,

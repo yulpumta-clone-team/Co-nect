@@ -87,7 +87,6 @@ function CommentList({
               )}
               {!isSecret && !parentId && replyFormCommentId === id && (
                 <CommentForm
-                  isChild
                   postType={postType}
                   postId={postId}
                   initialText=""

@@ -272,7 +272,6 @@ function CommentContainer({ postType, postWriter, postId }) {
   return (
     <div>
       <CommentForm
-        isChild={false}
         postType={postType}
         postId={postId}
         initialText=""
