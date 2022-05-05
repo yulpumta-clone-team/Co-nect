@@ -282,6 +282,7 @@ function CommentContainer({ postType, postWriter, postId }) {
         handleCancel={() => {}}
       />
       <CommentList
+        isReplies={false}
         postType={postType}
         postWriter={postWriter}
         loggedInUserName={loggedInUserName}

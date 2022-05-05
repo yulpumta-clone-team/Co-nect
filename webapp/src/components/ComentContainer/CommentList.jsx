@@ -1,10 +1,13 @@
 /* eslint-disable react/require-default-props */
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import CommentForm from './CommentForm';
 import Comment from './Comment';
 
+const DEFAULT_TARGET = -1;
+
 function CommentList({
+  isReplies,
   postType,
   postWriter,
   loggedInUserName,
@@ -17,6 +20,13 @@ function CommentList({
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
+  const [isShowReplies, setIsShowReplies] = useState(false);
+  const [replyFormCommentId, setReplyFormCommentId] = useState(DEFAULT_TARGET);
+
+  const handleShowReplies = useCallback(() => {
+    setIsShowReplies((prev) => !prev);
+  }, []);
+
   const checkSecretComment = useCallback((postWriterName, commentWriterName, loggedInUserName) => {
     // true: 가리기 , false: 보여주기
     if (!loggedInUserName) {
@@ -66,7 +76,16 @@ function CommentList({
                 handleClickDeleteButton={handleClickDeleteButton}
                 handleClickLikeThumb={handleClickLikeThumb}
               />
-              {!isSecret && !parentId && (
+              {!isSecret && !isReplies && !isShowReplies && (
+                <button onClick={handleShowReplies}>답글 보여주기</button>
+              )}
+              {!isSecret && !isReplies && isShowReplies && (
+                <button onClick={handleShowReplies}>답글 가리기</button>
+              )}
+              {!isSecret && !isReplies && replyFormCommentId !== id && (
+                <button onClick={() => setReplyFormCommentId(id)}>답글 작성하기</button>
+              )}
+              {!isSecret && !parentId && replyFormCommentId === id && (
                 <CommentForm
                   isChild
                   postType={postType}
@@ -74,12 +93,13 @@ function CommentList({
                   initialText=""
                   submitCallback={handlePostComment}
                   commentInfo={{ id, parentId, secret }}
-                  hasCancelButton={false}
-                  handleCancel={() => {}}
+                  hasCancelButton
+                  handleCancel={() => setReplyFormCommentId(DEFAULT_TARGET)}
                 />
               )}
-              {!isSecret && replies && replies.length !== 0 && (
+              {!isSecret && replies && replies.length !== 0 && isShowReplies && (
                 <CommentList
+                  isReplies
                   postType={postType}
                   postWriter={postWriter}
                   postId={postId}
@@ -102,6 +122,7 @@ function CommentList({
 }
 
 CommentList.propTypes = {
+  isReplies: PropTypes.bool.isRequired,
   loggedInUserName: PropTypes.string,
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
