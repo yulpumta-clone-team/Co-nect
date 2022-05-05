@@ -1,8 +1,9 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
 import { getUserCookie } from 'utils/cookie';
+import * as S from './style';
 
 const USE_FORM_COMMENT_KEY = 'commentValue';
 
@@ -19,6 +20,7 @@ function CommentForm({
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {},
@@ -27,6 +29,9 @@ function CommentForm({
   const formId = commentId || 'rootForm';
   const userInfo = getUserCookie(); // {name, img, id}
   const [isSecret, setIsSecret] = useState(secret);
+  const textArea = useRef(null);
+  const commentValue = watch(USE_FORM_COMMENT_KEY);
+  console.log('commentValue :>> ', commentValue);
   const onSubmit = useCallback(
     async ({ commentValue }) => {
       if (!userInfo) {
@@ -44,7 +49,7 @@ function CommentForm({
     [commentId, isSecret, parentId, postId, postType, setValue, submitCallback, userInfo],
   );
   return (
-    <div style={{ marginBottom: '12px' }}>
+    <S.FormBox style={{ marginBottom: '12px' }}>
       <form
         id={formId}
         style={{ display: 'flex', flexDirection: 'column' }}
@@ -66,7 +71,7 @@ function CommentForm({
         작성
       </button>
       {hasCancelButton && <button onClick={handleCancel}>취소</button>}
-    </div>
+    </S.FormBox>
   );
 }
 

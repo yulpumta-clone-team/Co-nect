@@ -3,8 +3,8 @@ import React, { memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserCookie } from 'utils/cookie';
-import { Buttons, Container, Image, Info, LikeThumbStyled } from './style';
 import CommentForm from './CommentForm';
+import * as S from './style';
 
 function Comment({
   id,
@@ -55,9 +55,9 @@ function Comment({
           handleCancel={resetTarget}
         />
       ) : (
-        <Info>
+        <S.Info>
           <span>{content}</span>
-        </Info>
+        </S.Info>
       ),
     [
       content,
@@ -73,32 +73,32 @@ function Comment({
   );
 
   return (
-    <Container isNested={parentId}>
+    <S.Container isNested={parentId}>
       {isSecret ? (
         <div>비밀댓글입니다.</div>
       ) : (
         <div style={{ display: 'flex' }}>
-          <Image>
+          <S.Image>
             <img
               style={{ width: '50px', heigth: '50px' }}
               src={setDefaultProfileImage(img)}
               alt="profile"
             />
             <h3>{commenWriter}</h3>
-          </Image>
+          </S.Image>
           <CheckEditForm />
           <span>좋아요수: {likesCount}</span>
-          <LikeThumbStyled
+          <S.LikeThumbStyled
             isFill={isLikesContainUserId}
             onClick={() => handleClickLikeThumb(id, loggedInUserId, isLikesContainUserId, parentId)}
           />
-          <Buttons>
+          <S.Buttons>
             <button onClick={() => setEditTargetCommentId(id)}>수정</button>
             <button onClick={() => handleClickDeleteButton(id, parentId)}>삭제</button>
-          </Buttons>
+          </S.Buttons>
         </div>
       )}
-    </Container>
+    </S.Container>
   );
 }
 
