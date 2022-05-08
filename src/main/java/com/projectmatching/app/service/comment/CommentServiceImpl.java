@@ -25,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -245,32 +246,42 @@ public class CommentServiceImpl implements CommentService {
 
 
     /**
-     * team 댓글 좋아요
+     * team 댓글 좋아요 등록
      */
     @Override
-    public Boolean likingTeamComment(UserDetailsImpl userDetails, Long commentId) {
+    @Transactional
+    public void doTeamCommentLiking(UserDetailsImpl userDetails, Long commentId) {
+        TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
 
+        TeamCommentLiking teamCommentLiking = TeamCommentLiking.builder()
+                .id(IdGenerator.number())
+                .teamComment(teamComment)
+                .user(user)
+                .build();
+
+        teamCommentLikingRepository.save(teamCommentLiking);
+    }
+
+    /**
+     * team 댓글 좋아요 취소
+     */
+    @Override
+    @Transactional
+    public void cancelTeamCommentLiking(UserDetailsImpl userDetails, Long commentId) {
         try{
-            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(NullPointerException::new);
-            TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
+            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
+            TeamCommentLiking teamCommentLiking = teamCommentLikingRepository.findByUser_IdAndTeamComment_Id(user.getId(), commentId).orElseThrow(NullPointerException::new);
 
-            Boolean check = teamCommentLikingRepository.existsByUser_IdAndTeamComment_Id(user.getId(), teamComment.getId());
-            if (!check) {
-                TeamCommentLiking teamCommentLiking = TeamCommentLiking.builder()
-                                .user(user).teamComment(teamComment).build();
-                teamCommentLikingRepository.save(teamCommentLiking);
-                return true;
-            } else {
-                teamCommentLikingRepository.deleteByUser_IdAndTeamComment_Id(user.getId(), teamComment.getId());
-                return false;
-            }
-
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            throw new ResponeException(ResponseTemplateStatus.LIKE_COMMENT_FAILED);
+            teamCommentLikingRepository.delete(teamCommentLiking);
+        }catch (NullPointerException e){
+            throw new ResponeException(LIKING_COMMENT_FAILED);
         }
     }
 
+    /**
+     * 팀 게시물에서 댓글 리스트 조회
+     */
     @Override
     @Transactional(readOnly = true)
     public List<TeamCommentDto> getTeamComment(Long teamPostId) {
@@ -280,6 +291,7 @@ public class CommentServiceImpl implements CommentService {
 
         return teamCommentDtos;
     }
+
 
     private TeamComment updateCommentToTeam(TeamCommentDto teamCommentDto){
         try{
