@@ -22,17 +22,15 @@ function TeamBoard() {
   const [filteredLength, setFilteredLength] = useState(0);
   const fetchData = async (page) => {
     setLoading(true);
-    const { payload } = await dispatch(getTeamList({ page }));
-    setTeamList((prev) => [...prev, ...payload]);
-    // const {
-    //   payload: { status, code, data, message },
-    // } = await dispatch(getTeamList({ page }));
-    // if (isStatusOk(status)) {
-    //   !data || data?.length === 0
-    //     ? setTeamList((prev) => [...prev])
-    //     : setTeamList((prev) => [...prev, ...data]);
-    //   setLoading(false);
-    // }
+    const {
+      payload: { status, code, data, message },
+    } = await dispatch(getTeamList({ page }));
+    if (isStatusOk(status)) {
+      !data || data?.length === 0
+        ? setTeamList((prev) => [...prev])
+        : setTeamList((prev) => [...prev, ...data]);
+      setLoading(false);
+    }
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });
   const [checked, setChecked, handleFilter] = useFilter();
