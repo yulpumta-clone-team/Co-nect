@@ -38,7 +38,7 @@ function EditTeamProfile() {
   const [userName, setName] = useState(name);
   const [mdcontent, setContent] = useState(content);
   const [userSkill, setUserSkill] = useState('');
-  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState(skills);
 
   const onClickback = () => {
     navigate(-1);

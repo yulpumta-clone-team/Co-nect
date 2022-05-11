@@ -1,7 +1,21 @@
 import { GET_USER_DETAIL, GET_USER__ARR, PATCH_USER_PROFILE } from '_types/userTypes';
 
 const initState = {
-  targetUser: null,
+  targetUser: {
+    user_id: '',
+    name: '',
+    content: '',
+    session: '',
+    img: '',
+    skills: [],
+    read: '',
+    job: '',
+    comment_cnt: '',
+    like_cnt: '',
+    createdAt: '',
+    updatedAt: '',
+    comments: '',
+  },
   userArray: [],
 };
 

@@ -25,10 +25,10 @@ export function getUserDetail({ id }) {
   };
 }
 
-export function patchUserProfile({ teamId }) {
+export function patchUserProfile({ id }) {
   return (dispatch) => {
     return userApi
-      .EDIT_USER_PROFILE({ team_id: teamId })
+      .EDIT_USER_PROFILE({ id })
       .then((response) => dispatch(actionPatchUserProfile(response)))
       .catch((error) => dispatch(catchError(error)));
   };
