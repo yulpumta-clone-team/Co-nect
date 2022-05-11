@@ -4,20 +4,20 @@ import instance from './core';
 const teamApi = {
   GET_TEAM_ARR({ page }) {
     return instance({
-      url: `${MOCK_SERVER_URL}/teams`,
+      url: `/teams`,
       method: 'get',
       params: { page },
     });
   },
   GET_TEAM_DETAIL({ id }) {
     return instance({
-      url: `${MOCK_SERVER_URL}/team/${id}`,
+      url: `/team/${id}`,
       method: 'get',
     });
   },
   EDIT_TEAM_POST({ id, data }) {
     return instance({
-      url: `${MOCK_SERVER_URL}/team/${id}`,
+      url: `/team/${id}`,
       method: 'patch',
       data,
     });
