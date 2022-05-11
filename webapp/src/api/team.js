@@ -4,16 +4,15 @@ import instance from './core';
 const teamApi = {
   GET_TEAM_ARR({ page }) {
     return instance({
-      url: '/team',
+      url: `${MOCK_SERVER_URL}/teams`,
       method: 'get',
-      params: { lastPage: page },
+      params: { page },
     });
   },
   GET_TEAM_DETAIL({ id }) {
     return instance({
-      url: '/team/join',
+      url: `${MOCK_SERVER_URL}/team/${id}`,
       method: 'get',
-      params: { id },
     });
   },
   GET_TEAM_LIKES() {

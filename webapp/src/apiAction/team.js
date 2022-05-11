@@ -11,7 +11,7 @@ export function getTeamDetail({ id }) {
   return async (dispatch) => {
     return teamApi
       .GET_TEAM_DETAIL({ id })
-      .then((response) => dispatch(actionGetTeamDetail(response)))
+      .then((response) => dispatch(actionGetTeamDetail(response.data.data)))
       .catch((error) => dispatch(catchError(error)));
   };
 }
@@ -20,7 +20,7 @@ export function getTeamList({ page }) {
   return async (dispatch) => {
     return teamApi
       .GET_TEAM_ARR({ page })
-      .then((response) => dispatch(actionGetTeamList))
+      .then((response) => dispatch(actionGetTeamList(response)))
       .catch((error) => dispatch(catchError(error)));
   };
 }
