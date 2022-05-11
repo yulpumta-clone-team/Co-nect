@@ -14,10 +14,9 @@ function NewTeamPost() {
   const onClickback = () => {
     navigate(-1);
   };
-  const [imageFile, fileHandler] = useFileUploader('');
+  const [imageFile, fileHandler] = useFileUploader(null);
 
   const [teamName, onTeamChange] = useInput('');
-  // const [userImg, onImgChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -58,7 +57,7 @@ function NewTeamPost() {
       <br />
       <h3> 프로필 이미지 </h3>
       <input type="file" accept="image/*" onChange={fileHandler} />
-      {/* <button onClick={fileHandler}> 이미지 업로드 ㅈ</button> */}
+      <img src={imageFile} alt="profile" />
       <form onSubmit={handleSubmit}>
         <div>
           팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />

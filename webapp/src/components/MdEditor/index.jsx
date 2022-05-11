@@ -9,17 +9,14 @@ function MarkdownEditor({ mdValue, setContent }) {
     setContent(editorRef.current?.getInstance().getMarkdown());
   }, [setContent]);
   return (
-    <div>
-      <Editor
-        initialValue={mdValue}
-        previewStyle="vertical"
-        height="400px"
-        initialEditType="markdown"
-        useCommandShortcut
-        ref={editorRef}
-        onChange={onChangeEditorTextHandler}
-      />
-    </div>
+    <Editor
+      initialValue={mdValue}
+      height="400px"
+      initialEditType="markdown"
+      useCommandShortcut
+      ref={editorRef}
+      onChange={onChangeEditorTextHandler}
+    />
   );
 }
 

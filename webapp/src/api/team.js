@@ -15,6 +15,13 @@ const teamApi = {
       method: 'get',
     });
   },
+  EDIT_TEAM_POST({ id, data }) {
+    return instance({
+      url: `${MOCK_SERVER_URL}/team/${id}`,
+      method: 'patch',
+      data,
+    });
+  },
   GET_TEAM_LIKES() {
     return instance({
       url: '/team/liking',
