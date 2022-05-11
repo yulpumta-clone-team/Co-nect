@@ -24,6 +24,8 @@ function TeamPost() {
   if (!targetTeam) {
     return <Loader />;
   }
+
+  console.log('targetTeam', targetTeam);
   const {
     team_id,
     team_name,

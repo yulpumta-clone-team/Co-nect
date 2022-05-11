@@ -3,10 +3,11 @@ const userComments = {
   isSuccess: true,
   code: 1000,
   message: '요청 성공',
-  comments: [
+  data: [
     {
       id: 1,
-      teamId: 123,
+      img: '',
+      userId: 123123,
       writer: 'front_temp',
       parentId: null,
       secret: false,
@@ -15,16 +16,18 @@ const userComments = {
       replies: [
         {
           id: 10,
-          teamId: 123,
+          img: '',
+          userId: 123123,
           writer: 'front_temp',
           parentId: 1,
-          secret: false,
+          secret: true,
           content: 'string',
           feeling: [901092146501],
         },
         {
           id: 11,
-          teamId: 123,
+          img: '',
+          userId: 123123,
           writer: 'string',
           parentId: 1,
           secret: false,
@@ -33,7 +36,8 @@ const userComments = {
         },
         {
           id: 12,
-          teamId: 123,
+          img: '',
+          userId: 123123,
           writer: 'string',
           parentId: 1,
           secret: false,
@@ -44,7 +48,8 @@ const userComments = {
     },
     {
       id: 2,
-      teamId: 123,
+      img: '',
+      userId: 123123,
       writer: 'back',
       parentId: null,
       secret: false,
@@ -52,8 +57,9 @@ const userComments = {
       feeling: [902092246502, 92729282999999, 927292822029322],
       replies: [
         {
-          id: 20,
-          teamId: 123,
+          id: 20777777,
+          img: '',
+          userId: 123123,
           writer: 'back',
           parentId: 2,
           secret: false,
@@ -61,8 +67,9 @@ const userComments = {
           feeling: [902092246502],
         },
         {
-          id: 21,
-          teamId: 123,
+          id: 21616161,
+          img: '',
+          userId: 123123,
           writer: 'string',
           parentId: 2,
           secret: false,
@@ -70,8 +77,9 @@ const userComments = {
           feeling: [22456666],
         },
         {
-          id: 22,
-          teamId: 123,
+          id: 2152,
+          img: '',
+          userId: 123123,
           writer: 'asdfasdf123123',
           parentId: 2,
           secret: false,
@@ -82,7 +90,8 @@ const userComments = {
     },
     {
       id: 3,
-      teamId: 123,
+      img: '',
+      userId: 123123,
       writer: 'back',
       parentId: null,
       secret: false,
@@ -90,8 +99,9 @@ const userComments = {
       feeling: [903092346503, 92739382999999, 927393823029332],
       replies: [
         {
-          id: 30,
-          teamId: 123,
+          id: 30151235,
+          img: '',
+          userId: 123123,
           writer: 'front_temp',
           parentId: 3,
           secret: false,
@@ -99,8 +109,9 @@ const userComments = {
           feeling: [903092346503],
         },
         {
-          id: 31,
-          teamId: 123,
+          id: 311231231,
+          img: '',
+          userId: 123123,
           writer: 'string',
           parentId: 3,
           secret: false,
@@ -108,8 +119,9 @@ const userComments = {
           feeling: [33456666],
         },
         {
-          id: 32,
-          teamId: 123,
+          id: 3212341234,
+          img: '',
+          userId: 123123,
           writer: 'string',
           parentId: 3,
           secret: false,

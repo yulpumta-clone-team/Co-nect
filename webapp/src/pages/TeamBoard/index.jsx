@@ -30,7 +30,7 @@ function TeamBoard() {
       } = await dispatch(getTeamList({ page }));
       setTeamList((prev) => [...prev, ...data]);
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setTeamList((prev) => [...prev]);
     } finally {
       setLoading(true);
