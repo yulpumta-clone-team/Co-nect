@@ -9,7 +9,7 @@ import ReduxThunk from 'redux-thunk';
 import worker from 'mocks/browser';
 import Reducer from './_reducers';
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.REACT_APP_MSW) {
   worker.start();
 }
 
