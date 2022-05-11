@@ -6,7 +6,12 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
+import worker from 'mocks/browser';
 import Reducer from './_reducers';
+
+if (process.env.NODE_ENV === 'development') {
+  worker.start();
+}
 
 const createStoreWithMiddileware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 

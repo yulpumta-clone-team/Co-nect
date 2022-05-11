@@ -60,6 +60,10 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "msw": "^0.39.2",
     "prettier": "^2.5.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
