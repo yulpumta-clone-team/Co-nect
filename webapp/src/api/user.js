@@ -3,16 +3,22 @@ import instance from './core';
 const userApi = {
   GET_USER_LIST({ page }) {
     return instance({
-      url: '/user',
+      url: `/users`,
       method: 'get',
-      params: { lastPage: page },
+      params: { page },
     });
   },
   GET_USER_DETAIL({ id }) {
     return instance({
-      url: '/user/join',
+      url: `/user/${id}`,
       method: 'get',
-      params: { id },
+    });
+  },
+  EDIT_USER_PROFILE({ data }) {
+    return instance({
+      url: `/user/myprofile`,
+      method: 'patch',
+      data,
     });
   },
   GET_USER_LIKES() {
