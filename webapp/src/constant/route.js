@@ -13,3 +13,4 @@ export const OAUTH_URL = {
 };
 
 export const ROOT_URL = process.env.REACT_APP_SERVER_API;
+console.log(ROOT_URL);
