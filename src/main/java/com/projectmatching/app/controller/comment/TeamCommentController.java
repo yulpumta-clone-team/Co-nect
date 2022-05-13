@@ -46,12 +46,22 @@ public class TeamCommentController {
         return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
     }
 
+
+
     @ApiOperation(value = "팀 게시물 댓글에 좋아요 누르기")
-    @PostMapping("/comment/liking/{comment_id}")
-    public ResponseTemplate<Boolean> likingTeamComment(@PathVariable(name = "comment_id") Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        Boolean result = commentService.likingTeamComment(userDetails, commentId);
-        return ResponseTemplate.valueOf(result);
+    @PatchMapping("/comment/liking/{comment_id}")
+    public ResponseTemplate<Boolean> doTeamCommentLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId){
+        commentService.doTeamCommentLiking(userDetails, commentId);
+        return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
     }
+
+    @ApiOperation(value ="팀 게시물 댓글 좋아요 취소")
+    @DeleteMapping("/comment/unliking/{comment_id}")
+    public ResponseTemplate<Boolean> cancelTeamCommentLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId){
+        commentService.cancelTeamCommentLiking(userDetails, commentId);
+        return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
+    }
+
 
     @ApiOperation(value = "팀 게시글 댓글 리스트 조회")
     @GetMapping("/comment/{team_id}")

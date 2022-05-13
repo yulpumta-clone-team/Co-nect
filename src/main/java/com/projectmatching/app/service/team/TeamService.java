@@ -16,6 +16,7 @@ import com.projectmatching.app.domain.techStack.TechStackRepository;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.UserTeamRepository;
+import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +57,7 @@ public class TeamService {
 
             Long teamId = teamRepository.save(team).getId();
 
-            List<Long> techs = requestDto.getTechs();
+            List<Long> techs = requestDto.getSkills();
             for (Long t : techs){
                 TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
                 TeamTech teamTech = TeamTech.builder()
@@ -90,16 +91,11 @@ public class TeamService {
             for(Team team : teams){
                 TeamResponseDto teamResponseDto = new TeamResponseDto();
                 copyProperties(team, teamResponseDto);
-                teamResponseDto.setUserId(findTeamUser(team));
+                teamResponseDto.setUser(findTeamUser(team));
                 teamResponseDto.setSkills(findTeamTech(team));
                 teamResponseDto.setCommentCnt(team.getTeamComments().size());
                 teamResponseDto.setLikeCnt(team.getTeamLikings().size());
 
-                if(team.getStatus()=="removed") {
-                    teamResponseDto.setStatus(Boolean.FALSE);
-                } else{
-                    teamResponseDto.setStatus(Boolean.TRUE);
-                }
 
                 responseDtos.add(teamResponseDto);
             }
@@ -115,16 +111,11 @@ public class TeamService {
         try{
             TeamDetailResponseDto teamDetailResponseDto = new TeamDetailResponseDto();
             copyProperties(team, teamDetailResponseDto);
-            teamDetailResponseDto.setUserId(findTeamUser(team));
+            teamDetailResponseDto.setUser(findTeamUser(team));
             teamDetailResponseDto.setSkills(findTeamTech(team));
             teamDetailResponseDto.setCommentCnt(team.getTeamComments().size());
             teamDetailResponseDto.setLikeCnt(team.getTeamLikings().size());
 
-            if(team.getStatus()=="removed") {
-                teamDetailResponseDto.setStatus(Boolean.FALSE);
-            } else{
-                teamDetailResponseDto.setStatus(Boolean.TRUE);
-            }
 
             return teamDetailResponseDto;
         }catch (Exception e){
@@ -132,11 +123,11 @@ public class TeamService {
         }
     }
 
-    public Long findTeamUser(Team team){
+    public UserDto findTeamUser(Team team){
         List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
         if(userTeamList.size() != 0) {
             UserTeam findUser = userTeamList.get(0);
-            return findUser.getUser().getId();
+            return UserDto.of(findUser.getUser());
         }
         else return null;
     }
@@ -175,7 +166,7 @@ public class TeamService {
             team.update(teamRequestDto);
             teamTechRepository.deleteAllByTeam_Id(team.getId());
 
-            List<Long> techs = teamRequestDto.getTechs();
+            List<Long> techs = teamRequestDto.getSkills();
             for (Long t : techs) {
                 TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
                 TeamTech teamTech = TeamTech.builder()

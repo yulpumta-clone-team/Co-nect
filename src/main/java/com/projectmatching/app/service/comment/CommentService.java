@@ -37,7 +37,8 @@ public interface CommentService {
     void cancelUserCommentLiking(UserDetailsImpl userDetails,Long commentId);
 
 
-    Boolean likingTeamComment(UserDetailsImpl userDetails, Long commentId);
+    void doTeamCommentLiking(UserDetailsImpl userDetails, Long commentId);
+    void cancelTeamCommentLiking(UserDetailsImpl userDetails, Long commentId);
 
 
 
