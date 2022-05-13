@@ -4,6 +4,7 @@ import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
+import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,19 +24,18 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class TeamDetailResponseDto {
 
-    private Long userId;
-    private Long teamId;
+    private Long id;
+    private UserDto user;
     private String name;
     private String content;
     private String session;
     private List<String> skills;
     private String img;
     private Long read;
-    private Boolean status;
+    private String status;
     private int commentCnt;
     private int likeCnt;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
+
 
 
     public static TeamDetailResponseDto createEmpty(){return new TeamDetailResponseDto();}
@@ -49,7 +49,6 @@ public class TeamDetailResponseDto {
         teamResponseDto.commentCnt = team.getTeamComments().size();
         teamResponseDto.likeCnt = team.getTeamLikings().size();
 
-        teamResponseDto.status = team.getStatus()=="removed" ? Boolean.FALSE : Boolean.TRUE;
 
         return teamResponseDto;
     }
