@@ -1,76 +1,115 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
-import { useSelector } from 'react-redux';
-import { Viewer } from '@toast-ui/react-editor';
-import { Board, Box2, Box3 } from './styleeu';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserDetail, patchUserProfile } from 'apiAction/user';
+import useFileUploader from 'hooks/useFileUploader';
+import useInput from 'hooks/useInput';
+import { hopeSessionOption, skillOptions } from 'constant';
+import Loader from 'components/Loader';
+import { Board, MdEditorContainer } from './style';
+
+const USER_ID = 3;
 
 function EditUserProfile(props) {
+  const dispatch = useDispatch();
   const location = useLocation();
-  const editorRef = useRef(null);
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
   };
-  const editUserData = {
-    name: '임시',
-    img: 'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png',
-    content: '임시 프로필',
-    userId: 123123123,
-    like_cnt: 3,
-  };
-  const { name, img, content, userId, like_cnt } = editUserData;
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(userName);
-    // console.log(editorRef.current?.getInstance().getMarkdown());
-  };
+  const { targetUser } = useSelector((state) => state.user);
+  const [imageFile, fileHandler] = useFileUploader(targetUser?.img);
+  const [hopeSession, onHopeSessionChange] = useInput(targetUser?.session);
+  const [userName, setName] = useState(targetUser?.name);
+  const [mdcontent, setContent] = useState(targetUser?.content);
+  const [userSkill, setUserSkill] = useState('');
+  const [selectedSkills, setSelectedSkills] = useState(targetUser?.skills);
 
-  const [userName, setName] = useState(name);
-  const [userImg, setImg] = useState(img);
-  const [mdcontent, setContent] = useState(content);
-  const onNameChange = (e) => {
-    // console.log(e.target.name, e.target.value);
-    setName(e.target.value);
-  };
-  const onImgChange = (e) => {
-    // console.log(e.target.name, e.target.value);
-    setImg(e.target.value);
-  };
-  const resetVal = () => {
-    setName(name);
-  };
+  useEffect(() => {
+    dispatch(getUserDetail({ id: USER_ID }));
+  }, [dispatch]);
+
+  if (!targetUser) {
+    return <Loader />;
+  }
+
+  const {
+    user_id,
+    name,
+    content,
+    session,
+    img,
+    read,
+    job,
+    skills,
+    like_cnt,
+    createdAt,
+    updatedAt,
+    comments,
+  } = targetUser;
+
+  const onSkillChange = useCallback(
+    (e) => {
+      setUserSkill(e.target.value);
+      setSelectedSkills((prev) => [...prev, e.target.value]);
+    },
+    [setUserSkill],
+  );
+
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const submitData = {
+        name: userName,
+        img: imageFile,
+        session: hopeSession,
+        techs: selectedSkills,
+        content: mdcontent,
+      };
+
+      try {
+        dispatch(patchUserProfile({ id: user_id, editTeamInfo: submitData }));
+        onClickback();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [dispatch, hopeSession, imageFile, mdcontent, onClickback, selectedSkills, userName, user_id],
+  );
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <button onClick={onClickback}>back</button>
-        <Board>
-          <Box3>
-            {/* <input name="사진" onChange={onImgChange} value={userImg} /> */}
-            <img style={{ width: '300px', heigth: '300px' }} src={userImg} alt="프로필 이미지" />
-          </Box3>
-          <div>
-            <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
-          </div>
-          <Box2>
-            <div>
-              <p>user 아이디 {userId}</p>
-              <p>
-                이름 <input name="이름" onChange={onNameChange} value={userName} />
-              </p>
-            </div>
-          </Box2>
-          <div>
-            <button onClick={resetVal}>reset</button>
-          </div>
-          <div>좋아요 개수 {like_cnt}</div>
-          <Box2>
-            <input type="submit" value="저장" />
-          </Box2>
-        </Board>
-      </div>
-    </form>
+    <Board>
+      <button onClick={onClickback}>back</button>
+      <br />
+      <h3> 프로필 이미지 </h3>
+      <input type="file" accept="image/*" onChange={fileHandler} />
+      <img src={imageFile} alt="profile" />
+      <form onSubmit={handleSubmit}>
+        <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
+        <select value={userSkill} onChange={onSkillChange}>
+          {skillOptions.map(({ id, value, label }) => (
+            <option key={id} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+        <span>희망 작업 기간</span>
+        <select value={hopeSession} onChange={onHopeSessionChange}>
+          {hopeSessionOption.map(({ id, value }) => (
+            <option key={id} value={value}>
+              {value}
+            </option>
+          ))}
+        </select>
+        <MdEditorContainer>
+          <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
+        </MdEditorContainer>
+        <button onSubmit={handleSubmit}>제출</button>
+      </form>
+    </Board>
   );
 }
 

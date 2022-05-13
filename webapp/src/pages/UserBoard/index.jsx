@@ -21,14 +21,14 @@ function UserBoard() {
   const [filteredLength, setFilteredLength] = useState(0);
   const fetchData = async (page) => {
     setLoading(true);
-    const {
-      payload: { status, code, data, message },
-    } = await dispatch(getUserList({ page }));
-    if (isStatusOk(status)) {
-      !data || data?.length === 0
-        ? setUserList((prev) => [...prev])
-        : setUserList((prev) => [...prev, ...data]);
-      setLoading(false);
+    try {
+      const { payload } = await dispatch(getUserList({ page }));
+      setUserList((prev) => [...prev, ...payload]);
+    } catch (error) {
+      console.log(error);
+      setUserList((prev) => [...prev]);
+    } finally {
+      setLoading(true);
     }
   };
   const [target, loading, setLoading] = useInfiniteScroll({ fetchData });

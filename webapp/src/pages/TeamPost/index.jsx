@@ -18,11 +18,14 @@ function TeamPost() {
   };
   const { targetTeam } = useSelector((state) => state.team);
   useEffect(() => {
-    dispatch(getTeamDetail(teamId));
+    dispatch(getTeamDetail({ id: teamId }));
   }, [dispatch, teamId]);
+
   if (!targetTeam) {
     return <Loader />;
   }
+
+  console.log('targetTeam', targetTeam);
   const {
     team_id,
     team_name,
@@ -41,7 +44,7 @@ function TeamPost() {
   return (
     <div>
       <button onClick={onClickback}>back</button>
-      <Link to="./edit" state={{ team_name, content, name, img, like_cnt }}>
+      <Link to="./edit" state={targetTeam}>
         <Button>Edit</Button>
       </Link>
       <Board>

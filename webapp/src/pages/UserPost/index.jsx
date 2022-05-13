@@ -18,7 +18,7 @@ function UserPost() {
   };
   const { targetUser } = useSelector((state) => state.user);
   useEffect(() => {
-    dispatch(getUserDetail(userId));
+    dispatch(getUserDetail({ id: userId }));
   }, [dispatch, userId]);
   if (!targetUser) {
     return <Loader />;
@@ -45,7 +45,7 @@ function UserPost() {
         <MarkdownViewer mdValue={content} />
         <div>이름 : {name}</div>
         <div>좋아요 개수 : {like_cnt}</div>
-        <CommentContainer postType={POST_TYPE.TEAM} postWriter={name} postId={userId} />
+        <CommentContainer postType={POST_TYPE.USER} postWriter={name} postId={userId} />
       </Board>
     </div>
   );

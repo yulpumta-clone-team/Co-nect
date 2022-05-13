@@ -1,6 +1,11 @@
 import userApi from 'api/user';
 import { catchError } from '_actions/global_action';
-import { actionGetUserDetail, actionGetUserList, actionPatchUserLike } from '_actions/user_action';
+import {
+  actionGetUserDetail,
+  actionGetUserList,
+  actionPatchUserLike,
+  actionPatchUserProfile,
+} from '_actions/user_action';
 
 export function getUserList({ page }) {
   return (dispatch) => {
@@ -13,13 +18,22 @@ export function getUserList({ page }) {
 
 export function getUserDetail({ id }) {
   return (dispatch) => {
-    console.log('UserDetail ID: ', id);
     return userApi
       .GET_USER_DETAIL({ id })
       .then((response) => dispatch(actionGetUserDetail(response)))
       .catch((error) => dispatch(catchError(error)));
   };
 }
+
+export function patchUserProfile({ id }) {
+  return (dispatch) => {
+    return userApi
+      .EDIT_USER_PROFILE({ id })
+      .then((response) => dispatch(actionPatchUserProfile(response)))
+      .catch((error) => dispatch(catchError(error)));
+  };
+}
+
 export function patchUserlike({ teamId }) {
   return (dispatch) => {
     return userApi
