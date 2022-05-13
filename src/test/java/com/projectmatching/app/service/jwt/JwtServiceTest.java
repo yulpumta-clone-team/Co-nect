@@ -53,6 +53,7 @@ public class JwtServiceTest extends ServiceTest {
             .email("test@email.com")
             .build();
 
+
     private UserDto userDto = UserDto.builder()
             .name("testName")
             .email("test@email.com")
@@ -137,10 +138,10 @@ public class JwtServiceTest extends ServiceTest {
     @DisplayName("쿠키 토큰 생성 테스트")
     @Test
     void When_Create_Token_Expect_Cookie_has_been_created(){
-//
-//        String token = authTokenProvider.createToken(userLoginResDto);
-//        Cookie resultCookie = authTokenProvider.createCookie(httpServletResponse,token);
-//
+
+
+
+
 //
 //        Assertions.assertEquals(resultCookie.getName(),"Authorization");
 //        Assertions.assertEquals(resultCookie.getValue(),token);

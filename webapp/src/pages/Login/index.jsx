@@ -28,7 +28,7 @@ function Login() {
     } = await dispatch(handleLogin(submitData));
     if (status && isStatusOk(status)) {
       navigate('/');
-      window.location.reload();
+      // window.location.reload();
     }
   };
   return (

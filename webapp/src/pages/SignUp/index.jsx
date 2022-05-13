@@ -53,6 +53,7 @@ function SignUp() {
     const {
       payload: { status, code, data, message },
     } = await dispatch(handleSignUp(signUpInfo));
+    console.log(123123123);
     if (isStatusOk(status)) {
       // navigate('/login');
     }

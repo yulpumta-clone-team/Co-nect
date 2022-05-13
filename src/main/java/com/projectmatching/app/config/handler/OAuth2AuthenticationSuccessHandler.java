@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 @Component
@@ -73,7 +74,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
     }
 
-    private void writeTokenCookie(HttpServletResponse response, String token){
+    private void writeTokenCookie(HttpServletResponse response, String token) throws UnsupportedEncodingException {
 
         authTokenProvider.createCookie(response,token);
 
