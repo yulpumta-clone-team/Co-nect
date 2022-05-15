@@ -1,30 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import TeamCard from 'components/TeamCard';
-import { getUserLikeList } from 'apiAction/user';
-import Loader from 'components/Loader';
-import UserCard from 'components/UserCard';
+import { getUserLikeList, getUserReadList } from 'apiAction/user';
+import Cards from './Cards';
 import * as S from './style';
 
+const LIKES_ID = 0;
+const READS_ID = 1;
+
 const TABS = [
-  { id: 0, title: '좋아요 누른 리스트' },
-  { id: 1, title: '읽은 목록' },
+  { id: LIKES_ID, title: '좋아요 누른 리스트' },
+  { id: READS_ID, title: '읽은 목록' },
 ];
 
 function MyUserList() {
   const dispatch = useDispatch();
-  const { userLikesArray } = useSelector((state) => state.user);
-  const [targetTabId, setTargetTabId] = useState(0);
-  console.log('userLikesArray :>> ', userLikesArray);
+  const { userLikesArray, userReadArray } = useSelector((state) => state.user);
+  const [targetTabId, setTargetTabId] = useState(LIKES_ID);
+
+  const isLikesActive = (tabId) => tabId === LIKES_ID;
+
+  const activeList = (tabId) => (isLikesActive(tabId) ? userLikesArray : userReadArray);
+
+  const activeDispatch = (tabId) => (isLikesActive(tabId) ? getUserLikeList() : getUserReadList());
 
   const handleClickActiveTab = (id) => {
     setTargetTabId(id);
   };
 
   useEffect(() => {
-    dispatch(getUserLikeList());
-  }, []);
+    dispatch(activeDispatch(targetTabId));
+  }, [targetTabId]);
 
   return (
     <S.Container>
@@ -36,13 +41,7 @@ function MyUserList() {
         ))}
       </S.Tabs>
       <S.Cards>
-        {userLikesArray.length === 0 ? (
-          <Loader />
-        ) : (
-          userLikesArray.map(({ id, ...userInfo }) => (
-            <UserCard key={id} userInfo={{ ...userInfo, id }} />
-          ))
-        )}
+        <Cards cards={activeList(targetTabId)} />
       </S.Cards>
     </S.Container>
   );

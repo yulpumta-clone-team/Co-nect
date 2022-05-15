@@ -4,6 +4,7 @@ import {
   actionGetUserDetail,
   actionGetUserLikesList,
   actionGetUserList,
+  actionGetUserReadList,
   actionPatchUserLike,
   actionPatchUserProfile,
 } from '_actions/user_action';
@@ -22,6 +23,15 @@ export function getUserLikeList() {
     return userApi
       .GET_USER_LIKES()
       .then((response) => dispatch(actionGetUserLikesList(response)))
+      .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+export function getUserReadList() {
+  return (dispatch) => {
+    return userApi
+      .GET_USER_READS()
+      .then((response) => dispatch(actionGetUserReadList(response)))
       .catch((error) => dispatch(catchError(error)));
   };
 }
