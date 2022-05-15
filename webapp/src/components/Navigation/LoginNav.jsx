@@ -13,7 +13,7 @@ import {
   NEW_POST,
   PROFILE,
   TEAM_BOARD,
-  USERS_LIST,
+  MY_USER_LIST,
   USER_BOARD,
 } from 'constant/route';
 import { Ul } from './style';
@@ -51,7 +51,7 @@ function LoginNav({ userInfo }) {
             <Link to={MY_POST}>내 작성글</Link>
           </li>
           <li>
-            <Link to={USERS_LIST}>내 관심글</Link>
+            <Link to={MY_USER_LIST}>내 관심글</Link>
           </li>
           <li>
             <Link to={PROFILE}>프로필 설정</Link>

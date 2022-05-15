@@ -9,7 +9,7 @@ import {
   PROFILE,
   SIGN_UP,
   TEAM_BOARD,
-  USERS_LIST,
+  MY_USER_LIST,
   USER_BOARD,
 } from 'constant/route';
 import Auth from 'hoc/auth';
@@ -24,7 +24,7 @@ import Callback from 'pages/Callback';
 import Navigation from 'components/Navigation';
 import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
-import UsersList from 'pages/UsersList';
+import MyUserList from 'pages/MyUserList';
 import NewPost from 'pages/NewTeamPost';
 import MyPost from 'pages/MyPost';
 import WindowModal from 'components/WindowModal';
@@ -55,7 +55,7 @@ function App() {
           />
           <Route path={LOGIN} element={<Auth SpecificComponent={Login} option={false} />} />
           <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option={false} />} />
-          <Route path={USERS_LIST} element={<Auth SpecificComponent={UsersList} option />} />
+          <Route path={MY_USER_LIST} element={<Auth SpecificComponent={MyUserList} option />} />
           <Route path={NEW_POST} element={<Auth SpecificComponent={NewPost} option />} />
           <Route path={MY_POST} element={<Auth SpecificComponent={MyPost} option />} />
           <Route

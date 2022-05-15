@@ -2,7 +2,9 @@ import userApi from 'api/user';
 import { catchError } from '_actions/global_action';
 import {
   actionGetUserDetail,
+  actionGetUserLikesList,
   actionGetUserList,
+  actionGetUserReadList,
   actionPatchUserLike,
   actionPatchUserProfile,
 } from '_actions/user_action';
@@ -12,6 +14,24 @@ export function getUserList({ page }) {
     return userApi
       .GET_USER_LIST({ page })
       .then((response) => dispatch(actionGetUserList(response)))
+      .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+export function getUserLikeList() {
+  return (dispatch) => {
+    return userApi
+      .GET_USER_LIKES()
+      .then((response) => dispatch(actionGetUserLikesList(response)))
+      .catch((error) => dispatch(catchError(error)));
+  };
+}
+
+export function getUserReadList() {
+  return (dispatch) => {
+    return userApi
+      .GET_USER_READS()
+      .then((response) => dispatch(actionGetUserReadList(response)))
       .catch((error) => dispatch(catchError(error)));
   };
 }

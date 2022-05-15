@@ -12,6 +12,12 @@ const USER = [
   rest.get(`${ROOT_URL}/users?page=1`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(mockUsers));
   }),
+  rest.get(`${ROOT_URL}/user/liking`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(mockUsers));
+  }),
+  rest.get(`${ROOT_URL}/user/read`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(mockUsers));
+  }),
   rest.get(`${ROOT_URL}/user/:id`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(mockUser));
   }),

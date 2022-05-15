@@ -1,4 +1,10 @@
-import { GET_USER_DETAIL, GET_USER__ARR, PATCH_USER_PROFILE } from '_types/userTypes';
+import {
+  GET_USER_DETAIL,
+  GET_USER_ARR,
+  PATCH_USER_PROFILE,
+  GET_USER_LIKE_ARR,
+  GET_USER_READ_ARR,
+} from '_types/userTypes';
 
 const initState = {
   targetUser: {
@@ -17,15 +23,20 @@ const initState = {
     comments: '',
   },
   userArray: [],
+  userLikesArray: [],
+  userReadArray: [],
 };
 
 const userReducer = (state = initState, action) => {
-  const { targetUser } = state;
   switch (action.type) {
     case GET_USER_DETAIL:
       return { ...state, targetUser: action.payload };
-    case GET_USER__ARR:
+    case GET_USER_ARR:
       return { ...state, userArray: action.payload };
+    case GET_USER_LIKE_ARR:
+      return { ...state, userLikesArray: action.payload };
+    case GET_USER_READ_ARR:
+      return { ...state, userReadArray: action.payload };
     case PATCH_USER_PROFILE:
       return { ...state, targetUser: action.payload };
     default:

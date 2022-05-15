@@ -5,12 +5,11 @@ import { USER_BOARD } from 'constant/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
 function UserCard({ userInfo }) {
-  const { user_id, nickname, hope_session, skills, img, job, comment_cnt, like_cnt, status } =
-    userInfo;
+  const { id, nickname, hope_session, skills, img, job, comment_cnt, like_cnt, status } = userInfo;
   return (
     <CardWrapper>
       <h2>좋아요: {like_cnt}</h2>
-      <Link to={`${USER_BOARD}/${user_id}`}>{nickname}</Link>
+      <Link to={`${USER_BOARD}/${id}`}>{nickname}</Link>
       <CardTitle>{nickname}</CardTitle>
       <ImgContainer>
         <img src={img} alt="임시" />
@@ -28,7 +27,7 @@ function UserCard({ userInfo }) {
 
 UserCard.propTypes = {
   userInfo: PropTypes.shape({
-    user_id: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     nickname: PropTypes.string.isRequired,
     hope_session: PropTypes.number.isRequired,
     skills: PropTypes.array.isRequired,
@@ -41,11 +40,3 @@ UserCard.propTypes = {
 };
 
 export default UserCard;
-
-const array = [
-  { user_id: 1, nickname: '123' },
-  { user_id: 1, nickname: '123' },
-  { user_id: 1, nickname: '123' },
-  { user_id: 1, nickname: '123' },
-  { user_id: 1, nickname: '123' },
-];
