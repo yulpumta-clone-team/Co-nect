@@ -2,11 +2,11 @@ import { MOCK_SERVER_URL } from 'constant/route';
 import instance from './core';
 
 const teamApi = {
-  GET_TEAM_ARR({ page }) {
+  GET_TEAM_ARR(lastPage) {
     return instance({
       url: `/teams`,
       method: 'get',
-      params: { page },
+      params: { lastPage },
     });
   },
   GET_TEAM_DETAIL({ id }) {

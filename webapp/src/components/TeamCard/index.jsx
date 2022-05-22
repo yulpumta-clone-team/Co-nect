@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { TEAM_BOARD } from 'constant/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
-function TeamCard({ teamInfo }) {
-  const { user_id, team_id, name, skills, session, img, read, comment_cnt, like_cnt } = teamInfo;
+function TeamCard({ cardInfo }) {
+  const { id, name, skills, session, img, read, likeCnt, commentCnt, user } = cardInfo;
   return (
     <CardWrapper>
-      <h2>좋아요: {like_cnt}</h2>
-      <Link to={`${TEAM_BOARD}/${team_id}`}>{name}</Link>
+      <h2>좋아요: {likeCnt}</h2>
+      <Link to={`${TEAM_BOARD}/${id}`}>{name}</Link>
       <CardTitle>{name}</CardTitle>
       <ImgContainer>
         <img src={img} alt="임시" />
@@ -26,16 +26,17 @@ function TeamCard({ teamInfo }) {
 }
 
 TeamCard.propTypes = {
-  teamInfo: PropTypes.shape({
-    user_id: PropTypes.number.isRequired,
-    team_id: PropTypes.number.isRequired,
+  cardInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    skills: PropTypes.array.isRequired,
-    session: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
+    session: PropTypes.string.isRequired,
     read: PropTypes.number.isRequired,
-    comment_cnt: PropTypes.number.isRequired,
-    like_cnt: PropTypes.number.isRequired,
+    skills: PropTypes.arrayOf(PropTypes.number).isRequired,
+    commentCnt: PropTypes.number.isRequired,
+    likeCnt: PropTypes.number.isRequired,
+    status: PropTypes.bool.isRequired,
+    user: PropTypes.object.isRequired,
   }).isRequired,
 };
 
