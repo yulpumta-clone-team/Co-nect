@@ -13,14 +13,9 @@ export function getUserList({ page }) {
   return userApi.GET_USER_LIST(page).then((response) => response);
 }
 
-// export function getUserList({ page }) {
-//   return (dispatch) => {
-//     return userApi
-//       .GET_USER_LIST({ page })
-//       .then((response) => dispatch(actionGetUserList(response)))
-//       .catch((error) => dispatch(catchError(error)));
-//   };
-// }
+export function getUserDetail({ id }) {
+  return userApi.GET_USER_DETAIL({ id }).then((response) => response);
+}
 
 export function getUserLikeList() {
   return (dispatch) => {
@@ -36,15 +31,6 @@ export function getUserReadList() {
     return userApi
       .GET_USER_READS()
       .then((response) => dispatch(actionGetUserReadList(response)))
-      .catch((error) => dispatch(catchError(error)));
-  };
-}
-
-export function getUserDetail({ id }) {
-  return (dispatch) => {
-    return userApi
-      .GET_USER_DETAIL({ id })
-      .then((response) => dispatch(actionGetUserDetail(response)))
       .catch((error) => dispatch(catchError(error)));
   };
 }

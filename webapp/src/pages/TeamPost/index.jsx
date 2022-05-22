@@ -17,10 +17,10 @@ function TeamPost() {
   const onClickback = () => {
     navigate(-1);
   };
-  const fetchData = async (page) => {
+  const fetchData = async () => {
     setLoading(true);
     try {
-      const { value, error } = await handleFetcher(getTeamDetail, { teamId });
+      const { value, error } = await handleFetcher(getTeamDetail, { id: teamId });
       setTargetTeam(value);
     } catch (error) {
       console.log(error);
