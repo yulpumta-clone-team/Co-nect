@@ -1,4 +1,4 @@
-const showTeam = {
+const editTeamDetail = {
   status: '000',
   isSuccess: true,
   code: 1000,
@@ -21,11 +21,11 @@ const showTeam = {
       commentCnt: 13,
       likeCnt: 10,
     },
-    name: 'showTeam name',
-    content: 'string',
-    session: 'stirng',
+    name: '수정 내용',
+    content: '수정 내용',
+    session: '수정 내용',
     skills: [101, 102, 201, 202],
-    img: 'stirng',
+    img: '수정 내용',
     read: 12,
     status: false,
     commentCnt: 12,
@@ -33,4 +33,4 @@ const showTeam = {
   },
 };
 
-export default showTeam;
+export default editTeamDetail;

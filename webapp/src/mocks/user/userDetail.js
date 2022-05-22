@@ -1,4 +1,4 @@
-const showUser = {
+const userDetail = {
   status: '200',
   isSuccess: true,
   code: 1000,
@@ -21,4 +21,4 @@ const showUser = {
   },
 };
 
-export default showUser;
+export default userDetail;

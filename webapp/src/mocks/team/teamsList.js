@@ -1,4 +1,4 @@
-const showTeamList = {
+const teamsList = {
   status: '000',
   isSuccess: true,
   code: 1000,
@@ -1356,4 +1356,4 @@ const showTeamList = {
     },
   ],
 };
-export default showTeamList;
+export default teamsList;
