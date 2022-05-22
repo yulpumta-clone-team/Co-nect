@@ -12,22 +12,8 @@ export function getTeamList({ page }) {
   return teamApi.GET_TEAM_ARR(page).then((response) => response);
 }
 
-// export function getTeamList({ page }) {
-//   return async (dispatch) => {
-//     return teamApi
-//       .GET_TEAM_ARR({ page })
-//       .then((response) => dispatch(actionGetTeamList(response)))
-//       .catch((error) => dispatch(catchError(error)));
-//   };
-// }
-
 export function getTeamDetail({ id }) {
-  return async (dispatch) => {
-    return teamApi
-      .GET_TEAM_DETAIL({ id })
-      .then((response) => dispatch(actionGetTeamDetail(response.data.data)))
-      .catch((error) => dispatch(catchError(error)));
-  };
+  return teamApi.GET_TEAM_DETAIL({ id }).then((response) => response);
 }
 
 export function postTeamPost(dataTosubmit) {

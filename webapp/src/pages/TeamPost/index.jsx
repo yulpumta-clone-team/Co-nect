@@ -1,46 +1,42 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
 import { getTeamDetail } from 'apiAction/team';
-import { POST_TYPE } from 'utils';
+import { handleFetcher, POST_TYPE } from 'utils';
 import { Board, Button } from './style';
 
 function TeamPost() {
-  const { teamId: id } = useParams();
-  const teamId = Number(id);
-  const dispatch = useDispatch();
+  const { teamId: stringTeamId } = useParams();
+  const teamId = Number(stringTeamId);
   const navigate = useNavigate();
+  const [targetTeam, setTargetTeam] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const onClickback = () => {
     navigate(-1);
   };
-  const { targetTeam } = useSelector((state) => state.team);
-  useEffect(() => {
-    dispatch(getTeamDetail({ id: teamId }));
-  }, [dispatch, teamId]);
+  const fetchData = async (page) => {
+    setLoading(true);
+    try {
+      const { value, error } = await handleFetcher(getTeamDetail, { teamId });
+      setTargetTeam(value);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  if (!targetTeam) {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (loading || !targetTeam) {
     return <Loader />;
   }
-
-  console.log('targetTeam', targetTeam);
-  const {
-    team_id,
-    team_name,
-    name,
-    content,
-    session,
-    img,
-    read,
-    job,
-    comment_cnt,
-    like_cnt,
-    createdAt,
-    updatedAt,
-    comments,
-  } = targetTeam;
+  const { id, name, content, session, img, read, skills, commentCnt, likeCnt, user } = targetTeam;
   return (
     <div>
       <button onClick={onClickback}>back</button>
@@ -51,10 +47,10 @@ function TeamPost() {
         <img src={img} alt="게시글" />
         <MarkdownViewer mdValue={content} />
         <div>
-          이름 : {name} / 팀명 : {team_name}
+          이름 : {name} / 팀명 : {name}
         </div>
-        <div>좋아요 개수 : {like_cnt}</div>
-        <CommentContainer postType={POST_TYPE.TEAM} postWriter={name} postId={teamId} />
+        <div>좋아요 개수 : {likeCnt}</div>
+        <CommentContainer postType={POST_TYPE.TEAM} postWriter={user.name} postId={teamId} />
       </Board>
     </div>
   );
