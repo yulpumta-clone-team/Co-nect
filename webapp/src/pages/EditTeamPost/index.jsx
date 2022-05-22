@@ -1,12 +1,12 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
-import Loader from 'components/Loader';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { useDispatch } from 'react-redux';
 import { patchTeamPost } from 'apiAction/team';
+import { handleFetcher } from 'utils';
 import { Board, MdEditorContainer } from './style';
 
 function EditTeamProfile() {
@@ -44,16 +44,16 @@ function EditTeamProfile() {
         name: teamName,
         img: imageFile,
         session: hopeSession,
-        techs: selectedSkills,
+        skills: selectedSkills,
         content: mdcontent,
       };
 
-      try {
-        dispatch(patchTeamPost({ id, editTeamInfo: submitData }));
-        onClickback();
-      } catch (error) {
-        console.error(error);
+      const { value, error, isError } = await handleFetcher(patchTeamPost, { id, submitData });
+      if (isError) {
+        console.log(error);
+        return;
       }
+      onClickback();
     },
     [dispatch, hopeSession, id, imageFile, mdcontent, selectedSkills, teamName],
   );

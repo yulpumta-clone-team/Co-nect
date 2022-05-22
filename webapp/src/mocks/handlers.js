@@ -46,6 +46,10 @@ const TEAM = [
     console.log(req.body);
     return res(ctx.status(200), ctx.json(teamDetail));
   }),
+  rest.patch(`${ROOT_URL}/team/:id`, (req, res, ctx) => {
+    console.log(req.body);
+    return res(ctx.status(200), ctx.json(teamDetail));
+  }),
   rest.get(`${ROOT_URL}/team/:id`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(teamDetail));
   }),
