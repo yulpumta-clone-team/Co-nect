@@ -22,21 +22,11 @@ export function patchUserProfile({ id }) {
 }
 
 export function getUserLikeList() {
-  return (dispatch) => {
-    return userApi
-      .GET_USER_LIKES()
-      .then((response) => dispatch(actionGetUserLikesList(response)))
-      .catch((error) => dispatch(catchError(error)));
-  };
+  return userApi.GET_USER_LIKES().then((response) => response);
 }
 
 export function getUserReadList() {
-  return (dispatch) => {
-    return userApi
-      .GET_USER_READS()
-      .then((response) => dispatch(actionGetUserReadList(response)))
-      .catch((error) => dispatch(catchError(error)));
-  };
+  return userApi.GET_USER_READS().then((response) => response);
 }
 
 export function patchUserlike({ teamId }) {
