@@ -42,6 +42,10 @@ const TEAM = [
   rest.get(`${ROOT_URL}/teams`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(teamsList));
   }),
+  rest.post(`${ROOT_URL}/team`, (req, res, ctx) => {
+    console.log(req.body);
+    return res(ctx.status(200), ctx.json(teamDetail));
+  }),
   rest.get(`${ROOT_URL}/team/:id`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(teamDetail));
   }),

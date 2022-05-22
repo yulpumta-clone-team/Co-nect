@@ -1,4 +1,3 @@
-import { MOCK_SERVER_URL } from 'constant/route';
 import instance from './core';
 
 const teamApi = {
@@ -7,6 +6,13 @@ const teamApi = {
       url: `/teams`,
       method: 'get',
       params: { lastPage },
+    });
+  },
+  POST_TEAM_POST({ data }) {
+    return instance({
+      url: '/team',
+      method: 'post',
+      data,
     });
   },
   GET_TEAM_DETAIL({ id }) {

@@ -17,12 +17,7 @@ export function getTeamDetail({ id }) {
 }
 
 export function postTeamPost(dataTosubmit) {
-  return async (dispatch) => {
-    return teamApi
-      .POST_TEAM_POST(dataTosubmit)
-      .then((response) => dispatch(actionPostTeamPost(response)))
-      .catch((error) => dispatch(catchError(error)));
-  };
+  return teamApi.POST_TEAM_POST({ data: dataTosubmit }).then((response) => response);
 }
 
 export function patchTeamPost({ id, editTeamInfo }) {
