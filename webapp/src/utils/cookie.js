@@ -1,5 +1,6 @@
 import { AUTH_KEY, USER_INFO } from 'constant';
 import { Cookies } from 'react-cookie';
+import { setDefaultProfileImage } from './constant';
 
 const cookies = new Cookies();
 
@@ -7,7 +8,14 @@ export const setCookie = (name, value, option) => cookies.set(name, value, { ...
 
 export const getCookie = (name) => cookies.get(name);
 
-export const getAuthCookie = () => cookies.get(AUTH_KEY);
+export const getUserCookie = () => {
+  const userInfo = getCookie(USER_INFO);
+  if (!userInfo) {
+    return null;
+  }
+  const { img } = userInfo;
+  return { ...userInfo, img: setDefaultProfileImage(img) };
+};
 
 const removeCookie = (name) => cookies.remove(name);
 

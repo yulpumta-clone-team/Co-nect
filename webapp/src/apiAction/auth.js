@@ -14,21 +14,8 @@ export function handleLogin(dataTosubmit) {
 
 export async function handleSignUp(dataTosubmit) {
   return (dispatch) => {
-    const { name, nickname, email, password } = dataTosubmit;
-    const test = {
-      content: '12341234!@#abc',
-      hope_session: 'string',
-      img: 'string',
-      job: 'string',
-      portfolio: 'string',
-      skills: ['string'],
-      slogan: 'string',
-      name: nickname,
-      pwd: password,
-      email,
-    };
     return authApi
-      .POST_SIGN_UP(test)
+      .POST_SIGN_UP(dataTosubmit)
       .then((response) => dispatch(actionSignUp(response)))
       .catch((error) => dispatch(catchError(error)));
   };

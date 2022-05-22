@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { AUTH_KEY } from 'constant';
-import { getAuthCookie } from 'utils/cookie';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_API,
@@ -14,7 +12,6 @@ instance.interceptors.request.use(
   (config) => {
     // 요청을 보내기 전에 수행할 로직
     config.headers['Content-Type'] = 'application/json; charset=utf-8';
-    config.headers[AUTH_KEY] = getAuthCookie();
     return config;
   },
   (error) => {

@@ -10,6 +10,7 @@ import {
   DELETE_TEAM_REPLY,
   PATCH_TEAM_REPLY,
   HANDLE_SECRET_TEAM_REPLY,
+  POST_TEAM_POST,
 } from '_types/teamTypes';
 
 const initState = {
@@ -25,6 +26,8 @@ const userReducer = (state = initState, action) => {
       return { ...state, targetTeam: action.payload };
     case GET_TEAM__ARR:
       return { ...state, teamArray: action.payload };
+    case POST_TEAM_POST:
+      return { ...state };
     case POST_TEAM_COMMENT:
       return {
         ...state,

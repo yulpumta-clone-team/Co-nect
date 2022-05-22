@@ -52,6 +52,7 @@ public class UserController {
     @ApiOperation(value = "일반 로그인, 성공시 유저 id 반환 및 헤더에 토큰 생성")
     @PostMapping("/login")
     public ResponseTemplate<?> login(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
+
             return ResponseTemplate.valueOf(userSignInService.userLogin(userLoginDto,response));
     }
 
@@ -88,9 +89,7 @@ public class UserController {
     @ApiImplicitParam(name = "id",example = "1",required = true,value = "유저 id")
     @GetMapping("/{id}")
     public ResponseTemplate<UserDto> getUserDetail(@PathVariable(name="id") Long id){
-
         return ResponseTemplate.valueOf(userService.getUserDetail(id));
-
     }
 
 
@@ -148,8 +147,6 @@ public class UserController {
     @PatchMapping("/myprofile")
     public ResponseTemplate<UserDto> updateUserPosting(@RequestBody PostUserProfileDto postUserProfileDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return ResponseTemplate.valueOf(userService.updateUserPosting(postUserProfileDto,userDetails));
-
-
     }
 
 

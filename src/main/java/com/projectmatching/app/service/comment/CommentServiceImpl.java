@@ -21,6 +21,8 @@ import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.IdGenerator;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,7 +65,7 @@ public class CommentServiceImpl implements CommentService {
     //유저 프로필에 대댓글 달기
     @Override
     @Transactional(rollbackFor = ResponeException.class)
-    public UserCommentDto addUserNestedComment( UserCommentDto userCommentDto) {
+    public UserCommentDto addUserNestedComment(UserCommentDto userCommentDto) {
         //부모 댓글 설정 안되어있으면 에러
         try {
             if (userCommentDto.getParentId() == null) throw new ResponeException(ADD_NESTED_FAILED);
@@ -129,9 +131,7 @@ public class CommentServiceImpl implements CommentService {
         List<UserCommentDto> userComments = userCommentRepository.getUserCommentByPostId(userPostId).stream()
                 .map(UserCommentDto::of)
                 .collect(Collectors.toList());
-
         return userComments;
-
     }
 
     /**
@@ -149,6 +149,7 @@ public class CommentServiceImpl implements CommentService {
                 .userComment(userComment)
                 .user(user)
                 .build();
+
         userCommentLikingRepository.save(userCommentLiking);
 
     }
@@ -190,7 +191,7 @@ public class CommentServiceImpl implements CommentService {
 
     private UserComment addCommentToUser(UserCommentDto userCommentDto) {
         try{
-            User user = Optional.ofNullable(userRepository.getById(userCommentDto.getUserId())).orElseThrow(NullPointerException::new);
+            User user = userRepository.findById(userCommentDto.getUserId()).orElseThrow(NullPointerException::new);
             userCommentDto.setId(IdGenerator.number()); //새로운 댓글 id 생성
             UserComment userComment = userCommentDto.asEntity();
             userComment.setUser(user);
