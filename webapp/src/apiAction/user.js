@@ -17,6 +17,10 @@ export function getUserDetail({ id }) {
   return userApi.GET_USER_DETAIL({ id }).then((response) => response);
 }
 
+export function patchUserProfile({ id }) {
+  return userApi.EDIT_USER_PROFILE({ id }).then((response) => response);
+}
+
 export function getUserLikeList() {
   return (dispatch) => {
     return userApi
@@ -31,15 +35,6 @@ export function getUserReadList() {
     return userApi
       .GET_USER_READS()
       .then((response) => dispatch(actionGetUserReadList(response)))
-      .catch((error) => dispatch(catchError(error)));
-  };
-}
-
-export function patchUserProfile({ id }) {
-  return (dispatch) => {
-    return userApi
-      .EDIT_USER_PROFILE({ id })
-      .then((response) => dispatch(actionPatchUserProfile(response)))
       .catch((error) => dispatch(catchError(error)));
   };
 }
