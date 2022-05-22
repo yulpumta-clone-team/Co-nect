@@ -10,13 +10,17 @@ import {
 } from '_actions/user_action';
 
 export function getUserList({ page }) {
-  return (dispatch) => {
-    return userApi
-      .GET_USER_LIST({ page })
-      .then((response) => dispatch(actionGetUserList(response)))
-      .catch((error) => dispatch(catchError(error)));
-  };
+  return userApi.GET_USER_LIST(page).then((response) => response);
 }
+
+// export function getUserList({ page }) {
+//   return (dispatch) => {
+//     return userApi
+//       .GET_USER_LIST({ page })
+//       .then((response) => dispatch(actionGetUserList(response)))
+//       .catch((error) => dispatch(catchError(error)));
+//   };
+// }
 
 export function getUserLikeList() {
   return (dispatch) => {
