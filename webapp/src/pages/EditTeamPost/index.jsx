@@ -15,27 +15,12 @@ function EditTeamProfile() {
   const navigate = useNavigate();
 
   const targetTeam = location.state;
-  console.log('targetTeam', targetTeam);
-  const {
-    team_id,
-    team_name,
-    name,
-    content,
-    session,
-    img,
-    read,
-    job,
-    skills,
-    like_cnt,
-    createdAt,
-    updatedAt,
-    comments,
-  } = targetTeam;
+  const { id, name, content, session, img, read, skills, commentCnt, likeCnt, user } = targetTeam;
 
   const [imageFile, fileHandler] = useFileUploader(img);
-  const [teamName, onTeamChange, setTeam] = useInput(team_name);
+  const [teamName, onTeamChange, setTeam] = useInput(name);
   const [hopeSession, onHopeSessionChange] = useInput(session);
-  const [userName, setName] = useState(name);
+  const [userName, setName] = useState(user.name);
   const [mdcontent, setContent] = useState(content);
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState(skills);
@@ -64,13 +49,13 @@ function EditTeamProfile() {
       };
 
       try {
-        dispatch(patchTeamPost({ id: team_id, editTeamInfo: submitData }));
+        dispatch(patchTeamPost({ id, editTeamInfo: submitData }));
         onClickback();
       } catch (error) {
         console.error(error);
       }
     },
-    [dispatch, hopeSession, imageFile, mdcontent, onClickback, selectedSkills, teamName, team_id],
+    [dispatch, hopeSession, id, imageFile, mdcontent, selectedSkills, teamName],
   );
 
   return (
