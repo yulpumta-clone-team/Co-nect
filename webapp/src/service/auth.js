@@ -6,9 +6,11 @@ export const updateUserInfo = (userinfo) => {
   storage.set(USER_INFO, userinfo);
 };
 
-export const deleteUserInfo = () => {};
+export const deleteUserInfo = () => storage.remove(USER_INFO);
 
 export const getUserInfo = () => storage.get(USER_INFO);
+
+export const isLogin = () => getUserInfo();
 
 export const isAllDataInUserInfo = () => {
   const currentUserInfo = getUserInfo();
