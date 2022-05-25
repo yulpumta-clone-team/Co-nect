@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
 import { handleLogin } from 'apiAction/auth';
 import { handleFetcher } from 'utils';
-import storage from 'utils/localstorage';
-import { USER_INFO } from 'constant';
 import { updateUserInfo } from 'service/auth';
 
 function Login() {
@@ -30,7 +28,8 @@ function Login() {
       return;
     }
     updateUserInfo(value);
-    // navigate('/');
+    navigate('/');
+    window.location.reload();
   };
   return (
     <div>
