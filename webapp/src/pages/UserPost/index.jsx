@@ -20,14 +20,13 @@ function UserPost() {
 
   const fetchData = async () => {
     setLoading(true);
-    try {
-      const { value, error } = await handleFetcher(getUserDetail, { id: userId });
-      setTargetUser(value);
-    } catch (error) {
+    const { value, error, isError } = await handleFetcher(getUserDetail, { id: userId });
+    if (isError) {
       console.log(error);
-    } finally {
-      setLoading(false);
+      return;
     }
+    setTargetUser(value);
+    setLoading(false);
   };
 
   useEffect(() => {
