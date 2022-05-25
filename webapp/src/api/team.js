@@ -1,12 +1,18 @@
-import { MOCK_SERVER_URL } from 'constant/route';
 import instance from './core';
 
 const teamApi = {
-  GET_TEAM_ARR({ page }) {
+  GET_TEAM_ARR(lastPage) {
     return instance({
       url: `/teams`,
       method: 'get',
-      params: { page },
+      params: { lastPage },
+    });
+  },
+  POST_TEAM_POST({ data }) {
+    return instance({
+      url: '/team',
+      method: 'post',
+      data,
     });
   },
   GET_TEAM_DETAIL({ id }) {

@@ -1,56 +1,63 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
-import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetail, patchUserProfile } from 'apiAction/user';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import Loader from 'components/Loader';
+import { handleFetcher } from 'utils';
 import { Board, MdEditorContainer } from './style';
 
 const USER_ID = 3;
 
-function EditUserProfile(props) {
-  const dispatch = useDispatch();
-  const location = useLocation();
+function EditUserProfile() {
+  const [loading, setLoading] = useState(false);
+  const [id, setId] = useState(-1);
+  const [imageFile, fileHandler, setFile] = useFileUploader('');
+  const [session, onSessionChange, setSession] = useInput('');
+  const [userName, setName] = useState('');
+  const [mdcontent, setContent] = useState('');
+  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [userSkill, setUserSkill] = useState('');
+
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
   };
-  const { targetUser } = useSelector((state) => state.user);
-  const [imageFile, fileHandler] = useFileUploader(targetUser?.img);
-  const [hopeSession, onHopeSessionChange] = useInput(targetUser?.session);
-  const [userName, setName] = useState(targetUser?.name);
-  const [mdcontent, setContent] = useState(targetUser?.content);
-  const [userSkill, setUserSkill] = useState('');
-  const [selectedSkills, setSelectedSkills] = useState(targetUser?.skills);
 
-  useEffect(() => {
-    dispatch(getUserDetail({ id: USER_ID }));
-  }, [dispatch]);
-
-  if (!targetUser) {
-    return <Loader />;
-  }
-
-  const {
-    user_id,
-    name,
-    content,
-    session,
-    img,
-    read,
-    job,
-    skills,
-    like_cnt,
-    createdAt,
-    updatedAt,
-    comments,
-  } = targetUser;
-
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const { value, error } = await handleFetcher(getUserDetail, { id: USER_ID });
+      const {
+        id,
+        oauthId,
+        email,
+        name,
+        portfolio,
+        slogan,
+        content,
+        img,
+        hopeSession,
+        job,
+        skills,
+        status,
+        commentCnt,
+        likeCnt,
+      } = value;
+      setId(id);
+      setFile(img);
+      setSession(hopeSession);
+      setName(name);
+      setContent(content);
+      setSelectedSkills(skills);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const onSkillChange = useCallback(
     (e) => {
       setUserSkill(e.target.value);
@@ -65,20 +72,28 @@ function EditUserProfile(props) {
       const submitData = {
         name: userName,
         img: imageFile,
-        session: hopeSession,
+        session,
         techs: selectedSkills,
         content: mdcontent,
       };
 
       try {
-        dispatch(patchUserProfile({ id: user_id, editTeamInfo: submitData }));
+        patchUserProfile({ id, editTeamInfo: submitData });
         onClickback();
       } catch (error) {
         console.error(error);
       }
     },
-    [dispatch, hopeSession, imageFile, mdcontent, onClickback, selectedSkills, userName, user_id],
+    [userName, imageFile, session, selectedSkills, mdcontent, id, onClickback],
   );
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Board>
@@ -97,7 +112,7 @@ function EditUserProfile(props) {
           ))}
         </select>
         <span>희망 작업 기간</span>
-        <select value={hopeSession} onChange={onHopeSessionChange}>
+        <select value={session} onChange={onSessionChange}>
           {hopeSessionOption.map(({ id, value }) => (
             <option key={id} value={value}>
               {value}

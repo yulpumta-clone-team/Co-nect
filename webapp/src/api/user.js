@@ -1,11 +1,11 @@
 import instance from './core';
 
 const userApi = {
-  GET_USER_LIST({ page }) {
+  GET_USER_LIST(lastPage) {
     return instance({
       url: `/users`,
       method: 'get',
-      params: { page },
+      params: { lastPage },
     });
   },
   GET_USER_DETAIL({ id }) {

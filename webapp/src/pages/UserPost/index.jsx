@@ -1,41 +1,57 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
 import { getUserDetail } from 'apiAction/user';
-import { POST_TYPE } from 'utils';
+import { handleFetcher, POST_TYPE } from 'utils';
 import { Board } from './style';
 
 function UserPost() {
-  const { userId: id } = useParams();
-  const userId = Number(id);
-  const dispatch = useDispatch();
+  const { userId: stringUserId } = useParams();
+  const userId = Number(stringUserId);
   const navigate = useNavigate();
+  const [targetUser, setTargetUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const onClickback = () => {
     navigate(-1);
   };
-  const { targetUser } = useSelector((state) => state.user);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const { value, error } = await handleFetcher(getUserDetail, { id: userId });
+      setTargetUser(value);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    dispatch(getUserDetail({ id: userId }));
-  }, [dispatch, userId]);
-  if (!targetUser) {
+    fetchData();
+  }, []);
+
+  if (loading || !targetUser) {
     return <Loader />;
   }
   const {
-    user_id,
+    id,
+    oauthId,
+    email,
     name,
+    portfolio,
+    slogan,
     content,
-    session,
     img,
-    read,
+    hopeSession,
     job,
-    comment_cnt,
-    like_cnt,
-    createdAt,
-    updatedAt,
-    comments,
+    skills,
+    status,
+    commentCnt,
+    likeCnt,
   } = targetUser;
   return (
     <div>
@@ -44,7 +60,7 @@ function UserPost() {
         <img src={img} alt="게시글" />
         <MarkdownViewer mdValue={content} />
         <div>이름 : {name}</div>
-        <div>좋아요 개수 : {like_cnt}</div>
+        <div>좋아요 개수 : {likeCnt}</div>
         <CommentContainer postType={POST_TYPE.USER} postWriter={name} postId={userId} />
       </Board>
     </div>

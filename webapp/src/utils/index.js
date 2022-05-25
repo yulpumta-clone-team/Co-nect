@@ -1,5 +1,3 @@
-import { isStatusOk } from 'constant/serverStatus';
-
 export function setDefaultProfileImage(img) {
   return (
     img ||

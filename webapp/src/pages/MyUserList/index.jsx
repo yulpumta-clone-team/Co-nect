@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { getUserLikeList, getUserReadList } from 'apiAction/user';
+import { handleFetcher } from 'utils';
 import Cards from './Cards';
 import * as S from './style';
 
@@ -13,22 +13,27 @@ const TABS = [
 ];
 
 function MyUserList() {
-  const dispatch = useDispatch();
-  const { userLikesArray, userReadArray } = useSelector((state) => state.user);
   const [targetTabId, setTargetTabId] = useState(LIKES_ID);
+  const [userList, setUserList] = useState([]);
 
   const isLikesActive = (tabId) => tabId === LIKES_ID;
 
-  const activeList = (tabId) => (isLikesActive(tabId) ? userLikesArray : userReadArray);
-
-  const activeDispatch = (tabId) => (isLikesActive(tabId) ? getUserLikeList() : getUserReadList());
+  const activeRequestType = (tabId) => (isLikesActive(tabId) ? getUserLikeList : getUserReadList);
 
   const handleClickActiveTab = (id) => {
     setTargetTabId(id);
   };
 
+  const fetcher = async (tabId) => {
+    const { value, isError, error } = await handleFetcher(activeRequestType(tabId));
+    if (isError) {
+      console.error(error);
+    }
+    setUserList(value);
+  };
+
   useEffect(() => {
-    dispatch(activeDispatch(targetTabId));
+    fetcher(targetTabId);
   }, [targetTabId]);
 
   return (
@@ -41,7 +46,7 @@ function MyUserList() {
         ))}
       </S.Tabs>
       <S.Cards>
-        <Cards cards={activeList(targetTabId)} />
+        <Cards cards={userList} />
       </S.Cards>
     </S.Container>
   );
