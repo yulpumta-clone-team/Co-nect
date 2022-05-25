@@ -16,17 +16,18 @@ import {
   MY_USER_LIST,
   USER_BOARD,
 } from 'constant/route';
+import { deleteUserInfo } from 'service/auth';
 import { Ul } from './style';
 
 function LoginNav({ userInfo }) {
   const navigate = useNavigate();
   const { name, img: image } = userInfo;
   const [showModal, onCloseModal, openModal] = useModal();
-  const triggerLogOut = useCallback(() => {
-    removeLoginCookie();
+  const triggerLogOut = () => {
+    deleteUserInfo();
     navigate('/');
     window.location.reload();
-  }, []);
+  };
   return (
     <Ul>
       <li>
@@ -67,8 +68,13 @@ function LoginNav({ userInfo }) {
 
 LoginNav.propTypes = {
   userInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    rolekey: PropTypes.string.isRequired,
+    isFirst: PropTypes.bool.isRequired,
   }).isRequired,
 };
 

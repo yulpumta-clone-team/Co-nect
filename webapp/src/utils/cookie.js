@@ -1,6 +1,6 @@
 import { AUTH_KEY, USER_INFO } from 'constant';
 import { Cookies } from 'react-cookie';
-import { setDefaultProfileImage } from './constant';
+import { setDefaultProfileImage } from 'utils';
 
 const cookies = new Cookies();
 

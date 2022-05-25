@@ -12,7 +12,6 @@ import {
   MY_USER_LIST,
   USER_BOARD,
 } from 'constant/route';
-import Auth from 'hoc/auth';
 import Login from 'pages/Login';
 import Main from 'pages/Main';
 import SignUp from 'pages/SignUp';
@@ -29,6 +28,9 @@ import NewPost from 'pages/NewTeamPost';
 import MyPost from 'pages/MyPost';
 import WindowModal from 'components/WindowModal';
 import ErrorModal from 'components/ErrorModal';
+import NotFound from 'pages/NotFound';
+import PublicRoute from 'hoc/PublicRoute';
+import PrivateRoute from 'hoc/PrivateRoute';
 import AppLayout from './style';
 
 // option: null => 아무나 출입 가능
@@ -46,31 +48,35 @@ function App() {
           </WindowModal>
         )}
         <Routes>
-          <Route path={HOME} element={<Auth SpecificComponent={Main} option={null} />} />
-          <Route path={USER_BOARD} element={<Auth SpecificComponent={UserBoard} option={null} />} />
-          <Route path={TEAM_BOARD} element={<Auth SpecificComponent={TeamBoard} option={null} />} />
+          <Route path={HOME} element={<PublicRoute Component={Main} restricted={false} />} />
           <Route
-            path={PROFILE}
-            element={<Auth SpecificComponent={EditUserProfile} option={null} />}
+            path={USER_BOARD}
+            element={<PublicRoute Component={UserBoard} restricted={false} />}
           />
-          <Route path={LOGIN} element={<Auth SpecificComponent={Login} option={false} />} />
-          <Route path={SIGN_UP} element={<Auth SpecificComponent={SignUp} option={false} />} />
-          <Route path={MY_USER_LIST} element={<Auth SpecificComponent={MyUserList} option />} />
-          <Route path={NEW_POST} element={<Auth SpecificComponent={NewPost} option />} />
-          <Route path={MY_POST} element={<Auth SpecificComponent={MyPost} option />} />
+          <Route
+            path={TEAM_BOARD}
+            element={<PublicRoute Component={TeamBoard} restricted={false} />}
+          />
+          <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
+          <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
+          <Route path={SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
+          <Route path={MY_USER_LIST} element={<PrivateRoute Component={MyUserList} />} />
+          <Route path={NEW_POST} element={<PrivateRoute Component={NewPost} />} />
+          <Route path={MY_POST} element={<PrivateRoute Component={MyPost} />} />
           <Route
             path={`${USER_BOARD}/:userId`}
-            element={<Auth SpecificComponent={UserPost} option={null} />}
+            element={<PublicRoute Component={UserPost} restricted={false} />}
           />
           <Route
             path={`${TEAM_BOARD}/:teamId`}
-            element={<Auth SpecificComponent={TeamPost} option={null} />}
+            element={<PublicRoute Component={TeamPost} restricted={false} />}
           />
           <Route
             path={`${TEAM_BOARD}/:teamId/edit`}
-            element={<Auth SpecificComponent={EditTeamProfile} option={null} />}
+            element={<PrivateRoute Component={EditTeamProfile} />}
           />
           <Route path="/callback" element={<Callback />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AppLayout>
     </Router>

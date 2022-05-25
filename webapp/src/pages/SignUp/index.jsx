@@ -1,15 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { handleSignUp } from 'apiAction/auth';
 import MarkdownEditor from 'components/MdEditor';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
-import { isStatusOk } from 'constant/serverStatus';
+import { handleFetcher } from 'utils';
 
 function SignUp() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userImg, onImgChange] = useInput('');
   const [userJob, onJobChange] = useInput('');
@@ -50,12 +48,12 @@ function SignUp() {
       slogan: userSlogan,
     };
     // TODO: input validation 추가해야함.
-    const {
-      payload: { status, code, data, message },
-    } = await dispatch(handleSignUp(signUpInfo));
-    if (isStatusOk(status)) {
-      navigate('/login');
+    const { value, error, isError } = await handleFetcher(handleSignUp, signUpInfo);
+    if (isError) {
+      console.log(error);
+      return;
     }
+    navigate('/login');
   };
   return (
     <div>

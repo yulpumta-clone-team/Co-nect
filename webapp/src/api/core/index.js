@@ -6,6 +6,7 @@ const instance = axios.create({
 });
 
 instance.defaults.timeout = 2500;
+instance.defaults.withCredentials = true;
 
 instance.interceptors.request.use(
   (config) => {
