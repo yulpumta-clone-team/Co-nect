@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
 import { isStatusOk } from 'constant/serverStatus';
 import { handleLogin } from 'apiAction/auth';
+import { handleFetcher } from 'utils';
 
 function Login() {
   const dispatch = useDispatch();
@@ -23,13 +24,12 @@ function Login() {
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
-    const {
-      payload: { status },
-    } = await dispatch(handleLogin(submitData));
-    if (status && isStatusOk(status)) {
-      navigate('/');
-      window.location.reload();
+    const { value, error, isError } = await handleFetcher(handleLogin, submitData);
+    if (isError) {
+      console.log(error);
+      return;
     }
+    navigate('/');
   };
   return (
     <div>

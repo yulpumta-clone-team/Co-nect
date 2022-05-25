@@ -7,6 +7,7 @@ import MarkdownEditor from 'components/MdEditor';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { isStatusOk } from 'constant/serverStatus';
+import { handleFetcher } from 'utils';
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -50,12 +51,12 @@ function SignUp() {
       slogan: userSlogan,
     };
     // TODO: input validation 추가해야함.
-    const {
-      payload: { status, code, data, message },
-    } = await dispatch(handleSignUp(signUpInfo));
-    if (isStatusOk(status)) {
-      navigate('/login');
+    const { value, error, isError } = await handleFetcher(handleSignUp, signUpInfo);
+    if (isError) {
+      console.log(error);
+      return;
     }
+    navigate('/login');
   };
   return (
     <div>
