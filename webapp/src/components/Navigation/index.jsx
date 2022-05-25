@@ -1,11 +1,11 @@
 import React from 'react';
-import { getUserCookie } from 'utils/cookie';
+import { getUserInfo } from 'service/auth';
 import LoginNav from './LoginNav';
 import NonLoginNav from './NonLoginNav';
 import { NavWrapper } from './style';
 
 function Navigation() {
-  const userInfo = getUserCookie();
+  const userInfo = getUserInfo();
   return <NavWrapper>{userInfo ? <LoginNav userInfo={userInfo} /> : <NonLoginNav />}</NavWrapper>;
 }
 

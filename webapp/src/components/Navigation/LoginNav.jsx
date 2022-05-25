@@ -67,8 +67,13 @@ function LoginNav({ userInfo }) {
 
 LoginNav.propTypes = {
   userInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    roleKey: PropTypes.string.isRequired,
+    isFirst: PropTypes.bool.isRequired,
   }).isRequired,
 };
 

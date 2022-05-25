@@ -1,14 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
-import { isStatusOk } from 'constant/serverStatus';
 import { handleLogin } from 'apiAction/auth';
 import { handleFetcher } from 'utils';
+import storage from 'utils/localstorage';
+import { USER_INFO } from 'constant';
+import { updateUserInfo } from 'service/auth';
 
 function Login() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -29,7 +29,8 @@ function Login() {
       console.log(error);
       return;
     }
-    navigate('/');
+    updateUserInfo(value);
+    // navigate('/');
   };
   return (
     <div>
