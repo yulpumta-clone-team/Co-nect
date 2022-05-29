@@ -25,7 +25,6 @@ import static com.projectmatching.app.constant.ServiceConstant.PAGING_SIZE;
 
 
 @Slf4j
-@RequestMapping("/api")
 @RequiredArgsConstructor
 @RestController
 @Api(tags = "팀 컨트롤러")
@@ -50,8 +49,8 @@ public class TeamController {
      * team 카드들 조회
      */
     @ApiOperation(value = "team 카드 조회 API", notes = "팀 리스트를 조회합니다.")
-    @GetMapping("/teams")
-    public ResponseTemplate<List<TeamResponseDto>> getTeams(@RequestParam(name="page") int page){
+    @GetMapping("/team")
+    public ResponseTemplate<List<TeamResponseDto>> getTeams(@RequestParam(name="lastPage") int page){
         Paging paging = new Paging(page,PAGING_SIZE);
         return ResponseTemplate.valueOf(teamService.getTeams(paging));
     }

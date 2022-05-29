@@ -3,6 +3,7 @@ package com.projectmatching.app.domain.team.dto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
+import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +21,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class TeamResponseDto {
-    private Long userId;
-    private Long teamId;
+
+    private Long id;
+    private UserDto user;
     private String name;
     private String session;
     private String img;
@@ -29,7 +31,7 @@ public class TeamResponseDto {
     private int commentCnt;
     private int likeCnt;
     private List<String> skills;
-    private Boolean status;
+    private String status;
 
 
     public static TeamResponseDto createEmpty(){return new TeamResponseDto();}
@@ -43,7 +45,6 @@ public class TeamResponseDto {
         teamResponseDto.commentCnt = team.getTeamComments().size();
         teamResponseDto.likeCnt = team.getTeamLikings().size();
 
-        teamResponseDto.status = team.getStatus()=="NA" ? Boolean.FALSE : Boolean.TRUE;
 
         return teamResponseDto;
     }
