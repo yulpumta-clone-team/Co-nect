@@ -59,7 +59,7 @@ public class TeamService {
 
             List<Long> techs = requestDto.getSkills();
             for (Long t : techs){
-                TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
+                TechStack techStack = techStackRepository.findByTechSerialNum(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
                 TeamTech teamTech = TeamTech.builder()
                         .team(team)
                         .techStack(techStack)
