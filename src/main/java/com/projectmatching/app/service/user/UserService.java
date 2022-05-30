@@ -34,4 +34,8 @@ public interface UserService {
     UserDto updateUserPosting(PostUserProfileDto postUserProfileDto, UserDetailsImpl userDetails);
 
 
+    //내가 좋아요한 유저 목록 조회
+    List<UserProfileDto> getUserLikingList(UserDetailsImpl userDetails);
+
+
 }

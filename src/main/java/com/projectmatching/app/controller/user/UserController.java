@@ -149,5 +149,15 @@ public class UserController {
         return ResponseTemplate.valueOf(userService.updateUserPosting(postUserProfileDto,userDetails));
     }
 
+    /**
+     * 내가 좋아요한 유저 목록
+     */
+    @ApiOperation(value = "내가 좋아요한 유저목록")
+    @GetMapping("/favorite")
+    public ResponseTemplate<List<UserProfileDto>> getMyFavoriteUser(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseTemplate.valueOf(userService.getUserLikingList(userDetails));
+
+
+    }
 
 }

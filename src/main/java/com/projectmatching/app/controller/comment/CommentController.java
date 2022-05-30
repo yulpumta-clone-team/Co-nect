@@ -72,7 +72,7 @@ public class CommentController {
 
 
     @ApiOperation(value = "유저 댓글 좋아요하기")
-    @GetMapping("/comment/liking/{comment_id}")
+    @PatchMapping("/comment/liking/{comment_id}")
     public ResponseTemplate<Void> doUserCommentLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId){
         commentService.doUserCommentLiking(userDetails,commentId);
         return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
