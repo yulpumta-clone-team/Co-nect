@@ -1,107 +1,57 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
-import CommentContainer from 'components/CommentContainer';
+import CommentContainer from 'components/ComentContainer';
 import { getTeamDetail } from 'apiAction/team';
-import { handleComment } from 'utils/handleComment';
-import { getCookie } from 'utils/cookie';
-import { TEAM } from 'constant';
-import { Board, Button, Box, Box2, Box3 } from './stylep';
+import { handleFetcher, POST_TYPE } from 'utils';
+import { Board, Button } from './style';
 
 function TeamPost() {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    setValue,
-    formState: { errors },
-    // watch,
-  } = useForm({
-    defaultValues: {},
-  });
-  const { teamId } = useParams();
-  const dispatch = useDispatch();
-  const dispatchComment = handleComment(TEAM, dispatch);
+  const { teamId: stringTeamId } = useParams();
+  const teamId = Number(stringTeamId);
   const navigate = useNavigate();
+  const [targetTeam, setTargetTeam] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const onClickback = () => {
     navigate(-1);
   };
-  const userInfo = getCookie('userInfo');
-  // const { myData } = useSelector((state) => state.auth);
-  const myNickname = userInfo?.name;
-  const myId = userInfo?.id;
-  const { targetTeam } = useSelector((state) => state.team);
-  useEffect(() => {
-    dispatch(getTeamDetail(Number(teamId)));
-  }, [dispatch, teamId]);
-  const onSubmit = async ({ commentValue }) => {
-    if (!userInfo) {
-      alert('로그인을 먼저해주세요');
-    } else {
-      const newCommentData = {
-        content: commentValue,
-        writter_id: myId,
-        team_id,
-        nickname: myNickname,
-        isSecret: false,
-      };
-      dispatchComment.postComment(newCommentData);
-      setValue('commentValue', '');
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const { value, error } = await handleFetcher(getTeamDetail, { id: teamId });
+      setTargetTeam(value);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-    // setError('extraError', { message: 'Server offLine.' });
   };
-  if (!targetTeam) {
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (loading || !targetTeam) {
     return <Loader />;
   }
-  const {
-    team_id,
-    team_name,
-    name,
-    content,
-    session,
-    img,
-    read,
-    job,
-    comment_cnt,
-    like_cnt,
-    createdAt,
-    updatedAt,
-    comments,
-  } = targetTeam;
+  const { id, name, content, session, img, read, skills, commentCnt, likeCnt, user } = targetTeam;
   return (
     <div>
       <button onClick={onClickback}>back</button>
-      <Board>
-        <Box3>{img}</Box3>
-        <Box2>
-          <MarkdownViewer mdValue={content} />
-        </Box2>
-        <Box2>
-          이름 : {name} / 팀명 : {team_name}
-        </Box2>
-        <Box2>좋아요 개수 : {like_cnt}</Box2>
-        <form
-          style={{ display: 'flex', flexDirection: 'column' }}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <input
-            {...register('commentValue', {
-              required: '내용을 입력해주세요.',
-            })}
-            placeholder="댓글을 입력하세요."
-          />
-          <span>{errors?.commentValue?.message}</span>
-          <span>{errors?.extraError?.message}</span>
-          <button type="submit">작성</button>
-        </form>
-        <CommentContainer postId={team_id} comments={comments} dispatchComment={dispatchComment} />
-      </Board>
-      <Link to="./edit" state={{ team_name, content, name, img, like_cnt }}>
+      <Link to="./edit" state={targetTeam}>
         <Button>Edit</Button>
       </Link>
+      <Board>
+        <img src={img} alt="게시글" />
+        <MarkdownViewer mdValue={content} />
+        <div>
+          이름 : {name} / 팀명 : {name}
+        </div>
+        <div>좋아요 개수 : {likeCnt}</div>
+        <CommentContainer postType={POST_TYPE.TEAM} postWriter={user.name} postId={teamId} />
+      </Board>
     </div>
   );
 }

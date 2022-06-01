@@ -4,7 +4,7 @@ export const LOGIN = '/login';
 export const SIGN_UP = '/signup';
 export const USER_BOARD = '/user-board';
 export const TEAM_BOARD = '/team-board';
-export const USERS_LIST = '/users-list';
+export const MY_USER_LIST = '/users-list';
 export const NEW_POST = '/new-post';
 export const MY_POST = '/my-post';
 export const OAUTH_URL = {
@@ -13,4 +13,5 @@ export const OAUTH_URL = {
 };
 
 export const ROOT_URL = process.env.REACT_APP_SERVER_API;
-console.log(ROOT_URL);
+
+export const MOCK_SERVER_URL = process.env.REACT_APP_MOCK_SERVER_API;

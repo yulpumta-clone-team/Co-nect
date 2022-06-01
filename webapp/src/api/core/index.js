@@ -1,12 +1,12 @@
 import axios from 'axios';
+import { ROOT_URL } from 'constant/route';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_API,
-  headers: { 'Access-Control-Allow-Origin': process.env.REACT_APP_SERVER_API },
-  withCredentials: true,
+  baseURL: ROOT_URL,
 });
 
 instance.defaults.timeout = 2500;
+instance.defaults.withCredentials = true;
 
 instance.interceptors.request.use(
   (config) => {
@@ -29,7 +29,7 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error, error.response); // 디버깅
+    // console.log(error, error.response); // 디버깅
     return Promise.reject(error);
   },
 );

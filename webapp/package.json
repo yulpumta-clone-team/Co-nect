@@ -33,6 +33,7 @@
   },
   "scripts": {
     "start": "GENERATE_SOURCEMAP=false react-scripts start",
+    "msw": "GENERATE_SOURCEMAP=false REACT_APP_MOCK_TOOL=msw react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -60,6 +61,10 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "msw": "^0.39.2",
     "prettier": "^2.5.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

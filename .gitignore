@@ -32,3 +32,4 @@ out/
 
 src/main/resources/static/
 .vscode/launch.json
+.DS_Store

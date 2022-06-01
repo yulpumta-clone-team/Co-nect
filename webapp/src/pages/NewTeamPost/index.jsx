@@ -5,8 +5,8 @@ import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { postTeamPost } from 'apiAction/team';
 import { useDispatch } from 'react-redux';
-import { isStatusOk } from 'constant/serverStatus';
 import { hopeSessionOption, skillOptions } from 'constant';
+import { handleFetcher } from 'utils';
 
 function NewTeamPost() {
   const dispatch = useDispatch();
@@ -14,10 +14,9 @@ function NewTeamPost() {
   const onClickback = () => {
     navigate(-1);
   };
-  const [imageFile, fileHandler] = useFileUploader('');
+  const [imageFile, fileHandler] = useFileUploader(null);
 
   const [teamName, onTeamChange] = useInput('');
-  // const [userImg, onImgChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -34,23 +33,23 @@ function NewTeamPost() {
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
+      // TODO: inputValidation 추가
       const submitData = {
         name: teamName,
         img: imageFile,
         session: hopeSession,
-        techs: selectedSkills,
+        skills: selectedSkills,
         content: mdcontent,
       };
 
-      const {
-        payload: { status, data },
-      } = await dispatch(postTeamPost(submitData));
-      console.log('\nstatus: ', status, '\ndata: ', data);
-      // if (status && isStatusOk(status)) {
-      //   navigate('/');
-      // }
+      const { value, error, isError } = await handleFetcher(postTeamPost, submitData);
+      if (isError) {
+        console.log(error);
+        return;
+      }
+      navigate('/');
     },
-    [dispatch, hopeSession, imageFile, mdcontent, selectedSkills, teamName],
+    [hopeSession, imageFile, mdcontent, navigate, selectedSkills, teamName],
   );
   return (
     <>
@@ -58,7 +57,7 @@ function NewTeamPost() {
       <br />
       <h3> 프로필 이미지 </h3>
       <input type="file" accept="image/*" onChange={fileHandler} />
-      {/* <button onClick={fileHandler}> 이미지 업로드 ㅈ</button> */}
+      <img src={imageFile} alt="profile" />
       <form onSubmit={handleSubmit}>
         <div>
           팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />

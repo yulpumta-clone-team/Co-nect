@@ -1,5 +1,7 @@
 import axios from 'axios';
+// import { AUTH_KEY } from 'constant';
 import { useCallback, useState } from 'react';
+// import { getAuthCookie } from 'utils/cookie';
 
 const useFileUploader = (initialValue) => {
   const [file, setFile] = useState(initialValue);
