@@ -13,7 +13,7 @@ function Cards({ isUserList, cards }) {
       {cards.length === 0 ? (
         <Loader />
       ) : (
-        cards.map(({ id, ...userInfo }) => <Card key={id} cardInfo={{ ...userInfo, id }} />)
+        cards.map(({ id, ...cardInfo }) => <Card key={id} cardInfo={{ ...cardInfo, id }} />)
       )}
     </S.Cards>
   );

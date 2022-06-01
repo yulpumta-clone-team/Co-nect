@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { getUserLikeList, getUserReadList } from 'apiAction/user';
 import { getTeamLikeList, getTeamReadList } from 'apiAction/team';
 import { handleFetcher } from 'utils';
-import Cards from './Cards';
-import * as S from './style';
+import Cards from 'components/CardsGrid';
 import Tabs from './Tabs';
+import * as S from './style';
 
 function MyList() {
   const [listTabId, setListTabId] = useState(LIKES_ID);
@@ -28,9 +28,7 @@ function MyList() {
     <S.Container>
       <Tabs tabs={LIST_TYPE_TABS} activeTabId={listTabId} setActiveTab={setListTabId} />
       <Tabs tabs={POST_TYPE_TABS} activeTabId={postTabId} setActiveTab={setPostTabId} />
-      <S.Cards>
-        <Cards cards={cards} isUserList={postTabId === USER_ID} />
-      </S.Cards>
+      <Cards cards={cards} isUserList={postTabId === USER_ID} />
     </S.Container>
   );
 }
