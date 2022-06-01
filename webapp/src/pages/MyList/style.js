@@ -14,12 +14,4 @@ export const Tab = styled.li`
   cursor: pointer;
 `;
 
-export const Cards = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-  width: 720px;
-  margin: 0 auto;
-`;
-
 export const SessionContainer = styled.div``;

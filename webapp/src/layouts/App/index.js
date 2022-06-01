@@ -9,7 +9,7 @@ import {
   PROFILE,
   SIGN_UP,
   TEAM_BOARD,
-  MY_USER_LIST,
+  MY_LIST,
   USER_BOARD,
 } from 'constant/route';
 import Login from 'pages/Login';
@@ -23,7 +23,7 @@ import Callback from 'pages/Callback';
 import Navigation from 'components/Navigation';
 import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
-import MyUserList from 'pages/MyUserList';
+import MyList from 'pages/MyList';
 import NewPost from 'pages/NewTeamPost';
 import MyPost from 'pages/MyPost';
 import WindowModal from 'components/WindowModal';
@@ -33,9 +33,6 @@ import PublicRoute from 'hoc/PublicRoute';
 import PrivateRoute from 'hoc/PrivateRoute';
 import AppLayout from './style';
 
-// option: null => 아무나 출입 가능
-// option: true => 로그인 유저만
-// option: false => 로그인 하면 출입 불가능한 곳(회원가입 등...)
 function App() {
   const { isOpen, errorContent, modalContent } = useSelector((state) => state.global);
   return (
@@ -60,7 +57,7 @@ function App() {
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
           <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
           <Route path={SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
-          <Route path={MY_USER_LIST} element={<PrivateRoute Component={MyUserList} />} />
+          <Route path={MY_LIST} element={<PrivateRoute Component={MyList} />} />
           <Route path={NEW_POST} element={<PrivateRoute Component={NewPost} />} />
           <Route path={MY_POST} element={<PrivateRoute Component={MyPost} />} />
           <Route

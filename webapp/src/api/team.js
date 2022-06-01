@@ -34,6 +34,12 @@ const teamApi = {
       method: 'get',
     });
   },
+  GET_TEAM_READS() {
+    return instance({
+      url: '/team/read',
+      method: 'get',
+    });
+  },
 };
 
 export default teamApi;

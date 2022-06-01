@@ -10,3 +10,7 @@ export const postTeamPost = (dataTosubmit) =>
 
 export const patchTeamPost = ({ id, editTeamInfo }) =>
   teamApi.EDIT_TEAM_POST({ id, data: editTeamInfo }).then((response) => response);
+
+export const getTeamLikeList = () => teamApi.GET_TEAM_LIKES().then((response) => response);
+
+export const getTeamReadList = () => teamApi.GET_TEAM_READS().then((response) => response);
