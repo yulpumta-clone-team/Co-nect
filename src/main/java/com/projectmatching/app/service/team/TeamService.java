@@ -2,6 +2,7 @@ package com.projectmatching.app.service.team;
 
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.domain.comment.entity.TeamComment;
+import com.projectmatching.app.domain.liking.entity.TeamCommentLiking;
 import com.projectmatching.app.domain.liking.entity.TeamLiking;
 import com.projectmatching.app.domain.liking.repository.TeamLikingRepository;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
@@ -20,6 +21,7 @@ import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
+import com.projectmatching.app.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
@@ -198,24 +200,33 @@ public class TeamService {
     }
 
     //팀 좋아요 누르기
-    public Boolean teamLike(Long teamId, String email) throws ResponeException {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
-        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+    public void doTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException {
         try {
-            Boolean check = teamLikingRepository.existsByUser_IdAndTeam_Id(user.getId(), team.getId());
-            if (check == false) {
-                TeamLiking teamLiking = TeamLiking.builder()
-                        .user(user)
-                        .team(team)
-                        .build();
-                teamLikingRepository.save(teamLiking);
-                return true;
-            } else {
-                teamLikingRepository.deleteByUser_IdAndTeam_Id(user.getId(), team.getId());
-                return false;
-            }
-        }catch(Exception e){
+            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
+            Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
+
+            TeamLiking teamLiking = TeamLiking.builder()
+                    .id(IdGenerator.number())
+                    .team(team)
+                    .user(user)
+                    .build();
+            teamLikingRepository.save(teamLiking);
+
+        }catch (NullPointerException e){
             throw new ResponeException(TEAM_LIKE_ERROR);
+        }
+    }
+
+    //팀 좋아요 취소
+    public void cancelTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException{
+        try{
+            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
+            Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
+            TeamLiking teamLiking = teamLikingRepository.findByUser_IdAndTeam_Id(user.getId(), team.getId()).orElseThrow(NullPointerException::new);
+
+            teamLikingRepository.delete(teamLiking);
+        }catch (NullPointerException e){
+            throw new ResponeException(LIKING_COMMENT_FAILED);
         }
     }
 
