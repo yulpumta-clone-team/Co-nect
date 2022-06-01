@@ -7,15 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Menu from 'components/Menu';
 import useModal from 'hooks/useModal';
 import { removeLoginCookie } from 'utils/cookie';
-import {
-  HOME,
-  MY_POST,
-  NEW_POST,
-  PROFILE,
-  TEAM_BOARD,
-  MY_USER_LIST,
-  USER_BOARD,
-} from 'constant/route';
+import { HOME, MY_POST, NEW_POST, PROFILE, TEAM_BOARD, MY_LIST, USER_BOARD } from 'constant/route';
 import { deleteUserInfo } from 'service/auth';
 import { Ul } from './style';
 
@@ -52,7 +44,7 @@ function LoginNav({ userInfo }) {
             <Link to={MY_POST}>내 작성글</Link>
           </li>
           <li>
-            <Link to={MY_USER_LIST}>내 관심글</Link>
+            <Link to={MY_LIST}>내 관심글</Link>
           </li>
           <li>
             <Link to={PROFILE}>프로필 설정</Link>

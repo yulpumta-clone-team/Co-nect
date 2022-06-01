@@ -9,7 +9,7 @@ import {
   PROFILE,
   SIGN_UP,
   TEAM_BOARD,
-  MY_USER_LIST,
+  MY_LIST,
   USER_BOARD,
 } from 'constant/route';
 import Login from 'pages/Login';
@@ -23,7 +23,7 @@ import Callback from 'pages/Callback';
 import Navigation from 'components/Navigation';
 import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
-import MyUserList from 'pages/MyUserList';
+import MyList from 'pages/MyList';
 import NewPost from 'pages/NewTeamPost';
 import MyPost from 'pages/MyPost';
 import WindowModal from 'components/WindowModal';
@@ -57,7 +57,7 @@ function App() {
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
           <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
           <Route path={SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
-          <Route path={MY_USER_LIST} element={<PrivateRoute Component={MyUserList} />} />
+          <Route path={MY_LIST} element={<PrivateRoute Component={MyList} />} />
           <Route path={NEW_POST} element={<PrivateRoute Component={NewPost} />} />
           <Route path={MY_POST} element={<PrivateRoute Component={MyPost} />} />
           <Route
