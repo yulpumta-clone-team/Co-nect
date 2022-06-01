@@ -19,6 +19,7 @@ import com.projectmatching.app.domain.user.UserTeamRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
+import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
@@ -44,6 +45,7 @@ public class TeamService {
     private final UserTeamRepository userTeamRepository;
     private final TeamLikingRepository teamLikingRepository;
 
+    //팀 게시글 저장
     public Long save(TeamRequestDto requestDto, String email) throws ResponeException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
         try {
@@ -82,11 +84,12 @@ public class TeamService {
         }
     }
 
+    //팀 게시글 조회
     public List<TeamResponseDto> getTeams(PageRequest pageRequest) throws ResponeException {
 
         try {
             List<Team> teams = teamRepository.getTeams(pageRequest);
-            List<TeamResponseDto> responseDtos = new ArrayList<>();
+            List<TeamResponseDto> responseDto = new ArrayList<>();
 
             for(Team team : teams){
                 TeamResponseDto teamResponseDto = new TeamResponseDto();
@@ -97,17 +100,18 @@ public class TeamService {
                 teamResponseDto.setLikeCnt(team.getTeamLikings().size());
 
 
-                responseDtos.add(teamResponseDto);
+                responseDto.add(teamResponseDto);
             }
-            return responseDtos;
+            return responseDto;
 
         }catch (Exception e){
             throw new ResponeException(GET_TEAMS_ERROR);
         }
     }
 
-    public TeamDetailResponseDto getTeam(Long team_id) throws ResponeException {
-        Team team = teamRepository.findById(team_id).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+    //팀 게시글 상세조회
+    public TeamDetailResponseDto getTeam(Long teamId) throws ResponeException {
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
         try{
             TeamDetailResponseDto teamDetailResponseDto = new TeamDetailResponseDto();
             copyProperties(team, teamDetailResponseDto);
@@ -143,21 +147,23 @@ public class TeamService {
     }
 
 
-    public void delete(Long team_id, String email) throws ResponeException {
+    //팀 게시글 삭제
+    public void delete(Long teamId, String email) throws ResponeException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
-        Team team = teamRepository.findById(team_id).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
 
         if(checkTeamUser(team, user)==false) throw new ResponeException(PERMISSION_DENIED);
 
         try{
-            teamRepository.deleteTeam(team_id);
+            teamRepository.deleteTeam(teamId);
         }catch(Exception e){
             throw new ResponeException(DELETE_TEAM_ERROR);
         }
     }
 
-    public void update(Long team_id, TeamRequestDto teamRequestDto, String email) throws ResponeException {
-        Team team = teamRepository.findById(team_id).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+    //팀 게시글 수정
+    public void update(Long teamId, TeamRequestDto teamRequestDto, String email) throws ResponeException {
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
 
         if(checkTeamUser(team, user)==false) throw new ResponeException(PERMISSION_DENIED);
@@ -191,9 +197,10 @@ public class TeamService {
         return find;
     }
 
-    public Boolean teamLike(Long team_id, String email) throws ResponeException {
+    //팀 좋아요 누르기
+    public Boolean teamLike(Long teamId, String email) throws ResponeException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
-        Team team = teamRepository.findById(team_id).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
         try {
             Boolean check = teamLikingRepository.existsByUser_IdAndTeam_Id(user.getId(), team.getId());
             if (check == false) {
@@ -210,5 +217,25 @@ public class TeamService {
         }catch(Exception e){
             throw new ResponeException(TEAM_LIKE_ERROR);
         }
+    }
+
+    //좋아요한 팀 게시글 목록 조회
+    public List<TeamResponseDto> getTeamLikingList(UserDetailsImpl userDetails){
+        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+
+        List<TeamLiking> teamLikings = teamLikingRepository.findTeamLikingByUser_Id(user.getId());
+        List<Team> teams = teamLikings.stream().map(t -> teamRepository.findById(t.getTeam().getId()).orElseThrow(RuntimeException::new)).collect(Collectors.toList());
+        List<TeamResponseDto> responseDto = new ArrayList<>();
+
+        for(Team team : teams){
+            TeamResponseDto teamResponseDto = new TeamResponseDto();
+            copyProperties(team, teamResponseDto);
+            teamResponseDto.setUser(findTeamUser(team));
+            teamResponseDto.setSkills(findTeamTech(team));
+            teamResponseDto.setCommentCnt(team.getTeamComments().size());
+            teamResponseDto.setLikeCnt(team.getTeamLikings().size());
+            responseDto.add(teamResponseDto);
+        }
+        return responseDto;
     }
 }

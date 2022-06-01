@@ -95,4 +95,13 @@ public class TeamController {
         Boolean result = teamService.teamLike(team_id, userDetails.getEmail());
         return ResponseTemplate.valueOf(result);
     }
+
+    /**
+     * 내가 좋아요 한 팀 목록
+     */
+    @ApiOperation(value = "내가 좋아요한 팀 목록")
+    @GetMapping("team/favorite")
+    public ResponseTemplate<List<TeamResponseDto>> getMyFavoriteTeam(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseTemplate.valueOf(teamService.getTeamLikingList(userDetails));
+    }
 }
