@@ -5,6 +5,7 @@ import com.projectmatching.app.domain.comment.entity.TeamComment;
 import com.projectmatching.app.domain.liking.dto.TeamCommentLikingDto;
 import com.projectmatching.app.domain.liking.entity.TeamCommentLiking;
 import com.projectmatching.app.domain.team.entity.Team;
+import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
@@ -36,7 +37,7 @@ public class TeamCommentDto {
     @Builder.Default
     private List<TeamCommentDto> comments = new ArrayList<>();
     @Builder.Default
-    private List<TeamCommentLikingDto> feelings = new ArrayList<>();
+    private List<Long> feelings = new ArrayList<>();
 
     public static TeamCommentDto createEmpty() {
         return new TeamCommentDto();
@@ -56,8 +57,7 @@ public class TeamCommentDto {
                     .stream().map(TeamCommentDto::of).collect(Collectors.toList());
         }
 
-        teamCommentDto.feelings = teamComment.getTeamCommentLikings()
-                .stream().map(TeamCommentLikingDto::of).collect(Collectors.toList());
+        teamCommentDto.feelings = teamComment.getTeamCommentLikings().stream().map(teamCommentLiking -> teamCommentLiking.getUser().getId()).collect(Collectors.toList());
 
         return teamCommentDto;
     }
@@ -69,7 +69,6 @@ public class TeamCommentDto {
         teamComment.setComments(comments.stream()
                 .map(teamCommentDto -> teamCommentDto.asEntity()).collect(Collectors.toSet()));
 
-        teamComment.setTeamCommentLikings(mapToSet(this.feelings,TeamCommentLikingDto::asEntity));
 
         return teamComment;
     }

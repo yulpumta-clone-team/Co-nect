@@ -1,3 +1,4 @@
+import { USER_INFO } from 'constant';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isAllDataInUserInfo } from 'service/auth';
