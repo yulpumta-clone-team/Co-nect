@@ -21,10 +21,13 @@ import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.IdGenerator;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,7 +65,7 @@ public class CommentServiceImpl implements CommentService {
     //유저 프로필에 대댓글 달기
     @Override
     @Transactional(rollbackFor = ResponeException.class)
-    public UserCommentDto addUserNestedComment( UserCommentDto userCommentDto) {
+    public UserCommentDto addUserNestedComment(UserCommentDto userCommentDto) {
         //부모 댓글 설정 안되어있으면 에러
         try {
             if (userCommentDto.getParentId() == null) throw new ResponeException(ADD_NESTED_FAILED);
@@ -128,9 +131,7 @@ public class CommentServiceImpl implements CommentService {
         List<UserCommentDto> userComments = userCommentRepository.getUserCommentByPostId(userPostId).stream()
                 .map(UserCommentDto::of)
                 .collect(Collectors.toList());
-
         return userComments;
-
     }
 
     /**
@@ -148,6 +149,7 @@ public class CommentServiceImpl implements CommentService {
                 .userComment(userComment)
                 .user(user)
                 .build();
+
         userCommentLikingRepository.save(userCommentLiking);
 
     }
@@ -189,7 +191,7 @@ public class CommentServiceImpl implements CommentService {
 
     private UserComment addCommentToUser(UserCommentDto userCommentDto) {
         try{
-            User user = Optional.ofNullable(userRepository.getById(userCommentDto.getUserId())).orElseThrow(NullPointerException::new);
+            User user = userRepository.findById(userCommentDto.getUserId()).orElseThrow(NullPointerException::new);
             userCommentDto.setId(IdGenerator.number()); //새로운 댓글 id 생성
             UserComment userComment = userCommentDto.asEntity();
             userComment.setUser(user);
@@ -204,32 +206,23 @@ public class CommentServiceImpl implements CommentService {
 
 
     /**
-     * team 댓글 추가
+     * team (대)댓글 추가
      */
     @Override
     @Transactional(rollbackFor = ResponeException.class)
     public TeamCommentDto addTeamComment(TeamCommentDto teamCommentDto) {
         TeamComment teamComment = addCommentToTeam(teamCommentDto);
+        if(teamCommentDto.getParentId()!=null){
+            teamComment.setParent(teamCommentRepository.findById(teamCommentDto.getParentId()).orElseThrow(NullPointerException::new));
+        }
         return teamCommentDto.of(teamCommentRepository.save(teamComment));
 
     }
 
-    @Override
-    @Transactional(rollbackFor = ResponeException.class)
-    public TeamCommentDto addTeamNestedComment(TeamCommentDto teamCommentDto) {
-        try{
-            if(teamCommentDto.getParentId()==null) throw new ResponeException(ResponseTemplateStatus.ADD_NESTED_FAILED);
-            TeamComment teamComment = addCommentToTeam(teamCommentDto);
-            teamComment.setParent(teamCommentRepository.findById(teamCommentDto.getParentId()).orElseThrow(NullPointerException::new));
-            return teamCommentDto.of(teamCommentRepository.save(teamComment));
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            throw new ResponeException(ResponseTemplateStatus.ADD_NESTED_FAILED);
-        }
-    }
+
 
     /**
-     * team 댓글 수정
+     * team (대)댓글 수정
      */
     @Override
     @Transactional(rollbackFor = ResponeException.class)
@@ -238,12 +231,6 @@ public class CommentServiceImpl implements CommentService {
         return teamCommentDto.of(teamCommentRepository.save(teamComment));
     }
 
-    @Override
-    @Transactional(rollbackFor = ResponeException.class)
-    public TeamCommentDto updateTeamNestedComment(TeamCommentDto teamCommentDto) {
-        TeamComment teamComment = updateCommentToTeam(teamCommentDto);
-        return teamCommentDto.of(teamCommentRepository.save(teamComment));
-    }
 
 
     /**
@@ -260,32 +247,51 @@ public class CommentServiceImpl implements CommentService {
 
 
     /**
-     * team 댓글 좋아요
+     * team 댓글 좋아요 등록
      */
     @Override
-    public Boolean likingTeamComment(UserDetailsImpl userDetails, Long commentId) {
+    @Transactional
+    public void doTeamCommentLiking(UserDetailsImpl userDetails, Long commentId) {
+        TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
 
+        TeamCommentLiking teamCommentLiking = TeamCommentLiking.builder()
+                .id(IdGenerator.number())
+                .teamComment(teamComment)
+                .user(user)
+                .build();
+
+        teamCommentLikingRepository.save(teamCommentLiking);
+    }
+
+    /**
+     * team 댓글 좋아요 취소
+     */
+    @Override
+    @Transactional
+    public void cancelTeamCommentLiking(UserDetailsImpl userDetails, Long commentId) {
         try{
-            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(NullPointerException::new);
-            TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
+            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
+            TeamCommentLiking teamCommentLiking = teamCommentLikingRepository.findByUser_IdAndTeamComment_Id(user.getId(), commentId).orElseThrow(NullPointerException::new);
 
-            Boolean check = teamCommentLikingRepository.existsByUser_IdAndTeamComment_Id(user.getId(), teamComment.getId());
-            if (!check) {
-                TeamCommentLiking teamCommentLiking = TeamCommentLiking.builder()
-                                .user(user).teamComment(teamComment).build();
-                teamCommentLikingRepository.save(teamCommentLiking);
-                return true;
-            } else {
-                teamCommentLikingRepository.deleteByUser_IdAndTeamComment_Id(user.getId(), teamComment.getId());
-                return false;
-            }
-
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            throw new ResponeException(ResponseTemplateStatus.LIKE_COMMENT_FAILED);
+            teamCommentLikingRepository.delete(teamCommentLiking);
+        }catch (NullPointerException e){
+            throw new ResponeException(LIKING_COMMENT_FAILED);
         }
     }
 
+    /**
+     * 팀 게시물에서 댓글 리스트 조회
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<TeamCommentDto> getTeamComment(Long teamPostId) {
+        List<TeamCommentDto> teamCommentDtos = teamCommentRepository.findAllByTeam_Id(teamPostId).stream()
+                .map(TeamCommentDto::of)
+                .collect(Collectors.toList());
+
+        return teamCommentDtos;
+    }
 
 
     private TeamComment updateCommentToTeam(TeamCommentDto teamCommentDto){

@@ -1,33 +1,61 @@
-import { handleSignUp } from 'apiAction/auth';
-import { isStatusOk } from 'constant/serverStatus';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { handleSignUp } from 'apiAction/auth';
+import MarkdownEditor from 'components/MdEditor';
+import useInput from 'hooks/useInput';
+import { hopeSessionOption, skillOptions } from 'constant';
+import { isStatusOk } from 'constant/serverStatus';
 
 function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [userImg, onImgChange] = useInput('');
+  const [userJob, onJobChange] = useInput('');
+  const [userPortfolio, onPortfolioChange] = useInput('');
+  const [hopeSession, onHopeSessionChange] = useInput('무관');
+  const [userSlogan, onSloganChange] = useInput('');
+  const [mdcontent, setMdContent] = useState('');
+  const [userSkill, setUserSkill] = useState('');
+  const [selectedSkills, setSelectedSkills] = useState([]);
+
+  const onSkillChange = useCallback((e) => {
+    setUserSkill(e.target.value);
+    setSelectedSkills((prev) => [...prev, e.target.value]);
+  }, []);
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
-    // watch,
   } = useForm({
     defaultValues: {},
   });
   const onValid = async (submitData) => {
-    const { password, verifiedPassword } = submitData;
+    const { email, nickname, password, verifiedPassword } = submitData;
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
+    const signUpInfo = {
+      email,
+      name: nickname,
+      pwd: password,
+      content: mdcontent,
+      hope_session: hopeSession,
+      img: userImg,
+      job: userJob,
+      portfolio: userPortfolio,
+      skills: selectedSkills,
+      slogan: userSlogan,
+    };
+    // TODO: input validation 추가해야함.
     const {
       payload: { status, code, data, message },
-    } = await dispatch(handleSignUp(submitData));
-    console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
+    } = await dispatch(handleSignUp(signUpInfo));
+    console.log(123123123);
     if (isStatusOk(status)) {
-      navigate('/login');
+      // navigate('/login');
     }
   };
   return (
@@ -48,11 +76,6 @@ function SignUp() {
           {...register('nickname', {
             required: '2자리 이상 닉네임을 입력해주세요.',
             minLength: 2,
-            validate: {
-              // async로 만들어서  비동기로 서버에서 요청받을 수도 있음
-              // noYun: (value) => (value.includes('yun') ? 'no yun allowed' : true),
-              // noHo: (value) => (value.includes('ho') ? 'no ho allowed' : true),
-            },
           })}
           placeholder="nickname"
         />
@@ -77,7 +100,40 @@ function SignUp() {
           placeholder="verifiedPassword"
         />
         <span>{errors?.verifiedPassword?.message}</span>
+        <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
+        <select value={userSkill} onChange={onSkillChange}>
+          {skillOptions.map(({ id, value, label }) => (
+            <option key={id} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+        <span>희망 작업 기간</span>
+        <select value={hopeSession} onChange={onHopeSessionChange}>
+          {hopeSessionOption.map(({ id, value }) => (
+            <option key={id} value={value}>
+              {value}
+            </option>
+          ))}
+        </select>
+        <input
+          name="profile-image"
+          onChange={onImgChange}
+          value={userImg}
+          placeholder="임시 프로필 이미지 문자열로 입력"
+        />
+        <input name="slogan" onChange={onSloganChange} value={userSlogan} placeholder="slogan" />
+        <input name="job" onChange={onJobChange} value={userJob} placeholder="직업" />
+        <input
+          name="portfolio"
+          onChange={onPortfolioChange}
+          value={userPortfolio}
+          placeholder="포트폴리오"
+        />
         <button>가입</button>
+        <div>
+          <MarkdownEditor mdValue={mdcontent} setContent={setMdContent} />
+        </div>
         <span>{errors?.extraError?.message}</span>
       </form>
     </div>

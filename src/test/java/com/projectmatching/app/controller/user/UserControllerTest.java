@@ -113,8 +113,6 @@ public class UserControllerTest extends ControllerTest {
                 .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
                 .andExpect(jsonPath("code").value("3007"))
                 .andExpect(jsonPath("message").value("비밀번호 형식 오류"));
-
-
     }
 
 

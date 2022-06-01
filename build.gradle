@@ -45,6 +45,8 @@ dependencies {
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+    testImplementation 'io.rest-assured:rest-assured:3.3.0'
+    testImplementation 'org.mockito:mockito-inline:3.6.0'
 }
 
 test {

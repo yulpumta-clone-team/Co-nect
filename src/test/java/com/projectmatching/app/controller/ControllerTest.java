@@ -30,8 +30,5 @@ public abstract class ControllerTest {
             response.setCharacterEncoding("utf-8");
             chain.doFilter(request, response);
         })).build();
-
-
-
     }
 }
