@@ -4,9 +4,41 @@ import { getTeamLikeList, getTeamReadList } from 'apiAction/team';
 import { handleFetcher } from 'utils';
 import Cards from './Cards';
 import * as S from './style';
+import Tabs from './Tabs';
 
-const LIKES_ID = 0;
-const READS_ID = 1;
+function MyList() {
+  const [listTabId, setListTabId] = useState(LIKES_ID);
+  const [postTabId, setPostTabId] = useState(USER_ID);
+  const [cards, setCards] = useState([]);
+
+  const fetcher = async (listId, postId) => {
+    const activedFetcher = fetcherObj[postId][listId];
+    const { value, isError, error } = await handleFetcher(activedFetcher);
+    if (isError) {
+      console.error(error);
+    }
+    setCards(value);
+  };
+
+  useEffect(() => {
+    fetcher(listTabId, postTabId);
+  }, [listTabId, postTabId]);
+
+  return (
+    <S.Container>
+      <Tabs tabs={LIST_TYPE_TABS} activeTabId={listTabId} setActiveTab={setListTabId} />
+      <Tabs tabs={POST_TYPE_TABS} activeTabId={postTabId} setActiveTab={setPostTabId} />
+      <S.Cards>
+        <Cards cards={cards} isUserList={postTabId === USER_ID} />
+      </S.Cards>
+    </S.Container>
+  );
+}
+
+export default MyList;
+
+const LIKES_ID = 'like';
+const READS_ID = 'read';
 const USER_ID = 'user';
 const TEAM_ID = 'team';
 
@@ -30,47 +62,3 @@ const fetcherObj = {
     [READS_ID]: getTeamReadList,
   },
 };
-
-function MyList() {
-  const [listTabId, setListTabId] = useState(LIKES_ID);
-  const [postTabId, setPostTabId] = useState(USER_ID);
-  const [cards, setCards] = useState([]);
-
-  const fetcher = async (listId, postId) => {
-    const activedFetcher = fetcherObj[postId][listId];
-    const { value, isError, error } = await handleFetcher(activedFetcher);
-    if (isError) {
-      console.error(error);
-    }
-    console.log('value :>> ', value);
-    setCards(value);
-  };
-
-  useEffect(() => {
-    fetcher(listTabId, postTabId);
-  }, [listTabId, postTabId]);
-
-  return (
-    <S.Container>
-      <S.Tabs>
-        {LIST_TYPE_TABS.map(({ id, title }) => (
-          <S.Tab key={id} isActive={id === listTabId} onClick={() => setListTabId(id)}>
-            {title}
-          </S.Tab>
-        ))}
-      </S.Tabs>
-      <S.Tabs>
-        {POST_TYPE_TABS.map(({ id, title }) => (
-          <S.Tab key={id} isActive={id === postTabId} onClick={() => setPostTabId(id)}>
-            {title}
-          </S.Tab>
-        ))}
-      </S.Tabs>
-      <S.Cards>
-        <Cards cards={cards} isUserList={postTabId === USER_ID} />
-      </S.Cards>
-    </S.Container>
-  );
-}
-
-export default MyList;
