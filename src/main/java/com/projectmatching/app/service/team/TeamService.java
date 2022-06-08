@@ -91,20 +91,7 @@ public class TeamService {
 
         try {
             List<Team> teams = teamRepository.getTeams(pageRequest);
-            List<TeamResponseDto> responseDto = new ArrayList<>();
-
-            for(Team team : teams){
-                TeamResponseDto teamResponseDto = new TeamResponseDto();
-                copyProperties(team, teamResponseDto);
-                teamResponseDto.setUser(findTeamUser(team));
-                teamResponseDto.setSkills(findTeamTech(team));
-                teamResponseDto.setCommentCnt(team.getTeamComments().size());
-                teamResponseDto.setLikeCnt(team.getTeamLikings().size());
-
-
-                responseDto.add(teamResponseDto);
-            }
-            return responseDto;
+            return entityToDtoList(teams);
 
         }catch (Exception e){
             throw new ResponeException(GET_TEAMS_ERROR);
@@ -128,26 +115,6 @@ public class TeamService {
             throw new ResponeException(GET_TEAM_ERROR);
         }
     }
-
-    public UserDto findTeamUser(Team team){
-        List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
-        if(userTeamList.size() != 0) {
-            UserTeam findUser = userTeamList.get(0);
-            return UserDto.of(findUser.getUser());
-        }
-        else return null;
-    }
-
-    public List<String> findTeamTech(Team team){
-        Set<TeamTech> teamTechSet = team.getTeamTeches();
-        List<String> findTeamTech = new ArrayList<>();
-        for (TeamTech tech : teamTechSet){
-            TechStack t = tech.getTechStack();
-            if(t!=null) findTeamTech.add(t.getName());
-        }
-        return findTeamTech;
-    }
-
 
     //팀 게시글 삭제
     public void delete(Long teamId, String email) throws ResponeException {
@@ -190,15 +157,6 @@ public class TeamService {
         }
     }
 
-    public boolean checkTeamUser(Team team, User user){
-        List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
-        boolean find = false;
-        for(UserTeam userTeam : userTeamList){
-            if(userTeam.getUser().getId() == user.getId()) find = true;
-        }
-        return find;
-    }
-
     //팀 좋아요 누르기
     public void doTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException {
         try {
@@ -236,6 +194,11 @@ public class TeamService {
 
         List<TeamLiking> teamLikings = teamLikingRepository.findTeamLikingByUser_Id(user.getId());
         List<Team> teams = teamLikings.stream().map(t -> teamRepository.findById(t.getTeam().getId()).orElseThrow(RuntimeException::new)).collect(Collectors.toList());
+
+        return entityToDtoList(teams);
+    }
+
+    public List<TeamResponseDto> entityToDtoList(List<Team> teams){
         List<TeamResponseDto> responseDto = new ArrayList<>();
 
         for(Team team : teams){
@@ -248,5 +211,35 @@ public class TeamService {
             responseDto.add(teamResponseDto);
         }
         return responseDto;
+    }
+
+
+    public UserDto findTeamUser(Team team){
+        List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
+        if(userTeamList.size() != 0) {
+            UserTeam findUser = userTeamList.get(0);
+            return UserDto.of(findUser.getUser());
+        }
+        else return null;
+    }
+
+    public List<String> findTeamTech(Team team){
+        Set<TeamTech> teamTechSet = team.getTeamTeches();
+        List<String> findTeamTech = new ArrayList<>();
+        for (TeamTech tech : teamTechSet){
+            TechStack t = tech.getTechStack();
+            if(t!=null) findTeamTech.add(t.getName());
+        }
+        return findTeamTech;
+    }
+
+
+    public boolean checkTeamUser(Team team, User user){
+        List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
+        boolean find = false;
+        for(UserTeam userTeam : userTeamList){
+            if(userTeam.getUser().getId() == user.getId()) find = true;
+        }
+        return find;
     }
 }
