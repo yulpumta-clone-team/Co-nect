@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { ROOT_URL } from 'constant/route';
+import { ROOT_URL } from 'constant/api';
 import userComments from './user/userComments';
 import teamComments from './team/teamComments';
 import usersList from './user/usersList';
