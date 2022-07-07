@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import Menu from 'components/Menu';
 import useModal from 'hooks/useModal';
-import { removeLoginCookie } from 'utils/cookie';
 import { HOME, MY_POST, NEW_POST, PROFILE, TEAM_BOARD, MY_LIST, USER_BOARD } from 'constant/route';
 import { deleteUserInfo } from 'service/auth';
 import { Ul } from './style';
