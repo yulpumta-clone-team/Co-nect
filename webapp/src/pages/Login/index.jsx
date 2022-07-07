@@ -2,9 +2,9 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
-import { handleLogin } from 'apiAction/auth';
 import { handleFetcher } from 'utils';
 import { updateUserInfo } from 'service/auth';
+import authApi from 'api/auth';
 
 function Login() {
   const navigate = useNavigate();
@@ -18,11 +18,14 @@ function Login() {
     defaultValues: {},
   });
   const onValid = async (submitData) => {
-    const { password, verifiedPassword } = submitData;
+    const { email, password, verifiedPassword } = submitData;
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
-    const { value, error, isError } = await handleFetcher(handleLogin, submitData);
+    const { value, error, isError } = await handleFetcher(authApi.POST_LOGIN, {
+      email,
+      pwd: password,
+    });
     if (isError) {
       console.log(error);
       return;
