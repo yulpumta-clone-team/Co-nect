@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
-import { getUserDetail, patchUserProfile } from 'apiAction/user';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import Loader from 'components/Loader';
 import { handleFetcher } from 'utils';
+import userApi from 'api/user';
 import { Board, MdEditorContainer } from './style';
 
 const USER_ID = 3;
@@ -29,7 +29,7 @@ function EditUserProfile() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const { value, error } = await handleFetcher(getUserDetail, { id: USER_ID });
+      const { value, error } = await handleFetcher(userApi.GET_USER_DETAIL, { id: USER_ID });
       const {
         id,
         oauthId,
@@ -78,7 +78,7 @@ function EditUserProfile() {
       };
 
       try {
-        patchUserProfile({ id, editTeamInfo: submitData });
+        userApi.EDIT_USER_PROFILE({ id, data: submitData });
         onClickback();
       } catch (error) {
         console.error(error);
