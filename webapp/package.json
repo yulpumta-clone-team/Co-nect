@@ -28,8 +28,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "GENERATE_SOURCEMAP=false react-scripts start",
-    "msw": "GENERATE_SOURCEMAP=false REACT_APP_MOCK_TOOL=msw react-scripts start",
+    "start": "react-scripts start",
+    "msw": "REACT_APP_MOCK_TOOL=msw react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
