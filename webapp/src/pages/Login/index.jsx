@@ -47,13 +47,7 @@ function Login() {
         <span>{errors?.email?.message}</span>
         <input
           {...register('password', {
-            required: '4자리 이상 비밀번호를 입력해주세요.',
-            minLength: 4,
-            pattern: {
-              value: /(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}/,
-              message:
-                '8자 이상 20자 이하, 숫자 한개이상 특수문자 한개이상 영어 한개이상 포함 공백 불가',
-            },
+            required: '비밀번호를 입력해주세요.',
           })}
           placeholder="password"
         />

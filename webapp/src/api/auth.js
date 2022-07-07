@@ -18,6 +18,7 @@ const authApi = {
   GET_LOG_OUT() {
     return instance({
       url: '/user/logout',
+      method: 'get',
     });
   },
   DEL_WITHDRAWAL() {
