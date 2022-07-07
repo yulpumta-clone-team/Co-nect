@@ -1,4 +1,4 @@
-import { ROOT_URL } from 'constant/api';
+import { API, ROOT_URL } from 'constant/api';
 import { rest } from 'msw';
 
 const responseObj = {
@@ -16,7 +16,7 @@ const mockUser = {
 
 /* eslint-disable import/prefer-default-export */
 export const AUTH = [
-  rest.post(`${ROOT_URL}/user/login`, (req, res, ctx) => {
+  rest.post(ROOT_URL + API.AUTH.LOGIN, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -27,13 +27,13 @@ export const AUTH = [
       }),
     );
   }),
-  rest.post(`${ROOT_URL}/user/join`, (req, res, ctx) => {
+  rest.post(ROOT_URL + API.AUTH.SIGNUP, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(responseObj));
   }),
-  rest.get(`${ROOT_URL}/user/logout`, (req, res, ctx) => {
+  rest.get(ROOT_URL + API.AUTH.LOGOUT, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(responseObj));
   }),
-  rest.delete(`${ROOT_URL}/user/withdrawal`, (req, res, ctx) => {
+  rest.delete(ROOT_URL + API.AUTH.WITHDRAWAL, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(responseObj));
   }),
 ];

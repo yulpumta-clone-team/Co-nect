@@ -1,42 +1,43 @@
+import { API } from 'constant/api';
 import instance from './core';
 
 const teamApi = {
   GET_TEAM_ARR(lastPage) {
     return instance({
-      url: `/teams`,
+      url: API.TEAM.LIST,
       method: 'get',
       params: { lastPage },
     });
   },
   POST_TEAM_POST({ data }) {
     return instance({
-      url: '/team',
+      url: API.TEAM.DETAIL,
       method: 'post',
       data,
     });
   },
   GET_TEAM_DETAIL({ id }) {
     return instance({
-      url: `/team/${id}`,
+      url: `${API.TEAM.DETAIL}/${id}`,
       method: 'get',
     });
   },
   EDIT_TEAM_POST({ id, data }) {
     return instance({
-      url: `/team/${id}`,
+      url: `${API.TEAM.DETAIL}/${id}`,
       method: 'patch',
       data,
     });
   },
   GET_TEAM_LIKES() {
     return instance({
-      url: '/team/liking',
+      url: API.TEAM.LIKES,
       method: 'get',
     });
   },
   GET_TEAM_READS() {
     return instance({
-      url: '/team/read',
+      url: API.TEAM.READS,
       method: 'get',
     });
   },
