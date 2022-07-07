@@ -26,24 +26,16 @@ import EditTeamProfile from 'pages/EditTeamPost';
 import MyList from 'pages/MyList';
 import NewPost from 'pages/NewTeamPost';
 import MyPost from 'pages/MyPost';
-import WindowModal from 'components/WindowModal';
-import ErrorModal from 'components/ErrorModal';
 import NotFound from 'pages/NotFound';
 import PublicRoute from 'hoc/PublicRoute';
 import PrivateRoute from 'hoc/PrivateRoute';
 import AppLayout from './style';
 
 function App() {
-  const { isOpen, errorContent, modalContent } = useSelector((state) => state.global);
   return (
     <Router>
       <AppLayout>
         <Navigation />
-        {isOpen && (
-          <WindowModal show={isOpen}>
-            {errorContent ? <ErrorModal errorContent={errorContent} /> : modalContent}
-          </WindowModal>
-        )}
         <Routes>
           <Route path={HOME} element={<PublicRoute Component={Main} restricted={false} />} />
           <Route
