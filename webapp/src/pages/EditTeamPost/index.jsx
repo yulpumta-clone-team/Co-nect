@@ -4,13 +4,11 @@ import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
-import { useDispatch } from 'react-redux';
 import { patchTeamPost } from 'apiAction/team';
 import { handleFetcher } from 'utils';
 import { Board, MdEditorContainer } from './style';
 
 function EditTeamProfile() {
-  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -55,7 +53,7 @@ function EditTeamProfile() {
       }
       onClickback();
     },
-    [dispatch, hopeSession, id, imageFile, mdcontent, selectedSkills, teamName],
+    [hopeSession, id, imageFile, mdcontent, selectedSkills, teamName],
   );
 
   return (

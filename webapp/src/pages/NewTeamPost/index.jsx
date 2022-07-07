@@ -4,12 +4,10 @@ import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { postTeamPost } from 'apiAction/team';
-import { useDispatch } from 'react-redux';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
 
 function NewTeamPost() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
