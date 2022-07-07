@@ -3,8 +3,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
-import { getTeamDetail } from 'apiAction/team';
 import { handleFetcher, POST_TYPE } from 'utils';
+import teamApi from 'api/team';
 import { Board, Button } from './style';
 
 function TeamPost() {
@@ -20,7 +20,7 @@ function TeamPost() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const { value, error } = await handleFetcher(getTeamDetail, { id: teamId });
+      const { value, error } = await handleFetcher(teamApi.GET_TEAM_DETAIL, { id: teamId });
       setTargetTeam(value);
     } catch (error) {
       console.log(error);

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getUserLikeList, getUserReadList } from 'apiAction/user';
-import { getTeamLikeList, getTeamReadList } from 'apiAction/team';
 import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
+import teamApi from 'api/team';
 import Tabs from './Tabs';
 import * as S from './style';
 
@@ -56,7 +56,7 @@ const fetcherObj = {
     [READS_ID]: getUserReadList,
   },
   [TEAM_ID]: {
-    [LIKES_ID]: getTeamLikeList,
-    [READS_ID]: getTeamReadList,
+    [LIKES_ID]: teamApi.GET_TEAM_LIKES,
+    [READS_ID]: teamApi.GET_TEAM_READS,
   },
 };

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { getTeamList } from 'apiAction/team';
 import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
+import teamApi from 'api/team';
 import * as S from './style';
 
 function TeamBoard() {
   const [teamList, setTeamList] = useState([]);
   const fetchData = async (page) => {
     try {
-      const { value, error } = await handleFetcher(getTeamList, { page });
+      const { value, error } = await handleFetcher(teamApi.GET_TEAM_ARR, { page });
       setTeamList((prev) => [...prev, ...value]);
     } catch (error) {
       console.log(error);

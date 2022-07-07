@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
-import { postTeamPost } from 'apiAction/team';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
+import teamApi from 'api/team';
 
 function NewTeamPost() {
   const navigate = useNavigate();
@@ -40,7 +40,9 @@ function NewTeamPost() {
         content: mdcontent,
       };
 
-      const { value, error, isError } = await handleFetcher(postTeamPost, submitData);
+      const { value, error, isError } = await handleFetcher(teamApi.POST_TEAM_POST, {
+        data: submitData,
+      });
       if (isError) {
         console.log(error);
         return;
