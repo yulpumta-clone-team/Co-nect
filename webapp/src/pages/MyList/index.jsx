@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getUserLikeList, getUserReadList } from 'apiAction/user';
-import { getTeamLikeList, getTeamReadList } from 'apiAction/team';
 import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
+import teamApi from 'api/team';
+import userApi from 'api/user';
 import Tabs from './Tabs';
 import * as S from './style';
 
@@ -52,11 +52,11 @@ const POST_TYPE_TABS = [
 
 const fetcherObj = {
   [USER_ID]: {
-    [LIKES_ID]: getUserLikeList,
-    [READS_ID]: getUserReadList,
+    [LIKES_ID]: userApi.GET_USER_LIKES,
+    [READS_ID]: userApi.GET_USER_READS,
   },
   [TEAM_ID]: {
-    [LIKES_ID]: getTeamLikeList,
-    [READS_ID]: getTeamReadList,
+    [LIKES_ID]: teamApi.GET_TEAM_LIKES,
+    [READS_ID]: teamApi.GET_TEAM_READS,
   },
 };

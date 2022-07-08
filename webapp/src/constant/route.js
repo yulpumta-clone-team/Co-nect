@@ -11,7 +11,3 @@ export const OAUTH_URL = {
   GITHUB: `${process.env.REACT_APP_SERVER_API}oauth2/authorization/github`,
   GOOGLE: `${process.env.REACT_APP_SERVER_API}oauth2/authorization/google`,
 };
-
-export const ROOT_URL = process.env.REACT_APP_SERVER_API;
-
-export const MOCK_SERVER_URL = process.env.REACT_APP_MOCK_SERVER_API;

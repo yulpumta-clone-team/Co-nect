@@ -4,8 +4,8 @@ import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
-import { patchTeamPost } from 'apiAction/team';
 import { handleFetcher } from 'utils';
+import teamApi from 'api/team';
 import { Board, MdEditorContainer } from './style';
 
 function EditTeamProfile() {
@@ -46,7 +46,10 @@ function EditTeamProfile() {
         content: mdcontent,
       };
 
-      const { value, error, isError } = await handleFetcher(patchTeamPost, { id, submitData });
+      const { value, error, isError } = await handleFetcher(teamApi.EDIT_TEAM_POST, {
+        id,
+        data: submitData,
+      });
       if (isError) {
         console.log(error);
         return;
