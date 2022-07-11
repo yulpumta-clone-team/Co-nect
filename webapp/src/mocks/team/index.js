@@ -5,8 +5,7 @@ import teamDetail from './teamDetail';
 import teamsList from './teamsList';
 import teamComments from './teamComments';
 
-/* eslint-disable import/prefer-default-export */
-export const TEAM = [
+const TEAM = [
   rest.get(ROOT_URL + API.TEAM.LIST, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(teamsList));
   }),
@@ -30,3 +29,5 @@ export const TEAM = [
     return res(ctx.status(200), ctx.json(teamComments));
   }),
 ];
+
+export default TEAM;

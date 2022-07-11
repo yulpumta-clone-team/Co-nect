@@ -1,5 +1,6 @@
 import { API, ROOT_URL } from 'constant/api';
 import { rest } from 'msw';
+import { mockMyData } from './mockMyData';
 
 const responseObj = {
   status: '000',
@@ -9,20 +10,14 @@ const responseObj = {
   data: {},
 };
 
-const mockUser = {
-  email: 'string',
-  pwd: 'string',
-};
-
-/* eslint-disable import/prefer-default-export */
-export const AUTH = [
+const AUTH = [
   rest.post(ROOT_URL + API.AUTH.LOGIN, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
         ...responseObj,
         data: {
-          mockUser,
+          mockMyData,
         },
       }),
     );
@@ -37,3 +32,5 @@ export const AUTH = [
     return res(ctx.status(200), ctx.json(responseObj));
   }),
 ];
+
+export default AUTH;

@@ -4,19 +4,11 @@ import userComments from './userComments';
 import usersList from './usersList';
 import userDetail from './userDetail';
 
-export const emptyUsers = {
-  status: '200',
-  isSuccess: true,
-  code: 1000,
-  message: '요청 성공',
-  data: [],
-};
-
-export const USER = [
+const USER = [
   rest.get(ROOT_URL + API.USER.LIST, (req, res, ctx) => {
     const lastPage = Number(req.url.searchParams.get('lastPage'));
     if (lastPage >= 2) {
-      return res(ctx.status(200), ctx.json(emptyUsers));
+      return res(ctx.status(200), ctx.json(usersList));
     }
     return res(ctx.status(200), ctx.json(usersList));
   }),
@@ -33,3 +25,5 @@ export const USER = [
     return res(ctx.status(200), ctx.json(userComments));
   }),
 ];
+
+export default USER;
