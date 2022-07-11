@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
@@ -9,30 +9,47 @@ import teamApi from 'api/team';
 import { Board, MdEditorContainer } from './style';
 
 export default function EditTeamPost() {
-  const location = useLocation();
+  const { teamId: stringTeamId } = useParams();
+  const teamId = Number(stringTeamId);
   const navigate = useNavigate();
 
-  const targetTeam = location.state;
-  const { id, name, content, session, img, read, skills, commentCnt, likeCnt, user } = targetTeam;
-
-  const [imageFile, fileHandler] = useFileUploader(img);
-  const [teamName, onTeamChange, setTeam] = useInput(name);
-  const [hopeSession, onHopeSessionChange] = useInput(session);
-  const [userName, setName] = useState(user.name);
-  const [mdcontent, setContent] = useState(content);
-  const [userSkill, setUserSkill] = useState('');
-  const [selectedSkills, setSelectedSkills] = useState(skills);
+  const [loading, setLoading] = useState(false);
+  const [id, setId] = useState(-1);
+  const [imageFile, fileHandler, setFile] = useFileUploader('');
+  const [session, onSessionChange, setSession] = useInput('');
+  const [teamName, onTeamNameChange, setTeamName] = useInput('');
+  const [mdcontent, setContent] = useState('');
+  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [teamSkill, setTeamSkill] = useState('');
 
   const onClickback = () => {
     navigate(-1);
   };
 
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const { value, error } = await handleFetcher(teamApi.GET_TEAM_DETAIL, { id: teamId });
+      const { id, name, content, session, img, read, skills, commentCnt, likeCnt, user } = value;
+      setId(id);
+      setFile(img);
+      setSession(session);
+      setTeamName(name);
+      setContent(content);
+      setSelectedSkills(skills);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onSkillChange = useCallback(
     (e) => {
-      setUserSkill(e.target.value);
+      setTeamSkill(e.target.value);
       setSelectedSkills((prev) => [...prev, e.target.value]);
     },
-    [setUserSkill],
+    [setTeamSkill],
   );
 
   const handleSubmit = useCallback(
@@ -41,7 +58,7 @@ export default function EditTeamPost() {
       const submitData = {
         name: teamName,
         img: imageFile,
-        session: hopeSession,
+        session,
         skills: selectedSkills,
         content: mdcontent,
       };
@@ -56,7 +73,7 @@ export default function EditTeamPost() {
       }
       onClickback();
     },
-    [hopeSession, id, imageFile, mdcontent, selectedSkills, teamName],
+    [id, imageFile, mdcontent, onClickback, selectedSkills, session, teamName],
   );
 
   return (
@@ -68,10 +85,10 @@ export default function EditTeamPost() {
       <img src={imageFile} alt="profile" />
       <form onSubmit={handleSubmit}>
         <div>
-          팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />
+          팀이름 <input name="팀이름" onChange={onTeamNameChange} value={teamName} />
         </div>
         <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
-        <select value={userSkill} onChange={onSkillChange}>
+        <select value={teamSkill} onChange={onSkillChange}>
           {skillOptions.map(({ id, value, label }) => (
             <option key={id} value={value}>
               {label}
@@ -79,7 +96,7 @@ export default function EditTeamPost() {
           ))}
         </select>
         <span>희망 작업 기간</span>
-        <select value={hopeSession} onChange={onHopeSessionChange}>
+        <select value={session} onChange={onSessionChange}>
           {hopeSessionOption.map(({ id, value }) => (
             <option key={id} value={value}>
               {value}

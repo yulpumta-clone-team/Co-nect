@@ -12,6 +12,8 @@ import { Board, MdEditorContainer } from './style';
 const USER_ID = 3;
 
 export default function EditUserProfile() {
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(-1);
   const [imageFile, fileHandler, setFile] = useFileUploader('');
@@ -21,7 +23,6 @@ export default function EditUserProfile() {
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [userSkill, setUserSkill] = useState('');
 
-  const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
   };
