@@ -15,6 +15,7 @@ export const API = {
     LIKES: '/user/liking',
     READS: '/user/read',
     PROFILE: `/user/myprofile`,
+    MYPOSTS: '/user/myposts',
   },
   TEAM: {
     LIST: `/teams`,

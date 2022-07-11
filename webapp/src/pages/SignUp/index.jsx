@@ -7,7 +7,7 @@ import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
 import authApi from 'api/auth';
 
-function SignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const [userImg, onImgChange] = useInput('');
   const [userJob, onJobChange] = useInput('');
@@ -136,5 +136,3 @@ function SignUp() {
     </div>
   );
 }
-
-export default SignUp;

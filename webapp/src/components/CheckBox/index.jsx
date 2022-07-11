@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CheckBoxGroupContainer } from './style';
 
-function CheckBox({ checked, setChecked, likeOrder, setLikeOrder }) {
+CheckBox.propTypes = {
+  checked: PropTypes.array.isRequired,
+  setChecked: PropTypes.func.isRequired,
+  likeOrder: PropTypes.bool.isRequired,
+  setLikeOrder: PropTypes.func.isRequired,
+};
+
+export default function CheckBox({ checked, setChecked, likeOrder, setLikeOrder }) {
   const handleToggle = ({ id, name, type }) => {
     const groupId = Math.floor(id / 100);
     const isGroup = id % 100 === 0;
@@ -58,15 +65,6 @@ function CheckBox({ checked, setChecked, likeOrder, setLikeOrder }) {
     </ul>
   );
 }
-
-CheckBox.propTypes = {
-  checked: PropTypes.array.isRequired,
-  setChecked: PropTypes.func.isRequired,
-  likeOrder: PropTypes.bool.isRequired,
-  setLikeOrder: PropTypes.func.isRequired,
-};
-
-export default CheckBox;
 
 const checkList = [
   [

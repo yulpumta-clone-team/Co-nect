@@ -3,13 +3,20 @@ import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
 import userApi from 'api/user';
-import Tabs from './Tabs';
+import Tabs from 'components/Tabs';
+import UserCard from 'components/UserCard';
+import TeamCard from 'components/TeamCard';
+import { TEAM, USER } from 'constant/route';
 import * as S from './style';
 
-function MyList() {
+export default function MyList() {
   const [listTabId, setListTabId] = useState(LIKES_ID);
   const [postTabId, setPostTabId] = useState(USER_ID);
   const [cards, setCards] = useState([]);
+
+  const isUserList = postTabId === USER_ID;
+  const CardComponent = isUserList ? UserCard : TeamCard;
+  const clickLink = isUserList ? USER : TEAM;
 
   const fetcher = async (listId, postId) => {
     const activedFetcher = fetcherObj[postId][listId];
@@ -28,12 +35,10 @@ function MyList() {
     <S.Container>
       <Tabs tabs={LIST_TYPE_TABS} activeTabId={listTabId} setActiveTab={setListTabId} />
       <Tabs tabs={POST_TYPE_TABS} activeTabId={postTabId} setActiveTab={setPostTabId} />
-      <Cards cards={cards} isUserList={postTabId === USER_ID} />
+      <Cards cards={cards} CardComponent={CardComponent} clickLink={`${clickLink}/`} />
     </S.Container>
   );
 }
-
-export default MyList;
 
 const LIKES_ID = 'like';
 const READS_ID = 'read';

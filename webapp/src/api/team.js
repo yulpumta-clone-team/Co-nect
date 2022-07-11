@@ -9,24 +9,10 @@ const teamApi = {
       params: { lastPage },
     });
   },
-  POST_TEAM_POST({ data }) {
-    return instance({
-      url: API.TEAM.DETAIL,
-      method: 'post',
-      data,
-    });
-  },
   GET_TEAM_DETAIL({ id }) {
     return instance({
       url: `${API.TEAM.DETAIL}/${id}`,
       method: 'get',
-    });
-  },
-  EDIT_TEAM_POST({ id, data }) {
-    return instance({
-      url: `${API.TEAM.DETAIL}/${id}`,
-      method: 'patch',
-      data,
     });
   },
   GET_TEAM_LIKES() {
@@ -39,6 +25,20 @@ const teamApi = {
     return instance({
       url: API.TEAM.READS,
       method: 'get',
+    });
+  },
+  POST_TEAM_POST({ data }) {
+    return instance({
+      url: API.TEAM.DETAIL,
+      method: 'post',
+      data,
+    });
+  },
+  EDIT_TEAM_POST({ id, data }) {
+    return instance({
+      url: `${API.TEAM.DETAIL}/${id}`,
+      method: 'patch',
+      data,
     });
   },
 };

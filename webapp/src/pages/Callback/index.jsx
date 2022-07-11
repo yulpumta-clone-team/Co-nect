@@ -1,8 +1,6 @@
 import React from 'react';
 import Loader from 'components/Loader';
 
-function Callback() {
+export default function Callback() {
   return <Loader />;
 }
-
-export default Callback;

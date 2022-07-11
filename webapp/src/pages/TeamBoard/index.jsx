@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
+import TeamCard from 'components/TeamCard';
+import { TEAM } from 'constant/route';
 import * as S from './style';
 
-function TeamBoard() {
+export default function TeamBoard() {
   const [teamList, setTeamList] = useState([]);
   const fetchData = async (page) => {
     try {
@@ -22,9 +24,7 @@ function TeamBoard() {
 
   return (
     <S.BoardWrapper>
-      <Cards cards={teamList} isUserList={false} />
+      <Cards cards={teamList} CardComponent={TeamCard} clickLink={`${TEAM}/`} />
     </S.BoardWrapper>
   );
 }
-
-export default TeamBoard;
