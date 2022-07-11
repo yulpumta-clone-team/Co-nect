@@ -3,10 +3,10 @@ import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
 import userApi from 'api/user';
-import Tabs from './Tabs';
+import Tabs from 'components/Tabs';
 import * as S from './style';
 
-function MyList() {
+export default function MyList() {
   const [listTabId, setListTabId] = useState(LIKES_ID);
   const [postTabId, setPostTabId] = useState(USER_ID);
   const [cards, setCards] = useState([]);
@@ -32,8 +32,6 @@ function MyList() {
     </S.Container>
   );
 }
-
-export default MyList;
 
 const LIKES_ID = 'like';
 const READS_ID = 'read';

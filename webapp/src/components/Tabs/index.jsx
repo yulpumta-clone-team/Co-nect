@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import * as S from './style';
 
-function Tabs({ tabs, activeTabId, setActiveTab }) {
+Tabs.propTypes = {
+  tabs: PropTypes.array.isRequired,
+  activeTabId: PropTypes.string.isRequired,
+  setActiveTab: PropTypes.func.isRequired,
+};
+
+export default function Tabs({ tabs, activeTabId, setActiveTab }) {
   return (
     <S.Tabs>
       {tabs.map(({ id, title }) => (
@@ -13,11 +20,3 @@ function Tabs({ tabs, activeTabId, setActiveTab }) {
     </S.Tabs>
   );
 }
-
-Tabs.propTypes = {
-  tabs: PropTypes.array.isRequired,
-  activeTabId: PropTypes.string.isRequired,
-  setActiveTab: PropTypes.func.isRequired,
-};
-
-export default Tabs;
