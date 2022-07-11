@@ -8,7 +8,7 @@ import { handleFetcher } from 'utils';
 import teamApi from 'api/team';
 import { Board, MdEditorContainer } from './style';
 
-function EditTeamProfile() {
+export default function EditTeamPost() {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -94,5 +94,3 @@ function EditTeamProfile() {
     </Board>
   );
 }
-
-export default EditTeamProfile;

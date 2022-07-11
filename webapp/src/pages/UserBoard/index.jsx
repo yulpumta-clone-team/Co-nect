@@ -5,7 +5,7 @@ import Cards from 'components/CardsGrid';
 import userApi from 'api/user';
 import * as S from './style';
 
-function UserBoard() {
+export default function UserBoard() {
   const [userList, setUserList] = useState([]);
   const fetchData = async (page) => {
     try {
@@ -30,5 +30,3 @@ function UserBoard() {
     </>
   );
 }
-
-export default UserBoard;

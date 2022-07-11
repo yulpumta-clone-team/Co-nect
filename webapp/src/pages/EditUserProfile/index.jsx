@@ -11,7 +11,7 @@ import { Board, MdEditorContainer } from './style';
 
 const USER_ID = 3;
 
-function EditUserProfile() {
+export default function EditUserProfile() {
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(-1);
   const [imageFile, fileHandler, setFile] = useFileUploader('');
@@ -127,7 +127,3 @@ function EditUserProfile() {
     </Board>
   );
 }
-
-EditUserProfile.propTypes = {};
-
-export default EditUserProfile;

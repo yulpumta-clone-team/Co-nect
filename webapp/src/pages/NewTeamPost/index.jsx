@@ -7,7 +7,7 @@ import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
 import teamApi from 'api/team';
 
-function NewTeamPost() {
+export default function NewTeamPost() {
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
@@ -86,5 +86,3 @@ function NewTeamPost() {
     </>
   );
 }
-
-export default NewTeamPost;

@@ -4,7 +4,7 @@ import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
 import * as S from './style';
 
-function TeamBoard() {
+export default function TeamBoard() {
   const [teamList, setTeamList] = useState([]);
   const fetchData = async (page) => {
     try {
@@ -26,5 +26,3 @@ function TeamBoard() {
     </S.BoardWrapper>
   );
 }
-
-export default TeamBoard;

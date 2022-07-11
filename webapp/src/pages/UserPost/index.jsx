@@ -7,7 +7,7 @@ import { handleFetcher, POST_TYPE } from 'utils';
 import userApi from 'api/user';
 import { Board } from './style';
 
-function UserPost() {
+export default function UserPost() {
   const { userId: stringUserId } = useParams();
   const userId = Number(stringUserId);
   const navigate = useNavigate();
@@ -65,5 +65,3 @@ function UserPost() {
     </div>
   );
 }
-
-export default UserPost;
