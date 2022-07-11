@@ -1,5 +1,6 @@
 import userApi from 'api/user';
 import Cards from 'components/CardsGrid';
+import TeamCard from 'components/TeamCard';
 import React, { useEffect, useState } from 'react';
 import { handleFetcher } from 'utils';
 
@@ -22,7 +23,7 @@ export default function MyPost() {
 
   return (
     <S.Container>
-      <Cards cards={cards} isUserList={false} />
+      <Cards cards={cards} isUserList={false} CardComponent={TeamCard} />
     </S.Container>
   );
 }

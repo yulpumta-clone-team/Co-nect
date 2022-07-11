@@ -4,7 +4,22 @@ import PropTypes from 'prop-types';
 import { TEAM_BOARD } from 'constant/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
-function TeamCard({ cardInfo }) {
+TeamCard.propTypes = {
+  cardInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    session: PropTypes.string.isRequired,
+    read: PropTypes.number.isRequired,
+    skills: PropTypes.arrayOf(PropTypes.number).isRequired,
+    commentCnt: PropTypes.number.isRequired,
+    likeCnt: PropTypes.number.isRequired,
+    status: PropTypes.bool.isRequired,
+    user: PropTypes.object.isRequired,
+  }).isRequired,
+};
+
+export default function TeamCard({ cardInfo }) {
   const { id, name, skills, session, img, read, likeCnt, commentCnt, user } = cardInfo;
   return (
     <CardWrapper>
@@ -24,20 +39,3 @@ function TeamCard({ cardInfo }) {
     </CardWrapper>
   );
 }
-
-TeamCard.propTypes = {
-  cardInfo: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    session: PropTypes.string.isRequired,
-    read: PropTypes.number.isRequired,
-    skills: PropTypes.arrayOf(PropTypes.number).isRequired,
-    commentCnt: PropTypes.number.isRequired,
-    likeCnt: PropTypes.number.isRequired,
-    status: PropTypes.bool.isRequired,
-    user: PropTypes.object.isRequired,
-  }).isRequired,
-};
-
-export default TeamCard;

@@ -3,6 +3,7 @@ import UpperButton from 'components/UpperButton';
 import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
 import userApi from 'api/user';
+import UserCard from 'components/UserCard';
 import * as S from './style';
 
 export default function UserBoard() {
@@ -24,7 +25,7 @@ export default function UserBoard() {
   return (
     <>
       <S.BoardWrapper>
-        <Cards cards={userList} isUserList />
+        <Cards cards={userList} CardComponent={UserCard} />
       </S.BoardWrapper>
       <UpperButton />
     </>

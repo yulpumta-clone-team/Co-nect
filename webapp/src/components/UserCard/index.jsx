@@ -4,18 +4,6 @@ import PropTypes from 'prop-types';
 import { USER_BOARD } from 'constant/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
-function UserCard({ cardInfo }) {
-  const { id, name, hopeSession, likeCnt, status } = cardInfo;
-  return (
-    <CardWrapper>
-      <h1>{id}</h1>
-      <h2>좋아요: {likeCnt}</h2>
-      <Link to={`${USER_BOARD}/${id}`}>{name}</Link>
-      <SessionContainer>{hopeSession}</SessionContainer>
-    </CardWrapper>
-  );
-}
-
 UserCard.propTypes = {
   cardInfo: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -31,4 +19,14 @@ UserCard.propTypes = {
   }).isRequired,
 };
 
-export default UserCard;
+export default function UserCard({ cardInfo }) {
+  const { id, name, hopeSession, likeCnt, status } = cardInfo;
+  return (
+    <CardWrapper>
+      <h1>{id}</h1>
+      <h2>좋아요: {likeCnt}</h2>
+      <Link to={`${USER_BOARD}/${id}`}>{name}</Link>
+      <SessionContainer>{hopeSession}</SessionContainer>
+    </CardWrapper>
+  );
+}

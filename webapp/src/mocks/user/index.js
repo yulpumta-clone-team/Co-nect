@@ -3,6 +3,7 @@ import { rest } from 'msw';
 import userComments from './userComments';
 import usersList from './usersList';
 import userDetail from './userDetail';
+import myPosts from './myPosts';
 
 const USER = [
   // GET_USER_LIST
@@ -23,7 +24,7 @@ const USER = [
   }),
   // GET_MY_POSTS
   rest.get(ROOT_URL + API.USER.MYPOSTS, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(usersList));
+    return res(ctx.status(200), ctx.json(myPosts));
   }),
   // GET_USER_DETAIL
   rest.get(`${ROOT_URL + API.USER.DETAIL}/:id`, (req, res, ctx) => {
