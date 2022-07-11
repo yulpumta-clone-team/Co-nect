@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,7 +7,19 @@ import { HOME, MY_POST, NEW_POST, PROFILE, TEAM_BOARD, MY_LIST, USER_BOARD } fro
 import { deleteUserInfo } from 'service/auth';
 import { Ul } from './style';
 
-function LoginNav({ userInfo }) {
+LoginNav.propTypes = {
+  userInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    profileImg: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    rolekey: PropTypes.string.isRequired,
+    isFirst: PropTypes.bool.isRequired,
+  }).isRequired,
+};
+
+export default function LoginNav({ userInfo }) {
   const navigate = useNavigate();
   const { name, profileImg } = userInfo;
   const [showModal, onCloseModal, openModal] = useModal();
@@ -56,17 +65,3 @@ function LoginNav({ userInfo }) {
     </Ul>
   );
 }
-
-LoginNav.propTypes = {
-  userInfo: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    profileImg: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    rolekey: PropTypes.string.isRequired,
-    isFirst: PropTypes.bool.isRequired,
-  }).isRequired,
-};
-
-export default LoginNav;
