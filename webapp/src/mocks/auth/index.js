@@ -16,9 +16,7 @@ const AUTH = [
       ctx.status(200),
       ctx.json({
         ...responseObj,
-        data: {
-          mockMyData,
-        },
+        data: mockMyData,
       }),
     );
   }),

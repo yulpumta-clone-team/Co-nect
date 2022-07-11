@@ -12,7 +12,7 @@ import { Ul } from './style';
 
 function LoginNav({ userInfo }) {
   const navigate = useNavigate();
-  const { name, img: image } = userInfo;
+  const { name, profileImg } = userInfo;
   const [showModal, onCloseModal, openModal] = useModal();
   const triggerLogOut = () => {
     deleteUserInfo();
@@ -34,7 +34,7 @@ function LoginNav({ userInfo }) {
         <Link to={NEW_POST}>New Post</Link>
       </li>
       <li onClick={openModal}>
-        <img style={{ width: '30px' }} src={image} alt="profile" />
+        <img style={{ width: '30px' }} src={profileImg} alt="profile" />
         <span>{name}</span>
       </li>
       <Menu style={{ right: 0, top: 80 }} show={showModal} onCloseModal={onCloseModal}>
@@ -61,7 +61,7 @@ LoginNav.propTypes = {
   userInfo: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
+    profileImg: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     rolekey: PropTypes.string.isRequired,

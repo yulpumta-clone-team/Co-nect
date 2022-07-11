@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 export const mockMyData = {
   user_id: '927191821029312',
   nickname: '코넥트',
