@@ -27,6 +27,12 @@ const userApi = {
       method: 'get',
     });
   },
+  GET_MY_POSTS() {
+    return instance({
+      url: API.USER.MYPOSTS,
+      method: 'get',
+    });
+  },
   EDIT_USER_PROFILE({ data }) {
     return instance({
       url: API.USER.PROFILE,

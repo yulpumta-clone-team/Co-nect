@@ -18,6 +18,9 @@ const USER = [
   rest.get(ROOT_URL + API.USER.READS, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(usersList));
   }),
+  rest.get(ROOT_URL + API.USER.MYPOSTS, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(usersList));
+  }),
   rest.get(`${ROOT_URL + API.USER.DETAIL}/:id`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(userDetail));
   }),
