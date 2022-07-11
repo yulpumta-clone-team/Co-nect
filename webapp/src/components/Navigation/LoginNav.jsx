@@ -9,13 +9,9 @@ import { Ul } from './style';
 
 LoginNav.propTypes = {
   userInfo: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    userId: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     profileImg: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    rolekey: PropTypes.string.isRequired,
-    isFirst: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
