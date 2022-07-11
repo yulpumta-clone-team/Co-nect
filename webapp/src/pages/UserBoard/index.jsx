@@ -4,6 +4,7 @@ import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
 import userApi from 'api/user';
 import UserCard from 'components/UserCard';
+import { USER } from 'constant/route';
 import * as S from './style';
 
 export default function UserBoard() {
@@ -25,7 +26,7 @@ export default function UserBoard() {
   return (
     <>
       <S.BoardWrapper>
-        <Cards cards={userList} CardComponent={UserCard} />
+        <Cards cards={userList} CardComponent={UserCard} clickLink={`${USER}/`} />
       </S.BoardWrapper>
       <UpperButton />
     </>

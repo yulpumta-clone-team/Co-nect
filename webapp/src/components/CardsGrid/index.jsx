@@ -13,7 +13,6 @@ Cards.propTypes = {
 export default function Cards({ CardComponent, cards, clickLink }) {
   const navaigate = useNavigate();
   const handleClickCardComponent = (cardId) => {
-    console.log(cardId);
     clickLink && navaigate(clickLink + cardId);
   };
   return (
@@ -23,8 +22,8 @@ export default function Cards({ CardComponent, cards, clickLink }) {
       ) : (
         cards.map(({ id, ...cardInfo }) => (
           <CardComponent
-            key={id}
             onClick={() => handleClickCardComponent(id)}
+            key={id}
             cardInfo={{ ...cardInfo, id }}
           />
         ))

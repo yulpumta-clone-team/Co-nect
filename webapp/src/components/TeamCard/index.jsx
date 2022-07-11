@@ -17,12 +17,13 @@ TeamCard.propTypes = {
     status: PropTypes.bool.isRequired,
     user: PropTypes.object.isRequired,
   }).isRequired,
+  onClick: PropTypes.func,
 };
 
-export default function TeamCard({ cardInfo }) {
+export default function TeamCard({ cardInfo, onClick }) {
   const { id, name, skills, session, img, read, likeCnt, commentCnt, user } = cardInfo;
   return (
-    <CardWrapper>
+    <CardWrapper onClick={onClick}>
       <h2>좋아요: {likeCnt}</h2>
       <CardTitle>{name}</CardTitle>
       <ImgContainer>{/* <img src={img} alt="임시" /> */}</ImgContainer>

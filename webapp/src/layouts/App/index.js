@@ -10,6 +10,7 @@ import {
   TEAM,
   MY_LIST,
   USER,
+  TEAM_EDIT,
 } from 'constant/route';
 import Login from 'pages/Login';
 import Main from 'pages/Main';
@@ -54,7 +55,7 @@ function App() {
             element={<PublicRoute Component={TeamPost} restricted={false} />}
           />
           <Route
-            path={`${TEAM}/:teamId/edit`}
+            path={`${TEAM_EDIT}/:teamId`}
             element={<PrivateRoute Component={EditTeamProfile} />}
           />
           <Route path="/callback" element={<Callback />} />

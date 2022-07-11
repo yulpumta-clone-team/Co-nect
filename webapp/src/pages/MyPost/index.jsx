@@ -1,6 +1,7 @@
 import userApi from 'api/user';
 import Cards from 'components/CardsGrid';
 import TeamCard from 'components/TeamCard';
+import { TEAM, TEAM_EDIT } from 'constant/route';
 import React, { useEffect, useState } from 'react';
 import { handleFetcher } from 'utils';
 
@@ -23,7 +24,12 @@ export default function MyPost() {
 
   return (
     <S.Container>
-      <Cards cards={cards} isUserList={false} CardComponent={TeamCard} />
+      <Cards
+        cards={cards}
+        isUserList={false}
+        CardComponent={TeamCard}
+        clickLink={`${TEAM_EDIT}/`}
+      />
     </S.Container>
   );
 }

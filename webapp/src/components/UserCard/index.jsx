@@ -17,15 +17,16 @@ UserCard.propTypes = {
     likeCnt: PropTypes.number.isRequired,
     status: PropTypes.bool.isRequired,
   }).isRequired,
+  onClick: PropTypes.func,
 };
 
-export default function UserCard({ cardInfo }) {
+export default function UserCard({ cardInfo, onClick }) {
   const { id, name, hopeSession, likeCnt, status } = cardInfo;
   return (
-    <CardWrapper>
+    <CardWrapper onClick={onClick}>
       <h1>{id}</h1>
       <h2>좋아요: {likeCnt}</h2>
-      <Link to={`${USER}/${id}`}>{name}</Link>
+      <h2>{name}</h2>
       <SessionContainer>{hopeSession}</SessionContainer>
     </CardWrapper>
   );
