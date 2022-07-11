@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { TEAM_BOARD } from 'constant/route';
+import { TEAM } from 'constant/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
 TeamCard.propTypes = {
@@ -24,11 +24,8 @@ export default function TeamCard({ cardInfo }) {
   return (
     <CardWrapper>
       <h2>좋아요: {likeCnt}</h2>
-      <Link to={`${TEAM_BOARD}/${id}`}>{name}</Link>
       <CardTitle>{name}</CardTitle>
-      <ImgContainer>
-        <img src={img} alt="임시" />
-      </ImgContainer>
+      <ImgContainer>{/* <img src={img} alt="임시" /> */}</ImgContainer>
       <SessionContainer>{session}</SessionContainer>
       <ul>
         {skills.map((skill, idx) => (

@@ -3,6 +3,7 @@ import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
 import TeamCard from 'components/TeamCard';
+import { TEAM } from 'constant/route';
 import * as S from './style';
 
 export default function TeamBoard() {
@@ -23,7 +24,7 @@ export default function TeamBoard() {
 
   return (
     <S.BoardWrapper>
-      <Cards cards={teamList} CardComponent={TeamCard} />
+      <Cards cards={teamList} CardComponent={TeamCard} clickLink={`${TEAM}/`} />
     </S.BoardWrapper>
   );
 }

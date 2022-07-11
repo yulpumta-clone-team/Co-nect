@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import Menu from 'components/Menu';
 import useModal from 'hooks/useModal';
-import { HOME, MY_POST, NEW_POST, PROFILE, TEAM_BOARD, MY_LIST, USER_BOARD } from 'constant/route';
+import { HOME, MY_POST, NEW_POST, PROFILE, TEAM, MY_LIST, USER } from 'constant/route';
 import { deleteUserInfo } from 'service/auth';
 import { Ul } from './style';
 
@@ -30,10 +30,10 @@ export default function LoginNav({ userInfo }) {
         <Link to={HOME}>Main</Link>
       </li>
       <li>
-        <Link to={USER_BOARD}>User Board</Link>
+        <Link to={USER}>User Board</Link>
       </li>
       <li>
-        <Link to={TEAM_BOARD}>Team Board</Link>
+        <Link to={TEAM}>Team Board</Link>
       </li>
       <li>
         <Link to={NEW_POST}>New Post</Link>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { USER_BOARD } from 'constant/route';
+import { USER } from 'constant/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
 
 UserCard.propTypes = {
@@ -25,7 +25,7 @@ export default function UserCard({ cardInfo }) {
     <CardWrapper>
       <h1>{id}</h1>
       <h2>좋아요: {likeCnt}</h2>
-      <Link to={`${USER_BOARD}/${id}`}>{name}</Link>
+      <Link to={`${USER}/${id}`}>{name}</Link>
       <SessionContainer>{hopeSession}</SessionContainer>
     </CardWrapper>
   );
