@@ -2,7 +2,7 @@ import { API, ROOT_URL } from 'constant/api';
 import { getResonseWithData } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { teamComments } from './teamComments';
-import { userComments } from './userComments';
+import { userComment, userComments } from './userComments';
 
 const COMMENT = [
   // GET_USER_COMMENT
@@ -10,8 +10,18 @@ const COMMENT = [
     return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
   }),
   // POST_USER_COMMENT
+  rest.post(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.ORIGIN}`, (req, res, ctx) => {
+    const newUserComments = [userComment, ...userComments];
+    return res(ctx.status(200), ctx.json(getResonseWithData(newUserComments)));
+  }),
   // DELETE_USER_COMMENT
+  rest.delete(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
+  }),
   // PATCH_USER_COMMENT
+  rest.patch(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
+  }),
   // POST_USER_REPLY
   // PATCH_USER_REPLY
   // PATCH_USER_COMMENT_LIKE

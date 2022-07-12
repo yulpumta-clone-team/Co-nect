@@ -1,3 +1,36 @@
+export const userComment = {
+  id: 999,
+  img: '',
+  userId: 12512512,
+  writer: '수정된',
+  parentId: null,
+  secret: false,
+  content: '수정된 연습용 댓긇',
+  feeling: [901092146501, 92719182999999, 927191821029312],
+  replies: [
+    {
+      id: 10,
+      img: '',
+      userId: 12512512,
+      writer: 'front_temp',
+      parentId: 999,
+      secret: true,
+      content: '연습용',
+      feeling: [901092146501],
+    },
+    {
+      id: 12,
+      img: '',
+      userId: 12512512,
+      writer: 'string',
+      parentId: 999,
+      secret: false,
+      content: '수정된',
+      feeling: [784833333333, 19148710],
+    },
+  ],
+};
+
 export const userComments = [
   {
     id: 1,

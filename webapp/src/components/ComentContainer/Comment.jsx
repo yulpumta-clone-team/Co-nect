@@ -5,6 +5,27 @@ import { getUserCookie } from 'utils/cookie';
 import CommentForm from './CommentForm';
 import * as S from './style';
 
+Comment.propTypes = {
+  id: PropTypes.number.isRequired,
+  isSecret: PropTypes.bool.isRequired,
+  postType: PropTypes.string.isRequired,
+  postId: PropTypes.number.isRequired,
+  commentInfo: PropTypes.shape({
+    img: PropTypes.string.isRequired,
+    secret: PropTypes.bool.isRequired,
+    writer: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    feeling: PropTypes.array.isRequired,
+    parentId: PropTypes.number,
+  }),
+  editTargetCommentId: PropTypes.number.isRequired,
+  resetTarget: PropTypes.func.isRequired,
+  setEditTargetCommentId: PropTypes.func.isRequired,
+  handleSubmitEditComment: PropTypes.func.isRequired,
+  handleClickDeleteButton: PropTypes.func.isRequired,
+  handleClickLikeThumb: PropTypes.func.isRequired,
+};
+
 export default function Comment({
   id,
   isSecret,
@@ -89,24 +110,3 @@ export default function Comment({
     </S.CommentBox>
   );
 }
-
-Comment.propTypes = {
-  id: PropTypes.number.isRequired,
-  isSecret: PropTypes.bool.isRequired,
-  postType: PropTypes.string.isRequired,
-  postId: PropTypes.number.isRequired,
-  commentInfo: PropTypes.shape({
-    img: PropTypes.string.isRequired,
-    secret: PropTypes.bool.isRequired,
-    writer: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    feeling: PropTypes.array.isRequired,
-    parentId: PropTypes.number,
-  }),
-  editTargetCommentId: PropTypes.number.isRequired,
-  resetTarget: PropTypes.func.isRequired,
-  setEditTargetCommentId: PropTypes.func.isRequired,
-  handleSubmitEditComment: PropTypes.func.isRequired,
-  handleClickDeleteButton: PropTypes.func.isRequired,
-  handleClickLikeThumb: PropTypes.func.isRequired,
-};
