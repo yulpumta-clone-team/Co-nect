@@ -17,5 +17,5 @@ public enum UserInfoField {
         return list[idx].getField();
     }
 
-    //test for jen22233344
+    //test for jen2223334456
 }
