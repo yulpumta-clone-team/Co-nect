@@ -53,7 +53,7 @@ export default function SignUp({ isOpen, close }) {
       skills: selectedSkills,
       slogan: userSlogan,
     };
-    // TODO: input validation 추가해야함.
+    // TODO: input validation 추가해야 함.
     const { value, error, isError } = await handleFetcher(authApi.POST_SIGN_UP, signUpInfo);
     if (isError) {
       console.log(error);
