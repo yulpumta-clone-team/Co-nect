@@ -1,5 +1,6 @@
 package com.projectmatching.app.util;
 
+import com.projectmatching.app.config.YAMLConfig;
 import org.springframework.util.StringUtils;
 
 import java.util.UUID;

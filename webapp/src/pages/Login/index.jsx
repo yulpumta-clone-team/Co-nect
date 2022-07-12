@@ -1,13 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
-import { isStatusOk } from 'constant/serverStatus';
 import { handleLogin } from 'apiAction/auth';
+import { handleFetcher } from 'utils';
+import { updateUserInfo } from 'service/auth';
 
 function Login() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -23,13 +22,14 @@ function Login() {
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
-    const {
-      payload: { status, code, data, message },
-    } = await dispatch(handleLogin(submitData));
-    console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (isStatusOk(status)) {
-      navigate('/callback');
+    const { value, error, isError } = await handleFetcher(handleLogin, submitData);
+    if (isError) {
+      console.log(error);
+      return;
     }
+    updateUserInfo(value);
+    navigate('/');
+    window.location.reload();
   };
   return (
     <div>

@@ -9,6 +9,7 @@ function MarkdownEditor({ mdValue, setContent }) {
     setContent(editorRef.current?.getInstance().getMarkdown());
   }, [setContent]);
   return (
+<<<<<<< HEAD
     <div>
       <Editor
         initialValue={mdValue}
@@ -20,6 +21,16 @@ function MarkdownEditor({ mdValue, setContent }) {
         onChange={onChangeEditorTextHandler}
       />
     </div>
+=======
+    <Editor
+      initialValue={mdValue}
+      height="400px"
+      initialEditType="markdown"
+      useCommandShortcut
+      ref={editorRef}
+      onChange={onChangeEditorTextHandler}
+    />
+>>>>>>> fetch_head
   );
 }
 

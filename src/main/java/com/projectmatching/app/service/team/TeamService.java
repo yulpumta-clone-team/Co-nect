@@ -16,6 +16,7 @@ import com.projectmatching.app.domain.techStack.TechStackRepository;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.UserTeamRepository;
+import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 
 @RequiredArgsConstructor
@@ -55,9 +57,9 @@ public class TeamService {
 
             Long teamId = teamRepository.save(team).getId();
 
-            List<String> techs = requestDto.getTechs();
-            for (String t : techs){
-                TechStack techStack = techStackRepository.findByName(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
+            List<Long> techs = requestDto.getSkills();
+            for (Long t : techs){
+                TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
                 TeamTech teamTech = TeamTech.builder()
                         .team(team)
                         .techStack(techStack)
@@ -88,17 +90,12 @@ public class TeamService {
 
             for(Team team : teams){
                 TeamResponseDto teamResponseDto = new TeamResponseDto();
-                BeanUtils.copyProperties(team, teamResponseDto);
-                teamResponseDto.setUserId(findTeamUser(team));
+                copyProperties(team, teamResponseDto);
+                teamResponseDto.setUser(findTeamUser(team));
                 teamResponseDto.setSkills(findTeamTech(team));
                 teamResponseDto.setCommentCnt(team.getTeamComments().size());
                 teamResponseDto.setLikeCnt(team.getTeamLikings().size());
 
-                if(team.getStatus()=="NA") {
-                    teamResponseDto.setStatus(Boolean.FALSE);
-                } else{
-                    teamResponseDto.setStatus(Boolean.TRUE);
-                }
 
                 responseDtos.add(teamResponseDto);
             }
@@ -112,31 +109,25 @@ public class TeamService {
     public TeamDetailResponseDto getTeam(Long team_id) throws ResponeException {
         Team team = teamRepository.findById(team_id).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
         try{
-            TeamDetailResponseDto teamResponseDto = new TeamDetailResponseDto();
-            BeanUtils.copyProperties(team, teamResponseDto);
-            teamResponseDto.setUserId(findTeamUser(team));
-            teamResponseDto.setSkills(findTeamTech(team));
-            teamResponseDto.setTeamComments(findTeamComment(team));
-            teamResponseDto.setCommentCnt(team.getTeamComments().size());
-            teamResponseDto.setLikeCnt(team.getTeamLikings().size());
+            TeamDetailResponseDto teamDetailResponseDto = new TeamDetailResponseDto();
+            copyProperties(team, teamDetailResponseDto);
+            teamDetailResponseDto.setUser(findTeamUser(team));
+            teamDetailResponseDto.setSkills(findTeamTech(team));
+            teamDetailResponseDto.setCommentCnt(team.getTeamComments().size());
+            teamDetailResponseDto.setLikeCnt(team.getTeamLikings().size());
 
-            if(team.getStatus()=="NA") {
-                teamResponseDto.setStatus(Boolean.FALSE);
-            } else{
-                teamResponseDto.setStatus(Boolean.TRUE);
-            }
 
-            return teamResponseDto;
+            return teamDetailResponseDto;
         }catch (Exception e){
             throw new ResponeException(GET_TEAM_ERROR);
         }
     }
 
-    public Long findTeamUser(Team team){
+    public UserDto findTeamUser(Team team){
         List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
         if(userTeamList.size() != 0) {
             UserTeam findUser = userTeamList.get(0);
-            return findUser.getUser().getId();
+            return UserDto.of(findUser.getUser());
         }
         else return null;
     }
@@ -151,11 +142,6 @@ public class TeamService {
         return findTeamTech;
     }
 
-    public List<TeamCommentDto> findTeamComment(Team team){
-        List<TeamCommentDto> findComment = team.getTeamComments().stream().
-                map(teamComment -> TeamCommentDto.of(teamComment)).collect(Collectors.toList());
-        return findComment;
-    }
 
     public void delete(Long team_id, String email) throws ResponeException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
@@ -180,9 +166,9 @@ public class TeamService {
             team.update(teamRequestDto);
             teamTechRepository.deleteAllByTeam_Id(team.getId());
 
-            List<String> techs = teamRequestDto.getTechs();
-            for (String t : techs) {
-                TechStack techStack = techStackRepository.findByName(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
+            List<Long> techs = teamRequestDto.getSkills();
+            for (Long t : techs) {
+                TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
                 TeamTech teamTech = TeamTech.builder()
                         .team(team)
                         .techStack(techStack)

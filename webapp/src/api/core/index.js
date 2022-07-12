@@ -1,20 +1,17 @@
 import axios from 'axios';
-import { AUTH_KEY } from 'constant';
-import { getAuthCookie } from 'utils/cookie';
+import { ROOT_URL } from 'constant/route';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_API,
-  headers: { 'Access-Control-Allow-Origin': process.env.REACT_APP_SERVER_API },
-  withCredentials: true,
+  baseURL: ROOT_URL,
 });
 
 instance.defaults.timeout = 2500;
+instance.defaults.withCredentials = true;
 
 instance.interceptors.request.use(
   (config) => {
     // 요청을 보내기 전에 수행할 로직
     config.headers['Content-Type'] = 'application/json; charset=utf-8';
-    config.headers[AUTH_KEY] = getAuthCookie();
     return config;
   },
   (error) => {
@@ -32,7 +29,7 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error, error.response); // 디버깅
+    // console.log(error, error.response); // 디버깅
     return Promise.reject(error);
   },
 );

@@ -24,5 +24,5 @@ public class TeamRequestDto {
     private String content;
 
     @ApiModelProperty(example = "기술 스택")
-    private List<String> techs;
+    private List<Long> skills;
 }

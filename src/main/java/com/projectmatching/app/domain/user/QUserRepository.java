@@ -75,11 +75,5 @@ public class QUserRepository {
     }
 
 
-    /**
-     * 유저 좋아요 누르기
-     */
-
-
-
 
 }

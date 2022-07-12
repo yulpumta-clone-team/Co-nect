@@ -32,6 +32,7 @@ import static com.projectmatching.app.constant.JwtConstant.*;
 
 @Slf4j
 @Component
+@Getter @Setter
 public class AuthTokenProvider {
 
 
@@ -53,7 +54,6 @@ public class AuthTokenProvider {
         this.key = key;
         this.tokenValidTime = 30* 60 * 1000L;
     }
-
 
 
 
@@ -140,7 +140,7 @@ public class AuthTokenProvider {
             return !claims.getBody().getExpiration().before(new Date());
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            throw e;
         }
     }
 
@@ -194,7 +194,6 @@ public class AuthTokenProvider {
             result[i][0] = UserInfoField.getAt(i);
             result[i][1] = userInfo.getByField(result[i][0]);
 
-
         }
         log.info("result is = {}",result.toString());
 
@@ -209,10 +208,13 @@ public class AuthTokenProvider {
     public String resolveCookie(HttpServletRequest request){
 
         final Cookie[] cookies = request.getCookies();
-        if(cookies == null)return  null;
+
+        if(cookies == null)return null;
+        log.info("size = {}",cookies.length);
         for(Cookie cookie : cookies){
             log.info("쿠키 이름 : {}",cookie.getName());
             log.info("쿠키 값 : {}",cookie.getValue());
+
             if(cookie.getName().equals("Authorization")){
                 log.info("통과");
                 return cookie.getValue();

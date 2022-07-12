@@ -1,13 +1,12 @@
 package com.projectmatching.app.domain.user.entity;
 
 import com.projectmatching.app.domain.BaseTimeEntity;
-import com.projectmatching.app.domain.comment.entity.TeamComment;
 import com.projectmatching.app.domain.comment.entity.UserComment;
+import com.projectmatching.app.domain.history.entity.UserHistory;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
 import com.projectmatching.app.domain.liking.entity.UserLiking;
 import com.projectmatching.app.domain.user.Role;
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -23,6 +22,7 @@ import java.util.Set;
 public class User extends BaseTimeEntity  {
 
     @Id
+    @GeneratedValue
     private Long id;
 
 
@@ -92,6 +92,12 @@ public class User extends BaseTimeEntity  {
     @ToString.Exclude
     @Builder.Default
     private Set<UserTech> skills = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    @Builder.Default
+    private Set<UserHistory> userHistories = new HashSet<>();
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

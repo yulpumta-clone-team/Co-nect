@@ -2,6 +2,7 @@ package com.projectmatching.app.service.user.Impl;
 
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.domain.liking.dto.UserLikingDto;
+import com.projectmatching.app.domain.liking.entity.UserLiking;
 import com.projectmatching.app.domain.liking.repository.UserLikingRepository;
 import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
@@ -127,7 +128,13 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    // 내가 좋아요한 유저 목록 가져오기
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserProfileDto> getUserLikingList(UserDetailsImpl userDetails) {
+        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+        List<UserLiking> userLikings = userLikingRepository.findUserLikingByFromUser(user);
 
-
-
+        return userLikings.stream().map(u-> u.getToUser()).map(UserProfileDto::of).collect(Collectors.toList());
+    }
 }

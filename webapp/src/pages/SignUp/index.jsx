@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { handleSignUp } from 'apiAction/auth';
+<<<<<<< HEAD
 import { isStatusOk } from 'constant/serverStatus';
 
 import MarkdownEditor from 'components/MdEditor';
@@ -24,19 +24,31 @@ const hopeSessionOption = [
   { id: 3, value: '6개월 이하' },
   { id: 4, value: '6개월 이상' },
 ];
+=======
+import MarkdownEditor from 'components/MdEditor';
+import useInput from 'hooks/useInput';
+import { hopeSessionOption, skillOptions } from 'constant';
+import { handleFetcher } from 'utils';
+>>>>>>> fetch_head
 
 function SignUp() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userImg, onImgChange] = useInput('');
   const [userJob, onJobChange] = useInput('');
   const [userPortfolio, onPortfolioChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
   const [userSlogan, onSloganChange] = useInput('');
+<<<<<<< HEAD
   const [userSkill, setUserSkill] = useInput('');
   const [mdcontent, setMdContent] = useInput('');
 
   const [selectedSkills, setSelectedSkills] = useState([]);
+=======
+  const [mdcontent, setMdContent] = useState('');
+  const [userSkill, setUserSkill] = useState('');
+  const [selectedSkills, setSelectedSkills] = useState([]);
+
+>>>>>>> fetch_head
   const onSkillChange = useCallback((e) => {
     setUserSkill(e.target.value);
     setSelectedSkills((prev) => [...prev, e.target.value]);
@@ -67,12 +79,20 @@ function SignUp() {
       slogan: userSlogan,
     };
     // TODO: input validation 추가해야함.
+<<<<<<< HEAD
     const {
       payload: { status, code, data, message },
     } = await dispatch(handleSignUp(signUpInfo));
     if (isStatusOk(status)) {
       navigate('/login');
+=======
+    const { value, error, isError } = await handleFetcher(handleSignUp, signUpInfo);
+    if (isError) {
+      console.log(error);
+      return;
+>>>>>>> fetch_head
     }
+    navigate('/login');
   };
   return (
     <div>

@@ -24,6 +24,8 @@ public class TechStack {
     @Column
     private String name; //기술 이름
 
+    @Column
+    private Long techSerialNum;
 
 
     @OneToMany(mappedBy = "techStack", cascade = CascadeType.ALL)

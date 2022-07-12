@@ -50,7 +50,6 @@ public class UserSignInServiceImpl implements UserSignInService {
                 UserLoginResDto userLoginResDto = Optional.ofNullable(qUserRepository.login(userLoginDto))
                         .map(UserLoginResDto::toUserLoginResDto)
                         .orElseThrow(NullPointerException::new);
-
                 createCookie(response, jwtTokenProvider.createToken(userLoginResDto)); //쿠키 생성;
 
                 return userLoginResDto;
