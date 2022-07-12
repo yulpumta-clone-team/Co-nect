@@ -14,13 +14,7 @@ spring:
     password:
 
   jpa:
-    hibernate:
-<<<<<<< HEAD
-      ddl-auto: create
-=======
-      ddl-auto: create-drop
 
->>>>>>> back
     properties:
       hibernate:
         # show_sql: true
