@@ -69,7 +69,7 @@ public class UserCommentDto {
         userComment.setUserCommentLikings(mapToSet(this.feelings,UserCommentLikingDto::asEntity));
 
         return userComment;
-            /// CI용 테스트 주석2222
+            /// CI용 테스트 주석2222dddd
     }
 
 }
