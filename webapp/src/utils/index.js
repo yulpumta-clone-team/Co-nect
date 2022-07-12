@@ -1,13 +1,8 @@
-import { DEFAULT_PROFILE_IMG } from 'constant';
+import { DEFAULT_PROFILE_IMG, POST_TYPE } from 'constant';
 
 export function setDefaultProfileImage(img) {
   return (!img || img.length < 10) && DEFAULT_PROFILE_IMG;
 }
-
-export const POST_TYPE = {
-  USER: 'user',
-  TEAM: 'team',
-};
 
 export function checkIsUserPost(postType) {
   return postType === POST_TYPE.USER;

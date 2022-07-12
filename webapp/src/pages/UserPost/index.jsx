@@ -3,8 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
-import { handleFetcher, POST_TYPE } from 'utils';
+import { handleFetcher } from 'utils';
 import userApi from 'api/user';
+import { POST_TYPE } from 'constant';
 import { Board } from './style';
 
 export default function UserPost() {
