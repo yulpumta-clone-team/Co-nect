@@ -1,12 +1,11 @@
-/* eslint-disable react/require-default-props */
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserCookie } from 'utils/cookie';
 import CommentForm from './CommentForm';
 import * as S from './style';
 
-function Comment({
+export default function Comment({
   id,
   isSecret,
   postId,
@@ -111,5 +110,3 @@ Comment.propTypes = {
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
 };
-
-export default memo(Comment);
