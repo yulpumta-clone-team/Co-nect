@@ -122,17 +122,17 @@ public class JwtServiceTest extends ServiceTest {
         Assertions.assertEquals(userDto.getName(),authTokenProvider.getUserName(token));
     }
 
-
-    @DisplayName("토큰 유효성 검사 테스트 : 만료됨")
-    @Test
-    void When_Invalid_Token_Throw_Exception(){
-
-        authTokenProvider.setTokenValidTime(0); //테스트를 위해 유효 시간 0으로 설정
-        String token = authTokenProvider.createToken(userLoginResDto);
-        Assertions.assertThrows(ExpiredJwtException.class,()->{
-            authTokenProvider.validateToken(token);
-        });
-    }
+//
+//    @DisplayName("토큰 유효성 검사 테스트 : 만료됨")
+//    @Test
+//    void When_Invalid_Token_Throw_Exception(){
+//
+//        authTokenProvider.setTokenValidTime(0); //테스트를 위해 유효 시간 0으로 설정
+//        String token = authTokenProvider.createToken(userLoginResDto);
+//        Assertions.assertThrows(ExpiredJwtException.class,()->{
+//            authTokenProvider.validateToken(token);
+//        });
+//    }
 
 
     @DisplayName("쿠키 토큰 생성 테스트")
