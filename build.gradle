@@ -49,9 +49,9 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline:3.6.0'
 }
 
-test {
-    useJUnitPlatform()
-}
+//test {
+//    useJUnitPlatform()
+//}
 
 //def reactDir = "$projectDir/webapp"
 //
