@@ -33,6 +33,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "fix-memory-limit": "cross-env LIMIT=2048 increase-memory-limit",
     "start": "GENERATE_SOURCEMAP=false react-scripts start",
     "msw": "GENERATE_SOURCEMAP=false REACT_APP_MOCK_TOOL=msw react-scripts start",
     "build": "react-scripts build",
