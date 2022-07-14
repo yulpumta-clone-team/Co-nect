@@ -39,6 +39,7 @@ export default function CommentForm({
   handleCancel,
   handleClickDeleteButton,
 }) {
+  console.log('userInfo', userInfo);
   const {
     register,
     handleSubmit,

@@ -17,7 +17,12 @@ export default function CommentContainer({ postType, postWriter, postId }) {
   const [comments, setComments] = useState([]);
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
   const userInfo = getUserInfo(); // {userId, name, profileImg}
+
   const loggedInUserName = userInfo?.name;
+
+  const selectEditTargetComment = (commentId) => {
+    setEditTargetCommentId(commentId);
+  };
 
   const resetTarget = useCallback(() => {
     setEditTargetCommentId(DEFAULT_TARGET);
@@ -245,7 +250,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
           comments={comments}
           editTargetCommentId={editTargetCommentId}
           resetTarget={resetTarget}
-          setEditTargetCommentId={setEditTargetCommentId}
+          selectEditTargetComment={selectEditTargetComment}
           handlePostComment={handlePostComment}
           handleSubmitEditComment={handleSubmitEditComment}
           handleClickDeleteButton={handleClickDeleteButton}

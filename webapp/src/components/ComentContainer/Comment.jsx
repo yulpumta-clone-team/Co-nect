@@ -20,7 +20,7 @@ Comment.propTypes = {
   }),
   editTargetCommentId: PropTypes.number.isRequired,
   resetTarget: PropTypes.func.isRequired,
-  setEditTargetCommentId: PropTypes.func.isRequired,
+  selectEditTargetComment: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
@@ -34,7 +34,7 @@ export default function Comment({
   commentInfo,
   editTargetCommentId,
   resetTarget,
-  setEditTargetCommentId,
+  selectEditTargetComment,
   handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
@@ -77,7 +77,7 @@ export default function Comment({
             {!isTargetEditCommnt && (
               <S.ContentInfo>
                 <span>{content}</span>
-                <button onClick={() => setEditTargetCommentId(id)}>수정</button>
+                <button onClick={() => selectEditTargetComment(id)}>수정</button>
               </S.ContentInfo>
             )}
             <S.LikeInfo>
