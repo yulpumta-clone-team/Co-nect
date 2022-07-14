@@ -110,7 +110,7 @@ export default function CommentList({
                   submitCallback={handlePostComment}
                   commentInfo={{ id, parentId, secret }}
                   hasCancelButton
-                  hasDeleteButton
+                  hasDeleteButton={false}
                   handleCancel={() => setReplyFormCommentId(DEFAULT_TARGET)}
                   handleClickDeleteButton={handleClickDeleteButton}
                 />

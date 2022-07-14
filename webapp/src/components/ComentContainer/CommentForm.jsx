@@ -59,6 +59,7 @@ export default function CommentForm({
       });
       await submitCallback(newCommentData, commentId, parentId);
       setValue(USE_FORM_COMMENT_KEY, '');
+      setIsSecret(false);
     },
     [commentId, isSecret, parentId, postId, postType, setValue, submitCallback, userInfo],
   );

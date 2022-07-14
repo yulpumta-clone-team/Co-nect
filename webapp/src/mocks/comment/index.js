@@ -64,7 +64,7 @@ const COMMENT = [
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // POST_TEAM_REPLY
-  rest.post(`${ROOT_URL + API.TEAM.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
+  rest.post(`${ROOT_URL + API.TEAM.DETAIL + API.COMMENT.NESTED}`, (req, res, ctx) => {
     console.log('request POST_TEAM_REPLY');
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),

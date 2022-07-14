@@ -13,6 +13,7 @@ CommentContainer.propTypes = {
 };
 
 export default function CommentContainer({ postType, postWriter, postId }) {
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [comments, setComments] = useState([]);
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
   const userInfo = getUserInfo(); // {userId, name, profileImg}
@@ -27,20 +28,6 @@ export default function CommentContainer({ postType, postWriter, postId }) {
     setEditTargetCommentId(DEFAULT_TARGET);
   };
 
-  const fetchComments = useCallback(async () => {
-    const {
-      error,
-      isError,
-      value: comments,
-    } = await handleFetcher(commentApi.GET_COMMENT, { postType, postId });
-    if (isError) {
-      console.log('error :>> ', error);
-      return;
-    }
-    setComments(comments);
-    resetTarget();
-  }, [postId, postType]);
-
   const addCommentOnRoot = useCallback(
     async (newCommentData) => {
       const { error, isError } = await handleFetcher(commentApi.POST_COMMENT, {
@@ -51,9 +38,9 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      fetchComments();
+      forceUpdate();
     },
-    [fetchComments, postType],
+    [forceUpdate, postType],
   );
 
   const addCommentOnNested = useCallback(
@@ -66,7 +53,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      fetchComments();
+      forceUpdate();
     },
     [postType],
   );
@@ -93,9 +80,9 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      fetchComments();
+      forceUpdate();
     },
-    [fetchComments, postType],
+    [forceUpdate, postType],
   );
 
   const editCommentOnNested = useCallback(
@@ -109,9 +96,9 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      fetchComments();
+      forceUpdate();
     },
-    [fetchComments, postType],
+    [forceUpdate, postType],
   );
 
   const handleSubmitEditComment = useCallback(
@@ -132,9 +119,9 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      fetchComments();
+      forceUpdate();
     },
-    [fetchComments, postType],
+    [forceUpdate, postType],
   );
 
   const addLike = useCallback(async (postType, idObj) => {
@@ -185,6 +172,20 @@ export default function CommentContainer({ postType, postWriter, postId }) {
     },
     [addLike, postType, removeLike],
   );
+
+  const fetchComments = useCallback(async () => {
+    const {
+      error,
+      isError,
+      value: comments,
+    } = await handleFetcher(commentApi.GET_COMMENT, { postType, postId });
+    if (isError) {
+      console.log('error :>> ', error);
+      return;
+    }
+    setComments(comments);
+    resetTarget();
+  }, [postId, postType]);
 
   useEffect(() => {
     fetchComments();
