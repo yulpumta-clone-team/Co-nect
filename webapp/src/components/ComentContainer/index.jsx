@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { handleFetcher } from 'utils';
 import commentApi from 'api/comment';
@@ -27,13 +27,23 @@ export default function CommentContainer({ postType, postWriter, postId }) {
     setEditTargetCommentId(DEFAULT_TARGET);
   };
 
+  const fetchComments = useCallback(async () => {
+    const {
+      error,
+      isError,
+      value: comments,
+    } = await handleFetcher(commentApi.GET_COMMENT, { postType, postId });
+    if (isError) {
+      console.log('error :>> ', error);
+      return;
+    }
+    setComments(comments);
+    resetTarget();
+  }, [postId, postType]);
+
   const addCommentOnRoot = useCallback(
     async (newCommentData) => {
-      const {
-        error,
-        isError,
-        value: newComment,
-      } = await handleFetcher(commentApi.POST_COMMENT, {
+      const { error, isError } = await handleFetcher(commentApi.POST_COMMENT, {
         postType,
         data: newCommentData,
       });
@@ -41,18 +51,14 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      setComments(newComment);
+      fetchComments();
     },
-    [postType],
+    [fetchComments, postType],
   );
 
   const addCommentOnNested = useCallback(
     async (newCommentData) => {
-      const {
-        error,
-        isError,
-        value: newComment,
-      } = await handleFetcher(commentApi.POST_REPLY, {
+      const { error, isError } = await handleFetcher(commentApi.POST_REPLY, {
         postType,
         data: newCommentData,
       });
@@ -60,7 +66,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      setComments(newComment);
+      fetchComments();
     },
     [postType],
   );
@@ -78,11 +84,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
 
   const editCommentOnRoot = useCallback(
     async (newCommentData, commentId) => {
-      const {
-        error,
-        isError,
-        value: newComment,
-      } = await handleFetcher(commentApi.PATCH_COMMENT, {
+      const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT, {
         postType,
         id: commentId,
         data: newCommentData,
@@ -91,19 +93,14 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      setComments(newComment);
-      resetTarget();
+      fetchComments();
     },
-    [postType],
+    [fetchComments, postType],
   );
 
   const editCommentOnNested = useCallback(
     async (newCommentData, commentId) => {
-      const {
-        error,
-        isError,
-        value: newComment,
-      } = await handleFetcher(commentApi.PATCH_REPLY, {
+      const { error, isError } = await handleFetcher(commentApi.PATCH_REPLY, {
         postType,
         id: commentId,
         data: newCommentData,
@@ -112,10 +109,9 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      setComments(newComment);
-      resetTarget();
+      fetchComments();
     },
-    [postType],
+    [fetchComments, postType],
   );
 
   const handleSubmitEditComment = useCallback(
@@ -129,15 +125,6 @@ export default function CommentContainer({ postType, postWriter, postId }) {
     [editCommentOnNested, editCommentOnRoot],
   );
 
-  const deleteCommentOnRoot = useCallback((id) => {
-    setComments((prevComments) => removeComment({ prevComments, id }));
-  }, []);
-
-  const deleteCommentOnNested = useCallback((id, parentId) => {
-    const callbackParams = { id };
-    setComments((prev) => findParentAndDoCallback(prev, parentId, removeComment, callbackParams));
-  }, []);
-
   const handleClickDeleteButton = useCallback(
     async (id, parentId) => {
       const { error, isError } = await handleFetcher(commentApi.DELETE_COMMENT, { postType, id });
@@ -145,13 +132,9 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      if (parentId) {
-        deleteCommentOnNested(id, parentId);
-      } else {
-        deleteCommentOnRoot(id);
-      }
+      fetchComments();
     },
-    [deleteCommentOnNested, deleteCommentOnRoot, postType],
+    [fetchComments, postType],
   );
 
   const addLike = useCallback(async (postType, idObj) => {
@@ -202,19 +185,6 @@ export default function CommentContainer({ postType, postWriter, postId }) {
     },
     [addLike, postType, removeLike],
   );
-
-  const fetchComments = useCallback(async () => {
-    const {
-      error,
-      isError,
-      value: comments,
-    } = await handleFetcher(commentApi.GET_COMMENT, { postType, postId });
-    if (isError) {
-      console.log('error :>> ', error);
-      return;
-    }
-    setComments(comments);
-  }, [postId, postType]);
 
   useEffect(() => {
     fetchComments();
@@ -268,20 +238,6 @@ const findParentAndDoCallback = (parents, parentId, callback, callbackParams) =>
     }
     return comment;
   });
-};
-
-const addComment = ({ prevComments, newComment }) => {
-  return [...prevComments, newComment];
-};
-
-const editComment = ({ prevComments, editedComment }) => {
-  return deepClone(prevComments).map((comment) =>
-    comment.id === editedComment.id ? editedComment : comment,
-  );
-};
-
-const removeComment = ({ prevComments, id }) => {
-  return prevComments.filter((comment) => comment.id !== id);
 };
 
 const addLikeToComment = ({ prevComments, id, loggedInUserId }) => {

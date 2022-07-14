@@ -1,5 +1,5 @@
 import { API, ROOT_URL } from 'constant/api';
-import { getResonseWithData } from 'mocks/mockUtils';
+import { getResonseWithData, successResponseWithEmptyData } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { teamComments } from './teamComments';
 import { userComment, userComments } from './userComments';
@@ -13,34 +13,32 @@ const COMMENT = [
   // POST_USER_COMMENT
   rest.post(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.ORIGIN}`, (req, res, ctx) => {
     console.log('request POST_USER_COMMENT');
-    const newUserComments = [userComment, ...userComments];
-    return res(ctx.status(200), ctx.json(getResonseWithData(newUserComments)));
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // DELETE_USER_COMMENT
   rest.delete(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
     console.log('request DELETE_USER_COMMENT');
-    return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // PATCH_USER_COMMENT
   rest.patch(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
     console.log('request PATCH_USER_COMMENT');
-    const { body, params } = req;
-    return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // POST_USER_REPLY
   rest.post(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
     console.log('request POST_USER_REPLY');
-    return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // DELETE_USER_REPLY
   rest.delete(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
     console.log('request DELETE_USER_REPLY');
-    return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // PATCH_USER_REPLY
   rest.patch(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
     console.log('request PATCH_USER_REPLY');
-    return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
 
   // PATCH_USER_COMMENT_LIKE
