@@ -15,7 +15,7 @@ CommentList.propTypes = {
   editTargetCommentId: PropTypes.number.isRequired,
   resetTarget: PropTypes.func.isRequired,
   handlePostComment: PropTypes.func.isRequired,
-  setEditTargetCommentId: PropTypes.func.isRequired,
+  selectEditTargetComment: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
@@ -30,7 +30,7 @@ export default function CommentList({
   editTargetCommentId,
   resetTarget,
   handlePostComment,
-  setEditTargetCommentId,
+  selectEditTargetComment,
   handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
@@ -86,7 +86,7 @@ export default function CommentList({
                 commentInfo={commentInfo}
                 editTargetCommentId={editTargetCommentId}
                 resetTarget={resetTarget}
-                setEditTargetCommentId={setEditTargetCommentId}
+                selectEditTargetComment={selectEditTargetComment}
                 handleSubmitEditComment={handleSubmitEditComment}
                 handleClickDeleteButton={handleClickDeleteButton}
                 handleClickLikeThumb={handleClickLikeThumb}
@@ -110,7 +110,7 @@ export default function CommentList({
                   submitCallback={handlePostComment}
                   commentInfo={{ id, parentId, secret }}
                   hasCancelButton
-                  hasDeleteButton
+                  hasDeleteButton={false}
                   handleCancel={() => setReplyFormCommentId(DEFAULT_TARGET)}
                   handleClickDeleteButton={handleClickDeleteButton}
                 />
@@ -126,7 +126,7 @@ export default function CommentList({
                   editTargetCommentId={editTargetCommentId}
                   resetTarget={resetTarget}
                   handlePostComment={handlePostComment}
-                  setEditTargetCommentId={setEditTargetCommentId}
+                  selectEditTargetComment={selectEditTargetComment}
                   handleSubmitEditComment={handleSubmitEditComment}
                   handleClickDeleteButton={handleClickDeleteButton}
                   handleClickLikeThumb={handleClickLikeThumb}

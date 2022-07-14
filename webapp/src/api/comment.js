@@ -35,6 +35,12 @@ const commentApi = {
       data,
     });
   },
+  DELETE_REPLY({ postType, id }) {
+    return instance({
+      url: `/${postType + API.COMMENT.NESTED}/${id}`,
+      method: 'delete',
+    });
+  },
   PATCH_REPLY({ postType, id, data }) {
     return instance({
       url: `/${postType + API.COMMENT.NESTED}/${id}`,
