@@ -4,13 +4,13 @@ import Loader from 'components/Loader';
 import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 
-Cards.propTypes = {
+CardsGrid.propTypes = {
   CardComponent: PropTypes.func.isRequired,
   cards: PropTypes.array.isRequired,
   clickLink: PropTypes.string,
 };
 
-export default function Cards({ CardComponent, cards, clickLink }) {
+export default function CardsGrid({ CardComponent, cards, clickLink }) {
   const navaigate = useNavigate();
   const handleClickCardComponent = (cardId) => {
     clickLink && navaigate(clickLink + cardId);

@@ -1,7 +1,6 @@
 import App from 'layouts/App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { CookiesProvider } from 'react-cookie';
 import worker from 'mocks/browser';
 
 if (process.env.REACT_APP_MOCK_TOOL === 'msw') {
@@ -10,9 +9,7 @@ if (process.env.REACT_APP_MOCK_TOOL === 'msw') {
 
 ReactDOM.render(
   <React.StrictMode>
-    <CookiesProvider>
-      <App />
-    </CookiesProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root'),
 );

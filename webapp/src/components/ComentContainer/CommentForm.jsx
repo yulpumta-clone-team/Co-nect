@@ -1,15 +1,36 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
-import { getUserCookie } from 'utils/cookie';
 import * as S from './style';
 
 const USE_FORM_COMMENT_KEY = 'commentValue';
 
-function CommentForm({
+CommentForm.propTypes = {
+  postId: PropTypes.number.isRequired,
+  postType: PropTypes.string.isRequired,
+  userInfo: PropTypes.shape({
+    userId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    profileImg: PropTypes.string.isRequired,
+  }).isRequired,
+  initialText: PropTypes.string.isRequired,
+  submitCallback: PropTypes.func.isRequired,
+  commentInfo: PropTypes.shape({
+    id: PropTypes.number,
+    parentId: PropTypes.number,
+    secret: PropTypes.bool,
+  }).isRequired,
+  hasCancelButton: PropTypes.bool.isRequired,
+  hasDeleteButton: PropTypes.bool.isRequired,
+  handleCancel: PropTypes.func.isRequired,
+  handleClickDeleteButton: PropTypes.func.isRequired,
+};
+
+export default function CommentForm({
   postType,
   postId,
+  userInfo,
   initialText,
   submitCallback,
   commentInfo,
@@ -28,7 +49,6 @@ function CommentForm({
   });
   const { id: commentId, parentId, secret } = commentInfo;
   const formId = commentId || 'rootForm';
-  const userInfo = getUserCookie(); // {name, img, id}
   const [isSecret, setIsSecret] = useState(secret);
   const onSubmit = useCallback(
     async ({ commentValue }) => {
@@ -75,21 +95,3 @@ function CommentForm({
     </S.FormBox>
   );
 }
-
-CommentForm.propTypes = {
-  postId: PropTypes.number.isRequired,
-  postType: PropTypes.string.isRequired,
-  initialText: PropTypes.string.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  commentInfo: PropTypes.shape({
-    id: PropTypes.number,
-    parentId: PropTypes.number,
-    secret: PropTypes.bool,
-  }).isRequired,
-  hasCancelButton: PropTypes.bool.isRequired,
-  hasDeleteButton: PropTypes.bool.isRequired,
-  handleCancel: PropTypes.func.isRequired,
-  handleClickDeleteButton: PropTypes.func.isRequired,
-};
-
-export default memo(CommentForm);

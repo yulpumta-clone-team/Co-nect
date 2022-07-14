@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { handleFetcher } from 'utils';
-import { getUserCookie } from 'utils/cookie';
 import commentApi from 'api/comment';
-import CommentForm from './CommentForm';
+import { getUserInfo } from 'service/auth';
+
 import CommentList from './CommentList';
+import CommentForm from './CommentForm';
 
 CommentContainer.propTypes = {
   postType: PropTypes.string.isRequired,
@@ -15,7 +16,7 @@ CommentContainer.propTypes = {
 export default function CommentContainer({ postType, postWriter, postId }) {
   const [comments, setComments] = useState([]);
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
-  const userInfo = getUserCookie(); // {name, img, id}
+  const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserName = userInfo?.name;
 
   const resetTarget = useCallback(() => {
@@ -36,7 +37,8 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      setComments((prevComments) => addComment({ prevComments, newComment }));
+      setComments(newComment);
+      // setComments((prevComments) => addComment({ prevComments, newComment }));
     },
     [postType],
   );
@@ -223,6 +225,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
       <CommentForm
         postType={postType}
         postId={postId}
+        userInfo={userInfo}
         initialText=""
         submitCallback={handlePostComment}
         commentInfo={{ id: null, parentId: null, secret: false }}
