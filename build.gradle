@@ -49,10 +49,12 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured:3.3.0'
     testImplementation 'org.mockito:mockito-inline:3.6.0'
 }
-//
-////test {
-////    useJUnitPlatform()
-////}
+
+test {
+    useJUnitPlatform()
+}
+
+
 //
 //def reactDir = "$projectDir/webapp"
 //
