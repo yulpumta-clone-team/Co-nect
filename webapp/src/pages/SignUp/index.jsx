@@ -69,12 +69,12 @@ export default function SignUp({ isOpen, close }) {
             style={{ display: 'flex', flexDirection: 'column' }}
             onSubmit={handleSubmit(onValid)}
           >
-            <div onClick={() => close} role="button" tabIndex="-1">
-              <div className="loginModal">
-                <span className="close" onClick={() => close} role="button" tabIndex="-1">
+            <div onClick={() => close()} role="button" tabIndex="-1">
+              <div>
+                <span onClick={() => close()} role="button" tabIndex="-1">
                   &times;
                 </span>
-                <div className="modalContents" onClick={() => isOpen} role="button" tabIndex="-1">
+                <div onClick={() => isOpen()} role="button" tabIndex="-1">
                   <input
                     {...register('email', {
                       required: 'Email is required',
