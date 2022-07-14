@@ -14,7 +14,6 @@ spring:
     password:
 
   jpa:
-
     properties:
       hibernate:
         # show_sql: true
@@ -32,7 +31,6 @@ spring:
       path: /h2-console
   jackson:
     default-property-inclusion: non_null # null 인경우 필드 생성하지않음
-
 
 #포트 변수
 env:

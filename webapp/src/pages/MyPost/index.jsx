@@ -1,33 +1,35 @@
-import React from 'react';
-import { CardTitle, CardWrapper, ImgContainer } from './style';
+import userApi from 'api/user';
+import Cards from 'components/CardsGrid';
+import TeamCard from 'components/TeamCard';
+import { TEAM, TEAM_EDIT } from 'constant/route';
+import React, { useEffect, useState } from 'react';
+import { handleFetcher } from 'utils';
 
-function MyPost() {
-  const my_posting = [
-    {
-      team_id: 1,
-      name: '코넥트',
-      like_cnt: 0,
-    },
-    {
-      team_id: 2,
-      name: '애플팀플',
-      like_cnt: 1,
-    },
-  ];
+import * as S from './style';
+
+export default function MyPost() {
+  const [cards, setCards] = useState([]);
+
+  const fetcher = async () => {
+    const { value, isError, error } = await handleFetcher(userApi.GET_MY_POSTS);
+    if (isError) {
+      console.error(error);
+    }
+    setCards(value);
+  };
+
+  useEffect(() => {
+    fetcher();
+  }, []);
+
   return (
-    <div>
-      {my_posting.map((posting) => (
-        <CardWrapper>
-          <h1>{posting.team_id}</h1>
-          <CardTitle>{posting.name}</CardTitle>
-          <ImgContainer>
-            <img alt="팀 사진" />
-          </ImgContainer>
-          <span>{posting.like_cnt}</span>
-        </CardWrapper>
-      ))}
-    </div>
+    <S.Container>
+      <Cards
+        cards={cards}
+        isUserList={false}
+        CardComponent={TeamCard}
+        clickLink={`${TEAM_EDIT}/`}
+      />
+    </S.Container>
   );
 }
-
-export default MyPost;

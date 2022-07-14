@@ -1,30 +1,23 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import Menu from 'components/Menu';
 import useModal from 'hooks/useModal';
-import { removeLoginCookie } from 'utils/cookie';
-import {
-  HOME,
-  MY_POST,
-  NEW_POST,
-  PROFILE,
-  TEAM_BOARD,
-  MY_USER_LIST,
-  USER_BOARD,
-} from 'constant/route';
-<<<<<<< HEAD
-=======
+import { HOME, MY_POST, NEW_POST, PROFILE, TEAM, MY_LIST, USER } from 'constant/route';
 import { deleteUserInfo } from 'service/auth';
->>>>>>> fetch_head
 import { Ul } from './style';
 
-function LoginNav({ userInfo }) {
+LoginNav.propTypes = {
+  userInfo: PropTypes.shape({
+    userId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    profileImg: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default function LoginNav({ userInfo }) {
   const navigate = useNavigate();
-  const { name, img: image } = userInfo;
+  const { name, profileImg } = userInfo;
   const [showModal, onCloseModal, openModal] = useModal();
   const triggerLogOut = () => {
     deleteUserInfo();
@@ -37,16 +30,16 @@ function LoginNav({ userInfo }) {
         <Link to={HOME}>Main</Link>
       </li>
       <li>
-        <Link to={USER_BOARD}>User Board</Link>
+        <Link to={USER}>User Board</Link>
       </li>
       <li>
-        <Link to={TEAM_BOARD}>Team Board</Link>
+        <Link to={TEAM}>Team Board</Link>
       </li>
       <li>
         <Link to={NEW_POST}>New Post</Link>
       </li>
       <li onClick={openModal}>
-        <img style={{ width: '30px' }} src={image} alt="profile" />
+        <img style={{ width: '30px' }} src={profileImg} alt="profile" />
         <span>{name}</span>
       </li>
       <Menu style={{ right: 0, top: 80 }} show={showModal} onCloseModal={onCloseModal}>
@@ -55,7 +48,7 @@ function LoginNav({ userInfo }) {
             <Link to={MY_POST}>내 작성글</Link>
           </li>
           <li>
-            <Link to={MY_USER_LIST}>내 관심글</Link>
+            <Link to={MY_LIST}>내 관심글</Link>
           </li>
           <li>
             <Link to={PROFILE}>프로필 설정</Link>
@@ -68,17 +61,3 @@ function LoginNav({ userInfo }) {
     </Ul>
   );
 }
-
-LoginNav.propTypes = {
-  userInfo: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    rolekey: PropTypes.string.isRequired,
-    isFirst: PropTypes.bool.isRequired,
-  }).isRequired,
-};
-
-export default LoginNav;
