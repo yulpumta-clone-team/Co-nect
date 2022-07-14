@@ -56,3 +56,20 @@ export const LogOutButton = styled.button`
   outline: none;
   cursor: pointer;
 `;
+export const Modal = styled.div`
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background-color: rgb(25, 31, 44);
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
