@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
-import { getTeamDetail } from 'apiAction/team';
-import { handleFetcher, POST_TYPE } from 'utils';
-import { Board, Button } from './style';
+import { handleFetcher } from 'utils';
+import teamApi from 'api/team';
+import { POST_TYPE } from 'constant';
+import { Board } from './style';
 
-function TeamPost() {
+export default function TeamPost() {
   const { teamId: stringTeamId } = useParams();
   const teamId = Number(stringTeamId);
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function TeamPost() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const { value, error } = await handleFetcher(getTeamDetail, { id: teamId });
+      const { value, error } = await handleFetcher(teamApi.GET_TEAM_DETAIL, { id: teamId });
       setTargetTeam(value);
     } catch (error) {
       console.log(error);
@@ -40,9 +41,6 @@ function TeamPost() {
   return (
     <div>
       <button onClick={onClickback}>back</button>
-      <Link to="./edit" state={targetTeam}>
-        <Button>Edit</Button>
-      </Link>
       <Board>
         <img src={img} alt="게시글" />
         <MarkdownViewer mdValue={content} />
@@ -55,5 +53,3 @@ function TeamPost() {
     </div>
   );
 }
-
-export default TeamPost;

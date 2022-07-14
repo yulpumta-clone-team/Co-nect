@@ -14,18 +14,16 @@ export const getUserCookie = () => {
     return null;
   }
   const { img } = userInfo;
-<<<<<<< HEAD
   const image = (!img || img.length < 10) && DEFAULT_PROFILE_IMG;
   return { ...userInfo, img: image };
 };
 
 export const getAuthCookie = () => cookies.get(AUTH_KEY);
-=======
   return { ...userInfo, img: setDefaultProfileImage(img) };
 };
 
 // export const getAuthCookie = () => cookies.get(AUTH_KEY);
->>>>>>> fetch_head
+
 
 const removeCookie = (name) => cookies.remove(name);
 

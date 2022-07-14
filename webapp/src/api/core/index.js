@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ROOT_URL } from 'constant/route';
+import { ROOT_URL } from 'constant/api';
 
 const instance = axios.create({
   baseURL: ROOT_URL,

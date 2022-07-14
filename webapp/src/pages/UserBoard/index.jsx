@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { getUserList } from 'apiAction/user';
-import UserCard from 'components/UserCard';
-import Loader from 'components/Loader';
 import UpperButton from 'components/UpperButton';
-import NoDataMessage from 'components/NoDataMessage';
 import { handleFetcher } from 'utils';
-import { BoardWrapper, Cards } from './style';
+import Cards from 'components/CardsGrid';
+import userApi from 'api/user';
+import UserCard from 'components/UserCard';
+import { USER } from 'constant/route';
+import * as S from './style';
 
-function UserBoard() {
+export default function UserBoard() {
   const [userList, setUserList] = useState([]);
-  const [loading, setLoading] = useState(true);
   const fetchData = async (page) => {
-    setLoading(true);
     try {
-      const { value, error } = await handleFetcher(getUserList, { page });
+      const { value, error } = await handleFetcher(userApi.GET_USER_LIST, { page });
       setUserList((prev) => [...prev, ...value]);
     } catch (error) {
       console.log(error);
       setUserList((prev) => [...prev]);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -27,26 +23,12 @@ function UserBoard() {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
     <>
-      <BoardWrapper>
-        {userList.length === 0 ? (
-          <NoDataMessage />
-        ) : (
-          <Cards>
-            {userList.map((userElement) => (
-              <UserCard key={userElement.id} cardInfo={{ ...userElement }} />
-            ))}
-          </Cards>
-        )}
-      </BoardWrapper>
+      <S.BoardWrapper>
+        <Cards cards={userList} CardComponent={UserCard} clickLink={`${USER}/`} />
+      </S.BoardWrapper>
       <UpperButton />
     </>
   );
 }
-
-export default UserBoard;

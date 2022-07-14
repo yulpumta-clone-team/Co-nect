@@ -1,44 +1,25 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Potal from 'components/Potal';
-import { resetError } from '_actions/global_action';
-import { ModalWrapper, ModalContainer, CloseModalButton } from './style';
+import Potal from './Potal';
+import * as S from './style';
 
-function WindowModal({ children, show }) {
-  const dispatch = useDispatch();
-  const stopPropagation = useCallback((e) => {
-    e.stopPropagation();
-  }, []);
-  const onCloseModal = useCallback(() => {
-    dispatch(resetError());
-  }, [dispatch]);
-  const handleKeyEsc = useCallback(
-    (e) => {
-      if (e.keyCode === 27) {
-        onCloseModal();
-      }
-    },
-    [onCloseModal],
-  );
-  if (!show) {
-    return null;
-  }
+Modal.propTypes = {
+  children: PropTypes.element.isRequired,
+  wrapperId: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.bool.isRequired,
+};
+
+export default function Modal({ children, wrapperId, isOpen, onClose }) {
+  if (!isOpen) return null;
   return (
-    <Potal>
-      <ModalWrapper onClick={onCloseModal} onKeyDown={handleKeyEsc} tabIndex={0}>
-        <ModalContainer onClick={stopPropagation}>
-          <CloseModalButton onClick={onCloseModal}>&times;</CloseModalButton>
+    <Potal wrapperId={wrapperId} isLock>
+      <S.Overlay onClick={onClose}>
+        <S.Content onClick={(event) => event.stopPropagation()}>
+          <S.CloseButton onClick={onClose}>&times;</S.CloseButton>
           {children}
-        </ModalContainer>
-      </ModalWrapper>
+        </S.Content>
+      </S.Overlay>
     </Potal>
   );
 }
-
-WindowModal.propTypes = {
-  children: PropTypes.element.isRequired,
-  show: PropTypes.bool.isRequired,
-};
-
-export default WindowModal;

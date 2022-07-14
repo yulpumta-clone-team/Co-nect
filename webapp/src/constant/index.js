@@ -21,6 +21,11 @@ export const hopeSessionOption = [
   { id: 4, value: '6개월 이상' },
 ];
 
+export const POST_TYPE = {
+  USER: 'user',
+  TEAM: 'team',
+};
+
 export const languageSkills = {
   100: 'Javascript',
   101: 'React',
