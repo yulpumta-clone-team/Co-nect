@@ -23,9 +23,9 @@ export default function CommentContainer({ postType, postWriter, postId }) {
     setEditTargetCommentId(commentId);
   };
 
-  const resetTarget = useCallback(() => {
+  const resetTarget = () => {
     setEditTargetCommentId(DEFAULT_TARGET);
-  }, []);
+  };
 
   const addCommentOnRoot = useCallback(
     async (newCommentData) => {
@@ -42,13 +42,12 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         return;
       }
       setComments(newComment);
-      // setComments((prevComments) => addComment({ prevComments, newComment }));
     },
     [postType],
   );
 
   const addCommentOnNested = useCallback(
-    async (newCommentData, commentId) => {
+    async (newCommentData) => {
       const {
         error,
         isError,
@@ -61,8 +60,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      const callbackParams = { newComment };
-      setComments((prev) => findParentAndDoCallback(prev, commentId, addComment, callbackParams));
+      setComments(newComment);
     },
     [postType],
   );
@@ -70,7 +68,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
   const handlePostComment = useCallback(
     async (newCommentData, commentId) => {
       if (commentId) {
-        addCommentOnNested(newCommentData, commentId);
+        addCommentOnNested(newCommentData);
       } else {
         addCommentOnRoot(newCommentData);
       }
@@ -96,7 +94,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
       setComments((prevComments) => editComment({ prevComments, editedComment }));
       resetTarget();
     },
-    [postType, resetTarget],
+    [postType],
   );
 
   const editCommentOnNested = useCallback(
@@ -118,7 +116,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
       setComments((prev) => findParentAndDoCallback(prev, parentId, editComment, callbackParams));
       resetTarget();
     },
-    [postType, resetTarget],
+    [postType],
   );
 
   const handleSubmitEditComment = useCallback(
