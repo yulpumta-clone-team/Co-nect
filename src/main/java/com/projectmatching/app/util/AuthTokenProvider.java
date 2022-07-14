@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +38,8 @@ public class AuthTokenProvider {
 
 
     private static Key key;
-    private String secretKey = Secret.JWT_SECRET_KEY;
+    @Value("${jwt.secretKey}")
+    private String secretKey;
 
     // 토큰 유효시간 30분
     private long tokenValidTime;

@@ -83,3 +83,5 @@ server:
 env:
   port: 8081
 
+jwt:
+  secretKey: ${JWT_SECRET_KEY}
