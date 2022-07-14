@@ -49,10 +49,36 @@ const COMMENT = [
     return res(ctx.status(200), ctx.json(getResonseWithData(teamComments)));
   }),
   // POST_TEAM_COMMENT
+  rest.post(`${ROOT_URL + API.TEAM.DETAIL + API.COMMENT.ORIGIN}`, (req, res, ctx) => {
+    console.log('request POST_TEAM_COMMENT');
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+  }),
   // DELETE_TEAM_COMMENT
+  rest.delete(`${ROOT_URL + API.TEAM.DETAIL + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
+    console.log('request DELETE_TEAM_COMMENT');
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+  }),
   // PATCH_TEAM_COMMENT
+  rest.patch(`${ROOT_URL + API.TEAM.DETAIL + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
+    console.log('request PATCH_TEAM_COMMENT');
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+  }),
   // POST_TEAM_REPLY
+  rest.post(`${ROOT_URL + API.TEAM.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
+    console.log('request POST_TEAM_REPLY');
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+  }),
+  // DELETE_TEAM_REPLY
+  rest.delete(`${ROOT_URL + API.TEAM.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
+    console.log('request DELETE_TEAM_REPLY');
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+  }),
   // PATCH_TEAM_REPLY
+  rest.patch(`${ROOT_URL + API.TEAM.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
+    console.log('request PATCH_TEAM_REPLY');
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+  }),
+
   // PATCH_TEAM_COMMENT_LIKE
   // PATCH_TEAM_COMMENT_UN_LIKE
 ];
