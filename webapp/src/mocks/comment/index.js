@@ -28,17 +28,17 @@ const COMMENT = [
     return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
   }),
   // POST_USER_REPLY
-  rest.post(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
+  rest.post(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
     console.log('request POST_USER_REPLY');
     return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
   }),
   // DELETE_USER_REPLY
-  rest.delete(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
+  rest.delete(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
     console.log('request DELETE_USER_REPLY');
     return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
   }),
   // PATCH_USER_REPLY
-  rest.patch(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
+  rest.patch(`${ROOT_URL + API.USER.DETAIL + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
     console.log('request PATCH_USER_REPLY');
     return res(ctx.status(200), ctx.json(getResonseWithData(userComments)));
   }),

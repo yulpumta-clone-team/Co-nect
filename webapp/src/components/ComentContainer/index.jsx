@@ -81,7 +81,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
       const {
         error,
         isError,
-        value: editedComment,
+        value: newComment,
       } = await handleFetcher(commentApi.PATCH_COMMENT, {
         postType,
         id: commentId,
@@ -91,18 +91,18 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      setComments((prevComments) => editComment({ prevComments, editedComment }));
+      setComments(newComment);
       resetTarget();
     },
     [postType],
   );
 
   const editCommentOnNested = useCallback(
-    async (newCommentData, commentId, parentId) => {
+    async (newCommentData, commentId) => {
       const {
         error,
         isError,
-        value: editedComment,
+        value: newComment,
       } = await handleFetcher(commentApi.PATCH_REPLY, {
         postType,
         id: commentId,
@@ -112,8 +112,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
         console.log('error :>> ', error);
         return;
       }
-      const callbackParams = { editedComment };
-      setComments((prev) => findParentAndDoCallback(prev, parentId, editComment, callbackParams));
+      setComments(newComment);
       resetTarget();
     },
     [postType],
@@ -122,8 +121,7 @@ export default function CommentContainer({ postType, postWriter, postId }) {
   const handleSubmitEditComment = useCallback(
     async (newCommentData, commentId, parentId) => {
       if (parentId) {
-        console.log('parentId :>> ', parentId);
-        editCommentOnNested(newCommentData, commentId, parentId);
+        editCommentOnNested(newCommentData, commentId);
       } else {
         editCommentOnRoot(newCommentData, commentId);
       }
