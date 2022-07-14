@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
-import { getUserCookie } from 'utils/cookie';
+import { getUserInfo } from 'service/auth';
 import CommentForm from './CommentForm';
 import * as S from './style';
 
@@ -39,8 +39,8 @@ export default function Comment({
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
-  const userInfo = getUserCookie(); // {name, img, id}
-  const loggedInUserId = userInfo?.id;
+  const userInfo = getUserInfo(); // {userId, name, profileImg}
+  const loggedInUserId = userInfo?.userId;
   const {
     img,
     secret,
