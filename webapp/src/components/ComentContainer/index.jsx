@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { handleFetcher } from 'utils';
 import commentApi from 'api/comment';
 import { getUserInfo } from 'service/auth';
-
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 
@@ -230,7 +229,6 @@ export default function CommentContainer({ postType, postWriter, postId }) {
       <CommentForm
         postType={postType}
         postId={postId}
-        userInfo={userInfo}
         initialText=""
         submitCallback={handlePostComment}
         commentInfo={{ id: null, parentId: null, secret: false }}

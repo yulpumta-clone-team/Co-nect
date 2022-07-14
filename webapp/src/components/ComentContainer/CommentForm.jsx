@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
+import { getUserInfo } from 'service/auth';
 import * as S from './style';
 
 const USE_FORM_COMMENT_KEY = 'commentValue';
@@ -9,11 +10,6 @@ const USE_FORM_COMMENT_KEY = 'commentValue';
 CommentForm.propTypes = {
   postId: PropTypes.number.isRequired,
   postType: PropTypes.string.isRequired,
-  userInfo: PropTypes.shape({
-    userId: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    profileImg: PropTypes.string.isRequired,
-  }).isRequired,
   initialText: PropTypes.string.isRequired,
   submitCallback: PropTypes.func.isRequired,
   commentInfo: PropTypes.shape({
@@ -30,7 +26,6 @@ CommentForm.propTypes = {
 export default function CommentForm({
   postType,
   postId,
-  userInfo,
   initialText,
   submitCallback,
   commentInfo,
@@ -39,7 +34,7 @@ export default function CommentForm({
   handleCancel,
   handleClickDeleteButton,
 }) {
-  console.log('userInfo', userInfo);
+  const userInfo = getUserInfo(); // {userId, name, profileImg}
   const {
     register,
     handleSubmit,
