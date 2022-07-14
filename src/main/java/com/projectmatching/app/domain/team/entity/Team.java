@@ -24,7 +24,7 @@ import java.util.Set;
 public class Team extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @Column
@@ -36,7 +36,7 @@ public class Team extends BaseTimeEntity {
     @Column
     private String img;
 
-    @Column
+    @Column(name = "`read`")
     private Long read;
 
     @Column(columnDefinition = "TEXT")

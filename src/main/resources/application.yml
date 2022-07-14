@@ -5,6 +5,11 @@ spring:
   profiles:
     include: oauth,key
 
+  datasource:
+    url: ${MP_DB_URL}
+    driver-class-name: com.mysql.jdbc.Driver
+    username: ${MP_DB_USERNAME}
+    password: ${MP_DB_PASSWORD}
   #  datasource:
 #    url: jdbc:h2:tcp://localhost/~/datajpa
 #    username: sa
@@ -24,6 +29,22 @@ spring:
 
   jackson:
     default-property-inclusion: non_null # null 인경우 필드 생성하지않음
+
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_ID}
+            client-secret: ${GITHUB_SECRET}
+            scope: name,email
+          google:
+            client-id: ${GOOGLE_ID}
+            client-secret: ${GOOGLE_SECRET}
+            scope: profile,email
+
+
 
 
 
