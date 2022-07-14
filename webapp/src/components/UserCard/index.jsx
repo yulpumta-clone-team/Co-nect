@@ -1,20 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { USER_BOARD } from 'constant/route';
+import { USER } from 'constant/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
-
-function UserCard({ cardInfo }) {
-  const { id, name, hopeSession, likeCnt, status } = cardInfo;
-  return (
-    <CardWrapper>
-      <h1>{id}</h1>
-      <h2>좋아요: {likeCnt}</h2>
-      <Link to={`${USER_BOARD}/${id}`}>{name}</Link>
-      <SessionContainer>{hopeSession}</SessionContainer>
-    </CardWrapper>
-  );
-}
 
 UserCard.propTypes = {
   cardInfo: PropTypes.shape({
@@ -29,6 +17,17 @@ UserCard.propTypes = {
     likeCnt: PropTypes.number.isRequired,
     status: PropTypes.bool.isRequired,
   }).isRequired,
+  onClick: PropTypes.func,
 };
 
-export default UserCard;
+export default function UserCard({ cardInfo, onClick }) {
+  const { id, name, hopeSession, likeCnt, status } = cardInfo;
+  return (
+    <CardWrapper onClick={onClick}>
+      <h1>{id}</h1>
+      <h2>좋아요: {likeCnt}</h2>
+      <h2>{name}</h2>
+      <SessionContainer>{hopeSession}</SessionContainer>
+    </CardWrapper>
+  );
+}

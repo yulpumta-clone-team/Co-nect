@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { getTeamList } from 'apiAction/team';
-import Loader from 'components/Loader';
-import TeamCard from 'components/TeamCard';
-import NoDataMessage from 'components/NoDataMessage';
 import { handleFetcher } from 'utils';
-import { BoardWrapper, Cards } from './style';
+import Cards from 'components/CardsGrid';
+import teamApi from 'api/team';
+import TeamCard from 'components/TeamCard';
+import { TEAM } from 'constant/route';
+import * as S from './style';
 
-function TeamBoard() {
+export default function TeamBoard() {
   const [teamList, setTeamList] = useState([]);
-  const [loading, setLoading] = useState(true);
   const fetchData = async (page) => {
-    setLoading(true);
     try {
-      const { value, error } = await handleFetcher(getTeamList, { page });
-      console.log('value', value);
+      const { value, error } = await handleFetcher(teamApi.GET_TEAM_ARR, { page });
       setTeamList((prev) => [...prev, ...value]);
     } catch (error) {
       console.log(error);
       setTeamList((prev) => [...prev]);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -27,23 +22,9 @@ function TeamBoard() {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
-    <BoardWrapper>
-      {teamList.length === 0 ? (
-        <NoDataMessage />
-      ) : (
-        <Cards>
-          {teamList.map((teamElement) => (
-            <TeamCard key={teamElement.id} cardInfo={{ ...teamElement }} />
-          ))}
-        </Cards>
-      )}
-    </BoardWrapper>
+    <S.BoardWrapper>
+      <Cards cards={teamList} CardComponent={TeamCard} clickLink={`${TEAM}/`} />
+    </S.BoardWrapper>
   );
 }
-
-export default TeamBoard;

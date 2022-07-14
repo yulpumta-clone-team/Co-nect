@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { handleSignUp } from 'apiAction/auth';
 import MarkdownEditor from 'components/MdEditor';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
+import authApi from 'api/auth';
 
-function SignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const [userImg, onImgChange] = useInput('');
   const [userJob, onJobChange] = useInput('');
@@ -48,7 +48,7 @@ function SignUp() {
       slogan: userSlogan,
     };
     // TODO: input validation 추가해야함.
-    const { value, error, isError } = await handleFetcher(handleSignUp, signUpInfo);
+    const { value, error, isError } = await handleFetcher(authApi.POST_SIGN_UP, signUpInfo);
     if (isError) {
       console.log(error);
       return;
@@ -136,5 +136,3 @@ function SignUp() {
     </div>
   );
 }
-
-export default SignUp;
