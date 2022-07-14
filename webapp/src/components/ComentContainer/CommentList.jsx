@@ -1,5 +1,4 @@
-/* eslint-disable react/require-default-props */
-import React, { memo, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import CommentForm from './CommentForm';
 import Comment from './Comment';
@@ -7,7 +6,22 @@ import * as S from './style';
 
 const DEFAULT_TARGET = -1;
 
-function CommentList({
+CommentList.propTypes = {
+  isReplies: PropTypes.bool.isRequired,
+  loggedInUserName: PropTypes.string,
+  postType: PropTypes.string.isRequired,
+  postWriter: PropTypes.string.isRequired,
+  comments: PropTypes.array.isRequired,
+  editTargetCommentId: PropTypes.number.isRequired,
+  resetTarget: PropTypes.func.isRequired,
+  handlePostComment: PropTypes.func.isRequired,
+  setEditTargetCommentId: PropTypes.func.isRequired,
+  handleSubmitEditComment: PropTypes.func.isRequired,
+  handleClickDeleteButton: PropTypes.func.isRequired,
+  handleClickLikeThumb: PropTypes.func.isRequired,
+};
+
+export default function CommentList({
   isReplies,
   postType,
   postWriter,
@@ -124,20 +138,3 @@ function CommentList({
     </S.ListBox>
   );
 }
-
-CommentList.propTypes = {
-  isReplies: PropTypes.bool.isRequired,
-  loggedInUserName: PropTypes.string,
-  postType: PropTypes.string.isRequired,
-  postWriter: PropTypes.string.isRequired,
-  comments: PropTypes.array.isRequired,
-  editTargetCommentId: PropTypes.number.isRequired,
-  resetTarget: PropTypes.func.isRequired,
-  handlePostComment: PropTypes.func.isRequired,
-  setEditTargetCommentId: PropTypes.func.isRequired,
-  handleSubmitEditComment: PropTypes.func.isRequired,
-  handleClickDeleteButton: PropTypes.func.isRequired,
-  handleClickLikeThumb: PropTypes.func.isRequired,
-};
-
-export default memo(CommentList);

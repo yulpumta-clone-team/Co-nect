@@ -3,11 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader';
 import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
-import { getUserDetail } from 'apiAction/user';
-import { handleFetcher, POST_TYPE } from 'utils';
+import { handleFetcher } from 'utils';
+import userApi from 'api/user';
+import { POST_TYPE } from 'constant';
 import { Board } from './style';
 
-function UserPost() {
+export default function UserPost() {
   const { userId: stringUserId } = useParams();
   const userId = Number(stringUserId);
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function UserPost() {
 
   const fetchData = async () => {
     setLoading(true);
-    const { value, error, isError } = await handleFetcher(getUserDetail, { id: userId });
+    const { value, error, isError } = await handleFetcher(userApi.GET_USER_DETAIL, { id: userId });
     if (isError) {
       console.log(error);
       return;
@@ -65,5 +66,3 @@ function UserPost() {
     </div>
   );
 }
-
-export default UserPost;

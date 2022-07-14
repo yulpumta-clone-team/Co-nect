@@ -1,28 +1,30 @@
+import { API } from 'constant/api';
 import instance from './core';
 
 const authApi = {
   POST_LOGIN(data) {
     return instance({
-      url: '/user/login',
+      url: API.AUTH.LOGIN,
       method: 'post',
       data,
     });
   },
   POST_SIGN_UP(data) {
     return instance({
-      url: '/user/join',
+      url: API.AUTH.SIGNUP,
       method: 'post',
       data,
     });
   },
   GET_LOG_OUT() {
     return instance({
-      url: '/user/logout',
+      url: API.AUTH.LOGOUT,
+      method: 'get',
     });
   },
   DEL_WITHDRAWAL() {
     return instance({
-      url: '/user/withdrawal',
+      url: API.AUTH.WITHDRAWAL,
       method: 'delete',
     });
   },

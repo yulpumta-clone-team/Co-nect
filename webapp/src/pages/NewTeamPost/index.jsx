@@ -3,13 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
-import { postTeamPost } from 'apiAction/team';
-import { useDispatch } from 'react-redux';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
+import teamApi from 'api/team';
 
-function NewTeamPost() {
-  const dispatch = useDispatch();
+export default function NewTeamPost() {
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
@@ -42,7 +40,9 @@ function NewTeamPost() {
         content: mdcontent,
       };
 
-      const { value, error, isError } = await handleFetcher(postTeamPost, submitData);
+      const { value, error, isError } = await handleFetcher(teamApi.POST_TEAM_POST, {
+        data: submitData,
+      });
       if (isError) {
         console.log(error);
         return;
@@ -86,5 +86,3 @@ function NewTeamPost() {
     </>
   );
 }
-
-export default NewTeamPost;

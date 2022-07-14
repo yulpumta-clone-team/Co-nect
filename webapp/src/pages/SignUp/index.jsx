@@ -1,54 +1,23 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { handleSignUp } from 'apiAction/auth';
-<<<<<<< HEAD
-import { isStatusOk } from 'constant/serverStatus';
-
-import MarkdownEditor from 'components/MdEditor';
-import useInput from 'hooks/useInput';
-
-const skillOptions = [
-  { id: 0, value: 'javascript', label: 'javascript' },
-  { id: 1, value: 'java', label: 'java' },
-  { id: 2, value: 'typescript', label: 'typescript' },
-  { id: 3, value: 'python', label: 'python' },
-  { id: 4, value: 'react', label: 'react' },
-  { id: 5, value: 'spring', label: 'spring' },
-  { id: 6, value: 'xd', label: 'xd' },
-];
-const hopeSessionOption = [
-  { id: 0, value: '무관' },
-  { id: 1, value: '1개월 이하' },
-  { id: 2, value: '3개월 이하' },
-  { id: 3, value: '6개월 이하' },
-  { id: 4, value: '6개월 이상' },
-];
-=======
 import MarkdownEditor from 'components/MdEditor';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
->>>>>>> fetch_head
+import authApi from 'api/auth';
 
-function SignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const [userImg, onImgChange] = useInput('');
   const [userJob, onJobChange] = useInput('');
   const [userPortfolio, onPortfolioChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
   const [userSlogan, onSloganChange] = useInput('');
-<<<<<<< HEAD
-  const [userSkill, setUserSkill] = useInput('');
-  const [mdcontent, setMdContent] = useInput('');
-
-  const [selectedSkills, setSelectedSkills] = useState([]);
-=======
   const [mdcontent, setMdContent] = useState('');
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
 
->>>>>>> fetch_head
   const onSkillChange = useCallback((e) => {
     setUserSkill(e.target.value);
     setSelectedSkills((prev) => [...prev, e.target.value]);
@@ -79,18 +48,10 @@ function SignUp() {
       slogan: userSlogan,
     };
     // TODO: input validation 추가해야함.
-<<<<<<< HEAD
-    const {
-      payload: { status, code, data, message },
-    } = await dispatch(handleSignUp(signUpInfo));
-    if (isStatusOk(status)) {
-      navigate('/login');
-=======
-    const { value, error, isError } = await handleFetcher(handleSignUp, signUpInfo);
+    const { value, error, isError } = await handleFetcher(authApi.POST_SIGN_UP, signUpInfo);
     if (isError) {
       console.log(error);
       return;
->>>>>>> fetch_head
     }
     navigate('/login');
   };
@@ -175,5 +136,3 @@ function SignUp() {
     </div>
   );
 }
-
-export default SignUp;
