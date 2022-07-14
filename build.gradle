@@ -78,7 +78,8 @@ task installReact(type:Exec){
         commandLine 'npm.cmd', 'install'
     }else{
         commandLine "npm", "audit", "fix"
-        commandLine 'npm', 'install', 'increase-memory-limit'
+        commandLine 'npm', 'install', '-g','increase-memory-limit'
+        commandLine 'increase-memory-limit'
     }
 }
 
