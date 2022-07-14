@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "fix-memory-limit": "cross-env LIMIT=2048 increase-memory-limit",
     "start": "react-scripts start",
     "msw": "cross-env REACT_APP_MOCK_TOOL=msw react-scripts start",
     "build": "react-scripts build",
@@ -47,8 +46,7 @@
     "styled-components": "^5.3.3",
     "styled-reset": "^4.3.4",
     "util": "^0.12.4",
-    "web-vitals": "^2.1.4",
-    "increase-memory-limit": "^1.0.7",
+    "web-vitals": "^2.1.4"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^19.0.4",
