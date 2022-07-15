@@ -24,6 +24,7 @@ export default function TeamCard({ cardInfo, onClick }) {
   const { id, name, skills, session, img, read, likeCnt, commentCnt, user } = cardInfo;
   return (
     <CardWrapper onClick={onClick}>
+      <h1>id: {id}</h1>
       <h2>좋아요: {likeCnt}</h2>
       <CardTitle>{name}</CardTitle>
       <ImgContainer>{/* <img src={img} alt="임시" /> */}</ImgContainer>

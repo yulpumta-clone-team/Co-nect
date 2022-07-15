@@ -9,7 +9,7 @@ function useIntersect(customOption) {
   const [page, setPage] = useState(0);
   const loadMoreRef = useRef(null);
 
-  const handleObsever = useCallback(async ([entry], observer) => {
+  const handleObsever = useCallback(async ([entry]) => {
     if (entry.isIntersecting) {
       setPage((prev) => prev + 1);
     }
