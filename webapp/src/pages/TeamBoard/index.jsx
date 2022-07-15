@@ -10,17 +10,17 @@ import * as S from './style';
 
 export default function TeamBoard() {
   const [loadMoreRef, page] = useIntersect();
-  const [loading, setLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [teamList, setTeamList] = useState([]);
   const fetchData = async (lastPage) => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const { value, error } = await handleFetcher(teamApi.GET_TEAM_ARR, { lastPage });
       setTeamList((prev) => [...prev, ...value]);
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -32,8 +32,8 @@ export default function TeamBoard() {
     <>
       <S.BoardWrapper>
         <Cards cards={teamList} CardComponent={TeamCard} clickLink={`${TEAM}/`} />
-        <div ref={loadMoreRef} style={{ display: loading ? 'none' : 'block' }}>
-          {loading && <div>Loading...</div>}
+        <div ref={loadMoreRef} style={{ display: isLoading ? 'none' : 'block' }}>
+          {isLoading && <div>Loading...</div>}
         </div>
       </S.BoardWrapper>
       <UpperButton />
