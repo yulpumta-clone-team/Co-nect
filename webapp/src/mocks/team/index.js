@@ -8,7 +8,9 @@ import { teamsList } from './teamsList';
 const TEAM = [
   // GET_TEAM_ARR
   rest.get(ROOT_URL + API.TEAM.LIST, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResonseWithData(teamsList)));
+    const lastPage = req.url.searchParams.get('lastPage');
+    const newTeamList = teamsList.map((team) => ({ ...team, id: Number(team.id + lastPage) }));
+    return res(ctx.status(200), ctx.delay(2000), ctx.json(getResonseWithData(newTeamList)));
   }),
   // GET_TEAM_LIKES
   rest.get(`${ROOT_URL + API.TEAM.LIKES}`, (req, res, ctx) => {

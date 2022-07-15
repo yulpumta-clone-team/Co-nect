@@ -8,11 +8,9 @@ import { userDetail } from './userDetail';
 const USER = [
   // GET_USER_LIST
   rest.get(ROOT_URL + API.USER.LIST, (req, res, ctx) => {
-    const lastPage = Number(req.url.searchParams.get('lastPage'));
-    if (lastPage >= 2) {
-      return res(ctx.status(200), ctx.json(getResonseWithData(userList)));
-    }
-    return res(ctx.status(200), ctx.json(getResonseWithData(userList)));
+    const lastPage = req.url.searchParams.get('lastPage');
+    const newUserList = userList.map((user) => ({ ...user, id: Number(user.id + lastPage) }));
+    return res(ctx.status(200), ctx.delay(2000), ctx.json(getResonseWithData(newUserList)));
   }),
   // GET_USER_LIKES
   rest.get(ROOT_URL + API.USER.LIKES, (req, res, ctx) => {
