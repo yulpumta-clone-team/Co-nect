@@ -10,7 +10,6 @@ import * as S from './style';
 
 export default function UserBoard() {
   const [loadMoreRef, page] = useIntersect();
-  console.log('page :>> ', page);
   const [loading, setLoading] = useState();
   const [userList, setUserList] = useState([]);
   const fetchData = async (lastPage) => {
@@ -33,7 +32,9 @@ export default function UserBoard() {
     <>
       <S.BoardWrapper>
         <Cards cards={userList} CardComponent={UserCard} clickLink={`${USER}/`} />
-        <div ref={loadMoreRef}>{loading && <div>Loading...</div>}</div>
+        <div ref={loadMoreRef} style={{ display: loading ? 'none' : 'block' }}>
+          {loading && <div>Loading...</div>}
+        </div>
       </S.BoardWrapper>
       <UpperButton />
     </>

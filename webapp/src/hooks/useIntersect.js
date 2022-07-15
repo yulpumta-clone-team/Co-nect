@@ -11,9 +11,7 @@ function useIntersect(customOption) {
 
   const handleObsever = useCallback(async ([entry], observer) => {
     if (entry.isIntersecting) {
-      // observer.unobserve(entry.target);
       setPage((prev) => prev + 1);
-      // observer.observe(entry.target);
     }
   }, []);
 
