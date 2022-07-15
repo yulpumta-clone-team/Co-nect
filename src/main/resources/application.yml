@@ -10,11 +10,6 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: ${MP_DB_USERNAME}
     password: ${MP_DB_PASSWORD}
-  #  datasource:
-#    url: jdbc:h2:tcp://localhost/~/datajpa
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: none
