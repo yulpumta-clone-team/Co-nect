@@ -10,7 +10,7 @@ const USER = [
   rest.get(ROOT_URL + API.USER.LIST, (req, res, ctx) => {
     const lastPage = req.url.searchParams.get('lastPage');
     const newUserList = userList.map((user) => ({ ...user, id: Number(user.id + lastPage) }));
-    return res(ctx.status(200), ctx.json(getResonseWithData(newUserList)));
+    return res(ctx.status(200), ctx.delay(2000), ctx.json(getResonseWithData(newUserList)));
   }),
   // GET_USER_LIKES
   rest.get(ROOT_URL + API.USER.LIKES, (req, res, ctx) => {
