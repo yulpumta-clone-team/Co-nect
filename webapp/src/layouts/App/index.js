@@ -28,6 +28,12 @@ import MyPost from 'pages/MyPost';
 import NotFound from 'pages/NotFound';
 import PublicRoute from 'hoc/PublicRoute';
 import PrivateRoute from 'hoc/PrivateRoute';
+import Nickname from 'pages/SignUp/Nickname';
+import Skill from 'pages/SignUp/Skill';
+import Img from 'pages/SignUp/Img';
+import SessionJob from 'pages/SignUp/SessionJob';
+import SloganPortfolio from 'pages/SignUp/SloganPortfolio';
+import Content from 'pages/SignUp/Content';
 import AppLayout from './style';
 
 function App() {
@@ -47,7 +53,7 @@ function App() {
           />
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
           <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
-          <Route path={SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
+          <Route path="/signup/*" element={<PublicRoute Component={SignUp} restricted />} />
           <Route path={MY_LIST} element={<PrivateRoute Component={MyList} />} />
           <Route path={NEW_POST} element={<PrivateRoute Component={NewPost} />} />
           <Route path={MY_POST} element={<PrivateRoute Component={MyPost} />} />

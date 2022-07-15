@@ -1,22 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SignUp from 'pages/SignUp';
+import useModal from 'hooks/useModal';
+import { Link } from 'react-router-dom';
 
 export default function Modalbutton() {
-  // const [isModalOpen, openModal, closeModal] = useModal(false, true, false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    return setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    return setIsModalOpen(false);
-  };
-
-  return (
-    <>
-      <button onClick={openModal}>Sign up</button>
-      <SignUp isOpen={isModalOpen} close={closeModal} />
-    </>
-  );
+  return <Link to="/signup">button</Link>;
 }

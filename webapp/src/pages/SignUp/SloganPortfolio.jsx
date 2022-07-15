@@ -1,6 +1,9 @@
+import useInput from 'hooks/useInput';
 import React from 'react';
 
-export default function nickname() {
+export default function SloganPortfolio() {
+  const [userSlogan, onSloganChange] = useInput('');
+  const [userPortfolio, onPortfolioChange] = useInput('');
   return (
     <>
       <input name="slogan" onChange={onSloganChange} value={userSlogan} placeholder="slogan" />

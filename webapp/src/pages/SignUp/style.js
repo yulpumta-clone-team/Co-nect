@@ -24,7 +24,7 @@ export const DialogBox = styled.dialog`
 `;
 export const Backdrop = styled.div`
   width: 100vw;
-  height: 150vh;
+  height: 200vh;
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.6);
 `;
