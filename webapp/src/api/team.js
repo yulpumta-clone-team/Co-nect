@@ -2,7 +2,7 @@ import { API } from 'constant/api';
 import instance from './core';
 
 const teamApi = {
-  GET_TEAM_ARR(lastPage) {
+  GET_TEAM_ARR({ lastPage }) {
     return instance({
       url: API.TEAM.LIST,
       method: 'get',

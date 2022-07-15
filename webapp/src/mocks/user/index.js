@@ -9,9 +9,7 @@ const USER = [
   // GET_USER_LIST
   rest.get(ROOT_URL + API.USER.LIST, (req, res, ctx) => {
     const lastPage = Number(req.url.searchParams.get('lastPage'));
-    if (lastPage >= 2) {
-      return res(ctx.status(200), ctx.json(getResonseWithData(userList)));
-    }
+    // console.log('lastPage', lastPage);
     return res(ctx.status(200), ctx.json(getResonseWithData(userList)));
   }),
   // GET_USER_LIKES
