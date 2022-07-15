@@ -38,7 +38,6 @@ public class AuthTokenProvider {
 
 
     private static Key key;
-    @Value("${jwt.secretKey}")
     private String secretKey;
 
     // 토큰 유효시간 30분
@@ -47,7 +46,8 @@ public class AuthTokenProvider {
 
 
     @Autowired
-    public AuthTokenProvider(){
+    public AuthTokenProvider(@Value("${jwt.secretKey}") String value){
+        this.secretKey = value;
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         this.tokenValidTime = 30 * 60 * 1000L;
     }

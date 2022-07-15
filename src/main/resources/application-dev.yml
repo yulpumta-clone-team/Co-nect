@@ -32,3 +32,6 @@ spring:
 #포트 변수
 env:
   port: 3000
+
+jwt:
+  secretKey: ${JWT_SECRET_KEY}
