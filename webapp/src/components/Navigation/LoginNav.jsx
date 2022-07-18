@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { HOME, MY_POST, NEW_POST, PROFILE, TEAM, MY_LIST, USER } from 'constant/route';
 import useDropdown from 'hooks/useDropdown';
-import { Ul } from './style';
 import UserInfoDropdown from './UserInfoDropdown';
+import * as S from './style';
 
 LoginNav.propTypes = {
   userInfo: PropTypes.shape({
@@ -19,7 +19,7 @@ export default function LoginNav({ userInfo }) {
   const { name, profileImg } = userInfo;
 
   return (
-    <Ul ref={parent}>
+    <S.LinkList ref={parent}>
       <li>
         <Link to={HOME}>Main</Link>
       </li>
@@ -41,6 +41,6 @@ export default function LoginNav({ userInfo }) {
         shouldCloseDropdown={shouldCloseDropdown}
         closeDropdown={closeDropdown}
       />
-    </Ul>
+    </S.LinkList>
   );
 }

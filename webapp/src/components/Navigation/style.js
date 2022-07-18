@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const NavWrapper = styled.nav`
+export const Container = styled.nav`
   width: 100%;
   height: 80px;
   background-color: wheat;
 `;
 
-export const Ul = styled.ul`
+export const LinkList = styled.ul`
   position: relative;
   display: flex;
   flex-direction: ${(props) => (props.IsflexDirectionColumn ? 'column' : 'row')};
@@ -16,4 +16,7 @@ export const Ul = styled.ul`
   align-items: center;
 `;
 
-export const Li = styled.li``;
+export const Link = styled.li`
+  cursor: pointer;
+  text-decoration: underline;
+`;
