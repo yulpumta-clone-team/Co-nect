@@ -30,6 +30,7 @@ export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, 
       isDropdownOpen={isDropdownOpen}
       shouldCloseDropdown={shouldCloseDropdown}
       closeDropdown={closeDropdown}
+      customStyle={S.UserInfoDropdown}
     >
       <ul>
         <S.Link onClick={() => onClickLinkLi(MY_POST)}>내 작성글</S.Link>

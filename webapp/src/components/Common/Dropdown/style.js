@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -7,9 +7,13 @@ export const Container = styled.div`
   gap: 1px;
 
   position: absolute;
-  top: 66px;
   border-radius: 16px;
   border: 1px solid #d9dbe9;
+  ${({ customStyle }) =>
+    customStyle &&
+    css`
+      ${customStyle};
+    `}
 `;
 
 export const Layout = styled.div`
@@ -23,6 +27,11 @@ export const Layout = styled.div`
 
   background-color: #fefefe;
   border: 1px solid #d9dbe9;
+  ${({ customStyle }) =>
+    customStyle &&
+    css`
+      ${customStyle};
+    `}
 `;
 
 export const CloseButton = styled.button`
@@ -34,4 +43,9 @@ export const CloseButton = styled.button`
   z-index: 512;
   font-size: 12px;
   cursor: pointer;
+  ${({ customStyle }) =>
+    customStyle &&
+    css`
+      ${customStyle};
+    `}
 `;

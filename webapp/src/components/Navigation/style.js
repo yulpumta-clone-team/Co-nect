@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.nav`
   width: 100%;
@@ -20,3 +20,13 @@ export const Link = styled.li`
   cursor: pointer;
   text-decoration: underline;
 `;
+
+export const UserInfoDropdown = {
+  containerStyle: css`
+    position: absolute;
+    top: 64px;
+    right: -10px;
+  `,
+  layoutStyle: css``,
+  buttonStyle: css``,
+};
