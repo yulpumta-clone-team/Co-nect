@@ -15,7 +15,7 @@ UserInfoDropdown.propTypes = {
 
 export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, closeDropdown }) {
   const navigate = useNavigate();
-  const triggerLogOut = () => {
+  const onClickLogout = () => {
     deleteUserInfo();
     navigate('/');
     window.location.reload();
@@ -36,7 +36,7 @@ export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, 
         <S.Link onClick={() => onClickLinkLi(MY_POST)}>내 작성글</S.Link>
         <S.Link onClick={() => onClickLinkLi(MY_LIST)}>내 관심글</S.Link>
         <S.Link onClick={() => onClickLinkLi(PROFILE)}>프로필 설정</S.Link>
-        <S.Link onClick={triggerLogOut}>로그아웃</S.Link>
+        <S.Link onClick={onClickLogout}>로그아웃</S.Link>
       </ul>
     </Dropdown>
   );
