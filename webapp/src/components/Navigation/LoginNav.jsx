@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { HOME, MY_POST, NEW_POST, PROFILE, TEAM, MY_LIST, USER } from 'constant/route';
+import { HOME, NEW_POST, TEAM, USER } from 'constant/route';
 import useDropdown from 'hooks/useDropdown';
 import UserInfoDropdown from './UserInfoDropdown';
 import * as S from './style';

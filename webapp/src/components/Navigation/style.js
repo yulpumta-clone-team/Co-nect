@@ -28,5 +28,4 @@ export const UserInfoDropdown = {
     right: -10px;
   `,
   contentStyle: css``,
-  buttonStyle: css``,
 };

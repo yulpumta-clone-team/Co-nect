@@ -26,7 +26,6 @@ export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, 
   };
   return (
     <Dropdown
-      style={{ right: 0, top: 80 }}
       isDropdownOpen={isDropdownOpen}
       shouldCloseDropdown={shouldCloseDropdown}
       closeDropdown={closeDropdown}
