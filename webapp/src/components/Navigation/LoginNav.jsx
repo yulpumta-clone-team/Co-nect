@@ -19,7 +19,7 @@ export default function LoginNav({ userInfo }) {
   const { name, profileImg } = userInfo;
 
   return (
-    <S.LinkList ref={parent}>
+    <S.LinkList>
       <li>
         <Link to={HOME}>Main</Link>
       </li>
@@ -32,7 +32,7 @@ export default function LoginNav({ userInfo }) {
       <li>
         <Link to={NEW_POST}>New Post</Link>
       </li>
-      <li onClick={openDropdown}>
+      <li ref={parent} onClick={openDropdown}>
         <img style={{ width: '30px' }} src={profileImg} alt="profile" />
         <span>{name}</span>
       </li>

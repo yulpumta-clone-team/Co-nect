@@ -6,7 +6,6 @@ const useDropdown = (initialMode = false) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(initialMode);
 
   const shouldCloseDropdown = (event) => {
-    // console.log('event', event.composedPath());
     const isParentExistInComposedPath = event.composedPath().includes(parent.current);
     if (isParentExistInComposedPath) return;
     closeDropdown();
