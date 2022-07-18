@@ -22,11 +22,11 @@ export const Link = styled.li`
 `;
 
 export const UserInfoDropdown = {
-  containerStyle: css`
+  overlayStyle: css`
     position: absolute;
     top: 64px;
     right: -10px;
   `,
-  layoutStyle: css``,
+  contentStyle: css``,
   buttonStyle: css``,
 };

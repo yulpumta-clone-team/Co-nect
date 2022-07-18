@@ -7,8 +7,8 @@ Dropdown.propTypes = {
   children: PropTypes.element.isRequired,
   isDropdownOpen: PropTypes.bool.isRequired,
   customStyle: PropTypes.shape({
-    containerStyle: PropTypes.object,
-    layoutStyle: PropTypes.object,
+    overlayStyle: PropTypes.object,
+    contentStyle: PropTypes.object,
     buttonStyle: PropTypes.object,
   }),
 };
@@ -16,10 +16,13 @@ Dropdown.propTypes = {
 export default function Dropdown({ children, isDropdownOpen, customStyle }) {
   if (!isDropdownOpen) return null;
   return (
-    <S.Container customStyle={customStyle?.containerStyle}>
-      <S.Layout onClick={(event) => event.stopPropagation()} customStyle={customStyle?.layoutStyle}>
+    <S.Overlay customStyle={customStyle?.overlayStyle}>
+      <S.Content
+        onClick={(event) => event.stopPropagation()}
+        customStyle={customStyle?.contentStyle}
+      >
         {children}
-      </S.Layout>
-    </S.Container>
+      </S.Content>
+    </S.Overlay>
   );
 }
