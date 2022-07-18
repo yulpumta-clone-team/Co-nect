@@ -17,7 +17,9 @@ export default function Dropdown({ children, isDropdownOpen, customStyle }) {
   if (!isDropdownOpen) return null;
   return (
     <S.Container customStyle={customStyle?.containerStyle}>
-      <S.Layout customStyle={customStyle?.layoutStyle}>{children}</S.Layout>
+      <S.Layout onClick={(event) => event.stopPropagation()} customStyle={customStyle?.layoutStyle}>
+        {children}
+      </S.Layout>
     </S.Container>
   );
 }
