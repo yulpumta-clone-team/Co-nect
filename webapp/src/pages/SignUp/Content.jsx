@@ -1,36 +1,23 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { handleFetcher } from 'utils';
-import authApi from 'api/auth';
+import React from 'react';
 import MarkdownEditor from 'components/MdEditor';
-import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function Content() {
-  const [mdcontent, setMdContent] = useState('');
-  const navigate = useNavigate();
-  const {
-    formState: { errors },
-  } = useForm({
-    defaultValues: {},
-  });
-  const onValid = async (submitData) => {
-    const signUpInfo = {
-      content: mdcontent,
-    };
-    // TODO: input validation 추가해야 함.
-    const { error, isError } = await handleFetcher(authApi.POST_SIGN_UP, signUpInfo);
-    if (isError) {
-      console.log(error);
-      return;
-    }
-    navigate('/login');
-  };
+Content.propTypes = {
+  errors: PropTypes.object.isRequired,
+  mdcontent: PropTypes.object.isRequired,
+  setMdContent: PropTypes.object.isRequired,
+};
+
+export default function Content({ mdcontent, setMdContent, errors }) {
   return (
-    <>
+    <div>
       <div>
-        <MarkdownEditor mdValue={mdcontent} setContent={setMdContent} />
+        <MarkdownEditor mdcontent={mdcontent} setMdContent={setMdContent} />
       </div>
       <span>{errors?.extraError?.message}</span>
-    </>
+      <div>
+        <input type="submit" />
+      </div>
+    </div>
   );
 }

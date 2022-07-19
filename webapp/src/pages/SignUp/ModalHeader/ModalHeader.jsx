@@ -5,27 +5,27 @@ export default function ModalHeader() {
   return (
     <div>
       <ul>
-        <li>
+        <div>
           <NavLink to="/signup">Id / password</NavLink>
-        </li>
-        <li>
+        </div>
+        <div>
           <NavLink to="/signup/nickname">Nickname</NavLink>
-        </li>
-        <li>
+        </div>
+        <div>
           <NavLink to="/signup/skill">Skill</NavLink>
-        </li>
-        <li>
+        </div>
+        <div>
           <NavLink to="/signup/img">Img</NavLink>
-        </li>
-        <li>
+        </div>
+        <div>
           <NavLink to="/signup/session-job">Session / Job</NavLink>
-        </li>
-        <li>
+        </div>
+        <div>
           <NavLink to="/signup/slogan-portfolio">Slogan / Portfolio</NavLink>
-        </li>
-        <li>
+        </div>
+        <div>
           <NavLink to="/signup/content">Content</NavLink>
-        </li>
+        </div>
       </ul>
     </div>
   );

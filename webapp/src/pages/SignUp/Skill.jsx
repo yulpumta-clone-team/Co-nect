@@ -1,15 +1,18 @@
 import React, { useCallback, useState } from 'react';
 import { skillOptions } from 'constant';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function Skill() {
-  const [userSkill, setUserSkill] = useState('');
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const onSkillChange = useCallback((e) => {
-    setUserSkill(e.target.value);
-    setSelectedSkills((prev) => [...prev, e.target.value]);
-  }, []);
+Skill.propTypes = {
+  selectedSkills: PropTypes.object.isRequired,
+  userSkill: PropTypes.object.isRequired,
+  onSkillChange: PropTypes.object.isRequired,
+};
+
+export default function Skill({ selectedSkills, userSkill, onSkillChange }) {
+  const navigate = useNavigate();
   return (
-    <>
+    <div>
       <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
       <select value={userSkill} onChange={onSkillChange}>
         {skillOptions.map(({ id, value, label }) => (
@@ -18,6 +21,9 @@ export default function Skill() {
           </option>
         ))}
       </select>
-    </>
+      <div>
+        <NavLink to="/signup/img">다음</NavLink>
+      </div>
+    </div>
   );
 }
