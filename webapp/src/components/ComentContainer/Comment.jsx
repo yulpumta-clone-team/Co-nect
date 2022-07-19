@@ -1,12 +1,32 @@
-/* eslint-disable react/require-default-props */
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
-import { getUserCookie } from 'utils/cookie';
+import { getUserInfo } from 'service/auth';
 import CommentForm from './CommentForm';
 import * as S from './style';
 
-function Comment({
+Comment.propTypes = {
+  id: PropTypes.number.isRequired,
+  isSecret: PropTypes.bool.isRequired,
+  postType: PropTypes.string.isRequired,
+  postId: PropTypes.number.isRequired,
+  commentInfo: PropTypes.shape({
+    img: PropTypes.string.isRequired,
+    secret: PropTypes.bool.isRequired,
+    writer: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    feeling: PropTypes.array.isRequired,
+    parentId: PropTypes.number,
+  }),
+  editTargetCommentId: PropTypes.number.isRequired,
+  resetTarget: PropTypes.func.isRequired,
+  selectEditTargetComment: PropTypes.func.isRequired,
+  handleSubmitEditComment: PropTypes.func.isRequired,
+  handleClickDeleteButton: PropTypes.func.isRequired,
+  handleClickLikeThumb: PropTypes.func.isRequired,
+};
+
+export default function Comment({
   id,
   isSecret,
   postId,
@@ -14,13 +34,13 @@ function Comment({
   commentInfo,
   editTargetCommentId,
   resetTarget,
-  setEditTargetCommentId,
+  selectEditTargetComment,
   handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
-  const userInfo = getUserCookie(); // {name, img, id}
-  const loggedInUserId = userInfo?.id;
+  const userInfo = getUserInfo(); // {userId, name, profileImg}
+  const loggedInUserId = userInfo?.userId;
   const {
     img,
     secret,
@@ -57,7 +77,7 @@ function Comment({
             {!isTargetEditCommnt && (
               <S.ContentInfo>
                 <span>{content}</span>
-                <button onClick={() => setEditTargetCommentId(id)}>수정</button>
+                <button onClick={() => selectEditTargetComment(id)}>수정</button>
               </S.ContentInfo>
             )}
             <S.LikeInfo>
@@ -90,26 +110,3 @@ function Comment({
     </S.CommentBox>
   );
 }
-
-Comment.propTypes = {
-  id: PropTypes.number.isRequired,
-  isSecret: PropTypes.bool.isRequired,
-  postType: PropTypes.string.isRequired,
-  postId: PropTypes.number.isRequired,
-  commentInfo: PropTypes.shape({
-    img: PropTypes.string.isRequired,
-    secret: PropTypes.bool.isRequired,
-    writer: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    feeling: PropTypes.array.isRequired,
-    parentId: PropTypes.number,
-  }),
-  editTargetCommentId: PropTypes.number.isRequired,
-  resetTarget: PropTypes.func.isRequired,
-  setEditTargetCommentId: PropTypes.func.isRequired,
-  handleSubmitEditComment: PropTypes.func.isRequired,
-  handleClickDeleteButton: PropTypes.func.isRequired,
-  handleClickLikeThumb: PropTypes.func.isRequired,
-};
-
-export default memo(Comment);

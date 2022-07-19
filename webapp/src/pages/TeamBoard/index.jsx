@@ -2,29 +2,41 @@ import React, { useEffect, useState } from 'react';
 import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
+import TeamCard from 'components/TeamCard';
+import { TEAM } from 'constant/route';
+import useIntersect from 'hooks/useIntersect';
+import UpperButton from 'components/UpperButton';
 import * as S from './style';
 
-function TeamBoard() {
+export default function TeamBoard() {
+  const [loadMoreRef, page] = useIntersect();
+  const [isLoading, setIsLoading] = useState(false);
   const [teamList, setTeamList] = useState([]);
-  const fetchData = async (page) => {
+  const fetchData = async (lastPage) => {
+    setIsLoading(true);
     try {
-      const { value, error } = await handleFetcher(teamApi.GET_TEAM_ARR, { page });
+      const { value, error } = await handleFetcher(teamApi.GET_TEAM_ARR, { lastPage });
       setTeamList((prev) => [...prev, ...value]);
     } catch (error) {
       console.log(error);
-      setTeamList((prev) => [...prev]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(page);
+  }, [page]);
 
   return (
-    <S.BoardWrapper>
-      <Cards cards={teamList} isUserList={false} />
-    </S.BoardWrapper>
+    <>
+      <S.BoardWrapper>
+        <Cards cards={teamList} CardComponent={TeamCard} clickLink={`${TEAM}/`} />
+        <div ref={loadMoreRef} style={{ display: isLoading ? 'none' : 'block' }}>
+          {isLoading && <div>Loading...</div>}
+        </div>
+      </S.BoardWrapper>
+      <UpperButton />
+    </>
   );
 }
-
-export default TeamBoard;

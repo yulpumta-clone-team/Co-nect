@@ -1,7 +1,8 @@
-import { AUTH } from './auth';
-import { TEAM } from './team';
-import { USER } from './user';
+import AUTH from './auth';
+import COMMENT from './comment';
+import TEAM from './team';
+import USER from './user';
 
-const handlers = [...AUTH, ...USER, ...TEAM];
+const handlers = [...AUTH, ...USER, ...TEAM, ...COMMENT];
 
 export default handlers;

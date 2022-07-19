@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-function NotAllow({ warnMessage }) {
+NotAllow.propTypes = {
+  warnMessage: PropTypes.string.isRequired,
+};
+
+export default function NotAllow({ warnMessage }) {
   const navigate = useNavigate();
   const backToMain = () => {
     navigate('/');
@@ -17,9 +21,3 @@ function NotAllow({ warnMessage }) {
     </div>
   );
 }
-
-NotAllow.propTypes = {
-  warnMessage: PropTypes.string.isRequired,
-};
-
-export default NotAllow;

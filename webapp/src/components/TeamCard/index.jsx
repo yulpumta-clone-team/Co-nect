@@ -1,29 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { TEAM_BOARD } from 'constant/route';
+import { TEAM } from 'constant/route';
 import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
-
-function TeamCard({ cardInfo }) {
-  const { id, name, skills, session, img, read, likeCnt, commentCnt, user } = cardInfo;
-  return (
-    <CardWrapper>
-      <h2>좋아요: {likeCnt}</h2>
-      <Link to={`${TEAM_BOARD}/${id}`}>{name}</Link>
-      <CardTitle>{name}</CardTitle>
-      <ImgContainer>
-        <img src={img} alt="임시" />
-      </ImgContainer>
-      <SessionContainer>{session}</SessionContainer>
-      <ul>
-        {skills.map((skill, idx) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <li key={idx}>{skill}</li>
-        ))}
-      </ul>
-    </CardWrapper>
-  );
-}
 
 TeamCard.propTypes = {
   cardInfo: PropTypes.shape({
@@ -38,6 +17,24 @@ TeamCard.propTypes = {
     status: PropTypes.bool.isRequired,
     user: PropTypes.object.isRequired,
   }).isRequired,
+  onClick: PropTypes.func,
 };
 
-export default TeamCard;
+export default function TeamCard({ cardInfo, onClick }) {
+  const { id, name, skills, session, img, read, likeCnt, commentCnt, user } = cardInfo;
+  return (
+    <CardWrapper onClick={onClick}>
+      <h1>id: {id}</h1>
+      <h2>좋아요: {likeCnt}</h2>
+      <CardTitle>{name}</CardTitle>
+      <ImgContainer>{/* <img src={img} alt="임시" /> */}</ImgContainer>
+      <SessionContainer>{session}</SessionContainer>
+      <ul>
+        {skills.map((skill, idx) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <li key={idx}>{skill}</li>
+        ))}
+      </ul>
+    </CardWrapper>
+  );
+}

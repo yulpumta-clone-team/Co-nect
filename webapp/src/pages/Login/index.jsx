@@ -6,7 +6,7 @@ import { handleFetcher } from 'utils';
 import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth';
 
-function Login() {
+export default function Login() {
   const navigate = useNavigate();
   const {
     register,
@@ -64,5 +64,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

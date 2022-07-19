@@ -7,9 +7,10 @@ import {
   NEW_POST,
   PROFILE,
   SIGN_UP,
-  TEAM_BOARD,
+  TEAM,
   MY_LIST,
-  USER_BOARD,
+  USER,
+  TEAM_EDIT,
 } from 'constant/route';
 import Login from 'pages/Login';
 import Main from 'pages/Main';
@@ -43,14 +44,8 @@ function App() {
         <Navigation />
         <Routes>
           <Route path={HOME} element={<PublicRoute Component={Main} restricted={false} />} />
-          <Route
-            path={USER_BOARD}
-            element={<PublicRoute Component={UserBoard} restricted={false} />}
-          />
-          <Route
-            path={TEAM_BOARD}
-            element={<PublicRoute Component={TeamBoard} restricted={false} />}
-          />
+          <Route path={USER} element={<PublicRoute Component={UserBoard} restricted={false} />} />
+          <Route path={TEAM} element={<PublicRoute Component={TeamBoard} restricted={false} />} />
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
           <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
           <Route path="/signup/*" element={<PublicRoute Component={SignUp} restricted />} />
@@ -58,15 +53,15 @@ function App() {
           <Route path={NEW_POST} element={<PrivateRoute Component={NewPost} />} />
           <Route path={MY_POST} element={<PrivateRoute Component={MyPost} />} />
           <Route
-            path={`${USER_BOARD}/:userId`}
+            path={`${USER}/:userId`}
             element={<PublicRoute Component={UserPost} restricted={false} />}
           />
           <Route
-            path={`${TEAM_BOARD}/:teamId`}
+            path={`${TEAM}/:teamId`}
             element={<PublicRoute Component={TeamPost} restricted={false} />}
           />
           <Route
-            path={`${TEAM_BOARD}/:teamId/edit`}
+            path={`${TEAM_EDIT}/:teamId`}
             element={<PrivateRoute Component={EditTeamProfile} />}
           />
           <Route path="/callback" element={<Callback />} />

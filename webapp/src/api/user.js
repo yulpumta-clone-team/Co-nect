@@ -2,7 +2,7 @@ import { API } from 'constant/api';
 import instance from './core';
 
 const userApi = {
-  GET_USER_LIST(lastPage) {
+  GET_USER_LIST({ lastPage }) {
     return instance({
       url: API.USER.LIST,
       method: 'get',
@@ -24,6 +24,12 @@ const userApi = {
   GET_USER_READS() {
     return instance({
       url: API.USER.READS,
+      method: 'get',
+    });
+  },
+  GET_MY_POSTS() {
+    return instance({
+      url: API.USER.MYPOSTS,
       method: 'get',
     });
   },

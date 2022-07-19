@@ -1,35 +1,37 @@
 import { API, ROOT_URL } from 'constant/api';
 import { rest } from 'msw';
-import userComments from './userComments';
-import usersList from './usersList';
-import userDetail from './userDetail';
+import { getResonseWithData } from 'mocks/mockUtils';
+import { userList } from './usersList';
+import { myPosts } from './myPosts';
+import { userDetail } from './userDetail';
 
-export const emptyUsers = {
-  status: '200',
-  isSuccess: true,
-  code: 1000,
-  message: '요청 성공',
-  data: [],
-};
-
-export const USER = [
+const USER = [
+  // GET_USER_LIST
   rest.get(ROOT_URL + API.USER.LIST, (req, res, ctx) => {
-    const lastPage = Number(req.url.searchParams.get('lastPage'));
-    if (lastPage >= 2) {
-      return res(ctx.status(200), ctx.json(emptyUsers));
-    }
-    return res(ctx.status(200), ctx.json(usersList));
+    const lastPage = req.url.searchParams.get('lastPage');
+    const newUserList = userList.map((user) => ({ ...user, id: Number(user.id + lastPage) }));
+    return res(ctx.status(200), ctx.delay(2000), ctx.json(getResonseWithData(newUserList)));
   }),
+  // GET_USER_LIKES
   rest.get(ROOT_URL + API.USER.LIKES, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(usersList));
+    return res(ctx.status(200), ctx.json(getResonseWithData(userList)));
   }),
+  // GET_USER_READS
   rest.get(ROOT_URL + API.USER.READS, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(usersList));
+    return res(ctx.status(200), ctx.json(getResonseWithData(userList)));
   }),
+  // GET_MY_POSTS
+  rest.get(ROOT_URL + API.USER.MYPOSTS, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getResonseWithData(myPosts)));
+  }),
+  // GET_USER_DETAIL
   rest.get(`${ROOT_URL + API.USER.DETAIL}/:id`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(userDetail));
+    return res(ctx.status(200), ctx.json(getResonseWithData(userDetail)));
   }),
-  rest.get(`${ROOT_URL + API.USER.DETAIL + API.COMMENT}/:id`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(userComments));
+  // EDIT_USER_PROFILE
+  rest.patch(`${ROOT_URL + API.USER.DETAIL}/:id`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getResonseWithData(userDetail)));
   }),
 ];
+
+export default USER;
