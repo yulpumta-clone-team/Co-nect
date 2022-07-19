@@ -4,38 +4,23 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 SloganPortfolio.propTypes = {
-  register: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
+  userPortfolio: PropTypes.string.isRequired,
+  onPortfolioChange: PropTypes.func.isRequired,
+  userSlogan: PropTypes.string.isRequired,
+  onSloganChange: PropTypes.func.isRequired,
 };
 
-export default function SloganPortfolio({ register }) {
+export default function SloganPortfolio({
+  userPortfolio,
+  onPortfolioChange,
+  userSlogan,
+  onSloganChange,
+}) {
   const navigate = useNavigate();
-  const [userSlogan, onSloganChange] = useInput('');
-  const [userPortfolio, onPortfolioChange] = useInput('');
   return (
     <div>
-      <input
-        {...register('slogan', {
-          required: 'Slogan is required',
-          pattern: {
-            value: { userSlogan },
-            message: '슬로건을 입력해주세요.',
-          },
-        })}
-        onChange={onSloganChange}
-        placeholder="slogan"
-      />
-      <input
-        {...register('portfolio', {
-          required: 'Portfolio is required',
-          pattern: {
-            value: { userPortfolio },
-            message: '포트폴리오를 입력해주세요.',
-          },
-        })}
-        onChange={onPortfolioChange}
-        placeholder="포트폴리오"
-      />
+      <input value={userSlogan} onChange={onSloganChange} placeholder="slogan" />
+      <input value={userPortfolio} onChange={onPortfolioChange} placeholder="포트폴리오" />
       <div>
         <NavLink to="/signup/content">다음</NavLink>
       </div>

@@ -5,14 +5,14 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 SessionJob.propTypes = {
-  register: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
+  hopeSession: PropTypes.string.isRequired,
+  onHopeSessionChange: PropTypes.func.isRequired,
+  userJob: PropTypes.string.isRequired,
+  onJobChange: PropTypes.func.isRequired,
 };
 
-export default function SessionJob({ register }) {
+export default function SessionJob({ hopeSession, onHopeSessionChange, userJob, onJobChange }) {
   const navigate = useNavigate();
-  const [hopeSession, onHopeSessionChange] = useInput('무관');
-  const [userJob, onJobChange] = useInput('');
   return (
     <div>
       <span>희망 작업 기간</span>

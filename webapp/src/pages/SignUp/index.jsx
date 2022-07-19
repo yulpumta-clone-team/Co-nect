@@ -31,6 +31,10 @@ export default function SignUp() {
   }, []);
   const [userImg, onImgChange] = useInput('');
   const [mdcontent, setMdContent] = useState('');
+  const [hopeSession, onHopeSessionChange] = useInput('무관');
+  const [userJob, onJobChange] = useInput('');
+  const [userSlogan, onSloganChange] = useInput('');
+  const [userPortfolio, onPortfolioChange] = useInput('');
 
   const onValid = async (submitData) => {
     const { email, nickname, password, verifiedPassword } = submitData;
@@ -81,23 +85,32 @@ export default function SignUp() {
                   />
                 }
               />
-              <Route
-                path="img"
-                element={<Img userImg={userImg} onImgChange={onImgChange} errors={errors} />}
-              />
+              <Route path="img" element={<Img userImg={userImg} onImgChange={onImgChange} />} />
               <Route
                 path="session-job"
-                element={<SessionJob register={register} errors={errors} />}
+                element={
+                  <SessionJob
+                    hopeSession={hopeSession}
+                    onHopeSessionChange={onHopeSessionChange}
+                    userJob={userJob}
+                    onJobChange={onJobChange}
+                  />
+                }
               />
               <Route
                 path="slogan-portfolio"
-                element={<SloganPortfolio register={register} errors={errors} />}
+                element={
+                  <SloganPortfolio
+                    userPortfolio={userPortfolio}
+                    onPortfolioChange={onPortfolioChange}
+                    userSlogan={userSlogan}
+                    onSloganChange={onSloganChange}
+                  />
+                }
               />
               <Route
                 path="content"
-                element={
-                  <Content mdcontent={mdcontent} setMdContent={setMdContent} errors={errors} />
-                }
+                element={<Content mdcontent={mdcontent} setMdContent={setMdContent} />}
               />
             </Routes>
           </form>
