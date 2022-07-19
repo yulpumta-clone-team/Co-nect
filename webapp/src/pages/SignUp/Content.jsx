@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 
 Content.propTypes = {
   errors: PropTypes.object.isRequired,
-  mdcontent: PropTypes.object.isRequired,
-  setMdContent: PropTypes.object.isRequired,
+  mdcontent: PropTypes.string.isRequired,
+  setMdContent: PropTypes.func.isRequired,
 };
 
 export default function Content({ mdcontent, setMdContent, errors }) {
   return (
     <div>
       <div>
-        <MarkdownEditor mdcontent={mdcontent} setMdContent={setMdContent} />
+        <MarkdownEditor mdValue={mdcontent} setContent={setMdContent} />
       </div>
       <span>{errors?.extraError?.message}</span>
       <div>

@@ -4,23 +4,16 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 Img.propTypes = {
-  register: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
+  userImg: PropTypes.string.isRequired,
+  onImgChange: PropTypes.func.isRequired,
 };
 
-export default function Img({ register, errors }) {
+export default function Img({ userImg, onImgChange }) {
   const navigate = useNavigate();
-  const [userImg, onImgChange] = useInput('');
   return (
     <div>
       <input
-        {...register('img', {
-          required: 'Img is required',
-          pattern: {
-            value: { userImg },
-            message: '사진을 넣어주세요.',
-          },
-        })}
+        value={userImg}
         name="profile-image"
         onChange={onImgChange}
         placeholder="임시 프로필 이미지 문자열로 입력"

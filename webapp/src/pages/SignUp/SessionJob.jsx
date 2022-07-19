@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 SessionJob.propTypes = {
-  register: PropTypes.object.isRequired,
+  register: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
 };
 
@@ -23,17 +23,7 @@ export default function SessionJob({ register }) {
           </option>
         ))}
       </select>
-      <input
-        {...register('job', {
-          required: 'Job is required',
-          pattern: {
-            value: { userJob },
-            message: '직업을 입력해주세요.',
-          },
-        })}
-        onChange={onJobChange}
-        placeholder="직업"
-      />
+      <input value={userJob} onChange={onJobChange} placeholder="직업" />
       <div>
         <NavLink to="/signup/slogan-portfolio">다음</NavLink>
       </div>

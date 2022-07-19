@@ -4,9 +4,9 @@ import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 Skill.propTypes = {
-  selectedSkills: PropTypes.object.isRequired,
-  userSkill: PropTypes.object.isRequired,
-  onSkillChange: PropTypes.object.isRequired,
+  selectedSkills: PropTypes.array.isRequired,
+  userSkill: PropTypes.string.isRequired,
+  onSkillChange: PropTypes.func.isRequired,
 };
 
 export default function Skill({ selectedSkills, userSkill, onSkillChange }) {

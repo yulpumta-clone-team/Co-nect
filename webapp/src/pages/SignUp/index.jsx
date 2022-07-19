@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { handleFetcher } from 'utils';
 import authApi from 'api/auth';
+import useInput from 'hooks/useInput';
 import IdPassword from './IdPassword';
 import Nickname from './Nickname';
 import Skill from './Skill';
@@ -28,21 +29,11 @@ export default function SignUp() {
     setUserSkill(e.target.value);
     setSelectedSkills((prev) => [...prev, e.target.value]);
   }, []);
+  const [userImg, onImgChange] = useInput('');
   const [mdcontent, setMdContent] = useState('');
 
   const onValid = async (submitData) => {
-    const {
-      email,
-      nickname,
-      password,
-      verifiedPassword,
-      hopeSession,
-      userImg,
-      userJob,
-      userPortfolio,
-      selectedSkills,
-      userSlogan,
-    } = submitData;
+    const { email, nickname, password, verifiedPassword } = submitData;
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
@@ -84,18 +75,24 @@ export default function SignUp() {
                 path="skill"
                 element={
                   <Skill
-                    value={userSkill}
-                    onChange={onSkillChange}
+                    userSkill={userSkill}
+                    onSkillChange={onSkillChange}
                     selectedSkills={selectedSkills}
                   />
                 }
               />
-              <Route path="img" element={<Img register={register} errors={errors} />} />
+              <Route
+                path="img"
+                element={<Img userImg={userImg} onImgChange={onImgChange} errors={errors} />}
+              />
               <Route
                 path="session-job"
                 element={<SessionJob register={register} errors={errors} />}
               />
-              <Route path="slogan-portfolio" element={<SloganPortfolio register={register} />} />
+              <Route
+                path="slogan-portfolio"
+                element={<SloganPortfolio register={register} errors={errors} />}
+              />
               <Route
                 path="content"
                 element={

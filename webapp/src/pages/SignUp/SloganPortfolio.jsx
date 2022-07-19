@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 SloganPortfolio.propTypes = {
-  register: PropTypes.object.isRequired,
+  register: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
 };
 
