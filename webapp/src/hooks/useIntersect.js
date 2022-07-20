@@ -9,6 +9,10 @@ function useIntersect(customOption) {
   const [page, setPage] = useState(0);
   const loadMoreRef = useRef(null);
 
+  const resetPage = () => {
+    setPage((prev) => 0);
+  };
+
   const handleObsever = useCallback(async ([entry]) => {
     if (entry.isIntersecting) {
       setPage((prev) => prev + 1);
@@ -23,7 +27,7 @@ function useIntersect(customOption) {
     }
     return () => observer.current && observer.disconnect();
   }, [customOption, handleObsever, loadMoreRef]);
-  return [loadMoreRef, page];
+  return [loadMoreRef, page, resetPage];
 }
 
 export default useIntersect;
