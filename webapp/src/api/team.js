@@ -2,11 +2,11 @@ import { API } from 'constant/api';
 import instance from './core';
 
 const teamApi = {
-  GET_TEAM_ARR({ lastPage }) {
+  GET_TEAM_ARR(config) {
     return instance({
       url: API.TEAM.LIST,
       method: 'get',
-      params: { lastPage },
+      ...config,
     });
   },
   GET_TEAM_DETAIL({ id }) {

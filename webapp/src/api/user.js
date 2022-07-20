@@ -2,11 +2,12 @@ import { API } from 'constant/api';
 import instance from './core';
 
 const userApi = {
-  GET_USER_LIST({ lastPage }) {
+  GET_USER_LIST(config) {
+    console.log('config', config);
     return instance({
       url: API.USER.LIST,
       method: 'get',
-      params: { lastPage },
+      ...config,
     });
   },
   GET_USER_DETAIL({ id }) {
