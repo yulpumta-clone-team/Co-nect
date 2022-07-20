@@ -1,30 +1,31 @@
+import { SIGN_UP_INFO, SIGN_UP } from 'constant/route';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function ModalHeader() {
   return (
     <div>
       <ul>
         <div>
-          <NavLink to="/signup">Id / password</NavLink>
+          <Link to={SIGN_UP}>Id / password</Link>
         </div>
         <div>
-          <NavLink to="/signup/nickname">Nickname</NavLink>
+          <Link to={SIGN_UP + SIGN_UP_INFO.NICKNAME}>Nickname</Link>
         </div>
         <div>
-          <NavLink to="/signup/skill">Skill</NavLink>
+          <Link to={SIGN_UP + SIGN_UP_INFO.SKILL}>Skill</Link>
         </div>
         <div>
-          <NavLink to="/signup/img">Img</NavLink>
+          <Link to={SIGN_UP + SIGN_UP_INFO.IMG}>Img</Link>
         </div>
         <div>
-          <NavLink to="/signup/session-job">Session / Job</NavLink>
+          <Link to={SIGN_UP + SIGN_UP_INFO.SESSION_JOB}>Session / Job</Link>
         </div>
         <div>
-          <NavLink to="/signup/slogan-portfolio">Slogan / Portfolio</NavLink>
+          <Link to={SIGN_UP + SIGN_UP_INFO.SLOGAN_PORTFOLIO}>Slogan / Portfolio</Link>
         </div>
         <div>
-          <NavLink to="/signup/content">Content</NavLink>
+          <Link to={SIGN_UP + SIGN_UP_INFO.CONTENT}>Content</Link>
         </div>
       </ul>
     </div>

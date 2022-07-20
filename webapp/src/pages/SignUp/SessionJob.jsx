@@ -1,8 +1,9 @@
 import useInput from 'hooks/useInput';
 import React from 'react';
 import { hopeSessionOption } from 'constant';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { SIGN_UP, SIGN_UP_INFO } from 'constant/route';
 
 SessionJob.propTypes = {
   hopeSession: PropTypes.string.isRequired,
@@ -25,7 +26,7 @@ export default function SessionJob({ hopeSession, onHopeSessionChange, userJob, 
       </select>
       <input value={userJob} onChange={onJobChange} placeholder="직업" />
       <div>
-        <NavLink to="/signup/slogan-portfolio">다음</NavLink>
+        <Link to={SIGN_UP + SIGN_UP_INFO.SLOGAN_PORTFOLIO}>다음</Link>
       </div>
     </div>
   );

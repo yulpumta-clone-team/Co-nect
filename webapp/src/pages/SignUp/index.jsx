@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Router, Routes, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { handleFetcher } from 'utils';
 import authApi from 'api/auth';
 import useInput from 'hooks/useInput';
+import { SIGN_UP, SIGN_UP_INFO } from 'constant/route';
 import IdPassword from './IdPassword';
 import Nickname from './Nickname';
 import Skill from './Skill';
@@ -74,9 +75,12 @@ export default function SignUp() {
             <ModalHeader />
             <Routes>
               <Route path="" element={<IdPassword register={register} errors={errors} />} />
-              <Route path="nickname" element={<Nickname register={register} errors={errors} />} />
               <Route
-                path="skill"
+                path={SIGN_UP_INFO.NICKNAME}
+                element={<Nickname register={register} errors={errors} />}
+              />
+              <Route
+                path={SIGN_UP_INFO.SKILL}
                 element={
                   <Skill
                     userSkill={userSkill}
@@ -85,9 +89,12 @@ export default function SignUp() {
                   />
                 }
               />
-              <Route path="img" element={<Img userImg={userImg} onImgChange={onImgChange} />} />
               <Route
-                path="session-job"
+                path={SIGN_UP_INFO.IMG}
+                element={<Img userImg={userImg} onImgChange={onImgChange} />}
+              />
+              <Route
+                path={SIGN_UP_INFO.SESSION_JOB}
                 element={
                   <SessionJob
                     hopeSession={hopeSession}
@@ -98,7 +105,7 @@ export default function SignUp() {
                 }
               />
               <Route
-                path="slogan-portfolio"
+                path={SIGN_UP_INFO.SLOGAN_PORTFOLIO}
                 element={
                   <SloganPortfolio
                     userPortfolio={userPortfolio}
@@ -109,7 +116,7 @@ export default function SignUp() {
                 }
               />
               <Route
-                path="content"
+                path={SIGN_UP_INFO.CONTENT}
                 element={<Content mdcontent={mdcontent} setMdContent={setMdContent} />}
               />
             </Routes>

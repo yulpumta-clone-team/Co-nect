@@ -1,6 +1,7 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { SIGN_UP, SIGN_UP_INFO } from 'constant/route';
 
 IdPassword.propTypes = {
   register: PropTypes.func.isRequired,
@@ -43,7 +44,7 @@ export default function IdPassword({ register, errors }) {
       />
       <span>{errors?.verifiedPassword?.message}</span>
       <div>
-        <NavLink to="/signup/nickname">다음</NavLink>
+        <Link to={SIGN_UP + SIGN_UP_INFO.NICKNAME}>다음</Link>
       </div>
     </div>
   );

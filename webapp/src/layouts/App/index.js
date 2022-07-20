@@ -11,6 +11,7 @@ import {
   MY_LIST,
   USER,
   TEAM_EDIT,
+  NOTFOUND,
 } from 'constant/route';
 import Login from 'pages/Login';
 import Main from 'pages/Main';
@@ -48,7 +49,10 @@ function App() {
           <Route path={TEAM} element={<PublicRoute Component={TeamBoard} restricted={false} />} />
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
           <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
-          <Route path="/signup/*" element={<PublicRoute Component={SignUp} restricted />} />
+          <Route
+            path={SIGN_UP + NOTFOUND}
+            element={<PublicRoute Component={SignUp} restricted />}
+          />
           <Route path={MY_LIST} element={<PrivateRoute Component={MyList} />} />
           <Route path={NEW_POST} element={<PrivateRoute Component={NewPost} />} />
           <Route path={MY_POST} element={<PrivateRoute Component={MyPost} />} />
@@ -65,7 +69,7 @@ function App() {
             element={<PrivateRoute Component={EditTeamProfile} />}
           />
           <Route path="/callback" element={<Callback />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path={NOTFOUND} element={<NotFound />} />
         </Routes>
       </AppLayout>
     </Router>
