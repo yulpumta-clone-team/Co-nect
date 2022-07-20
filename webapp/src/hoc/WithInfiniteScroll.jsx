@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import useIntersect from 'hooks/useIntersect';
 import CardsGrid from 'components/CardsGrid';
@@ -17,6 +17,7 @@ export default function WithInfiniteScroll({
   axiosInstance,
   clickLink,
 }) {
+  const controllerRef = useRef(new AbortController());
   const [loadMoreRef, page, resetPage] = useIntersect();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ isError: false, msg: '' });
@@ -35,13 +36,13 @@ export default function WithInfiniteScroll({
     resetPage();
   };
 
-  const fetchData = async (lastPage) => {
+  const fetchData = async (lastPage, signal) => {
     setIsLoading(true);
     try {
       const {
         status,
         data: { data },
-      } = await axiosInstance({ lastPage });
+      } = await axiosInstance({ params: { lastPage }, signal });
       setCardList((prev) => [...prev, ...data]);
     } catch (error) {
       console.error(error);
@@ -55,7 +56,10 @@ export default function WithInfiniteScroll({
   };
 
   useEffect(() => {
-    fetchData(page);
+    const controller = controllerRef.current;
+    const { signal } = controller;
+    fetchData(page, signal);
+    return () => controller.abort();
   }, [page]);
 
   return (
