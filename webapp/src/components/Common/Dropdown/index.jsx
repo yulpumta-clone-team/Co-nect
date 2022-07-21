@@ -7,9 +7,8 @@ Dropdown.propTypes = {
   children: PropTypes.element.isRequired,
   isDropdownOpen: PropTypes.bool.isRequired,
   customStyle: PropTypes.shape({
-    overlayStyle: PropTypes.object,
-    contentStyle: PropTypes.object,
-    buttonStyle: PropTypes.object,
+    overlayStyle: PropTypes.array,
+    contentStyle: PropTypes.array,
   }),
 };
 

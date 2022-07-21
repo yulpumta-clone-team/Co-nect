@@ -1,42 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { handleFetcher } from 'utils';
-import Cards from 'components/CardsGrid';
+import React from 'react';
 import teamApi from 'api/team';
 import TeamCard from 'components/TeamCard';
 import { TEAM } from 'constant/route';
-import useIntersect from 'hooks/useIntersect';
-import UpperButton from 'components/UpperButton';
+import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
 import * as S from './style';
 
 export default function TeamBoard() {
-  const [loadMoreRef, page] = useIntersect();
-  const [isLoading, setIsLoading] = useState(false);
-  const [teamList, setTeamList] = useState([]);
-  const fetchData = async (lastPage) => {
-    setIsLoading(true);
-    try {
-      const { value, error } = await handleFetcher(teamApi.GET_TEAM_ARR, { lastPage });
-      setTeamList((prev) => [...prev, ...value]);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData(page);
-  }, [page]);
-
   return (
-    <>
-      <S.BoardWrapper>
-        <Cards cards={teamList} CardComponent={TeamCard} clickLink={`${TEAM}/`} />
-        <div ref={loadMoreRef} style={{ display: isLoading ? 'none' : 'block' }}>
-          {isLoading && <div>Loading...</div>}
-        </div>
-      </S.BoardWrapper>
-      <UpperButton />
-    </>
+    <S.BoardWrapper>
+      <WithInfiniteScroll
+        CardComponent={TeamCard}
+        axiosInstance={teamApi.GET_TEAM_ARR}
+        clickLink={`${TEAM}/`}
+      />
+    </S.BoardWrapper>
   );
 }

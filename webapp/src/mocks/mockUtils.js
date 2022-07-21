@@ -10,3 +10,5 @@ export const getResonseWithData = (data) => ({
   ...successResponseWithEmptyData,
   data,
 });
+
+export const getRandomStatusErrorCode = () => (Math.random() > 0.6 ? 200 : 500);
