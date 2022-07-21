@@ -16,13 +16,13 @@ const useAxios = (axiosInstance, config) => {
     setIsLoading(false);
   };
 
-  const fetch = async () => {
+  const fetchData = async (signal) => {
     setIsLoading(true);
     try {
       const {
         status,
         data: { data },
-      } = await axiosInstance(config);
+      } = await axiosInstance({ ...config, signal });
       setResponseData(data);
     } catch (error) {
       console.error(error);
@@ -36,8 +36,13 @@ const useAxios = (axiosInstance, config) => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
     resetState();
-    fetch();
+    fetchData(signal);
+    return () => {
+      controller.abort();
+    };
   }, [trigger]);
 
   return [responseData, isLoading, error, forceRefetch];
