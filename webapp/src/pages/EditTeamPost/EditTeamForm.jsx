@@ -5,18 +5,18 @@ import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
-import { handleFetcher } from 'utils';
 import teamApi from 'api/team';
 
 EditTeamForm.propTypes = {};
 
 export default function EditTeamForm({ targetTeam, onClickback }) {
+  console.log('targetTeam', targetTeam);
   const {
     id: teamId,
     name: teamName,
     content: teamContent,
     session: teamSession,
-    image: teamImage,
+    img: teamImage,
     read,
     skills: teamSkills,
     commentCnt,
@@ -31,6 +31,8 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
   const [mdcontent, setContent] = useState(teamContent);
   const [selectedSkills, setSelectedSkills] = useState(teamSkills);
   const [teamSkill, setTeamSkill] = useState();
+  const [error, setError] = useState({ isError: false, msg: '' });
+
   const onSkillChange = useCallback(
     (e) => {
       setTeamSkill(e.target.value);
@@ -39,29 +41,41 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
     [setTeamSkill],
   );
 
-  const handleSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
-      const submitData = {
-        name,
-        img: imageFile,
-        session,
-        skills: selectedSkills,
-        content: mdcontent,
-      };
-
-      const { value, error, isError } = await handleFetcher(teamApi.EDIT_TEAM_POST, {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const submitData = {
+      name,
+      img: imageFile,
+      session,
+      skills: selectedSkills,
+      content: mdcontent,
+    };
+    try {
+      const {
+        status,
+        data: { data },
+      } = await teamApi.EDIT_TEAM_POST({
         id,
         data: submitData,
       });
-      if (isError) {
-        console.log(error);
-        return;
-      }
-      onClickback();
-    },
-    [id, imageFile, mdcontent, onClickback, selectedSkills, session, name],
-  );
+      console.log('data', data);
+      // TODO: 성공시 이동할 페이지 정해서 이동시키기
+    } catch (error) {
+      console.error(error);
+      setError({
+        isError: true,
+        msg: error,
+      });
+    }
+  };
+
+  if (error.isError)
+    return (
+      <div>
+        <button onClick={handleSubmit}>refetch</button>
+      </div>
+    );
+
   return (
     <div>
       <h3> 프로필 이미지 </h3>
