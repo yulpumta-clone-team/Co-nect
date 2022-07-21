@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { handleFetcher } from 'utils';
+import React, { useState } from 'react';
 import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
 import userApi from 'api/user';
@@ -17,19 +16,6 @@ export default function MyList() {
   const isUserList = postTabId === USER_ID;
   const CardComponent = isUserList ? UserCard : TeamCard;
   const clickLink = isUserList ? USER : TEAM;
-
-  // const fetcher = async (listId, postId) => {
-  //   const activedFetcher = fetcherObj[postId][listId];
-  //   const { value, isError, error } = await handleFetcher(activedFetcher);
-  //   if (isError) {
-  //     console.error(error);
-  //   }
-  //   setCards(value);
-  // };
-
-  // useEffect(() => {
-  //   fetcher(listTabId, postTabId);
-  // }, [listTabId, postTabId]);
 
   const activedFetcher = fetcherObj[postTabId][listTabId];
 

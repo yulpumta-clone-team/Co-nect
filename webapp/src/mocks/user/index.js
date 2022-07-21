@@ -35,7 +35,12 @@ const USER = [
   }),
   // GET_MY_POSTS
   rest.get(ROOT_URL + API.USER.MYPOSTS, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.delay(1500), ctx.json(getResonseWithData(myPosts)));
+    const randomStatusErrorCode = getRandomStatusErrorCode();
+    return res(
+      ctx.status(randomStatusErrorCode),
+      ctx.delay(1500),
+      ctx.json(getResonseWithData(myPosts)),
+    );
   }),
   // GET_USER_DETAIL
   rest.get(`${ROOT_URL + API.USER.DETAIL}/:id`, (req, res, ctx) => {
