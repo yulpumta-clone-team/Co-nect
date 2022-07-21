@@ -14,7 +14,7 @@ export default function EditTeamPost() {
     navigate(-1);
   };
 
-  const UserPostDetailWithLoading = WithLoading({
+  const EditTeamFormWithLoading = WithLoading({
     Component: EditTeamForm,
     responseDataKey: 'targetTeam',
     axiosInstance: teamApi.GET_TEAM_DETAIL,
@@ -25,7 +25,7 @@ export default function EditTeamPost() {
     <S.Container>
       <button onClick={onClickback}>back</button>
       <br />
-      <UserPostDetailWithLoading onClickback={onClickback} />
+      <EditTeamFormWithLoading onClickback={onClickback} />
     </S.Container>
   );
 }

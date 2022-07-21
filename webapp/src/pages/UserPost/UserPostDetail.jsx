@@ -8,7 +8,6 @@ import { POST_TYPE } from 'constant';
 import * as S from './style';
 
 export default function UserPostDetail({ targetUser }) {
-  console.log('targetUser', targetUser);
   const {
     id,
     oauthId,
