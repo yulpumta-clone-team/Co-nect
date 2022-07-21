@@ -17,7 +17,6 @@ export default function WithInfiniteScroll({
   axiosInstance,
   clickLink,
 }) {
-  const controllerRef = useRef(new AbortController());
   const [loadMoreRef, page, resetPage] = useIntersect();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ isError: false, msg: '' });
@@ -56,10 +55,12 @@ export default function WithInfiniteScroll({
   };
 
   useEffect(() => {
-    const controller = controllerRef.current;
+    const controller = new AbortController();
     const { signal } = controller;
     fetchData(page, signal);
-    return () => controller.abort();
+    return () => {
+      controller.abort();
+    };
   }, [page]);
 
   return (
