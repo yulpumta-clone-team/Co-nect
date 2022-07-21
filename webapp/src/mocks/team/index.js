@@ -1,5 +1,5 @@
 import { API, ROOT_URL } from 'constant/api';
-import { getResonseWithData } from 'mocks/mockUtils';
+import { getRandomStatusErrorCode, getResonseWithData } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { editTeamDetail } from './editTeamDetail';
 import { teamDetail } from './teamDetail';
@@ -22,7 +22,8 @@ const TEAM = [
   }),
   // GET_TEAM_DETAIL
   rest.get(`${ROOT_URL + API.TEAM.DETAIL}/:id`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResonseWithData(teamDetail)));
+    const randomStatusErrorCode = getRandomStatusErrorCode();
+    return res(ctx.status(randomStatusErrorCode), ctx.json(getResonseWithData(teamDetail)));
   }),
   // POST_TEAM_POST
   rest.post(`${ROOT_URL + API.TEAM.DETAIL}`, (req, res, ctx) => {
