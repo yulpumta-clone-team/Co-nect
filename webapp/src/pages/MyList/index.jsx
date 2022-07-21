@@ -7,35 +7,44 @@ import Tabs from 'components/Tabs';
 import UserCard from 'components/UserCard';
 import TeamCard from 'components/TeamCard';
 import { TEAM, USER } from 'constant/route';
+import WithLoading from 'hoc/WithLoading';
 import * as S from './style';
 
 export default function MyList() {
   const [listTabId, setListTabId] = useState(LIKES_ID);
   const [postTabId, setPostTabId] = useState(USER_ID);
-  const [cards, setCards] = useState([]);
 
   const isUserList = postTabId === USER_ID;
   const CardComponent = isUserList ? UserCard : TeamCard;
   const clickLink = isUserList ? USER : TEAM;
 
-  const fetcher = async (listId, postId) => {
-    const activedFetcher = fetcherObj[postId][listId];
-    const { value, isError, error } = await handleFetcher(activedFetcher);
-    if (isError) {
-      console.error(error);
-    }
-    setCards(value);
-  };
+  // const fetcher = async (listId, postId) => {
+  //   const activedFetcher = fetcherObj[postId][listId];
+  //   const { value, isError, error } = await handleFetcher(activedFetcher);
+  //   if (isError) {
+  //     console.error(error);
+  //   }
+  //   setCards(value);
+  // };
 
-  useEffect(() => {
-    fetcher(listTabId, postTabId);
-  }, [listTabId, postTabId]);
+  // useEffect(() => {
+  //   fetcher(listTabId, postTabId);
+  // }, [listTabId, postTabId]);
+
+  const activedFetcher = fetcherObj[postTabId][listTabId];
+
+  const CardsView = WithLoading({
+    Component: Cards,
+    responseDataKey: 'cards',
+    axiosInstance: activedFetcher,
+    axiosConfig: {},
+  });
 
   return (
     <S.Container>
       <Tabs tabs={LIST_TYPE_TABS} activeTabId={listTabId} setActiveTab={setListTabId} />
       <Tabs tabs={POST_TYPE_TABS} activeTabId={postTabId} setActiveTab={setPostTabId} />
-      <Cards cards={cards} CardComponent={CardComponent} clickLink={`${clickLink}/`} />
+      <CardsView CardComponent={CardComponent} clickLink={`${clickLink}/`} />
     </S.Container>
   );
 }

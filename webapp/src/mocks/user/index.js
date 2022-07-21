@@ -17,15 +17,25 @@ const USER = [
   }),
   // GET_USER_LIKES
   rest.get(ROOT_URL + API.USER.LIKES, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResonseWithData(userList)));
+    const randomStatusErrorCode = getRandomStatusErrorCode();
+    return res(
+      ctx.status(randomStatusErrorCode),
+      ctx.delay(1500),
+      ctx.json(getResonseWithData(userList)),
+    );
   }),
   // GET_USER_READS
   rest.get(ROOT_URL + API.USER.READS, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResonseWithData(userList)));
+    const randomStatusErrorCode = getRandomStatusErrorCode();
+    return res(
+      ctx.status(randomStatusErrorCode),
+      ctx.delay(1500),
+      ctx.json(getResonseWithData(userList)),
+    );
   }),
   // GET_MY_POSTS
   rest.get(ROOT_URL + API.USER.MYPOSTS, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResonseWithData(myPosts)));
+    return res(ctx.status(200), ctx.delay(1500), ctx.json(getResonseWithData(myPosts)));
   }),
   // GET_USER_DETAIL
   rest.get(`${ROOT_URL + API.USER.DETAIL}/:id`, (req, res, ctx) => {
