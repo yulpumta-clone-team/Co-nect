@@ -5,18 +5,12 @@ import CardsGrid from 'components/CardsGrid';
 import UpperButton from 'components/UpperButton';
 
 WithInfiniteScroll.propTypes = {
-  WrapperComponent: PropTypes.object.isRequired,
   CardComponent: PropTypes.func.isRequired,
   axiosInstance: PropTypes.func.isRequired,
   clickLink: PropTypes.string.isRequired,
 };
 
-export default function WithInfiniteScroll({
-  WrapperComponent,
-  CardComponent,
-  axiosInstance,
-  clickLink,
-}) {
+export default function WithInfiniteScroll({ CardComponent, axiosInstance, clickLink }) {
   const [loadMoreRef, page, resetPage] = useIntersect();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ isError: false, msg: '' });
@@ -64,13 +58,13 @@ export default function WithInfiniteScroll({
   }, [page]);
 
   return (
-    <WrapperComponent>
+    <>
       <CardsGrid cards={cardList} CardComponent={CardComponent} clickLink={clickLink} />
       {error.isError && <button onClick={refetchData}>데이터 다시 요청</button>}
       <div ref={loadMoreRef} style={{ display: IsShowLoadRef }}>
         {isLoading && <div>Loading...</div>}
       </div>
       <UpperButton />
-    </WrapperComponent>
+    </>
   );
 }

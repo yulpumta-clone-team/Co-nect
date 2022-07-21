@@ -7,11 +7,12 @@ import * as S from './style';
 
 export default function TeamBoard() {
   return (
-    <WithInfiniteScroll
-      WrapperComponent={S.BoardWrapper}
-      CardComponent={TeamCard}
-      axiosInstance={teamApi.GET_TEAM_ARR}
-      clickLink={`${TEAM}/`}
-    />
+    <S.BoardWrapper>
+      <WithInfiniteScroll
+        CardComponent={TeamCard}
+        axiosInstance={teamApi.GET_TEAM_ARR}
+        clickLink={`${TEAM}/`}
+      />
+    </S.BoardWrapper>
   );
 }

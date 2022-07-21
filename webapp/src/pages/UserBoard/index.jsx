@@ -7,11 +7,12 @@ import * as S from './style';
 
 export default function UserBoard() {
   return (
-    <WithInfiniteScroll
-      WrapperComponent={S.BoardWrapper}
-      CardComponent={UserCard}
-      axiosInstance={userApi.GET_USER_LIST}
-      clickLink={`${USER}/`}
-    />
+    <S.BoardWrapper>
+      <WithInfiniteScroll
+        CardComponent={UserCard}
+        axiosInstance={userApi.GET_USER_LIST}
+        clickLink={`${USER}/`}
+      />
+    </S.BoardWrapper>
   );
 }
