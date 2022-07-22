@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { ROOT_URL } from 'constant/api';
+import { API_SERVER_URI } from 'constant/api';
 
 const instance = axios.create({
-  baseURL: ROOT_URL,
+  baseURL: API_SERVER_URI,
 });
 
 instance.defaults.timeout = 2500;
