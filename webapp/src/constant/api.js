@@ -8,16 +8,14 @@ export const API = {
     WITHDRAWAL: 'user/widthdrawal',
   },
   USER: {
-    LIST: `/users`,
-    DETAIL: `/user`,
+    INDEX: `/user`,
     LIKES: '/user/liking',
     READS: '/user/read',
     PROFILE: `/user/myprofile`,
     MYPOSTS: '/user/myposts',
   },
   TEAM: {
-    LIST: `/teams`,
-    DETAIL: `/team`,
+    INDEX: `/team`,
     LIKES: '/team/liking',
     READS: '/team/read',
   },

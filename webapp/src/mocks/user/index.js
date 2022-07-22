@@ -7,7 +7,7 @@ import { userDetail } from './userDetail';
 
 const USER = [
   // GET_USER_LIST
-  rest.get(API_SERVER_URI + API.USER.LIST, (req, res, ctx) => {
+  rest.get(API_SERVER_URI + API.USER.INDEX, (req, res, ctx) => {
     const lastPage = req.url.searchParams.get('lastPage');
     const newUserList = userList.map((user) => ({ ...user, id: Number(user.id + lastPage) }));
     if (Number(lastPage) === 3) {
@@ -43,12 +43,12 @@ const USER = [
     );
   }),
   // GET_USER_DETAIL
-  rest.get(`${API_SERVER_URI + API.USER.DETAIL}/:id`, (req, res, ctx) => {
+  rest.get(`${API_SERVER_URI + API.USER.INDEX}/:id`, (req, res, ctx) => {
     const randomStatusErrorCode = getRandomStatusErrorCode();
     return res(ctx.status(randomStatusErrorCode), ctx.json(getResonseWithData(userDetail)));
   }),
   // EDIT_USER_PROFILE
-  rest.patch(`${API_SERVER_URI + API.USER.DETAIL}/:id`, (req, res, ctx) => {
+  rest.patch(`${API_SERVER_URI + API.USER.INDEX}/:id`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getResonseWithData(userDetail)));
   }),
 ];

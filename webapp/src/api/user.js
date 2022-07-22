@@ -4,14 +4,14 @@ import instance from './core';
 const userApi = {
   GET_USER_LIST(config) {
     return instance({
-      url: API.USER.LIST,
+      url: API.USER.INDEX,
       method: 'get',
       ...config,
     });
   },
   GET_USER_DETAIL({ id }) {
     return instance({
-      url: `${API.USER.DETAIL}/${id}`,
+      url: `${API.USER.INDEX}/${id}`,
       method: 'get',
     });
   },
