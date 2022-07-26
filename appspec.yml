@@ -2,10 +2,10 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /app/webapp
+    destination: /home/ubuntu/app/webapp
     overwrite: yes
 permissions:
-  - object: app/webapp
+  - object: /home/ubuntu/app/webapp
     owner: root
     group: root
     mode: 755
