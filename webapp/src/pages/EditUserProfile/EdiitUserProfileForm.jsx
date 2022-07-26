@@ -55,11 +55,8 @@ export default function EdiitUserProfileForm({ targetUser, onClickback }) {
       content: mdcontent,
     };
     try {
-      const {
-        status,
-        data: { data },
-      } = await userApi.EDIT_USER_PROFILE({ id, data: submitData });
-      console.log('data', data);
+      const response = await userApi.EDIT_USER_PROFILE({ id, data: submitData });
+      console.log(response);
       // TODO: 성공시 이동할 페이지 정해서 이동시키기
     } catch (error) {
       console.error(error);

@@ -6,6 +6,7 @@ import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
 import teamApi from 'api/team';
+import authApi from 'api/auth';
 
 export default function NewTeamPost() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function NewTeamPost() {
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [mdcontent, setContent] = useState('');
+  const [error, setError] = useState({ isError: false, msg: '' });
 
   const onSkillChange = useCallback(
     (e) => {
@@ -34,18 +36,21 @@ export default function NewTeamPost() {
       // TODO: inputValidation 추가
       const submitData = {
         name: teamName,
-        img: imageFile,
         session: hopeSession,
         skills: selectedSkills,
         content: mdcontent,
       };
-
-      const { value, error, isError } = await handleFetcher(teamApi.POST_TEAM_POST, {
-        data: submitData,
-      });
-      if (isError) {
-        console.log(error);
-        return;
+      try {
+        const response = await authApi.POST_TEAM_POST(submitData);
+        console.log(response);
+        // console.log('data', data);
+        // TODO: 성공시 이동할 페이지 정해서 이동시키기
+      } catch (error) {
+        console.error(error);
+        setError({
+          isError: true,
+          msg: error,
+        });
       }
       navigate('/');
     },
