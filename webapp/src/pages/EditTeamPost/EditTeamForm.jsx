@@ -52,7 +52,7 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
       content: mdcontent,
     };
     try {
-      const response = await authApi.EDIT_TEAM_POST({ id, data: submitData });
+      const response = await teamApi.EDIT_TEAM_POST({ id, data: submitData });
       console.log(response);
       // console.log('data', data);
       // TODO: 성공시 이동할 페이지 정해서 이동시키기
