@@ -14,6 +14,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      working-directory: ./webapp
+
     strategy:
       matrix:
         node-version: [16.x]
@@ -25,14 +28,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-
+        working-directory: ${{env.working-directory}}
       - name: npm Install
         run:
           npm install
           npm build
+        working-directory: ${{env.working-directory}}
+
       - name: zip create
         run: zip -qq -r ./build-fe.zip .
         shell: bash
+        working-directory: ${{env.working-directory}}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
