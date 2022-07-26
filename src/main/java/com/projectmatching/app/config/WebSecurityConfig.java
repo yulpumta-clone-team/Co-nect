@@ -38,13 +38,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin().disable()
                     .authorizeRequests()
-                    .antMatchers("/h2-console/**").permitAll()
-                    .antMatchers("/user/login").permitAll()
-                    .antMatchers("/user/join/**").permitAll()
+                    .antMatchers("api/user/login").permitAll()
+                    .antMatchers("api/user/join/**").permitAll()
                     .antMatchers(
-                        "/swagger*/**",
-                        "/webjars/**",
-                        "/v2/api-docs").permitAll()
+                        "api/swagger*/**",
+                        "api/webjars/**",
+                        "api/v2/api-docs").permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .headers()
