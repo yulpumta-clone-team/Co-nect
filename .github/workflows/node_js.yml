@@ -33,7 +33,7 @@ jobs:
 
       - name: npm build
         run:
-          yarn build
+          npm run build
         working-directory: ${{env.working-directory}}
 
       - name: zip create
