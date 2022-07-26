@@ -58,6 +58,7 @@ jobs:
 
         run: |
           aws s3 cp --region ap-northeast-2 ./build-fe.zip s3://conect-react/mp/build-fe.zip
+        working-directory: ${{env.working-directory}}
 
       - name: Deploy
         run: aws deploy create-deployment
