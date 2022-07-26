@@ -19,6 +19,10 @@ jobs:
         node-version: [16.x]
 
     steps:
+      - name: mv dir
+        run: cd webapp
+        shell: bash
+
       - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -26,9 +30,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: mv dir
-        run: cd webapp
-        shell: bash
 
       - name: npm Install
         run:
