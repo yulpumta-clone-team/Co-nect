@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-        working-directory: ${{env.working-directory}}
+
       - name: npm Install
         run:
           npm install
