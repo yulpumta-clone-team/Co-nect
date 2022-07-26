@@ -1,11 +1,13 @@
 package com.projectmatching.app.util;
 
 import com.projectmatching.app.config.secret.Secret;
+import com.projectmatching.app.constant.JwtConstant;
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.UserInfoField;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.UserLoginResDto;
+import com.projectmatching.app.exception.CoNectForbiddenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -51,7 +53,7 @@ public class AuthTokenProvider {
 
     public AuthTokenProvider(Key key){
         this.key = key;
-        this.tokenValidTime = 30* 60 * 1000L;
+        this.tokenValidTime = 30* 60 * 1000L; //30 분
     }
 
 
@@ -126,10 +128,6 @@ public class AuthTokenProvider {
     }
 
 
-    // Request의 Header에서 token 값을 가져옵니다. "Authorization" : "TOKEN값'
-    public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("Authorization");
-    }
 
 
 
@@ -141,7 +139,7 @@ public class AuthTokenProvider {
             return !claims.getBody().getExpiration().before(new Date());
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            return false; //서명 불일치
         }
     }
 
@@ -224,6 +222,17 @@ public class AuthTokenProvider {
         return null;
 
     }
+
+
+
+    // Request의 Header에서 token 값을 가져옴 "Authorization" : "TOKEN값'
+    public String resolveToken(HttpServletRequest request) {
+        String token = request.getHeader(HEADER_NAME);
+        if(token == null)throw new CoNectForbiddenException();
+        return request.getHeader("Authorization");
+    }
+
+
 
     public Key getKey() {
         return this.key;
