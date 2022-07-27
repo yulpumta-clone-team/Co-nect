@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { userType } from 'types/user.type';
+import { userCardType } from 'types/user.type';
 
 import * as S from './style';
 
 UserCard.propTypes = {
-  cardInfo: userType.isRequired,
+  cardInfo: userCardType.isRequired,
   onClick: PropTypes.func,
 };
 

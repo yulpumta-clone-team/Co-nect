@@ -14,7 +14,20 @@ export const userType = shape({
   hopeSession: PropTypes.string.isRequired,
   job: PropTypes.string.isRequired,
   skills: PropTypes.arrayOf(PropTypes.number).isRequired,
+  status: PropTypes.bool.isRequired,
+});
+
+export const userCardType = shape({
+  ...userType,
   commentCnt: PropTypes.number.isRequired,
   likeCnt: PropTypes.number.isRequired,
-  status: PropTypes.bool.isRequired,
+});
+
+export const userDetailType = shape({
+  ...userType,
+  oauthId: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  portfolio: PropTypes.string.isRequired,
+  commentCnt: PropTypes.number.isRequired,
+  likeCnt: PropTypes.number.isRequired,
 });
