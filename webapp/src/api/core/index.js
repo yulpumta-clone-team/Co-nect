@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { ROOT_URL } from 'constant/api';
+import { ROOT_API_URL } from 'constant/api';
 
-const instance = axios.create({
-  baseURL: ROOT_URL,
+const rootApiInstance = axios.create({
+  baseURL: ROOT_API_URL,
 });
 
-instance.defaults.timeout = 2500;
-instance.defaults.withCredentials = true;
+rootApiInstance.defaults.timeout = 2500;
+rootApiInstance.defaults.withCredentials = true;
 
-instance.interceptors.request.use(
+rootApiInstance.interceptors.request.use(
   (config) => {
     // 요청을 보내기 전에 수행할 로직
     config.headers['Content-Type'] = 'application/json; charset=utf-8';
@@ -21,7 +21,7 @@ instance.interceptors.request.use(
   },
 );
 
-instance.interceptors.response.use(
+rootApiInstance.interceptors.response.use(
   (response) => {
     // const {
     //   data: { code, data, message, status },
@@ -34,4 +34,4 @@ instance.interceptors.response.use(
   },
 );
 
-export default instance;
+export default rootApiInstance;

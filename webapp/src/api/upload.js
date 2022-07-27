@@ -1,8 +1,8 @@
-import instance from './core';
+import rootApiInstance from './core';
 
 const uploadApi = {
   IMAGE_UPLOAD(data) {
-    return instance({
+    return rootApiInstance({
       url: '/upload',
       method: 'post',
       data,
