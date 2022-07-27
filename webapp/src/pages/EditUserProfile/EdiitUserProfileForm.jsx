@@ -5,10 +5,10 @@ import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import userApi from 'api/user';
-import { userCardType } from 'types/user.type';
+import { userType } from 'types/user.type';
 
 EdiitUserProfileForm.propTypes = {
-  targetUser: userCardType.isRequired,
+  targetUser: userType.isRequired,
   onClickback: PropTypes.func.isRequired,
 };
 

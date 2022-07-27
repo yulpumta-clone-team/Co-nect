@@ -6,7 +6,7 @@ export const userInfoType = shape({
   profileImg: PropTypes.string.isRequired,
 });
 
-export const userCardType = shape({
+export const userType = shape({
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   slogan: PropTypes.string.isRequired,
