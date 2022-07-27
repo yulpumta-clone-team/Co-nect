@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { teamType } from 'types/team.type';
+import { teamCardType } from 'types/team.type';
 
 import * as S from './style';
 
 TeamCard.propTypes = {
-  cardInfo: teamType.isRequired,
+  cardInfo: teamCardType.isRequired,
   onClick: PropTypes.func,
 };
 
 export default function TeamCard({ cardInfo, onClick }) {
-  console.log('cardInfo', cardInfo);
   const { id, name, skills, session, img, read, likeCnt, commentCnt, user } = cardInfo;
   return (
     <S.CardWrapper onClick={onClick}>
