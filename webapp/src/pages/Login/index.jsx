@@ -5,8 +5,6 @@ import { OAUTH_URL } from 'constant/route';
 import { handleFetcher } from 'utils';
 import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth';
-import { ProfileImg } from 'pages/Main/style';
-import { response } from 'msw';
 import * as S from './style';
 
 export default function Login() {
