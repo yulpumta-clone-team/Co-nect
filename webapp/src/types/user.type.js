@@ -1,6 +1,6 @@
 import PropTypes, { shape } from 'prop-types';
 
-export const userInfoType = shape({
+export const loggedUserType = shape({
   userId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   profileImg: PropTypes.string.isRequired,

@@ -1,14 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { HOME, NEW_POST, TEAM, USER } from 'constant/route';
 import useDropdown from 'hooks/useDropdown';
-import { userInfoType } from 'types/user.type';
+import { loggedUserType } from 'types/user.type';
 import UserInfoDropdown from './UserInfoDropdown';
 import * as S from './style';
 
 LoginNav.propTypes = {
-  userInfo: userInfoType.isRequired,
+  userInfo: loggedUserType.isRequired,
 };
 
 export default function LoginNav({ userInfo }) {
