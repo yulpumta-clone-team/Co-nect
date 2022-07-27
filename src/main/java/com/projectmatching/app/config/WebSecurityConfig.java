@@ -30,20 +30,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http)throws Exception {
-        http.csrf().ignoringAntMatchers("/h2-console/**")
-                .disable();
+
         http.httpBasic().disable();
         http.csrf().disable().
                 cors().configurationSource(corsConfigurationSource())
                 .and()
                     .formLogin().disable()
                     .authorizeRequests()
+//                    .antMatchers("/h2-console/**").permitAll()
                     .antMatchers("api/user/login").permitAll()
                     .antMatchers("api/user/join/**").permitAll()
                     .antMatchers(
-                        "api/swagger*/**",
-                        "api/webjars/**",
-                        "api/v2/api-docs").permitAll()
+                        "/swagger*/**",
+                        "/webjars/**",
+                        "/v2/api-docs").permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .headers()
