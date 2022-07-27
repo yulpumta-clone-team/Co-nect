@@ -3,7 +3,7 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   profiles:
-    include: oauth,key
+    include: dev
 
   datasource:
     url: ${MP_DB_URL}
