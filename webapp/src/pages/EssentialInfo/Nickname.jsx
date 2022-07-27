@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { SIGN_UP, SIGN_UP_INFO } from 'constant/route';
+import { ESSENTIAL_INFO, SIGN_UP, SIGN_UP_INFO } from 'constant/route';
 
 Nickname.propTypes = {
   register: PropTypes.func.isRequired,
@@ -21,7 +21,7 @@ export default function Nickname({ register, errors }) {
       />
       <span>{errors?.nickname?.message}</span>
       <div>
-        <Link to={SIGN_UP + SIGN_UP_INFO.SKILL}>다음</Link>
+        <Link to={ESSENTIAL_INFO + SIGN_UP_INFO.SKILL}>다음</Link>
       </div>
     </div>
   );

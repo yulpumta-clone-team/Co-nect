@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { skillOptions } from 'constant';
 import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { SIGN_UP, SIGN_UP_INFO } from 'constant/route';
+import { ESSENTIAL_INFO, SIGN_UP, SIGN_UP_INFO } from 'constant/route';
 
 Skill.propTypes = {
   selectedSkills: PropTypes.array.isRequired,
@@ -23,7 +23,7 @@ export default function Skill({ selectedSkills, userSkill, onSkillChange }) {
         ))}
       </select>
       <div>
-        <Link to={SIGN_UP + SIGN_UP_INFO.IMG}>다음</Link>
+        <Link to={ESSENTIAL_INFO + SIGN_UP_INFO.IMG}>다음</Link>
       </div>
     </div>
   );

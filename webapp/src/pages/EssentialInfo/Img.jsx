@@ -2,7 +2,7 @@ import React from 'react';
 import useInput from 'hooks/useInput';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { SIGN_UP, SIGN_UP_INFO } from 'constant/route';
+import { ESSENTIAL_INFO, SIGN_UP, SIGN_UP_INFO } from 'constant/route';
 
 Img.propTypes = {
   userImg: PropTypes.string.isRequired,
@@ -20,7 +20,7 @@ export default function Img({ userImg, onImgChange }) {
         placeholder="임시 프로필 이미지 문자열로 입력"
       />{' '}
       <div>
-        <Link to={SIGN_UP + SIGN_UP_INFO.SESSION_JOB}>다음</Link>
+        <Link to={ESSENTIAL_INFO + SIGN_UP_INFO.SESSION_JOB}>다음</Link>
       </div>
     </div>
   );

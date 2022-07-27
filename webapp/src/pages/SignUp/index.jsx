@@ -6,13 +6,12 @@ import authApi from 'api/auth';
 import useInput from 'hooks/useInput';
 import { SIGN_UP, SIGN_UP_INFO } from 'constant/route';
 import IdPassword from './IdPassword';
-import Nickname from './Nickname';
-import Skill from './Skill';
-import Img from './Img';
-import SessionJob from './SessionJob';
-import SloganPortfolio from './SloganPortfolio';
-import Content from './Content';
-import ModalHeader from './ModalHeader/ModalHeader';
+import Nickname from '../EssentialInfo/Nickname';
+import Skill from '../EssentialInfo/Skill';
+import Img from '../EssentialInfo/Img';
+import SessionJob from '../EssentialInfo/SessionJob';
+import SloganPortfolio from '../EssentialInfo/SloganPortfolio';
+import Content from '../EssentialInfo/Content';
 import * as S from './style';
 
 export default function SignUp() {
@@ -45,15 +44,7 @@ export default function SignUp() {
     }
     const signUpInfo = {
       email,
-      name: nickname,
       pwd: password,
-      content: mdcontent,
-      hope_session: hopeSession,
-      img: userImg,
-      job: userJob,
-      portfolio: userPortfolio,
-      skills: selectedSkills,
-      slogan: userSlogan,
     };
     // TODO: input validation 추가해야 함.
 
@@ -79,53 +70,8 @@ export default function SignUp() {
             style={{ display: 'flex', flexDirection: 'column' }}
             onSubmit={handleSubmit(onValid)}
           >
-            <ModalHeader />
             <Routes>
               <Route path="" element={<IdPassword register={register} errors={errors} />} />
-              <Route
-                path={SIGN_UP_INFO.NICKNAME}
-                element={<Nickname register={register} errors={errors} />}
-              />
-              <Route
-                path={SIGN_UP_INFO.SKILL}
-                element={
-                  <Skill
-                    userSkill={userSkill}
-                    onSkillChange={onSkillChange}
-                    selectedSkills={selectedSkills}
-                  />
-                }
-              />
-              <Route
-                path={SIGN_UP_INFO.IMG}
-                element={<Img userImg={userImg} onImgChange={onImgChange} />}
-              />
-              <Route
-                path={SIGN_UP_INFO.SESSION_JOB}
-                element={
-                  <SessionJob
-                    hopeSession={hopeSession}
-                    onHopeSessionChange={onHopeSessionChange}
-                    userJob={userJob}
-                    onJobChange={onJobChange}
-                  />
-                }
-              />
-              <Route
-                path={SIGN_UP_INFO.SLOGAN_PORTFOLIO}
-                element={
-                  <SloganPortfolio
-                    userPortfolio={userPortfolio}
-                    onPortfolioChange={onPortfolioChange}
-                    userSlogan={userSlogan}
-                    onSloganChange={onSloganChange}
-                  />
-                }
-              />
-              <Route
-                path={SIGN_UP_INFO.CONTENT}
-                element={<Content mdcontent={mdcontent} setMdContent={setMdContent} />}
-              />
             </Routes>
           </form>
         </S.DialogBox>
