@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import MarkdownEditor from 'components/MdEditor';
@@ -6,8 +5,12 @@ import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import userApi from 'api/user';
+import { userCardType } from 'types/user.type';
 
-EdiitUserProfileForm.propTypes = {};
+EdiitUserProfileForm.propTypes = {
+  targetUser: userCardType.isRequired,
+  onClickback: PropTypes.func.isRequired,
+};
 
 export default function EdiitUserProfileForm({ targetUser, onClickback }) {
   const {
