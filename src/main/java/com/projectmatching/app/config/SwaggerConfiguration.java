@@ -32,7 +32,7 @@ public class SwaggerConfiguration {
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
-                .pathMapping("/")
+                .pathMapping("/api")
                 .securitySchemes(Arrays.asList(createTokenParameter()))
                 .securityContexts(Collections.singletonList(securityContext()))
                 .select()
