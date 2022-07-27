@@ -98,6 +98,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/configuration/security",
                 "/swagger-ui/**",
                 "/webjars/**");
+
+        web.ignoring().antMatchers("/**").anyRequest();
     }
 
 }
