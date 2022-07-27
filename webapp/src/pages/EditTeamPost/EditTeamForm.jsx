@@ -6,6 +6,7 @@ import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import teamApi from 'api/team';
+import authApi from 'api/auth';
 
 EditTeamForm.propTypes = {};
 
@@ -51,14 +52,8 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
       content: mdcontent,
     };
     try {
-      const {
-        status,
-        data: { data },
-      } = await teamApi.EDIT_TEAM_POST({
-        id,
-        data: submitData,
-      });
-      console.log('data', data);
+      const response = await teamApi.EDIT_TEAM_POST({ id, data: submitData });
+      // console.log('data', data);
       // TODO: 성공시 이동할 페이지 정해서 이동시키기
     } catch (error) {
       console.error(error);

@@ -36,6 +36,7 @@ export default function SignUp() {
   const [userJob, onJobChange] = useInput('');
   const [userSlogan, onSloganChange] = useInput('');
   const [userPortfolio, onPortfolioChange] = useInput('');
+  const [apiError, setApiError] = useState({ isError: false, msg: '' });
 
   const onValid = async (submitData) => {
     const { email, nickname, password, verifiedPassword } = submitData;
@@ -55,12 +56,18 @@ export default function SignUp() {
       slogan: userSlogan,
     };
     // TODO: input validation 추가해야 함.
-    const { value, error, isError } = await handleFetcher(authApi.POST_SIGN_UP, signUpInfo);
-    if (isError) {
-      console.log(error);
-      return;
+
+    try {
+      const response = await authApi.POST_SIGN_UP(signUpInfo);
+      console.log(response);
+      // TODO: 성공시 이동할 페이지 정해서 이동시키기
+    } catch (apiError) {
+      console.error(apiError);
+      setApiError({
+        isError: true,
+        msg: apiError,
+      });
     }
-    console.log(signUpInfo);
     navigate('/login');
   };
   return (

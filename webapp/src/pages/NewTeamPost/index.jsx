@@ -6,6 +6,7 @@ import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
 import teamApi from 'api/team';
+import authApi from 'api/auth';
 
 export default function NewTeamPost() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function NewTeamPost() {
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [mdcontent, setContent] = useState('');
+  const [error, setError] = useState({ isError: false, msg: '' });
 
   const onSkillChange = useCallback(
     (e) => {
@@ -28,29 +30,29 @@ export default function NewTeamPost() {
     [setUserSkill],
   );
 
-  const handleSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
-      // TODO: inputValidation 추가
-      const submitData = {
-        name: teamName,
-        img: imageFile,
-        session: hopeSession,
-        skills: selectedSkills,
-        content: mdcontent,
-      };
-
-      const { value, error, isError } = await handleFetcher(teamApi.POST_TEAM_POST, {
-        data: submitData,
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // TODO: inputValidation 추가
+    const submitData = {
+      name: teamName,
+      session: hopeSession,
+      skills: selectedSkills,
+      content: mdcontent,
+    };
+    try {
+      const response = await teamApi.POST_TEAM_POST({ submitData });
+      console.log(response);
+      // console.log('data', data);
+      // TODO: 성공시 이동할 페이지 정해서 이동시키기
+    } catch (error) {
+      console.error(error);
+      setError({
+        isError: true,
+        msg: error,
       });
-      if (isError) {
-        console.log(error);
-        return;
-      }
-      navigate('/');
-    },
-    [hopeSession, imageFile, mdcontent, navigate, selectedSkills, teamName],
-  );
+    }
+    navigate('/');
+  };
   return (
     <>
       <button onClick={onClickback}>back</button>
