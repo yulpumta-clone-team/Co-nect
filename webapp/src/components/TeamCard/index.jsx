@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { teamCardType } from 'types/team.type';
+import { teamType } from 'types/team.type';
 
 import * as S from './style';
 
 TeamCard.propTypes = {
-  cardInfo: teamCardType.isRequired,
+  cardInfo: teamType.isRequired,
   onClick: PropTypes.func,
 };
 

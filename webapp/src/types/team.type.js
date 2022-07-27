@@ -1,6 +1,7 @@
 import PropTypes, { shape } from 'prop-types';
+import { userType } from './user.type';
 
-export const teamCardType = shape({
+export const teamType = shape({
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
@@ -10,5 +11,5 @@ export const teamCardType = shape({
   commentCnt: PropTypes.number.isRequired,
   likeCnt: PropTypes.number.isRequired,
   status: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
+  user: userType.isRequired,
 });
