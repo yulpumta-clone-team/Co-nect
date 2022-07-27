@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface TechStackRepository extends JpaRepository<TechStack, Long> {
     Optional<TechStack> findByName(String name);
+    Optional<TechStack> findByTechSerialNum(Long num);
 }
