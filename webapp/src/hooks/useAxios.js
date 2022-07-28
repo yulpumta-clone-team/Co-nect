@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-const useAxios = (axiosInstance, config) => {
+const useAxios = (axiosInstance, config, immediate = true) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({ isError: false, msg: '' });
   const [responseData, setResponseData] = useState(null);
   const [trigger, setTrigger] = useState(Date.now());
+  const [controller, setController] = useState();
 
   const forceRefetch = () => {
     setTrigger(Date.now());
@@ -16,13 +17,15 @@ const useAxios = (axiosInstance, config) => {
     setIsLoading(false);
   };
 
-  const fetchData = async (signal) => {
+  const execution = async () => {
     setIsLoading(true);
     try {
+      const ctrl = new AbortController();
+      setController(ctrl);
       const {
         status,
         data: { data },
-      } = await axiosInstance({ ...config, signal });
+      } = await axiosInstance({ ...config, signal: ctrl.signal });
       setResponseData(data);
     } catch (error) {
       console.error(error);
@@ -36,16 +39,14 @@ const useAxios = (axiosInstance, config) => {
   };
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
     resetState();
-    fetchData(signal);
-    return () => {
-      controller.abort();
-    };
+    if (immediate) {
+      execution();
+    }
+    return () => controller && controller.abort();
   }, [trigger]);
 
-  return [responseData, isLoading, error, forceRefetch];
+  return { responseData, isLoading, error, execution, forceRefetch };
 };
 
 export default useAxios;
