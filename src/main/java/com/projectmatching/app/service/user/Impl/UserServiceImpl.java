@@ -10,6 +10,7 @@ import com.projectmatching.app.domain.user.dto.PostUserProfileDto;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserProfileDto;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.exception.CoNectRuntimeException;
 import com.projectmatching.app.service.user.UserService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserDetail(Long id){
         return UserDto.of(qUserRepository.find(id)
-                .orElseThrow(CoNectRuntimeException::new)
+                .orElseThrow(CoNectNotFoundException::new)
         );
 
     }

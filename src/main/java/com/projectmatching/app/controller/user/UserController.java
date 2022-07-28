@@ -8,6 +8,7 @@ import com.projectmatching.app.service.user.UserService;
 import com.projectmatching.app.service.user.UserSignInService;
 import com.projectmatching.app.service.user.UserSignUpService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
+import com.projectmatching.app.util.AuthToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -52,8 +53,7 @@ public class UserController {
     @ApiOperation(value = "일반 로그인, 성공시 유저 id 반환 및 헤더에 토큰 생성")
     @PostMapping("/login")
     public ResponseTemplate<?> login(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
-
-            return ResponseTemplate.valueOf(userSignInService.userLogin(userLoginDto,response));
+        return ResponseTemplate.valueOf(userSignInService.userLogin(userLoginDto,response));
     }
 
 

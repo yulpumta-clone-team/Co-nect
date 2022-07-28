@@ -44,7 +44,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         String token = authTokenProvider.createToken(user);
         log.info("Oatuh 로그인후 토큰 생성  : {}",token);
 
-        writeTokenCookie(response,token);
+//        writeTokenCookie(response,token);
         resultRedirectStrategy(request, response, authentication);
 
     }
@@ -56,7 +56,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             String targetUrl = savedRequest.getRedirectUrl();
             redirectStratgy.sendRedirect(request, response, targetUrl);
         } else {
-            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+yamlConfig.getPORT()+ "/callback";
+            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+ yamlConfig.getPORT()+ "/callback";
             redirectStratgy.sendRedirect(request, response, redirectUrl);
         }
 
