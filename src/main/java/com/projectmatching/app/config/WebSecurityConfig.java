@@ -30,8 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http)throws Exception {
-        http.csrf().ignoringAntMatchers("/h2-console/**")
-                .disable();
+//        http.csrf().ignoringAntMatchers("/h2-console/**")
+//                .disable();
         http.httpBasic().disable();
         http.csrf().disable().
                 cors().configurationSource(corsConfigurationSource())
@@ -99,6 +99,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/configuration/security",
                 "/swagger-ui/**",
                 "/webjars/**");
+
+        web.ignoring().antMatchers("/**").anyRequest();
     }
 
 }

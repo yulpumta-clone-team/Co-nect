@@ -7,7 +7,6 @@ import lombok.Setter;
 
 @Getter
 @RequiredArgsConstructor
-@AllArgsConstructor
 public enum TechStackConstant {
 
     FRONT(1),

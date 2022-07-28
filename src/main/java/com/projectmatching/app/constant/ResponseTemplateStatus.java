@@ -95,7 +95,8 @@ public enum ResponseTemplateStatus {
      *
      * 9000: 논리적 에러
      */
-    LOGICAL_ERROR("서버 내부 논리 에러",9000);
+    LOGICAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,"서버 내부 논리 에러",9000),
+    NOT_FOUND(HttpStatus.NOT_FOUND,"리소스를 찾을 수 없습니다.",9001);
 
     private HttpStatus httpStatus;
     private final String message;

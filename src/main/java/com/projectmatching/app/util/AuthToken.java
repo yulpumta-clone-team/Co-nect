@@ -2,6 +2,7 @@ package com.projectmatching.app.util;
 
 import com.projectmatching.app.constant.JwtConstant;
 import io.jsonwebtoken.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 @Getter
+@Builder
 public class AuthToken {
 
     private final String token;
@@ -25,36 +27,6 @@ public class AuthToken {
 
 
     private static final String AUTHORITIES_KEY = "role";
-
-//    AuthToken(String id, Date expiry, Key key){
-//        this.key = key;
-//        this.token = createToken(id,expiry);
-//
-//    }
-//
-//    AuthToken(String id, String role, Date expiry, Key key){
-//        this.key = key;
-//        this.token = createToken(id,expiry);
-//    }
-//
-//    private String createToken(String id , Date expiry){
-//
-//        return Jwts.builder()
-//                .setSubject(id)
-//                .signWith(key, SignatureAlgorithm.HS256)
-//                .setExpiration(expiry)
-//                .compact();
-//
-//    }
-//
-//    private String createToken(String id, String role, Date expiry){
-//        return Jwts.builder()
-//                .setSubject(id)
-//                .claim(AUTHORITIES_KEY,role)
-//                .signWith(key,SignatureAlgorithm.HS256)
-//                .setExpiration(expiry)
-//                .compact();
-//    }
 
     public boolean validate(){
         return this.getTokenClaims() != null;
