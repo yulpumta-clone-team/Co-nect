@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserInfo } from 'service/auth';
+import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import CommentForm from './CommentForm';
 import * as S from './style';
 
@@ -18,9 +19,7 @@ Comment.propTypes = {
     feeling: PropTypes.array.isRequired,
     parentId: PropTypes.number,
   }),
-  editTargetCommentId: PropTypes.number.isRequired,
   resetTarget: PropTypes.func.isRequired,
-  selectEditTargetComment: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
@@ -32,13 +31,13 @@ export default function Comment({
   postId,
   postType,
   commentInfo,
-  editTargetCommentId,
   resetTarget,
-  selectEditTargetComment,
   handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
+  const { editTargetCommentId } = useCommentsState();
+  const { selectEditTargetComment } = useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
   const {

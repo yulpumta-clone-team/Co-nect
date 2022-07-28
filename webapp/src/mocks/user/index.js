@@ -1,6 +1,10 @@
 import { API, ROOT_API_URL } from 'constant/api';
 import { rest } from 'msw';
-import { getResonseWithData, getRandomStatusErrorCode } from 'mocks/mockUtils';
+import {
+  getResonseWithData,
+  getRandomStatusErrorCode,
+  successResponseWithEmptyData,
+} from 'mocks/mockUtils';
 import { userList } from './usersList';
 import { myPosts } from './myPosts';
 import { userDetail } from './userDetail';
@@ -45,7 +49,7 @@ const USER = [
   // GET_USER_DETAIL
   rest.get(`${ROOT_API_URL + API.USER.DETAIL}/:id`, (req, res, ctx) => {
     const randomStatusErrorCode = getRandomStatusErrorCode();
-    return res(ctx.status(randomStatusErrorCode), ctx.json(getResonseWithData(userDetail)));
+    return res(ctx.status(200), ctx.json(getResonseWithData(userDetail)));
   }),
   // EDIT_USER_PROFILE
   rest.patch(`${ROOT_API_URL + API.USER.DETAIL}/:id`, (req, res, ctx) => {

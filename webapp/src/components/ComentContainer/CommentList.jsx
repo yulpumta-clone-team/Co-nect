@@ -12,10 +12,8 @@ CommentList.propTypes = {
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
-  editTargetCommentId: PropTypes.number.isRequired,
   resetTarget: PropTypes.func.isRequired,
   handlePostComment: PropTypes.func.isRequired,
-  selectEditTargetComment: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
@@ -27,10 +25,8 @@ export default function CommentList({
   postWriter,
   loggedInUserName,
   comments,
-  editTargetCommentId,
   resetTarget,
   handlePostComment,
-  selectEditTargetComment,
   handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
@@ -84,9 +80,7 @@ export default function CommentList({
                 postId={postId}
                 postWriter={postWriter}
                 commentInfo={commentInfo}
-                editTargetCommentId={editTargetCommentId}
                 resetTarget={resetTarget}
-                selectEditTargetComment={selectEditTargetComment}
                 handleSubmitEditComment={handleSubmitEditComment}
                 handleClickDeleteButton={handleClickDeleteButton}
                 handleClickLikeThumb={handleClickLikeThumb}
@@ -123,10 +117,8 @@ export default function CommentList({
                   postId={postId}
                   loggedInUserName={loggedInUserName}
                   comments={replies}
-                  editTargetCommentId={editTargetCommentId}
                   resetTarget={resetTarget}
                   handlePostComment={handlePostComment}
-                  selectEditTargetComment={selectEditTargetComment}
                   handleSubmitEditComment={handleSubmitEditComment}
                   handleClickDeleteButton={handleClickDeleteButton}
                   handleClickLikeThumb={handleClickLikeThumb}

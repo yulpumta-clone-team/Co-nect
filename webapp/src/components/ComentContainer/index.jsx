@@ -4,7 +4,10 @@ import { handleFetcher } from 'utils';
 import commentApi from 'api/comment';
 import { getUserInfo } from 'service/auth';
 import WithProvider from 'hoc/withProvider';
-import CommentProvider, { useCommentsState } from 'contexts/Comment/Comment.Provider';
+import CommentProvider, {
+  useCommentsAction,
+  useCommentsState,
+} from 'contexts/Comment/Comment.Provider';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 
@@ -17,22 +20,14 @@ CommentContainer.propTypes = {
 };
 
 function CommentContainer({ postType, postWriter, postId }) {
-  const [tempComments, apiState] = useCommentsState();
-  console.log('states :>> ', tempComments);
+  const { commentss, apiState } = useCommentsState();
+  const { resetTarget } = useCommentsAction();
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [comments, setComments] = useState([]);
-  const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
+
   const userInfo = getUserInfo(); // {userId, name, profileImg}
 
   const loggedInUserName = userInfo?.name;
-
-  const selectEditTargetComment = (commentId) => {
-    setEditTargetCommentId(commentId);
-  };
-
-  const resetTarget = () => {
-    setEditTargetCommentId(DEFAULT_TARGET);
-  };
 
   const addCommentOnRoot = useCallback(
     async (newCommentData) => {
@@ -222,9 +217,7 @@ function CommentContainer({ postType, postWriter, postId }) {
           postWriter={postWriter}
           loggedInUserName={loggedInUserName}
           comments={comments}
-          editTargetCommentId={editTargetCommentId}
           resetTarget={resetTarget}
-          selectEditTargetComment={selectEditTargetComment}
           handlePostComment={handlePostComment}
           handleSubmitEditComment={handleSubmitEditComment}
           handleClickDeleteButton={handleClickDeleteButton}
@@ -234,8 +227,6 @@ function CommentContainer({ postType, postWriter, postId }) {
     </div>
   );
 }
-
-const DEFAULT_TARGET = -1;
 
 const deepClone = (originalObject) => JSON.parse(JSON.stringify(originalObject));
 
