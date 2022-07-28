@@ -29,103 +29,81 @@ function CommentContainer({ postType, postWriter, postId }) {
 
   const loggedInUserName = userInfo?.name;
 
-  const addCommentOnRoot = useCallback(
-    async (newCommentData) => {
-      const { error, isError } = await handleFetcher(commentApi.POST_COMMENT, {
-        postType,
-        data: newCommentData,
-      });
-      if (isError) {
-        console.log('error :>> ', error);
-        return;
-      }
-      forceUpdate();
-    },
-    [forceUpdate, postType],
-  );
+  const addCommentOnRoot = async (newCommentData) => {
+    const { error, isError } = await handleFetcher(commentApi.POST_COMMENT, {
+      postType,
+      data: newCommentData,
+    });
+    if (isError) {
+      console.log('error :>> ', error);
+      return;
+    }
+    forceUpdate();
+  };
 
-  const addCommentOnNested = useCallback(
-    async (newCommentData) => {
-      const { error, isError } = await handleFetcher(commentApi.POST_REPLY, {
-        postType,
-        data: newCommentData,
-      });
-      if (isError) {
-        console.log('error :>> ', error);
-        return;
-      }
-      forceUpdate();
-    },
-    [postType],
-  );
+  const addCommentOnNested = async (newCommentData) => {
+    const { error, isError } = await handleFetcher(commentApi.POST_REPLY, {
+      postType,
+      data: newCommentData,
+    });
+    if (isError) {
+      console.log('error :>> ', error);
+      return;
+    }
+    forceUpdate();
+  };
 
-  const handlePostComment = useCallback(
-    async (newCommentData, commentId) => {
-      if (commentId) {
-        addCommentOnNested(newCommentData);
-      } else {
-        addCommentOnRoot(newCommentData);
-      }
-    },
-    [addCommentOnNested, addCommentOnRoot],
-  );
+  const handlePostComment = async (newCommentData, commentId) => {
+    if (commentId) {
+      addCommentOnNested(newCommentData);
+    } else {
+      addCommentOnRoot(newCommentData);
+    }
+  };
 
-  const editCommentOnRoot = useCallback(
-    async (newCommentData, commentId) => {
-      const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT, {
-        postType,
-        id: commentId,
-        data: newCommentData,
-      });
-      if (isError) {
-        console.log('error :>> ', error);
-        return;
-      }
-      forceUpdate();
-    },
-    [forceUpdate, postType],
-  );
+  const editCommentOnRoot = async (newCommentData, commentId) => {
+    const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT, {
+      postType,
+      id: commentId,
+      data: newCommentData,
+    });
+    if (isError) {
+      console.log('error :>> ', error);
+      return;
+    }
+    forceUpdate();
+  };
+  const editCommentOnNested = async (newCommentData, commentId) => {
+    const { error, isError } = await handleFetcher(commentApi.PATCH_REPLY, {
+      postType,
+      id: commentId,
+      data: newCommentData,
+    });
+    if (isError) {
+      console.log('error :>> ', error);
+      return;
+    }
+    forceUpdate();
+  };
 
-  const editCommentOnNested = useCallback(
-    async (newCommentData, commentId) => {
-      const { error, isError } = await handleFetcher(commentApi.PATCH_REPLY, {
-        postType,
-        id: commentId,
-        data: newCommentData,
-      });
-      if (isError) {
-        console.log('error :>> ', error);
-        return;
-      }
-      forceUpdate();
-    },
-    [forceUpdate, postType],
-  );
+  const handleSubmitEditComment = async (newCommentData, commentId, parentId) => {
+    if (parentId) {
+      editCommentOnNested(newCommentData, commentId);
+    } else {
+      editCommentOnRoot(newCommentData, commentId);
+    }
+  };
 
-  const handleSubmitEditComment = useCallback(
-    async (newCommentData, commentId, parentId) => {
-      if (parentId) {
-        editCommentOnNested(newCommentData, commentId);
-      } else {
-        editCommentOnRoot(newCommentData, commentId);
-      }
-    },
-    [editCommentOnNested, editCommentOnRoot],
-  );
+  const handleClickDeleteButton = async (id, parentId) => {
+    const { error, isError } = await handleFetcher(commentApi.DELETE_COMMENT, { postType, id });
+    if (isError) {
+      console.log('error :>> ', error);
+      return;
+    }
+    forceUpdate();
+  };
 
-  const handleClickDeleteButton = useCallback(
-    async (id, parentId) => {
-      const { error, isError } = await handleFetcher(commentApi.DELETE_COMMENT, { postType, id });
-      if (isError) {
-        console.log('error :>> ', error);
-        return;
-      }
-      forceUpdate();
-    },
-    [forceUpdate, postType],
-  );
-
-  const addLike = useCallback(async (postType, idObj) => {
+  const addLike = async (postType, idObj) => {
     const { id, loggedInUserId, parentId } = idObj;
     const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT_LIKE, {
       postType,
@@ -143,9 +121,9 @@ function CommentContainer({ postType, postWriter, postId }) {
     } else {
       setComments((prevComments) => addLikeToComment({ prevComments, id, loggedInUserId }));
     }
-  }, []);
+  };
 
-  const removeLike = useCallback(async (postType, idObj) => {
+  const removeLike = async (postType, idObj) => {
     const { id, loggedInUserId, parentId } = idObj;
     const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT_UN_LIKE, {
       postType,
@@ -163,21 +141,18 @@ function CommentContainer({ postType, postWriter, postId }) {
     } else {
       setComments((prevComments) => removeLikeToComment({ prevComments, id, loggedInUserId }));
     }
-  }, []);
+  };
 
-  const handleClickLikeThumb = useCallback(
-    async (id, loggedInUserId, isLikesContainUserId, parentId) => {
-      const idObj = { id, loggedInUserId, parentId };
-      if (isLikesContainUserId) {
-        removeLike(postType, idObj);
-      } else {
-        addLike(postType, idObj);
-      }
-    },
-    [addLike, postType, removeLike],
-  );
+  const handleClickLikeThumb = async (id, loggedInUserId, isLikesContainUserId, parentId) => {
+    const idObj = { id, loggedInUserId, parentId };
+    if (isLikesContainUserId) {
+      removeLike(postType, idObj);
+    } else {
+      addLike(postType, idObj);
+    }
+  };
 
-  const fetchComments = useCallback(async () => {
+  const fetchComments = async () => {
     const {
       error,
       isError,
@@ -189,11 +164,11 @@ function CommentContainer({ postType, postWriter, postId }) {
     }
     setComments(comments);
     resetTarget();
-  }, [postId, postType]);
+  };
 
   useEffect(() => {
     fetchComments();
-  }, [fetchComments]);
+  }, []);
 
   return (
     <div>
