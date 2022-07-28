@@ -25,6 +25,23 @@ spring:
   jackson:
     default-property-inclusion: non_null # null 인경우 필드 생성하지않음
 
+  springfox:
+    documentation:
+      swagger-ui:
+        base-url: /api
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_ID}
+            client-secret: ${GITHUB_SECRET}
+            scope: name,email
+          google:
+            client-id: ${GOOGLE_ID}
+            client-secret: ${GOOGLE_SECRET}
+            scope: profile,email
 
 
 
@@ -53,6 +70,7 @@ logging:
       amazonaws:
         util:
           EC2MetadataUtils: ERROR
+
 
 
 

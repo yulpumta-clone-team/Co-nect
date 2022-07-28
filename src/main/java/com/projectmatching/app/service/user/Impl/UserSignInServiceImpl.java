@@ -8,6 +8,7 @@ import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
 import com.projectmatching.app.domain.user.dto.UserLoginResDto;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.service.user.UserSignInService;
 import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
@@ -47,7 +48,7 @@ public class UserSignInServiceImpl implements UserSignInService {
     @Validation
     public UserLoginResDto userLogin(UserLoginDto userLoginDto, HttpServletResponse response){
         try {
-            User user = userRepository.findByEmail(userLoginDto.getEmail()).orElseThrow(NullPointerException::new);
+            User user = userRepository.findByEmail(userLoginDto.getEmail()).orElseThrow(CoNectNotFoundException::new);
             if(passwordEncoder.matches(userLoginDto.getPwd(),user.getPwd())){
                 //로그인 성공시 유저 이미지와 이름 아이디를 반환, 최초 로그인인지도 체크하여 반환
                 UserLoginResDto userLoginResDto = Optional.ofNullable(qUserRepository.login(userLoginDto))

@@ -4,6 +4,6 @@ import com.projectmatching.app.constant.ResponseTemplateStatus;
 
 public class CoNectForbiddenException extends CoNectRuntimeException{
     public CoNectForbiddenException(){
-        super(ResponseTemplateStatus.FORBIDDEN);
+        super(ResponseTemplateStatus.UNAUTHORIZED);
     }
 }

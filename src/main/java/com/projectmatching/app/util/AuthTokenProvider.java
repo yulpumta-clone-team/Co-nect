@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -232,6 +233,14 @@ public class AuthTokenProvider {
         return request.getHeader("Authorization");
     }
 
+
+    public boolean isTokenExist(HttpServletRequest request) {
+        return isTokenExist(request, HEADER_NAME);
+    }
+
+    private boolean isTokenExist(HttpServletRequest request, String name){
+        return StringUtils.hasText(request.getHeader(name));
+    }
 
 
     public Key getKey() {

@@ -88,7 +88,8 @@ public enum ResponseTemplateStatus {
     /**
      * 6000 : 안증 및 인가 오류
      */
-    FORBIDDEN(HttpStatus.FORBIDDEN,"인증 및 인가 오류",6000)
+    UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"인증 및 인가 오류",6000),
+    FORBIDDEN(HttpStatus.FORBIDDEN,"접근 에러",6001)
     ,
 
     /**
