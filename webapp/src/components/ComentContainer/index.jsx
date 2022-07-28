@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { handleFetcher } from 'utils';
 import commentApi from 'api/comment';
 import { getUserInfo } from 'service/auth';
+import WithProvider from 'hoc/withProvider';
+import CommentProvider, { useCommentsState } from 'contexts/Comment/Comment.Provider';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
+
+export default WithProvider({ Provider: CommentProvider, Component: CommentContainer });
 
 CommentContainer.propTypes = {
   postType: PropTypes.string.isRequired,
@@ -12,7 +16,9 @@ CommentContainer.propTypes = {
   postId: PropTypes.number.isRequired,
 };
 
-export default function CommentContainer({ postType, postWriter, postId }) {
+function CommentContainer({ postType, postWriter, postId }) {
+  const [tempComments, apiState] = useCommentsState();
+  console.log('states :>> ', tempComments);
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [comments, setComments] = useState([]);
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
@@ -126,7 +132,10 @@ export default function CommentContainer({ postType, postWriter, postId }) {
 
   const addLike = useCallback(async (postType, idObj) => {
     const { id, loggedInUserId, parentId } = idObj;
-    const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT_LIKE, { postType, id });
+    const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT_LIKE, {
+      postType,
+      id,
+    });
     if (isError) {
       console.log('error :>> ', error);
       return;
