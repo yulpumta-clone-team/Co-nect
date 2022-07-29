@@ -17,6 +17,16 @@ const useComments = () => {
     immediate: false,
   });
 
+  const [patchCommentState, patchCommentApi] = useAxios({
+    axiosInstance: commentApi.PATCH_COMMENT,
+    immediate: false,
+  });
+
+  const [pathCommentState, pathReplyApi] = useAxios({
+    axiosInstance: commentApi.PATCH_REPLY,
+    immediate: false,
+  });
+
   const selectEditTargetComment = (commentId) => {
     setEditTargetCommentId(commentId);
   };
@@ -30,8 +40,10 @@ const useComments = () => {
       resetTarget,
       postCommentApi,
       postReplyApi,
+      patchCommentApi,
+      pathReplyApi,
     }),
-    [postCommentApi, postReplyApi],
+    [patchCommentApi, pathReplyApi, postCommentApi, postReplyApi],
   );
   const states = useMemo(
     () => ({ comments, editTargetCommentId, postCommentState, postReplyState }),

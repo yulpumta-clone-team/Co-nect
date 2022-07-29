@@ -20,7 +20,7 @@ CommentContainer.propTypes = {
 };
 
 function CommentContainer({ postType, postWriter, postId }) {
-  const { commentss, apiState } = useCommentsState();
+  const { commentss } = useCommentsState();
   const { resetTarget, postCommentApi } = useCommentsAction();
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [comments, setComments] = useState([]);
@@ -28,39 +28,6 @@ function CommentContainer({ postType, postWriter, postId }) {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
 
   const loggedInUserName = userInfo?.name;
-
-  const editCommentOnRoot = async (newCommentData, commentId) => {
-    const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT, {
-      postType,
-      id: commentId,
-      data: newCommentData,
-    });
-    if (isError) {
-      console.log('error :>> ', error);
-      return;
-    }
-    forceUpdate();
-  };
-  const editCommentOnNested = async (newCommentData, commentId) => {
-    const { error, isError } = await handleFetcher(commentApi.PATCH_REPLY, {
-      postType,
-      id: commentId,
-      data: newCommentData,
-    });
-    if (isError) {
-      console.log('error :>> ', error);
-      return;
-    }
-    forceUpdate();
-  };
-
-  const handleSubmitEditComment = async (newCommentData, commentId, parentId) => {
-    if (parentId) {
-      editCommentOnNested(newCommentData, commentId);
-    } else {
-      editCommentOnRoot(newCommentData, commentId);
-    }
-  };
 
   const handleClickDeleteButton = async (id, parentId) => {
     const { error, isError } = await handleFetcher(commentApi.DELETE_COMMENT, { postType, id });
@@ -160,7 +127,6 @@ function CommentContainer({ postType, postWriter, postId }) {
           postWriter={postWriter}
           loggedInUserName={loggedInUserName}
           comments={comments}
-          handleSubmitEditComment={handleSubmitEditComment}
           handleClickDeleteButton={handleClickDeleteButton}
           handleClickLikeThumb={handleClickLikeThumb}
         />

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
-import CommentForm from './CommentForm';
-import * as S from './style';
+import CommentForm from '../CommentForm';
+import * as S from '../style';
 
-Comment.propTypes = {
+RootCommentElement.propTypes = {
   id: PropTypes.number.isRequired,
   isSecret: PropTypes.bool.isRequired,
   postType: PropTypes.string.isRequired,
@@ -19,25 +19,21 @@ Comment.propTypes = {
     feeling: PropTypes.array.isRequired,
     parentId: PropTypes.number,
   }),
-  resetTarget: PropTypes.func.isRequired,
-  handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
-export default function Comment({
+export default function RootCommentElement({
   id,
   isSecret,
   postId,
   postType,
   commentInfo,
-  resetTarget,
-  handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
   const { editTargetCommentId } = useCommentsState();
-  const { selectEditTargetComment } = useCommentsAction();
+  const { selectEditTargetComment, resetTarget, pathReplyApi } = useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
   const {
@@ -96,7 +92,7 @@ export default function Comment({
               postType={postType}
               postId={postId}
               initialText={content}
-              submitCallback={handleSubmitEditComment}
+              submitCallback={pathReplyApi}
               commentInfo={{ id, parentId, secret }}
               hasCancelButton
               hasDeleteButton

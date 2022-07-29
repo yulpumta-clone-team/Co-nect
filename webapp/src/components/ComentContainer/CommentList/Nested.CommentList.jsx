@@ -2,8 +2,9 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
 import CommentForm from '../CommentForm';
-import Comment from '../Comment';
+
 import * as S from '../style';
+import NestedCommentElement from '../CommentElement/Nested.CommentElement';
 
 const DEFAULT_TARGET = -1;
 
@@ -13,7 +14,6 @@ NestedCommentList.propTypes = {
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
-  handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
 };
@@ -24,11 +24,10 @@ export default function NestedCommentList({
   postWriter,
   loggedInUserName,
   comments,
-  handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
-  const { resetTarget, replyPostCommentState } = useCommentsAction();
+  const { resetTarget } = useCommentsAction();
   const [isShowReplies, setIsShowReplies] = useState(false);
   const [replyFormCommentId, setReplyFormCommentId] = useState(DEFAULT_TARGET);
 
@@ -71,7 +70,7 @@ export default function NestedCommentList({
           const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
           return (
             <li key={id}>
-              <Comment
+              <NestedCommentElement
                 id={id}
                 isSecret={isSecret}
                 postType={postType}
@@ -79,7 +78,6 @@ export default function NestedCommentList({
                 postWriter={postWriter}
                 commentInfo={commentInfo}
                 resetTarget={resetTarget}
-                handleSubmitEditComment={handleSubmitEditComment}
                 handleClickDeleteButton={handleClickDeleteButton}
                 handleClickLikeThumb={handleClickLikeThumb}
               />
@@ -94,19 +92,6 @@ export default function NestedCommentList({
                   <button onClick={() => setReplyFormCommentId(id)}>답글 작성하기</button>
                 )}
               </S.ReplyButtons>
-              {!isSecret && !parentId && replyFormCommentId === id && (
-                <CommentForm
-                  postType={postType}
-                  postId={postId}
-                  initialText=""
-                  submitCallback={() => {}}
-                  commentInfo={{ id, parentId, secret }}
-                  hasCancelButton
-                  hasDeleteButton={false}
-                  handleCancel={() => setReplyFormCommentId(DEFAULT_TARGET)}
-                  handleClickDeleteButton={handleClickDeleteButton}
-                />
-              )}
             </li>
           );
         })}

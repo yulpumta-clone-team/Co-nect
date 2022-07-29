@@ -2,9 +2,10 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
 import CommentForm from '../CommentForm';
-import Comment from '../Comment';
+
 import * as S from '../style';
 import NestedCommentList from './Nested.CommentList';
+import RootCommentElement from '../CommentElement/Root.CommentElement';
 
 const DEFAULT_TARGET = -1;
 
@@ -14,7 +15,6 @@ RootCommentList.propTypes = {
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
-  handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
 };
@@ -25,7 +25,6 @@ export default function RootCommentList({
   postWriter,
   loggedInUserName,
   comments,
-  handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
@@ -72,15 +71,13 @@ export default function RootCommentList({
           const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
           return (
             <li key={id}>
-              <Comment
+              <RootCommentElement
                 id={id}
                 isSecret={isSecret}
                 postType={postType}
                 postId={postId}
                 postWriter={postWriter}
                 commentInfo={commentInfo}
-                resetTarget={resetTarget}
-                handleSubmitEditComment={handleSubmitEditComment}
                 handleClickDeleteButton={handleClickDeleteButton}
                 handleClickLikeThumb={handleClickLikeThumb}
               />
@@ -116,7 +113,6 @@ export default function RootCommentList({
                   postId={postId}
                   loggedInUserName={loggedInUserName}
                   comments={replies}
-                  handleSubmitEditComment={handleSubmitEditComment}
                   handleClickDeleteButton={handleClickDeleteButton}
                   handleClickLikeThumb={handleClickLikeThumb}
                 />
