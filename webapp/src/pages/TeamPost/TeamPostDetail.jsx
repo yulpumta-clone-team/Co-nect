@@ -18,7 +18,7 @@ export default function TeamPostDetail({ targetTeam }) {
         이름 : {name} / 팀명 : {name}
       </div>
       <div>좋아요 개수 : {likeCnt}</div>
-      <CommentContainer postType={POST_TYPE.TEAM} postWriter={user.name} postId={id} />
+      <CommentContainer postWriter={user.name} />
     </S.Container>
   );
 }

@@ -9,8 +9,6 @@ import * as S from '../style';
 NestedCommentElement.propTypes = {
   id: PropTypes.number.isRequired,
   isSecret: PropTypes.bool.isRequired,
-  postType: PropTypes.string.isRequired,
-  postId: PropTypes.number.isRequired,
   commentInfo: PropTypes.shape({
     img: PropTypes.string.isRequired,
     secret: PropTypes.bool.isRequired,
@@ -26,13 +24,11 @@ NestedCommentElement.propTypes = {
 export default function NestedCommentElement({
   id,
   isSecret,
-  postId,
-  postType,
   commentInfo,
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
-  const { editTargetCommentId } = useCommentsState();
+  const { editTargetCommentId, postType } = useCommentsState();
   const { selectEditTargetComment, resetTarget, patchCommentApi } = useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
@@ -90,7 +86,6 @@ export default function NestedCommentElement({
           {isTargetEditCommnt && (
             <CommentForm
               postType={postType}
-              postId={postId}
               initialText={content}
               submitCallback={patchCommentApi}
               commentInfo={{ id, parentId, secret }}

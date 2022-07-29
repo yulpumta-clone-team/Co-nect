@@ -31,7 +31,7 @@ export default function UserPostDetail({ targetUser }) {
       <MarkdownViewer mdValue={content} />
       <div>이름 : {name}</div>
       <div>좋아요 개수 : {likeCnt}</div>
-      <CommentContainer postType={POST_TYPE.USER} postWriter={name} postId={id} />
+      <CommentContainer postWriter={name} />
     </S.Container>
   );
 }

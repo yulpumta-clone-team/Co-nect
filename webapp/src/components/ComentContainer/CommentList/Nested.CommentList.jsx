@@ -8,20 +8,12 @@ import NestedCommentElement from '../CommentElement/Nested.CommentElement';
 const DEFAULT_TARGET = -1;
 
 NestedCommentList.propTypes = {
-  isReplies: PropTypes.bool.isRequired,
   loggedInUserName: PropTypes.string,
-  postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
 };
 
-export default function NestedCommentList({
-  isReplies,
-  postType,
-  postWriter,
-  loggedInUserName,
-  comments,
-}) {
+export default function NestedCommentList({ postWriter, loggedInUserName, comments }) {
   const { resetTarget } = useCommentsAction();
   const [isShowReplies, setIsShowReplies] = useState(false);
   const [replyFormCommentId, setReplyFormCommentId] = useState(DEFAULT_TARGET);
@@ -61,27 +53,24 @@ export default function NestedCommentList({
         comments.length !== 0 &&
         comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
           const { secret, writer: commenWriter, parentId } = commentInfo;
-          const postId = teamId || userId;
           const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
           return (
             <li key={id}>
               <NestedCommentElement
                 id={id}
                 isSecret={isSecret}
-                postType={postType}
-                postId={postId}
                 postWriter={postWriter}
                 commentInfo={commentInfo}
                 resetTarget={resetTarget}
               />
               <S.ReplyButtons>
-                {!isSecret && !isReplies && !isShowReplies && (
+                {!isSecret && !isShowReplies && (
                   <button onClick={handleShowReplies}>답글 보여주기</button>
                 )}
-                {!isSecret && !isReplies && isShowReplies && (
+                {!isSecret && isShowReplies && (
                   <button onClick={handleShowReplies}>답글 가리기</button>
                 )}
-                {!isSecret && !isReplies && replyFormCommentId !== id && (
+                {!isSecret && replyFormCommentId !== id && (
                   <button onClick={() => setReplyFormCommentId(id)}>답글 작성하기</button>
                 )}
               </S.ReplyButtons>

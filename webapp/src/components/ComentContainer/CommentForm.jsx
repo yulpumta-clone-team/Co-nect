@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
 import { getUserInfo } from 'service/auth';
-import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
+import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import * as S from './style';
 
 const USE_FORM_COMMENT_KEY = 'commentValue';
 
 CommentForm.propTypes = {
-  postId: PropTypes.number.isRequired,
-  postType: PropTypes.string.isRequired,
   initialText: PropTypes.string.isRequired,
   submitCallback: PropTypes.func.isRequired,
   commentInfo: PropTypes.shape({
@@ -24,8 +22,6 @@ CommentForm.propTypes = {
 };
 
 export default function CommentForm({
-  postType,
-  postId,
   initialText,
   submitCallback,
   commentInfo,
@@ -42,6 +38,7 @@ export default function CommentForm({
   } = useForm({
     defaultValues: {},
   });
+  const { postType, postId } = useCommentsState();
   const { deleteCommentApi } = useCommentsAction();
   const { id: commentId, parentId, secret } = commentInfo;
   const formId = commentId || 'rootForm';

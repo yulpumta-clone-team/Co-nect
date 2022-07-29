@@ -9,8 +9,6 @@ import * as S from '../style';
 RootCommentElement.propTypes = {
   id: PropTypes.number.isRequired,
   isSecret: PropTypes.bool.isRequired,
-  postType: PropTypes.string.isRequired,
-  postId: PropTypes.number.isRequired,
   commentInfo: PropTypes.shape({
     img: PropTypes.string.isRequired,
     secret: PropTypes.bool.isRequired,
@@ -21,8 +19,8 @@ RootCommentElement.propTypes = {
   }),
 };
 
-export default function RootCommentElement({ id, isSecret, postId, postType, commentInfo }) {
-  const { editTargetCommentId } = useCommentsState();
+export default function RootCommentElement({ id, isSecret, commentInfo }) {
+  const { postType, editTargetCommentId } = useCommentsState();
   const { selectEditTargetComment, resetTarget, pathReplyApi, handleClickLikeThumb } =
     useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
@@ -80,8 +78,6 @@ export default function RootCommentElement({ id, isSecret, postId, postType, com
           </S.NormalCommentBox>
           {isTargetEditCommnt && (
             <CommentForm
-              postType={postType}
-              postId={postId}
               initialText={content}
               submitCallback={pathReplyApi}
               commentInfo={{ id, parentId, secret }}
