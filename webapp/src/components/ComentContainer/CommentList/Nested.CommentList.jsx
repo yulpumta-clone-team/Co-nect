@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
 import CommentForm from '../CommentForm';
 import Comment from '../Comment';
 import * as S from '../style';
@@ -12,8 +13,6 @@ NestedCommentList.propTypes = {
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
-  resetTarget: PropTypes.func.isRequired,
-  handlePostComment: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
@@ -25,12 +24,11 @@ export default function NestedCommentList({
   postWriter,
   loggedInUserName,
   comments,
-  resetTarget,
-  handlePostComment,
   handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
+  const { resetTarget, replyPostCommentState } = useCommentsAction();
   const [isShowReplies, setIsShowReplies] = useState(false);
   const [replyFormCommentId, setReplyFormCommentId] = useState(DEFAULT_TARGET);
 
@@ -101,7 +99,7 @@ export default function NestedCommentList({
                   postType={postType}
                   postId={postId}
                   initialText=""
-                  submitCallback={handlePostComment}
+                  submitCallback={() => {}}
                   commentInfo={{ id, parentId, secret }}
                   hasCancelButton
                   hasDeleteButton={false}

@@ -21,45 +21,13 @@ CommentContainer.propTypes = {
 
 function CommentContainer({ postType, postWriter, postId }) {
   const { commentss, apiState } = useCommentsState();
-  const { resetTarget } = useCommentsAction();
+  const { resetTarget, postCommentApi } = useCommentsAction();
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [comments, setComments] = useState([]);
 
   const userInfo = getUserInfo(); // {userId, name, profileImg}
 
   const loggedInUserName = userInfo?.name;
-
-  const addCommentOnRoot = async (newCommentData) => {
-    const { error, isError } = await handleFetcher(commentApi.POST_COMMENT, {
-      postType,
-      data: newCommentData,
-    });
-    if (isError) {
-      console.log('error :>> ', error);
-      return;
-    }
-    forceUpdate();
-  };
-
-  const addCommentOnNested = async (newCommentData) => {
-    const { error, isError } = await handleFetcher(commentApi.POST_REPLY, {
-      postType,
-      data: newCommentData,
-    });
-    if (isError) {
-      console.log('error :>> ', error);
-      return;
-    }
-    forceUpdate();
-  };
-
-  const handlePostComment = async (newCommentData, commentId) => {
-    if (commentId) {
-      addCommentOnNested(newCommentData);
-    } else {
-      addCommentOnRoot(newCommentData);
-    }
-  };
 
   const editCommentOnRoot = async (newCommentData, commentId) => {
     const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT, {
@@ -176,7 +144,7 @@ function CommentContainer({ postType, postWriter, postId }) {
         postType={postType}
         postId={postId}
         initialText=""
-        submitCallback={handlePostComment}
+        submitCallback={postCommentApi}
         commentInfo={{ id: null, parentId: null, secret: false }}
         hasCancelButton={false}
         hasDeleteButton={false}
@@ -192,8 +160,6 @@ function CommentContainer({ postType, postWriter, postId }) {
           postWriter={postWriter}
           loggedInUserName={loggedInUserName}
           comments={comments}
-          resetTarget={resetTarget}
-          handlePostComment={handlePostComment}
           handleSubmitEditComment={handleSubmitEditComment}
           handleClickDeleteButton={handleClickDeleteButton}
           handleClickLikeThumb={handleClickLikeThumb}

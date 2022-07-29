@@ -46,23 +46,21 @@ export default function CommentForm({
   const { id: commentId, parentId, secret } = commentInfo;
   const formId = commentId || 'rootForm';
   const [isSecret, setIsSecret] = useState(secret);
-  const onSubmit = useCallback(
-    async ({ commentValue }) => {
-      if (!userInfo) {
-        alert('로그인을 먼저해주세요');
-      }
-      const newCommentData = setPostIdOnSubmitData(postType, postId, {
-        parentId,
-        writer: userInfo?.name,
-        secret: isSecret,
-        content: commentValue,
-      });
-      await submitCallback(newCommentData, commentId, parentId);
-      setValue(USE_FORM_COMMENT_KEY, '');
-      setIsSecret(false);
-    },
-    [commentId, isSecret, parentId, postId, postType, setValue, submitCallback, userInfo],
-  );
+
+  const onSubmit = async ({ commentValue }) => {
+    if (!userInfo) {
+      alert('로그인을 먼저해주세요');
+    }
+    const newCommentData = setPostIdOnSubmitData(postType, postId, {
+      parentId,
+      writer: userInfo?.name,
+      secret: isSecret,
+      content: commentValue,
+    });
+    await submitCallback({ postType, data: newCommentData, id: commentId });
+    setValue(USE_FORM_COMMENT_KEY, '');
+    setIsSecret(false);
+  };
   return (
     <S.FormBox style={{ marginBottom: '12px' }}>
       <form

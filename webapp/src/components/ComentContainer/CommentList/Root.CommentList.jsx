@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
 import CommentForm from '../CommentForm';
 import Comment from '../Comment';
 import * as S from '../style';
@@ -13,8 +14,6 @@ RootCommentList.propTypes = {
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
-  resetTarget: PropTypes.func.isRequired,
-  handlePostComment: PropTypes.func.isRequired,
   handleSubmitEditComment: PropTypes.func.isRequired,
   handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
@@ -26,21 +25,17 @@ export default function RootCommentList({
   postWriter,
   loggedInUserName,
   comments,
-  resetTarget,
-  handlePostComment,
   handleSubmitEditComment,
   handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
+  const { resetTarget, postReplyApi } = useCommentsAction();
   const [isShowReplies, setIsShowReplies] = useState(false);
   const [replyFormCommentId, setReplyFormCommentId] = useState(DEFAULT_TARGET);
-
   // ! 해당하는 대댓글만 보이게 수정하기
   const handleShowReplies = useCallback(() => {
     setIsShowReplies((prev) => !prev);
   }, []);
-
-  console.log('isShowReplies', isShowReplies);
 
   const checkSecretComment = useCallback((postWriterName, commentWriterName, loggedInUserName) => {
     // true: 가리기 , false: 보여주기
@@ -105,7 +100,7 @@ export default function RootCommentList({
                   postType={postType}
                   postId={postId}
                   initialText=""
-                  submitCallback={handlePostComment}
+                  submitCallback={postReplyApi}
                   commentInfo={{ id, parentId, secret }}
                   hasCancelButton
                   hasDeleteButton={false}
@@ -121,8 +116,6 @@ export default function RootCommentList({
                   postId={postId}
                   loggedInUserName={loggedInUserName}
                   comments={replies}
-                  resetTarget={resetTarget}
-                  handlePostComment={handlePostComment}
                   handleSubmitEditComment={handleSubmitEditComment}
                   handleClickDeleteButton={handleClickDeleteButton}
                   handleClickLikeThumb={handleClickLikeThumb}
