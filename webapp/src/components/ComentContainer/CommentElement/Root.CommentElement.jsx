@@ -19,19 +19,12 @@ RootCommentElement.propTypes = {
     feeling: PropTypes.array.isRequired,
     parentId: PropTypes.number,
   }),
-  handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
-export default function RootCommentElement({
-  id,
-  isSecret,
-  postId,
-  postType,
-  commentInfo,
-  handleClickLikeThumb,
-}) {
+export default function RootCommentElement({ id, isSecret, postId, postType, commentInfo }) {
   const { editTargetCommentId } = useCommentsState();
-  const { selectEditTargetComment, resetTarget, pathReplyApi } = useCommentsAction();
+  const { selectEditTargetComment, resetTarget, pathReplyApi, handleClickLikeThumb } =
+    useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
   const {
@@ -50,6 +43,11 @@ export default function RootCommentElement({
     const findUser = targetLikesArray.find((id) => id === userId);
     return !!findUser;
   }, []);
+
+  const handleClickThumbSvg = () => {
+    const idObj = { id, loggedInUserId, parentId };
+    handleClickLikeThumb(isLikesContainUserId, postType, idObj);
+  };
 
   const isLikesContainUserId = useMemo(
     () => checkUserLikeTarget(loggedInUserId, likedUserIds),
@@ -74,12 +72,7 @@ export default function RootCommentElement({
               </S.ContentInfo>
             )}
             <S.LikeInfo>
-              <S.ThumbSVG
-                isFill={isLikesContainUserId}
-                onClick={() =>
-                  handleClickLikeThumb(id, loggedInUserId, isLikesContainUserId, parentId)
-                }
-              >
+              <S.ThumbSVG isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
                 👍
               </S.ThumbSVG>
               <span>: {likesCount}</span>

@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
-import CommentForm from '../CommentForm';
 
 import * as S from '../style';
 import NestedCommentElement from '../CommentElement/Nested.CommentElement';
@@ -14,7 +13,6 @@ NestedCommentList.propTypes = {
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
-  handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
 export default function NestedCommentList({
@@ -23,7 +21,6 @@ export default function NestedCommentList({
   postWriter,
   loggedInUserName,
   comments,
-  handleClickLikeThumb,
 }) {
   const { resetTarget } = useCommentsAction();
   const [isShowReplies, setIsShowReplies] = useState(false);
@@ -76,7 +73,6 @@ export default function NestedCommentList({
                 postWriter={postWriter}
                 commentInfo={commentInfo}
                 resetTarget={resetTarget}
-                handleClickLikeThumb={handleClickLikeThumb}
               />
               <S.ReplyButtons>
                 {!isSecret && !isReplies && !isShowReplies && (

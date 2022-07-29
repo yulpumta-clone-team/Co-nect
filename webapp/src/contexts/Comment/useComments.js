@@ -32,6 +32,57 @@ const useComments = () => {
     immediate: false,
   });
 
+  const [patchCommentLikeState, patchCommentLikeApi] = useAxios({
+    axiosInstance: commentApi.PATCH_COMMENT_LIKE,
+    immediate: false,
+  });
+
+  const [patchCommentUnLikeState, patchCommentUnLikeApi] = useAxios({
+    axiosInstance: commentApi.PATCH_COMMENT_UN_LIKE,
+    immediate: false,
+  });
+
+  const addLike = async (postType, idObj) => {
+    const { id, loggedInUserId, parentId } = idObj;
+    await patchCommentLikeApi({
+      postType,
+      id,
+    });
+    if (parentId) {
+      const callbackParams = { id, loggedInUserId };
+      setComments((prev) =>
+        findParentAndDoCallback(prev, parentId, addLikeToComment, callbackParams),
+      );
+    } else {
+      setComments((prevComments) => addLikeToComment({ prevComments, id, loggedInUserId }));
+    }
+  };
+
+  const removeLike = async (postType, idObj) => {
+    const { id, loggedInUserId, parentId } = idObj;
+    await patchCommentUnLikeApi({
+      postType,
+      id,
+    });
+    if (parentId) {
+      const callbackParams = { id, loggedInUserId };
+      setComments((prev) =>
+        findParentAndDoCallback(prev, parentId, removeLikeToComment, callbackParams),
+      );
+    } else {
+      setComments((prevComments) => removeLikeToComment({ prevComments, id, loggedInUserId }));
+    }
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleClickLikeThumb = async (isLikesContainUserId, postType, idObj) => {
+    if (isLikesContainUserId) {
+      removeLike(postType, idObj);
+    } else {
+      addLike(postType, idObj);
+    }
+  };
+
   const selectEditTargetComment = (commentId) => {
     setEditTargetCommentId(commentId);
   };
@@ -39,6 +90,7 @@ const useComments = () => {
   const resetTarget = () => {
     setEditTargetCommentId(DEFAULT_TARGET);
   };
+
   const actions = useMemo(
     () => ({
       selectEditTargetComment,
@@ -48,8 +100,16 @@ const useComments = () => {
       patchCommentApi,
       pathReplyApi,
       deleteCommentApi,
+      handleClickLikeThumb,
     }),
-    [deleteCommentApi, patchCommentApi, pathReplyApi, postCommentApi, postReplyApi],
+    [
+      deleteCommentApi,
+      patchCommentApi,
+      pathReplyApi,
+      postCommentApi,
+      postReplyApi,
+      handleClickLikeThumb,
+    ],
   );
   const states = useMemo(
     () => ({ comments, editTargetCommentId, postCommentState, postReplyState }),
@@ -59,3 +119,38 @@ const useComments = () => {
 };
 
 export default useComments;
+
+const deepClone = (originalObject) => JSON.parse(JSON.stringify(originalObject));
+
+const findParentAndDoCallback = (parents, parentId, callback, callbackParams) => {
+  return parents.map((comment) => {
+    if (comment.id === parentId) {
+      const clone = deepClone(comment);
+      clone.replies = callback({ prevComments: clone.replies, ...callbackParams });
+      return clone;
+    }
+    return comment;
+  });
+};
+
+const addLikeToComment = ({ prevComments, id, loggedInUserId }) => {
+  return prevComments.map((comment) => {
+    if (comment.id === id) {
+      const clone = deepClone(comment);
+      clone.feeling.push(loggedInUserId);
+      return clone;
+    }
+    return comment;
+  });
+};
+
+const removeLikeToComment = ({ prevComments, id, loggedInUserId }) => {
+  return prevComments.map((comment) => {
+    if (comment.id === id) {
+      const clone = deepClone(comment);
+      clone.feeling = [...clone.feeling].filter((userId) => userId !== loggedInUserId);
+      return clone;
+    }
+    return comment;
+  });
+};

@@ -48,6 +48,11 @@ export default function NestedCommentElement({
   const isTargetEditCommnt = id === editTargetCommentId;
   const isNested = Boolean(parentId);
 
+  const handleClickThumbSvg = () => {
+    const idObj = { id, loggedInUserId, parentId };
+    handleClickLikeThumb(isLikesContainUserId, postType, idObj);
+  };
+
   const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
     const findUser = targetLikesArray.find((id) => id === userId);
     return !!findUser;
@@ -76,12 +81,7 @@ export default function NestedCommentElement({
               </S.ContentInfo>
             )}
             <S.LikeInfo>
-              <S.ThumbSVG
-                isFill={isLikesContainUserId}
-                onClick={() =>
-                  handleClickLikeThumb(id, loggedInUserId, isLikesContainUserId, parentId)
-                }
-              >
+              <S.ThumbSVG isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
                 👍
               </S.ThumbSVG>
               <span>: {likesCount}</span>

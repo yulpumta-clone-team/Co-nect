@@ -15,7 +15,6 @@ RootCommentList.propTypes = {
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
-  handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
 export default function RootCommentList({
@@ -24,7 +23,6 @@ export default function RootCommentList({
   postWriter,
   loggedInUserName,
   comments,
-  handleClickLikeThumb,
 }) {
   const { resetTarget, postReplyApi } = useCommentsAction();
   const [isShowReplies, setIsShowReplies] = useState(false);
@@ -76,7 +74,6 @@ export default function RootCommentList({
                 postId={postId}
                 postWriter={postWriter}
                 commentInfo={commentInfo}
-                handleClickLikeThumb={handleClickLikeThumb}
               />
               <S.ReplyButtons>
                 {!isSecret && !isReplies && !isShowReplies && (
@@ -109,7 +106,6 @@ export default function RootCommentList({
                   postId={postId}
                   loggedInUserName={loggedInUserName}
                   comments={replies}
-                  handleClickLikeThumb={handleClickLikeThumb}
                 />
               )}
             </li>
