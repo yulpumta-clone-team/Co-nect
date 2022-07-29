@@ -27,6 +27,11 @@ const useComments = () => {
     immediate: false,
   });
 
+  const [deleteCommentState, deleteCommentApi] = useAxios({
+    axiosInstance: commentApi.DELETE_COMMENT,
+    immediate: false,
+  });
+
   const selectEditTargetComment = (commentId) => {
     setEditTargetCommentId(commentId);
   };
@@ -42,8 +47,9 @@ const useComments = () => {
       postReplyApi,
       patchCommentApi,
       pathReplyApi,
+      deleteCommentApi,
     }),
-    [patchCommentApi, pathReplyApi, postCommentApi, postReplyApi],
+    [deleteCommentApi, patchCommentApi, pathReplyApi, postCommentApi, postReplyApi],
   );
   const states = useMemo(
     () => ({ comments, editTargetCommentId, postCommentState, postReplyState }),

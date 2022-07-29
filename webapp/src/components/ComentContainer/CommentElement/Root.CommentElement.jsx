@@ -19,7 +19,6 @@ RootCommentElement.propTypes = {
     feeling: PropTypes.array.isRequired,
     parentId: PropTypes.number,
   }),
-  handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
@@ -29,7 +28,6 @@ export default function RootCommentElement({
   postId,
   postType,
   commentInfo,
-  handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
   const { editTargetCommentId } = useCommentsState();
@@ -97,7 +95,6 @@ export default function RootCommentElement({
               hasCancelButton
               hasDeleteButton
               handleCancel={resetTarget}
-              handleClickDeleteButton={handleClickDeleteButton}
             />
           )}
         </>

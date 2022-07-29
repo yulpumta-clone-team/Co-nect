@@ -14,7 +14,6 @@ NestedCommentList.propTypes = {
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
-  handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
@@ -24,7 +23,6 @@ export default function NestedCommentList({
   postWriter,
   loggedInUserName,
   comments,
-  handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
   const { resetTarget } = useCommentsAction();
@@ -78,7 +76,6 @@ export default function NestedCommentList({
                 postWriter={postWriter}
                 commentInfo={commentInfo}
                 resetTarget={resetTarget}
-                handleClickDeleteButton={handleClickDeleteButton}
                 handleClickLikeThumb={handleClickLikeThumb}
               />
               <S.ReplyButtons>

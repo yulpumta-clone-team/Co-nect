@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
 import { getUserInfo } from 'service/auth';
+import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
 import * as S from './style';
 
 const USE_FORM_COMMENT_KEY = 'commentValue';
@@ -20,7 +21,6 @@ CommentForm.propTypes = {
   hasCancelButton: PropTypes.bool.isRequired,
   hasDeleteButton: PropTypes.bool.isRequired,
   handleCancel: PropTypes.func.isRequired,
-  handleClickDeleteButton: PropTypes.func.isRequired,
 };
 
 export default function CommentForm({
@@ -32,7 +32,6 @@ export default function CommentForm({
   hasCancelButton,
   hasDeleteButton,
   handleCancel,
-  handleClickDeleteButton,
 }) {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const {
@@ -43,9 +42,14 @@ export default function CommentForm({
   } = useForm({
     defaultValues: {},
   });
+  const { deleteCommentApi } = useCommentsAction();
   const { id: commentId, parentId, secret } = commentInfo;
   const formId = commentId || 'rootForm';
   const [isSecret, setIsSecret] = useState(secret);
+
+  const handleClickDeleteButton = () => {
+    deleteCommentApi({ postType, id: commentId });
+  };
 
   const onSubmit = async ({ commentValue }) => {
     if (!userInfo) {
@@ -83,9 +87,7 @@ export default function CommentForm({
       <button form={formId} type="submit">
         작성
       </button>
-      {hasDeleteButton && (
-        <button onClick={() => handleClickDeleteButton(commentId, parentId)}>삭제</button>
-      )}
+      {hasDeleteButton && <button onClick={handleClickDeleteButton}>삭제</button>}
       {hasCancelButton && <button onClick={handleCancel}>취소</button>}
     </S.FormBox>
   );

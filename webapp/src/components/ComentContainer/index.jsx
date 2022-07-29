@@ -29,15 +29,6 @@ function CommentContainer({ postType, postWriter, postId }) {
 
   const loggedInUserName = userInfo?.name;
 
-  const handleClickDeleteButton = async (id, parentId) => {
-    const { error, isError } = await handleFetcher(commentApi.DELETE_COMMENT, { postType, id });
-    if (isError) {
-      console.log('error :>> ', error);
-      return;
-    }
-    forceUpdate();
-  };
-
   const addLike = async (postType, idObj) => {
     const { id, loggedInUserId, parentId } = idObj;
     const { error, isError } = await handleFetcher(commentApi.PATCH_COMMENT_LIKE, {
@@ -116,7 +107,6 @@ function CommentContainer({ postType, postWriter, postId }) {
         hasCancelButton={false}
         hasDeleteButton={false}
         handleCancel={() => {}}
-        handleClickDeleteButton={handleClickDeleteButton}
       />
       {!comments && comments?.length !== 0 ? (
         <div>댓글이 없어요.</div>
@@ -127,7 +117,6 @@ function CommentContainer({ postType, postWriter, postId }) {
           postWriter={postWriter}
           loggedInUserName={loggedInUserName}
           comments={comments}
-          handleClickDeleteButton={handleClickDeleteButton}
           handleClickLikeThumb={handleClickLikeThumb}
         />
       )}

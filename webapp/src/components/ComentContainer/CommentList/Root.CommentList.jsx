@@ -15,7 +15,6 @@ RootCommentList.propTypes = {
   postType: PropTypes.string.isRequired,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
-  handleClickDeleteButton: PropTypes.func.isRequired,
   handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
@@ -25,7 +24,6 @@ export default function RootCommentList({
   postWriter,
   loggedInUserName,
   comments,
-  handleClickDeleteButton,
   handleClickLikeThumb,
 }) {
   const { resetTarget, postReplyApi } = useCommentsAction();
@@ -78,7 +76,6 @@ export default function RootCommentList({
                 postId={postId}
                 postWriter={postWriter}
                 commentInfo={commentInfo}
-                handleClickDeleteButton={handleClickDeleteButton}
                 handleClickLikeThumb={handleClickLikeThumb}
               />
               <S.ReplyButtons>
@@ -102,7 +99,6 @@ export default function RootCommentList({
                   hasCancelButton
                   hasDeleteButton={false}
                   handleCancel={() => setReplyFormCommentId(DEFAULT_TARGET)}
-                  handleClickDeleteButton={handleClickDeleteButton}
                 />
               )}
               {!isSecret && replies && replies.length !== 0 && isShowReplies && (
@@ -113,7 +109,6 @@ export default function RootCommentList({
                   postId={postId}
                   loggedInUserName={loggedInUserName}
                   comments={replies}
-                  handleClickDeleteButton={handleClickDeleteButton}
                   handleClickLikeThumb={handleClickLikeThumb}
                 />
               )}
