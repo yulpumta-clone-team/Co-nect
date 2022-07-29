@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
 
-const useAxios = (axiosInstance, config, immediate = true) => {
+const useAxios = ({ axiosInstance, config = {}, immediate = true }) => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     responseData: null,
@@ -17,7 +17,7 @@ const useAxios = (axiosInstance, config, immediate = true) => {
     dispatch({ type: RESET_TYPE });
   };
 
-  const execution = async () => {
+  const execution = async (submitData) => {
     dispatch({ type: LOADING_TYPE });
     try {
       const ctrl = new AbortController();
@@ -25,7 +25,7 @@ const useAxios = (axiosInstance, config, immediate = true) => {
       const {
         status,
         data: { data },
-      } = await axiosInstance({ ...config, signal: ctrl.signal });
+      } = await axiosInstance({ ...config, data: submitData, signal: ctrl.signal });
       dispatch({ type: SUCCESS_TYPE, data });
     } catch (error) {
       console.error(error);
