@@ -26,7 +26,6 @@ public class TeamResponseDto {
     private UserDto user;
     private String name;
     private String session;
-    private String img;
     private Long read;
     private int commentCnt;
     private int likeCnt;
