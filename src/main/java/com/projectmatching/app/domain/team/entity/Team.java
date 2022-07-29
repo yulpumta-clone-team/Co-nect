@@ -33,8 +33,6 @@ public class Team extends BaseTimeEntity {
     @Column
     private String session;
 
-    @Column
-    private String img;
 
     @Column
     private Long read;
@@ -64,7 +62,6 @@ public class Team extends BaseTimeEntity {
     public void update(TeamRequestDto teamRequestDto){
         this.name = teamRequestDto.getName();
         this.session = teamRequestDto.getSession();
-        this.img = teamRequestDto.getImg();
         this.content = teamRequestDto.getContent();
     }
 }
