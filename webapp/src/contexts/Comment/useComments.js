@@ -1,46 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import commentApi from 'api/comment';
 import useAxios from 'hooks/useAxios';
 import { useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import useCommentApi from './useCommentApi';
 
 const DEFAULT_TARGET = -1;
 
 const useComments = () => {
-  const [comments, setComments] = useState([]);
+  const location = useLocation();
+  const [_, postType, postId] = location.pathname.split('/');
+  const { comments, setComments, isLoading, apiError, changeApi, forceRefetch } = useCommentApi(
+    'getComments',
+    commentApi.GET_COMMENT,
+    { postType, postId },
+  );
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
-  const [postCommentState, postCommentApi] = useAxios({
-    axiosInstance: commentApi.POST_COMMENT,
-    immediate: false,
-  });
 
-  const [postReplyState, postReplyApi] = useAxios({
-    axiosInstance: commentApi.POST_COMMENT,
-    immediate: false,
-  });
+  const postCommentApi = (config) => changeApi('postComments', commentApi.POST_COMMENT, config);
+  const postReplyApi = (config) => changeApi('postReply', commentApi.POST_REPLY, config);
+  const patchCommentApi = (config) => changeApi('postComments', commentApi.PATCH_COMMENT, config);
+  const pathReplyApi = (config) => changeApi('pathReply', commentApi.PATCH_REPLY, config);
+  const deleteCommentApi = (config) =>
+    changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
 
-  const [patchCommentState, patchCommentApi] = useAxios({
-    axiosInstance: commentApi.PATCH_COMMENT,
-    immediate: false,
-  });
+  const patchCommentLikeApi = (config) =>
+    changeApi('deleteComment', commentApi.PATCH_COMMENT_LIKE, config);
 
-  const [pathCommentState, pathReplyApi] = useAxios({
-    axiosInstance: commentApi.PATCH_REPLY,
-    immediate: false,
-  });
-
-  const [deleteCommentState, deleteCommentApi] = useAxios({
-    axiosInstance: commentApi.DELETE_COMMENT,
-    immediate: false,
-  });
-
-  const [patchCommentLikeState, patchCommentLikeApi] = useAxios({
-    axiosInstance: commentApi.PATCH_COMMENT_LIKE,
-    immediate: false,
-  });
-
-  const [patchCommentUnLikeState, patchCommentUnLikeApi] = useAxios({
-    axiosInstance: commentApi.PATCH_COMMENT_UN_LIKE,
-    immediate: false,
-  });
+  const patchCommentUnLikeApi = (config) =>
+    changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
 
   const addLike = async (postType, idObj) => {
     const { id, loggedInUserId, parentId } = idObj;
@@ -74,7 +62,6 @@ const useComments = () => {
     }
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleClickLikeThumb = async (isLikesContainUserId, postType, idObj) => {
     if (isLikesContainUserId) {
       removeLike(postType, idObj);
@@ -112,8 +99,8 @@ const useComments = () => {
     ],
   );
   const states = useMemo(
-    () => ({ comments, editTargetCommentId, postCommentState, postReplyState }),
-    [, comments, editTargetCommentId, postCommentState, postReplyApi],
+    () => ({ postType, postId, comments, editTargetCommentId }),
+    [postType, postId, comments, editTargetCommentId],
   );
   return [states, actions];
 };
