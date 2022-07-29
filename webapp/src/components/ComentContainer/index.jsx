@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { handleFetcher } from 'utils';
 import commentApi from 'api/comment';
@@ -8,8 +8,8 @@ import CommentProvider, {
   useCommentsAction,
   useCommentsState,
 } from 'contexts/Comment/Comment.Provider';
-import CommentList from './CommentList';
 import CommentForm from './CommentForm';
+import RootCommentList from './CommentList/Root.CommentList';
 
 export default WithProvider({ Provider: CommentProvider, Component: CommentContainer });
 
@@ -186,7 +186,7 @@ function CommentContainer({ postType, postWriter, postId }) {
       {!comments && comments?.length !== 0 ? (
         <div>댓글이 없어요.</div>
       ) : (
-        <CommentList
+        <RootCommentList
           isReplies={false}
           postType={postType}
           postWriter={postWriter}

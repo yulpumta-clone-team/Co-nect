@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import CommentForm from './CommentForm';
-import Comment from './Comment';
-import * as S from './style';
+import CommentForm from '../CommentForm';
+import Comment from '../Comment';
+import * as S from '../style';
 
 const DEFAULT_TARGET = -1;
 
-CommentList.propTypes = {
+NestedCommentList.propTypes = {
   isReplies: PropTypes.bool.isRequired,
   loggedInUserName: PropTypes.string,
   postType: PropTypes.string.isRequired,
@@ -19,7 +19,7 @@ CommentList.propTypes = {
   handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
-export default function CommentList({
+export default function NestedCommentList({
   isReplies,
   postType,
   postWriter,
@@ -107,21 +107,6 @@ export default function CommentList({
                   hasDeleteButton={false}
                   handleCancel={() => setReplyFormCommentId(DEFAULT_TARGET)}
                   handleClickDeleteButton={handleClickDeleteButton}
-                />
-              )}
-              {!isSecret && replies && replies.length !== 0 && isShowReplies && (
-                <CommentList
-                  isReplies
-                  postType={postType}
-                  postWriter={postWriter}
-                  postId={postId}
-                  loggedInUserName={loggedInUserName}
-                  comments={replies}
-                  resetTarget={resetTarget}
-                  handlePostComment={handlePostComment}
-                  handleSubmitEditComment={handleSubmitEditComment}
-                  handleClickDeleteButton={handleClickDeleteButton}
-                  handleClickLikeThumb={handleClickLikeThumb}
                 />
               )}
             </li>
