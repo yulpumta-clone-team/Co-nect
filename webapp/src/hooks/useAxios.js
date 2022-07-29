@@ -17,7 +17,7 @@ const useAxios = ({ axiosInstance, config = {}, immediate = true }) => {
     dispatch({ type: RESET_TYPE });
   };
 
-  const execution = async (submitData) => {
+  const execution = async (newConfig) => {
     dispatch({ type: LOADING_TYPE });
     try {
       const ctrl = new AbortController();
@@ -25,7 +25,7 @@ const useAxios = ({ axiosInstance, config = {}, immediate = true }) => {
       const {
         status,
         data: { data },
-      } = await axiosInstance({ ...config, data: submitData, signal: ctrl.signal });
+      } = await axiosInstance({ ...config, ...newConfig, signal: ctrl.signal });
       dispatch({ type: SUCCESS_TYPE, data });
     } catch (error) {
       console.error(error);
@@ -41,7 +41,7 @@ const useAxios = ({ axiosInstance, config = {}, immediate = true }) => {
     return () => controller && controller.abort();
   }, [trigger]);
 
-  return { ...state, execution, forceRefetch };
+  return [state, execution, forceRefetch];
 };
 
 export default useAxios;
