@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface UserSignInService {
 
-    UserLoginResDto userLogin(UserLoginDto userLoginDto, HttpServletResponse response);
+    AuthToken userLogin(UserLoginDto userLoginDto, HttpServletResponse response);
 
     void userDelete(String userEamil);
 

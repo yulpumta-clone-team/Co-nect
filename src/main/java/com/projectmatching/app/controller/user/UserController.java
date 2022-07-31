@@ -15,6 +15,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -52,8 +54,11 @@ public class UserController {
      */
     @ApiOperation(value = "일반 로그인, 성공시 유저 id 반환 및 헤더에 토큰 생성")
     @PostMapping("/login")
-    public ResponseTemplate<?> login(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
-        return ResponseTemplate.valueOf(userSignInService.userLogin(userLoginDto,response));
+    public ResponseEntity<ResponseTemplate<Void>> login(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
+        AuthToken authToken = userSignInService.userLogin(userLoginDto,response);
+        return ResponseEntity.ok()
+                .headers(HttpHeaders.readOnlyHttpHeaders(authToken.asHeaders()))
+                .body(ResponseTemplate.of(SUCCESS));
     }
 
 

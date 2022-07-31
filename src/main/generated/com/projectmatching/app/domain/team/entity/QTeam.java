@@ -29,8 +29,6 @@ public class QTeam extends EntityPathBase<Team> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath img = createString("img");
-
     public final StringPath name = createString("name");
 
     public final NumberPath<Long> read = createNumber("read", Long.class);

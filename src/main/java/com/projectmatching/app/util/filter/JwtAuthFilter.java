@@ -1,16 +1,19 @@
 package com.projectmatching.app.util.filter;
 
+import com.projectmatching.app.constant.JwtConstant;
+import com.projectmatching.app.domain.user.UserRepository;
+import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
+import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -18,8 +21,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.LinkedHashSet;
 
 
 
@@ -29,19 +30,23 @@ import java.util.LinkedHashSet;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final AuthTokenProvider authTokenProvider;
-
+    private final UserRepository userRepository;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         if(authTokenProvider.isTokenExist(request)){
             String token = authTokenProvider.resolveToken(request);
-            if (authTokenProvider.validateToken(token)) {
+            if (authTokenProvider.isTokenValid(token)) {
                 log.info("토큰 유효");
-                // 토큰이 유효하면 토큰으로부터 유저 정보를 받아옵니다.
-                Authentication authentication = getAuthentication(token);
                 // SecurityContext 에 Authentication 객체를 저장합니다.
-                log.info("Authentication = {}",authentication);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                setAuthentication(token);
+            }else{
+                if(authTokenProvider.isRefreshTokenExist(request)){
+                    String refreshToken = authTokenProvider.resolveRefreshToken(request);
+                    if(!authTokenProvider.isTokenValid(refreshToken)){
+                        reIssueAccessToken(refreshToken,response);
+                    }
+                }
             }
         }
         // 유효한 토큰인지 확인합니다.
@@ -49,6 +54,23 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    private void setAuthentication(String token){
+        SecurityContextHolder.getContext().setAuthentication(getAuthentication(token));
+    }
+
+    private void reIssueAccessToken(String refreshToken, HttpServletResponse response){
+
+        Long memberId = AuthTokenProvider.getUserId(refreshToken);
+        AuthToken authToken = authTokenProvider.createTokens(
+                UserDto.of(
+                        (userRepository.findById(memberId)
+                                .orElseThrow(CoNectNotFoundException::new))
+                )
+        );
+        setAuthentication(authToken.getToken());
+        response.setHeader(JwtConstant.HEADER_NAME,authToken.getToken());
+        response.setHeader(JwtConstant.REFRESH_TOKEN_HEADER_NAME,authToken.getRefreshToken());
+    }
 
     // JWT 토큰에서 인증 정보 조회
     private Authentication getAuthentication(String token) {
