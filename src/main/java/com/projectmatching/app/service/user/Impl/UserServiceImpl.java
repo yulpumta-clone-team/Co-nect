@@ -138,4 +138,19 @@ public class UserServiceImpl implements UserService {
 
         return userLikings.stream().map(u-> u.getToUser()).map(UserProfileDto::of).collect(Collectors.toList());
     }
+
+
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Boolean isDuplicateEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Boolean isDuplicateName(String name) {
+        return userRepository.existsByName(name);
+    }
 }
