@@ -25,7 +25,11 @@ function useIntersect(customOption) {
       observer = new IntersectionObserver(handleObsever, { ...defaultOption, ...customOption });
       observer.observe(loadMoreRef.current);
     }
-    return () => observer.current && observer.disconnect();
+    return () => {
+      if (observer) {
+        observer.current && observer.disconnect();
+      }
+    };
   }, [customOption, handleObsever, loadMoreRef]);
   return [loadMoreRef, page, resetPage];
 }

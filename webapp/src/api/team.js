@@ -4,14 +4,14 @@ import rootApiInstance from './core';
 const teamApi = {
   GET_TEAM_ARR(config) {
     return rootApiInstance({
-      url: API.TEAM.LIST,
+      url: API.TEAM.INDEX,
       method: 'get',
       ...config,
     });
   },
   GET_TEAM_DETAIL({ id }) {
     return rootApiInstance({
-      url: `${API.TEAM.DETAIL}/${id}`,
+      url: `${API.TEAM.INDEX}/${id}`,
       method: 'get',
     });
   },
@@ -29,14 +29,14 @@ const teamApi = {
   },
   POST_TEAM_POST({ data }) {
     return rootApiInstance({
-      url: API.TEAM.DETAIL,
+      url: API.TEAM.INDEX,
       method: 'post',
       data,
     });
   },
   EDIT_TEAM_POST({ id, data }) {
     return rootApiInstance({
-      url: `${API.TEAM.DETAIL}/${id}`,
+      url: `${API.TEAM.INDEX}/${id}`,
       method: 'patch',
       data,
     });

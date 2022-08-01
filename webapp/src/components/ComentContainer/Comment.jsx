@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserInfo } from 'service/auth';
+import { commentInfoType } from 'types/comment.type';
 import CommentForm from './CommentForm';
 import * as S from './style';
 
@@ -10,14 +11,7 @@ Comment.propTypes = {
   isSecret: PropTypes.bool.isRequired,
   postType: PropTypes.string.isRequired,
   postId: PropTypes.number.isRequired,
-  commentInfo: PropTypes.shape({
-    img: PropTypes.string.isRequired,
-    secret: PropTypes.bool.isRequired,
-    writer: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    feeling: PropTypes.array.isRequired,
-    parentId: PropTypes.number,
-  }),
+  commentInfo: commentInfoType,
   editTargetCommentId: PropTypes.number.isRequired,
   resetTarget: PropTypes.func.isRequired,
   selectEditTargetComment: PropTypes.func.isRequired,

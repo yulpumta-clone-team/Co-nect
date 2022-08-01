@@ -1,11 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import MarkdownEditor from 'components/MdEditor';
-import useFileUploader from 'hooks/useFileUploader';
-import useInput from 'hooks/useInput';
-import { hopeSessionOption, skillOptions } from 'constant';
-import Loader from 'components/Loader';
-import { handleFetcher } from 'utils';
 import userApi from 'api/user';
 
 import WithLoading from 'hoc/WithLoading';
