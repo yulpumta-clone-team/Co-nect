@@ -14,22 +14,20 @@ export default function NestedCommentList({ postWriter, loggedInUserName, commen
   const { isShowSecretComment } = useCommentsAction();
   return (
     <S.ListBox>
-      {comments &&
-        comments.length !== 0 &&
-        comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
-          const { secret, writer: commenWriter, parentId } = commentInfo;
-          const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
-          return (
-            <li key={id}>
-              <NestedCommentElement
-                commentId={id}
-                isSecret={isSecret}
-                postWriter={postWriter}
-                commentInfo={commentInfo}
-              />
-            </li>
-          );
-        })}
+      {comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
+        const { secret, writer: commenWriter, parentId } = commentInfo;
+        const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
+        return (
+          <li key={id}>
+            <NestedCommentElement
+              commentId={id}
+              isSecret={isSecret}
+              postWriter={postWriter}
+              commentInfo={commentInfo}
+            />
+          </li>
+        );
+      })}
     </S.ListBox>
   );
 }

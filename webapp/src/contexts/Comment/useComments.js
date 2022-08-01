@@ -2,35 +2,25 @@
 import commentApi from 'api/comment';
 import { useCallback, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { getUserInfo } from 'service/auth';
 import useCommentApi from './useCommentApi';
 
 const DEFAULT_TARGET = -1;
 
 const useComments = () => {
+  // 로그인 유저 정보
+  const userInfo = getUserInfo(); // {userId, name, profileImg}
+  const loggedInUserId = userInfo?.userId;
+
   const location = useLocation();
   const [_, postType, postId] = location.pathname.split('/');
+
+  // api관련 로직
   const { comments, setComments, isLoading, apiError, changeApi, forceRefetch } = useCommentApi(
     'getComments',
     commentApi.GET_COMMENT,
     { postType, postId },
   );
-  const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_TARGET);
-  const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
-  const [createReplyTargetCommentId, setCreateReplyTargetCommentId] = useState(DEFAULT_TARGET);
-
-  const showReplyList = (commentId) => setTargetReplyListId(commentId);
-
-  const resetShowReplyList = () => setTargetReplyListId(DEFAULT_TARGET);
-
-  const selectEditTargetComment = (commentId) => setEditTargetCommentId(commentId);
-
-  const resetEditTargetCommentId = () => setEditTargetCommentId(DEFAULT_TARGET);
-
-  const showCreateReplyFormOnTargetComment = (commentId) =>
-    setCreateReplyTargetCommentId(commentId);
-
-  const resetCreateReplyTargetCommentId = () => setCreateReplyTargetCommentId(DEFAULT_TARGET);
-
   const postCommentApi = (config) => changeApi('postComments', commentApi.POST_COMMENT, config);
   const postReplyApi = (config) => changeApi('postReply', commentApi.POST_REPLY, config);
   const patchCommentApi = (config) => changeApi('postComments', commentApi.PATCH_COMMENT, config);
@@ -41,6 +31,20 @@ const useComments = () => {
     changeApi('deleteComment', commentApi.PATCH_COMMENT_LIKE, config);
   const patchCommentUnLikeApi = (config) =>
     changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
+
+  // useState관련 로직
+  const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_TARGET);
+  const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
+  const [createReplyTargetCommentId, setCreateReplyTargetCommentId] = useState(DEFAULT_TARGET);
+
+  // setState관련 로직
+  const showReplyList = (commentId) => setTargetReplyListId(commentId);
+  const resetShowReplyList = () => setTargetReplyListId(DEFAULT_TARGET);
+  const selectEditTargetComment = (commentId) => setEditTargetCommentId(commentId);
+  const resetEditTargetCommentId = () => setEditTargetCommentId(DEFAULT_TARGET);
+  const showCreateReplyFormOnTargetComment = (commentId) =>
+    setCreateReplyTargetCommentId(commentId);
+  const resetCreateReplyTargetCommentId = () => setCreateReplyTargetCommentId(DEFAULT_TARGET);
 
   const addLike = async (postType, idObj) => {
     const { id, loggedInUserId, parentId } = idObj;
@@ -87,9 +91,9 @@ const useComments = () => {
     if (!loggedInUserName) {
       return true;
     }
-    const isSameCommentWriter = () => postWriterName === loggedInUserName;
-    const isSamePostWriter = () => commentWriterName === loggedInUserName;
-    if (isSameCommentWriter() || isSamePostWriter()) {
+    const isSameCommentWriter = postWriterName === loggedInUserName;
+    const isSamePostWriter = commentWriterName === loggedInUserName;
+    if (isSameCommentWriter || isSamePostWriter) {
       return false;
     }
 
@@ -104,6 +108,13 @@ const useComments = () => {
     }
     return false;
   };
+
+  const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
+    const findUser = targetLikesArray.find((id) => id === userId);
+    return !!findUser;
+  }, []);
+
+  const isLikesContainUserId = (likedUserIds) => checkUserLikeTarget(loggedInUserId, likedUserIds);
 
   const actions = useMemo(
     () => ({
@@ -120,6 +131,7 @@ const useComments = () => {
       deleteCommentApi,
       handleClickLikeThumb,
       isShowSecretComment,
+      isLikesContainUserId,
     }),
     [
       showReplyList,
@@ -133,6 +145,7 @@ const useComments = () => {
       postReplyApi,
       handleClickLikeThumb,
       isShowSecretComment,
+      isLikesContainUserId,
     ],
   );
   const states = useMemo(

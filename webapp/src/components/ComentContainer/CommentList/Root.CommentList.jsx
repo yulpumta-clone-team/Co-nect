@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
-
 import * as S from '../style';
 import NestedCommentList from './Nested.CommentList';
 import RootCommentElement from '../CommentElement/Root.CommentElement';
@@ -23,7 +22,6 @@ export default function RootCommentList({ postWriter, loggedInUserName, comments
   const { createReplyTargetCommentId, targetReplyListId } = useCommentsState();
 
   const isShowReplies = (commentId) => commentId === targetReplyListId;
-
   const handleClickShowReplyButton = (commentId) => showReplyList(commentId);
   const handleClickHideReplyButton = (commentId) => resetShowReplyList(commentId);
   const handleClickShowCreateForm = (commentId) => showCreateReplyFormOnTargetComment(commentId);

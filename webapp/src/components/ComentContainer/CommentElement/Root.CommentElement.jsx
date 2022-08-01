@@ -21,7 +21,8 @@ RootCommentElement.propTypes = {
 
 export default function RootCommentElement({ commentId, isSecret, commentInfo }) {
   const { postType, editTargetCommentId } = useCommentsState();
-  const { selectEditTargetComment, handleClickLikeThumb } = useCommentsAction();
+  const { selectEditTargetComment, handleClickLikeThumb, isLikesContainUserId } =
+    useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
   const {
@@ -36,24 +37,12 @@ export default function RootCommentElement({ commentId, isSecret, commentInfo })
   const isEditTargetComment = commentId === editTargetCommentId;
   const isNested = Boolean(parentId);
 
-  const handleClickTargetComment = () => {
-    selectEditTargetComment(commentId);
-  };
+  const handleClickTargetComment = () => selectEditTargetComment(commentId);
 
   const handleClickThumbSvg = () => {
     const idObj = { commentId, loggedInUserId, parentId };
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
-
-  const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
-    const findUser = targetLikesArray.find((id) => id === userId);
-    return !!findUser;
-  }, []);
-
-  const isLikesContainUserId = useMemo(
-    () => checkUserLikeTarget(loggedInUserId, likedUserIds),
-    [checkUserLikeTarget, likedUserIds, loggedInUserId],
-  );
 
   return (
     <S.CommentBox isNested={isNested}>
