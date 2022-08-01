@@ -102,10 +102,7 @@ public class UserServiceImpl implements UserService {
         //TODO 이부분 수정 필요, 현재 안쓰임
         UserProfileDto userProfileDto = UserProfileDto.builder()
                 .name(userDetails.getUserRealName())
-                .slogan(postUserProfileDto.getSlogan())
-                .description(postUserProfileDto.getDescription())
                 .img(postUserProfileDto.getImg())
-                .hopeSession(postUserProfileDto.getHope_session())
                 .skills(postUserProfileDto.getSkills())
                 .job(postUserProfileDto.getJob())
                 .build();
