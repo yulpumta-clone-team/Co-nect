@@ -29,9 +29,9 @@ import MyList from 'pages/MyList';
 import NewPost from 'pages/NewTeamPost';
 import MyPost from 'pages/MyPost';
 import NotFound from 'pages/NotFound';
+import EssentialInfo from 'pages/EssentialInfo';
 import PublicRoute from 'hoc/PublicRoute';
 import PrivateRoute from 'hoc/PrivateRoute';
-import EssentialInfo from 'pages/EssentialInfo/EssentialInfo';
 import AppLayout from './style';
 
 function App() {

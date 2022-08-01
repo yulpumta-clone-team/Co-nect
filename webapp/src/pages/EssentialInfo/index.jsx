@@ -39,28 +39,6 @@ export default function EssentialInfo() {
     setUserSkill(e.target.value);
     setSelectedSkills((prev) => [...prev, e.target.value]);
   }, []);
-
-  // 희망 작업 기간
-  const [hopeSession, setHopeSession] = useState('');
-  const [selectedHopeSession, setSelectedHopeSession] = useState([]);
-  const onHopeSessionChange = useCallback((e) => {
-    setHopeSession(e.target.getValues('hopeSession'));
-    setSelectedHopeSession((prev) => [...prev, e.target.getValues('hopeSession')]);
-  });
-  // 직업
-  const [userJob, setUserJob] = useState('');
-  const [selectedJob, setSelectedJob] = useState([]);
-  const onJobChange = useCallback((e) => {
-    setUserJob(e.target.getValues('userJob'));
-    setSelectedJob((prev) => [...prev, e.target.getValues('userJob')]);
-  });
-  // 팀 소속 여부 체크
-  const [belongTeam, setBelongTeam] = useState([]);
-  const [selectedTeam, setSelectedTeam] = useState([]);
-  const onCheckedElement = useCallback((e) => {
-    setBelongTeam(e.target.getValues('belongTeam'));
-    setSelectedTeam((prev) => [...prev, e.target.getValues('belongTeam')]);
-  });
   // 공고글 (내용)
   const [mdcontent, setMdContent] = useState('');
   // form 제출 시 작동
@@ -135,8 +113,6 @@ export default function EssentialInfo() {
                     register={register}
                     getFieldState={getFieldState}
                     formState={formState}
-                    selectedHopeSession={selectedHopeSession}
-                    selectedJob={selectedJob}
                     errors={errors}
                   />
                 }
