@@ -41,11 +41,11 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
         OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
         UserDto user = toDto(oAuth2User);
-        String token = authTokenProvider.createToken(user);
-        log.info("Oatuh 로그인후 토큰 생성  : {}",token);
+        authTokenProvider.createTokens(user);
+        log.info("Oatuh 로그인후 토큰 생성  : {}");
 
 //        writeTokenCookie(response,token);
-        resultRedirectStrategy(request, response, authentication);
+//        resultRedirectStrategy(request, response, authentication);
 
     }
 
@@ -73,13 +73,13 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
 
     }
-
-    private void writeTokenCookie(HttpServletResponse response, String token) throws UnsupportedEncodingException {
-
-        authTokenProvider.createCookie(response,token);
-
-    }
-
+//
+//    private void writeTokenCookie(HttpServletResponse response, String token) throws UnsupportedEncodingException {
+//
+//        authTokenProvider.createCookie(response,token);
+//
+//    }
+//
 
 
     private UserDto toDto(OAuth2User oAuth2User) {

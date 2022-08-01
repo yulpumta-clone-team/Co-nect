@@ -38,4 +38,9 @@ public interface UserService {
     List<UserProfileDto> getUserLikingList(UserDetailsImpl userDetails);
 
 
+    Boolean isDuplicateEmail(String email);
+
+    Boolean isDuplicateName(String name);
+
+
 }

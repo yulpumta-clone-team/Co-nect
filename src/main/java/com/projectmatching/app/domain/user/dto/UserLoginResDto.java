@@ -10,27 +10,25 @@ import lombok.*;
  * 오직 로그인시에 반환되는 DTO
  */
 @Getter @Setter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor
 @Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonInclude(JsonInclude.Include.NON_NULL) //null 이면 생성되지 않음
-public class UserLoginResDto {
+public class UserLoginResDto{
 
     private Long id;
     private String img;
     private String email;
     private String name;
     private Boolean isFirst;//최초 로그인인지 확인하는 부분
-    private Role role;
 
 
     public static UserLoginResDto toUserLoginResDto(User user) {
+
         UserLoginResDto userLoginResDto = UserLoginResDto.builder()
                 .img(user.getImg())
                 .email(user.getEmail())
                 .id(user.getId())
                 .name(user.getName())
-                .role(user.getRole())
                 .isFirst(isFirstLoginUser(user))
                 .build();
         return userLoginResDto;
@@ -45,8 +43,5 @@ public class UserLoginResDto {
         else return false;
     }
 
-    public String getRolekey(){
-        return this.role.getKey();
-    }
 
 }

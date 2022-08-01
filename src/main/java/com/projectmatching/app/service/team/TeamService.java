@@ -54,7 +54,6 @@ public class TeamService {
             Team team = Team.builder()
                     .name(requestDto.getName())
                     .session(requestDto.getSession())
-                    .img(requestDto.getImg())
                     .content(requestDto.getContent())
                     .read(0L)
                     .build();

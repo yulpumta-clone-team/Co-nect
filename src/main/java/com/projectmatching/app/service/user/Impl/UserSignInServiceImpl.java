@@ -5,6 +5,7 @@ import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.JwtConstant;
 import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
+import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
 import com.projectmatching.app.domain.user.dto.UserLoginResDto;
 import com.projectmatching.app.domain.user.entity.User;
@@ -24,7 +25,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGIN_USER_ERROR;
-import static com.projectmatching.app.util.AuthTokenProvider.createCookie;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +46,7 @@ public class UserSignInServiceImpl implements UserSignInService {
      */
     @Transactional(readOnly = true)
     @Validation
-    public UserLoginResDto userLogin(UserLoginDto userLoginDto, HttpServletResponse response){
+    public AuthToken userLogin(UserLoginDto userLoginDto, HttpServletResponse response){
         try {
             User user = userRepository.findByEmail(userLoginDto.getEmail()).orElseThrow(CoNectNotFoundException::new);
             if(passwordEncoder.matches(userLoginDto.getPwd(),user.getPwd())){
@@ -54,10 +54,9 @@ public class UserSignInServiceImpl implements UserSignInService {
                 UserLoginResDto userLoginResDto = Optional.ofNullable(qUserRepository.login(userLoginDto))
                         .map(UserLoginResDto::toUserLoginResDto)
                         .orElseThrow(NullPointerException::new);
-                String token = jwtTokenProvider.createToken(userLoginResDto); //토큰 생성
-                response.setHeader(JwtConstant.HEADER_NAME,token);
-//                createCookie(response, token); //쿠키 생성
-                return userLoginResDto;
+
+                return jwtTokenProvider.createTokens(UserDto.of(user));
+
             }
 
             throw new ResponeException(LOGIN_USER_ERROR);
