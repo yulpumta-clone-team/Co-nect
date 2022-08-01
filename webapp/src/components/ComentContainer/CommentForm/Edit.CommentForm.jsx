@@ -4,73 +4,52 @@ import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
-import * as S from './style';
+import * as S from '../style';
 
-const USE_FORM_COMMENT_KEY = 'commentValue';
-
-CommentForm.propTypes = {
+EditRootCommentForm.propTypes = {
   initialText: PropTypes.string.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  commentInfo: PropTypes.shape({
-    id: PropTypes.number,
-    parentId: PropTypes.number,
-    secret: PropTypes.bool,
-  }).isRequired,
-  hasCancelButton: PropTypes.bool.isRequired,
-  hasDeleteButton: PropTypes.bool.isRequired,
-  handleCancel: PropTypes.func.isRequired,
+  secret: PropTypes.bool.isRequired,
 };
 
-export default function CommentForm({
-  initialText,
-  submitCallback,
-  commentInfo,
-  hasCancelButton,
-  hasDeleteButton,
-  handleCancel,
-}) {
+export function EditRootCommentForm({ initialText, secret }) {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {},
   });
-  const { postType, postId } = useCommentsState();
-  const { deleteCommentApi } = useCommentsAction();
-  const { id: commentId, parentId, secret } = commentInfo;
-  const formId = commentId || 'rootForm';
+  const { postType, postId, editTargetCommentId } = useCommentsState();
+  const { patchCommentApi, resetEditTargetCommentId } = useCommentsAction();
   const [isSecret, setIsSecret] = useState(secret);
 
-  const handleClickDeleteButton = () => {
-    deleteCommentApi({ postType, id: commentId });
-  };
+  const handleClickCancel = () => resetEditTargetCommentId();
 
-  const onSubmit = async ({ commentValue }) => {
+  const onSubmit = async ({ editRootCommentForm }) => {
     if (!userInfo) {
       alert('로그인을 먼저해주세요');
     }
     const newCommentData = setPostIdOnSubmitData(postType, postId, {
-      parentId,
       writer: userInfo?.name,
       secret: isSecret,
-      content: commentValue,
+      content: editRootCommentForm,
     });
-    await submitCallback({ postType, data: newCommentData, id: commentId });
-    setValue(USE_FORM_COMMENT_KEY, '');
+    await patchCommentApi({ postType, id: editTargetCommentId, data: newCommentData });
     setIsSecret(false);
+    reset({ editRootCommentForm: '' });
+    resetEditTargetCommentId();
   };
   return (
     <S.FormBox style={{ marginBottom: '12px' }}>
       <form
-        id={formId}
+        id="editRootCommentForm"
         style={{ display: 'flex', flexDirection: 'column' }}
         onSubmit={handleSubmit(onSubmit)}
       >
         <textarea
-          {...register(USE_FORM_COMMENT_KEY, {
+          {...register('editRootCommentForm', {
             required: '내용을 입력해주세요.',
           })}
           defaultValue={initialText}
@@ -81,11 +60,10 @@ export default function CommentForm({
       </form>
       <span>비밀댓글여부</span>
       <input type="checkbox" checked={isSecret} onChange={() => setIsSecret((prev) => !prev)} />
-      <button form={formId} type="submit">
+      <button form="editRootCommentForm" type="submit">
         작성
       </button>
-      {hasDeleteButton && <button onClick={handleClickDeleteButton}>삭제</button>}
-      {hasCancelButton && <button onClick={handleCancel}>취소</button>}
+      <button onClick={handleClickCancel}>취소</button>
     </S.FormBox>
   );
 }

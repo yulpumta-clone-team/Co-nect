@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
-
 import * as S from '../style';
 import NestedCommentElement from '../CommentElement/Nested.CommentElement';
 
@@ -14,7 +12,6 @@ NestedCommentList.propTypes = {
 };
 
 export default function NestedCommentList({ postWriter, loggedInUserName, comments }) {
-  const { resetTarget } = useCommentsAction();
   const [isShowReplies, setIsShowReplies] = useState(false);
   const [replyFormCommentId, setReplyFormCommentId] = useState(DEFAULT_TARGET);
 
@@ -57,23 +54,11 @@ export default function NestedCommentList({ postWriter, loggedInUserName, commen
           return (
             <li key={id}>
               <NestedCommentElement
-                id={id}
+                commentId={id}
                 isSecret={isSecret}
                 postWriter={postWriter}
                 commentInfo={commentInfo}
-                resetTarget={resetTarget}
               />
-              <S.ReplyButtons>
-                {!isSecret && !isShowReplies && (
-                  <button onClick={handleShowReplies}>답글 보여주기</button>
-                )}
-                {!isSecret && isShowReplies && (
-                  <button onClick={handleShowReplies}>답글 가리기</button>
-                )}
-                {!isSecret && replyFormCommentId !== id && (
-                  <button onClick={() => setReplyFormCommentId(id)}>답글 작성하기</button>
-                )}
-              </S.ReplyButtons>
             </li>
           );
         })}

@@ -18,7 +18,7 @@ export function CreateReplyCommentForm({ secret, commentId }) {
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {},
@@ -29,23 +29,28 @@ export function CreateReplyCommentForm({ secret, commentId }) {
 
   const handleClickCancel = () => resetCreateReplyTargetCommentId();
 
-  const onSubmit = async ({ commentValue }) => {
+  const onSubmit = async ({ createRootCommentForm }) => {
     if (!userInfo) {
       alert('로그인을 먼저해주세요');
     }
     const newCommentData = setPostIdOnSubmitData(postType, postId, {
       writer: userInfo?.name,
       secret: isSecret,
-      content: commentValue,
+      content: createRootCommentForm,
     });
     await postReplyApi({ postType, data: newCommentData });
     setIsSecret(false);
+    reset({ createRootCommentForm: '' });
   };
   return (
     <S.FormBox style={{ marginBottom: '12px' }}>
-      <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        id="createReplyCommentForm"
+        style={{ display: 'flex', flexDirection: 'column' }}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <textarea
-          {...register('CreateReplyCommentForm', {
+          {...register('createReplyCommentForm', {
             required: '내용을 입력해주세요.',
           })}
           defaultValue=""
@@ -56,7 +61,9 @@ export function CreateReplyCommentForm({ secret, commentId }) {
       </form>
       <span>비밀댓글여부</span>
       <input type="checkbox" checked={isSecret} onChange={() => setIsSecret((prev) => !prev)} />
-      <button type="submit">작성</button>
+      <button form="createReplyCommentForm" type="submit">
+        작성
+      </button>
       <button onClick={handleClickCancel}>취소</button>
     </S.FormBox>
   );

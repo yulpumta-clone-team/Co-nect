@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
-import CommentForm from '../CommentForm';
 import * as S from '../style';
+import { EditRootCommentForm } from '../CommentForm/Edit.CommentForm';
 
 NestedCommentElement.propTypes = {
-  id: PropTypes.number.isRequired,
+  commentId: PropTypes.number.isRequired,
   isSecret: PropTypes.bool.isRequired,
   commentInfo: PropTypes.shape({
     img: PropTypes.string.isRequired,
@@ -17,19 +17,11 @@ NestedCommentElement.propTypes = {
     feeling: PropTypes.array.isRequired,
     parentId: PropTypes.number,
   }),
-  handleClickDeleteButton: PropTypes.func.isRequired,
-  handleClickLikeThumb: PropTypes.func.isRequired,
 };
 
-export default function NestedCommentElement({
-  id,
-  isSecret,
-  commentInfo,
-  handleClickDeleteButton,
-  handleClickLikeThumb,
-}) {
+export default function NestedCommentElement({ commentId, isSecret, commentInfo }) {
   const { editTargetCommentId, postType } = useCommentsState();
-  const { selectEditTargetComment, resetTarget, patchCommentApi } = useCommentsAction();
+  const { selectEditTargetComment, handleClickLikeThumb, patchCommentApi } = useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
   const {
@@ -41,11 +33,11 @@ export default function NestedCommentElement({
     parentId,
   } = commentInfo;
   const likesCount = likedUserIds.length;
-  const isTargetEditCommnt = id === editTargetCommentId;
+  const isEditTargetComment = commentId === editTargetCommentId;
   const isNested = Boolean(parentId);
 
   const handleClickThumbSvg = () => {
-    const idObj = { id, loggedInUserId, parentId };
+    const idObj = { commentId, loggedInUserId, parentId };
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
 
@@ -70,10 +62,10 @@ export default function NestedCommentElement({
               <img src={setDefaultProfileImage(img)} alt="profile" />
               <h3>{commenWriter}</h3>
             </S.UserInfo>
-            {!isTargetEditCommnt && (
+            {!isEditTargetComment && (
               <S.ContentInfo>
                 <span>{content}</span>
-                <button onClick={() => selectEditTargetComment(id)}>수정</button>
+                <button onClick={() => selectEditTargetComment(commentId)}>수정</button>
               </S.ContentInfo>
             )}
             <S.LikeInfo>
@@ -83,17 +75,8 @@ export default function NestedCommentElement({
               <span>: {likesCount}</span>
             </S.LikeInfo>
           </S.NormalCommentBox>
-          {isTargetEditCommnt && (
-            <CommentForm
-              postType={postType}
-              initialText={content}
-              submitCallback={patchCommentApi}
-              commentInfo={{ id, parentId, secret }}
-              hasCancelButton
-              hasDeleteButton
-              handleCancel={resetTarget}
-              handleClickDeleteButton={handleClickDeleteButton}
-            />
+          {isEditTargetComment && (
+            <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
           )}
         </>
       )}

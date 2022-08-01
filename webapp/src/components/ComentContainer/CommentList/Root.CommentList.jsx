@@ -1,14 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
-import CommentForm from '../CommentForm';
 
 import * as S from '../style';
 import NestedCommentList from './Nested.CommentList';
 import RootCommentElement from '../CommentElement/Root.CommentElement';
 import { CreateReplyCommentForm } from '../CommentForm/Create.Reply.CommentForm';
-
-const DEFAULT_TARGET = -1;
 
 RootCommentList.propTypes = {
   loggedInUserName: PropTypes.string,
@@ -17,10 +14,9 @@ RootCommentList.propTypes = {
 };
 
 export default function RootCommentList({ postWriter, loggedInUserName, comments }) {
-  const { resetTarget, showCreateReplyFormOnTargetComment } = useCommentsAction();
+  const { showCreateReplyFormOnTargetComment } = useCommentsAction();
   const { createReplyTargetCommentId } = useCommentsState();
   const [isShowReplies, setIsShowReplies] = useState(false);
-  const [replyFormCommentId, setReplyFormCommentId] = useState(DEFAULT_TARGET);
 
   // ! 해당하는 대댓글만 보이게 수정하기
   const handleShowReplies = () => {
@@ -61,7 +57,7 @@ export default function RootCommentList({ postWriter, loggedInUserName, comments
           return (
             <li key={id}>
               <RootCommentElement
-                id={id}
+                commentId={id}
                 isSecret={isSecret}
                 postWriter={postWriter}
                 commentInfo={commentInfo}
@@ -73,7 +69,7 @@ export default function RootCommentList({ postWriter, loggedInUserName, comments
                 {!isSecret && isShowReplies && (
                   <button onClick={handleShowReplies}>답글 가리기</button>
                 )}
-                {!isSecret && replyFormCommentId !== id && (
+                {!isSecret && createReplyTargetCommentId !== id && (
                   <button onClick={() => handleClickShowCreateForm(id)}>답글 작성하기</button>
                 )}
               </S.ReplyButtons>

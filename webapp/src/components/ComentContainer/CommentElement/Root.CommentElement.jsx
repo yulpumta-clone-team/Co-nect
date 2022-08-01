@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
-import CommentForm from '../CommentForm';
 import * as S from '../style';
+import { EditRootCommentForm } from '../CommentForm/Edit.CommentForm';
 
 RootCommentElement.propTypes = {
-  id: PropTypes.number.isRequired,
+  commentId: PropTypes.number.isRequired,
   isSecret: PropTypes.bool.isRequired,
   commentInfo: PropTypes.shape({
     img: PropTypes.string.isRequired,
@@ -19,10 +19,9 @@ RootCommentElement.propTypes = {
   }),
 };
 
-export default function RootCommentElement({ id, isSecret, commentInfo }) {
+export default function RootCommentElement({ commentId, isSecret, commentInfo }) {
   const { postType, editTargetCommentId } = useCommentsState();
-  const { selectEditTargetComment, resetTarget, pathReplyApi, handleClickLikeThumb } =
-    useCommentsAction();
+  const { selectEditTargetComment, handleClickLikeThumb } = useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
   const {
@@ -34,8 +33,12 @@ export default function RootCommentElement({ id, isSecret, commentInfo }) {
     parentId,
   } = commentInfo;
   const likesCount = likedUserIds.length;
-  const isTargetEditCommnt = id === editTargetCommentId;
+  const isEditTargetComment = commentId === editTargetCommentId;
   const isNested = Boolean(parentId);
+
+  const handleClickTargetComment = () => {
+    selectEditTargetComment(commentId);
+  };
 
   const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
     const findUser = targetLikesArray.find((id) => id === userId);
@@ -43,7 +46,7 @@ export default function RootCommentElement({ id, isSecret, commentInfo }) {
   }, []);
 
   const handleClickThumbSvg = () => {
-    const idObj = { id, loggedInUserId, parentId };
+    const idObj = { commentId, loggedInUserId, parentId };
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
 
@@ -63,10 +66,10 @@ export default function RootCommentElement({ id, isSecret, commentInfo }) {
               <img src={setDefaultProfileImage(img)} alt="profile" />
               <h3>{commenWriter}</h3>
             </S.UserInfo>
-            {!isTargetEditCommnt && (
+            {!isEditTargetComment && (
               <S.ContentInfo>
                 <span>{content}</span>
-                <button onClick={() => selectEditTargetComment(id)}>수정</button>
+                <button onClick={handleClickTargetComment}>수정</button>
               </S.ContentInfo>
             )}
             <S.LikeInfo>
@@ -76,15 +79,8 @@ export default function RootCommentElement({ id, isSecret, commentInfo }) {
               <span>: {likesCount}</span>
             </S.LikeInfo>
           </S.NormalCommentBox>
-          {isTargetEditCommnt && (
-            <CommentForm
-              initialText={content}
-              submitCallback={pathReplyApi}
-              commentInfo={{ id, parentId, secret }}
-              hasCancelButton
-              hasDeleteButton
-              handleCancel={resetTarget}
-            />
+          {isEditTargetComment && (
+            <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
           )}
         </>
       )}
