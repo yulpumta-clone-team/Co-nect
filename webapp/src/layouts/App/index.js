@@ -23,7 +23,11 @@ import Callback from 'pages/Callback';
 import Navigation from 'components/Navigation';
 import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
+<<<<<<< HEAD
 import MyList from 'pages/MyList';
+=======
+import UsersList from 'pages/UsersList';
+>>>>>>> back
 import NewPost from 'pages/NewTeamPost';
 import MyPost from 'pages/MyPost';
 import NotFound from 'pages/NotFound';

@@ -1,4 +1,11 @@
 import React, { useEffect, useState } from 'react';
+<<<<<<< HEAD
+=======
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserList } from 'apiAction/user';
+import UserCard from 'components/UserCard';
+import Loader from 'components/Loader';
+>>>>>>> back
 import UpperButton from 'components/UpperButton';
 import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';

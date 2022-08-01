@@ -1,7 +1,11 @@
 import axios from 'axios';
+<<<<<<< HEAD
 // import { AUTH_KEY } from 'constant';
 import { useCallback, useState } from 'react';
 // import { getAuthCookie } from 'utils/cookie';
+=======
+import { useCallback, useState } from 'react';
+>>>>>>> back
 
 const useFileUploader = (initialValue) => {
   const [file, setFile] = useState(initialValue);

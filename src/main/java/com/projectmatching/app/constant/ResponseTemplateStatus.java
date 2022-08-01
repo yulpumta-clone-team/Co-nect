@@ -85,13 +85,19 @@ public enum ResponseTemplateStatus {
     ,
 
 
-
+    /**
+     * 6000 : 안증 및 인가 오류
+     */
+    UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"인증 및 인가 오류",6000),
+    FORBIDDEN(HttpStatus.FORBIDDEN,"접근 에러",6001)
+    ,
 
     /**
      *
      * 9000: 논리적 에러
      */
-    LOGICAL_ERROR("서버 내부 논리 에러",9000);
+    LOGICAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,"서버 내부 논리 에러",9000),
+    NOT_FOUND(HttpStatus.NOT_FOUND,"리소스를 찾을 수 없습니다.",9001);
 
     private HttpStatus httpStatus;
     private final String message;

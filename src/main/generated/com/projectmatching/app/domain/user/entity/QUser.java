@@ -45,6 +45,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath pwd = createString("pwd");
 
+    public final NumberPath<Integer> read = createNumber("read", Integer.class);
+
     public final NumberPath<Integer> respected = createNumber("respected", Integer.class);
 
     public final EnumPath<com.projectmatching.app.domain.user.Role> role = createEnum("role", com.projectmatching.app.domain.user.Role.class);
@@ -62,6 +64,8 @@ public class QUser extends EntityPathBase<User> {
     public final SetPath<com.projectmatching.app.domain.liking.entity.UserCommentLiking, com.projectmatching.app.domain.liking.entity.QUserCommentLiking> userCommentLikings = this.<com.projectmatching.app.domain.liking.entity.UserCommentLiking, com.projectmatching.app.domain.liking.entity.QUserCommentLiking>createSet("userCommentLikings", com.projectmatching.app.domain.liking.entity.UserCommentLiking.class, com.projectmatching.app.domain.liking.entity.QUserCommentLiking.class, PathInits.DIRECT2);
 
     public final SetPath<com.projectmatching.app.domain.comment.entity.UserComment, com.projectmatching.app.domain.comment.entity.QUserComment> userComments = this.<com.projectmatching.app.domain.comment.entity.UserComment, com.projectmatching.app.domain.comment.entity.QUserComment>createSet("userComments", com.projectmatching.app.domain.comment.entity.UserComment.class, com.projectmatching.app.domain.comment.entity.QUserComment.class, PathInits.DIRECT2);
+
+    public final SetPath<com.projectmatching.app.domain.history.entity.UserHistory, com.projectmatching.app.domain.history.entity.QUserHistory> userHistories = this.<com.projectmatching.app.domain.history.entity.UserHistory, com.projectmatching.app.domain.history.entity.QUserHistory>createSet("userHistories", com.projectmatching.app.domain.history.entity.UserHistory.class, com.projectmatching.app.domain.history.entity.QUserHistory.class, PathInits.DIRECT2);
 
     public final SetPath<com.projectmatching.app.domain.liking.entity.UserLiking, com.projectmatching.app.domain.liking.entity.QUserLiking> userLikings = this.<com.projectmatching.app.domain.liking.entity.UserLiking, com.projectmatching.app.domain.liking.entity.QUserLiking>createSet("userLikings", com.projectmatching.app.domain.liking.entity.UserLiking.class, com.projectmatching.app.domain.liking.entity.QUserLiking.class, PathInits.DIRECT2);
 

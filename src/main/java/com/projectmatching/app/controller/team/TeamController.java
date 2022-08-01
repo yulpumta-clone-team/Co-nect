@@ -2,6 +2,7 @@ package com.projectmatching.app.controller.team;
 
 
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
+import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.constant.ServiceConstant;
 import com.projectmatching.app.domain.common.Paging;
 import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
@@ -87,12 +88,31 @@ public class TeamController {
     }
 
     /**
-     * team 좋아요 등록 및 삭제
+     * team 좋아요 등록
      */
-    @ApiOperation(value = "team 게시글 좋아요 등록 및 취소 API", notes = "팀 게시글을 수정합니다.")
-    @PostMapping("/team/liking/{team_id}")
-    public ResponseTemplate<Boolean> teamLike(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long team_id){  //user_id 부분 수정필요
-        Boolean result = teamService.teamLike(team_id, userDetails.getEmail());
-        return ResponseTemplate.valueOf(result);
+    @ApiOperation(value = "team 게시글 좋아요 등록", notes = "팀 게시글 좋아요 등록")
+    @PatchMapping("/team/liking/{team_id}")
+    public ResponseTemplate<Boolean> doTeamLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "team_id") Long teamId){
+        teamService.doTeamLiking(userDetails, teamId);
+        return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
+    }
+
+    /**
+     * team 좋아요 취소
+     */
+    @ApiOperation(value ="팀 게시물 좋아요 취소")
+    @DeleteMapping("/team/unliking/{team_id}")
+    public ResponseTemplate<Boolean> cancelTeamLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "team_id") Long teamId){
+        teamService.cancelTeamLiking(userDetails, teamId);
+        return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
+    }
+
+    /**
+     * 내가 좋아요 한 팀 목록
+     */
+    @ApiOperation(value = "내가 좋아요한 팀 목록")
+    @GetMapping("team/favorite")
+    public ResponseTemplate<List<TeamResponseDto>> getMyFavoriteTeam(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseTemplate.valueOf(teamService.getTeamLikingList(userDetails));
     }
 }

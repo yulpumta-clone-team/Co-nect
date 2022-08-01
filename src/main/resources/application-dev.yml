@@ -13,14 +13,15 @@ spring:
     username: ${MP_DB_USERNAME}
     password: ${MP_DB_PASSWORD}
 
+
   jpa:
     hibernate:
       ddl-auto: none
+
     properties:
       hibernate:
         # show_sql: true
         format_sql: true
-  servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
@@ -33,6 +34,7 @@ spring:
       path: /h2-console
   jackson:
     default-property-inclusion: non_null # null 인경우 필드 생성하지않음
+
 
 
 #포트 변수

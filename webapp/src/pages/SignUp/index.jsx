@@ -4,10 +4,34 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+import { handleSignUp } from 'apiAction/auth';
+import MarkdownEditor from 'components/MdEditor';
+import useInput from 'hooks/useInput';
+import { hopeSessionOption, skillOptions } from 'constant';
+import { isStatusOk } from 'constant/serverStatus';
+>>>>>>> back
 
 function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+<<<<<<< HEAD
+=======
+  const [userImg, onImgChange] = useInput('');
+  const [userJob, onJobChange] = useInput('');
+  const [userPortfolio, onPortfolioChange] = useInput('');
+  const [hopeSession, onHopeSessionChange] = useInput('무관');
+  const [userSlogan, onSloganChange] = useInput('');
+  const [mdcontent, setMdContent] = useState('');
+  const [userSkill, setUserSkill] = useState('');
+  const [selectedSkills, setSelectedSkills] = useState([]);
+
+  const onSkillChange = useCallback((e) => {
+    setUserSkill(e.target.value);
+    setSelectedSkills((prev) => [...prev, e.target.value]);
+  }, []);
+>>>>>>> back
   const {
     register,
     handleSubmit,
@@ -24,10 +48,15 @@ function SignUp() {
     }
     const {
       payload: { status, code, data, message },
+<<<<<<< HEAD
     } = await dispatch(handleSignUp(submitData));
     console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
+=======
+    } = await dispatch(handleSignUp(signUpInfo));
+    console.log(123123123);
+>>>>>>> back
     if (isStatusOk(status)) {
-      navigate('/login');
+      // navigate('/login');
     }
   };
   return (

@@ -21,7 +21,18 @@ const teamApi = {
       method: 'get',
     });
   },
+<<<<<<< HEAD
   GET_TEAM_READS() {
+=======
+  POST_TEAM_POST(data) {
+    return instance({
+      url: 'api/team',
+      method: 'post',
+      data,
+    });
+  },
+  POST_TEAM_COMMENT(data) {
+>>>>>>> back
     return instance({
       url: API.TEAM.READS,
       method: 'get',

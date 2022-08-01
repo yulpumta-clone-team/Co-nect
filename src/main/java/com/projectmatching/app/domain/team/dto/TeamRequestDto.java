@@ -17,9 +17,6 @@ public class TeamRequestDto {
     @ApiModelProperty(example = "프로젝트 기간")
     private String session;
 
-    @ApiModelProperty(example = "이미지")
-    private String img;
-
     @ApiModelProperty(example = "팀 소개글")
     private String content;
 

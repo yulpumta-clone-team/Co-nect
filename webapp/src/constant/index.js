@@ -20,6 +20,7 @@ export const hopeSessionOption = [
   { id: 3, value: '6개월 이하' },
   { id: 4, value: '6개월 이상' },
 ];
+<<<<<<< HEAD
 
 export const POST_TYPE = {
   USER: 'user',
@@ -52,3 +53,5 @@ export const languageSkills = {
   400: 'XD',
   401: 'Figma',
 };
+=======
+>>>>>>> back

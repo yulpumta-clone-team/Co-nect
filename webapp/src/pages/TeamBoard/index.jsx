@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import { handleFetcher } from 'utils';
 import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
+=======
+import { useDispatch, useSelector } from 'react-redux';
+import { getTeamList } from 'apiAction/team';
+import Loader from 'components/Loader';
+>>>>>>> back
 import TeamCard from 'components/TeamCard';
 import { TEAM } from 'constant/route';
 import * as S from './style';

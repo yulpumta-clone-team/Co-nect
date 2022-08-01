@@ -22,6 +22,7 @@ export default function Login() {
     if (password !== verifiedPassword) {
       setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
     }
+<<<<<<< HEAD
     const { value, error, isError } = await handleFetcher(authApi.POST_LOGIN, {
       email,
       pwd: password,
@@ -29,6 +30,14 @@ export default function Login() {
     if (isError) {
       console.log(error);
       return;
+=======
+    const {
+      payload: { status },
+    } = await dispatch(handleLogin(submitData));
+    if (status && isStatusOk(status)) {
+      navigate('/');
+      // window.location.reload();
+>>>>>>> back
     }
     updateUserInfo(value);
     navigate('/');

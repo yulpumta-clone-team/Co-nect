@@ -1,5 +1,8 @@
 import axios from 'axios';
+<<<<<<< HEAD
 import { ROOT_URL } from 'constant/api';
+=======
+>>>>>>> back
 
 const instance = axios.create({
   baseURL: ROOT_URL,
