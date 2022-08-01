@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.SUCCESS;
 
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
 @Api(tags = "유저 회원 관련 컨트롤러")

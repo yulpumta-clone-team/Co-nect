@@ -7,16 +7,13 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
-<<<<<<< HEAD
-=======
+
   datasource:
     url: ${MP_DB_URL}
     driver-class-name: com.mysql.jdbc.Driver
     username: ${MP_DB_USERNAME}
     password: ${MP_DB_PASSWORD}
 
-
->>>>>>> develop
   jpa:
     hibernate:
       ddl-auto: none
@@ -38,11 +35,7 @@ spring:
   jackson:
     default-property-inclusion: non_null # null 인경우 필드 생성하지않음
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> develop
 #포트 변수
 env:
   port: 3000
