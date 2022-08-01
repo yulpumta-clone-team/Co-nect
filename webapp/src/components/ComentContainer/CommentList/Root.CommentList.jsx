@@ -14,8 +14,12 @@ RootCommentList.propTypes = {
 };
 
 export default function RootCommentList({ postWriter, loggedInUserName, comments }) {
-  const { showCreateReplyFormOnTargetComment, showReplyList, resetShowReplyList } =
-    useCommentsAction();
+  const {
+    showCreateReplyFormOnTargetComment,
+    showReplyList,
+    resetShowReplyList,
+    isShowSecretComment,
+  } = useCommentsAction();
   const { createReplyTargetCommentId, targetReplyListId } = useCommentsState();
 
   const isShowReplies = (commentId) => commentId === targetReplyListId;
@@ -24,28 +28,6 @@ export default function RootCommentList({ postWriter, loggedInUserName, comments
   const handleClickHideReplyButton = (commentId) => resetShowReplyList(commentId);
   const handleClickShowCreateForm = (commentId) => showCreateReplyFormOnTargetComment(commentId);
 
-  const checkSecretComment = (postWriterName, commentWriterName, loggedInUserName) => {
-    // true: 가리기 , false: 보여주기
-    if (!loggedInUserName) {
-      return true;
-    }
-    const isSameCommentWriter = () => postWriterName === loggedInUserName;
-    const isSamePostWriter = () => commentWriterName === loggedInUserName;
-    if (isSameCommentWriter() || isSamePostWriter()) {
-      return false;
-    }
-
-    return true;
-  };
-
-  const isShowSecretComment = (secret, postWriterName, commentWriterName, loggedInUserName) => {
-    // secret ? 가리기 : 보여주기
-    if (secret) {
-      const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
-      return isShow;
-    }
-    return false;
-  };
   return (
     <S.ListBox>
       {comments &&

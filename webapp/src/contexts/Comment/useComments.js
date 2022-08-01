@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import commentApi from 'api/comment';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import useCommentApi from './useCommentApi';
 
@@ -82,6 +82,29 @@ const useComments = () => {
     }
   };
 
+  const checkSecretComment = (postWriterName, commentWriterName, loggedInUserName) => {
+    // true: 가리기 , false: 보여주기
+    if (!loggedInUserName) {
+      return true;
+    }
+    const isSameCommentWriter = () => postWriterName === loggedInUserName;
+    const isSamePostWriter = () => commentWriterName === loggedInUserName;
+    if (isSameCommentWriter() || isSamePostWriter()) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const isShowSecretComment = (secret, postWriterName, commentWriterName, loggedInUserName) => {
+    // secret ? 가리기 : 보여주기
+    if (secret) {
+      const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
+      return isShow;
+    }
+    return false;
+  };
+
   const actions = useMemo(
     () => ({
       showReplyList,
@@ -96,6 +119,7 @@ const useComments = () => {
       pathReplyApi,
       deleteCommentApi,
       handleClickLikeThumb,
+      isShowSecretComment,
     }),
     [
       showReplyList,
@@ -108,6 +132,7 @@ const useComments = () => {
       postCommentApi,
       postReplyApi,
       handleClickLikeThumb,
+      isShowSecretComment,
     ],
   );
   const states = useMemo(

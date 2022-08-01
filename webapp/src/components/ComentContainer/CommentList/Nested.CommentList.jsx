@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
 import * as S from '../style';
 import NestedCommentElement from '../CommentElement/Nested.CommentElement';
-
-const DEFAULT_TARGET = -1;
 
 NestedCommentList.propTypes = {
   loggedInUserName: PropTypes.string,
@@ -12,38 +11,7 @@ NestedCommentList.propTypes = {
 };
 
 export default function NestedCommentList({ postWriter, loggedInUserName, comments }) {
-  const [isShowReplies, setIsShowReplies] = useState(false);
-  const [replyFormCommentId, setReplyFormCommentId] = useState(DEFAULT_TARGET);
-
-  const handleShowReplies = useCallback(() => {
-    setIsShowReplies((prev) => !prev);
-  }, []);
-
-  const checkSecretComment = useCallback((postWriterName, commentWriterName, loggedInUserName) => {
-    // true: 가리기 , false: 보여주기
-    if (!loggedInUserName) {
-      return true;
-    }
-    const isSameCommentWriter = () => postWriterName === loggedInUserName;
-    const isSamePostWriter = () => commentWriterName === loggedInUserName;
-    if (isSameCommentWriter() || isSamePostWriter()) {
-      return false;
-    }
-
-    return true;
-  }, []);
-
-  const isShowSecretComment = useCallback(
-    (secret, postWriterName, commentWriterName, loggedInUserName) => {
-      // secret ? 가리기 : 보여주기
-      if (secret) {
-        const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
-        return isShow;
-      }
-      return false;
-    },
-    [checkSecretComment],
-  );
+  const { isShowSecretComment } = useCommentsAction();
   return (
     <S.ListBox>
       {comments &&

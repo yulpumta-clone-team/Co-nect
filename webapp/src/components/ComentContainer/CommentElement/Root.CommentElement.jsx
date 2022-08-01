@@ -40,15 +40,15 @@ export default function RootCommentElement({ commentId, isSecret, commentInfo })
     selectEditTargetComment(commentId);
   };
 
-  const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
-    const findUser = targetLikesArray.find((id) => id === userId);
-    return !!findUser;
-  }, []);
-
   const handleClickThumbSvg = () => {
     const idObj = { commentId, loggedInUserId, parentId };
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
+
+  const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
+    const findUser = targetLikesArray.find((id) => id === userId);
+    return !!findUser;
+  }, []);
 
   const isLikesContainUserId = useMemo(
     () => checkUserLikeTarget(loggedInUserId, likedUserIds),
