@@ -1,5 +1,3 @@
-tester
-=======
 처리 순서
 
 1. 댓글 store 만들기
@@ -69,4 +67,3 @@ tester
 ```
 
 2. comment관련 action을 user와 team에서 분리해 반복할 필요가 없다.
-

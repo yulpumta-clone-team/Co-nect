@@ -6,6 +6,8 @@ import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
 import teamApi from 'api/team';
+import authApi from 'api/auth';
+import * as S from './style';
 
 export default function NewTeamPost() {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ export default function NewTeamPost() {
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [mdcontent, setContent] = useState('');
+  const [error, setError] = useState({ isError: false, msg: '' });
 
   const onSkillChange = useCallback(
     (e) => {
@@ -28,61 +31,65 @@ export default function NewTeamPost() {
     [setUserSkill],
   );
 
-  const handleSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
-      // TODO: inputValidation 추가
-      const submitData = {
-        name: teamName,
-        img: imageFile,
-        session: hopeSession,
-        skills: selectedSkills,
-        content: mdcontent,
-      };
-
-      const { value, error, isError } = await handleFetcher(teamApi.POST_TEAM_POST, {
-        data: submitData,
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // TODO: inputValidation 추가
+    const submitData = {
+      name: teamName,
+      session: hopeSession,
+      skills: selectedSkills,
+      content: mdcontent,
+    };
+    try {
+      const response = await teamApi.POST_TEAM_POST({ submitData });
+      console.log(response);
+      // console.log('data', data);
+      // TODO: 성공시 이동할 페이지 정해서 이동시키기
+    } catch (error) {
+      console.error(error);
+      setError({
+        isError: true,
+        msg: error,
       });
-      if (isError) {
-        console.log(error);
-        return;
-      }
-      navigate('/');
-    },
-    [hopeSession, imageFile, mdcontent, navigate, selectedSkills, teamName],
-  );
+    }
+    navigate('/');
+  };
   return (
-    <>
-      <button onClick={onClickback}>back</button>
-      <br />
-      <h3> 프로필 이미지 </h3>
-      <input type="file" accept="image/*" onChange={fileHandler} />
-      <img src={imageFile} alt="profile" />
-      <form onSubmit={handleSubmit}>
-        <div>
-          팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />
-        </div>
-        <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
-        <select value={userSkill} onChange={onSkillChange}>
-          {skillOptions.map(({ id, value, label }) => (
-            <option key={id} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
-        <span>희망 작업 기간</span>
-        <select value={hopeSession} onChange={onHopeSessionChange}>
-          {hopeSessionOption.map(({ id, value }) => (
-            <option key={id} value={value}>
-              {value}
-            </option>
-          ))}
-        </select>
-        <div>
-          <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
-        </div>
-        <button onSubmit={handleSubmit}>제출</button>
-      </form>
-    </>
+    <S.ModalContainer>
+      <S.Backdrop>
+        <S.DialogBox>
+          <button onClick={onClickback}>back</button>
+          <br />
+          <h3> 프로필 이미지 </h3>
+          <input type="file" accept="image/*" onChange={fileHandler} />
+          <img src={imageFile} alt="profile" />
+          <form onSubmit={handleSubmit}>
+            <div>
+              팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />
+            </div>
+            <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
+            <select value={userSkill} onChange={onSkillChange}>
+              {skillOptions.map(({ id, value, label }) => (
+                <option key={id} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+            <span>희망 작업 기간</span>
+            <select value={hopeSession} onChange={onHopeSessionChange}>
+              {hopeSessionOption.map(({ id, value }) => (
+                <option key={id} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
+            <div>
+              <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
+            </div>
+            <button onSubmit={handleSubmit}>제출</button>
+          </form>
+        </S.DialogBox>
+      </S.Backdrop>
+    </S.ModalContainer>
   );
 }

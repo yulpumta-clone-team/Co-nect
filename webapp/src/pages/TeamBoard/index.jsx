@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { handleFetcher } from 'utils';
-import Cards from 'components/CardsGrid';
+import React from 'react';
 import teamApi from 'api/team';
 import TeamCard from 'components/TeamCard';
 import { TEAM } from 'constant/route';
+import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
+import CardsGrid from 'components/CardsGrid';
 import * as S from './style';
 
 export default function TeamBoard() {
-  const [teamList, setTeamList] = useState([]);
-  const fetchData = async (page) => {
-    try {
-      const { value, error } = await handleFetcher(teamApi.GET_TEAM_ARR, { page });
-      setTeamList((prev) => [...prev, ...value]);
-    } catch (error) {
-      console.log(error);
-      setTeamList((prev) => [...prev]);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  const UserCardsGridWithInfiniteScroll = WithInfiniteScroll({
+    Component: CardsGrid,
+    responseDataKey: 'cards',
+    axiosInstance: teamApi.GET_TEAM_ARR,
+  });
   return (
     <S.BoardWrapper>
-      <Cards cards={teamList} CardComponent={TeamCard} clickLink={`${TEAM}/`} />
+      <UserCardsGridWithInfiniteScroll CardComponent={TeamCard} clickLink={`${TEAM}/`} />
     </S.BoardWrapper>
   );
 }

@@ -1,6 +1,5 @@
-export const ROOT_URL = process.env.REACT_APP_SERVER_API;
-
-export const MOCK_SERVER_URL = process.env.REACT_APP_MOCK_SERVER_API;
+export const API_PREFIX = '/api';
+export const ROOT_API_URL = process.env.REACT_APP_SERVER_API + API_PREFIX;
 
 export const API = {
   AUTH: {
@@ -10,16 +9,14 @@ export const API = {
     WITHDRAWAL: 'user/widthdrawal',
   },
   USER: {
-    LIST: `/users`,
-    DETAIL: `/user`,
+    INDEX: `/user`,
     LIKES: '/user/liking',
     READS: '/user/read',
     PROFILE: `/user/myprofile`,
     MYPOSTS: '/user/myposts',
   },
   TEAM: {
-    LIST: `/teams`,
-    DETAIL: `/team`,
+    INDEX: `/team`,
     LIKES: '/team/liking',
     READS: '/team/read',
   },

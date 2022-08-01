@@ -41,11 +41,11 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
         OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
         UserDto user = toDto(oAuth2User);
-        String token = authTokenProvider.createToken(user);
-        log.info("Oatuh 로그인후 토큰 생성  : {}",token);
+        authTokenProvider.createTokens(user);
+        log.info("Oatuh 로그인후 토큰 생성  : {}");
 
-        writeTokenCookie(response,token);
-        resultRedirectStrategy(request, response, authentication);
+//        writeTokenCookie(response,token);
+//        resultRedirectStrategy(request, response, authentication);
 
     }
 
@@ -56,7 +56,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             String targetUrl = savedRequest.getRedirectUrl();
             redirectStratgy.sendRedirect(request, response, targetUrl);
         } else {
-            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+yamlConfig.getPORT()+ "/callback";
+            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+ yamlConfig.getPORT()+ "/callback";
             redirectStratgy.sendRedirect(request, response, redirectUrl);
         }
 
@@ -71,12 +71,6 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         response.addHeader("Authorization",token);
         response.setContentType("application/json;charset=UTF-8");
 
-
-    }
-
-    private void writeTokenCookie(HttpServletResponse response, String token) throws UnsupportedEncodingException {
-
-        authTokenProvider.createCookie(response,token);
 
     }
 

@@ -79,7 +79,7 @@ public class CommentController {
     }
 
     @ApiOperation(value ="유저 댓글 좋아요 취소")
-    @GetMapping("/comment/unliking/{comment_id}")
+    @DeleteMapping("/comment/unliking/{comment_id}")
     public ResponseTemplate<Void> cancelUserCommentLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id")Long commentId){
         commentService.cancelUserCommentLiking(userDetails,commentId);
         return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);

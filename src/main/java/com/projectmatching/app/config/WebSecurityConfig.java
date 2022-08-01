@@ -1,7 +1,11 @@
 package com.projectmatching.app.config;
 
+import com.projectmatching.app.config.handler.JwtAuthenticationEntryPoint;
 import com.projectmatching.app.config.handler.OAuth2AuthenticationSuccessHandler;
+import com.projectmatching.app.constant.JwtConstant;
+import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.service.user.OAuthService;
+import com.projectmatching.app.util.AuthTokenProvider;
 import com.projectmatching.app.util.filter.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -26,8 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final OAuthService oAuthService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
-    private final JwtAuthFilter jwtAuthFilter;
-
+    private final AuthTokenProvider authTokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final UserRepository userRepository;
     @Override
     protected void configure(HttpSecurity http)throws Exception {
 
@@ -36,22 +41,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 cors().configurationSource(corsConfigurationSource())
                 .and()
                     .formLogin().disable()
-                    .authorizeRequests()
-//                    .antMatchers("/h2-console/**").permitAll()
-                    .antMatchers("api/user/login").permitAll()
-                    .antMatchers("api/user/join/**").permitAll()
-                    .antMatchers(
-                        "/swagger*/**",
-                        "/webjars/**",
-                        "/v2/api-docs").permitAll()
-                    .anyRequest().authenticated()
-                .and()
                 .headers()
-                .frameOptions().sameOrigin() // h2 console을 위해
+                .frameOptions().sameOrigin()
                 .and()
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                    .authorizeRequests()
+                    .antMatchers("/api/user/login").permitAll()
+                    .antMatchers("/api/user/join/**").permitAll()
+                    .antMatchers(
+                        "/api/swagger*/**",
+                        "/api/webjars/**",
+                        "/api/v2/api-docs").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //토큰 사용하므로 세션 사용 x
                 .and()
+                .addFilterBefore(new JwtAuthFilter(authTokenProvider,userRepository), UsernamePasswordAuthenticationFilter.class)
                 .logout()
                 .logoutSuccessUrl("/")
                 .and()
@@ -80,6 +87,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
+        configuration.addExposedHeader(JwtConstant.HEADER_NAME);
+        configuration.addExposedHeader(JwtConstant.REFRESH_TOKEN_HEADER_NAME);
         configuration.addAllowedOriginPattern("*");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");

@@ -1,34 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import UpperButton from 'components/UpperButton';
-import { handleFetcher } from 'utils';
-import Cards from 'components/CardsGrid';
+import React from 'react';
 import userApi from 'api/user';
 import UserCard from 'components/UserCard';
 import { USER } from 'constant/route';
+import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
+import CardsGrid from 'components/CardsGrid';
 import * as S from './style';
 
 export default function UserBoard() {
-  const [userList, setUserList] = useState([]);
-  const fetchData = async (page) => {
-    try {
-      const { value, error } = await handleFetcher(userApi.GET_USER_LIST, { page });
-      setUserList((prev) => [...prev, ...value]);
-    } catch (error) {
-      console.log(error);
-      setUserList((prev) => [...prev]);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  const UserCardsGridWithInfiniteScroll = WithInfiniteScroll({
+    Component: CardsGrid,
+    responseDataKey: 'cards',
+    axiosInstance: userApi.GET_USER_LIST,
+  });
   return (
-    <>
-      <S.BoardWrapper>
-        <Cards cards={userList} CardComponent={UserCard} clickLink={`${USER}/`} />
-      </S.BoardWrapper>
-      <UpperButton />
-    </>
+    <S.BoardWrapper>
+      <UserCardsGridWithInfiniteScroll CardComponent={UserCard} clickLink={`${USER}/`} />
+    </S.BoardWrapper>
   );
 }

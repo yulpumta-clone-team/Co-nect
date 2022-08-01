@@ -10,6 +10,7 @@ import com.projectmatching.app.domain.user.dto.PostUserProfileDto;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserProfileDto;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.exception.CoNectRuntimeException;
 import com.projectmatching.app.service.user.UserService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserDetail(Long id){
         return UserDto.of(qUserRepository.find(id)
-                .orElseThrow(CoNectRuntimeException::new)
+                .orElseThrow(CoNectNotFoundException::new)
         );
 
     }
@@ -101,10 +102,7 @@ public class UserServiceImpl implements UserService {
         //TODO 이부분 수정 필요, 현재 안쓰임
         UserProfileDto userProfileDto = UserProfileDto.builder()
                 .name(userDetails.getUserRealName())
-                .slogan(postUserProfileDto.getSlogan())
-                .description(postUserProfileDto.getDescription())
                 .img(postUserProfileDto.getImg())
-                .hopeSession(postUserProfileDto.getHope_session())
                 .skills(postUserProfileDto.getSkills())
                 .job(postUserProfileDto.getJob())
                 .build();
@@ -136,5 +134,20 @@ public class UserServiceImpl implements UserService {
         List<UserLiking> userLikings = userLikingRepository.findUserLikingByFromUser(user);
 
         return userLikings.stream().map(u-> u.getToUser()).map(UserProfileDto::of).collect(Collectors.toList());
+    }
+
+
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Boolean isDuplicateEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Boolean isDuplicateName(String name) {
+        return userRepository.existsByName(name);
     }
 }
