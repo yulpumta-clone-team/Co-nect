@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import commentApi from 'api/comment';
-import useAxios from 'hooks/useAxios';
 import { useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import useCommentApi from './useCommentApi';
@@ -16,6 +15,16 @@ const useComments = () => {
     { postType, postId },
   );
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
+  const [createReplyTargetCommentId, setCreateReplyTargetCommentId] = useState(DEFAULT_TARGET);
+
+  const selectEditTargetComment = (commentId) => setEditTargetCommentId(commentId);
+
+  const resetEditTargetCommentId = () => setEditTargetCommentId(DEFAULT_TARGET);
+
+  const showCreateReplyFormOnTargetComment = (commentId) =>
+    setCreateReplyTargetCommentId(commentId);
+
+  const resetCreateReplyTargetCommentId = () => setCreateReplyTargetCommentId(DEFAULT_TARGET);
 
   const postCommentApi = (config) => changeApi('postComments', commentApi.POST_COMMENT, config);
   const postReplyApi = (config) => changeApi('postReply', commentApi.POST_REPLY, config);
@@ -23,10 +32,8 @@ const useComments = () => {
   const pathReplyApi = (config) => changeApi('pathReply', commentApi.PATCH_REPLY, config);
   const deleteCommentApi = (config) =>
     changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
-
   const patchCommentLikeApi = (config) =>
     changeApi('deleteComment', commentApi.PATCH_COMMENT_LIKE, config);
-
   const patchCommentUnLikeApi = (config) =>
     changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
 
@@ -70,18 +77,12 @@ const useComments = () => {
     }
   };
 
-  const selectEditTargetComment = (commentId) => {
-    setEditTargetCommentId(commentId);
-  };
-
-  const resetTarget = () => {
-    setEditTargetCommentId(DEFAULT_TARGET);
-  };
-
   const actions = useMemo(
     () => ({
+      showCreateReplyFormOnTargetComment,
       selectEditTargetComment,
-      resetTarget,
+      resetEditTargetCommentId,
+      resetCreateReplyTargetCommentId,
       postCommentApi,
       postReplyApi,
       patchCommentApi,
@@ -90,6 +91,8 @@ const useComments = () => {
       handleClickLikeThumb,
     }),
     [
+      resetCreateReplyTargetCommentId,
+      showCreateReplyFormOnTargetComment,
       deleteCommentApi,
       patchCommentApi,
       pathReplyApi,
@@ -99,8 +102,8 @@ const useComments = () => {
     ],
   );
   const states = useMemo(
-    () => ({ postType, postId, comments, editTargetCommentId }),
-    [postType, postId, comments, editTargetCommentId],
+    () => ({ postType, postId, comments, editTargetCommentId, createReplyTargetCommentId }),
+    [postType, postId, comments, editTargetCommentId, createReplyTargetCommentId],
   );
   return [states, actions];
 };

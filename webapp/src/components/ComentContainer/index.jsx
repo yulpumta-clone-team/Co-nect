@@ -6,8 +6,8 @@ import CommentProvider, {
   useCommentsAction,
   useCommentsState,
 } from 'contexts/Comment/Comment.Provider';
-import CommentForm from './CommentForm';
 import RootCommentList from './CommentList/Root.CommentList';
+import { CreateRootCommentForm } from './CommentForm/Create.Root.CommentForm';
 
 export default WithProvider({ Provider: CommentProvider, Component: CommentContainer });
 
@@ -17,7 +17,7 @@ CommentContainer.propTypes = {
 
 function CommentContainer({ postWriter }) {
   const { comments } = useCommentsState();
-  const { resetTarget, postCommentApi } = useCommentsAction();
+  const { postCommentApi } = useCommentsAction();
 
   const userInfo = getUserInfo(); // {userId, name, profileImg}
 
@@ -25,14 +25,7 @@ function CommentContainer({ postWriter }) {
 
   return (
     <div>
-      <CommentForm
-        initialText=""
-        submitCallback={postCommentApi}
-        commentInfo={{ id: null, parentId: null, secret: false }}
-        hasCancelButton={false}
-        hasDeleteButton={false}
-        handleCancel={() => {}}
-      />
+      <CreateRootCommentForm secret={false} />
       {!comments && comments?.length !== 0 ? (
         <div>댓글이 없어요.</div>
       ) : (
