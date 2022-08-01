@@ -16,16 +16,13 @@ public class UserProfileDto {
     @Builder.Default
     private Long id = IdGenerator.number();
     private String name;
-    private String slogan;
-    private String description;
     private String img;
-    private String hopeSession;
     private List<String> skills;
     private String job;
     private String status; //현재 상태 (유저가 수동으로 변경, 상태가 Closed 일 경우 인력시장에서 사라짐)
-    private String portfolio;
 
 
+    private int readCnt;
     private int commentCnt;
     private int likeCnt;
 
@@ -39,7 +36,7 @@ public class UserProfileDto {
 
         userProfileDto.commentCnt = user.getUserComments().size();
         userProfileDto.likeCnt = user.getUserLikings().size();
-
+        userProfileDto.readCnt = user.getRead();
 
         return userProfileDto;
     }
