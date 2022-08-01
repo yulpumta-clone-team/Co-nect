@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import useIntersect from 'hooks/useIntersect';
-import { PropTypes } from 'prop-types';
 import UpperButton from 'components/UpperButton';
 
 /* eslint-disable react/no-unstable-nested-components */
@@ -8,7 +7,7 @@ import UpperButton from 'components/UpperButton';
 export default function WithInfiniteScroll({ Component, responseDataKey, axiosInstance }) {
   return function Wrapper(props) {
     const [loadMoreRef, page, resetPage] = useIntersect();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState({ isError: false, msg: '' });
     const [cardList, setCardList] = useState([]);
     const IsShowLoadRef = isLoading || error.isError ? 'none' : 'block';
@@ -52,6 +51,15 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
         controller.abort();
       };
     }, [page]);
+
+    if (isLoading) return <div>Loading....</div>;
+
+    if (error.isError)
+      return (
+        <div>
+          <button onClick={() => {}}>refetch</button>
+        </div>
+      );
 
     const propsWithResponseData = { ...props, [responseDataKey]: cardList };
     return (
