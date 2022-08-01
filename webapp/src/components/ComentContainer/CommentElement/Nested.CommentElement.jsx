@@ -34,7 +34,6 @@ export default function NestedCommentElement({ commentId, isSecret, commentInfo 
   } = commentInfo;
   const likesCount = likedUserIds.length;
   const isEditTargetComment = commentId === editTargetCommentId;
-  const isNested = Boolean(parentId);
 
   const handleClickThumbSvg = () => {
     const idObj = { commentId, loggedInUserId, parentId };
@@ -52,7 +51,7 @@ export default function NestedCommentElement({ commentId, isSecret, commentInfo 
   );
 
   return (
-    <S.CommentBox isNested={isNested}>
+    <S.NestedCommentBox>
       {isSecret ? (
         <S.SecretCommentBox>비밀댓글입니다.</S.SecretCommentBox>
       ) : (
@@ -80,6 +79,6 @@ export default function NestedCommentElement({ commentId, isSecret, commentInfo 
           )}
         </>
       )}
-    </S.CommentBox>
+    </S.NestedCommentBox>
   );
 }
