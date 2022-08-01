@@ -3,41 +3,39 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route';
 
-Nickname.propTypes = {
+ImgPortfolio.propTypes = {
   register: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   getFieldState: PropTypes.func.isRequired,
   formState: PropTypes.object.isRequired,
 };
 
-export default function Nickname({ register, errors, getFieldState, formState }) {
+export default function ImgPortfolio({ register, errors, getFieldState, formState }) {
   const navigate = useNavigate();
-  getFieldState('nickname', formState);
-  const fieldState = getFieldState('nickname');
+  getFieldState('img', formState);
+  const fieldState = getFieldState('img');
   const isButtonDisabled = fieldState.isDirty;
   const handleClickButton = (event) => {
-    const { target } = event; // curretTarget
+    const { target } = event;
     if (isButtonDisabled) {
-      // 조건이 만족하면 실행되는 부분
       target.disabled = false;
-      navigate(ESSENTIAL_INFO + SIGN_UP_INFO.SKILL);
+      navigate(ESSENTIAL_INFO + SIGN_UP_INFO.CONTENT);
     }
   };
-
   return (
     <div>
       <input
-        {...register('nickname', {
+        {...register('img', {
           minLength: {
             value: 2,
-            message: '닉네임을 입력해주세요',
+            message: '프로필 이미지를 입력해주세요',
           },
           required: true,
         })}
-        type="text"
-        placeholder="nickname"
+        placeholder="profile-Img"
       />
-      <span>{errors?.nickname?.message}</span>
+      <span>{errors?.img?.message}</span>
+      <input {...register('portfolio')} placeholder="portfolio" />
       <div>
         <button type="button" onClick={handleClickButton}>
           다음

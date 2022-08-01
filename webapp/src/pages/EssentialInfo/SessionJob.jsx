@@ -1,32 +1,53 @@
-import useInput from 'hooks/useInput';
-import React from 'react';
-import { hopeSessionOption } from 'constant';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { hopeSessionOption, jobOptions } from 'constant';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { ESSENTIAL_INFO, SIGN_UP, SIGN_UP_INFO } from 'constant/route';
+import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route';
 
 SessionJob.propTypes = {
-  hopeSession: PropTypes.string.isRequired,
-  onHopeSessionChange: PropTypes.func.isRequired,
-  userJob: PropTypes.string.isRequired,
-  onJobChange: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  getFieldState: PropTypes.func.isRequired,
+  formState: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
-export default function SessionJob({ hopeSession, onHopeSessionChange, userJob, onJobChange }) {
+export default function SessionJob({ register, errors, getFieldState, formState }) {
   const navigate = useNavigate();
+  getFieldState('hopeSession', formState);
+  getFieldState('userJob', formState);
+  const [selectedHopeSession, setSelectedHopeSession] = useState([]);
+  const [selectedJob, setSelectedJob] = useState([]);
+  const handleClickButton = (event) => {
+    const { target } = event;
+    if (getFieldState('hopeSession').isDirty && getFieldState('userJob').isDirty) {
+      target.disabled = false;
+      navigate(ESSENTIAL_INFO + SIGN_UP_INFO.BELONG_TEAM);
+    }
+  };
   return (
     <div>
-      <span>희망 작업 기간</span>
-      <select value={hopeSession} onChange={onHopeSessionChange}>
-        {hopeSessionOption.map(({ id, value }) => (
+      <span>희망 작업 기간: {selectedHopeSession}</span>
+      <select {...register('hopeSession')}>
+        {hopeSessionOption.map(({ id, value, label }) => (
           <option key={id} value={value}>
-            {value}
+            {label}
           </option>
         ))}
       </select>
-      <input value={userJob} onChange={onJobChange} placeholder="직업" />
+      <span>{errors?.hopeSession?.message}</span>
+      <span>선택한 직업: {selectedJob}</span>
+      <select {...register('userJob')}>
+        {jobOptions.map(({ id, value, label }) => (
+          <option key={id} value={value}>
+            {label}
+          </option>
+        ))}
+      </select>
+      <span>{errors?.selectedJob?.message}</span>
       <div>
-        <Link to={ESSENTIAL_INFO + SIGN_UP_INFO.SLOGAN_PORTFOLIO}>다음</Link>
+        <button type="button" onClick={handleClickButton}>
+          다음
+        </button>
       </div>
     </div>
   );

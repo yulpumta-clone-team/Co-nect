@@ -47,7 +47,7 @@ function App() {
           <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
           <Route
             path={ESSENTIAL_INFO + NOTFOUND}
-            element={<PublicRoute Component={EssentialInfo} />}
+            element={<PublicRoute Component={EssentialInfo} restricted />}
           />
           <Route path={SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
           <Route path={MY_LIST} element={<PrivateRoute Component={MyList} />} />

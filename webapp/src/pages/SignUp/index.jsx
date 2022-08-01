@@ -6,12 +6,6 @@ import authApi from 'api/auth';
 import useInput from 'hooks/useInput';
 import { SIGN_UP, SIGN_UP_INFO } from 'constant/route';
 import IdPassword from './IdPassword';
-import Nickname from '../EssentialInfo/Nickname';
-import Skill from '../EssentialInfo/Skill';
-import Img from '../EssentialInfo/Img';
-import SessionJob from '../EssentialInfo/SessionJob';
-import SloganPortfolio from '../EssentialInfo/SloganPortfolio';
-import Content from '../EssentialInfo/Content';
 import * as S from './style';
 
 export default function SignUp() {
@@ -23,18 +17,6 @@ export default function SignUp() {
   } = useForm({
     defaultValues: {},
   });
-  const [userSkill, setUserSkill] = useState('');
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const onSkillChange = useCallback((e) => {
-    setUserSkill(e.target.value);
-    setSelectedSkills((prev) => [...prev, e.target.value]);
-  }, []);
-  const [userImg, onImgChange] = useInput('');
-  const [mdcontent, setMdContent] = useState('');
-  const [hopeSession, onHopeSessionChange] = useInput('무관');
-  const [userJob, onJobChange] = useInput('');
-  const [userSlogan, onSloganChange] = useInput('');
-  const [userPortfolio, onPortfolioChange] = useInput('');
   const [apiError, setApiError] = useState({ isError: false, msg: '' });
 
   const onValid = async (submitData) => {

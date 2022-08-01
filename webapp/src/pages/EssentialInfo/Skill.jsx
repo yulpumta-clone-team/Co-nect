@@ -8,13 +8,22 @@ Skill.propTypes = {
   selectedSkills: PropTypes.array.isRequired,
   userSkill: PropTypes.string.isRequired,
   onSkillChange: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
-export default function Skill({ selectedSkills, userSkill, onSkillChange }) {
+export default function Skill({ userSkill, onSkillChange, errors, selectedSkills }) {
   const navigate = useNavigate();
+  const handleClickButton = (event) => {
+    const { target } = event;
+    if (userSkill) {
+      target.disabled = false;
+      navigate(ESSENTIAL_INFO + SIGN_UP_INFO.SLOGAN);
+    }
+  };
   return (
     <div>
       <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
+      <br />
       <select value={userSkill} onChange={onSkillChange}>
         {skillOptions.map(({ id, value, label }) => (
           <option key={id} value={value}>
@@ -22,8 +31,11 @@ export default function Skill({ selectedSkills, userSkill, onSkillChange }) {
           </option>
         ))}
       </select>
+      <span>{errors?.skill?.message}</span>
       <div>
-        <Link to={ESSENTIAL_INFO + SIGN_UP_INFO.IMG}>다음</Link>
+        <button type="button" onClick={handleClickButton}>
+          다음
+        </button>
       </div>
     </div>
   );

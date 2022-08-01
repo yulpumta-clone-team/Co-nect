@@ -1,54 +1,90 @@
 import React, { useCallback, useState } from 'react';
-import { Route, Router, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import authApi from 'api/auth';
-import useInput from 'hooks/useInput';
 import { SIGN_UP_INFO } from 'constant/route';
 import Nickname from './Nickname';
 import Skill from './Skill';
-import Img from './Img';
+import Slogan from './Slogan';
 import SessionJob from './SessionJob';
-import SloganPortfolio from './SloganPortfolio';
+import ImgPortfolio from './ImgPortfolio';
 import Content from './Content';
 import * as S from './style';
+import BelongTeam from './BelongTeam';
 
 export default function EssentialInfo() {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
   const {
+    getFieldState,
+    register,
+    formState,
     formState: { errors },
+    handleSubmit,
   } = useForm({
-    defaultValues: {},
+    mode: 'onChange',
+    defaultValues: {
+      nickname: '',
+      slogan: '',
+      skill: '',
+      hopeSession: '',
+      userJob: '',
+      belongTeam: '',
+      img: '',
+      portfolio: '',
+    },
   });
+  // 기술
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
   const onSkillChange = useCallback((e) => {
     setUserSkill(e.target.value);
     setSelectedSkills((prev) => [...prev, e.target.value]);
   }, []);
-  const [userImg, onImgChange] = useInput('');
-  const [mdcontent, setMdContent] = useState('');
-  const [hopeSession, onHopeSessionChange] = useInput('무관');
-  const [userJob, onJobChange] = useInput('');
-  const [userSlogan, onSloganChange] = useInput('');
-  const [userPortfolio, onPortfolioChange] = useInput('');
-  const [error, setError] = useState({ isError: false, msg: '' });
 
+  // 희망 작업 기간
+  const [hopeSession, setHopeSession] = useState('');
+  const [selectedHopeSession, setSelectedHopeSession] = useState([]);
+  const onHopeSessionChange = useCallback((e) => {
+    setHopeSession(e.target.getValues('hopeSession'));
+    setSelectedHopeSession((prev) => [...prev, e.target.getValues('hopeSession')]);
+  });
+  // 직업
+  const [userJob, setUserJob] = useState('');
+  const [selectedJob, setSelectedJob] = useState([]);
+  const onJobChange = useCallback((e) => {
+    setUserJob(e.target.getValues('userJob'));
+    setSelectedJob((prev) => [...prev, e.target.getValues('userJob')]);
+  });
+  // 팀 소속 여부 체크
+  const [belongTeam, setBelongTeam] = useState([]);
+  const [selectedTeam, setSelectedTeam] = useState([]);
+  const onCheckedElement = useCallback((e) => {
+    setBelongTeam(e.target.getValues('belongTeam'));
+    setSelectedTeam((prev) => [...prev, e.target.getValues('belongTeam')]);
+  });
+  // 공고글 (내용)
+  const [mdcontent, setMdContent] = useState('');
+  // form 제출 시 작동
   const onValid = async (submitData) => {
-    const { nickname, skill, slogan } = submitData;
+    const { nickname, skill, slogan, img, portfolio, hopeSession, userJob, belongTeam } =
+      submitData;
+
     const signUpInfo = {
-      name: nickname,
-      content: mdcontent,
-      hope_session: hopeSession,
-      img: userImg,
-      job: userJob,
-      portfolio: userPortfolio,
-      skills: selectedSkills,
-      slogan: userSlogan,
+      value: {
+        name: nickname,
+        content: mdcontent,
+        hope_session: hopeSession,
+        img,
+        job: userJob,
+        belong_team: belongTeam,
+        portfolio,
+        skills: selectedSkills,
+        slogan,
+      },
     };
     // TODO: input validation 추가해야 함.
 
     navigate('/');
+    console.log(signUpInfo);
   };
   return (
     <S.ModalContainer>
@@ -59,40 +95,71 @@ export default function EssentialInfo() {
             onSubmit={handleSubmit(onValid)}
           >
             <Routes>
-              <Route path="" element={<Nickname register={register} errors={errors} />} />
+              <Route
+                path=""
+                element={
+                  <Nickname
+                    register={register}
+                    errors={errors}
+                    getFieldState={getFieldState}
+                    formState={formState}
+                  />
+                }
+              />
               <Route
                 path={SIGN_UP_INFO.SKILL}
                 element={
                   <Skill
                     userSkill={userSkill}
                     onSkillChange={onSkillChange}
+                    errors={errors}
                     selectedSkills={selectedSkills}
                   />
                 }
               />
               <Route
-                path={SIGN_UP_INFO.IMG}
-                element={<Img userImg={userImg} onImgChange={onImgChange} />}
+                path={SIGN_UP_INFO.SLOGAN}
+                element={
+                  <Slogan
+                    register={register}
+                    errors={errors}
+                    getFieldState={getFieldState}
+                    formState={formState}
+                  />
+                }
               />
               <Route
                 path={SIGN_UP_INFO.SESSION_JOB}
                 element={
                   <SessionJob
-                    hopeSession={hopeSession}
-                    onHopeSessionChange={onHopeSessionChange}
-                    userJob={userJob}
-                    onJobChange={onJobChange}
+                    register={register}
+                    getFieldState={getFieldState}
+                    formState={formState}
+                    selectedHopeSession={selectedHopeSession}
+                    selectedJob={selectedJob}
+                    errors={errors}
                   />
                 }
               />
               <Route
-                path={SIGN_UP_INFO.SLOGAN_PORTFOLIO}
+                path={SIGN_UP_INFO.BELONG_TEAM}
                 element={
-                  <SloganPortfolio
-                    userPortfolio={userPortfolio}
-                    onPortfolioChange={onPortfolioChange}
-                    userSlogan={userSlogan}
-                    onSloganChange={onSloganChange}
+                  <BelongTeam
+                    register={register}
+                    errors={errors}
+                    getFieldState={getFieldState}
+                    formState={formState}
+                  />
+                }
+              />
+              <Route
+                path={SIGN_UP_INFO.IMG_PORTFOLIO}
+                element={
+                  <ImgPortfolio
+                    register={register}
+                    errors={errors}
+                    getFieldState={getFieldState}
+                    formState={formState}
                   />
                 }
               />
