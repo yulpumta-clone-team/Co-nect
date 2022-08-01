@@ -44,8 +44,9 @@ export default function IdPassword({ register, errors }) {
       />
       <span>{errors?.verifiedPassword?.message}</span>
       <div>
-        <Link to={SIGN_UP + SIGN_UP_INFO.NICKNAME}>다음</Link>
+        <input type="submit" />
       </div>
     </div>
   );
 }
+// <Link to={SIGN_UP + SIGN_UP_INFO.NICKNAME}>다음</Link>

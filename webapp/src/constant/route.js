@@ -8,13 +8,15 @@ export const TEAM_EDIT = '/team/edit';
 export const MY_LIST = '/my-list';
 export const NEW_POST = '/new-post';
 export const MY_POST = '/my-post';
+export const ESSENTIAL_INFO = '/essential_info';
 export const NOTFOUND = '*';
 export const SIGN_UP_INFO = {
   NICKNAME: '/nickname',
   SKILL: '/skill',
-  IMG: '/img',
+  SLOGAN: '/slogan',
   SESSION_JOB: '/session-job',
-  SLOGAN_PORTFOLIO: '/slogan_portfolio',
+  BELONG_TEAM: '/belong_team',
+  IMG_PORTFOLIO: '/img_portfolio',
   CONTENT: '/content',
 };
 export const OAUTH_URL = {

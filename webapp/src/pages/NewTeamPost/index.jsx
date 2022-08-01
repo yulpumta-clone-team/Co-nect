@@ -7,6 +7,7 @@ import { hopeSessionOption, skillOptions } from 'constant';
 import { handleFetcher } from 'utils';
 import teamApi from 'api/team';
 import authApi from 'api/auth';
+import * as S from './style';
 
 export default function NewTeamPost() {
   const navigate = useNavigate();
@@ -54,37 +55,41 @@ export default function NewTeamPost() {
     navigate('/');
   };
   return (
-    <>
-      <button onClick={onClickback}>back</button>
-      <br />
-      <h3> 프로필 이미지 </h3>
-      <input type="file" accept="image/*" onChange={fileHandler} />
-      <img src={imageFile} alt="profile" />
-      <form onSubmit={handleSubmit}>
-        <div>
-          팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />
-        </div>
-        <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
-        <select value={userSkill} onChange={onSkillChange}>
-          {skillOptions.map(({ id, value, label }) => (
-            <option key={id} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
-        <span>희망 작업 기간</span>
-        <select value={hopeSession} onChange={onHopeSessionChange}>
-          {hopeSessionOption.map(({ id, value }) => (
-            <option key={id} value={value}>
-              {value}
-            </option>
-          ))}
-        </select>
-        <div>
-          <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
-        </div>
-        <button onSubmit={handleSubmit}>제출</button>
-      </form>
-    </>
+    <S.ModalContainer>
+      <S.Backdrop>
+        <S.DialogBox>
+          <button onClick={onClickback}>back</button>
+          <br />
+          <h3> 프로필 이미지 </h3>
+          <input type="file" accept="image/*" onChange={fileHandler} />
+          <img src={imageFile} alt="profile" />
+          <form onSubmit={handleSubmit}>
+            <div>
+              팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />
+            </div>
+            <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
+            <select value={userSkill} onChange={onSkillChange}>
+              {skillOptions.map(({ id, value, label }) => (
+                <option key={id} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+            <span>희망 작업 기간</span>
+            <select value={hopeSession} onChange={onHopeSessionChange}>
+              {hopeSessionOption.map(({ id, value }) => (
+                <option key={id} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
+            <div>
+              <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
+            </div>
+            <button onSubmit={handleSubmit}>제출</button>
+          </form>
+        </S.DialogBox>
+      </S.Backdrop>
+    </S.ModalContainer>
   );
 }

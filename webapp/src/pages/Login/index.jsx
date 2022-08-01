@@ -41,7 +41,7 @@ export default function Login() {
         msg: error,
       });
     }
-    navigate('/callback');
+    navigate('/essential_info');
   };
   return (
     <S.ModalContainer>

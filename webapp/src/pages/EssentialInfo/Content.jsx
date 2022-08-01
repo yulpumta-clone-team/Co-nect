@@ -14,7 +14,6 @@ export default function Content({ mdcontent, setMdContent }) {
       <div>
         <MarkdownEditor mdValue={mdcontent} setContent={setMdContent} />
       </div>
-      {/* <span>{errors?.extraError?.message}</span> */}
       <div>
         <input type="submit" />
       </div>
