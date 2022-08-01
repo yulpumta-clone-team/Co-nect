@@ -6,7 +6,7 @@ export const loggedUserType = shape({
   profileImg: PropTypes.string.isRequired,
 });
 
-export const userType = shape({
+const userSchema = {
   description: PropTypes.string.isRequired,
   hopeSession: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
@@ -15,21 +15,27 @@ export const userType = shape({
   name: PropTypes.string.isRequired,
   skills: PropTypes.arrayOf(PropTypes.string).isRequired,
   slogan: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
-});
+  status: PropTypes.bool.isRequired,
+};
 
-export const userCardType = shape({
-  ...userType,
+const userCardTypeSchema = {
+  ...userSchema,
   commentCnt: PropTypes.number.isRequired,
   likeCnt: PropTypes.number.isRequired,
-});
+};
 
-export const userDetailType = shape({
-  ...userType,
+const userDetailTypeSchema = {
+  ...userSchema,
   commentCnt: PropTypes.number.isRequired,
   content: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   likeCnt: PropTypes.number.isRequired,
   oauthId: PropTypes.string.isRequired,
   portfolio: PropTypes.string.isRequired,
-});
+};
+
+export const userType = shape(userSchema);
+
+export const userCardType = shape(userCardTypeSchema);
+
+export const userDetailType = shape(userDetailTypeSchema);

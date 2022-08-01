@@ -10,7 +10,7 @@ export default function TeamBoard() {
   const UserCardsGridWithInfiniteScroll = WithInfiniteScroll({
     Component: CardsGrid,
     responseDataKey: 'cards',
-    axiosInstance: teamApi.GET_TEAM_LIST,
+    axiosInstance: teamApi.GET_TEAM_ARR,
   });
   return (
     <S.BoardWrapper>

@@ -29,14 +29,14 @@ const teamApi = {
   },
   POST_TEAM_POST({ data }) {
     return rootApiInstance({
-      url: API.TEAM.DETAIL,
+      url: API.TEAM.INDEX,
       method: 'post',
       data,
     });
   },
   EDIT_TEAM_POST({ id, data }) {
     return rootApiInstance({
-      url: `${API.TEAM.DETAIL}/${id}`,
+      url: `${API.TEAM.INDEX}/${id}`,
       method: 'patch',
       data,
     });

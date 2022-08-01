@@ -23,7 +23,6 @@ export default function WithLoading({
 }) {
   return function Wrapper(props) {
     const [responseData, isLoading, error, forceRefetch] = useAxios(axiosInstance, axiosConfig);
-
     if (isLoading) return <div>Loading....</div>;
 
     if (error.isError)
