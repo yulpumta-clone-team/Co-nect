@@ -1,42 +1,42 @@
 import { API } from 'constant/api';
-import instance from './core';
+import rootApiInstance from './core';
 
 const teamApi = {
-  GET_TEAM_LIST(config) {
-    return instance({
-      url: API.TEAM.INDEX,
+  GET_TEAM_ARR(config) {
+    return rootApiInstance({
+      url: API.TEAM.LIST,
       method: 'get',
       ...config,
     });
   },
   GET_TEAM_DETAIL({ id }) {
-    return instance({
-      url: `${API.TEAM.INDEX}/${id}`,
+    return rootApiInstance({
+      url: `${API.TEAM.DETAIL}/${id}`,
       method: 'get',
     });
   },
   GET_TEAM_LIKES() {
-    return instance({
+    return rootApiInstance({
       url: API.TEAM.LIKES,
       method: 'get',
     });
   },
   GET_TEAM_READS() {
-    return instance({
+    return rootApiInstance({
       url: API.TEAM.READS,
       method: 'get',
     });
   },
   POST_TEAM_POST({ data }) {
-    return instance({
-      url: API.TEAM.INDEX,
+    return rootApiInstance({
+      url: API.TEAM.DETAIL,
       method: 'post',
       data,
     });
   },
   EDIT_TEAM_POST({ id, data }) {
-    return instance({
-      url: `${API.TEAM.INDEX}/${id}`,
+    return rootApiInstance({
+      url: `${API.TEAM.DETAIL}/${id}`,
       method: 'patch',
       data,
     });
