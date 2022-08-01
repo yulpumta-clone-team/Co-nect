@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 
@@ -14,15 +14,14 @@ RootCommentList.propTypes = {
 };
 
 export default function RootCommentList({ postWriter, loggedInUserName, comments }) {
-  const { showCreateReplyFormOnTargetComment } = useCommentsAction();
-  const { createReplyTargetCommentId } = useCommentsState();
-  const [isShowReplies, setIsShowReplies] = useState(false);
+  const { showCreateReplyFormOnTargetComment, showReplyList, resetShowReplyList } =
+    useCommentsAction();
+  const { createReplyTargetCommentId, targetReplyListId } = useCommentsState();
 
-  // ! 해당하는 대댓글만 보이게 수정하기
-  const handleShowReplies = () => {
-    setIsShowReplies((prev) => !prev);
-  };
+  const isShowReplies = (commentId) => commentId === targetReplyListId;
 
+  const handleClickShowReplyButton = (commentId) => showReplyList(commentId);
+  const handleClickHideReplyButton = (commentId) => resetShowReplyList(commentId);
   const handleClickShowCreateForm = (commentId) => showCreateReplyFormOnTargetComment(commentId);
 
   const checkSecretComment = (postWriterName, commentWriterName, loggedInUserName) => {
@@ -52,7 +51,7 @@ export default function RootCommentList({ postWriter, loggedInUserName, comments
       {comments &&
         comments.length !== 0 &&
         comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
-          const { secret, writer: commenWriter, parentId } = commentInfo;
+          const { secret, writer: commenWriter } = commentInfo;
           const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
           return (
             <li key={id}>
@@ -63,11 +62,11 @@ export default function RootCommentList({ postWriter, loggedInUserName, comments
                 commentInfo={commentInfo}
               />
               <S.ReplyButtons>
-                {!isSecret && !isShowReplies && (
-                  <button onClick={handleShowReplies}>답글 보여주기</button>
+                {!isSecret && isShowReplies(id) && (
+                  <button onClick={() => handleClickHideReplyButton(id)}>답글 가리기</button>
                 )}
-                {!isSecret && isShowReplies && (
-                  <button onClick={handleShowReplies}>답글 가리기</button>
+                {!isSecret && !isShowReplies(id) && (
+                  <button onClick={() => handleClickShowReplyButton(id)}>답글 보여주기</button>
                 )}
                 {!isSecret && createReplyTargetCommentId !== id && (
                   <button onClick={() => handleClickShowCreateForm(id)}>답글 작성하기</button>
@@ -76,7 +75,7 @@ export default function RootCommentList({ postWriter, loggedInUserName, comments
               {!isSecret && createReplyTargetCommentId === id && (
                 <CreateReplyCommentForm secret={secret} commentId={id} />
               )}
-              {!isSecret && replies && replies.length !== 0 && isShowReplies && (
+              {!isSecret && replies && replies.length !== 0 && isShowReplies(id) && (
                 <NestedCommentList
                   postWriter={postWriter}
                   loggedInUserName={loggedInUserName}

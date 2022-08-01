@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getUserInfo } from 'service/auth';
 import WithProvider from 'hoc/withProvider';
-import CommentProvider, {
-  useCommentsAction,
-  useCommentsState,
-} from 'contexts/Comment/Comment.Provider';
+import CommentProvider, { useCommentsState } from 'contexts/Comment/Comment.Provider';
 import RootCommentList from './CommentList/Root.CommentList';
 import { CreateRootCommentForm } from './CommentForm/Create.Root.CommentForm';
 
@@ -17,7 +14,6 @@ CommentContainer.propTypes = {
 
 function CommentContainer({ postWriter }) {
   const { comments } = useCommentsState();
-  const { postCommentApi } = useCommentsAction();
 
   const userInfo = getUserInfo(); // {userId, name, profileImg}
 

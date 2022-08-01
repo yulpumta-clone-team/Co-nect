@@ -14,8 +14,13 @@ const useComments = () => {
     commentApi.GET_COMMENT,
     { postType, postId },
   );
+  const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_TARGET);
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
   const [createReplyTargetCommentId, setCreateReplyTargetCommentId] = useState(DEFAULT_TARGET);
+
+  const showReplyList = (commentId) => setTargetReplyListId(commentId);
+
+  const resetShowReplyList = () => setTargetReplyListId(DEFAULT_TARGET);
 
   const selectEditTargetComment = (commentId) => setEditTargetCommentId(commentId);
 
@@ -79,6 +84,8 @@ const useComments = () => {
 
   const actions = useMemo(
     () => ({
+      showReplyList,
+      resetShowReplyList,
       showCreateReplyFormOnTargetComment,
       selectEditTargetComment,
       resetEditTargetCommentId,
@@ -91,6 +98,8 @@ const useComments = () => {
       handleClickLikeThumb,
     }),
     [
+      showReplyList,
+      resetShowReplyList,
       resetCreateReplyTargetCommentId,
       showCreateReplyFormOnTargetComment,
       deleteCommentApi,
@@ -102,8 +111,22 @@ const useComments = () => {
     ],
   );
   const states = useMemo(
-    () => ({ postType, postId, comments, editTargetCommentId, createReplyTargetCommentId }),
-    [postType, postId, comments, editTargetCommentId, createReplyTargetCommentId],
+    () => ({
+      postType,
+      postId,
+      comments,
+      editTargetCommentId,
+      createReplyTargetCommentId,
+      targetReplyListId,
+    }),
+    [
+      postType,
+      postId,
+      comments,
+      editTargetCommentId,
+      createReplyTargetCommentId,
+      targetReplyListId,
+    ],
   );
   return [states, actions];
 };
