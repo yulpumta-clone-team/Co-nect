@@ -3,12 +3,12 @@ import { userDetailType } from './user.type';
 
 export const teamType = shape({
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   session: PropTypes.string.isRequired,
   read: PropTypes.number.isRequired,
-  skills: PropTypes.arrayOf(PropTypes.number).isRequired,
-  status: PropTypes.bool.isRequired,
+  skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+  status: PropTypes.string.isRequired,
   user: userDetailType.isRequired, // 작성자 정보
 });
 
