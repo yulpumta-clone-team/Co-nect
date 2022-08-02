@@ -33,7 +33,7 @@ export const CommentBox = styled.div`
   ${CommonCommentBoxStyle}
 `;
 
-export const NestedCommentBox = styled.ul`
+export const NestedCommentBox = styled.div`
   ${CommonCommentBoxStyle}
   padding-left: 50px;
 `;

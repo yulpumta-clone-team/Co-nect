@@ -13,6 +13,7 @@ HocNestedComment.propTypes = {
   replies: PropTypes.array,
 };
 
+// 답글보여주기 상태에 따른 컴포넌트 렌더링
 export default function HocNestedComment({ commentInfo, postWriter, replies }) {
   const { id: commentId } = commentInfo;
   const { createReplyTargetCommentId, targetReplyListId } = useCommentsState();

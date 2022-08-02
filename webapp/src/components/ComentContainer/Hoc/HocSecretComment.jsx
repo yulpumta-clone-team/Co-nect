@@ -8,6 +8,7 @@ HocSecretComment.propTypes = {
   Component: PropTypes.func.isRequired,
 };
 
+// 비밀댓글인지 여부에 따른 컴포넌트 렌더링 관리
 export default function HocSecretComment({ isSecret, Component }) {
   return function Wrapper(props) {
     return (
