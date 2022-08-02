@@ -6,14 +6,10 @@ import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import * as S from '../style';
 
-CreateReplyCommentForm.propTypes = {
-  secret: PropTypes.bool.isRequired,
-  commentId: PropTypes.number.isRequired,
-};
+CreateReplyCommentForm.propTypes = {};
 
-export function CreateReplyCommentForm({ secret, commentId }) {
+export function CreateReplyCommentForm() {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
-  const { createReplyCommentId } = useCommentsState();
   const { resetCreateReplyTargetCommentId } = useCommentsAction();
   const {
     register,
@@ -25,7 +21,7 @@ export function CreateReplyCommentForm({ secret, commentId }) {
   });
   const { postType, postId } = useCommentsState();
   const { postReplyApi } = useCommentsAction();
-  const [isSecret, setIsSecret] = useState(secret);
+  const [isSecret, setIsSecret] = useState(false);
 
   const handleClickCancel = () => resetCreateReplyTargetCommentId();
 

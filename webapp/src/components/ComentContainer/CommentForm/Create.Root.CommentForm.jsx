@@ -6,11 +6,9 @@ import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import * as S from '../style';
 
-CreateRootCommentForm.propTypes = {
-  secret: PropTypes.bool.isRequired,
-};
+CreateRootCommentForm.propTypes = {};
 
-export function CreateRootCommentForm({ secret }) {
+export function CreateRootCommentForm({}) {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const {
     register,
@@ -22,7 +20,7 @@ export function CreateRootCommentForm({ secret }) {
   });
   const { postType, postId } = useCommentsState();
   const { postCommentApi } = useCommentsAction();
-  const [isSecret, setIsSecret] = useState(secret);
+  const [isSecret, setIsSecret] = useState(false);
 
   const onSubmit = async ({ createRootCommentForm }) => {
     if (!userInfo) {

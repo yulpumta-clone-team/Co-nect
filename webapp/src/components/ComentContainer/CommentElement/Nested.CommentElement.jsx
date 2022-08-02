@@ -9,11 +9,10 @@ import { EditRootCommentForm } from '../CommentForm/Edit.CommentForm';
 
 NestedCommentElement.propTypes = {
   commentId: PropTypes.number.isRequired,
-  isSecret: PropTypes.bool.isRequired,
   commentInfo: commentInfoType.isRequired,
 };
 
-export default function NestedCommentElement({ commentId, isSecret, commentInfo }) {
+export default function NestedCommentElement({ commentId, commentInfo }) {
   const { editTargetCommentId, postType } = useCommentsState();
   const { selectEditTargetComment, handleClickLikeThumb, isLikesContainUserId } =
     useCommentsAction();
@@ -37,32 +36,26 @@ export default function NestedCommentElement({ commentId, isSecret, commentInfo 
 
   return (
     <S.NestedCommentBox>
-      {isSecret ? (
-        <S.SecretCommentBox>비밀댓글입니다.</S.SecretCommentBox>
-      ) : (
-        <>
-          <S.NormalCommentBox style={{ display: 'flex' }}>
-            <S.UserInfo>
-              <img src={setDefaultProfileImage(img)} alt="profile" />
-              <h3>{commenWriter}</h3>
-            </S.UserInfo>
-            {!isEditTargetComment && (
-              <S.ContentInfo>
-                <span>{content}</span>
-                <button onClick={() => selectEditTargetComment(commentId)}>수정</button>
-              </S.ContentInfo>
-            )}
-            <S.LikeInfo>
-              <S.ThumbSVG isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
-                👍
-              </S.ThumbSVG>
-              <span>: {likesCount}</span>
-            </S.LikeInfo>
-          </S.NormalCommentBox>
-          {isEditTargetComment && (
-            <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
-          )}
-        </>
+      <S.NormalCommentBox style={{ display: 'flex' }}>
+        <S.UserInfo>
+          <img src={setDefaultProfileImage(img)} alt="profile" />
+          <h3>{commenWriter}</h3>
+        </S.UserInfo>
+        {!isEditTargetComment && (
+          <S.ContentInfo>
+            <span>{content}</span>
+            <button onClick={() => selectEditTargetComment(commentId)}>수정</button>
+          </S.ContentInfo>
+        )}
+        <S.LikeInfo>
+          <S.ThumbSVG isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
+            👍
+          </S.ThumbSVG>
+          <span>: {likesCount}</span>
+        </S.LikeInfo>
+      </S.NormalCommentBox>
+      {isEditTargetComment && (
+        <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
       )}
     </S.NestedCommentBox>
   );

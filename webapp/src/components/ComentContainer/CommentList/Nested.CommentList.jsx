@@ -23,7 +23,6 @@ export default function NestedCommentList({ postWriter, comments }) {
           <li key={id}>
             <NestedCommentElement
               commentId={id}
-              isSecret={isSecret}
               postWriter={postWriter}
               commentInfo={commentInfo}
             />

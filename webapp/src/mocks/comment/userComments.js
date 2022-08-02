@@ -4,7 +4,7 @@ export const userComment = {
   userId: 12512512,
   writer: '수정된',
   parentId: null,
-  secret: false,
+  secret: true,
   content: '수정된 연습용 댓긇',
   feeling: [901092146501, 92719182999999, 927191821029312],
   replies: [
@@ -24,7 +24,7 @@ export const userComment = {
       userId: 12512512,
       writer: 'string',
       parentId: 999,
-      secret: false,
+      secret: true,
       content: '수정된',
       feeling: [784833333333, 19148710],
     },
@@ -38,7 +38,7 @@ export const userComments = [
     userId: 123123,
     writer: 'front_temp',
     parentId: null,
-    secret: false,
+    secret: true,
     content: '연습용 댓글입니다.',
     feeling: [901092146501, 92719182999999, 927191821029312],
     replies: [

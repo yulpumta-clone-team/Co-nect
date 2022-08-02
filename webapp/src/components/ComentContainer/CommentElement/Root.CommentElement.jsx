@@ -9,11 +9,10 @@ import { EditRootCommentForm } from '../CommentForm/Edit.CommentForm';
 
 RootCommentElement.propTypes = {
   commentId: PropTypes.number.isRequired,
-  isSecret: PropTypes.bool.isRequired,
   commentInfo: commentInfoType.isRequired,
 };
 
-export default function RootCommentElement({ commentId, isSecret, commentInfo }) {
+export default function RootCommentElement({ commentId, commentInfo }) {
   const { postType, editTargetCommentId } = useCommentsState();
   const { selectEditTargetComment, handleClickLikeThumb, isLikesContainUserId } =
     useCommentsAction();
@@ -29,7 +28,6 @@ export default function RootCommentElement({ commentId, isSecret, commentInfo })
   } = commentInfo;
   const likesCount = likedUserIds.length;
   const isEditTargetComment = commentId === editTargetCommentId;
-  const isNested = Boolean(parentId);
 
   const handleClickTargetComment = () => selectEditTargetComment(commentId);
 
@@ -39,33 +37,27 @@ export default function RootCommentElement({ commentId, isSecret, commentInfo })
   };
 
   return (
-    <S.CommentBox isNested={isNested}>
-      {isSecret ? (
-        <S.SecretCommentBox>비밀댓글입니다.</S.SecretCommentBox>
-      ) : (
-        <>
-          <S.NormalCommentBox style={{ display: 'flex' }}>
-            <S.UserInfo>
-              <img src={setDefaultProfileImage(img)} alt="profile" />
-              <h3>{commenWriter}</h3>
-            </S.UserInfo>
-            {!isEditTargetComment && (
-              <S.ContentInfo>
-                <span>{content}</span>
-                <button onClick={handleClickTargetComment}>수정</button>
-              </S.ContentInfo>
-            )}
-            <S.LikeInfo>
-              <S.ThumbSVG isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
-                👍
-              </S.ThumbSVG>
-              <span>: {likesCount}</span>
-            </S.LikeInfo>
-          </S.NormalCommentBox>
-          {isEditTargetComment && (
-            <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
-          )}
-        </>
+    <S.CommentBox>
+      <S.NormalCommentBox style={{ display: 'flex' }}>
+        <S.UserInfo>
+          <img src={setDefaultProfileImage(img)} alt="profile" />
+          <h3>{commenWriter}</h3>
+        </S.UserInfo>
+        {!isEditTargetComment && (
+          <S.ContentInfo>
+            <span>{content}</span>
+            <button onClick={handleClickTargetComment}>수정</button>
+          </S.ContentInfo>
+        )}
+        <S.LikeInfo>
+          <S.ThumbSVG isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
+            👍
+          </S.ThumbSVG>
+          <span>: {likesCount}</span>
+        </S.LikeInfo>
+      </S.NormalCommentBox>
+      {isEditTargetComment && (
+        <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
       )}
     </S.CommentBox>
   );
