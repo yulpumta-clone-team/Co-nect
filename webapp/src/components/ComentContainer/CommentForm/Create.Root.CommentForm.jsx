@@ -18,8 +18,8 @@ export function CreateRootCommentForm({}) {
   } = useForm({
     defaultValues: {},
   });
-  const { postType, postId } = useCommentsState();
-  const { postCommentApi } = useCommentsAction();
+  const { postType, postId, isLoading, apiError } = useCommentsState();
+  const { postCommentApi, forceRefetch } = useCommentsAction();
   const [isSecret, setIsSecret] = useState(false);
 
   const onSubmit = async ({ createRootCommentForm }) => {

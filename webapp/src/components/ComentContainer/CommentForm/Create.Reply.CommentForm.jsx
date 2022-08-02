@@ -10,7 +10,6 @@ CreateReplyCommentForm.propTypes = {};
 
 export function CreateReplyCommentForm() {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
-  const { resetCreateReplyTargetCommentId } = useCommentsAction();
   const {
     register,
     handleSubmit,
@@ -19,8 +18,8 @@ export function CreateReplyCommentForm() {
   } = useForm({
     defaultValues: {},
   });
-  const { postType, postId } = useCommentsState();
-  const { postReplyApi } = useCommentsAction();
+  const { postType, postId, isLoading, apiError } = useCommentsState();
+  const { postReplyApi, resetCreateReplyTargetCommentId, forceRefetch } = useCommentsAction();
   const [isSecret, setIsSecret] = useState(false);
 
   const handleClickCancel = () => resetCreateReplyTargetCommentId();

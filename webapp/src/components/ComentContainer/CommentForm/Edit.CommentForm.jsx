@@ -21,8 +21,8 @@ export function EditRootCommentForm({ initialText, secret }) {
   } = useForm({
     defaultValues: {},
   });
-  const { postType, postId, editTargetCommentId } = useCommentsState();
-  const { patchCommentApi, resetEditTargetCommentId } = useCommentsAction();
+  const { postType, postId, editTargetCommentId, isLoading, apiError } = useCommentsState();
+  const { patchCommentApi, resetEditTargetCommentId, forceRefetch } = useCommentsAction();
   const [isSecret, setIsSecret] = useState(secret);
 
   const handleClickCancel = () => resetEditTargetCommentId();

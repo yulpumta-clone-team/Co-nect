@@ -118,6 +118,7 @@ const useComments = () => {
 
   const actions = useMemo(
     () => ({
+      forceRefetch,
       showReplyList,
       resetShowReplyList,
       showCreateReplyFormOnTargetComment,
@@ -134,6 +135,7 @@ const useComments = () => {
       isLikesContainUserId,
     }),
     [
+      forceRefetch,
       showReplyList,
       resetShowReplyList,
       resetCreateReplyTargetCommentId,
@@ -150,6 +152,8 @@ const useComments = () => {
   );
   const states = useMemo(
     () => ({
+      isLoading,
+      apiError,
       userInfo,
       postType,
       postId,
@@ -159,6 +163,8 @@ const useComments = () => {
       targetReplyListId,
     }),
     [
+      isLoading,
+      apiError,
       userInfo,
       postType,
       postId,
