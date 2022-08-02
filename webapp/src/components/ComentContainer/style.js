@@ -1,4 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const CommonCommentBoxStyle = css`
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 8px;
+`;
 
 export const FormBox = styled.div`
   textarea {
@@ -22,12 +30,12 @@ export const ListBox = styled.ul`
 `;
 
 export const CommentBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 8px;
-  padding-left: ${({ isNested }) => isNested && '50px'};
+  ${CommonCommentBoxStyle}
+`;
+
+export const NestedCommentBox = styled.ul`
+  ${CommonCommentBoxStyle}
+  padding-left: 50px;
 `;
 
 export const SecretCommentBox = styled.div``;

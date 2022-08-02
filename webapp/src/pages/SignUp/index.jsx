@@ -41,6 +41,7 @@ export default function SignUp() {
         msg: apiError,
       });
     }
+    console.log(signUpInfo);
     navigate('/login');
   };
   return (
