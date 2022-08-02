@@ -150,6 +150,7 @@ const useComments = () => {
   );
   const states = useMemo(
     () => ({
+      userInfo,
       postType,
       postId,
       comments,
@@ -158,6 +159,7 @@ const useComments = () => {
       targetReplyListId,
     }),
     [
+      userInfo,
       postType,
       postId,
       comments,

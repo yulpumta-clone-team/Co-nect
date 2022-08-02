@@ -1,22 +1,16 @@
-import React, { useCallback, useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { setDefaultProfileImage } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
+import { commentInfoType } from 'types/comment.type';
 import * as S from '../style';
 import { EditRootCommentForm } from '../CommentForm/Edit.CommentForm';
 
 RootCommentElement.propTypes = {
   commentId: PropTypes.number.isRequired,
   isSecret: PropTypes.bool.isRequired,
-  commentInfo: PropTypes.shape({
-    img: PropTypes.string.isRequired,
-    secret: PropTypes.bool.isRequired,
-    writer: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    feeling: PropTypes.array.isRequired,
-    parentId: PropTypes.number,
-  }),
+  commentInfo: commentInfoType.isRequired,
 };
 
 export default function RootCommentElement({ commentId, isSecret, commentInfo }) {

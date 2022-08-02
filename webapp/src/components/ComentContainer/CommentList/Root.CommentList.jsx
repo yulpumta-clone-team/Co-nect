@@ -7,19 +7,20 @@ import RootCommentElement from '../CommentElement/Root.CommentElement';
 import { CreateReplyCommentForm } from '../CommentForm/Create.Reply.CommentForm';
 
 RootCommentList.propTypes = {
-  loggedInUserName: PropTypes.string,
   postWriter: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
 };
 
-export default function RootCommentList({ postWriter, loggedInUserName, comments }) {
+export default function RootCommentList({ postWriter, comments }) {
   const {
     showCreateReplyFormOnTargetComment,
     showReplyList,
     resetShowReplyList,
     isShowSecretComment,
   } = useCommentsAction();
-  const { createReplyTargetCommentId, targetReplyListId } = useCommentsState();
+  const { createReplyTargetCommentId, targetReplyListId, userInfo } = useCommentsState();
+
+  const loggedInUserName = userInfo?.name;
 
   const isShowReplies = (commentId) => commentId === targetReplyListId;
   const handleClickShowReplyButton = (commentId) => showReplyList(commentId);
@@ -56,11 +57,7 @@ export default function RootCommentList({ postWriter, loggedInUserName, comments
                 <CreateReplyCommentForm secret={secret} commentId={id} />
               )}
               {!isSecret && replies && replies.length !== 0 && isShowReplies(id) && (
-                <NestedCommentList
-                  postWriter={postWriter}
-                  loggedInUserName={loggedInUserName}
-                  comments={replies}
-                />
+                <NestedCommentList postWriter={postWriter} comments={replies} />
               )}
             </li>
           );

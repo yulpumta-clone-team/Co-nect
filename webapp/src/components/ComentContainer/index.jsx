@@ -15,21 +15,13 @@ CommentContainer.propTypes = {
 function CommentContainer({ postWriter }) {
   const { comments } = useCommentsState();
 
-  const userInfo = getUserInfo(); // {userId, name, profileImg}
-
-  const loggedInUserName = userInfo?.name;
-
   return (
     <div>
       <CreateRootCommentForm secret={false} />
       {!comments && comments?.length !== 0 ? (
         <div>댓글이 없어요.</div>
       ) : (
-        <RootCommentList
-          postWriter={postWriter}
-          loggedInUserName={loggedInUserName}
-          comments={comments}
-        />
+        <RootCommentList postWriter={postWriter} comments={comments} />
       )}
     </div>
   );
