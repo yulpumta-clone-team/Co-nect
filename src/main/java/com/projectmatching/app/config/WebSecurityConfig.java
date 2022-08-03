@@ -39,8 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http)throws Exception {
 
-        http.httpBasic().disable();
-        http.csrf().disable().
+
+        http.httpBasic().disable()
+                .csrf().disable().
                 cors().configurationSource(corsConfigurationSource())
                 .and()
                     .formLogin().disable()
@@ -94,7 +95,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Collections.singletonList("*"));
         configuration.addAllowedOrigin("http://localhost:3000");
 
         configuration.addExposedHeader("*");
@@ -116,5 +116,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         web.ignoring().antMatchers("/**").anyRequest();
     }
+
 
 }
