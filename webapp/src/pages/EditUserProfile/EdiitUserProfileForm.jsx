@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import MarkdownEditor from 'components/MdEditor';
@@ -58,8 +59,11 @@ export default function EdiitUserProfileForm({ targetUser, onClickback }) {
       content: mdcontent,
     };
     try {
-      const response = await userApi.EDIT_USER_PROFILE({ id, data: submitData });
-      console.log(response);
+      const {
+        status,
+        data: { data },
+      } = await userApi.EDIT_USER_PROFILE({ id, data: submitData });
+      console.log('data', data);
       // TODO: 성공시 이동할 페이지 정해서 이동시키기
     } catch (error) {
       console.error(error);

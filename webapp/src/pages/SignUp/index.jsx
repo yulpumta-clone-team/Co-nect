@@ -1,10 +1,7 @@
-import React, { useCallback, useState } from 'react';
-import { Route, Router, Routes, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { handleFetcher } from 'utils';
 import authApi from 'api/auth';
-import useInput from 'hooks/useInput';
-import { SIGN_UP, SIGN_UP_INFO } from 'constant/route';
 import IdPassword from './IdPassword';
 import * as S from './style';
 
@@ -41,6 +38,7 @@ export default function SignUp() {
         msg: apiError,
       });
     }
+    console.log(signUpInfo);
     navigate('/login');
   };
   return (
@@ -52,9 +50,7 @@ export default function SignUp() {
             style={{ display: 'flex', flexDirection: 'column' }}
             onSubmit={handleSubmit(onValid)}
           >
-            <Routes>
-              <Route path="" element={<IdPassword register={register} errors={errors} />} />
-            </Routes>
+            <IdPassword register={register} errors={errors} />
           </form>
         </S.DialogBox>
       </S.Backdrop>

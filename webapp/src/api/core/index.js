@@ -6,7 +6,7 @@ const rootApiInstance = axios.create({
 });
 
 rootApiInstance.defaults.timeout = 2500;
-rootApiInstance.defaults.withCredentials = true;
+// rootApiInstance.defaults.withCredentials = true;
 
 rootApiInstance.interceptors.request.use(
   (config) => {
