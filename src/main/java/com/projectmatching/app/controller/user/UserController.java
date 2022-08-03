@@ -40,6 +40,7 @@ public class UserController {
      * 유저 카드(리스트) 조회
      */
     @ApiOperation(value = "유저 리스트(카드) 조회")
+    @CrossOrigin(origins = "*", allowCredentials = "true")
     @ApiImplicitParam(name="lastPage", example = "1",required = true, value = "마지막 페이지 기준으로 10개씩 유저 리스트를 보내줌")
     @GetMapping
     public ResponseTemplate<List<UserProfileDto>> getUserList(@RequestParam(name="lastPage") int lastPage){

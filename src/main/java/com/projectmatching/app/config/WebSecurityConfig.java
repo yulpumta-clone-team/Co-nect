@@ -99,7 +99,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         configuration.addExposedHeader("*");
 
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
