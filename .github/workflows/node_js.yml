@@ -30,6 +30,11 @@ jobs:
         run:
           npm install
         working-directory: ${{env.working-directory}}
+        
+      - name: Setting .env
+        run : |
+          echo "REACT_APP_SERVER_API=${{secrets.REACT_APP_SERVER_API}}" >> .env
+          cat .env
 
       - name: npm build
         run:
