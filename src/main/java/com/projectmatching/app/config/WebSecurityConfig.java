@@ -23,6 +23,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Collection;
+import java.util.Collections;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -87,12 +90,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.addExposedHeader(JwtConstant.HEADER_NAME);
-        configuration.addExposedHeader(JwtConstant.REFRESH_TOKEN_HEADER_NAME);
-        configuration.addAllowedOriginPattern("*");
+        configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.setAllowCredentials(true);
+        configuration.addExposedHeader(JwtConstant.HEADER_NAME);
+        configuration.addExposedHeader(JwtConstant.REFRESH_TOKEN_HEADER_NAME);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
