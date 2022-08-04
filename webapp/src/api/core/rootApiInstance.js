@@ -17,20 +17,24 @@ rootApiInstance.interceptors.request.use(
   (error) => {
     // 요청 에러가 발생했을 때 수행할 로직
     console.log(error); // 디버깅
-    return Promise.reject(error);
+    return error;
   },
 );
 
 rootApiInstance.interceptors.response.use(
   (response) => {
-    // const {
-    //   data: { code, data, message, status },
-    // } = response;
-    return response;
+    const { data } = response;
+    return data;
   },
   (error) => {
-    // console.log(error, error.response); // 디버깅
-    return Promise.reject(error);
+    // FIXME : 개발자용 에러
+    console.error(error);
+    const {
+      response: { data, status },
+    } = error;
+    // return { status, data };
+    // return Promise.reject(new Error(error, data, status));
+    throw new Error(error.response.data.message);
   },
 );
 
