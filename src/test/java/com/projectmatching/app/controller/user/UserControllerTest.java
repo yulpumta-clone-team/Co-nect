@@ -67,7 +67,7 @@ public class UserControllerTest extends ControllerTest {
                 .img(null)
                 .slogan("나는 할 수 있다")
                 .pwd("123@@asjgdjz")
-                .skills(new ArrayList<>(Arrays.asList("스프링","리액트","리눅스")))
+                .skills(new ArrayList<Integer>(Arrays.asList(100,101,102)))
                 .build();
 
         when(userRepository.save(any(User.class))).thenAnswer(AdditionalAnswers.returnsFirstArg());
@@ -96,7 +96,7 @@ public class UserControllerTest extends ControllerTest {
                 .portfolio("깃허브 링크 등")
                 .img(null)
                 .slogan("나는 할 수 있다")
-                .skills(new ArrayList<>(Arrays.asList("스프링","리액트","리눅스")))
+                .skills(new ArrayList<Integer>(Arrays.asList(100,101,102)))
                 .build();
 
         //given
