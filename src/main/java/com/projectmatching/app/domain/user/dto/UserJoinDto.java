@@ -27,6 +27,7 @@ public class UserJoinDto implements Validatable {
 
     @JsonIgnore
     private Long id = IdGenerator.number();
+
     private String email;
 
     private String name;
@@ -37,7 +38,7 @@ public class UserJoinDto implements Validatable {
     private String slogan;
     private String img;
     private String content;//자기소개
-    private List<String> skills;
+    private List<Integer> skills; //기술 스택 key 값만 받음
     private String hope_session; //원하는 작업기간
     private String job; //직업
 

@@ -1,5 +1,6 @@
 package com.projectmatching.app.domain.techStack.entity;
 
+import com.projectmatching.app.domain.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 @Builder
 @Entity
 @Table(name = "tech_code")
-public class TechCode {
+public class TechCode extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
@@ -22,7 +23,12 @@ public class TechCode {
 
     private int key;
 
-    private String value;
+    private String category;
+
+    private String image;
+
+    //기술 이름
+    private String techName;
 
 
 
