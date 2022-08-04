@@ -1,13 +1,23 @@
 import React from 'react';
 import GlobalNavigation from 'components/GlobalNavigation';
 import { Outlet } from 'react-router-dom';
+import ToastNotificationProvider, {
+  useToastNotificationAction,
+  useToastNotificationState,
+} from 'contexts/ToastNotification';
+import WithProvider from 'hoc/withProvider';
+import { deleteMessage } from 'contexts/ToastNotification/action';
+import ToastNotification from 'components/ToastNotification';
 import * as S from './style';
 
-export default function Layout() {
-  // const { toastList, notifyDispatch } = useNotification();
-  // const deleteToastCallback = (id) => {
-  //   deleteMessage(notifyDispatch, id);
-  // };
+export default WithProvider({ Provider: ToastNotificationProvider, Component: Layout });
+
+function Layout() {
+  const { toastList } = useToastNotificationState();
+  const notifyDispatch = useToastNotificationAction();
+  const deleteToastCallback = (id) => {
+    deleteMessage(notifyDispatch, id);
+  };
   return (
     <S.AppContainer>
       <S.Header>
@@ -16,14 +26,14 @@ export default function Layout() {
       <S.Main>
         <Outlet />
       </S.Main>
-      {/* <ToastNotification
+      <ToastNotification
         toastList={toastList}
         col="top"
         row="right"
         autoDelete
         autoDeleteTime={2000}
         deleteCallback={deleteToastCallback}
-      /> */}
+      />
     </S.AppContainer>
   );
 }
