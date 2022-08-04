@@ -2,8 +2,7 @@ package com.projectmatching.app.service.user;
 
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.service.ServiceTest;
-import com.projectmatching.app.service.user.Impl.UserServiceImpl;
-import org.junit.jupiter.api.Assertions;
+import com.projectmatching.app.service.user.Impl.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class UserDuplicateServiceTest extends ServiceTest {
 
     @InjectMocks
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Mock
     private UserRepository userRepository;

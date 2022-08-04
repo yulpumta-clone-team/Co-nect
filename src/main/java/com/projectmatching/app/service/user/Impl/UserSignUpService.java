@@ -7,7 +7,6 @@ import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserJoinDto;
 import com.projectmatching.app.domain.user.entity.User;
-import com.projectmatching.app.service.user.UserSignUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,18 +21,18 @@ import static com.projectmatching.app.constant.ServiceConstant.REGEX_EMAIL;
 @Repository
 @Service
 @Slf4j
-public class UserSignUpServiceImpl implements UserSignUpService {
+public class UserSignUpService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
     @Transactional
     @Validation
-    @Override
     public Long join(UserJoinDto userJoinDto) {
         try {
             checkUserValidation(userJoinDto);
             userJoinDto.setPwd(passwordEncoder.encode(userJoinDto.getPwd())); //비밀번호 암호화
             User user = userJoinDto.asEntity(Role.USER);
+
             log.info("유저 info : {}",user);
 
             return userRepository.save(user).getId();
