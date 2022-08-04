@@ -22,7 +22,6 @@ import TeamBoard from 'pages/TeamBoard';
 import UserPost from 'pages/UserPost';
 import TeamPost from 'pages/TeamPost';
 import Callback from 'pages/Callback';
-import Navigation from 'components/Navigation';
 import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
 import MyList from 'pages/MyList';
@@ -32,15 +31,14 @@ import NotFound from 'pages/NotFound';
 import EssentialInfo from 'pages/EssentialInfo';
 import PublicRoute from 'hoc/PublicRoute';
 import PrivateRoute from 'hoc/PrivateRoute';
-import AppLayout from './style';
+import Layout from 'layouts';
 
 function App() {
   return (
     <Router>
-      <AppLayout>
-        <Navigation />
-        <Routes>
-          <Route path={HOME} element={<PublicRoute Component={Main} restricted={false} />} />
+      <Routes>
+        <Route path={HOME} element={<Layout />}>
+          <Route index element={<PublicRoute Component={Main} restricted={false} />} />
           <Route path={USER} element={<PublicRoute Component={UserBoard} restricted={false} />} />
           <Route path={TEAM} element={<PublicRoute Component={TeamBoard} restricted={false} />} />
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
@@ -67,8 +65,8 @@ function App() {
           />
           <Route path="/callback" element={<Callback />} />
           <Route path={NOTFOUND} element={<NotFound />} />
-        </Routes>
-      </AppLayout>
+        </Route>
+      </Routes>
     </Router>
   );
 }
