@@ -33,6 +33,7 @@ export default function WithLoading({
     if (error)
       return (
         <div>
+          <h1>{error}</h1>
           <button onClick={forceRefetch}>refetch</button>
         </div>
       );
