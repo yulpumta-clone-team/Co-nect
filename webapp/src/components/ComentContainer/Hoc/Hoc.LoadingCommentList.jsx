@@ -10,11 +10,13 @@ HocLoadingCommentList.propTypes = {
 export default function HocLoadingCommentList({ postWriter }) {
   const { comments, isLoading, apiError } = useCommentsState();
   const { forceRefetch } = useCommentsAction();
+
   if (isLoading) return <div>Loading...</div>;
 
-  if (apiError)
+  if (apiError.isError)
     return (
       <div>
+        <h1>{apiError.msg}</h1>
         <button onClick={forceRefetch}>refetch</button>
       </div>
     );

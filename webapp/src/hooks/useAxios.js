@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
 
-const useAxios = ({ axiosInstance, config = {}, immediate = true }) => {
+const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     responseData: null,
@@ -22,11 +22,12 @@ const useAxios = ({ axiosInstance, config = {}, immediate = true }) => {
     try {
       const ctrl = new AbortController();
       setController(ctrl);
-      const {
-        status,
-        data: { data },
-      } = await axiosInstance({ ...config, ...newConfig, signal: ctrl.signal });
-      dispatch({ type: SUCCESS_TYPE, data });
+      const { data: responseData } = await axiosInstance({
+        ...axiosConfig,
+        ...newConfig,
+        signal: ctrl.signal,
+      });
+      dispatch({ type: SUCCESS_TYPE, responseData });
     } catch (error) {
       console.error(error);
       dispatch({ type: ERROR_TYPE, error });
@@ -62,7 +63,7 @@ function reducer(state, action) {
     case SUCCESS_TYPE:
       return {
         isLoading: false,
-        responseData: action.data,
+        responseData: action.responseData,
         error: null,
       };
     case ERROR_TYPE:

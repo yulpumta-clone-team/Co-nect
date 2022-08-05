@@ -1,4 +1,4 @@
-import rootApiInstance from './core';
+import rootApiInstance from './core/rootApiInstance';
 
 const uploadApi = {
   IMAGE_UPLOAD(data) {

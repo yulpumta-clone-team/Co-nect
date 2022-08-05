@@ -8,11 +8,10 @@ import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.PostUserProfileDto;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.UserProfileDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectNotFoundException;
-import com.projectmatching.app.exception.CoNectRuntimeException;
-import com.projectmatching.app.service.user.UserService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,11 +26,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGICAL_ERROR;
+import static com.projectmatching.app.domain.user.dto.UserInfo.toUserInfoByUser;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserServiceImpl implements UserService {
+public class UserService  {
 
 
     private final QUserRepository qUserRepository;
@@ -40,9 +40,24 @@ public class UserServiceImpl implements UserService {
     private final UserDetails userDetails;
 
 
+    /**
+     * 사용자의
+     * id
+     * name
+     * image
+     * 들을 반환
+     */
+    @Transactional(readOnly = true)
+    public UserInfo getUserEssentialInfo(UserDetailsImpl userDetails){
+        User user = userRepository.findByEmail(userDetails.getEmail())
+                .orElseThrow(CoNectNotFoundException::new);
+        return toUserInfoByUser(user);
+
+    }
+
+
     //유저 상세 조회
     @Transactional(readOnly = true)
-    @Override
     public UserDto getUserDetail(Long id){
         return UserDto.of(qUserRepository.find(id)
                 .orElseThrow(CoNectNotFoundException::new)
@@ -53,7 +68,6 @@ public class UserServiceImpl implements UserService {
 
     //유저 업데이트
     @Transactional
-    @Override
     public UserDto updateUser(UserDto NewUserDto) {
         String userEmail = userDetails.getUsername();
         UserDto DBUser =  Optional.ofNullable(userRepository.findByEmail(userEmail))
@@ -64,7 +78,6 @@ public class UserServiceImpl implements UserService {
 
     //유저 게시물 조회
     @Transactional(readOnly = true)
-    @Override
     public List<UserProfileDto> getUserList(PageRequest pageRequest){
         return qUserRepository.find(pageRequest)
                 .stream().map(UserProfileDto::of)
@@ -75,7 +88,6 @@ public class UserServiceImpl implements UserService {
 
     //좋아요 누르기
     @Transactional
-    @Override
     public Long addLiking(UserDetailsImpl userDetails, long userId){
         User from = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
         User to = userRepository.findById(userId).orElseThrow(RuntimeException::new);
@@ -88,7 +100,6 @@ public class UserServiceImpl implements UserService {
 
     //좋아요 한 유저 목록 불러오기
     @Transactional(readOnly = true)
-    @Override
     public List<UserProfileDto> getLikedUserList(UserDetails userDetails) {
         return userLikingRepository.getLikedUserByUserEmail(userDetails.getUsername()).stream()
                 .map(userLiking -> userLiking.getToUser()).map(user -> UserProfileDto.of(user)).collect(Collectors.toList());
@@ -96,13 +107,12 @@ public class UserServiceImpl implements UserService {
 
 
     //게시물 등록, 프로필 생성하기
-    @Override
     @Transactional
     public void postingUserProfile(PostUserProfileDto postUserProfileDto, UserDetailsImpl userDetails) {
         //TODO 이부분 수정 필요, 현재 안쓰임
         UserProfileDto userProfileDto = UserProfileDto.builder()
                 .name(userDetails.getUserRealName())
-                .img(postUserProfileDto.getImg())
+                .image(postUserProfileDto.getImg())
                 .skills(postUserProfileDto.getSkills())
                 .job(postUserProfileDto.getJob())
                 .build();
@@ -113,7 +123,6 @@ public class UserServiceImpl implements UserService {
     }
 
     //게시물 수정
-    @Override
     @Transactional
     public UserDto updateUserPosting(PostUserProfileDto postUserProfileDto, UserDetailsImpl userDetails) {
         if(!userRepository.existsByName(userDetails.getUserRealName()))throw new ResponeException(LOGICAL_ERROR); //등록하지 않은것을 수정 불가
@@ -127,7 +136,6 @@ public class UserServiceImpl implements UserService {
 
 
     // 내가 좋아요한 유저 목록 가져오기
-    @Override
     @Transactional(readOnly = true)
     public List<UserProfileDto> getUserLikingList(UserDetailsImpl userDetails) {
         User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
@@ -139,13 +147,13 @@ public class UserServiceImpl implements UserService {
 
 
 
-    @Override
+
+
     @Transactional(readOnly = true)
     public Boolean isDuplicateEmail(String email) {
         return userRepository.existsByEmail(email);
     }
 
-    @Override
     @Transactional(readOnly = true)
     public Boolean isDuplicateName(String name) {
         return userRepository.existsByName(name);

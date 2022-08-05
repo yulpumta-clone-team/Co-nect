@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.nav`
   width: 100%;
-  height: 80px;
+  height: 100px;
   background-color: wheat;
 `;
 

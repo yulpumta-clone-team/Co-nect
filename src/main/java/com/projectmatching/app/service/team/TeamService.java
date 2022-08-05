@@ -14,7 +14,8 @@ import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.team.repository.TeamRepository;
 import com.projectmatching.app.domain.team.repository.TeamTechRepository;
 import com.projectmatching.app.domain.techStack.TechStackRepository;
-import com.projectmatching.app.domain.techStack.entity.TechStack;
+import com.projectmatching.app.domain.techStack.entity.TechCode;
+import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.UserTeamRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
@@ -41,7 +42,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @Transactional
 public class TeamService {
     private final TeamRepository teamRepository;
-    private final TechStackRepository techStackRepository;
+    private final TechStackProvider techStackProvider;
     private final TeamTechRepository teamTechRepository;
     private final UserRepository userRepository;
     private final UserTeamRepository userTeamRepository;
@@ -60,23 +61,21 @@ public class TeamService {
 
             Long teamId = teamRepository.save(team).getId();
 
-            List<Long> techs = requestDto.getSkills();
-            for (Long t : techs){
-                TechStack techStack = techStackRepository.findByTechSerialNum(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
-                TeamTech teamTech = TeamTech.builder()
-                        .team(team)
-                        .techStack(techStack)
-                        .build();
+            //TODO : REFACTORING
+            List<Integer> techs = requestDto.getSkills();
 
-                teamTechRepository.save(teamTech);
-            }
+            List<TechCode> techStacks = techStackProvider.extractTechCodeByKeys(techs);
 
-            UserTeam userTeam = UserTeam.builder()
-                    .user(user)
-                    .team(team)
-                    .build();
-
-            userTeamRepository.save(userTeam);
+//
+//            teamTechRepository.save(teamTech);
+//
+//
+//            UserTeam userTeam = UserTeam.builder()
+//                    .user(user)
+//                    .team(team)
+//                    .build();
+//
+//            userTeamRepository.save(userTeam);
 
             return teamId;
 
@@ -119,7 +118,7 @@ public class TeamService {
             TeamDetailResponseDto teamDetailResponseDto = new TeamDetailResponseDto();
             copyProperties(team, teamDetailResponseDto);
             teamDetailResponseDto.setUser(findTeamUser(team));
-            teamDetailResponseDto.setSkills(findTeamTech(team));
+//            teamDetailResponseDto.setSkills(findTeamTech(team));
             teamDetailResponseDto.setCommentCnt(team.getTeamComments().size());
             teamDetailResponseDto.setLikeCnt(team.getTeamLikings().size());
 
@@ -156,16 +155,16 @@ public class TeamService {
             team.update(teamRequestDto);
             teamTechRepository.deleteAllByTeam_Id(team.getId());
 
-            List<Long> techs = teamRequestDto.getSkills();
-            for (Long t : techs) {
-                TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
-                TeamTech teamTech = TeamTech.builder()
-                        .team(team)
-                        .techStack(techStack)
-                        .build();
-
-                teamTechRepository.save(teamTech);
-            }
+//            List<Long> techs = teamRequestDto.getSkills();
+//            for (Long t : techs) {
+//                TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
+//                TeamTech teamTech = TeamTech.builder()
+//                        .team(team)
+//                        .techStack(techStack)
+//                        .build();
+//
+//                teamTechRepository.save(teamTech);
+//            }
             teamRepository.save(team);
         }catch(Exception e){
             throw new ResponeException(UPDATE_TEAM_ERROR);
@@ -240,12 +239,12 @@ public class TeamService {
 
     public List<String> findTeamTech(Team team){
         Set<TeamTech> teamTechSet = team.getTeamTeches();
-        List<String> findTeamTech = new ArrayList<>();
-        for (TeamTech tech : teamTechSet){
-            TechStack t = tech.getTechStack();
-            if(t!=null) findTeamTech.add(t.getName());
-        }
-        return findTeamTech;
+//        List<String> findTeamTech = new ArrayList<>();
+//        for (TeamTech tech : teamTechSet){
+//            TechStack t = tech.getTechStack();
+//            if(t!=null) findTeamTech.add(t.getName());
+//        }
+        return null;
     }
 
 

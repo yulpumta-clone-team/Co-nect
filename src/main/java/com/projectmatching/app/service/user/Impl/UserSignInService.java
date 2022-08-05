@@ -2,7 +2,6 @@ package com.projectmatching.app.service.user.Impl;
 
 import com.projectmatching.app.annotation.Validation;
 import com.projectmatching.app.config.resTemplate.ResponeException;
-import com.projectmatching.app.constant.JwtConstant;
 import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
@@ -10,18 +9,15 @@ import com.projectmatching.app.domain.user.dto.UserLoginDto;
 import com.projectmatching.app.domain.user.dto.UserLoginResDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectNotFoundException;
-import com.projectmatching.app.service.user.UserSignInService;
 import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGIN_USER_ERROR;
@@ -29,7 +25,7 @@ import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGIN_USER
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserSignInServiceImpl implements UserSignInService {
+public class UserSignInService {
 
     private final UserRepository userRepository;
     private final QUserRepository qUserRepository;

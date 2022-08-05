@@ -15,7 +15,8 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TeamCommentLikingDto {
+public class
+TeamCommentLikingDto {
     private Long id = IdGenerator.number();
     private UserDto userDto;
     private TeamCommentDto teamCommentDto;

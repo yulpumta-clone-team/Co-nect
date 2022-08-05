@@ -3,7 +3,6 @@ package com.projectmatching.app.domain.team.dto;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
-import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.AllArgsConstructor;
@@ -29,7 +28,7 @@ public class TeamDetailResponseDto {
     private String name;
     private String content;
     private String session;
-    private List<String> skills;
+    private List<Integer> skills;
     private String img;
     private Long read;
     private String status;
