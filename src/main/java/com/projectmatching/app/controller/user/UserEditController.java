@@ -28,7 +28,6 @@ public class UserEditController {
     private final UserSignUpService userSignUpService;
 
 
-
     /**
      * 유저 필수 정보 입력(essential_info)
      */

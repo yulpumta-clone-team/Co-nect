@@ -1,11 +1,12 @@
 package com.projectmatching.app.domain.techStack;
 
-import com.projectmatching.app.domain.techStack.entity.TechCode;
+import com.projectmatching.app.domain.techStack.entity.TechStack;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface TechStackRepository extends JpaRepository<TechCode, Long> {
-    Optional<TechCode> findByName(String name);
-    Optional<TechCode> findByTechSerialNum(Long num);
+@Repository
+public interface TechStackRepository extends JpaRepository<TechStack, Long> {
+
 }
