@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
 
-const useAxios = ({ axiosInstance, config = {}, immediate = true }) => {
+const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     responseData: null,
@@ -23,7 +23,7 @@ const useAxios = ({ axiosInstance, config = {}, immediate = true }) => {
       const ctrl = new AbortController();
       setController(ctrl);
       const { data: responseData } = await axiosInstance({
-        ...config,
+        ...axiosConfig,
         ...newConfig,
         signal: ctrl.signal,
       });
