@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ROOT_API_URL } from 'constant/api';
-import errorHandler from './errorHandler';
+import { successHandler, errorHandler } from './responseHandler';
 
 const rootApiInstance = axios.create({
   baseURL: ROOT_API_URL,
@@ -22,9 +22,6 @@ rootApiInstance.interceptors.request.use(
   },
 );
 
-rootApiInstance.interceptors.response.use((response) => {
-  const { data } = response;
-  return data;
-}, errorHandler);
+rootApiInstance.interceptors.response.use(successHandler, errorHandler);
 
 export default rootApiInstance;
