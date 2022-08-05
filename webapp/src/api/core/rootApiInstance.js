@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ROOT_API_URL } from 'constant/api';
+import errorHandler from './errorHandler';
 
 const rootApiInstance = axios.create({
   baseURL: ROOT_API_URL,
@@ -21,21 +22,10 @@ rootApiInstance.interceptors.request.use(
   },
 );
 
-rootApiInstance.interceptors.response.use(
-  (response) => {
-    const { data } = response;
-    return data;
-  },
-  (error) => {
-    // FIXME : 개발자용 에러
-    console.error(error);
-    const {
-      response: { data, status },
-    } = error;
-    // return { status, data };
-    // return Promise.reject(new Error(error, data, status));
-    throw new Error(error.response.data.message);
-  },
-);
+rootApiInstance.interceptors.response.use((response) => {
+  const { data } = response;
+  console.log('data :>> ', data);
+  return data;
+}, errorHandler);
 
 export default rootApiInstance;
