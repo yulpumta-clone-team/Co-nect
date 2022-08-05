@@ -34,11 +34,8 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       const ctrl = new AbortController();
       setController(ctrl);
       const { instance, config } = axiosInstance;
-      const {
-        status,
-        data: { data },
-      } = await instance({ ...config, signal: ctrl.signal });
-      console.log('data', data);
+      const { data: responseData } = await instance({ ...config, signal: ctrl.signal });
+      console.log('data', responseData);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -54,11 +51,8 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       const ctrl = new AbortController();
       setController(ctrl);
       const { instance, config } = getInstance;
-      const {
-        status,
-        data: { data },
-      } = await instance({ ...config, signal: ctrl.signal });
-      setComments(data);
+      const { data: responseData } = await instance({ ...config, signal: ctrl.signal });
+      setComments(responseData);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
