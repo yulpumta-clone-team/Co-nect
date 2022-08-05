@@ -1,6 +1,10 @@
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useEffect, useState } from 'react';
 
 const useCommentApi = (initKey, initInstance, initConfig) => {
+  const notifyDispatch = useToastNotificationAction();
   const getInstance = {
     key: initKey,
     instance: initInstance,
@@ -13,38 +17,38 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
   });
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [apiError, setApiError] = useState(null);
+  const [apiError, setApiError] = useState({
+    isError: false,
+    msg: '',
+  });
   const [trigger, setTrigger] = useState(Date.now());
   const [controller, setController] = useState();
 
   const forceRefetch = () => {
+    resetState();
     setTrigger(Date.now());
   };
 
   const resetState = () => {
     setComments([]);
     setIsLoading(true);
-    setApiError(null);
+    setApiError({ isError: false, msg: '' });
     setAxiosInstance({ key: initKey, instance: initInstance, config: initConfig });
   };
 
   const execution = async () => {
-    setIsLoading(true);
+    notifyNewMessage(notifyDispatch, '요청 중...', TOAST_TYPE.Info);
     try {
       const ctrl = new AbortController();
       setController(ctrl);
       const { instance, config } = axiosInstance;
-      const {
-        status,
-        data: { data },
-      } = await instance({ ...config, signal: ctrl.signal });
-      console.log('data', data);
-      setIsLoading(false);
+      const { data: responseData } = await instance({ ...config, signal: ctrl.signal });
+      console.log('data', responseData);
+      notifyNewMessage(notifyDispatch, '요청 성공', TOAST_TYPE.Success);
+      getExecution();
     } catch (error) {
       console.error(error);
-      setApiError(error);
-    } finally {
-      getExecution();
+      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
     }
   };
 
@@ -54,19 +58,24 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       const ctrl = new AbortController();
       setController(ctrl);
       const { instance, config } = getInstance;
-      const {
-        status,
-        data: { data },
-      } = await instance({ ...config, signal: ctrl.signal });
-      setComments(data);
+      const { data: responseData } = await instance({ ...config, signal: ctrl.signal });
+      setComments(responseData);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
-      setApiError(error);
+      setApiError({
+        isError: true,
+        msg: error,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const changeApi = (key, instance, config) => setAxiosInstance({ key, instance, config });
+  const changeApi = (key, instance, config) => {
+    setAxiosInstance({ key, instance, config });
+    execution();
+  };
 
   const isGetRequest = axiosInstance.key === getInstance.key;
 
@@ -74,11 +83,10 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
     if (isGetRequest) {
       getExecution();
     } else {
-      resetState();
       execution();
     }
     return () => controller && controller.abort();
-  }, [trigger, axiosInstance.key]);
+  }, [trigger]);
 
   return { comments, setComments, isLoading, apiError, changeApi, forceRefetch };
 };

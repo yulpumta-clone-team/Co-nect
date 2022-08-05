@@ -10,7 +10,7 @@ function useIntersect(customOption) {
   const loadMoreRef = useRef(null);
 
   const resetPage = () => {
-    setPage((prev) => 0);
+    setPage(0);
   };
 
   const handleObsever = useCallback(async ([entry]) => {
