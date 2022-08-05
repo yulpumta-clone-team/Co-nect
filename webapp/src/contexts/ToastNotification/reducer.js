@@ -4,21 +4,21 @@ import { DELETE_TOAST, NOTIFY_TOAST } from './type';
 export const initState = {
   // TODO: 예시 코드입니다. 배포 전에 지워야합니다.
   toastList: [
-    {
-      id: 1,
-      type: 'Success',
-      description: 'This is a success toast component',
-    },
-    {
-      id: 2,
-      type: 'Error',
-      description: 'This is an error toast component',
-    },
-    {
-      id: 3,
-      type: 'Warning',
-      description: 'This is an error toast component',
-    },
+    // {
+    //   id: 'asdf',
+    //   type: 'Success',
+    //   description: 'This is a success toast component',
+    // },
+    // {
+    //   id: 'bb',
+    //   type: 'Error',
+    //   description: 'This is an error toast component',
+    // },
+    // {
+    //   id: 'cacaa',
+    //   type: 'Warning',
+    //   description: 'This is an error toast component',
+    // },
   ],
 };
 
