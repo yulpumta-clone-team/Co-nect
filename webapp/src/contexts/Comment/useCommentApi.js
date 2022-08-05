@@ -45,6 +45,7 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       const { data: responseData } = await instance({ ...config, signal: ctrl.signal });
       console.log('data', responseData);
       notifyNewMessage(notifyDispatch, '요청 성공', TOAST_TYPE.Success);
+      getExecution();
     } catch (error) {
       console.error(error);
       notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
@@ -80,7 +81,6 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
 
   useEffect(() => {
     if (isGetRequest) {
-      console.log('"get" :>> ', 'get');
       getExecution();
     } else {
       execution();
