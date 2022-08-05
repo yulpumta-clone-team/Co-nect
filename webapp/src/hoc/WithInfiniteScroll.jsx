@@ -11,6 +11,7 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
     const [error, setError] = useState({ isError: false, msg: '' });
     const [cardList, setCardList] = useState([]);
     const IsShowLoadRef = isLoading || error.isError ? 'none' : 'block';
+    const [trigger, setTrigger] = useState(Date.now());
 
     const resetError = () => {
       setError({ isError: false, msg: '' });
@@ -18,22 +19,26 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
       setIsLoading(false);
     };
 
-    const refetchData = async () => {
-      resetError();
+    const refetcher = () => {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      resetError();
       resetPage();
+      setTrigger(Date.now());
     };
 
-    const fetchData = async (lastPage, signal) => {
+    const fetcher = async (lastPage, signal) => {
       setIsLoading(true);
       try {
-        const {
-          status,
-          data: { data },
-        } = await axiosInstance({ params: { lastPage }, signal });
-        setCardList((prev) => [...prev, ...data]);
+        const { data: responseCardList } = await axiosInstance({ params: { lastPage }, signal });
+        setCardList((prev) => [...prev, ...responseCardList]);
       } catch (error) {
-        console.error(error);
+        // src/api/errorHandler가 올바르게 작동하지 않은 경우 if문 실행
+        if (typeof error !== 'string') {
+          setError({
+            isError: true,
+            msg: '데이터를 가져오는 도중 에러가 발생했습니다. ',
+          });
+        }
         setError({
           isError: true,
           msg: error,
@@ -46,18 +51,17 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
     useEffect(() => {
       const controller = new AbortController();
       const { signal } = controller;
-      fetchData(page, signal);
+      fetcher(page, signal);
       return () => {
         controller.abort();
       };
-    }, [page]);
-
-    if (isLoading) return <div>Loading....</div>;
+    }, [page, trigger]);
 
     if (error.isError)
       return (
         <div>
-          <button onClick={() => {}}>refetch</button>
+          <h1>{error.msg}</h1>
+          <button onClick={refetcher}>데이터 다시 요청</button>
         </div>
       );
 
@@ -65,8 +69,7 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
     return (
       <>
         <Component {...propsWithResponseData} />
-        {error.isError && <button onClick={refetchData}>데이터 다시 요청</button>}
-        <div ref={loadMoreRef} style={{ display: IsShowLoadRef }}>
+        <div ref={loadMoreRef} style={{ display: IsShowLoadRef, height: '100px' }}>
           {isLoading && <div>Loading...</div>}
         </div>
         <UpperButton />

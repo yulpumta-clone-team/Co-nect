@@ -13,6 +13,7 @@ WithLoading.propTypes = {
   ErrorFallback: PropTypes.element.isRequired,
 };
 
+// TODO: 사용하는 곳마다 LoadingFallback, ErrorFallback 컴포넌트 넘겨받기
 export default function WithLoading({
   Component,
   responseDataKey,
@@ -32,6 +33,7 @@ export default function WithLoading({
     if (error)
       return (
         <div>
+          <h1>{error}</h1>
           <button onClick={forceRefetch}>refetch</button>
         </div>
       );

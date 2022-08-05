@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ROOT_API_URL } from 'constant/api';
+import { successHandler, errorHandler } from './responseHandler';
 
 const rootApiInstance = axios.create({
   baseURL: ROOT_API_URL,
@@ -17,21 +18,10 @@ rootApiInstance.interceptors.request.use(
   (error) => {
     // 요청 에러가 발생했을 때 수행할 로직
     console.log(error); // 디버깅
-    return Promise.reject(error);
+    return error;
   },
 );
 
-rootApiInstance.interceptors.response.use(
-  (response) => {
-    // const {
-    //   data: { code, data, message, status },
-    // } = response;
-    return response;
-  },
-  (error) => {
-    // console.log(error, error.response); // 디버깅
-    return Promise.reject(error);
-  },
-);
+rootApiInstance.interceptors.response.use(successHandler, errorHandler);
 
 export default rootApiInstance;

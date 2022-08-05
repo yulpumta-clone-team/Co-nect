@@ -11,4 +11,24 @@ export const getResonseWithData = (data) => ({
   data,
 });
 
-export const getRandomStatusErrorCode = () => (Math.random() > 0.6 ? 200 : 500);
+export const getRandomStatusErrorCode = () => (Math.random() > 0.4 ? 200 : 500);
+
+export const errorResponse = {
+  code: 1000,
+  message: 'spring용 임시 에러 메세지 입니다.',
+  status: 'Denied',
+};
+
+export const randomResponse = (res, ctx, sucessData) => {
+  const randomStatusErrorCode = getRandomStatusErrorCode();
+
+  if (randomStatusErrorCode === 500) {
+    return res(ctx.status(randomStatusErrorCode), ctx.json(errorResponse));
+  }
+
+  return res(
+    ctx.status(randomStatusErrorCode),
+    ctx.delay(1500),
+    ctx.json(getResonseWithData(sucessData)),
+  );
+};
