@@ -55,13 +55,18 @@ public class UserSignUpService {
     }
 
 
-
+    /**
+     * 유저 회원 가입에 담긴 이메일을 한번 더 체크함
+     */
     private void checkDuplicateEmail(String email) throws ResponeException {
         if(userRepository.findByEmail(email).isPresent()){
             throw new ResponeException(ResponseTemplateStatus.EMAIL_DUPLICATE);
         }
     }
 
+    /**
+     * 유저 필수정보에 담긴 닉네임을 한번 더 체크함
+     */
     private void checkDuplicateName(String name) throws ResponeException {
         if(userRepository.findByName(name).isPresent()){
             throw new ResponeException(ResponseTemplateStatus.NAME_DUPLICATE);

@@ -131,7 +131,6 @@ public class User extends BaseTimeEntity  {
 
     public User updateEssentialInfo(UserEssentialDto userEssentialDto, TechStackProvider techStackProvider){
         this.name = userEssentialDto.getName();
-        this.portfolio = userEssentialDto.getPortfolio();
         this.slogan = userEssentialDto.getSlogan();
         this.image = userEssentialDto.getImage();
         this.content = userEssentialDto.getContent();

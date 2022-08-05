@@ -30,7 +30,6 @@ public class UserEssentialDto implements Validatable {
     private String email; //필수정보 업데이트할 유저를 찾기 위한 이메일
 
     private String name;
-    private String portfolio;
     private String slogan;
     private String image;
     private String content;//자기소개
