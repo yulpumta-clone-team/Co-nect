@@ -30,6 +30,11 @@ rootApiInstance.interceptors.response.use(
   },
   (error) => {
     // console.log(error, error.response); // 디버깅
+    console.error(error); // 디버깅
+    const {
+      response: { data, status },
+    } = error;
+    console.log('data', data);
     return Promise.reject(error);
   },
 );

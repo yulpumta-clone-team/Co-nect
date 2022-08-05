@@ -24,12 +24,20 @@ export default function SignUp() {
     const signUpInfo = {
       email,
       pwd: password,
+      name: '',
+      content: '',
+      hope_session: '',
+      img: '',
+      job: '',
+      portfolio: '',
+      skills: [''],
+      slogan: '',
     };
     // TODO: input validation 추가해야 함.
-
     try {
       const response = await authApi.POST_SIGN_UP(signUpInfo);
       console.log(response);
+      navigate('/login');
       // TODO: 성공시 이동할 페이지 정해서 이동시키기
     } catch (apiError) {
       console.error(apiError);
@@ -38,8 +46,7 @@ export default function SignUp() {
         msg: apiError,
       });
     }
-    console.log(signUpInfo);
-    navigate('/login');
+    // console.log(signUpInfo);
   };
   return (
     <S.ModalContainer>

@@ -9,6 +9,20 @@ const authApi = {
       data,
     });
   },
+  POST_ESSENTIAL_INFO(data) {
+    return rootApiInstance({
+      url: API.AUTH.ESSENTIAL_INFO,
+      method: 'post',
+      data,
+    });
+  },
+  GET_ESSENTIAL_INFO(config) {
+    return rootApiInstance({
+      url: API.AUTH.ESSENTIAL_INFO,
+      method: 'get',
+      ...config,
+    });
+  },
   POST_SIGN_UP(data) {
     return rootApiInstance({
       url: API.AUTH.SIGNUP,

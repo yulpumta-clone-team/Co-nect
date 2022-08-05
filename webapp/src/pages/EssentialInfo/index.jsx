@@ -2,14 +2,16 @@ import React, { useCallback, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { SIGN_UP_INFO } from 'constant/route';
+import { getUserInfo, updateUserInfo } from 'service/auth';
+import authApi from 'api/auth';
 import Nickname from './Nickname';
 import Skill from './Skill';
 import Slogan from './Slogan';
 import SessionJob from './SessionJob';
 import ImgPortfolio from './ImgPortfolio';
 import Content from './Content';
-import * as S from './style';
 import BelongTeam from './BelongTeam';
+import * as S from './style';
 
 export default function EssentialInfo() {
   const navigate = useNavigate();
@@ -33,6 +35,7 @@ export default function EssentialInfo() {
     },
   });
   // 기술
+  const [skillId, setSkillId] = useState('');
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
   const onSkillChange = useCallback((e) => {
@@ -41,28 +44,54 @@ export default function EssentialInfo() {
   }, []);
   // 공고글 (내용)
   const [mdcontent, setMdContent] = useState('');
+  // api error
+  const [apiError, setApiError] = useState({ isError: false, msg: '' });
   // form 제출 시 작동
   const onValid = async (submitData) => {
-    const { nickname, skill, slogan, img, portfolio, hopeSession, userJob, belongTeam } =
+    const { nickname, selectedSkills, slogan, img, portfolio, hopeSession, userJob, belongTeam } =
       submitData;
 
     const signUpInfo = {
-      value: {
-        name: nickname,
-        content: mdcontent,
-        hope_session: hopeSession,
-        img,
-        job: userJob,
-        belong_team: belongTeam,
-        portfolio,
-        skills: selectedSkills,
-        slogan,
-      },
+      name: nickname,
+      portfolio,
+      slogan,
+      content: mdcontent,
+      img,
+      hope_session: hopeSession,
+      job: userJob,
+      skills: skillId,
+      status: belongTeam,
     };
     // TODO: input validation 추가해야 함.
-
-    navigate('/');
-    console.log(signUpInfo);
+    try {
+      const response = await authApi.POST_ESSENTIAL_INFO(signUpInfo);
+      console.log(response);
+      updateUserInfo({
+        userId: response.data.data.id,
+        profileImg: response.data.data.img,
+        name: response.data.data.name,
+      });
+    } catch (apiError) {
+      console.error(apiError);
+      setApiError({
+        isError: true,
+        msg: apiError,
+      });
+    }
+    try {
+      const response = await authApi.GET_ESSENTIAL_INFO({
+        name: nickname,
+        img,
+      });
+      console.log(response);
+      navigate('/');
+    } catch (apiError) {
+      console.error(apiError);
+      setApiError({
+        isError: true,
+        msg: apiError,
+      });
+    }
   };
   return (
     <S.ModalContainer>
@@ -92,6 +121,7 @@ export default function EssentialInfo() {
                     onSkillChange={onSkillChange}
                     errors={errors}
                     selectedSkills={selectedSkills}
+                    id={skillId}
                   />
                 }
               />

@@ -9,9 +9,10 @@ Skill.propTypes = {
   userSkill: PropTypes.string.isRequired,
   onSkillChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
-export default function Skill({ userSkill, onSkillChange, errors, selectedSkills }) {
+export default function Skill({ userSkill, onSkillChange, errors, selectedSkills, id }) {
   const navigate = useNavigate();
   const handleClickButton = (event) => {
     const { target } = event;
@@ -20,11 +21,12 @@ export default function Skill({ userSkill, onSkillChange, errors, selectedSkills
       navigate(ESSENTIAL_INFO + SIGN_UP_INFO.SLOGAN);
     }
   };
+  // key 값으로 전달해주기! string 말고 key값으로!!
   return (
     <div>
       <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
       <br />
-      <select value={userSkill} onChange={onSkillChange}>
+      <select value={id} onChange={onSkillChange}>
         {skillOptions.map(({ id, value, label }) => (
           <option key={id} value={value}>
             {label}

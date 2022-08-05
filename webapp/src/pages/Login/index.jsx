@@ -22,11 +22,6 @@ export default function Login() {
     try {
       const response = await authApi.POST_LOGIN({ email, pwd: password });
       console.log(response);
-      updateUserInfo({
-        userId: email,
-        profileImg: response.data.data.img,
-        name: response.data.data.name,
-      });
       navigate('/essential_info');
       // TODO: 성공시 이동할 페이지 정해서 이동시키기
     } catch (apiError) {
@@ -37,6 +32,7 @@ export default function Login() {
       });
     }
   };
+
   return (
     <S.ModalContainer>
       <S.Backdrop>

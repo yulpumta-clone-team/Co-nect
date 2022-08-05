@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from 'components/Common/Dropdown';
 import { deleteUserInfo } from 'service/auth';
 import { MY_POST, PROFILE, MY_LIST } from 'constant/route';
-
+import authApi from 'api/auth';
 import * as S from './style';
 
 UserInfoDropdown.propTypes = {
@@ -12,13 +12,24 @@ UserInfoDropdown.propTypes = {
   shouldCloseDropdown: PropTypes.func.isRequired,
   closeDropdown: PropTypes.func.isRequired,
 };
-
 export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, closeDropdown }) {
   const navigate = useNavigate();
-  const onClickLogout = () => {
-    deleteUserInfo();
-    navigate('/');
-    window.location.reload();
+  // api error
+  const [apiError, setApiError] = useState({ isError: false, msg: '' });
+  const onClickLogout = async () => {
+    try {
+      const response = await authApi.GET_LOG_OUT();
+      console.log(response);
+      deleteUserInfo();
+      navigate('/');
+      window.location.reload();
+    } catch (apiError) {
+      console.error(apiError);
+      setApiError({
+        isError: true,
+        msg: apiError,
+      });
+    }
   };
   const onClickLinkLi = (link) => {
     navigate(link);
