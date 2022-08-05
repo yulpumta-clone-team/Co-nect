@@ -9,7 +9,7 @@ import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
 import com.projectmatching.app.domain.team.dto.TeamResponseDto;
 import com.projectmatching.app.service.team.TeamService;
-import com.projectmatching.app.service.user.UserService;
+import com.projectmatching.app.service.user.Impl.UserService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

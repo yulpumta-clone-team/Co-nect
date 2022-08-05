@@ -6,8 +6,8 @@ import com.projectmatching.app.domain.common.Paging;
 import com.projectmatching.app.domain.user.dto.*;
 
 import com.projectmatching.app.service.user.Impl.UserService;
-import com.projectmatching.app.service.user.UserSignInService;
-import com.projectmatching.app.service.user.UserSignUpService;
+import com.projectmatching.app.service.user.Impl.UserSignInService;
+import com.projectmatching.app.service.user.Impl.UserSignUpService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

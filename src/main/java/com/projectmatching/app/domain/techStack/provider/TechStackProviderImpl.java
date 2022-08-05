@@ -1,14 +1,16 @@
 package com.projectmatching.app.domain.techStack.provider;
-
 import com.projectmatching.app.constant.bean.TechStackCodeBean;
 import com.projectmatching.app.domain.techStack.dto.TechCodeDto;
 import com.projectmatching.app.domain.techStack.entity.TechCode;
+import com.projectmatching.app.domain.techStack.entity.TechStack;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
+@Component
 public class TechStackProviderImpl implements TechStackProvider{
     private final TechStackCodeBean techStackCode;
 
@@ -35,4 +37,7 @@ public class TechStackProviderImpl implements TechStackProvider{
                 .map(TechCodeDto::of)
                 .collect(Collectors.toList());
     }
+
+
+
 }

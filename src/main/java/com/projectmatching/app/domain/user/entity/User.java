@@ -6,6 +6,7 @@ import com.projectmatching.app.domain.history.entity.UserHistory;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
 import com.projectmatching.app.domain.liking.entity.UserLiking;
 import com.projectmatching.app.domain.techStack.entity.TechCode;
+import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.dto.UserEssentialDto;
@@ -96,7 +97,7 @@ public class User extends BaseTimeEntity  {
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
     @Builder.Default
-    private Set<TechCode> skills = new HashSet<>();
+    private Set<UserTech> skills = new HashSet<>();
 
 
     @OneToMany(mappedBy = "user")
@@ -134,8 +135,12 @@ public class User extends BaseTimeEntity  {
         this.slogan = userEssentialDto.getSlogan();
         this.image = userEssentialDto.getImage();
         this.content = userEssentialDto.getContent();
-        this.skills = techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills()).stream()
-                .collect(Collectors.toSet());
+        this.skills = techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills())
+                .stream()
+                .map(t ->
+                    TechCode.toUserTechWithAddedUser(t,this)
+                ).collect(Collectors.toSet());
+
         this.hope_session = userEssentialDto.getHope_session();
 
         return this;
