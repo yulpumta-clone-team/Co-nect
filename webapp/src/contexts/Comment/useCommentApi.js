@@ -1,5 +1,6 @@
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useEffect, useState } from 'react';
 
 const useCommentApi = (initKey, initInstance, initConfig) => {
@@ -36,17 +37,17 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
   };
 
   const execution = async () => {
-    notifyNewMessage(notifyDispatch, '요청 중...', 'Info');
+    notifyNewMessage(notifyDispatch, '요청 중...', TOAST_TYPE.Info);
     try {
       const ctrl = new AbortController();
       setController(ctrl);
       const { instance, config } = axiosInstance;
       const { data: responseData } = await instance({ ...config, signal: ctrl.signal });
       console.log('data', responseData);
-      notifyNewMessage(notifyDispatch, '요청 성공', 'Success');
+      notifyNewMessage(notifyDispatch, '요청 성공', TOAST_TYPE.Success);
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, 'Error');
+      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
     }
   };
 
