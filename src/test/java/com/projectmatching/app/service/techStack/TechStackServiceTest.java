@@ -4,6 +4,8 @@ import com.projectmatching.app.constant.bean.TechStackCodeBean;
 import com.projectmatching.app.domain.techStack.TechCodeRepository;
 import com.projectmatching.app.domain.techStack.dto.TechCodeDto;
 import com.projectmatching.app.domain.techStack.entity.TechCode;
+import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
+import com.projectmatching.app.domain.techStack.provider.TechStackProviderImpl;
 import com.projectmatching.app.service.ServiceTest;
 import com.projectmatching.app.util.StreamUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,11 @@ public class TechStackServiceTest extends ServiceTest {
     private TechCodeRepository techCodeRepository;
     @Mock
     private TechStackCodeBean techStackCodeBean;
+
+    @InjectMocks
+    private TechStackProviderImpl techStackProvider;
+
+
 
     private List<TechCode> techCodeList;
     private List<TechCodeDto> techCodeDtoList;
@@ -58,7 +66,7 @@ public class TechStackServiceTest extends ServiceTest {
         when(techStackCodeBean.getTechCodeList()).thenReturn(techCodeList);
 
         String param = "front";
-        List<TechCodeDto> result = techStackService.getTechCodeDtoListByCategory(param);
+        List<TechCodeDto> result = techStackProvider.extractTechCodeDtoByCategory(param);
 
         assertThat(result).extracting("category").contains("front");
         assertThat(result).extracting("category").doesNotContain("architect");
@@ -74,7 +82,7 @@ public class TechStackServiceTest extends ServiceTest {
         keys.add(202);
         keys.add(101);
 
-        List<TechCode> result = techStackService.getTechCodeList(keys);
+        List<TechCode> result = techStackProvider.extractTechCodeByKeys(keys);
 
         assertThat(result).extracting("techName").contains("react","express");
 

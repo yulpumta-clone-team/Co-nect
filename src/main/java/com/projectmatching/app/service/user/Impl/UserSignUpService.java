@@ -46,10 +46,10 @@ public class UserSignUpService {
 
         //형식 체크
         validateEmail(userDto.getEmail());
-        validateName(userDto.getName());
+//        validateName(userDto.getName());
         //중복 체크
         checkDuplicateEmail(userDto.getEmail());
-        checkDuplicateName(userDto.getName());
+//        checkDuplicateName(userDto.getName());
 
     }
 

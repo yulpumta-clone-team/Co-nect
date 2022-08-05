@@ -5,12 +5,16 @@ import com.projectmatching.app.domain.comment.entity.UserComment;
 import com.projectmatching.app.domain.history.entity.UserHistory;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
 import com.projectmatching.app.domain.liking.entity.UserLiking;
+import com.projectmatching.app.domain.techStack.entity.TechCode;
+import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
 import com.projectmatching.app.domain.user.Role;
+import com.projectmatching.app.domain.user.dto.UserEssentialDto;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter @Setter
 @ToString
@@ -38,7 +42,7 @@ public class User extends BaseTimeEntity  {
 
     private String pwd;
 
-    private String img;
+    private String image;
 
     private String portfolio;
 
@@ -92,7 +96,7 @@ public class User extends BaseTimeEntity  {
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
     @Builder.Default
-    private Set<UserTech> skills = new HashSet<>();
+    private Set<TechCode> skills = new HashSet<>();
 
 
     @OneToMany(mappedBy = "user")
@@ -125,6 +129,18 @@ public class User extends BaseTimeEntity  {
     }
 
 
+    public User updateEssentialInfo(UserEssentialDto userEssentialDto, TechStackProvider techStackProvider){
+        this.name = userEssentialDto.getName();
+        this.portfolio = userEssentialDto.getPortfolio();
+        this.slogan = userEssentialDto.getSlogan();
+        this.image = userEssentialDto.getImage();
+        this.content = userEssentialDto.getContent();
+        this.skills = techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills()).stream()
+                .collect(Collectors.toSet());
+        this.hope_session = userEssentialDto.getHope_session();
+
+        return this;
+    }
 
 
 

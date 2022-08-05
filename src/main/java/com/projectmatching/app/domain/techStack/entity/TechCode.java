@@ -1,6 +1,7 @@
 package com.projectmatching.app.domain.techStack.entity;
 
 import com.projectmatching.app.domain.BaseTimeEntity;
+import com.projectmatching.app.domain.user.entity.UserTech;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -29,6 +30,8 @@ public class TechCode extends BaseTimeEntity {
 
     //기술 이름
     private String techName;
+
+
 
 
 

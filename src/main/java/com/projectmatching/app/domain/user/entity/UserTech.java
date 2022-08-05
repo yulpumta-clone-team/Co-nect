@@ -1,7 +1,7 @@
 package com.projectmatching.app.domain.user.entity;
 
 
-import com.projectmatching.app.domain.techStack.entity.TechStack;
+import com.projectmatching.app.domain.techStack.entity.TechCode;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +22,7 @@ public class UserTech {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="tech_stack")
-    private TechStack techStack;
+    private TechCode techStack;
 
 
     @ManyToOne(fetch = FetchType.LAZY)

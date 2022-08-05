@@ -1,7 +1,6 @@
 package com.projectmatching.app.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.entity.User;
 import lombok.*;
 
@@ -25,7 +24,7 @@ public class UserLoginResDto{
     public static UserLoginResDto toUserLoginResDto(User user) {
 
         UserLoginResDto userLoginResDto = UserLoginResDto.builder()
-                .img(user.getImg())
+                .img(user.getImage())
                 .email(user.getEmail())
                 .id(user.getId())
                 .name(user.getName())

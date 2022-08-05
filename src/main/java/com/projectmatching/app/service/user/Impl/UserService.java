@@ -94,7 +94,7 @@ public class UserService  {
         //TODO 이부분 수정 필요, 현재 안쓰임
         UserProfileDto userProfileDto = UserProfileDto.builder()
                 .name(userDetails.getUserRealName())
-                .img(postUserProfileDto.getImg())
+                .image(postUserProfileDto.getImg())
                 .skills(postUserProfileDto.getSkills())
                 .job(postUserProfileDto.getJob())
                 .build();
