@@ -13,18 +13,22 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
   });
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [apiError, setApiError] = useState(null);
+  const [apiError, setApiError] = useState({
+    isError: false,
+    msg: '',
+  });
   const [trigger, setTrigger] = useState(Date.now());
   const [controller, setController] = useState();
 
   const forceRefetch = () => {
+    resetState();
     setTrigger(Date.now());
   };
 
   const resetState = () => {
     setComments([]);
     setIsLoading(true);
-    setApiError(null);
+    setApiError({ isError: false, msg: '' });
     setAxiosInstance({ key: initKey, instance: initInstance, config: initConfig });
   };
 
@@ -39,7 +43,10 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       setIsLoading(false);
     } catch (error) {
       console.error(error);
-      setApiError(error);
+      setApiError({
+        isError: true,
+        msg: error,
+      });
     } finally {
       getExecution();
     }
@@ -56,7 +63,12 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       setIsLoading(false);
     } catch (error) {
       console.error(error);
-      setApiError(error);
+      setApiError({
+        isError: true,
+        msg: error,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
