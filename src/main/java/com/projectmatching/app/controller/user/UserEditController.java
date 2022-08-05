@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.projectmatching.app.constant.ResponseTemplateStatus.SUCCESS;
 
 
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
 @Api(tags = "유저 정보 입력 관련 컨트롤러")
