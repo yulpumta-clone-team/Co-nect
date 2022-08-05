@@ -2,7 +2,6 @@ package com.projectmatching.app.domain.team.dto;
 
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
-import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.AllArgsConstructor;

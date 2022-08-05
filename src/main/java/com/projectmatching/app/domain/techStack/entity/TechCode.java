@@ -1,12 +1,13 @@
 package com.projectmatching.app.domain.techStack.entity;
 
 import com.projectmatching.app.domain.BaseTimeEntity;
+import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.domain.user.entity.UserTech;
+import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -28,8 +29,24 @@ public class TechCode extends BaseTimeEntity {
     private String image;
 
     //기술 이름
+    @Column(name = "tech_name")
     private String techName;
 
+
+
+    public static TechStack toTechStackEntity(TechCode techCode){
+        TechStack techStack = new TechStack();
+        BeanUtils.copyProperties(techCode,techStack);
+        return techStack;
+
+    }
+    public static UserTech toUserTechWithAddedUser(TechCode techCode, User user){
+        UserTech userTech = new UserTech();
+        userTech.setTechStack(toTechStackEntity(techCode));
+        userTech.setUser(user);
+        userTech.setId(IdGenerator.number());
+        return userTech;
+    }
 
 
 }

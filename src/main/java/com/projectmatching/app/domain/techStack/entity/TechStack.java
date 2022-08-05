@@ -15,8 +15,11 @@ import java.util.Set;
 @Entity
 @Table(name = "tech_stack")
 public class TechStack {
+
+
     @Id
-    private Long techStackId;
+    @Column(name = "tech_stack_id")
+    private Long id;
 
     @Column
     private String category;
@@ -25,7 +28,7 @@ public class TechStack {
     private String name; //기술 이름
 
     @Column
-    private Long techSerialNum;
+    private Long key;
 
 
     @OneToMany(mappedBy = "techStack", cascade = CascadeType.ALL)
@@ -34,10 +37,10 @@ public class TechStack {
     private Set<TeamTech> teamTechs = new HashSet<>();
 
     @OneToMany
-    @JoinColumn(name = "user_tech")
+    @JoinColumn(name = "user")
     @ToString.Exclude
     @Builder.Default
-    private Set<UserTech> userTeches = new HashSet<>();
+    private Set<UserTech> userTechs = new HashSet<>();
 
 
 }

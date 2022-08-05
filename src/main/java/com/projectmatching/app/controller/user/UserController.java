@@ -4,19 +4,18 @@ import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.domain.common.Paging;
 import com.projectmatching.app.domain.user.dto.*;
-import com.projectmatching.app.service.user.UserService;
-import com.projectmatching.app.service.user.UserSignInService;
-import com.projectmatching.app.service.user.UserSignUpService;
+
+import com.projectmatching.app.service.user.Impl.UserService;
+import com.projectmatching.app.service.user.Impl.UserSignInService;
+import com.projectmatching.app.service.user.Impl.UserSignUpService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
-import com.projectmatching.app.util.AuthToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -132,26 +131,7 @@ public class UserController {
     }
 
 
-    /**
-     * 유저 프로필 생성(유저 게시물 등록)
-     */
-     @ApiOperation(value = "유저 게시물 등록")
-     @PostMapping("/myprofile")
-     public ResponseTemplate<Void> addUserProfilePosting(@RequestBody PostUserProfileDto postUserProfileDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-         userService.postingUserProfile(postUserProfileDto,userDetails);
-         return ResponseTemplate.of(SUCCESS);
-     }
 
-
-    /**
-     * 유저 프로필 수정(등록된 게시물 수정)
-     */
-
-    @ApiOperation(value = "유저 게시물 수정")
-    @PatchMapping("/myprofile")
-    public ResponseTemplate<UserDto> updateUserPosting(@RequestBody PostUserProfileDto postUserProfileDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return ResponseTemplate.valueOf(userService.updateUserPosting(postUserProfileDto,userDetails));
-    }
 
     /**
      * 내가 좋아요한 유저 목록
@@ -163,5 +143,7 @@ public class UserController {
 
 
     }
+
+
 
 }

@@ -1,7 +1,7 @@
 package com.projectmatching.app.domain.team.entity;
 
 import com.projectmatching.app.domain.BaseTimeEntity;
-import com.projectmatching.app.domain.techStack.entity.TechStack;
+import com.projectmatching.app.domain.techStack.entity.TechCode;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,5 +26,5 @@ public class TeamTech extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="tech_id")
-    private TechStack techStack;
+    private TechCode techStack;
 }
