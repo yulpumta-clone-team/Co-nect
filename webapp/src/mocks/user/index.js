@@ -1,6 +1,11 @@
 import { API, ROOT_API_URL } from 'constant/api';
 import { rest } from 'msw';
-import { getResonseWithData, getRandomStatusErrorCode, errorResponse } from 'mocks/mockUtils';
+import {
+  getResonseWithData,
+  getRandomStatusErrorCode,
+  errorResponse,
+  randomResponse,
+} from 'mocks/mockUtils';
 import { userList } from './usersList';
 import { myPosts } from './myPosts';
 import { userDetail } from './userDetail';
@@ -10,17 +15,10 @@ const USER = [
   rest.get(ROOT_API_URL + API.USER.INDEX, (req, res, ctx) => {
     const lastPage = req.url.searchParams.get('lastPage');
     const newUserList = userList.map((user) => ({ ...user, id: Number(user.id + lastPage) }));
-    console.log('lastPage :>> ', lastPage);
     if (Number(lastPage) === 3) {
       return res(ctx.status(500), ctx.json(getResonseWithData(errorResponse)));
     }
-    const randomStatusErrorCode = getRandomStatusErrorCode();
-
-    if (randomStatusErrorCode === 500) {
-      return res(ctx.status(randomStatusErrorCode), ctx.json(errorResponse));
-    }
-
-    return res(ctx.status(randomStatusErrorCode), ctx.json(getResonseWithData(newUserList)));
+    return randomResponse(res, ctx, userList);
   }),
   // GET_USER_LIKES
   rest.get(ROOT_API_URL + API.USER.LIKES, (req, res, ctx) => {
@@ -51,8 +49,7 @@ const USER = [
   }),
   // GET_USER_DETAIL
   rest.get(`${ROOT_API_URL + API.USER.INDEX}/:id`, (req, res, ctx) => {
-    const randomStatusErrorCode = getRandomStatusErrorCode();
-    return res(ctx.status(randomStatusErrorCode), ctx.json(getResonseWithData(userDetail)));
+    return randomResponse(res, ctx, userDetail);
   }),
   // EDIT_USER_PROFILE
   rest.patch(`${ROOT_API_URL + API.USER.INDEX}/:id`, (req, res, ctx) => {
