@@ -24,7 +24,6 @@ rootApiInstance.interceptors.request.use(
 
 rootApiInstance.interceptors.response.use((response) => {
   const { data } = response;
-  console.log('data :>> ', data);
   return data;
 }, errorHandler);
 
