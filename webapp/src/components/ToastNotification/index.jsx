@@ -6,7 +6,29 @@ import infoIcon from 'assets/info.svg';
 import warningIcon from 'assets/warning.svg';
 import * as S from './style';
 
-function ToastNotification({ toastList, col, row, autoDelete, autoDeleteTime, deleteCallback }) {
+ToastNotification.propTypes = {
+  toastList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  col: PropTypes.string.isRequired,
+  row: PropTypes.string.isRequired,
+  autoDelete: PropTypes.bool.isRequired,
+  autoDeleteTime: PropTypes.number.isRequired,
+  deleteCallback: PropTypes.func.isRequired,
+};
+
+export default function ToastNotification({
+  toastList,
+  col,
+  row,
+  autoDelete,
+  autoDeleteTime,
+  deleteCallback,
+}) {
   const timeId = useRef(null);
   const [list, setList] = useState(toastList);
   const position = `${col}-${row}`;
@@ -45,23 +67,6 @@ function ToastNotification({ toastList, col, row, autoDelete, autoDeleteTime, de
     </S.Container>
   );
 }
-
-ToastNotification.propTypes = {
-  toastList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  col: PropTypes.string.isRequired,
-  row: PropTypes.string.isRequired,
-  autoDelete: PropTypes.bool.isRequired,
-  autoDeleteTime: PropTypes.number.isRequired,
-  deleteCallback: PropTypes.func.isRequired,
-};
-
-export default ToastNotification;
 
 const MESSAGE_ICON = {
   Success: checkIcon,
