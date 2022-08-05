@@ -1,6 +1,9 @@
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useEffect, useState } from 'react';
 
 const useCommentApi = (initKey, initInstance, initConfig) => {
+  const notifyDispatch = useToastNotificationAction();
   const getInstance = {
     key: initKey,
     instance: initInstance,
@@ -33,22 +36,17 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
   };
 
   const execution = async () => {
-    setIsLoading(true);
+    notifyNewMessage(notifyDispatch, '요청 중...', 'Info');
     try {
       const ctrl = new AbortController();
       setController(ctrl);
       const { instance, config } = axiosInstance;
       const { data: responseData } = await instance({ ...config, signal: ctrl.signal });
       console.log('data', responseData);
-      setIsLoading(false);
+      notifyNewMessage(notifyDispatch, '요청 성공', 'Success');
     } catch (error) {
       console.error(error);
-      setApiError({
-        isError: true,
-        msg: error,
-      });
-    } finally {
-      getExecution();
+      notifyNewMessage(notifyDispatch, error, 'Error');
     }
   };
 
@@ -72,19 +70,22 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
     }
   };
 
-  const changeApi = (key, instance, config) => setAxiosInstance({ key, instance, config });
+  const changeApi = (key, instance, config) => {
+    setAxiosInstance({ key, instance, config });
+    execution();
+  };
 
   const isGetRequest = axiosInstance.key === getInstance.key;
 
   useEffect(() => {
     if (isGetRequest) {
+      console.log('"get" :>> ', 'get');
       getExecution();
     } else {
-      resetState();
       execution();
     }
     return () => controller && controller.abort();
-  }, [trigger, axiosInstance.key]);
+  }, [trigger]);
 
   return { comments, setComments, isLoading, apiError, changeApi, forceRefetch };
 };
