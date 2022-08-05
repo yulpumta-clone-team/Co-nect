@@ -24,14 +24,6 @@ export default function SignUp() {
     const signUpInfo = {
       email,
       pwd: password,
-      name: '',
-      content: '',
-      hope_session: '',
-      img: '',
-      job: '',
-      portfolio: '',
-      skills: [''],
-      slogan: '',
     };
     // TODO: input validation 추가해야 함.
     try {
