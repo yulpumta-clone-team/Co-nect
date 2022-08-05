@@ -6,7 +6,6 @@ import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserJoinDto;
 import com.projectmatching.app.domain.user.entity.User;
-import com.projectmatching.app.service.user.UserService;
 import com.projectmatching.app.util.JsonUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,8 +46,6 @@ public class UserControllerTest extends ControllerTest {
 
     private UserJoinDto userJoinDto;
 
-    @MockBean
-    private UserService userService;
 
 
 //

@@ -8,6 +8,7 @@ import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.PostUserProfileDto;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.UserProfileDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectNotFoundException;
@@ -25,6 +26,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGICAL_ERROR;
+import static com.projectmatching.app.domain.user.dto.UserInfo.toUserInfoByUser;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +38,22 @@ public class UserService  {
     private final UserRepository userRepository;
     private final UserLikingRepository userLikingRepository;
     private final UserDetails userDetails;
+
+
+    /**
+     * 사용자의
+     * id
+     * name
+     * image
+     * 들을 반환
+     */
+    @Transactional(readOnly = true)
+    public UserInfo getUserEssentialInfo(UserDetailsImpl userDetails){
+        User user = userRepository.findByEmail(userDetails.getEmail())
+                .orElseThrow(CoNectNotFoundException::new);
+        return toUserInfoByUser(user);
+
+    }
 
 
     //유저 상세 조회

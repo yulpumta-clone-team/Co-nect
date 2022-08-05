@@ -4,6 +4,7 @@ import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.domain.user.dto.PostUserProfileDto;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserEssentialDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.service.user.Impl.UserService;
 import com.projectmatching.app.service.user.Impl.UserSignUpService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
@@ -11,10 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.SUCCESS;
 
@@ -38,6 +36,11 @@ public class UserEditController {
         return ResponseTemplate.of(SUCCESS);
     }
 
+    @ApiOperation(value = "유저 프로필을 띄우기 위한 최소 필수정보들을 조회")
+    @GetMapping("/essential_info")
+    public ResponseTemplate<UserInfo> getEssential(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseTemplate.valueOf(userService.getUserEssentialInfo(userDetails));
+    }
 
 
     /**
