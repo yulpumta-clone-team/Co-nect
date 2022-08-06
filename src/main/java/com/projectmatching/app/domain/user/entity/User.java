@@ -61,8 +61,8 @@ public class User extends BaseTimeEntity  {
     @Column(columnDefinition = "INT")
     private int respected;
 
-    @Column(columnDefinition = "BIGINT")
-    private int read;
+    @Column(name = "read_cnt",columnDefinition = "BIGINT")
+    private int readCnt;
     /**
      * 내가 좋아요한 유저 목록
      */
