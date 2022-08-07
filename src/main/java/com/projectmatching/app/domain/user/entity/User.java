@@ -63,6 +63,9 @@ public class User extends BaseTimeEntity  {
 
     @Column(name = "read_cnt",columnDefinition = "BIGINT")
     private int readCnt;
+
+    @Column(name = "team_exist",columnDefinition = "TINYINT")
+    private boolean isTeamExist;
     /**
      * 내가 좋아요한 유저 목록
      */
@@ -140,7 +143,8 @@ public class User extends BaseTimeEntity  {
                 .map(t ->
                     TechCode.toUserTechWithAddedUser(t,this)
                 ).collect(Collectors.toSet());
-
+        this.portfolio = userEssentialDto.getPortfolio();
+        this.isTeamExist = userEssentialDto.getStatus();
         this.hope_session = userEssentialDto.getHope_session();
 
         return this;
