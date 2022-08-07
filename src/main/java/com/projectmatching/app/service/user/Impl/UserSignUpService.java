@@ -36,8 +36,8 @@ public class UserSignUpService {
             User user = userJoinDto.asEntity(Role.USER);
 
             log.info("유저 info : {}",user);
-
-            return userRepository.save(user).getId();
+            userRepository.save(user);
+            return user.getId();
         }catch (ResponeException e){
             throw e;
         }
@@ -48,7 +48,7 @@ public class UserSignUpService {
     @Validation
     public void updateUserEssentialInfo(UserEssentialDto userEssentialDto){
         checkDuplicateName(userEssentialDto.getName());
-        User user = userRepository.findByEmail(userEssentialDto.getEmail()).orElseThrow(CoNectNotFoundException::new);
+        User user = userRepository.findById(userEssentialDto.getId()).orElseThrow(CoNectNotFoundException::new);
         userRepository.save(user.updateEssentialInfo(userEssentialDto,techStackProvider));
 
     }
