@@ -36,7 +36,7 @@ public class UserProfileDto {
 
         userProfileDto.commentCnt = user.getUserComments().size();
         userProfileDto.likeCnt = user.getUserLikings().size();
-        userProfileDto.readCnt = user.getRead();
+        userProfileDto.readCnt = user.getReadCnt();
 
         return userProfileDto;
     }
