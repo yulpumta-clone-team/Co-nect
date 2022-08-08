@@ -144,7 +144,6 @@ public class User extends BaseTimeEntity  {
                     TechCode.toUserTechWithAddedUser(t,this)
                 ).collect(Collectors.toSet());
         this.portfolio = userEssentialDto.getPortfolio();
-        this.isTeamExist = userEssentialDto.getStatus();
         this.hope_session = userEssentialDto.getHope_session();
 
         return this;
