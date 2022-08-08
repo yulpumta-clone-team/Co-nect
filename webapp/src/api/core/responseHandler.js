@@ -17,9 +17,9 @@ export function errorHandler(error) {
     const {
       response: { data: apiData, status },
     } = error;
-    const hasCode = apiData.hasOwnProperty('code');
-    const hasMessage = apiData.hasOwnProperty('message');
-    const hasStatus = apiData.hasOwnProperty('status');
+    const hasCode = apiData && apiData.hasOwnProperty('code');
+    const hasMessage = apiData && apiData.hasOwnProperty('message');
+    const hasStatus = apiData && apiData.hasOwnProperty('status');
 
     if (hasCode && hasMessage && hasStatus) {
       return Promise.reject(apiData.message);
@@ -36,6 +36,6 @@ export function errorHandler(error) {
     // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
     console.log('Error', error.message);
   }
-  console.log(error.config);
-  return Promise.reject(error);
+
+  return Promise.reject(new Error('요청 도중 에러 발생'));
 }
