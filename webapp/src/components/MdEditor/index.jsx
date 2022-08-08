@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 
+MarkdownEditor.propTypes = {
+  mdValue: PropTypes.string.isRequired,
+  setContent: PropTypes.func.isRequired,
+};
+
 function MarkdownEditor({ mdValue, setContent }) {
   const editorRef = useRef(null);
   const onChangeEditorTextHandler = useCallback(() => {
@@ -11,7 +16,6 @@ function MarkdownEditor({ mdValue, setContent }) {
   return (
     <Editor
       initialValue={mdValue}
-      height="400px"
       initialEditType="markdown"
       useCommandShortcut
       ref={editorRef}
@@ -19,10 +23,5 @@ function MarkdownEditor({ mdValue, setContent }) {
     />
   );
 }
-
-MarkdownEditor.propTypes = {
-  mdValue: PropTypes.string.isRequired,
-  setContent: PropTypes.func.isRequired,
-};
 
 export default React.memo(MarkdownEditor);
