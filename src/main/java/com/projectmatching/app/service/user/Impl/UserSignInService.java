@@ -65,15 +65,15 @@ public class UserSignInService {
     public UserIsFirstDto isFirstLoginUserCheck(UserDetailsImpl userDetails){
         User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(CoNectNotFoundException::new);
 
-        if(isUserNameNull(user))UserIsFirstDto.builder().isFirst(true).build();
+        if(isUserNameNull(user)) return UserIsFirstDto.builder().isFirst(true).build();
 
         return UserIsFirstDto.builder().isFirst(false).build();
 
     }
 
     private boolean isUserNameNull(User user){
-        if(user.getName() != null)return false;
-        else return true;
+        if(user.getName() == null)return true;
+        else return false;
 
     }
 

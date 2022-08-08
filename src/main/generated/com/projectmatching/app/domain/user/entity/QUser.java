@@ -33,7 +33,9 @@ public class QUser extends EntityPathBase<User> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath img = createString("img");
+    public final StringPath image = createString("image");
+
+    public final BooleanPath isTeamExist = createBoolean("isTeamExist");
 
     public final StringPath job = createString("job");
 
@@ -45,7 +47,7 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath pwd = createString("pwd");
 
-    public final NumberPath<Integer> read = createNumber("read", Integer.class);
+    public final NumberPath<Integer> readCnt = createNumber("readCnt", Integer.class);
 
     public final NumberPath<Integer> respected = createNumber("respected", Integer.class);
 
