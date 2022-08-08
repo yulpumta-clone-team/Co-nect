@@ -32,8 +32,8 @@ public class UserEditController {
      */
     @ApiOperation(value = "유저 필수정보 업데이트 ")
     @PostMapping("/essential_info")
-    public ResponseTemplate<Void> updateEssential(@RequestBody UserEssentialDto userEssentialDto){
-        userSignUpService.updateUserEssentialInfo(userEssentialDto);
+    public ResponseTemplate<Void> updateEssential(@RequestBody UserEssentialDto userEssentialDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        userSignUpService.updateUserEssentialInfo(userEssentialDto,userDetails);
         return ResponseTemplate.of(SUCCESS);
     }
 

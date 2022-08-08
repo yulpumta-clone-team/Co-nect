@@ -5,10 +5,12 @@ import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserIsFirstDto;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
 import com.projectmatching.app.domain.user.dto.UserLoginResDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectNotFoundException;
+import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -32,24 +34,19 @@ public class UserSignInService {
     private final AuthTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
-    //유저 로그인
     /**
      * 해당 유저 존재하면
-     * 토큰을 만들어 헤더에 저장하고
-     * 유저 정보와
-     * 최초 로그인인지 확인 하여 전달
+     * 토큰을 만듦
+     * @param userLoginDto
+     * @return AuthToken
      *
      */
     @Transactional(readOnly = true)
     @Validation
-    public AuthToken userLogin(UserLoginDto userLoginDto, HttpServletResponse response){
+    public AuthToken userLogin(UserLoginDto userLoginDto){
         try {
             User user = userRepository.findByEmail(userLoginDto.getEmail()).orElseThrow(CoNectNotFoundException::new);
             if(passwordEncoder.matches(userLoginDto.getPwd(),user.getPwd())){
-                //로그인 성공시 유저 이미지와 이름 아이디를 반환, 최초 로그인인지도 체크하여 반환
-                UserLoginResDto userLoginResDto = Optional.ofNullable(qUserRepository.login(userLoginDto))
-                        .map(UserLoginResDto::toUserLoginResDto)
-                        .orElseThrow(NullPointerException::new);
                 return jwtTokenProvider.createTokens(UserDto.of(user));
 
             }
@@ -61,6 +58,25 @@ public class UserSignInService {
             throw new ResponeException(LOGIN_USER_ERROR);
         }
     }
+
+
+
+    @Transactional(readOnly = true)
+    public UserIsFirstDto isFirstLoginUserCheck(UserDetailsImpl userDetails){
+        User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(CoNectNotFoundException::new);
+
+        if(isUserNameNull(user))UserIsFirstDto.builder().isFirst(true).build();
+
+        return UserIsFirstDto.builder().isFirst(false).build();
+
+    }
+
+    private boolean isUserNameNull(User user){
+        if(user.getName() != null)return false;
+        else return true;
+
+    }
+
 
     @Transactional
     public void userDelete(String userEamil){
