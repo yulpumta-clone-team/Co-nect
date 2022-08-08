@@ -38,11 +38,12 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
             isError: true,
             msg: '데이터를 가져오는 도중 에러가 발생했습니다. ',
           });
+        } else {
+          setError({
+            isError: true,
+            msg: error,
+          });
         }
-        setError({
-          isError: true,
-          msg: error,
-        });
       } finally {
         setIsLoading(false);
       }
