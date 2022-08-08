@@ -5,34 +5,33 @@ import { useNavigate } from 'react-router-dom';
 import { categoryList } from 'constant';
 
 BelongTeam.propTypes = {
-  register: PropTypes.func.isRequired,
+  checkedList: PropTypes.string.isRequired,
+  onCheckedElement: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  getFieldState: PropTypes.func.isRequired,
-  formState: PropTypes.object.isRequired,
 };
 
-export default function BelongTeam({ register, errors, getFieldState, formState }) {
+export default function BelongTeam({ checkedList, onCheckedElement, errors }) {
   const navigate = useNavigate();
-  getFieldState('belongTeam', formState);
-  const fieldState = getFieldState('belongTeam');
-  const isButtonDisabled = fieldState.isDirty;
-  const handleClickButton = (event) => {
-    const { target } = event;
-    if (isButtonDisabled) {
-      target.disabled = false;
-      navigate(ESSENTIAL_INFO + SIGN_UP_INFO.IMG_PORTFOLIO);
-    }
+  const handleClickButton = () => {
+    navigate(ESSENTIAL_INFO + SIGN_UP_INFO.IMG_PORTFOLIO);
   };
   return (
     <div>
       <p>팀 소속 여부를 선택해주세요</p>
-      <select {...register('belongTeam')}>
-        {categoryList.map(({ id, value, label }) => (
-          <option key={id} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
+      {categoryList.map((item) => (
+        <div key={item.id}>
+          <input
+            type="checkbox"
+            name="belong_team"
+            value={item.value}
+            onChange={(e) => {
+              onCheckedElement(e.target.checked, e.target.value);
+            }}
+            checked={checkedList.includes(item.value) ? 1 : 0}
+          />
+          <div>{item.value}</div>
+        </div>
+      ))}
       <span>{errors?.checkedList?.message}</span>
       <div>
         <button type="button" onClick={handleClickButton}>

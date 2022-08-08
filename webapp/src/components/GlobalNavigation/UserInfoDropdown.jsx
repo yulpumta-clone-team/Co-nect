@@ -17,19 +17,9 @@ export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, 
   // api error
   const [apiError, setApiError] = useState({ isError: false, msg: '' });
   const onClickLogout = async () => {
-    try {
-      const response = await authApi.GET_LOG_OUT();
-      console.log(response);
-      deleteUserInfo();
-      navigate('/');
-      window.location.reload();
-    } catch (apiError) {
-      console.error(apiError);
-      setApiError({
-        isError: true,
-        msg: apiError,
-      });
-    }
+    deleteUserInfo();
+    navigate('/');
+    window.location.reload();
   };
   const onClickLinkLi = (link) => {
     navigate(link);

@@ -16,11 +16,10 @@ const authApi = {
       data,
     });
   },
-  GET_ESSENTIAL_INFO(config) {
+  GET_ESSENTIAL_INFO() {
     return rootApiInstance({
       url: API.AUTH.ESSENTIAL_INFO,
       method: 'get',
-      ...config,
     });
   },
   POST_SIGN_UP(data) {
@@ -28,12 +27,6 @@ const authApi = {
       url: API.AUTH.SIGNUP,
       method: 'post',
       data,
-    });
-  },
-  GET_LOG_OUT() {
-    return rootApiInstance({
-      url: API.AUTH.LOGOUT,
-      method: 'get',
     });
   },
   DEL_WITHDRAWAL() {

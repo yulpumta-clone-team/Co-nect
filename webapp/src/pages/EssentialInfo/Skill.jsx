@@ -16,7 +16,7 @@ export default function Skill({ userSkill, onSkillChange, errors, selectedSkills
   const navigate = useNavigate();
   const handleClickButton = (event) => {
     const { target } = event;
-    if (userSkill) {
+    if (selectedSkills) {
       target.disabled = false;
       navigate(ESSENTIAL_INFO + SIGN_UP_INFO.SLOGAN);
     }

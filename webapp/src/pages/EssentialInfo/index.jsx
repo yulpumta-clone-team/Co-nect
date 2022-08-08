@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { SIGN_UP_INFO } from 'constant/route';
-import { getUserInfo, updateUserInfo } from 'service/auth';
+import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth';
 import Nickname from './Nickname';
 import Skill from './Skill';
@@ -30,16 +30,28 @@ export default function EssentialInfo() {
       hopeSession: '',
       userJob: '',
       belongTeam: '',
-      img: '',
+      image: '',
       portfolio: '',
     },
   });
+  // 팀 소속 여부
+  const [checkedList, setCheckedList] = useState('');
+  const onCheckedElement = useCallback(
+    (checked, list) => {
+      if (checked) {
+        setCheckedList([...checkedList, list]);
+      } else {
+        setCheckedList(checkedList.filter((el) => el !== list));
+      }
+    },
+    [checkedList],
+  );
   // 기술
   const [skillId, setSkillId] = useState('');
   const [userSkill, setUserSkill] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
   const onSkillChange = useCallback((e) => {
-    setUserSkill(e.target.value);
+    setUserSkill(e.target.id);
     setSelectedSkills((prev) => [...prev, e.target.value]);
   }, []);
   // 공고글 (내용)
@@ -48,7 +60,7 @@ export default function EssentialInfo() {
   const [apiError, setApiError] = useState({ isError: false, msg: '' });
   // form 제출 시 작동
   const onValid = async (submitData) => {
-    const { nickname, selectedSkills, slogan, img, portfolio, hopeSession, userJob, belongTeam } =
+    const { nickname, userSkill, slogan, image, portfolio, hopeSession, userJob, checkedList } =
       submitData;
 
     const signUpInfo = {
@@ -56,21 +68,16 @@ export default function EssentialInfo() {
       portfolio,
       slogan,
       content: mdcontent,
-      img,
+      image,
       hope_session: hopeSession,
       job: userJob,
-      skills: skillId,
-      status: belongTeam,
+      skills: userSkill,
+      status: checkedList,
     };
     // TODO: input validation 추가해야 함.
     try {
       const response = await authApi.POST_ESSENTIAL_INFO(signUpInfo);
       console.log(response);
-      updateUserInfo({
-        userId: response.data.data.id,
-        profileImg: response.data.data.img,
-        name: response.data.data.name,
-      });
     } catch (apiError) {
       console.error(apiError);
       setApiError({
@@ -79,11 +86,13 @@ export default function EssentialInfo() {
       });
     }
     try {
-      const response = await authApi.GET_ESSENTIAL_INFO({
-        name: nickname,
-        img,
-      });
+      const response = await authApi.GET_ESSENTIAL_INFO();
       console.log(response);
+      updateUserInfo({
+        userId: response.data.id,
+        profileImg: response.data.image,
+        name: response.data.name,
+      });
       navigate('/');
     } catch (apiError) {
       console.error(apiError);
@@ -151,10 +160,9 @@ export default function EssentialInfo() {
                 path={SIGN_UP_INFO.BELONG_TEAM}
                 element={
                   <BelongTeam
-                    register={register}
+                    checkedList={checkedList}
+                    onCheckedElement={onCheckedElement}
                     errors={errors}
-                    getFieldState={getFieldState}
-                    formState={formState}
                   />
                 }
               />

@@ -22,6 +22,7 @@ export default function Login() {
     try {
       const response = await authApi.POST_LOGIN({ email, pwd: password });
       console.log(response);
+      // 최초 로그인인지 아닌지
       navigate('/essential_info');
       // TODO: 성공시 이동할 페이지 정해서 이동시키기
     } catch (apiError) {

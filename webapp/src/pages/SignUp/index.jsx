@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import authApi from 'api/auth';
+import { updateUserInfo } from 'service/auth';
 import IdPassword from './IdPassword';
 import * as S from './style';
 
