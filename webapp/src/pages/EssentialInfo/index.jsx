@@ -35,17 +35,14 @@ export default function EssentialInfo() {
     },
   });
   // 팀 소속 여부
-  const [checkedList, setCheckedList] = useState('');
-  const onCheckedElement = useCallback(
-    (checked, list) => {
-      if (checked) {
-        setCheckedList([...checkedList, list]);
-      } else {
-        setCheckedList(checkedList.filter((el) => el !== list));
-      }
-    },
-    [checkedList],
-  );
+  const [checkedList, setCheckedList] = useState(false);
+  const onCheckedElement = (checked) => {
+    if (checked) {
+      setCheckedList(true);
+    } else {
+      setCheckedList(false);
+    }
+  };
   // 기술
   const [skillId, setSkillId] = useState('');
   const [userSkill, setUserSkill] = useState('');
