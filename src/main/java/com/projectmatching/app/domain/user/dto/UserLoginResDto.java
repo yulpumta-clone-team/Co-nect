@@ -8,6 +8,7 @@ import lombok.*;
 /**
  * 오직 로그인시에 반환되는 DTO
  */
+@Deprecated
 @Getter @Setter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

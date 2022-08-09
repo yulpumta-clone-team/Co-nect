@@ -9,6 +9,7 @@ import com.projectmatching.app.domain.user.dto.UserJoinDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.service.ServiceTest;
 import com.projectmatching.app.service.user.Impl.UserSignUpService;
+import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,6 +39,9 @@ public class UserSignUpServiceTest extends ServiceTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private UserDetailsImpl userDetails;
 
     private UserJoinDto userJoinDto;
     private UserEssentialDto userEssentialDto;
@@ -93,17 +97,16 @@ public class UserSignUpServiceTest extends ServiceTest {
                 .slogan("slogan")
                 .image("img")
                 .job("무직")
-                .email("123@naver.com")
                 .hope_session("1개월")
                 .build();
 
         User user = mock(User.class);
         when(user.updateEssentialInfo(userEssentialDto,techStackProvider)).thenReturn(user);
-        when(userRepository.findByName(anyString())).thenReturn(Optional.empty()); //중복되는 이름을 갖는 유저 없음
-        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user)); // 해당 유저의 필수정보를 업데이트함
+        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(userDetails.getUserId()).thenReturn(anyLong());
 
-        userSignUpService.updateUserEssentialInfo(userEssentialDto);
+        userSignUpService.updateUserEssentialInfo(userEssentialDto,userDetails);
 
     }
 
@@ -117,15 +120,13 @@ public class UserSignUpServiceTest extends ServiceTest {
                 .slogan("slogan")
                 .image("img")
                 .job("무직")
-                .email("123@naver.com")
                 .hope_session("1개월")
                 .build();
 
         User user = mock(User.class);
-        when(userRepository.findByName(anyString())).thenReturn(Optional.of(user)); //중복되는 이름을 갖는 유저 없음
-
+        when(userRepository.findByName(anyString())).thenReturn(Optional.of(user)); //중복되는 이름을 갖는 유저
         assertThrows(ResponeException.class,()->{
-            userSignUpService.updateUserEssentialInfo(userEssentialDto);
+            userSignUpService.updateUserEssentialInfo(userEssentialDto,userDetails);
         });
     }
 

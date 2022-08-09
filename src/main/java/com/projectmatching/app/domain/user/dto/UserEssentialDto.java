@@ -27,7 +27,6 @@ import static com.projectmatching.app.constant.ServiceConstant.NAME_SIZE_MAX;
  */
 public class UserEssentialDto implements Validatable {
 
-    private Long id;
     private String name;
     private String slogan;
     private String image;
@@ -36,7 +35,6 @@ public class UserEssentialDto implements Validatable {
     private List<Integer> skills; //기술 스택 key 값만 받음
     private String hope_session; //원하는2 작업기간
     private String job; //직업
-    private Boolean status; //팀 소속 여부
 
 
     @Override
