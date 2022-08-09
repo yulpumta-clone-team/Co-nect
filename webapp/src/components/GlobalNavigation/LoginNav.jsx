@@ -25,9 +25,6 @@ export default function LoginNav({ userInfo }) {
       <li>
         <Link to={TEAM}>Team Board</Link>
       </li>
-      <li>
-        <Link to={NEW_POST}>New Post</Link>
-      </li>
       <li ref={parent} onClick={openDropdown} style={{ position: 'relative' }}>
         <img style={{ width: '30px' }} src={profileImg} alt="profile" />
         <span>{name}</span>
