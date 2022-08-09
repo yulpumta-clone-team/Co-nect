@@ -155,13 +155,7 @@ export default function EssentialInfo() {
               />
               <Route
                 path={SIGN_UP_INFO.BELONG_TEAM}
-                element={
-                  <BelongTeam
-                    checkedList={checkedList}
-                    onCheckedElement={onCheckedElement}
-                    errors={errors}
-                  />
-                }
+                element={<BelongTeam onCheckedElement={onCheckedElement} errors={errors} />}
               />
               <Route
                 path={SIGN_UP_INFO.IMG_PORTFOLIO}
