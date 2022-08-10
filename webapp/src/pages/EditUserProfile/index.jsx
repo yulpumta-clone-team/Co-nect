@@ -4,7 +4,7 @@ import userApi from 'api/user';
 
 import WithLoading from 'hoc/WithLoading';
 import * as S from './style';
-import EdiitUserProfileForm from './EdiitUserProfileForm';
+import EditUserProfileForm from './EditUserProfileForm';
 
 const USER_ID = 3;
 
@@ -16,7 +16,7 @@ export default function EditUserProfile() {
   };
 
   const EditUserProfileFormWithLoading = WithLoading({
-    Component: EdiitUserProfileForm,
+    Component: EditUserProfileForm,
     responseDataKey: 'targetUser',
     axiosInstance: userApi.GET_USER_DETAIL,
     axiosConfig: { id: USER_ID },

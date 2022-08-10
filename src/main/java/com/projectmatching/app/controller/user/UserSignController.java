@@ -2,11 +2,13 @@ package com.projectmatching.app.controller.user;
 
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
+import com.projectmatching.app.domain.user.dto.UserIsFirstDto;
 import com.projectmatching.app.domain.user.dto.UserJoinDto;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
 import com.projectmatching.app.service.user.Impl.UserService;
 import com.projectmatching.app.service.user.Impl.UserSignInService;
 import com.projectmatching.app.service.user.Impl.UserSignUpService;
+import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.AuthToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +19,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
+
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.SUCCESS;
 
@@ -43,13 +45,15 @@ public class UserSignController {
     /**
      * 로그인
      */
-    @ApiOperation(value = "일반 로그인, 성공시 유저 id 반환 및 헤더에 토큰 생성")
+    @ApiOperation(value = "일반 로그인, 성공시 유저 id 반환 및 헤더에 토큰 생성, 최초 로그인 여부가 isFirst 이름으로 전달됨")
     @PostMapping("/login")
-    public ResponseEntity<ResponseTemplate<Void>> login(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
-        AuthToken authToken = userSignInService.userLogin(userLoginDto,response);
+    public ResponseEntity<ResponseTemplate<UserIsFirstDto>> login(@RequestBody UserLoginDto userLoginDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        AuthToken authToken = userSignInService.userLogin(userLoginDto);
         return ResponseEntity.ok()
                 .headers(HttpHeaders.readOnlyHttpHeaders(authToken.asHeaders()))
-                .body(ResponseTemplate.of(SUCCESS));
+                .body(ResponseTemplate.valueOf(
+                        userSignInService.isFirstLoginUserCheck(userDetails)
+                ));
     }
 
 

@@ -19,11 +19,26 @@ public class QTechCode extends EntityPathBase<TechCode> {
 
     public static final QTechCode techCode = new QTechCode("techCode");
 
+    public final com.projectmatching.app.domain.QBaseTimeEntity _super = new com.projectmatching.app.domain.QBaseTimeEntity(this);
+
+    public final StringPath category = createString("category");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final StringPath image = createString("image");
 
     public final NumberPath<Integer> key = createNumber("key", Integer.class);
 
-    public final StringPath value = createString("value");
+    //inherited
+    public final StringPath status = _super.status;
+
+    public final StringPath techName = createString("techName");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
 
     public QTechCode(String variable) {
         super(TechCode.class, forVariable(variable));

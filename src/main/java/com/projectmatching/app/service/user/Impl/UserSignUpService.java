@@ -10,6 +10,7 @@ import com.projectmatching.app.domain.user.dto.UserEssentialDto;
 import com.projectmatching.app.domain.user.dto.UserJoinDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectNotFoundException;
+import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,9 +47,9 @@ public class UserSignUpService {
 
     @Transactional
     @Validation
-    public void updateUserEssentialInfo(UserEssentialDto userEssentialDto){
+    public void updateUserEssentialInfo(UserEssentialDto userEssentialDto, UserDetailsImpl userDetails){
         checkDuplicateName(userEssentialDto.getName());
-        User user = userRepository.findById(userEssentialDto.getId()).orElseThrow(CoNectNotFoundException::new);
+        User user = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
         userRepository.save(user.updateEssentialInfo(userEssentialDto,techStackProvider));
 
     }

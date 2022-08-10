@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
-import { handleFetcher } from 'utils';
 import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth';
 import * as S from './style';
@@ -13,36 +12,28 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors },
-    // watch,
   } = useForm({
     defaultValues: {},
   });
-  const [error, setError] = useState({ isError: false, msg: '' });
-  // const { img, name } = response.data.data;
+  const [apiError, setApiError] = useState({ isError: false, msg: '' });
   const onValid = async (submitData) => {
     const { email, password } = submitData;
-    // if (password !== verifiedPassword) {
-    //   setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
-    // }
 
     try {
       const response = await authApi.POST_LOGIN({ email, pwd: password });
       console.log(response);
-      updateUserInfo({
-        userId: email,
-        profileImg: response.data.data.img,
-        name: response.data.data.name,
-      });
+      // 최초 로그인인지 아닌지
+      navigate('/essential_info');
       // TODO: 성공시 이동할 페이지 정해서 이동시키기
-    } catch (error) {
-      console.error(error);
-      setError({
+    } catch (apiError) {
+      console.error(apiError);
+      setApiError({
         isError: true,
-        msg: error,
+        msg: apiError,
       });
     }
-    navigate('/essential_info');
   };
+
   return (
     <S.ModalContainer>
       <S.Backdrop>

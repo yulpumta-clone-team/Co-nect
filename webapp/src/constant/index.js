@@ -29,7 +29,6 @@ export const hopeSessionOption = [
   { id: 4, value: '6개월 이상', label: '6개월 이상' },
 ];
 export const categoryList = [
-  { id: -1, value: '', label: '' },
   { id: 0, value: '팀 소속 O', label: '팀 소속 O' },
   { id: 1, value: '팀 소속 X', label: '팀 소속 X' },
 ];

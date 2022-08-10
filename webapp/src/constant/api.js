@@ -6,7 +6,8 @@ export const API = {
     LOGIN: '/user/login',
     SIGNUP: '/user/join',
     LOGOUT: '/user/logout',
-    WITHDRAWAL: 'user/widthdrawal',
+    WITHDRAWAL: '/user/widthdrawal',
+    ESSENTIAL_INFO: '/user/essential_info',
   },
   USER: {
     INDEX: `/user`,

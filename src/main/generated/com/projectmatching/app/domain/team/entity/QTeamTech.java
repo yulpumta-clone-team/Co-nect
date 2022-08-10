@@ -34,7 +34,7 @@ public class QTeamTech extends EntityPathBase<TeamTech> {
 
     public final QTeam team;
 
-    public final com.projectmatching.app.domain.techStack.entity.QTechStack techStack;
+    public final com.projectmatching.app.domain.techStack.entity.QTechCode techStack;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
@@ -58,7 +58,7 @@ public class QTeamTech extends EntityPathBase<TeamTech> {
     public QTeamTech(Class<? extends TeamTech> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.team = inits.isInitialized("team") ? new QTeam(forProperty("team")) : null;
-        this.techStack = inits.isInitialized("techStack") ? new com.projectmatching.app.domain.techStack.entity.QTechStack(forProperty("techStack")) : null;
+        this.techStack = inits.isInitialized("techStack") ? new com.projectmatching.app.domain.techStack.entity.QTechCode(forProperty("techStack")) : null;
     }
 
 }

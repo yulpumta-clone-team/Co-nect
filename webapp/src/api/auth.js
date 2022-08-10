@@ -9,17 +9,24 @@ const authApi = {
       data,
     });
   },
+  POST_ESSENTIAL_INFO(data) {
+    return rootApiInstance({
+      url: API.AUTH.ESSENTIAL_INFO,
+      method: 'post',
+      data,
+    });
+  },
+  GET_ESSENTIAL_INFO() {
+    return rootApiInstance({
+      url: API.AUTH.ESSENTIAL_INFO,
+      method: 'get',
+    });
+  },
   POST_SIGN_UP(data) {
     return rootApiInstance({
       url: API.AUTH.SIGNUP,
       method: 'post',
       data,
-    });
-  },
-  GET_LOG_OUT() {
-    return rootApiInstance({
-      url: API.AUTH.LOGOUT,
-      method: 'get',
     });
   },
   DEL_WITHDRAWAL() {

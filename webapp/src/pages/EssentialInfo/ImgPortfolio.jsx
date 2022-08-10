@@ -12,8 +12,8 @@ ImgPortfolio.propTypes = {
 
 export default function ImgPortfolio({ register, errors, getFieldState, formState }) {
   const navigate = useNavigate();
-  getFieldState('img', formState);
-  const fieldState = getFieldState('img');
+  getFieldState('image', formState);
+  const fieldState = getFieldState('image');
   const isButtonDisabled = fieldState.isDirty;
   const handleClickButton = (event) => {
     const { target } = event;
@@ -25,7 +25,8 @@ export default function ImgPortfolio({ register, errors, getFieldState, formStat
   return (
     <div>
       <input
-        {...register('img', {
+        type="file"
+        {...register('image', {
           minLength: {
             value: 2,
             message: '프로필 이미지를 입력해주세요',
