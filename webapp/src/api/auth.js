@@ -3,7 +3,6 @@ import authApiInstance from './core/authApiInstance';
 
 const authApi = {
   POST_LOGIN(data) {
-    console.log('authApi', data);
     return authApiInstance({
       url: API.AUTH.LOGIN,
       method: 'post',

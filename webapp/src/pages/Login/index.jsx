@@ -6,6 +6,8 @@ import authApi from 'api/auth';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
+import { handleToken } from 'service/auth';
+import { TOKEN } from 'constant/api';
 import * as S from './style';
 
 export default function Login() {
@@ -18,22 +20,21 @@ export default function Login() {
   } = useForm({
     defaultValues: {},
   });
-  const [apiError, setApiError] = useState({ isError: false, msg: '' });
   const onValid = async (submitData) => {
     const { email, password } = submitData;
     try {
       const response = await authApi.POST_LOGIN({ email, pwd: password });
-      console.log(response);
-      // 최초 로그인인지 아닌지
-      navigate('/essential_info');
-      // TODO: 성공시 이동할 페이지 정해서 이동시키기
+      const {
+        headers,
+        data: { isFirstLogin },
+      } = response;
+      handleToken.saveAccessToken(headers[TOKEN.ACCESS]);
+      handleToken.saveRefreshToken(headers[TOKEN.REFRESH]);
+
+      if (isFirstLogin) navigate('/essential_info');
     } catch (apiError) {
       console.error(apiError);
       notifyNewMessage(notifyDispatch, apiError, TOAST_TYPE.Error);
-      setApiError({
-        isError: true,
-        msg: apiError,
-      });
     }
   };
 
