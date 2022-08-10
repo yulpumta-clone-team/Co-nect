@@ -1,5 +1,5 @@
 import { USER_INFO } from 'constant';
-import storage from 'utils/localstorage';
+import storage from 'utils/handleLocalstorage';
 
 export const updateUserInfo = (rawUserInfo) => {
   const userInfo = changeUserInfoKey(rawUserInfo);
