@@ -10,8 +10,8 @@ ${Normalize}
   margin: 0;
 }
 html {
-   
-  }
+   font-size: 10px; // rem 단위를 편하게 사용하기 위해 10px로 함.
+}
   body {
     width: 100%;
     font: inherit;

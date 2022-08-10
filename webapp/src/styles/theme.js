@@ -1,3 +1,5 @@
+import { css } from 'styled-components';
+
 export const FONT = {
   SIZE: {
     // html {font-size: 10px}
@@ -19,7 +21,7 @@ export const FONT = {
   },
   STYLE: {
     BASE: 'normal',
-    LOGO: 'italic',
+    ITALIC: 'italic',
   },
 };
 
@@ -46,7 +48,28 @@ const COLORS = {
   },
 };
 
-const fonts = {};
+const fonts = {
+  head: {
+    large: css`
+      font-style: normal;
+      font-weight: ${FONT.WEIGHT.REGULAR};
+      font-size: 40px;
+      line-height: 60px;
+    `,
+    normal: css`
+      font-style: normal;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 48px;
+    `,
+    small: css`
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 36px;
+    `,
+  },
+};
 
 const colors = {
   primary: {
