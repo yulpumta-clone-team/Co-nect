@@ -1,15 +1,23 @@
 import { API, ROOT_API_URL } from 'constant/api';
 import { getResonseWithData, successResponseWithEmptyData } from 'mocks/mockUtils';
 import { rest } from 'msw';
-import { mockMyData } from './mockMyData';
+import { mockLoginData, mockEssentialInfo, mockSignUpData } from './mockMyData';
 
 const AUTH = [
   rest.post(ROOT_API_URL + API.AUTH.LOGIN, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResonseWithData(mockMyData)));
+    return res(ctx.status(200), ctx.json(getResonseWithData(mockLoginData)));
   }),
   rest.post(ROOT_API_URL + API.AUTH.SIGNUP, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getResonseWithData(mockSignUpData)));
+  }),
+
+  rest.post(ROOT_API_URL + API.AUTH.ESSENTIAL_INFO, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
+  rest.get(ROOT_API_URL + API.AUTH.ESSENTIAL_INFO, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getResonseWithData(mockEssentialInfo)));
+  }),
+
   rest.get(ROOT_API_URL + API.AUTH.LOGOUT, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),

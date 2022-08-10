@@ -8,12 +8,12 @@ import { hopeSessionOption, skillOptions } from 'constant';
 import userApi from 'api/user';
 import { userType } from 'types/user.type';
 
-EdiitUserProfileForm.propTypes = {
+EditUserProfileForm.propTypes = {
   targetUser: userType.isRequired,
   onClickback: PropTypes.func.isRequired,
 };
 
-export default function EdiitUserProfileForm({ targetUser, onClickback }) {
+export default function EditUserProfileForm({ targetUser, onClickback }) {
   const {
     id: userId,
     oauthId,

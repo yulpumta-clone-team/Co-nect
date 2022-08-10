@@ -13,6 +13,6 @@ export const getUserInfo = () => storage.get(USER_INFO);
 export const isLogin = () => getUserInfo();
 
 export const changeUserInfoKey = (userInfo) => {
-  const { user_id, img, nickname } = userInfo;
-  return { userId: user_id, profileImg: img, name: nickname };
+  const { user_id, image, nickname } = userInfo;
+  return { userId: user_id, image, name: nickname };
 };
