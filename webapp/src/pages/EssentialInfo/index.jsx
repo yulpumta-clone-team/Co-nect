@@ -35,13 +35,9 @@ export default function EssentialInfo() {
     },
   });
   // 팀 소속 여부
-  const [checkedList, setCheckedList] = useState(false);
-  const onCheckedElement = (checked) => {
-    if (checked) {
-      setCheckedList(true);
-    } else {
-      setCheckedList(false);
-    }
+  const [isTeamBelong, setIsTeamBelong] = useState(false);
+  const onChecked = () => {
+    setIsTeamBelong((prev) => !prev);
   };
   // 기술
   const [skillId, setSkillId] = useState('');
@@ -57,7 +53,7 @@ export default function EssentialInfo() {
   const [apiError, setApiError] = useState({ isError: false, msg: '' });
   // form 제출 시 작동
   const onValid = async (submitData) => {
-    const { nickname, userSkill, slogan, image, portfolio, hopeSession, userJob, checkedList } =
+    const { nickname, userSkill, slogan, image, portfolio, hopeSession, userJob, isTeamBelong } =
       submitData;
 
     const signUpInfo = {
@@ -69,7 +65,7 @@ export default function EssentialInfo() {
       hope_session: hopeSession,
       job: userJob,
       skills: userSkill,
-      status: checkedList,
+      status: isTeamBelong,
     };
     // TODO: input validation 추가해야 함.
     try {
@@ -155,7 +151,7 @@ export default function EssentialInfo() {
               />
               <Route
                 path={SIGN_UP_INFO.BELONG_TEAM}
-                element={<BelongTeam onCheckedElement={onCheckedElement} errors={errors} />}
+                element={<BelongTeam onChecked={onChecked} isTeamBelong={isTeamBelong} />}
               />
               <Route
                 path={SIGN_UP_INFO.IMG_PORTFOLIO}

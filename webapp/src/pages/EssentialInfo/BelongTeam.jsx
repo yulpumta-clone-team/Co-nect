@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { categoryList } from 'constant';
 
 BelongTeam.propTypes = {
-  onCheckedElement: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
+  isTeamBelong: PropTypes.bool.isRequired,
+  onChecked: PropTypes.func.isRequired,
 };
 
-export default function BelongTeam({ onCheckedElement, errors }) {
+export default function BelongTeam({ isTeamBelong, onChecked }) {
   const navigate = useNavigate();
   const handleClickButton = () => {
     navigate(ESSENTIAL_INFO + SIGN_UP_INFO.IMG_PORTFOLIO);
@@ -18,9 +18,8 @@ export default function BelongTeam({ onCheckedElement, errors }) {
     <div>
       <p>팀 소속 여부를 선택해주세요</p>
       <div>
-        <input type="checkbox" name="belong_team" onClick={onCheckedElement()} />
+        <input type="checkbox" name="belong_team" onClick={onChecked} value={isTeamBelong} />
       </div>
-      <span>{errors?.checkedList?.message}</span>
       <div>
         <button type="button" onClick={handleClickButton}>
           다음
