@@ -2,6 +2,19 @@ import { API } from 'constant/api';
 import rootApiInstance from './core/rootApiInstance';
 
 const userApi = {
+  POST_ESSENTIAL_INFO(data) {
+    return rootApiInstance({
+      url: API.AUTH.ESSENTIAL_INFO,
+      method: 'post',
+      data,
+    });
+  },
+  GET_ESSENTIAL_INFO() {
+    return rootApiInstance({
+      url: API.AUTH.ESSENTIAL_INFO,
+      method: 'get',
+    });
+  },
   GET_USER_LIST(config) {
     return rootApiInstance({
       url: API.USER.INDEX,
