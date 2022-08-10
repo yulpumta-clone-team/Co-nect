@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { OAUTH_URL } from 'constant/route';
-import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import * as S from './style';
 
 export default function Login() {
+  const notifyDispatch = useToastNotificationAction();
   const navigate = useNavigate();
   const {
     register,
@@ -18,7 +21,6 @@ export default function Login() {
   const [apiError, setApiError] = useState({ isError: false, msg: '' });
   const onValid = async (submitData) => {
     const { email, password } = submitData;
-
     try {
       const response = await authApi.POST_LOGIN({ email, pwd: password });
       console.log(response);
@@ -27,6 +29,7 @@ export default function Login() {
       // TODO: 성공시 이동할 페이지 정해서 이동시키기
     } catch (apiError) {
       console.error(apiError);
+      notifyNewMessage(notifyDispatch, apiError, TOAST_TYPE.Error);
       setApiError({
         isError: true,
         msg: apiError,
