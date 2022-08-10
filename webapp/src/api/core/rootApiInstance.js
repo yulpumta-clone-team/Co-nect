@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { ROOT_API_URL } from 'constant/api';
+import { ROOT_API_URL, ACCESS_TOKEN, REFRESH_TOKEN } from 'constant/api';
+import handleLocalstorage from 'utils/handleLocalstorage';
 import { successHandler, errorHandler } from './responseHandler';
 
 const rootApiInstance = axios.create({
@@ -11,8 +12,12 @@ rootApiInstance.defaults.timeout = 2500;
 
 rootApiInstance.interceptors.request.use(
   (config) => {
+    const accessToken = handleLocalstorage.get(ACCESS_TOKEN);
+    const refreshToken = handleLocalstorage.get(REFRESH_TOKEN);
     // 요청을 보내기 전에 수행할 로직
     config.headers['Content-Type'] = 'application/json; charset=utf-8';
+    // config.headers.Authorization = `Bearer ${accessToken}`;
+    // config.headers['x-refresh-token'] = refreshToken;
     return config;
   },
   (error) => {
