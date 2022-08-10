@@ -1,5 +1,5 @@
 export const TOKEN = {
-  ACCESS: 'acessToken',
+  ACCESS: 'authorization',
   REFRESH: 'x-refresh-token',
 };
 
