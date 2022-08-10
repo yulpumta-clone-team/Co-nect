@@ -1,6 +1,5 @@
 export const mockLoginData = {
-  email: '92719@naver.com',
-  pwd: '12345',
+  isFirstLogin: true,
 };
 export const mockSignUpData = {
   email: '92719@naver.com',
