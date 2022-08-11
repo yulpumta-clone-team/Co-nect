@@ -5,12 +5,21 @@ import {
   getRandomStatusErrorCode,
   errorResponse,
   randomResponse,
+  successResponseWithEmptyData,
 } from 'mocks/mockUtils';
+
 import { userList } from './usersList';
 import { myPosts } from './myPosts';
 import { userDetail } from './userDetail';
+import { mockEssentialInfo } from './essentialInfo';
 
 const USER = [
+  rest.post(ROOT_API_URL + API.USER.ESSENTIAL_INFO, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+  }),
+  rest.get(ROOT_API_URL + API.USER.ESSENTIAL_INFO, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getResonseWithData(mockEssentialInfo)));
+  }),
   // GET_USER_LIST
   rest.get(ROOT_API_URL + API.USER.INDEX, (req, res, ctx) => {
     const lastPage = req.url.searchParams.get('lastPage');

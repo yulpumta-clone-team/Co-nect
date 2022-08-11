@@ -12,7 +12,6 @@ export const API = {
     SIGNUP: '/user/join',
     LOGOUT: '/user/logout',
     WITHDRAWAL: '/user/widthdrawal',
-    ESSENTIAL_INFO: '/user/essential_info',
   },
   USER: {
     INDEX: `/user`,
@@ -20,6 +19,7 @@ export const API = {
     READS: '/user/read',
     PROFILE: `/user/myprofile`,
     MYPOSTS: '/user/myposts',
+    ESSENTIAL_INFO: '/user/essential_info',
   },
   TEAM: {
     INDEX: `/team`,

@@ -5,14 +5,14 @@ import publicApiInstance from './core/publicApiInstance';
 const userApi = {
   POST_ESSENTIAL_INFO(data) {
     return privateApiInstance({
-      url: API.AUTH.ESSENTIAL_INFO,
+      url: API.USER.ESSENTIAL_INFO,
       method: 'post',
       data,
     });
   },
   GET_ESSENTIAL_INFO() {
     return privateApiInstance({
-      url: API.AUTH.ESSENTIAL_INFO,
+      url: API.USER.ESSENTIAL_INFO,
       method: 'get',
     });
   },
