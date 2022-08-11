@@ -44,8 +44,7 @@ public class UserIsFisrtLoginTest extends ServiceTest {
 
 
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
-        when(userDetails.getEmail()).thenReturn("yesman@naver.com");
-        UserIsFirstDto result = userSignInService.isFirstLoginUserCheck(userDetails);
+        UserIsFirstDto result = userSignInService.isFirstLoginUserCheck(user.getEmail());
 
         Assertions.assertTrue(result.getIsFirst());
     }
@@ -59,8 +58,7 @@ public class UserIsFisrtLoginTest extends ServiceTest {
                 .pwd("!@#!#5682348248692381!@#8536jaxdhas")
                 .build();
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
-        when(userDetails.getEmail()).thenReturn("yesman@naver.com");
-        UserIsFirstDto result = userSignInService.isFirstLoginUserCheck(userDetails);
+        UserIsFirstDto result = userSignInService.isFirstLoginUserCheck(user.getEmail());
 
         Assertions.assertFalse(result.getIsFirst());
     }
