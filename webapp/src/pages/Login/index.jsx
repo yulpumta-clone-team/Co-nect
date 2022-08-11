@@ -26,11 +26,11 @@ export default function Login() {
       const response = await authApi.POST_LOGIN({ email, pwd: password });
       const {
         headers,
-        data: { isFirstLogin },
+        data: { isFirst: isFirstLogin },
       } = response;
       handleToken.saveAccessToken(headers[TOKEN.ACCESS]);
       handleToken.saveRefreshToken(headers[TOKEN.REFRESH]);
-
+      notifyNewMessage(notifyDispatch, '로그인이 성공적으로 완료되었습니다.', TOAST_TYPE.Success);
       if (isFirstLogin) navigate('/essential_info');
     } catch (apiError) {
       console.error(apiError);
