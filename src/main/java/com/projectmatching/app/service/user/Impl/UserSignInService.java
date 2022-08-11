@@ -62,8 +62,8 @@ public class UserSignInService {
 
 
     @Transactional(readOnly = true)
-    public UserIsFirstDto isFirstLoginUserCheck(UserDetailsImpl userDetails){
-        User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(CoNectNotFoundException::new);
+    public UserIsFirstDto isFirstLoginUserCheck(String userEmail){
+        User user = userRepository.findByEmail(userEmail).orElseThrow(CoNectNotFoundException::new);
 
         if(isUserNameNull(user)) return UserIsFirstDto.builder().isFirst(true).build();
 

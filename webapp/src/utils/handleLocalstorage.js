@@ -1,4 +1,4 @@
-const storage = {
+const handleLocalstorage = {
   set: (key, object) => {
     if (!localStorage) return;
     localStorage[key] = typeof object === 'string' ? object : JSON.stringify(object);
@@ -27,4 +27,4 @@ const storage = {
   },
 };
 
-export default storage;
+export default handleLocalstorage;

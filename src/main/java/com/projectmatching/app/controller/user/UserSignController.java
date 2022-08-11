@@ -10,6 +10,7 @@ import com.projectmatching.app.service.user.Impl.UserSignInService;
 import com.projectmatching.app.service.user.Impl.UserSignUpService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.AuthToken;
+import com.projectmatching.app.util.AuthTokenProvider;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -47,12 +48,12 @@ public class UserSignController {
      */
     @ApiOperation(value = "일반 로그인, 성공시 유저 id 반환 및 헤더에 토큰 생성, 최초 로그인 여부가 isFirst 이름으로 전달됨")
     @PostMapping("/login")
-    public ResponseEntity<ResponseTemplate<UserIsFirstDto>> login(@RequestBody UserLoginDto userLoginDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public ResponseEntity<ResponseTemplate<UserIsFirstDto>> login(@RequestBody UserLoginDto userLoginDto) {
         AuthToken authToken = userSignInService.userLogin(userLoginDto);
         return ResponseEntity.ok()
                 .headers(HttpHeaders.readOnlyHttpHeaders(authToken.asHeaders()))
                 .body(ResponseTemplate.valueOf(
-                        userSignInService.isFirstLoginUserCheck(userDetails)
+                        userSignInService.isFirstLoginUserCheck(userLoginDto.getEmail())
                 ));
     }
 
