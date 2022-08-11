@@ -4,14 +4,14 @@ import { handleToken } from 'service/auth';
 
 import { successHandler, errorHandler } from './responseHandler';
 
-const rootApiInstance = axios.create({
+const privateApiInstance = axios.create({
   baseURL: ROOT_API_URL,
 });
 
-rootApiInstance.defaults.timeout = 2500;
-// rootApiInstance.defaults.withCredentials = true;
+privateApiInstance.defaults.timeout = 2500;
+// privateApiInstance.defaults.withCredentials = true;
 
-rootApiInstance.interceptors.request.use(
+privateApiInstance.interceptors.request.use(
   (config) => {
     const accessToken = handleToken.getAccessToken();
     const refreshToken = handleToken.getRefreshToken();
@@ -28,6 +28,6 @@ rootApiInstance.interceptors.request.use(
   },
 );
 
-rootApiInstance.interceptors.response.use(successHandler, errorHandler);
+privateApiInstance.interceptors.response.use(successHandler, errorHandler);
 
-export default rootApiInstance;
+export default privateApiInstance;

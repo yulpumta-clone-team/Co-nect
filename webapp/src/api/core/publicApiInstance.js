@@ -2,13 +2,13 @@ import axios from 'axios';
 import { ROOT_API_URL } from 'constant/api';
 import { successHandler, errorHandler } from './responseHandler';
 
-const authApiInstance = axios.create({
+const publicApiInstance = axios.create({
   baseURL: ROOT_API_URL,
 });
 
-authApiInstance.defaults.timeout = 2500;
+publicApiInstance.defaults.timeout = 2500;
 
-authApiInstance.interceptors.request.use(
+publicApiInstance.interceptors.request.use(
   (config) => {
     return config;
   },
@@ -19,6 +19,6 @@ authApiInstance.interceptors.request.use(
   },
 );
 
-authApiInstance.interceptors.response.use(successHandler, errorHandler);
+publicApiInstance.interceptors.response.use(successHandler, errorHandler);
 
-export default authApiInstance;
+export default publicApiInstance;
