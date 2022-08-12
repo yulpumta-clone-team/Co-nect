@@ -16,6 +16,7 @@ import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,7 @@ public class UserService  {
     private final UserLikingRepository userLikingRepository;
     private final UserDetails userDetails;
 
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     /**
      * 사용자의
@@ -59,9 +61,9 @@ public class UserService  {
     //유저 상세 조회
     @Transactional(readOnly = true)
     public UserDto getUserDetail(Long id){
-        return UserDto.of(qUserRepository.find(id)
-                .orElseThrow(CoNectNotFoundException::new)
-        );
+        User user = qUserRepository.find(id).orElseThrow(CoNectNotFoundException::new);
+        applicationEventPublisher.publishEvent(user);
+        return UserDto.of(user);
 
     }
 
