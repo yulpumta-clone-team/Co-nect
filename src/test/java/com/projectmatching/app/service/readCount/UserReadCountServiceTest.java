@@ -15,21 +15,7 @@ import org.springframework.test.annotation.Rollback;
 @SpringBootTest
 public class UserReadCountServiceTest  extends ServiceTest {
 
-    @Autowired
-    private UserService userService;
 
-
-    @DisplayName("Write-Back 구현 테스트")
-    @Test
-    @Rollback(value = false)
-    void TESTING_WRITE_BACK_LOGIC(){
-
-        userService.getUserDetail(26L);
-        userService.getUserDetail(26L);
-        userService.getUserDetail(31L);
-        userService.getUserDetail(32L);
-        userService.getUserDetail(30L);
-    }
 
 
 }
