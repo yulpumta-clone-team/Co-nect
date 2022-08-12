@@ -149,6 +149,15 @@ public class User extends BaseTimeEntity  {
         return this;
     }
 
+    /**
+     * plusCount 만큼 조회수 증가
+     * @Param plusCount : 증가할 조회수
+     */
+    public void updatingReadCnt(int plusCount){
+        this.readCnt = this.readCnt + plusCount;
+
+    }
+
 
 
 

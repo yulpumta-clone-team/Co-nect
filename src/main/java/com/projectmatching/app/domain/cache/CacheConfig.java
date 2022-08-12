@@ -1,7 +1,6 @@
 package com.projectmatching.app.domain.cache;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.projectmatching.app.domain.cache.readCount.ReadCount;
 import com.projectmatching.app.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
