@@ -5,7 +5,7 @@ export const Container = styled.div`
   box-sizing: border-box;
   width: 450px;
   height: 40px;
-  background: ${({ theme: { colors } }) => colors.white};
+  background: ${({ theme: { colors } }) => colors.greyScale.white};
 `;
 
 export const InputContainer = styled.div`
