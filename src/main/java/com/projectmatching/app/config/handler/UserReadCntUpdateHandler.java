@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import static com.projectmatching.app.constant.ServiceConstant.*;
 import static com.projectmatching.app.util.InMemoryUtil.readCntMap;
 
@@ -30,6 +33,8 @@ public class UserReadCntUpdateHandler {
     @TransactionalEventListener
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void updateUserReadCnt(User user){
+        log.info("Updating User Read Cnt Logic === ");
+
         AddUserReadCntInfoToMap(user); //유저 조회수 정보를 임시 저장함
 
         if(readCntMap.size() == MAX_USER_READ_CNT_SIZE){
@@ -38,8 +43,8 @@ public class UserReadCntUpdateHandler {
                 //조회수 업데이트
                 User forUpdatedUser = userRepository.findById(aLong).orElseThrow(CoNectLogicalException::new);
                 forUpdatedUser.updatingReadCnt(readCntMap.get(aLong));
-
                 userRepository.save(forUpdatedUser);
+
             }
             readCntMap.clear();
         }

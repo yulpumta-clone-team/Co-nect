@@ -4,6 +4,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class InMemoryUtil {
-    static public Map<Long, Integer> readCntMap = new ConcurrentHashMap<>();
+    static public final Map<Long, Integer> readCntMap = new ConcurrentHashMap<>();
 
 }

@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 public class User extends BaseTimeEntity  {
 
     @Id
-    @GeneratedValue
     private Long id;
 
 
