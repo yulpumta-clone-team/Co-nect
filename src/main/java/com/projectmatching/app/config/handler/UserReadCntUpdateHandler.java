@@ -33,8 +33,6 @@ public class UserReadCntUpdateHandler {
     @TransactionalEventListener
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void updateUserReadCnt(User user){
-        log.info("Updating User Read Cnt Logic === ");
-
         AddUserReadCntInfoToMap(user); //유저 조회수 정보를 임시 저장함
 
         if(readCntMap.size() == MAX_USER_READ_CNT_SIZE){
