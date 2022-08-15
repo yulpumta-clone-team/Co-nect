@@ -3,7 +3,7 @@ import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
 import userApi from 'api/user';
 import Tabs from 'components/Tabs';
-import UserCard from 'components/UserCard';
+import UserCard from 'components/UserCard/UserCard';
 import TeamCard from 'components/TeamCard';
 import { TEAM, USER } from 'constant/route';
 import WithLoading from 'hoc/WithLoading';

@@ -1,6 +1,6 @@
 import React from 'react';
 import userApi from 'api/user';
-import UserCard from 'components/UserCard';
+import UserCard from 'components/UserCard/UserCard';
 import { USER } from 'constant/route';
 import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
 import CardsGrid from 'components/CardsGrid';
