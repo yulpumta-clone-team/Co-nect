@@ -50,9 +50,6 @@ export default function SignUp() {
       const response = await authApi.checkDuplicateEmail({ data: inputValues.email });
       const { message } = response.data;
       notifyNewMessage(notifyDispatch, message, 'Success');
-      setTimeout(() => {
-        navigate('/login');
-      }, 1000);
     } catch (error) {
       console.error(error);
       notifyNewMessage(notifyDispatch, error, 'Error');
