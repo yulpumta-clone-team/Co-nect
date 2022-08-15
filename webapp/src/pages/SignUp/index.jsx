@@ -43,6 +43,22 @@ export default function SignUp() {
     validate: signUpValidate,
   });
 
+  const onClickCheckDuplicateEmail = async () => {
+    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
+    notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
+    try {
+      const response = await authApi.checkDuplicateEmail({ data: inputValues.email });
+      const { message } = response.data;
+      notifyNewMessage(notifyDispatch, message, 'Success');
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+      notifyNewMessage(notifyDispatch, error, 'Error');
+    }
+  };
+
   return (
     <S.Container>
       <S.Header>
@@ -60,7 +76,11 @@ export default function SignUp() {
             isError={!!validateError.email}
             helperText={validateError.email}
           />
-          <Button theme="secondary" customStyle={S.DuplicateCheckButton}>
+          <Button
+            theme="secondary"
+            customStyle={S.DuplicateCheckButton}
+            onClick={onClickCheckDuplicateEmail}
+          >
             중복확인
           </Button>
         </S.DuplicateCheckInput>

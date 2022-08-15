@@ -12,6 +12,8 @@ export const API = {
     SIGNUP: '/user/join',
     LOGOUT: '/user/logout',
     WITHDRAWAL: '/user/widthdrawal',
+    CHECK_DUPLICATE_EMAIL: '/user/checkDuplicate/email',
+    CHECK_DUPLICATE_NICKNAME: '/user/checkDuplicate/name',
   },
   USER: {
     INDEX: `/user`,
