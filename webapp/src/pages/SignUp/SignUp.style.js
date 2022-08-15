@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 750px;
+  height: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,6 +46,30 @@ export const Form = styled.form`
   align-items: center;
   justify-content: center;
   gap: 18px;
+  width: 450px;
 `;
 
-export const Backdrop = styled.div``;
+export const DuplicateCheckInput = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 15px;
+`;
+
+export const DuplicateCheckButton = css`
+  width: 120px;
+  /* eng_main_bold */
+  font-family: 'Arimo';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: ${({ theme: { colors } }) => colors.greyScale.white};
+`;
+
+// TODO: theme 혹은 common버튼의 속성으로 추가하기
+export const SubmitButton = css`
+  width: 268px;
+  height: 55px;
+  margin: 73px 0;
+`;

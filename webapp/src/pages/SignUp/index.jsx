@@ -7,7 +7,9 @@ import signUpValidate from 'service/signUp.validation';
 import useForm from 'hooks/useForm';
 import Input from 'components/Common/Input';
 import Divider from 'components/Common/Divider';
-import * as S from './style';
+import Button from 'components/Common/Button';
+import SocailLoginButtons from 'components/SocialLoginButtons';
+import * as S from './SignUp.style';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -47,16 +49,21 @@ export default function SignUp() {
         <h2>환영합니다</h2>
         <span>회원 가입을 통해 팀에게 꼭 맞는 팀원을 만나보세요!</span>
       </S.Header>
-      <S.Form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={submitHandler}>
-        <Input
-          name="email"
-          type="email"
-          placeholder="이메일"
-          value={inputValues.email}
-          onChange={onChangeHandler}
-          isError={!!validateError.email}
-          helperText={validateError.email}
-        />
+      <S.Form onSubmit={submitHandler}>
+        <S.DuplicateCheckInput>
+          <Input
+            name="email"
+            type="email"
+            placeholder="이메일"
+            value={inputValues.email}
+            onChange={onChangeHandler}
+            isError={!!validateError.email}
+            helperText={validateError.email}
+          />
+          <Button theme="secondary" customStyle={S.DuplicateCheckButton}>
+            중복확인
+          </Button>
+        </S.DuplicateCheckInput>
         <Input
           name="password"
           type="password"
@@ -76,10 +83,16 @@ export default function SignUp() {
           helperText={validateError.verifiedPassword}
         />
       </S.Form>
-      <button type="submit" disabled={!satisfyAllValidites}>
+      <Button
+        theme="primary"
+        type="submit"
+        disabled={!satisfyAllValidites}
+        customStyle={S.SubmitButton}
+      >
         회원가입
-      </button>
+      </Button>
       <Divider width="500" />
+      <SocailLoginButtons>소셜계정으로 회원가입</SocailLoginButtons>
     </S.Container>
   );
 }

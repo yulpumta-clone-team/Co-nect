@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.button`
   ${({ theme: { mixin } }) => mixin.flexCenter({})}
-  padding: 2px 20px;
+  padding: 5px 20px;
   gap: 10px;
 
   width: 92px;
