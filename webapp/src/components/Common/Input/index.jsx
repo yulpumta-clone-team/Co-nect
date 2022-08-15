@@ -10,6 +10,7 @@ Input.propTypes = {
   label: PropTypes.string,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
+  customStyle: PropTypes.array,
 };
 
 export default function Input({
@@ -19,10 +20,11 @@ export default function Input({
   placeholder,
   isError = false,
   helperText,
+  customStyle,
   ...rest
 }) {
   return (
-    <S.Container isError={isError}>
+    <S.Container isError={isError} customStyle={customStyle}>
       <S.Label>{label}</S.Label>
       <S.InputContainer isError={isError}>
         <S.Input

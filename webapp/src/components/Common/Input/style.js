@@ -3,9 +3,10 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   box-sizing: border-box;
-  width: 450px;
+  width: 100%;
   height: 40px;
   background: ${({ theme: { colors } }) => colors.greyScale.white};
+  ${({ customStyle }) => customStyle}
 `;
 
 export const InputContainer = styled.div`
