@@ -7,5 +7,10 @@ import * as S from './style';
 
 export default function Navigation() {
   const userInfo = getUserInfo();
-  return <S.Container>{userInfo ? <LoginNav userInfo={userInfo} /> : <NonLoginNav />}</S.Container>;
+  return (
+    <>
+      <S.TopContainer />
+      <S.Container>{userInfo ? <LoginNav userInfo={userInfo} /> : <NonLoginNav />}</S.Container>
+    </>
+  );
 }
