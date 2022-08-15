@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Cards from 'components/CardsGrid';
 import teamApi from 'api/team';
 import userApi from 'api/user';
-import Tabs from 'components/Tabs';
+import Tabs from 'components/Common/Tabs';
 import UserCard from 'components/UserCard';
 import TeamCard from 'components/TeamCard';
 import { TEAM, USER } from 'constant/route';

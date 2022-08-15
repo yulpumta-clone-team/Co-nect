@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import mixin from './mixin';
 
 export const FONT = {
   SIZE: {
@@ -40,9 +41,12 @@ const COLORS = {
     200: '#F09AA4',
   },
   GRAY: {
+    fff: '#ffffff',
     200: '#979797',
     400: '#DEDEDE',
+    500: '#c2c2c2',
     600: '#979797',
+    700: '#818181',
     800: '#606060',
     1000: '#000000',
   },
@@ -86,15 +90,34 @@ const colors = {
     dark: COLORS.RED[600],
   },
   greyScale: {
+    white: COLORS.GRAY.fff,
     normal: COLORS.GRAY[1000],
     assistant: COLORS.GRAY[800],
+    subTitle: COLORS.GRAY[700],
     guide: COLORS.GRAY[600],
     pressed: COLORS.GRAY[600],
+    border: COLORS.GRAY[500],
     nonActive: COLORS.GRAY[400],
     hover: COLORS.GRAY[200],
   },
 };
 
-const theme = { fonts, colors };
+// export const zIndex = {
+//   gnbLevel: 500,
+// };
+
+const deviceSizes = {
+  mobile: '375px',
+  tablet: '768px',
+  pc: '1024px',
+};
+
+export const device = {
+  mobile: `screen and (max-width: ${deviceSizes.mobile})`,
+  tablet: `screen and (max-width: ${deviceSizes.tablet})`,
+  pc: `screen and (max-width: ${deviceSizes.pc})`,
+};
+
+const theme = { fonts, colors, device, mixin };
 
 export default theme;

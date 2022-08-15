@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Loader from 'components/Loader';
+import Loader from 'components/Common/Loader';
 import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 
