@@ -13,6 +13,7 @@ export const InputContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 6px 16px;
+  margin-bottom: 4px;
   border: 1px solid ${({ theme: { colors } }) => colors.greyScale.border};
   border-radius: 3px;
   ${({ isError }) => {
@@ -36,7 +37,6 @@ export const Input = styled.input`
 `;
 
 export const Error = styled.span`
-  margin-top: 6px;
   padding-left: 6px;
   color: ${({ theme }) => theme.colors.important.normal};
 `;

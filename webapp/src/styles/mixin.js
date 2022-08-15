@@ -14,6 +14,12 @@ const mixin = {
     align-items: ${align};
     justify-content: ${justify};
   `,
+  flexCenter: ({ direction = 'column' }) => css`
+    display: flex;
+    flex-direction: ${direction};
+    align-items: center;
+    justify-content: center;
+  `,
 
   // positions
   positionCenterX: (position = 'absolute') => css`
