@@ -15,8 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: webapp
+        working-directory: ./webapp
     # Job steps
+    steps: 
+      - name: npm run storybook
+      - run:
+          npm run build-storybook
     steps:
       - uses: actions/checkout@v1
       - run: yarn
