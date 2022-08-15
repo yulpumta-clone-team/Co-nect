@@ -16,16 +16,15 @@ export const Header = styled.header`
   align-items: center;
   justify-content: center;
   gap: 30px;
+  margin: 106px;
   > h2 {
     font-family: 'Sandoll GothicNeo1';
     font-style: normal;
     font-weight: 400;
     font-size: 40px;
     line-height: 28px;
-    /* identical to box height, or 70% */
 
-    /* Color/Primary/900 */
-    color: #036eff;
+    color: ${({ theme: { colors } }) => colors.primary.normal};
   }
   > span {
     font-family: 'Sandoll GothicNeo1';
@@ -33,10 +32,8 @@ export const Header = styled.header`
     font-weight: 400;
     font-size: 24px;
     line-height: 32px;
-    /* identical to box height, or 133% */
 
-    /* Color/Gray/700 */
-    color: #818181;
+    color: ${({ theme: { colors } }) => colors.greyScale.subTitle};
   }
 `;
 

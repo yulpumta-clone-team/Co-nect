@@ -59,7 +59,7 @@ export default function SignUp() {
   return (
     <S.Container>
       <S.Header>
-        <h2>환영합니다</h2>
+        <h2>환영합니다!</h2>
         <span>회원 가입을 통해 팀에게 꼭 맞는 팀원을 만나보세요!</span>
       </S.Header>
       <S.Form onSubmit={submitHandler}>

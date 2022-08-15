@@ -19,13 +19,19 @@ Default.args = {
   theme: 'primary',
 };
 
+export const Primary = Template.bind({});
+Primary.args = {
+  children: <span>버튼</span>,
+  theme: 'primary',
+};
+
 export const PrimaryWithCustomStyle = Template.bind({});
 PrimaryWithCustomStyle.args = {
   children: <span>버튼</span>,
   theme: 'primary',
   customStyle: css`
-    width: 200px;
-    height: 100px;
+    border: 3px solid black;
+    background-color: tomato;
   `,
 };
 
