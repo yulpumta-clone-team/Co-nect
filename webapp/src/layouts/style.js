@@ -7,8 +7,8 @@ export const AppContainer = styled.div`
 export const Main = styled.main`
   width: 100%;
   height: 100vh;
-  margin: 0 auto;
   padding-top: 100px;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})}
 `;
 
 export const Header = styled.header`
