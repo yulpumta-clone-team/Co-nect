@@ -9,8 +9,6 @@ export default {
   layout: 'fullscreen',
 };
 
-Template.parameters = { pseudo: { hover: true } };
-
 function Template(args) {
   return <Button {...args} />;
 }
