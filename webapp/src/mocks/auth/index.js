@@ -1,9 +1,15 @@
 import { API, ROOT_API_URL, TOKEN } from 'constant/api';
 import { getResonseWithData, successResponseWithEmptyData } from 'mocks/mockUtils';
 import { rest } from 'msw';
-import { mockLoginData, mockEssentialInfo, mockSignUpData } from './mockMyData';
+import { mockLoginData, mockSignUpData } from './mockMyData';
 
 const AUTH = [
+  rest.post(ROOT_API_URL + API.AUTH.CHECK_DUPLICATE_EMAIL, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+  }),
+  rest.post(ROOT_API_URL + API.AUTH.CHECK_DUPLICATE_NICKNAME, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+  }),
   rest.post(ROOT_API_URL + API.AUTH.LOGIN, (req, res, ctx) => {
     return res(
       ctx.status(200),

@@ -9,7 +9,7 @@ const authApi = {
       data,
     });
   },
-  POST_SIGN_UP(data) {
+  signUp(data) {
     return publicApiInstance({
       url: API.AUTH.SIGNUP,
       method: 'post',
@@ -20,6 +20,20 @@ const authApi = {
     return publicApiInstance({
       url: API.AUTH.WITHDRAWAL,
       method: 'delete',
+    });
+  },
+  checkDuplicateEmail(config) {
+    return publicApiInstance({
+      url: API.AUTH.CHECK_DUPLICATE_EMAIL,
+      method: 'post',
+      ...config,
+    });
+  },
+  checkDuplicateNickName(config) {
+    return publicApiInstance({
+      url: API.AUTH.CHECK_DUPLICATE_NICKNAME,
+      method: 'post',
+      ...config,
     });
   },
 };
