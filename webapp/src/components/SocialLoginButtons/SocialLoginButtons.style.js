@@ -9,6 +9,7 @@ export const Container = styled.div`
     font-size: 24px;
     line-height: 32px;
     color: ${({ theme: { colors } }) => colors.greyScale.subTitle};
+    ${({ theme: { fonts } }) => fonts.korean.emphasis}
   }
 `;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import * as S from './style';
+import * as S from './Input.style';
 
 Input.propTypes = {
   value: PropTypes.string.isRequired,

@@ -18,11 +18,7 @@ export const Header = styled.header`
   gap: 16px;
   margin-bottom: 66px;
   > h1 {
-    font-family: 'Arimo';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 41px;
+    ${({ theme: { fonts } }) => fonts.english.title}
 
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
@@ -47,4 +43,5 @@ export const SubmitButton = css`
   width: 268px;
   height: 55px;
   margin-top: 67px;
+  ${({ theme: { fonts } }) => fonts.english.emphasis}
 `;

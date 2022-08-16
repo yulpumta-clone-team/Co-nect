@@ -4,21 +4,23 @@ import mixin from './mixin';
 export const FONT = {
   SIZE: {
     // html {font-size: 10px}
-    X_SMALL: '1.2rem',
-    SMALL: '1.4rem',
     BASE: '1.6rem',
-    MEDIUM: '1.8rem',
+    MEDIUM: '2.4rem',
+    LARGE: '3.6rem',
+  },
+  HEIGHT: {
+    // html {line-height: 10px}
+    BASE: '2.4rem',
+    MEDIUM: '3.2rem',
     LARGE: '3.2rem',
-    X_LARGE: '5.6rem',
   },
   WEIGHT: {
     REGULAR: '400',
-    MEDIUM: '500',
     BOLD: '700',
   },
   FAMILY: {
-    BASE: "'Noto Sans KR', sans-serif",
-    LOGO: "'Montserrat', sans-serif",
+    KOREAN: "'NotoSansKR', sans-serif",
+    ENGLISH: "'Arimo', sans-serif",
   },
   STYLE: {
     BASE: 'normal',
@@ -53,24 +55,50 @@ const COLORS = {
 };
 
 const fonts = {
-  head: {
-    large: css`
-      font-style: normal;
+  korean: {
+    title: css`
+      font-family: ${FONT.FAMILY.KOREAN};
+      font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.BOLD};
+      font-size: ${FONT.SIZE.LARGE};
+      line-height: ${FONT.HEIGHT.LARGE};
+    `,
+    emphasis: css`
+      font-family: ${FONT.FAMILY.KOREAN};
+      font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.BOLD};
+      font-size: ${FONT.SIZE.MEDIUM};
+      line-height: ${FONT.HEIGHT.MEDIUM};
+    `,
+    default: css`
+      font-family: ${FONT.FAMILY.KOREAN};
+      font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.REGULAR};
-      font-size: 40px;
-      line-height: 60px;
+      font-size: ${FONT.SIZE.BASE};
+      line-height: ${FONT.HEIGHT.BASE};
     `,
-    normal: css`
-      font-style: normal;
-      font-weight: 400;
-      font-size: 32px;
-      line-height: 48px;
+  },
+  english: {
+    title: css`
+      font-family: ${FONT.FAMILY.ENGLISH};
+      font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.BOLD};
+      font-size: ${FONT.SIZE.LARGE};
+      line-height: ${FONT.HEIGHT.LARGE};
     `,
-    small: css`
-      font-style: normal;
-      font-weight: 400;
-      font-size: 24px;
-      line-height: 36px;
+    emphasis: css`
+      font-family: ${FONT.FAMILY.ENGLISH};
+      font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.BOLD};
+      font-size: ${FONT.SIZE.MEDIUM};
+      line-height: ${FONT.HEIGHT.MEDIUM};
+    `,
+    default: css`
+      font-family: ${FONT.FAMILY.ENGLISH};
+      font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.REGULAR};
+      font-size: ${FONT.SIZE.BASE};
+      line-height: ${FONT.HEIGHT.BASE};
     `,
   },
 };
