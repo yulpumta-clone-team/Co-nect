@@ -44,7 +44,7 @@ function App() {
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
           <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
           <Route
-            path={ESSENTIAL_INFO + NOTFOUND}
+            path={`${ESSENTIAL_INFO}/${NOTFOUND}`}
             element={<PublicRoute Component={EssentialInfo} restricted />}
           />
           <Route path={SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />

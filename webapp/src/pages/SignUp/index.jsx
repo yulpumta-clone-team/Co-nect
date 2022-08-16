@@ -1,59 +1,115 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import authApi from 'api/auth';
-import { updateUserInfo } from 'service/auth';
-import IdPassword from './IdPassword';
-import * as S from './style';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import signUpValidate from 'service/signUp.validation';
+import useForm from 'hooks/useForm';
+import Input from 'components/Common/Input';
+import Divider from 'components/Common/Divider';
+import Button from 'components/Common/Button';
+import SocailLoginButtons from 'components/SocialLoginButtons';
+import * as S from './SignUp.style';
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
-  const {
-    setError,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {},
-  });
-  const [apiError, setApiError] = useState({ isError: false, msg: '' });
-
-  const onValid = async (submitData) => {
-    const { email, nickname, password, verifiedPassword } = submitData;
-    if (password !== verifiedPassword) {
-      setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
-    }
-    const signUpInfo = {
-      email,
-      pwd: password,
-    };
-    // TODO: input validation 추가해야 함.
+  const notifyDispatch = useToastNotificationAction();
+  const submitCallback = async (submitData) => {
+    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
+    notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
     try {
-      const response = await authApi.POST_SIGN_UP(signUpInfo);
-      console.log(response);
-      navigate('/login');
-      // TODO: 성공시 이동할 페이지 정해서 이동시키기
-    } catch (apiError) {
-      console.error(apiError);
-      setApiError({
-        isError: true,
-        msg: apiError,
-      });
+      const response = await authApi.signUp({ data: submitData });
+      const { message } = response.data;
+      notifyNewMessage(notifyDispatch, message, 'Success');
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+      notifyNewMessage(notifyDispatch, error, 'Error');
     }
-    // console.log(signUpInfo);
   };
+
+  const {
+    inputValues,
+    validateError,
+    isLoading,
+    onChangeHandler,
+    submitHandler,
+    satisfyAllValidites,
+  } = useForm({
+    initialValues: { email: '', password: '', verifiedPassword: '' },
+    submitCallback,
+    validate: signUpValidate,
+  });
+
+  const onClickCheckDuplicateEmail = async () => {
+    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
+    notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
+    try {
+      const response = await authApi.checkDuplicateEmail({ data: inputValues.email });
+      const { message } = response.data;
+      notifyNewMessage(notifyDispatch, message, 'Success');
+    } catch (error) {
+      console.error(error);
+      notifyNewMessage(notifyDispatch, error, 'Error');
+    }
+  };
+
   return (
-    <S.ModalContainer>
-      <S.Backdrop>
-        <S.DialogBox>
-          <button onClick={() => navigate('/')}>x</button>
-          <form
-            style={{ display: 'flex', flexDirection: 'column' }}
-            onSubmit={handleSubmit(onValid)}
+    <S.Container>
+      <S.Header>
+        <h2>환영합니다!</h2>
+        <span>회원 가입을 통해 팀에게 꼭 맞는 팀원을 만나보세요!</span>
+      </S.Header>
+      <S.Form onSubmit={submitHandler}>
+        <S.DuplicateCheckInput>
+          <Input
+            name="email"
+            type="email"
+            placeholder="이메일"
+            value={inputValues.email}
+            onChange={onChangeHandler}
+            isError={!!validateError.email}
+            helperText={validateError.email}
+          />
+          <Button
+            theme="secondary"
+            customStyle={S.DuplicateCheckButton}
+            onClick={onClickCheckDuplicateEmail}
           >
-            <IdPassword register={register} errors={errors} />
-          </form>
-        </S.DialogBox>
-      </S.Backdrop>
-    </S.ModalContainer>
+            중복확인
+          </Button>
+        </S.DuplicateCheckInput>
+        <Input
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+          value={inputValues.password}
+          onChange={onChangeHandler}
+          isError={!!validateError.password}
+          helperText={validateError.password}
+        />
+        <Input
+          name="verifiedPassword"
+          type="verifiedPassword"
+          placeholder="비밀번호 확인"
+          value={inputValues.verifiedPassword}
+          onChange={onChangeHandler}
+          isError={!!validateError.verifiedPassword}
+          helperText={validateError.verifiedPassword}
+        />
+      </S.Form>
+      <Button
+        theme="primary"
+        type="submit"
+        disabled={!satisfyAllValidites}
+        customStyle={S.SubmitButton}
+      >
+        회원가입
+      </Button>
+      <Divider width="500" />
+      <SocailLoginButtons>소셜계정으로 회원가입</SocailLoginButtons>
+    </S.Container>
   );
 }
