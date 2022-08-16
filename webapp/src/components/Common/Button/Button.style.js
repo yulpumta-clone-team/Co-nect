@@ -10,8 +10,12 @@ export const Container = styled.button`
   border-radius: 50px;
 
   // theme 적용
-  ${({ mytheme }) => mytheme}
-  ${({ customStyle }) => customStyle}
+  & {
+    ${({ mytheme }) => mytheme}
+  }
+  && {
+    ${({ customStyle }) => customStyle}
+  }
 `;
 
 export const themes = {
