@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { OAUTH_URL } from 'constant/route';
 import authApi from 'api/auth';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
+import loginValidate from 'service/login.validation';
+import useForm from 'hooks/useForm';
+import Input from 'components/Common/Input';
+import Button from 'components/Common/Button';
+import Divider from 'components/Common/Divider';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
-import { handleToken } from 'service/auth';
+import SocailLoginButtons from 'components/SocialLoginButtons';
 import { TOKEN } from 'constant/api';
-import * as S from './style';
+import { handleToken } from 'service/auth';
+import * as S from './Login.style';
 
 export default function Login() {
-  const notifyDispatch = useToastNotificationAction();
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {},
-  });
-  const onValid = async (submitData) => {
-    const { email, password } = submitData;
+  const notifyDispatch = useToastNotificationAction();
+  const submitCallback = async (submitData) => {
+    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
+    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
-      const response = await authApi.POST_LOGIN({ email, pwd: password });
+      const response = await authApi.signUp({ data: submitData });
       const {
         headers,
         data: { isFirst: isFirstLogin },
@@ -31,48 +29,65 @@ export default function Login() {
       handleToken.saveAccessToken(headers[TOKEN.ACCESS]);
       handleToken.saveRefreshToken(headers[TOKEN.REFRESH]);
       notifyNewMessage(notifyDispatch, '로그인이 성공적으로 완료되었습니다.', TOAST_TYPE.Success);
-      if (isFirstLogin) navigate('/essential_info');
-    } catch (apiError) {
-      console.error(apiError);
-      notifyNewMessage(notifyDispatch, apiError, TOAST_TYPE.Error);
+      setTimeout(() => {
+        if (isFirstLogin) navigate('/essential_info');
+        navigate('/login');
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
     }
   };
 
+  const {
+    inputValues,
+    validateError,
+    isLoading,
+    onChangeHandler,
+    submitHandler,
+    satisfyAllValidites,
+  } = useForm({
+    initialValues: { email: '', password: '' },
+    submitCallback,
+    validate: loginValidate,
+  });
+
   return (
-    <S.ModalContainer>
-      <S.Backdrop>
-        <S.DialogBox>
-          <button onClick={() => navigate('/')}>x</button>
-          <form
-            style={{ display: 'flex', flexDirection: 'column' }}
-            onSubmit={handleSubmit(onValid)}
-          >
-            <input
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: /^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\w+\.)+\w+$/i,
-                  message: '이메일 형식으로 입력해주세요.',
-                },
-              })}
-              placeholder="email"
-            />
-            <span>{errors?.email?.message}</span>
-            <input
-              {...register('password', {
-                required: '비밀번호를 입력해주세요.',
-              })}
-              placeholder="password"
-            />
-            <span>{errors?.password?.message}</span>
-            <button type="submit">로그인</button>
-            <span>{errors?.extraError?.message}</span>
-          </form>
-          <a href={OAUTH_URL.GITHUB}>Github</a>
-          <br />
-          <a href={OAUTH_URL.GOOGLE}>Google</a>
-        </S.DialogBox>
-      </S.Backdrop>
-    </S.ModalContainer>
+    <S.Container>
+      <S.Header>
+        <S.MainLogo />
+        <h1>Co-nect</h1>
+      </S.Header>
+      <S.Form onSubmit={submitHandler}>
+        <Input
+          name="email"
+          type="email"
+          placeholder="이메일"
+          value={inputValues.email}
+          onChange={onChangeHandler}
+          isError={!!validateError.email}
+          helperText={validateError.email}
+        />
+        <Input
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+          value={inputValues.password}
+          onChange={onChangeHandler}
+          isError={!!validateError.password}
+          helperText={validateError.password}
+        />
+      </S.Form>
+      <Button
+        theme="primary"
+        type="submit"
+        disabled={!satisfyAllValidites}
+        customStyle={S.SubmitButton}
+      >
+        Login
+      </Button>
+      <Divider width="500" marginTop="67" marginBottom="38" />
+      <SocailLoginButtons>소셜계정으로 로그인</SocailLoginButtons>
+    </S.Container>
   );
 }
