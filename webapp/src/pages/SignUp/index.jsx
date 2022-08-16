@@ -32,18 +32,12 @@ export default function SignUp() {
     }
   };
 
-  const {
-    inputValues,
-    validateError,
-    isLoading,
-    onChangeHandler,
-    submitHandler,
-    satisfyAllValidites,
-  } = useForm({
-    initialValues: { email: '', password: '', verifiedPassword: '' },
-    submitCallback,
-    validate: signUpValidate,
-  });
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidites } =
+    useForm({
+      initialValues: { email: '', password: '', verifiedPassword: '' },
+      submitCallback,
+      validate: signUpValidate,
+    });
 
   const onClickCheckDuplicateEmail = async () => {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정

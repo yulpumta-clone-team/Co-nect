@@ -40,18 +40,12 @@ export default function Login() {
     }
   };
 
-  const {
-    inputValues,
-    validateError,
-    isLoading,
-    onChangeHandler,
-    submitHandler,
-    satisfyAllValidites,
-  } = useForm({
-    initialValues: { email: '', password: '' },
-    submitCallback,
-    validate: loginValidate,
-  });
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidites } =
+    useForm({
+      initialValues: { email: '', password: '' },
+      submitCallback,
+      validate: loginValidate,
+    });
 
   return (
     <S.Container>
