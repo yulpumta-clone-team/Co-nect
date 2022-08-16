@@ -2,11 +2,11 @@
 name: 'Chromatic Deployment'
 
 # Event for the workflow
-on: push
+on:
   push:
-    branches: [ "develop" ]
+    branches: ['develop']
   pull_request:
-    branches: [ "develop" ]
+    branches: ['develop']
 
 # List of jobs
 jobs:
@@ -17,11 +17,11 @@ jobs:
       run:
         working-directory: ./webapp
     # Job steps
-    steps: 
-      - name: npm run storybook
-      - run:
-          npm run build-storybook
     steps:
+      - name: npm run storybook
+        run: npm run build-storybook
+
+      - name: Start delploy to chromatic
       - uses: actions/checkout@v1
       - run: yarn
         #👇 Adds Chromatic as a step in the workflow
