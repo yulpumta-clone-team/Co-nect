@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as MainLogoIcon } from 'assets/icons/conect-main.svg';
 
 export const Container = styled.div`
+  width: 750px;
   height: 900px;
   display: flex;
   flex-direction: column;
