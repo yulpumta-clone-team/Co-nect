@@ -42,7 +42,7 @@ const Normalize = css`
 
   h1 {
     font-size: 2em;
-    margin: 0.67em 0;
+    /* margin: 0.67em 0; */
   }
 
   /* Grouping content

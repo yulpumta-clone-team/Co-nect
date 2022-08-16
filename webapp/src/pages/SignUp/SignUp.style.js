@@ -2,12 +2,10 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 750px;
-  height: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
 `;
 
 export const Header = styled.header`
@@ -60,13 +58,11 @@ export const DuplicateCheckButton = css`
   font-weight: 700;
   font-size: 16px;
   line-height: 24px;
-
-  color: ${({ theme: { colors } }) => colors.greyScale.white};
 `;
 
 // TODO: theme 혹은 common버튼의 속성으로 추가하기
 export const SubmitButton = css`
   width: 268px;
   height: 55px;
-  margin: 73px 0;
+  margin-top: 73px;
 `;

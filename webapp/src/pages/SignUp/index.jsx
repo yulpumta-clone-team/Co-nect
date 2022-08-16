@@ -9,6 +9,7 @@ import Input from 'components/Common/Input';
 import Divider from 'components/Common/Divider';
 import Button from 'components/Common/Button';
 import SocailLoginButtons from 'components/SocialLoginButtons';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import * as S from './SignUp.style';
 
 export default function SignUp() {
@@ -16,17 +17,17 @@ export default function SignUp() {
   const notifyDispatch = useToastNotificationAction();
   const submitCallback = async (submitData) => {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
+    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
       const response = await authApi.signUp({ data: submitData });
       const { message } = response.data;
-      notifyNewMessage(notifyDispatch, message, 'Success');
+      notifyNewMessage(notifyDispatch, message, TOAST_TYPE.Success);
       setTimeout(() => {
         navigate('/login');
       }, 1000);
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, 'Error');
+      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
     }
   };
 
@@ -108,7 +109,7 @@ export default function SignUp() {
       >
         회원가입
       </Button>
-      <Divider width="500" />
+      <Divider width="500" marginTop="73" marginBottom="38" />
       <SocailLoginButtons>소셜계정으로 회원가입</SocailLoginButtons>
     </S.Container>
   );
