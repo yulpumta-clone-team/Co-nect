@@ -12,6 +12,7 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import SocailLoginButtons from 'components/SocialLoginButtons';
 import { TOKEN } from 'constant/api';
 import { handleToken } from 'service/auth';
+import BackButton from 'components/Common/BackButton';
 import * as S from './Login.style';
 
 export default function Login() {
@@ -54,6 +55,7 @@ export default function Login() {
 
   return (
     <S.Container>
+      <BackButton />
       <S.Header>
         <S.MainLogo />
         <h1>Co-nect</h1>
