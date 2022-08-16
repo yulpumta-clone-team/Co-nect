@@ -6,12 +6,15 @@ export const AppContainer = styled.div`
 
 export const Main = styled.main`
   width: 100%;
-  margin: 0 auto;
+  height: 100vh;
+  padding-top: 100px;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})}
 `;
 
 export const Header = styled.header`
   width: 100%;
   height: 100px;
+  position: absolute;
   > div {
     width: 100vw;
     margin: 0 auto;
