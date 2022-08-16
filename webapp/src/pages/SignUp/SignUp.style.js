@@ -66,5 +66,5 @@ export const SubmitButton = css`
   width: 268px;
   height: 55px;
   margin-top: 73px;
-  ${({ theme: { fonts } }) => fonts.english.emphasis}
+  ${({ theme: { fonts } }) => fonts.english.title}
 `;

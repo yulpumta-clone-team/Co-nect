@@ -103,7 +103,7 @@ export default function SignUp() {
         disabled={!satisfyAllValidites}
         customStyle={S.SubmitButton}
       >
-        회원가입
+        Sign up
       </Button>
       <Divider width="500" marginTop="73" marginBottom="38" />
       <SocailLoginButtons>소셜계정으로 회원가입</SocailLoginButtons>

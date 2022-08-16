@@ -59,15 +59,15 @@ const fonts = {
     title: css`
       font-family: ${FONT.FAMILY.KOREAN};
       font-style: ${FONT.STYLE.BASE};
-      font-weight: ${FONT.WEIGHT.BOLD};
-      font-size: ${FONT.SIZE.LARGE};
+      font-weight: ${FONT.WEIGHT.REGULAR};
+      font-size: ${FONT.SIZE.MEDIUM};
       line-height: ${FONT.HEIGHT.LARGE};
     `,
     emphasis: css`
       font-family: ${FONT.FAMILY.KOREAN};
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
-      font-size: ${FONT.SIZE.MEDIUM};
+      font-size: ${FONT.SIZE.BASE};
       line-height: ${FONT.HEIGHT.MEDIUM};
     `,
     default: css`
@@ -83,7 +83,7 @@ const fonts = {
       font-family: ${FONT.FAMILY.ENGLISH};
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
-      font-size: ${FONT.SIZE.LARGE};
+      font-size: ${FONT.SIZE.MEDIUM};
       line-height: ${FONT.HEIGHT.LARGE};
     `,
     emphasis: css`
