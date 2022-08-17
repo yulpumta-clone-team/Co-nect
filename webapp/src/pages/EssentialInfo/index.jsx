@@ -9,7 +9,7 @@ import Nickname from './Nickname';
 import Skill from './Skill';
 import Slogan from './Slogan';
 import SessionJob from './SessionJob';
-import ImgPortfolio from './ImgPortfolio';
+import ProfileImage from './ProfileImage';
 import Content from './Content';
 import BelongTeam from './BelongTeam';
 import * as S from './EssentialInfo.style';
@@ -164,7 +164,7 @@ export default function EssentialInfo() {
             <Route
               path={SIGN_UP_INFO.IMG_PORTFOLIO}
               element={
-                <ImgPortfolio
+                <ProfileImage
                   register={register}
                   errors={errors}
                   getFieldState={getFieldState}

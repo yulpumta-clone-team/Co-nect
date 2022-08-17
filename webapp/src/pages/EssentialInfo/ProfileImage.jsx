@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route';
 
-ImgPortfolio.propTypes = {
+ProfileImage.propTypes = {
   register: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   getFieldState: PropTypes.func.isRequired,
   formState: PropTypes.object.isRequired,
 };
 
-export default function ImgPortfolio({ register, errors, getFieldState, formState }) {
+export default function ProfileImage({ register, errors, getFieldState, formState }) {
   const navigate = useNavigate();
   getFieldState('image', formState);
   const fieldState = getFieldState('image');
