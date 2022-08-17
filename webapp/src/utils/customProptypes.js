@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 export const themePropTypesChecker = (props, propName, componentName) => {
-  const themes = ['primary', 'secondary', 'important', 'gray'];
+  const themes = ['primary', 'secondary', 'important', 'gray', 'none'];
 
   const isThemeNameValid = themes.filter((theme) => theme === props[propName]).length !== 0;
 

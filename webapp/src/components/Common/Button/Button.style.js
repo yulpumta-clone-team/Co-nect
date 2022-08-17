@@ -59,4 +59,5 @@ export const themes = {
       color: ${({ theme: { colors } }) => colors.greyScale.normal};
     }
   `,
+  none: css``,
 };
