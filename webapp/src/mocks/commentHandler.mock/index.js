@@ -1,16 +1,10 @@
 import { API, ROOT_API_URL } from 'constant/api';
-import {
-  errorResponse,
-  getRandomStatusErrorCode,
-  getResonseWithData,
-  randomResponse,
-  successResponseWithEmptyData,
-} from 'mocks/mockUtils';
+import { getResonseWithData, randomResponse } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { teamComments } from './teamComments';
 import { userComments } from './userComments';
 
-const COMMENT = [
+const commentHandler = [
   // ------------ USER ------------
   // GET_USER_COMMENT
   rest.get(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
@@ -88,4 +82,4 @@ const COMMENT = [
   }),
 ];
 
-export default COMMENT;
+export default commentHandler;

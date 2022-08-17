@@ -5,7 +5,7 @@ import { editTeamDetail } from './editTeamDetail';
 import { teamDetail } from './teamDetail';
 import { teamsList } from './teamsList';
 
-const TEAM = [
+const teamHandler = [
   // GET_TEAM_ARR
   rest.get(ROOT_API_URL + API.TEAM.INDEX, (req, res, ctx) => {
     const lastPage = req.url.searchParams.get('lastPage');
@@ -46,4 +46,4 @@ const TEAM = [
   }),
 ];
 
-export default TEAM;
+export default teamHandler;

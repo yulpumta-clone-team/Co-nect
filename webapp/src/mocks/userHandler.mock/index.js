@@ -13,7 +13,7 @@ import { myPosts } from './myPosts';
 import { userDetail } from './userDetail';
 import { mockEssentialInfo } from './essentialInfo';
 
-const USER = [
+const userHandler = [
   rest.post(ROOT_API_URL + API.USER.ESSENTIAL_INFO, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
@@ -66,4 +66,4 @@ const USER = [
   }),
 ];
 
-export default USER;
+export default userHandler;

@@ -3,7 +3,7 @@ import { getResonseWithData, successResponseWithEmptyData } from 'mocks/mockUtil
 import { rest } from 'msw';
 import { mockLoginData, mockSignUpData } from './mockMyData';
 
-const AUTH = [
+const authHandler = [
   rest.post(ROOT_API_URL + API.AUTH.CHECK_DUPLICATE_EMAIL, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
@@ -33,4 +33,4 @@ const AUTH = [
   }),
 ];
 
-export default AUTH;
+export default authHandler;
