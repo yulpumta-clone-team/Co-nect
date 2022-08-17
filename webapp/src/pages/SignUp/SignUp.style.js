@@ -7,7 +7,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
 `;
 
 export const Header = styled.header`
@@ -25,6 +24,7 @@ export const Header = styled.header`
     line-height: 28px;
 
     color: ${({ theme: { colors } }) => colors.primary.normal};
+    ${({ theme: { fonts } }) => fonts.korean.title}
   }
   > span {
     font-family: 'Sandoll GothicNeo1';
@@ -34,6 +34,7 @@ export const Header = styled.header`
     line-height: 32px;
 
     color: ${({ theme: { colors } }) => colors.greyScale.subTitle};
+    ${({ theme: { fonts } }) => fonts.korean.emphasis}
   }
 `;
 
@@ -49,24 +50,21 @@ export const Form = styled.form`
 export const DuplicateCheckInput = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   gap: 15px;
 `;
 
 export const DuplicateCheckButton = css`
   width: 120px;
-  /* eng_main_bold */
-  font-family: 'Arimo';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-
-  color: ${({ theme: { colors } }) => colors.greyScale.white};
+  height: 34px;
+  padding: 5px 20px;
+  ${({ theme: { fonts } }) => fonts.korean.default}
 `;
 
 // TODO: theme 혹은 common버튼의 속성으로 추가하기
 export const SubmitButton = css`
   width: 268px;
   height: 55px;
-  margin: 73px 0;
+  margin-top: 73px;
+  ${({ theme: { fonts } }) => fonts.english.title}
 `;

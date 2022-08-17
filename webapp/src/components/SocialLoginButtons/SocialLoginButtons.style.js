@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   ${({ theme: { mixin } }) => mixin.flexCenter({})}
@@ -9,6 +9,7 @@ export const Container = styled.div`
     font-size: 24px;
     line-height: 32px;
     color: ${({ theme: { colors } }) => colors.greyScale.subTitle};
+    ${({ theme: { fonts } }) => fonts.korean.title}
   }
 `;
 

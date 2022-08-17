@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 public class User extends BaseTimeEntity  {
 
     @Id
-    @GeneratedValue
     private Long id;
 
 
@@ -147,6 +146,15 @@ public class User extends BaseTimeEntity  {
         this.hope_session = userEssentialDto.getHope_session();
 
         return this;
+    }
+
+    /**
+     * plusCount 만큼 조회수 증가
+     * @Param plusCount : 증가할 조회수
+     */
+    public void updatingReadCnt(int plusCount){
+        this.readCnt += plusCount;
+
     }
 
 

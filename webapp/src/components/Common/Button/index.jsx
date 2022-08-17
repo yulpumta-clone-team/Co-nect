@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { themePropTypesChecker } from 'utils/customProptypes';
-import * as S from './style';
+import * as S from './Button.style';
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,

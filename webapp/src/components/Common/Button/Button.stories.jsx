@@ -6,7 +6,7 @@ export default {
   title: 'Common/Button',
   component: Button,
   args: {},
-  layout: 'fullscreen',
+  layout: 'centered',
 };
 
 function Template(args) {
