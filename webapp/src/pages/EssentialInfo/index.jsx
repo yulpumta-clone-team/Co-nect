@@ -161,17 +161,7 @@ export default function EssentialInfo() {
               path={SIGN_UP_INFO.BELONG_TEAM}
               element={<BelongTeam onChecked={onChecked} isTeamBelong={isTeamBelong} />}
             />
-            <Route
-              path={SIGN_UP_INFO.IMG_PORTFOLIO}
-              element={
-                <ProfileImage
-                  register={register}
-                  errors={errors}
-                  getFieldState={getFieldState}
-                  formState={formState}
-                />
-              }
-            />
+            <Route path={SIGN_UP_INFO.IMG_PORTFOLIO} element={<ProfileImage />} />
             <Route
               path={SIGN_UP_INFO.CONTENT}
               element={<Content mdcontent={mdcontent} setMdContent={setMdContent} />}

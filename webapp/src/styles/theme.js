@@ -46,6 +46,7 @@ const COLORS = {
   GRAY: {
     fff: '#ffffff',
     200: '#979797',
+    300: '#F0F0F0',
     400: '#DEDEDE',
     500: '#c2c2c2',
     600: '#979797',
@@ -134,6 +135,7 @@ const colors = {
     pressed: COLORS.GRAY[600],
     border: COLORS.GRAY[500],
     nonActive: COLORS.GRAY[400],
+    background: COLORS.GRAY[300],
     hover: COLORS.GRAY[200],
   },
 };

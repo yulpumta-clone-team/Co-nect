@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as CloseLargeIcon } from 'assets/icons/close-large.svg';
 import { ReactComponent as LeftAngleIcon } from 'assets/icons/left-angle.svg';
 import { ReactComponent as rightAngleIcon } from 'assets/icons/right-angle.svg';
+import { ReactComponent as plusSolidIcon } from 'assets/icons/plus-solid.svg';
 
 // 레이아웃
 export const Layout = styled.div`
@@ -31,12 +32,12 @@ export const DialogContainer = styled.dialog`
 export const Form = styled.form`
   width: 100%;
   height: 100%;
+  z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
 `;
 
 export const Content = styled.div`
-  z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
   padding: 0 5% 5% 5%;
-  width: 487px;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
   display: flex;
@@ -51,19 +52,7 @@ export const Content = styled.div`
 `;
 
 // 공통 스타일
-export const DuplicateCheckInput = styled.div`
-  ${({ theme: { mixin } }) => mixin.positionCenterY()};
-  display: flex;
-  width: 60%;
-  gap: 15px;
-`;
-
-export const DuplicateCheckButton = css`
-  width: 120px;
-  height: 34px;
-  padding: 5px 20px;
-  ${({ theme: { fonts } }) => fonts.korean.default}
-`;
+export const CommonInput = css``;
 
 export const NextButtonContainer = styled.div`
   bottom: 5%;
@@ -102,6 +91,7 @@ export const CloseLarge = styled(CloseLargeIcon)`
 export const AngleContainer = styled.div`
   ${({ theme: { mixin } }) => mixin.positionCenterY()};
   ${({ theme: { mixin } }) => mixin.flexBox({ direction: 'row', justify: 'space-between' })};
+  z-index: ${({ theme: { zIndex } }) => zIndex.modalLevel};
   width: 100%;
   padding: 0 4%;
 `;
@@ -125,6 +115,49 @@ export const RightAngle = styled(rightAngleIcon)`
   }
 `;
 
+export const PlusSolid = styled(plusSolidIcon)`
+  width: 18px;
+  height: 18px;
+  & path {
+    fill: ${({ theme: { colors } }) => colors.greyScale.white};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+  }
+`;
+
 // 개별스타일
 
-export const InputTypeImage = styled.input``;
+export const DuplicateCheckInput = styled.div`
+  ${({ theme: { mixin } }) => mixin.positionCenterY()};
+  display: flex;
+  width: 60%;
+  gap: 15px;
+`;
+
+export const DuplicateCheckButton = css`
+  width: 120px;
+  height: 34px;
+  padding: 5px 20px;
+  ${({ theme: { fonts } }) => fonts.korean.default}
+`;
+
+export const InputTypeImageHandler = styled.label`
+  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
+  width: 144px;
+  height: 144px;
+  border-radius: 50%;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})};
+  > div {
+    background-color: ${({ theme: { colors } }) => colors.primary.normal};
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    ${({ theme: { mixin } }) => mixin.flexCenter({})};
+  }
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const HiddenInputHandler = styled.input`
+  display: none;
+`;

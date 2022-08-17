@@ -1,13 +1,14 @@
 import { useCallback, useState } from 'react';
 
-const useFileUploader = (initialValue) => {
-  const [file, setFile] = useState(initialValue);
-  const fileHandler = useCallback(async (event) => {
+const useFileUploader = () => {
+  const [imageFile, setImageFile] = useState(null);
+
+  const fileHandler = (event) => {
     const imageFile = event.target.files[0];
-    if (imageFile.size > 10000) {
-      alert('10mb이상');
-      return;
-    }
+    // if (imageFile.size > 10000) {
+    //   alert('10mb이상');
+    //   return;
+    // }
     const formData = new FormData();
     formData.append('file', imageFile);
     // FormData값확인
@@ -15,12 +16,13 @@ const useFileUploader = (initialValue) => {
       console.log('제출할 데이터', formData.get(key));
     }
     try {
-      console.log();
+      setImageFile(imageFile);
     } catch (error) {
       console.error(error);
     }
-  }, []);
-  return [file, fileHandler, setFile];
+  };
+
+  return { imageFile, fileHandler, setImageFile };
 };
 
 export default useFileUploader;

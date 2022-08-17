@@ -1,9 +1,10 @@
+import { API } from 'constant/api.constant';
 import privateApiInstance from './instance/privateApiInstance';
 
 const uploadApi = {
   uploadImage(data) {
     return privateApiInstance({
-      url: '/upload',
+      url: API.UPLOAD.POST,
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -13,8 +14,8 @@ const uploadApi = {
   },
   deleteImage(imgUrl) {
     return privateApiInstance({
-      url: '/upload',
-      method: 'post',
+      url: API.UPLOAD.DELETE,
+      method: 'get',
       params: {
         imgUrl,
       },

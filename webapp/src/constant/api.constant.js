@@ -34,4 +34,8 @@ export const API = {
     LIKE: '/comment/liking',
     UNLIKE: '/comment/unliking',
   },
+  UPLOAD: {
+    POST: '/api/upload',
+    DELETE: '/api/upload/cancel',
+  },
 };
