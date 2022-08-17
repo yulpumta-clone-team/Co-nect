@@ -1,4 +1,4 @@
-import { API } from 'constant/api';
+import { API } from 'constant/api.constant';
 import publicApiInstance from './instance/publicApiInstance';
 
 const authApi = {

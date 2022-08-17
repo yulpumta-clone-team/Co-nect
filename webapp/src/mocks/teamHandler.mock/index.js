@@ -1,4 +1,4 @@
-import { API, ROOT_API_URL } from 'constant/api';
+import { API, ROOT_API_URL } from 'constant/api.constant';
 import { getRandomStatusErrorCode, getResonseWithData } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { editTeamDetail } from './editTeamDetail';

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route';
+import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route.constant';
 import { useNavigate } from 'react-router-dom';
 import { categoryList } from 'constant';
 

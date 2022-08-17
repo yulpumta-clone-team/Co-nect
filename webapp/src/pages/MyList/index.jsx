@@ -5,7 +5,7 @@ import userApi from 'api/user.api';
 import Tabs from 'components/Common/Tabs';
 import UserCard from 'components/UserCard';
 import TeamCard from 'components/TeamCard';
-import { TEAM, USER } from 'constant/route';
+import { TEAM, USER } from 'constant/route.constant';
 import WithLoading from 'hoc/WithLoading';
 import * as S from './style';
 

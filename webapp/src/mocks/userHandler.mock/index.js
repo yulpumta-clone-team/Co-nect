@@ -1,4 +1,4 @@
-import { API, ROOT_API_URL } from 'constant/api';
+import { API, ROOT_API_URL } from 'constant/api.constant';
 import { rest } from 'msw';
 import {
   getResonseWithData,

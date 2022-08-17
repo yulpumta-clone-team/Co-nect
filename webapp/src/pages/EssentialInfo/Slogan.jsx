@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route';
+import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route.constant';
 
 Slogan.propTypes = {
   register: PropTypes.func.isRequired,

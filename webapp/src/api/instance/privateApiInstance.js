@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ROOT_API_URL, TOKEN } from 'constant/api';
+import { ROOT_API_URL, TOKEN } from 'constant/api.constant';
 import { handleToken } from 'service/auth';
 
 import { successHandler, errorHandler } from './responseHandler';

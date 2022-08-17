@@ -13,7 +13,7 @@ import {
   TEAM_EDIT,
   NOTFOUND,
   ESSENTIAL_INFO,
-} from 'constant/route';
+} from 'constant/route.constant';
 import Login from 'pages/Login';
 import Main from 'pages/Main';
 import SignUp from 'pages/SignUp';

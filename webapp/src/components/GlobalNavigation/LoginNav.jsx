@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HOME, NEW_POST, TEAM, USER } from 'constant/route';
+import { HOME, NEW_POST, TEAM, USER } from 'constant/route.constant';
 import useDropdown from 'hooks/useDropdown';
 import { loggedUserType } from 'types/user.type';
 import UserInfoDropdown from './UserInfoDropdown';

@@ -1,4 +1,4 @@
-import { API, ROOT_API_URL, TOKEN } from 'constant/api';
+import { API, ROOT_API_URL, TOKEN } from 'constant/api.constant';
 import { getResonseWithData, successResponseWithEmptyData } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { mockLoginData, mockSignUpData } from './mockMyData';

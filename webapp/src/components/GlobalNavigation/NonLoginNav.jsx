@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM, USER } from 'constant/route';
+import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM, USER } from 'constant/route.constant';
 
 import * as S from './style';
 

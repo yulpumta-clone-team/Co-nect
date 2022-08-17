@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { SIGN_UP_INFO } from 'constant/route';
+import { SIGN_UP_INFO } from 'constant/route.constant';
 import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth.api';
 import Button from 'components/Common/Button';

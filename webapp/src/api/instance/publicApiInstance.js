@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ROOT_API_URL } from 'constant/api';
+import { ROOT_API_URL } from 'constant/api.constant';
 import { successHandler, errorHandler } from './responseHandler';
 
 const publicApiInstance = axios.create({

@@ -1,4 +1,4 @@
-import { API } from 'constant/api';
+import { API } from 'constant/api.constant';
 import privateApiInstance from './instance/privateApiInstance';
 import publicApiInstance from './instance/publicApiInstance';
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { hopeSessionOption, jobOptions } from 'constant';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route';
+import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route.constant';
 
 SessionJob.propTypes = {
   register: PropTypes.func.isRequired,

@@ -10,7 +10,7 @@ import Button from 'components/Common/Button';
 import Divider from 'components/Common/Divider';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import SocailLoginButtons from 'components/SocialLoginButtons';
-import { TOKEN } from 'constant/api';
+import { TOKEN } from 'constant/api.constant';
 import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
 import * as S from './Login.style';

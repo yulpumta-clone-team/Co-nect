@@ -1,7 +1,7 @@
 import React from 'react';
 import userApi from 'api/user.api';
 import UserCard from 'components/UserCard';
-import { USER } from 'constant/route';
+import { USER } from 'constant/route.constant';
 import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
 import CardsGrid from 'components/CardsGrid';
 import * as S from './style';

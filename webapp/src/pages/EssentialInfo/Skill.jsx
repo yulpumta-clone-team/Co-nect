@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { skillOptions } from 'constant';
 import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { ESSENTIAL_INFO, SIGN_UP, SIGN_UP_INFO } from 'constant/route';
+import { ESSENTIAL_INFO, SIGN_UP, SIGN_UP_INFO } from 'constant/route.constant';
 
 Skill.propTypes = {
   selectedSkills: PropTypes.array.isRequired,
