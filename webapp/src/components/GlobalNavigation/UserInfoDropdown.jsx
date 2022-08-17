@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Dropdown from 'components/Common/Dropdown';
 import { deleteUserInfo } from 'service/auth';
 import { MY_POST, PROFILE, MY_LIST } from 'constant/route';
-import authApi from 'api/auth';
+import authApi from 'api/auth.api';
 import * as S from './style';
 
 UserInfoDropdown.propTypes = {

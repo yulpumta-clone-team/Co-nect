@@ -1,4 +1,4 @@
-import privateApiInstance from './core/privateApiInstance';
+import privateApiInstance from './instance/privateApiInstance';
 
 const uploadApi = {
   IMAGE_UPLOAD(data) {

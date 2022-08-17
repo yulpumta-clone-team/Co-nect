@@ -1,5 +1,5 @@
 import React from 'react';
-import userApi from 'api/user';
+import userApi from 'api/user.api';
 import CardsGrid from 'components/CardsGrid';
 import TeamCard from 'components/TeamCard';
 import { TEAM_EDIT } from 'constant/route';

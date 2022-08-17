@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import userApi from 'api/user';
+import userApi from 'api/user.api';
 import WithLoading from 'hoc/WithLoading';
 import UserPostDetail from './UserPostDetail';
 

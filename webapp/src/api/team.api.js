@@ -1,6 +1,6 @@
 import { API } from 'constant/api';
-import privateApiInstance from './core/privateApiInstance';
-import publicApiInstance from './core/publicApiInstance';
+import privateApiInstance from './instance/privateApiInstance';
+import publicApiInstance from './instance/publicApiInstance';
 
 const teamApi = {
   GET_TEAM_ARR(config) {

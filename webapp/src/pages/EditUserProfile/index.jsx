@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import userApi from 'api/user';
+import userApi from 'api/user.api';
 
 import WithLoading from 'hoc/WithLoading';
 import * as S from './style';

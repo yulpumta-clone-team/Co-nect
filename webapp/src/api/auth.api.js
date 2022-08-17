@@ -1,5 +1,5 @@
 import { API } from 'constant/api';
-import publicApiInstance from './core/publicApiInstance';
+import publicApiInstance from './instance/publicApiInstance';
 
 const authApi = {
   POST_LOGIN(data) {

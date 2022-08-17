@@ -124,3 +124,7 @@ export const RightAngle = styled(rightAngleIcon)`
     stroke: ${({ theme: { colors } }) => colors.greyScale.black};
   }
 `;
+
+// 개별스타일
+
+export const InputTypeImage = styled.input``;

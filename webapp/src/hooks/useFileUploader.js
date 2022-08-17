@@ -1,7 +1,4 @@
-import axios from 'axios';
-// import { AUTH_KEY } from 'constant';
 import { useCallback, useState } from 'react';
-// import { getAuthCookie } from 'utils/cookie';
 
 const useFileUploader = (initialValue) => {
   const [file, setFile] = useState(initialValue);
@@ -18,14 +15,7 @@ const useFileUploader = (initialValue) => {
       console.log('제출할 데이터', formData.get(key));
     }
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_API}upload`, formData, {
-        headers: {
-          'Access-Control-Allow-Origin': process.env.REACT_APP_SERVER_API,
-          'content-type': 'multipart/form-data',
-        },
-        withCredentials: true,
-      });
-      console.log(res);
+      console.log();
     } catch (error) {
       console.error(error);
     }

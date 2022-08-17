@@ -1,5 +1,5 @@
 import React from 'react';
-import teamApi from 'api/team';
+import teamApi from 'api/team.api';
 import TeamCard from 'components/TeamCard';
 import { TEAM } from 'constant/route';
 import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
