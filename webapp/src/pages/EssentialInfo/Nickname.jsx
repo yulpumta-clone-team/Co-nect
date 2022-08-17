@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route';
+import Input from 'components/Common/Input';
+import Button from 'components/Common/Button';
 
 Nickname.propTypes = {
   register: PropTypes.func.isRequired,
@@ -26,23 +28,18 @@ export default function Nickname({ register, errors, getFieldState, formState })
 
   return (
     <div>
-      <input
-        {...register('nickname', {
-          minLength: {
-            value: 2,
-            message: '닉네임을 입력해주세요',
-          },
-          required: true,
-        })}
-        type="text"
-        placeholder="nickname"
+      <Input
+        name="email"
+        type="email"
+        placeholder="이메일"
+        value=""
+        onChange={() => {}}
+        isError={false}
+        helperText=""
       />
-      <span>{errors?.nickname?.message}</span>
-      <div>
-        <button type="button" onClick={handleClickButton}>
-          다음
-        </button>
-      </div>
+      <Button theme="primary" type="submit" disabled={false}>
+        다음
+      </Button>
     </div>
   );
 }

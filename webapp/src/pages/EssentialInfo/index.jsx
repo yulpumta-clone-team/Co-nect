@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { SIGN_UP_INFO } from 'constant/route';
 import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth';
+import Button from 'components/Common/Button';
 import Nickname from './Nickname';
 import Skill from './Skill';
 import Slogan from './Slogan';
@@ -11,7 +12,7 @@ import SessionJob from './SessionJob';
 import ImgPortfolio from './ImgPortfolio';
 import Content from './Content';
 import BelongTeam from './BelongTeam';
-import * as S from './style';
+import * as S from './EssentialInfo.style';
 
 export default function EssentialInfo() {
   const navigate = useNavigate();
@@ -96,82 +97,88 @@ export default function EssentialInfo() {
     }
   };
   return (
-    <S.ModalContainer>
-      <S.Backdrop>
-        <S.DialogBox>
-          <form
-            style={{ display: 'flex', flexDirection: 'column' }}
-            onSubmit={handleSubmit(onValid)}
-          >
-            <Routes>
-              <Route
-                path=""
-                element={
-                  <Nickname
-                    register={register}
-                    errors={errors}
-                    getFieldState={getFieldState}
-                    formState={formState}
-                  />
-                }
-              />
-              <Route
-                path={SIGN_UP_INFO.SKILL}
-                element={
-                  <Skill
-                    userSkill={userSkill}
-                    onSkillChange={onSkillChange}
-                    errors={errors}
-                    selectedSkills={selectedSkills}
-                    id={skillId}
-                  />
-                }
-              />
-              <Route
-                path={SIGN_UP_INFO.SLOGAN}
-                element={
-                  <Slogan
-                    register={register}
-                    errors={errors}
-                    getFieldState={getFieldState}
-                    formState={formState}
-                  />
-                }
-              />
-              <Route
-                path={SIGN_UP_INFO.SESSION_JOB}
-                element={
-                  <SessionJob
-                    register={register}
-                    getFieldState={getFieldState}
-                    formState={formState}
-                    errors={errors}
-                  />
-                }
-              />
-              <Route
-                path={SIGN_UP_INFO.BELONG_TEAM}
-                element={<BelongTeam onChecked={onChecked} isTeamBelong={isTeamBelong} />}
-              />
-              <Route
-                path={SIGN_UP_INFO.IMG_PORTFOLIO}
-                element={
-                  <ImgPortfolio
-                    register={register}
-                    errors={errors}
-                    getFieldState={getFieldState}
-                    formState={formState}
-                  />
-                }
-              />
-              <Route
-                path={SIGN_UP_INFO.CONTENT}
-                element={<Content mdcontent={mdcontent} setMdContent={setMdContent} />}
-              />
-            </Routes>
-          </form>
-        </S.DialogBox>
-      </S.Backdrop>
-    </S.ModalContainer>
+    <S.Layout>
+      <S.DialogContainer>
+        <Button theme="none" customStyle={S.CloseButton}>
+          <S.CloseLarge />
+        </Button>
+        <S.AngleContainer>
+          <Button theme="none" customStyle={S.AngleButton}>
+            <S.LeftAngle />
+          </Button>
+          <Button theme="none" customStyle={S.AngleButton}>
+            <S.RightAngle />
+          </Button>
+        </S.AngleContainer>
+        <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onValid)}>
+          <Routes>
+            <Route
+              path=""
+              element={
+                <Nickname
+                  register={register}
+                  errors={errors}
+                  getFieldState={getFieldState}
+                  formState={formState}
+                />
+              }
+            />
+            <Route
+              path={SIGN_UP_INFO.SKILL}
+              element={
+                <Skill
+                  userSkill={userSkill}
+                  onSkillChange={onSkillChange}
+                  errors={errors}
+                  selectedSkills={selectedSkills}
+                  id={skillId}
+                />
+              }
+            />
+            <Route
+              path={SIGN_UP_INFO.SLOGAN}
+              element={
+                <Slogan
+                  register={register}
+                  errors={errors}
+                  getFieldState={getFieldState}
+                  formState={formState}
+                />
+              }
+            />
+            <Route
+              path={SIGN_UP_INFO.SESSION_JOB}
+              element={
+                <SessionJob
+                  register={register}
+                  getFieldState={getFieldState}
+                  formState={formState}
+                  errors={errors}
+                />
+              }
+            />
+            <Route
+              path={SIGN_UP_INFO.BELONG_TEAM}
+              element={<BelongTeam onChecked={onChecked} isTeamBelong={isTeamBelong} />}
+            />
+            <Route
+              path={SIGN_UP_INFO.IMG_PORTFOLIO}
+              element={
+                <ImgPortfolio
+                  register={register}
+                  errors={errors}
+                  getFieldState={getFieldState}
+                  formState={formState}
+                />
+              }
+            />
+            <Route
+              path={SIGN_UP_INFO.CONTENT}
+              element={<Content mdcontent={mdcontent} setMdContent={setMdContent} />}
+            />
+          </Routes>
+        </form>
+      </S.DialogContainer>
+    </S.Layout>
   );
 }

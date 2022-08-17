@@ -138,9 +138,13 @@ const colors = {
   },
 };
 
-// export const zIndex = {
-//   gnbLevel: 500,
-// };
+export const zIndex = {
+  gnbLevel: 100,
+  dropModalLevel: 200,
+  modalLayout: 900,
+  modalLevel: 950,
+  modalContent: 999,
+};
 
 const deviceSizes = {
   mobile: '375px',
@@ -154,6 +158,6 @@ export const device = {
   pc: `screen and (max-width: ${deviceSizes.pc})`,
 };
 
-const theme = { fonts, colors, device, mixin };
+const theme = { fonts, colors, device, zIndex, mixin };
 
 export default theme;
