@@ -5,7 +5,7 @@ import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import signUpValidate from 'service/signUp.validation';
 import useForm from 'hooks/useForm';
-import Input from 'components/Common/Input';
+import TextInput from 'components/Common/TextInput';
 import Divider from 'components/Common/Divider';
 import Button from 'components/Common/Button';
 import SocailLoginButtons from 'components/SocialLoginButtons';
@@ -61,7 +61,7 @@ export default function SignUp() {
       </S.Header>
       <S.Form onSubmit={submitHandler}>
         <S.DuplicateCheckInput>
-          <Input
+          <TextInput
             name="email"
             type="email"
             placeholder="이메일"
@@ -78,7 +78,7 @@ export default function SignUp() {
             중복확인
           </Button>
         </S.DuplicateCheckInput>
-        <Input
+        <TextInput
           name="password"
           type="password"
           placeholder="비밀번호"
@@ -87,9 +87,9 @@ export default function SignUp() {
           isError={!!validateError.password}
           helperText={validateError.password}
         />
-        <Input
+        <TextInput
           name="verifiedPassword"
-          type="verifiedPassword"
+          type="password"
           placeholder="비밀번호 확인"
           value={inputValues.verifiedPassword}
           onChange={onChangeHandler}

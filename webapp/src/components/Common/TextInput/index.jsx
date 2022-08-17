@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import * as S from './Input.style';
+import * as S from './TextInput.style';
 
 Input.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+  type: PropTypes.string,
   label: PropTypes.string,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
@@ -18,6 +19,7 @@ export default function Input({
   value,
   onChange,
   placeholder,
+  type = 'text',
   isError = false,
   helperText,
   customStyle,
@@ -29,6 +31,7 @@ export default function Input({
       <S.InputContainer isError={isError}>
         <S.Input
           label={label}
+          type={type}
           value={value}
           placeholder={placeholder}
           onChange={onChange}

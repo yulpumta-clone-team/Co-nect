@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Input from './index';
+import TextInput from './index';
 
 export default {
-  title: 'Common/Input',
-  component: Input,
+  title: 'Common/TextInput',
+  component: TextInput,
   layout: 'centered',
 };
 
@@ -18,7 +18,7 @@ function Template(args) {
   const onChange = (event) => {
     setValue(event.target.value);
   };
-  return <Input value={value} onChange={onChange} {...args} />;
+  return <TextInput value={value} onChange={onChange} {...args} />;
 }
 
 export const Default = Template.bind({});

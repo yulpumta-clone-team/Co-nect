@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from 'components/Common/Input';
+import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
 import * as S from './EssentialInfo.style';
 
@@ -10,9 +10,8 @@ export default function Nickname({}) {
     <S.Content>
       <h2>닉네임을 입력해주세요.</h2>
       <S.DuplicateCheckInput>
-        <Input
+        <TextInput
           name="nickname"
-          type="nickname"
           placeholder="닉네임"
           value=""
           onChange={() => {}}

@@ -5,7 +5,7 @@ import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import loginValidate from 'service/login.validation';
 import useForm from 'hooks/useForm';
-import Input from 'components/Common/Input';
+import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
 import Divider from 'components/Common/Divider';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
@@ -55,7 +55,7 @@ export default function Login() {
         <h1>Co-nect</h1>
       </S.Header>
       <S.Form onSubmit={submitHandler}>
-        <Input
+        <TextInput
           name="email"
           type="email"
           placeholder="이메일"
@@ -64,7 +64,7 @@ export default function Login() {
           isError={!!validateError.email}
           helperText={validateError.email}
         />
-        <Input
+        <TextInput
           name="password"
           type="password"
           placeholder="비밀번호"
