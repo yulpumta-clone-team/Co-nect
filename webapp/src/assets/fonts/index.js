@@ -2,30 +2,43 @@ import { css } from 'styled-components';
 
 import NotoSansKR_Bold from './NotoSansKR-Bold.otf';
 import NotoSansKR_Regular from './NotoSansKR-Regular.otf';
-import Arimo_Bold from './Arimo-Bold.ttf';
-import Arimo_Regular from './Arimo-Regular.ttf';
+import AppleSDGothicNeo_Bold from './AppleSDGothicNeoB.ttf';
+import AppleSDGothicNeo_Regular from './AppleSDGothicNeoR.ttf';
+import OpenSans_Bold from './OpenSans-Bold.ttf';
+import OpenSans_Regular from './OpenSans-Regular.ttf';
 
 export default css`
   // 구글 본고딕 - 한글
   @font-face {
-    font-family: 'NotoSansKR';
-    src: local('NotoSansKR'), url(${NotoSansKR_Regular}) format('woff');
+    font-family: 'AppleSDGothicNeo';
+    src: local('AppleSDGothicNeo'), url(${AppleSDGothicNeo_Bold}) format('truetype');
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: 'AppleSDGothicNeo';
+    src: local('AppleSDGothicNeo'), url(${AppleSDGothicNeo_Regular}) format('truetype');
     font-weight: 400;
   }
   @font-face {
-    font-family: 'NotoSansKR';
-    src: local('NotoSansKR'), url(${NotoSansKR_Bold}) format('woff');
+    font-family: 'Noto Sans KR';
+    src: local('Noto Sans KR'), url(${NotoSansKR_Bold}) format('opentype');
     font-weight: 700;
   }
+  @font-face {
+    font-family: 'Noto Sans KR';
+    src: local('Noto Sans KR'), url(${NotoSansKR_Regular}) format('opentype');
+    font-weight: 400;
+  }
+
   // 구글 arimo - 영어
   @font-face {
-    font-family: 'Arimo';
-    src: local('Arimo'), url(${Arimo_Regular}) format('woff');
-    font-weight: 400;
+    font-family: 'Open Sans';
+    src: local('Open Sans'), url(${OpenSans_Bold}) format('truetype');
+    font-weight: 700;
   }
   @font-face {
-    font-family: 'Arimo';
-    src: local('Arimo'), url(${Arimo_Bold}) format('woff');
-    font-weight: 700;
+    font-family: 'Open Sans';
+    src: local('Open Sans'), url(${OpenSans_Regular}) format('truetype');
+    font-weight: 400;
   }
 `;
