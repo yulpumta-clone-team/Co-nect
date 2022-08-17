@@ -2,29 +2,30 @@ import { css } from 'styled-components';
 import mixin from './mixin';
 
 export const FONT = {
-  SIZE: {
-    // html {font-size: 10px}
-    BASE: '1.6rem',
-    MEDIUM: '2.4rem',
-    LARGE: '3.6rem',
+  FAMILY: {
+    KOREAN: "'AppleSDGothicNeo', 'Noto Sans KR', sans-serif",
+    ENGLISH: "'Open Sans', sans-serif",
   },
-  HEIGHT: {
-    // html {line-height: 10px}
-    BASE: '2.4rem',
-    MEDIUM: '3.2rem',
-    LARGE: '3.2rem',
+  STYLE: {
+    BASE: 'normal',
+    ITALIC: 'italic',
   },
   WEIGHT: {
     REGULAR: '400',
     BOLD: '700',
   },
-  FAMILY: {
-    KOREAN: "'NotoSansKR', sans-serif",
-    ENGLISH: "'Arimo', sans-serif",
+  SIZE: {
+    // html {font-size: 10px}
+    BASE: '1.6rem',
+    MEDIUM: '2.4rem',
+    LARGE: '3.6rem',
+    X_LARGE: '4rem',
   },
-  STYLE: {
-    BASE: 'normal',
-    ITALIC: 'italic',
+  HEIGHT: {
+    // html {line-height: 10px}
+    BASE: '1.6rem',
+    MEDIUM: '2.4rem',
+    LARGE: '3.2rem',
   },
 };
 
@@ -59,6 +60,13 @@ const fonts = {
     title: css`
       font-family: ${FONT.FAMILY.KOREAN};
       font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.BOLD};
+      font-size: ${FONT.SIZE.X_LARGE};
+      line-height: ${FONT.HEIGHT.LARGE};
+    `,
+    subTitle: css`
+      font-family: ${FONT.FAMILY.KOREAN};
+      font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.REGULAR};
       font-size: ${FONT.SIZE.MEDIUM};
       line-height: ${FONT.HEIGHT.LARGE};
@@ -66,7 +74,7 @@ const fonts = {
     emphasis: css`
       font-family: ${FONT.FAMILY.KOREAN};
       font-style: ${FONT.STYLE.BASE};
-      font-weight: ${FONT.WEIGHT.BOLD};
+      font-weight: ${FONT.WEIGHT.REGULAR};
       font-size: ${FONT.SIZE.BASE};
       line-height: ${FONT.HEIGHT.MEDIUM};
     `,
@@ -75,7 +83,7 @@ const fonts = {
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.REGULAR};
       font-size: ${FONT.SIZE.BASE};
-      line-height: ${FONT.HEIGHT.BASE};
+      line-height: ${FONT.HEIGHT.MEDIUM};
     `,
   },
   english: {
@@ -90,7 +98,7 @@ const fonts = {
       font-family: ${FONT.FAMILY.ENGLISH};
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
-      font-size: ${FONT.SIZE.MEDIUM};
+      font-size: ${FONT.SIZE.BASE};
       line-height: ${FONT.HEIGHT.MEDIUM};
     `,
     default: css`
@@ -98,7 +106,7 @@ const fonts = {
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.REGULAR};
       font-size: ${FONT.SIZE.BASE};
-      line-height: ${FONT.HEIGHT.BASE};
+      line-height: ${FONT.HEIGHT.MEDIUM};
     `,
   },
 };
