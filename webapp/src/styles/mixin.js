@@ -52,21 +52,24 @@ const mixin = {
     white-space: nowrap !important;
     border: 0 !important;
   `,
-  handlePlaceHolderColor: (color) => css`
+  handlePlaceHolderColor: ({ color, fonts }) => css`
     ::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: ${color};
       opacity: 1; /* Firefox */
+      ${fonts}
     }
 
     :-ms-input-placeholder {
       /* Internet Explorer 10-11 */
       color: ${color};
+      ${fonts}
     }
 
     ::-ms-input-placeholder {
       /* Microsoft Edge */
       color: ${color};
+      ${fonts}
     }
   `,
 };

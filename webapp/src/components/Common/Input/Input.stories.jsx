@@ -5,6 +5,7 @@ import Input from './index';
 export default {
   title: 'Common/Input',
   component: Input,
+  layout: 'centered',
 };
 
 Template.propTypes = {
