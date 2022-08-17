@@ -3,6 +3,7 @@ import { ReactComponent as CloseLargeIcon } from 'assets/icons/close-large.svg';
 import { ReactComponent as LeftAngleIcon } from 'assets/icons/left-angle.svg';
 import { ReactComponent as rightAngleIcon } from 'assets/icons/right-angle.svg';
 
+// 레이아웃
 export const Layout = styled.div`
   position: fixed;
   left: 0;
@@ -12,6 +13,7 @@ export const Layout = styled.div`
   z-index: ${({ theme: { zIndex } }) => zIndex.modalLayout};
   background-color: ${({ theme: { colors } }) => colors.greyScale.border};
 `;
+
 export const DialogContainer = styled.dialog`
   position: relative;
   top: 50%;
@@ -21,12 +23,65 @@ export const DialogContainer = styled.dialog`
   height: 520px;
   z-index: ${({ theme: { zIndex } }) => zIndex.modalLevel};
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
+  border: none;
   border-radius: 20px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
 `;
 
+export const Form = styled.form`
+  width: 100%;
+  height: 100%;
+`;
+
 export const Content = styled.div`
   z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
+  padding: 0 5% 5% 5%;
+  width: 487px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  > h2 {
+    ${({ theme: { fonts } }) => fonts.korean.title}
+    color: ${({ theme: { colors } }) => colors.primary.normal};
+    margin-top: 100px;
+  }
+`;
+
+// 공통 스타일
+export const DuplicateCheckInput = styled.div`
+  ${({ theme: { mixin } }) => mixin.positionCenterY()};
+  display: flex;
+  width: 60%;
+  gap: 15px;
+`;
+
+export const DuplicateCheckButton = css`
+  width: 120px;
+  height: 34px;
+  padding: 5px 20px;
+  ${({ theme: { fonts } }) => fonts.korean.default}
+`;
+
+export const NextButtonContainer = styled.div`
+  bottom: 5%;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})};
+  gap: 23px;
+  > span {
+    ${({ theme: { fonts } }) => fonts.korean.emphasis};
+    color: ${({ theme: { colors } }) => colors.greyScale.subTitle};
+  }
+`;
+
+// 버튼들
+
+export const NextButton = css`
+  width: 268px;
+  height: 55px;
+  ${({ theme: { fonts } }) => fonts.korean.subTitle};
+  color: ${({ theme: { colors } }) => colors.greyScale.white};
 `;
 
 export const CloseButton = css`

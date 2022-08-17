@@ -110,7 +110,7 @@ export default function EssentialInfo() {
             <S.RightAngle />
           </Button>
         </S.AngleContainer>
-        <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onValid)}>
+        <S.Form onSubmit={handleSubmit(onValid)}>
           <Routes>
             <Route
               path=""
@@ -177,7 +177,7 @@ export default function EssentialInfo() {
               element={<Content mdcontent={mdcontent} setMdContent={setMdContent} />}
             />
           </Routes>
-        </form>
+        </S.Form>
       </S.DialogContainer>
     </S.Layout>
   );
