@@ -135,6 +135,7 @@ const colors = {
     subTitle: COLORS.GRAY[700],
     guide: COLORS.GRAY[600],
     pressed: COLORS.GRAY[600],
+    placeHolder: COLORS.GRAY[500],
     border: COLORS.GRAY[500],
     nonActive: COLORS.GRAY[400],
     background: COLORS.GRAY[300],

@@ -16,13 +16,7 @@ const useFileUploader = () => {
     for (const key of formData.keys()) {
       console.log('제출할 데이터', formData.get(key));
     }
-    try {
-      const response = await uploadApi.uploadImage(formData);
-      console.log('response', response);
-      // setImageFile(imageFile);
-    } catch (error) {
-      console.error(error);
-    }
+    setImageFile(formData);
   };
 
   return { imageFile, fileHandler, setImageFile };

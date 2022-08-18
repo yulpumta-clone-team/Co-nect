@@ -52,7 +52,9 @@ export const Content = styled.div`
 `;
 
 // 공통 스타일
-export const CommonInput = css``;
+export const CommonInputContainer = styled.div`
+  /* width: 50%; */
+`;
 
 export const NextButtonContainer = styled.div`
   bottom: 5%;
@@ -160,4 +162,11 @@ export const InputTypeImageHandler = styled.label`
 
 export const HiddenInputHandler = styled.input`
   display: none;
+`;
+
+export const SelectInputContainer = styled.div`
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;

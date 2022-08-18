@@ -20,8 +20,11 @@ export const Label = styled.label``;
 export const PlaceHolder = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
+  > h3 {
+    color: ${({ theme: { colors } }) => colors.greyScale.placeHolder};
+  }
 `;
 
 export const Select = styled.ul`
@@ -39,6 +42,7 @@ export const Select = styled.ul`
   width: 100%;
   border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 5px;
+  z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
 `;
 
 export const Option = styled.li`
