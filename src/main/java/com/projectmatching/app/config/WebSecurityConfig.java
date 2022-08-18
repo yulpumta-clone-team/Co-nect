@@ -3,6 +3,7 @@ package com.projectmatching.app.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectmatching.app.config.handler.JwtAuthenticationEntryPoint;
 import com.projectmatching.app.config.handler.OAuth2AuthenticationSuccessHandler;
+import com.projectmatching.app.constant.FilterPatternConstant;
 import com.projectmatching.app.constant.JwtConstant;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.service.user.OAuthService;
@@ -40,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http)throws Exception {
 
+
         http.httpBasic().disable();
         http.csrf().disable().
                 cors().configurationSource(corsConfigurationSource())
@@ -56,8 +58,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/api/user/join/**").permitAll()
                     .antMatchers(
                         "/api/swagger*/**",
-                        "/api/webjars/**",
-                        "/api/v2/api-docs").permitAll()
+                        "/webjars/**",
+                        "/v2/api-docs",
+                        "/swagger-resources/configuration/ui",
+                        "/swagger-resources/**",
+                        "/swagger-resources/configuration/security",
+                        "/swagger-ui/**",
+                        "/webjars/**",
+                        "/v2/api-docs"
+                    ).permitAll()
+                .antMatchers(FilterPatternConstant.pathArray).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //토큰 사용하므로 세션 사용 x
@@ -101,17 +111,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+
         web.ignoring().antMatchers(
-                "/v2/api-docs",
+                "**/api/v2/api-docs",
                 "/swagger-resources/configuration/ui",
                 "/swagger-resources/**",
                 "/swagger-resources/configuration/security",
                 "/swagger-ui/**",
-                "/webjars/**");
+                "/webjars/**",
+                "/swagger*/**"
+        ,"/swagger-ui.html");
+
 
     }
 
