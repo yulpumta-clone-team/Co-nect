@@ -1,5 +1,6 @@
 package com.projectmatching.app.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectmatching.app.config.handler.JwtAuthenticationEntryPoint;
 import com.projectmatching.app.config.handler.OAuth2AuthenticationSuccessHandler;
 import com.projectmatching.app.constant.JwtConstant;
@@ -7,6 +8,7 @@ import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.service.user.OAuthService;
 import com.projectmatching.app.util.AuthTokenProvider;
 import com.projectmatching.app.util.filter.JwtAuthFilter;
+import com.projectmatching.app.util.filter.JwtExceptionFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthTokenProvider authTokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final UserRepository userRepository;
+    private final ObjectMapper objectMapper;
+
     @Override
     protected void configure(HttpSecurity http)throws Exception {
 
@@ -52,7 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/api/user/join/**").permitAll()
                     .antMatchers(
                         "/api/swagger*/**",
-                            "/api/checkDuplicate/**",
                         "/api/webjars/**",
                         "/api/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
@@ -60,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //토큰 사용하므로 세션 사용 x
                 .and()
                 .addFilterBefore(new JwtAuthFilter(authTokenProvider,userRepository), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtExceptionFilter(objectMapper),JwtAuthFilter.class)
                 .logout()
                 .logoutSuccessUrl("/")
                 .and()
@@ -107,8 +111,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/**",
                 "/swagger-resources/configuration/security",
                 "/swagger-ui/**",
-                "/webjars/**",
-                "/api/checkDuplicate/**");
+                "/webjars/**");
 
     }
 
