@@ -9,19 +9,21 @@ export default function Nickname({}) {
   return (
     <S.Content>
       <h2>닉네임을 입력해주세요.</h2>
-      <S.DuplicateCheckInput>
-        <TextInput
-          name="nickname"
-          placeholder="닉네임"
-          value=""
-          onChange={() => {}}
-          isError={false}
-          helperText=""
-        />
-        <Button theme="secondary" customStyle={S.DuplicateCheckButton} onClick={() => {}}>
-          중복확인
-        </Button>
-      </S.DuplicateCheckInput>
+      <S.SelectInputContainer>
+        <S.DuplicateCheckInput>
+          <TextInput
+            name="nickname"
+            placeholder="닉네임"
+            value=""
+            onChange={() => {}}
+            isError={false}
+            helperText=""
+          />
+          <Button theme="secondary" customStyle={S.DuplicateCheckButton} onClick={() => {}}>
+            중복확인
+          </Button>
+        </S.DuplicateCheckInput>
+      </S.SelectInputContainer>
       <S.NextButtonContainer>
         <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음

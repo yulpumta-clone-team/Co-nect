@@ -7,6 +7,7 @@ import ProfileImage from './ProfileImage';
 import SessionJob from './SessionJob';
 import * as S from './EssentialInfo.style';
 import BelongTeam from './BelongTeam';
+import Slogan from './Slogan';
 
 export default {
   title: 'pages/EssentialInfo',
@@ -57,4 +58,9 @@ SessionJobModal.args = {
 export const BelongTeamModal = Template.bind({});
 BelongTeamModal.args = {
   children: <BelongTeam />,
+};
+
+export const SloganModal = Template.bind({});
+SloganModal.args = {
+  children: <Slogan />,
 };
