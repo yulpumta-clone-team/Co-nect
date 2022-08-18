@@ -11,6 +11,7 @@ public class FilterPatternConstant {
             "/team",
             "/team/{\\d+}",
             "/user/comment/{\\d+}",
-            "/upload/**"
+            "/upload/**",
+            "techstack/**"
     };
 }
