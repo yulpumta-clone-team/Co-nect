@@ -6,6 +6,7 @@ import Nickname from './Nickname';
 import ProfileImage from './ProfileImage';
 import SessionJob from './SessionJob';
 import * as S from './EssentialInfo.style';
+import BelongTeam from './BelongTeam';
 
 export default {
   title: 'pages/EssentialInfo',
@@ -51,4 +52,9 @@ ProfileImageModal.args = {
 export const SessionJobModal = Template.bind({});
 SessionJobModal.args = {
   children: <SessionJob />,
+};
+
+export const BelongTeamModal = Template.bind({});
+BelongTeamModal.args = {
+  children: <BelongTeam />,
 };

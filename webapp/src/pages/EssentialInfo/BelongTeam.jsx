@@ -1,30 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route.constant';
-import { useNavigate } from 'react-router-dom';
-import { categoryList } from 'constant';
+import SelectInput from 'components/Common/SelectInput';
+import Button from 'components/Common/Button';
+import * as S from './EssentialInfo.style';
 
-BelongTeam.propTypes = {
-  isTeamBelong: PropTypes.bool.isRequired,
-  onChecked: PropTypes.func.isRequired,
-};
+BelongTeam.propTypes = {};
 
-export default function BelongTeam({ isTeamBelong, onChecked }) {
-  const navigate = useNavigate();
-  const handleClickButton = () => {
-    navigate(ESSENTIAL_INFO + SIGN_UP_INFO.IMG_PORTFOLIO);
-  };
+const belongTeamOptions = [
+  { id: 0, label: '팀소속 ✅', value: '팀소속 ✅' },
+  { id: 1, label: '팀소속 ❌', value: '팀소속 ❌' },
+];
+
+export default function BelongTeam({}) {
   return (
-    <div>
-      <p>팀 소속 여부를 선택해주세요</p>
-      <div>
-        <input type="checkbox" name="belong_team" onClick={onChecked} value={isTeamBelong} />
-      </div>
-      <div>
-        <button type="button" onClick={handleClickButton}>
+    <S.Content>
+      <h2>팀 소속 여부를 알려주세요.</h2>
+      <S.SelectInputContainer>
+        <SelectInput
+          label="팀 소속 여부"
+          defaultOption={belongTeamOptions[0]}
+          options={belongTeamOptions}
+        />
+      </S.SelectInputContainer>
+      <S.NextButtonContainer>
+        <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음
-        </button>
-      </div>
-    </div>
+        </Button>
+        <span>필수 입력 항목입니다.</span>
+      </S.NextButtonContainer>
+    </S.Content>
   );
 }
