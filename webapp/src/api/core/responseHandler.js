@@ -1,8 +1,8 @@
 /* eslint-disable no-prototype-builtins */
 
 export function successHandler(response) {
-  const { data } = response;
-  return data;
+  const { data, headers } = response;
+  return { ...data, headers };
 }
 
 export function errorHandler(error) {

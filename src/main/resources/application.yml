@@ -9,6 +9,7 @@ spring:
     username: ${MP_DB_USERNAME}
     password: ${MP_DB_PASSWORD}
 
+
   jpa:
     hibernate:
       ddl-auto: none

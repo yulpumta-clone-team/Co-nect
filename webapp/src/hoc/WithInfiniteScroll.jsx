@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useIntersect from 'hooks/useIntersect';
-import UpperButton from 'components/UpperButton';
+import UpperButton from 'components/Common/UpperButton';
 
 /* eslint-disable react/no-unstable-nested-components */
 

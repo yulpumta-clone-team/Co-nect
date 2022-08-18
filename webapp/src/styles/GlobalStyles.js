@@ -1,16 +1,19 @@
+import fonts from 'assets/fonts';
 import { createGlobalStyle } from 'styled-components';
 
 import Normalize from './Normalize';
 
 const GlobalStyles = createGlobalStyle`
 ${Normalize}
+${fonts}
 * {
-  
+  font-family: 'NotoSansKR';
   box-sizing: border-box;
   margin: 0;
 }
 html {
    font-size: 10px; // rem 단위를 편하게 사용하기 위해 10px로 함.
+   line-height: 10px;
 }
   body {
     width: 100%;
