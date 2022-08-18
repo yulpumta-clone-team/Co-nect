@@ -19,6 +19,9 @@ SelectInput.propTypes = {
 export default function SelectInput({ options, label, defaultOption, customStyle, ...rest }) {
   const { parent, handleClickOutside, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
   const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
+  const handleClick = () => {
+    closeDropdown();
+  };
   return (
     <S.Container customStyle={customStyle} ref={parent} onClick={openDropdown}>
       <S.PlaceHolder>
@@ -27,7 +30,7 @@ export default function SelectInput({ options, label, defaultOption, customStyle
       </S.PlaceHolder>
       <S.Select isDropdownOpen={isDropdownOpen}>
         {options.map(({ id, value, label }) => (
-          <S.Option key={id} value={value}>
+          <S.Option key={id} value={value} onClick={handleClick}>
             {label}
           </S.Option>
         ))}

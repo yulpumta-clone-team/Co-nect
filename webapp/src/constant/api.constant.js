@@ -3,6 +3,8 @@ export const TOKEN = {
   REFRESH: 'x-refresh-token',
 };
 
+export const S3_IMAGE_SERVER_URL = '';
+
 export const API_PREFIX = '/api';
 export const ROOT_API_URL = process.env.REACT_APP_SERVER_API + API_PREFIX;
 
@@ -35,7 +37,7 @@ export const API = {
     UNLIKE: '/comment/unliking',
   },
   UPLOAD: {
-    POST: '/api/upload',
-    DELETE: '/api/upload/cancel',
+    POST: '/upload',
+    DELETE: '/upload/cancel',
   },
 };

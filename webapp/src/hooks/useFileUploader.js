@@ -1,14 +1,15 @@
-import { useCallback, useState } from 'react';
+import uploadApi from 'api/upload.api';
+import { useState } from 'react';
 
 const useFileUploader = () => {
   const [imageFile, setImageFile] = useState(null);
 
-  const fileHandler = (event) => {
+  const fileHandler = async (event) => {
     const imageFile = event.target.files[0];
-    // if (imageFile.size > 10000) {
-    //   alert('10mb이상');
-    //   return;
-    // }
+    if (imageFile.size > 10000) {
+      alert('10mb이상');
+      return;
+    }
     const formData = new FormData();
     formData.append('file', imageFile);
     // FormData값확인
@@ -16,7 +17,9 @@ const useFileUploader = () => {
       console.log('제출할 데이터', formData.get(key));
     }
     try {
-      setImageFile(imageFile);
+      const response = await uploadApi.uploadImage(formData);
+      console.log('response', response);
+      // setImageFile(imageFile);
     } catch (error) {
       console.error(error);
     }

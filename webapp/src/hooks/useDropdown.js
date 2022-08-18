@@ -7,7 +7,6 @@ const useDropdown = (initialMode = false) => {
 
   const shouldCloseDropdown = (event) => {
     const isParentExistInComposedPath = event.composedPath().includes(parent.current);
-    // console.log(isParentExistInComposedPath, parent);
     if (isParentExistInComposedPath) {
       console.log(parent);
     } else {
