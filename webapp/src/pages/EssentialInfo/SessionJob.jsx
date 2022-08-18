@@ -1,54 +1,28 @@
 import React, { useState } from 'react';
 import { hopeSessionOption, jobOptions } from 'constant';
-import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route.constant';
+import TextInput from 'components/Common/TextInput';
+import Button from 'components/Common/Button';
+import SelectInput from 'components/Common/SelectInput';
+import * as S from './EssentialInfo.style';
 
-SessionJob.propTypes = {
-  register: PropTypes.func.isRequired,
-  getFieldState: PropTypes.func.isRequired,
-  formState: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-};
+SessionJob.propTypes = {};
 
-export default function SessionJob({ register, errors, getFieldState, formState }) {
-  const navigate = useNavigate();
-  getFieldState('hopeSession', formState);
-  getFieldState('userJob', formState);
-  const [selectedHopeSession, setSelectedHopeSession] = useState([]);
-  const [selectedJob, setSelectedJob] = useState([]);
-  const handleClickButton = (event) => {
-    const { target } = event;
-    if (getFieldState('hopeSession').isDirty && getFieldState('userJob').isDirty) {
-      target.disabled = false;
-      navigate(ESSENTIAL_INFO + SIGN_UP_INFO.BELONG_TEAM);
-    }
-  };
+export default function SessionJob({}) {
   return (
-    <div>
-      <span>희망 작업 기간: {selectedHopeSession}</span>
-      <select {...register('hopeSession')}>
-        {hopeSessionOption.map(({ id, value, label }) => (
-          <option key={id} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
-      <span>{errors?.hopeSession?.message}</span>
-      <span>선택한 직업: {selectedJob}</span>
-      <select {...register('userJob')}>
-        {jobOptions.map(({ id, value, label }) => (
-          <option key={id} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
-      <span>{errors?.selectedJob?.message}</span>
-      <div>
-        <button type="button" onClick={handleClickButton}>
+    <S.Content>
+      <h2>직업과 희망 기간을 선택해주세요.</h2>
+      <SelectInput
+        label="회망 기간"
+        defaultOption={hopeSessionOption[0]}
+        options={hopeSessionOption}
+      />
+      <SelectInput label="직업" defaultOption={jobOptions[0]} options={jobOptions} />
+      <S.NextButtonContainer>
+        <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음
-        </button>
-      </div>
-    </div>
+        </Button>
+        <span>필수 입력 항목입니다.</span>
+      </S.NextButtonContainer>
+    </S.Content>
   );
 }

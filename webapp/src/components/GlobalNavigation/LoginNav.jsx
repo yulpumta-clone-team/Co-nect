@@ -11,7 +11,8 @@ LoginNav.propTypes = {
 };
 
 export default function LoginNav({ userInfo }) {
-  const [parent, isDropdownOpen, shouldCloseDropdown, openDropdown, closeDropdown] = useDropdown();
+  const { parent, isDropdownOpen, shouldCloseDropdown, openDropdown, closeDropdown } =
+    useDropdown();
   const { name, profileImg } = userInfo;
 
   return (

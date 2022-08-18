@@ -33,6 +33,7 @@ const COLORS = {
   BLUE: {
     900: '#036EFF',
     700: '#81B7FF',
+    100: '#e6f1ff',
   },
   YELLOW: {
     900: '#FFBC39',
@@ -116,6 +117,7 @@ const colors = {
   primary: {
     normal: COLORS.BLUE[900],
     light: COLORS.BLUE[700],
+    shadow: COLORS.BLUE[100],
   },
   secondary: {
     normal: COLORS.YELLOW[900],

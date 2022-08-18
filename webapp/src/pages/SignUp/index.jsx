@@ -43,7 +43,7 @@ export default function SignUp() {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
     try {
-      const response = await authApi.checkDuplicateEmail({ data: inputValues.email });
+      const response = await authApi.checkDuplicateEmail({ email: inputValues.email });
       const { message } = response.data;
       notifyNewMessage(notifyDispatch, message, 'Success');
     } catch (error) {

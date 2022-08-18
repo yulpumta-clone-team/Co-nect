@@ -4,6 +4,7 @@ import Button from 'components/Common/Button';
 import EssentialInfo from './index';
 import Nickname from './Nickname';
 import ProfileImage from './ProfileImage';
+import SessionJob from './SessionJob';
 import * as S from './EssentialInfo.style';
 
 export default {
@@ -45,4 +46,9 @@ NicknameModal.args = {
 export const ProfileImageModal = Template.bind({});
 ProfileImageModal.args = {
   children: <ProfileImage />,
+};
+
+export const SessionJobModal = Template.bind({});
+SessionJobModal.args = {
+  children: <SessionJob />,
 };

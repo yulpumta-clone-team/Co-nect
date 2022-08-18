@@ -11,9 +11,7 @@ Content.propTypes = {
 export default function Content({ mdcontent, setMdContent }) {
   return (
     <div>
-      <div>
-        <MarkdownEditor mdValue={mdcontent} setContent={setMdContent} />
-      </div>
+      <MarkdownEditor mdValue={mdcontent} setContent={setMdContent} />
       <div>
         <input type="submit" />
       </div>
