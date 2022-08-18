@@ -22,11 +22,11 @@ const authApi = {
       method: 'delete',
     });
   },
-  checkDuplicateEmail(config) {
+  checkDuplicateEmail({ email }) {
     return publicApiInstance({
       url: API.AUTH.CHECK_DUPLICATE_EMAIL,
       method: 'post',
-      ...config,
+      params: { email },
     });
   },
   checkDuplicateNickName(config) {
