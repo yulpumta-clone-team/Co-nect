@@ -52,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/api/user/join/**").permitAll()
                     .antMatchers(
                         "/api/swagger*/**",
+                            "/api/checkDuplicate/**",
                         "/api/webjars/**",
                         "/api/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
@@ -103,12 +104,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(
                 "/v2/api-docs",
                 "/swagger-resources/configuration/ui",
-                "/swagger-resources",
+                "/swagger-resources/**",
                 "/swagger-resources/configuration/security",
                 "/swagger-ui/**",
-                "/webjars/**");
+                "/webjars/**",
+                "/api/checkDuplicate/**");
 
-        web.ignoring().antMatchers("/**").anyRequest();
     }
 
 }
