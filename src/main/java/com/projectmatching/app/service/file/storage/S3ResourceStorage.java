@@ -21,12 +21,13 @@ import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGIN_USER
 @Component
 @ConditionalOnProperty(prefix = "cloud.aws.s3", name = "bucket")
 @RequiredArgsConstructor
+@Slf4j
 public class S3ResourceStorage implements ResourceStorage{
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
     private final AmazonS3Client amazonS3Client;
-
+    private final String dirPrefix = "images/";
 
     @Override
     public void store(String directoryPath, MultipartFile multipartFile) {
@@ -47,7 +48,9 @@ public class S3ResourceStorage implements ResourceStorage{
     }
 
     @Override
-    public void remove(String directoryPath) {
+    public void remove(String imageId) {
+        String directoryPath = dirPrefix + imageId;
+        log.info("path : {}",directoryPath);
         if (amazonS3Client.doesObjectExist(bucket, directoryPath)) {
             amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, directoryPath));
         }
