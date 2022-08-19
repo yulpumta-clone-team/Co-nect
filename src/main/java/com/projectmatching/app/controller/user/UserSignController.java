@@ -72,13 +72,13 @@ public class UserSignController {
     }
 
     @ApiOperation(value = "회원 가입시 사용할 Email 중복여부 체크")
-    @PostMapping("/checkDuplicate/email")
+    @PatchMapping("/checkDuplicate/email")
     public ResponseTemplate<Boolean> checkDuplicateEmail(@RequestParam(name = "email")String email){
         return ResponseTemplate.valueOf(userService.isDuplicateEmail(email));
     }
 
     @ApiOperation(value = "회원 가입시 사용할 NickName 중복여부 체크")
-    @PostMapping("/checkDuplicate/name")
+    @PatchMapping("/checkDuplicate/name")
     public ResponseTemplate<Boolean> checkDuplicateName(@RequestParam(name = "name")String name){
         return ResponseTemplate.valueOf(userService.isDuplicateName(name));
     }
