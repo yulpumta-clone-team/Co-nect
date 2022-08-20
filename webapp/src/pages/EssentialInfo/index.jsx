@@ -5,13 +5,14 @@ import { SIGN_UP_INFO } from 'constant/route.constant';
 import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth.api';
 import Button from 'components/Common/Button';
-import Nickname from './Nickname';
-import Skills from './Skills';
-import Slogan from './Slogan';
-import SessionJob from './SessionJob';
-import ProfileImage from './ProfileImage';
-import Introduction from './Introduction';
-import BelongTeam from './BelongTeam';
+import Nickname from './SubPages/Nickname';
+import ProfileImage from './SubPages/ProfileImage';
+import SessionJob from './SubPages/SessionJob';
+import BelongTeam from './SubPages/BelongTeam';
+import Slogan from './SubPages/Slogan';
+import Introduction from './SubPages/Introduction';
+import Skills from './SubPages/Skills';
+import Portfolio from './SubPages/Portfolio';
 import * as S from './EssentialInfo.style';
 
 export default function EssentialInfo() {

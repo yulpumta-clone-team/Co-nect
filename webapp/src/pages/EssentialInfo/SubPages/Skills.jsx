@@ -2,7 +2,7 @@ import React from 'react';
 import { skillOptions } from 'constant';
 import SelectInput from 'components/Common/SelectInput';
 import Button from 'components/Common/Button';
-import * as S from './EssentialInfo.style';
+import * as S from '../EssentialInfo.style';
 
 Skills.propTypes = {};
 

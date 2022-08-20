@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'components/Common/Button';
 import TextArea from 'components/Common/TextArea';
-import * as S from './EssentialInfo.style';
+import * as S from '../EssentialInfo.style';
 
 Introduction.propTypes = {};
 

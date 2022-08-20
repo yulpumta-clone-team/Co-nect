@@ -1,7 +1,7 @@
 import React from 'react';
 import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
-import * as S from './EssentialInfo.style';
+import * as S from '../EssentialInfo.style';
 
 Nickname.propTypes = {};
 

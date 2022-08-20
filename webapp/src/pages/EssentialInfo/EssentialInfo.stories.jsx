@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'components/Common/Button';
 import EssentialInfo from './index';
-import Nickname from './Nickname';
-import ProfileImage from './ProfileImage';
-import SessionJob from './SessionJob';
+import Nickname from './SubPages/Nickname';
+import ProfileImage from './SubPages/ProfileImage';
+import SessionJob from './SubPages/SessionJob';
+import BelongTeam from './SubPages/BelongTeam';
+import Slogan from './SubPages/Slogan';
+import Introduction from './SubPages/Introduction';
+import Skills from './SubPages/Skills';
+import Portfolio from './SubPages/Portfolio';
 import * as S from './EssentialInfo.style';
-import BelongTeam from './BelongTeam';
-import Slogan from './Slogan';
-import Introduction from './Introduction';
-import Skills from './Skills';
-import Portfolio from './Portfolio';
 
 export default {
   title: 'pages/EssentialInfo',

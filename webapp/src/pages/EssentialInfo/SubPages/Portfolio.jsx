@@ -1,18 +1,18 @@
 import React from 'react';
 import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
-import * as S from './EssentialInfo.style';
+import * as S from '../EssentialInfo.style';
 
-Slogan.propTypes = {};
+Portfolio.propTypes = {};
 
-export default function Slogan({}) {
+export default function Portfolio({}) {
   return (
     <S.Content>
-      <h2>슬로건을 입력해주세요.</h2>
+      <h2>포트폴리오를 업로드해주세요.</h2>
       <S.InputContainer>
         <TextInput
-          name="nickname"
-          placeholder="슬로건"
+          name="Portfolio"
+          placeholder="포트폴리오(url)"
           value=""
           onChange={() => {}}
           isError={false}
@@ -23,7 +23,6 @@ export default function Slogan({}) {
         <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음
         </Button>
-        <span>필수 입력 항목입니다.</span>
       </S.NextButtonContainer>
     </S.Content>
   );

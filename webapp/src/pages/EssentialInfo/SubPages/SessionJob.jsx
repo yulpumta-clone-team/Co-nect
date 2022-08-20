@@ -2,7 +2,7 @@ import React from 'react';
 import { hopeSessionOption, jobOptions } from 'constant';
 import Button from 'components/Common/Button';
 import SelectInput from 'components/Common/SelectInput';
-import * as S from './EssentialInfo.style';
+import * as S from '../EssentialInfo.style';
 
 SessionJob.propTypes = {};
 

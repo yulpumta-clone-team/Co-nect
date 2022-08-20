@@ -2,7 +2,7 @@
 import React from 'react';
 import Button from 'components/Common/Button';
 import useFileUploader from 'hooks/useFileUploader';
-import * as S from './EssentialInfo.style';
+import * as S from '../EssentialInfo.style';
 
 ProfileImage.propTypes = {};
 
