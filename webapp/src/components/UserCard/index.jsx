@@ -9,6 +9,7 @@ import view from 'assets/icons/view.svg';
 import left_skill from 'assets/icons/left-skill.svg';
 import right_skill from 'assets/icons/right-skill.svg';
 import Slide from './Slide';
+import { skillsImg } from 'mocks/skills/skillsImg';
 
 import * as S from './style';
 
@@ -26,9 +27,7 @@ export default function UserCard({ cardInfo, onClick }) {
   // Next 버튼 클릭 시
   const NextSlide = () => {
     if (currentSlide >= TOTAL_SLIDES) {
-      // 더 이상 넘어갈 슬라이드가 없으면
-      setCurrentSlide(0); // 1번째 사진으로 넘어갑니다.
-      // return;  // 클릭이 작동하지 않습니다.
+      setCurrentSlide(0);
     } else {
       setCurrentSlide(currentSlide + 1);
     }
@@ -36,15 +35,14 @@ export default function UserCard({ cardInfo, onClick }) {
   // Prev 버튼 클릭 시
   const PrevSlide = () => {
     if (currentSlide === 0) {
-      setCurrentSlide(TOTAL_SLIDES); // 마지막 사진으로 넘어갑니다.
-      // return;  // 클릭이 작동하지 않습니다.
+      setCurrentSlide(TOTAL_SLIDES);
     } else {
       setCurrentSlide(currentSlide - 1);
     }
   };
   useEffect(() => {
     slideRef.current.style.transition = 'all 0.5s ease-in-out';
-    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 에니메이션을 만듭니다.
+    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
   return (
     <S.CardWrapper onClick={onClick}>
@@ -69,10 +67,12 @@ export default function UserCard({ cardInfo, onClick }) {
       <S.Divider />
       <S.SkillBoard>
         <img src={left_skill} alt="arrow" onClick={PrevSlide} />
-        <S.Skills>
-          <S.Skill>
-            <Slide img={img} />
-          </S.Skill>
+        <S.Skills ref={slideRef}>
+          {skillsImg.map(({ value }) => (
+            <S.Skill>
+              <Slide img={value} />
+            </S.Skill>
+          ))}
         </S.Skills>
         <img src={right_skill} alt="arrow" onClick={NextSlide} />
       </S.SkillBoard>
