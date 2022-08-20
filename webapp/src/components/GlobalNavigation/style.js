@@ -21,7 +21,7 @@ export const Container = styled.nav`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 `;
 
-//3개의 컨테이너를 담는 전체 컨테이너
+// 3개의 컨테이너를 담는 전체 컨테이너
 export const BoardList = styled.ul`
   display: flex;
   flex-direction: center;
