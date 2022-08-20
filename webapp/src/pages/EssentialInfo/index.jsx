@@ -6,7 +6,7 @@ import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth.api';
 import Button from 'components/Common/Button';
 import Nickname from './Nickname';
-import Skill from './Skill';
+import Skills from './Skills';
 import Slogan from './Slogan';
 import SessionJob from './SessionJob';
 import ProfileImage from './ProfileImage';
@@ -126,7 +126,7 @@ export default function EssentialInfo() {
             <Route
               path={SIGN_UP_INFO.SKILL}
               element={
-                <Skill
+                <Skills
                   userSkill={userSkill}
                   onSkillChange={onSkillChange}
                   errors={errors}

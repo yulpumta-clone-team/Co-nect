@@ -6,7 +6,6 @@ export const DEFAULT_PROFILE_IMG =
   'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png';
 
 export const skillOptions = [
-  { id: -1, value: '', label: '' },
   { id: 0, value: 'javascript', label: 'javascript' },
   { id: 1, value: 'java', label: 'java' },
   { id: 2, value: 'typescript', label: 'typescript' },
@@ -38,31 +37,4 @@ export const categoryList = [
 export const POST_TYPE = {
   USER: 'user',
   TEAM: 'team',
-};
-
-export const languageSkills = {
-  100: 'Javascript',
-  101: 'React',
-  102: 'Vue',
-  103: 'Angular',
-  104: 'Svelte',
-  105: 'Typescript',
-  200: 'C',
-  201: 'C++',
-  202: 'C#',
-  203: 'Java',
-  204: 'Spring',
-  205: 'Node.js',
-  206: 'Python',
-  207: 'Django',
-  208: 'Ruby',
-  209: 'Ruby',
-  210: 'Go',
-  300: 'Swift',
-  301: 'Kotlin',
-  302: 'Flutter',
-  303: 'React-Native',
-  304: 'Objective-C',
-  400: 'XD',
-  401: 'Figma',
 };

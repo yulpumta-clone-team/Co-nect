@@ -9,6 +9,7 @@ import * as S from './EssentialInfo.style';
 import BelongTeam from './BelongTeam';
 import Slogan from './Slogan';
 import Introduction from './Introduction';
+import Skills from './Skills';
 
 export default {
   title: 'pages/EssentialInfo',
@@ -68,5 +69,10 @@ SloganModal.args = {
 
 export const IntroductionModal = Template.bind({});
 IntroductionModal.args = {
-  children: <Introduction mdcontent="" setMdContent={() => {}} />,
+  children: <Introduction />,
+};
+
+export const SkillsModal = Template.bind({});
+SkillsModal.args = {
+  children: <Skills />,
 };

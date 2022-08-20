@@ -1,22 +1,17 @@
 import React from 'react';
-import { hopeSessionOption, jobOptions } from 'constant';
-import Button from 'components/Common/Button';
+import { skillOptions } from 'constant';
 import SelectInput from 'components/Common/SelectInput';
+import Button from 'components/Common/Button';
 import * as S from './EssentialInfo.style';
 
-SessionJob.propTypes = {};
+Skills.propTypes = {};
 
-export default function SessionJob({}) {
+export default function Skills({}) {
   return (
     <S.Content>
-      <h2>직업과 희망 기간을 선택해주세요.</h2>
+      <h2>가능한 기술들을 선택해주세요.</h2>
       <S.SelectInputContainer>
-        <SelectInput
-          label="회망 기간"
-          defaultOption={hopeSessionOption[0]}
-          options={hopeSessionOption}
-        />
-        <SelectInput label="직업" defaultOption={jobOptions[0]} options={jobOptions} />
+        <SelectInput label="기술" defaultOption={skillOptions[0]} options={skillOptions} />
       </S.SelectInputContainer>
       <S.NextButtonContainer>
         <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
