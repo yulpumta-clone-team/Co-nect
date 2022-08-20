@@ -12,23 +12,25 @@ export default function ProfileImage({}) {
   return (
     <S.Content>
       <h2>프로필 이미지를 골라주세요.</h2>
-      {imageFile && (
-        <div>
-          <img alt="not fount" src={URL.createObjectURL(imageFile)} />
-          <button onClick={() => setImageFile(null)}>Remove</button>
-        </div>
-      )}
-      <S.InputTypeImageHandler htmlFor="ProfileImage">
-        <div>
-          <S.PlusSolid />
-        </div>
-        <S.HiddenInputHandler
-          id="ProfileImage"
-          type="file"
-          accept="image/*"
-          onChange={fileHandler}
-        />
-      </S.InputTypeImageHandler>
+      <S.InputContainer>
+        {imageFile && (
+          <div>
+            <img alt="not fount" src={URL.createObjectURL(imageFile)} />
+            <button onClick={() => setImageFile(null)}>Remove</button>
+          </div>
+        )}
+        <S.InputTypeImageHandler htmlFor="ProfileImage">
+          <div>
+            <S.PlusSolid />
+          </div>
+          <S.HiddenInputHandler
+            id="ProfileImage"
+            type="file"
+            accept="image/*"
+            onChange={fileHandler}
+          />
+        </S.InputTypeImageHandler>
+      </S.InputContainer>
       <S.NextButtonContainer>
         <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음
