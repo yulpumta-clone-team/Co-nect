@@ -51,16 +51,22 @@ export const Content = styled.div`
   }
 `;
 
-// 공통 스타일
-export const CommonInputContainer = styled.div`
-  /* width: 50%; */
+export const InputContainer = styled.div`
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  ${({ theme: { mixin } }) => mixin.positionCenterY()};
 `;
 
+// 공통 스타일
+
 export const NextButtonContainer = styled.div`
-  bottom: 5%;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
-  gap: 23px;
+  position: absolute;
+  top: 75%;
   > span {
+    margin-top: 23px;
     ${({ theme: { fonts } }) => fonts.korean.emphasis};
     color: ${({ theme: { colors } }) => colors.greyScale.subTitle};
   }
@@ -129,9 +135,8 @@ export const PlusSolid = styled(plusSolidIcon)`
 // 개별스타일
 
 export const DuplicateCheckInput = styled.div`
-  ${({ theme: { mixin } }) => mixin.positionCenterY()};
   display: flex;
-  width: 60%;
+  width: 100%;
   gap: 15px;
 `;
 
@@ -162,11 +167,4 @@ export const InputTypeImageHandler = styled.label`
 
 export const HiddenInputHandler = styled.input`
   display: none;
-`;
-
-export const SelectInputContainer = styled.div`
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 `;

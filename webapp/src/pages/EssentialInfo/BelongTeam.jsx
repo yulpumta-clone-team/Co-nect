@@ -15,13 +15,13 @@ export default function BelongTeam({}) {
   return (
     <S.Content>
       <h2>팀 소속 여부를 알려주세요.</h2>
-      <S.SelectInputContainer>
+      <S.InputContainer>
         <SelectInput
           label="팀 소속 여부"
           defaultOption={belongTeamOptions[0]}
           options={belongTeamOptions}
         />
-      </S.SelectInputContainer>
+      </S.InputContainer>
       <S.NextButtonContainer>
         <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음

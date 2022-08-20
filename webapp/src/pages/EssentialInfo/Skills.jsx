@@ -10,9 +10,9 @@ export default function Skills({}) {
   return (
     <S.Content>
       <h2>가능한 기술들을 선택해주세요.</h2>
-      <S.SelectInputContainer>
+      <S.InputContainer>
         <SelectInput label="기술" defaultOption={skillOptions[0]} options={skillOptions} />
-      </S.SelectInputContainer>
+      </S.InputContainer>
       <S.NextButtonContainer>
         <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음

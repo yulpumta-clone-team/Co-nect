@@ -10,6 +10,7 @@ import BelongTeam from './BelongTeam';
 import Slogan from './Slogan';
 import Introduction from './Introduction';
 import Skills from './Skills';
+import Portfolio from './Portfolio';
 
 export default {
   title: 'pages/EssentialInfo',
@@ -75,4 +76,9 @@ IntroductionModal.args = {
 export const SkillsModal = Template.bind({});
 SkillsModal.args = {
   children: <Skills />,
+};
+
+export const PortfolioModal = Template.bind({});
+PortfolioModal.args = {
+  children: <Portfolio />,
 };

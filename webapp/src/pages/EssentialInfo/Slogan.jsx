@@ -9,7 +9,7 @@ export default function Slogan({}) {
   return (
     <S.Content>
       <h2>슬로건을 입력해주세요.</h2>
-      <S.SelectInputContainer>
+      <S.InputContainer>
         <TextInput
           name="nickname"
           placeholder="슬로건"
@@ -18,7 +18,7 @@ export default function Slogan({}) {
           isError={false}
           helperText=""
         />
-      </S.SelectInputContainer>
+      </S.InputContainer>
       <S.NextButtonContainer>
         <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음

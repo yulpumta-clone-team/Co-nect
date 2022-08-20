@@ -11,9 +11,9 @@ export default function Introduction({}) {
   return (
     <S.Content>
       <h2>자기소개를 입력해주세요.</h2>
-      <S.SelectInputContainer>
+      <S.InputContainer>
         <TextArea onChange={() => {}} placeholder="자기소개" value="" />
-      </S.SelectInputContainer>
+      </S.InputContainer>
       <S.NextButtonContainer>
         <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음

@@ -9,7 +9,7 @@ export default function Nickname({}) {
   return (
     <S.Content>
       <h2>닉네임을 입력해주세요.</h2>
-      <S.SelectInputContainer>
+      <S.InputContainer>
         <S.DuplicateCheckInput>
           <TextInput
             name="nickname"
@@ -23,7 +23,7 @@ export default function Nickname({}) {
             중복확인
           </Button>
         </S.DuplicateCheckInput>
-      </S.SelectInputContainer>
+      </S.InputContainer>
       <S.NextButtonContainer>
         <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
           다음
