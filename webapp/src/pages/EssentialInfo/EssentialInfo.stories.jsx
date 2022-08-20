@@ -8,6 +8,7 @@ import SessionJob from './SessionJob';
 import * as S from './EssentialInfo.style';
 import BelongTeam from './BelongTeam';
 import Slogan from './Slogan';
+import Introduction from './Introduction';
 
 export default {
   title: 'pages/EssentialInfo',
@@ -63,4 +64,9 @@ BelongTeamModal.args = {
 export const SloganModal = Template.bind({});
 SloganModal.args = {
   children: <Slogan />,
+};
+
+export const IntroductionModal = Template.bind({});
+IntroductionModal.args = {
+  children: <Introduction mdcontent="" setMdContent={() => {}} />,
 };

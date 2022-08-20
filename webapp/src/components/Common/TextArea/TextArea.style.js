@@ -17,7 +17,7 @@ export const TextArea = styled.textarea`
   border-radius: 3px;
 
   width: 100%;
-  min-height: 20rem;
+  min-height: 8rem;
   resize: vertical;
   padding: 0.6rem 1.6rem;
   ${({ theme: { mixin, colors, fonts } }) =>

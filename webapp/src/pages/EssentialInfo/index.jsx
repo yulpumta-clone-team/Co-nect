@@ -10,7 +10,7 @@ import Skill from './Skill';
 import Slogan from './Slogan';
 import SessionJob from './SessionJob';
 import ProfileImage from './ProfileImage';
-import Content from './Content';
+import Introduction from './Introduction';
 import BelongTeam from './BelongTeam';
 import * as S from './EssentialInfo.style';
 
@@ -164,7 +164,7 @@ export default function EssentialInfo() {
             <Route path={SIGN_UP_INFO.IMG_PORTFOLIO} element={<ProfileImage />} />
             <Route
               path={SIGN_UP_INFO.CONTENT}
-              element={<Content mdcontent={mdcontent} setMdContent={setMdContent} />}
+              element={<Introduction mdcontent={mdcontent} setMdContent={setMdContent} />}
             />
           </Routes>
         </S.Form>
