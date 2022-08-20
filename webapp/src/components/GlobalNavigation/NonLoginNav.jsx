@@ -1,43 +1,39 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Logo from 'assets/icons/nav-logo.svg';
+import Button from 'components/Common/Button';
 import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM, USER } from 'constant/route';
-import logo from 'assets/icons/logo.svg';
 
 import * as S from './style';
 
-function NonLoginNav() {
+export default function NonLoginNav() {
   return (
-    <S.BoardList>
-      <S.Logo>
-        <img src={logo} alt="Logo" />
-        <S.Text style={{ color: '#036EFF' }}>Co-nect</S.Text>
-      </S.Logo>
-      <S.LinkList>
-        <S.Text>
-          <Link to={HOME}>Main</Link>
-        </S.Text>
-        <S.Text>
-          <Link to={USER}>User Board</Link>
-        </S.Text>
-        <S.Text>
-          <Link to={TEAM}>Team Board</Link>
-        </S.Text>
-      </S.LinkList>
-      <S.AssignList>
-        <S.AssignButton style={{ background: '#036EFF' }}>
-          <S.Text style={{ color: '#FFFFFF' }}>
+    <S.Container>
+      <S.TopContainer />
+      <S.BoardList>
+        <S.Logo>
+          <img src={Logo} alt="conect-logo" />
+        </S.Logo>
+        <S.LinkList>
+          <S.Hover>
+            <Link to={HOME}>Home</Link>
+          </S.Hover>
+          <S.Hover>
+            <Link to={USER}>Single</Link>
+          </S.Hover>
+          <S.Hover>
+            <Link to={TEAM}>Team</Link>
+          </S.Hover>
+        </S.LinkList>
+        <S.AssignList>
+          <Button theme="primary" style={{ height: 35 }}>
             <Link to={LOGIN}>로그인</Link>
-          </S.Text>
-        </S.AssignButton>
-        <S.AssignButton>
-          <S.Text>
+          </Button>
+          <Button theme="gray" style={{ height: 35 }}>
             <Link to={SIGN_UP}>회원가입</Link>
-          </S.Text>
-        </S.AssignButton>
-      </S.AssignList>
-    </S.BoardList>
+          </Button>
+        </S.AssignList>
+      </S.BoardList>
+    </S.Container>
   );
 }
-
-export default NonLoginNav;
