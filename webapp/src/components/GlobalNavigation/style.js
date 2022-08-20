@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { ReactComponent as alarm } from '/assets/icons/alarm.svg';
 
 // 상단 파란색 상자
 export const TopContainer = styled.div`
@@ -53,7 +54,7 @@ export const LinkList = styled.ul`
 export const AssignList = styled.ul`
   position: relative;
   display: flex;
-  width: 10%;
+  width: ${({ isLogin }) => (isLogin ? '300px' : '10%')};
   height: 100%;
   align-items: center;
   justify-content: space-between;
@@ -61,12 +62,11 @@ export const AssignList = styled.ul`
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
 
   > img {
+    cursor: pointer;
     border-radius: 70%;
-    overflow: hidden;
-    width: 11.2%;
+    width: 12%;
     height: 35px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
   }
 `;
 
@@ -80,6 +80,13 @@ export const Hover = styled.div`
 export const Link = styled.div`
   cursor: pointer;
   text-decoration: underline;
+`;
+
+export const Alarm = styled(alarm)`
+  overflow: hidden;
+  width: 15px;
+  height: 20px;
+  cursor: pointer;
 `;
 
 // user 이름

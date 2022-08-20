@@ -25,11 +25,11 @@ export default function NonLoginNav() {
             <Link to={TEAM}>Team</Link>
           </S.Hover>
         </S.LinkList>
-        <S.AssignList>
-          <Button theme="primary" style={{ height: 35 }}>
+        <S.AssignList isLogin={false}>
+          <Button theme="primary" style={{ height: 35 }} customStyle={{ width: 99 }}>
             <Link to={LOGIN}>로그인</Link>
           </Button>
-          <Button theme="gray" style={{ height: 35 }}>
+          <Button theme="gray" style={{ height: 35 }} customStyle={{ width: 99 }}>
             <Link to={SIGN_UP}>회원가입</Link>
           </Button>
         </S.AssignList>
