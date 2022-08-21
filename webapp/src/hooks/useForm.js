@@ -8,7 +8,7 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
 
   const satisfyAllValidates = Object.values(validateError).every((value) => !value);
 
-  // const satisftyTargetValidate =
+  const isTargetSatisfyValidate = (target) => !!validateError[target];
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -31,6 +31,7 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
     onChangeHandler,
     submitHandler,
     satisfyAllValidates,
+    isTargetSatisfyValidate,
   };
 };
 

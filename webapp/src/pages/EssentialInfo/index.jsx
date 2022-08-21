@@ -5,6 +5,8 @@ import { SIGN_UP_INFO } from 'constant/route.constant';
 import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth.api';
 import Button from 'components/Common/Button';
+import WithProvider from 'hoc/withProvider';
+import EssentialFormProvider from 'contexts/EssentialForm/EssentialForm.Provider';
 import Nickname from './SubPages/Nickname';
 import ProfileImage from './SubPages/ProfileImage';
 import SessionJob from './SubPages/SessionJob';
@@ -15,7 +17,9 @@ import Skills from './SubPages/Skills';
 import Portfolio from './SubPages/Portfolio';
 import * as S from './EssentialInfo.style';
 
-export default function EssentialInfo() {
+export default WithProvider({ Provider: EssentialFormProvider, Component: EssentialInfo });
+
+function EssentialInfo() {
   const navigate = useNavigate();
   const {
     getFieldState,
@@ -113,60 +117,14 @@ export default function EssentialInfo() {
         </S.AngleContainer>
         <S.Form onSubmit={handleSubmit(onValid)}>
           <Routes>
-            <Route
-              path=""
-              element={
-                <Nickname
-                  register={register}
-                  errors={errors}
-                  getFieldState={getFieldState}
-                  formState={formState}
-                />
-              }
-            />
-            <Route
-              path={SIGN_UP_INFO.SKILL}
-              element={
-                <Skills
-                  userSkill={userSkill}
-                  onSkillChange={onSkillChange}
-                  errors={errors}
-                  selectedSkills={selectedSkills}
-                  id={skillId}
-                />
-              }
-            />
-            <Route
-              path={SIGN_UP_INFO.SLOGAN}
-              element={
-                <Slogan
-                  register={register}
-                  errors={errors}
-                  getFieldState={getFieldState}
-                  formState={formState}
-                />
-              }
-            />
-            <Route
-              path={SIGN_UP_INFO.SESSION_JOB}
-              element={
-                <SessionJob
-                  register={register}
-                  getFieldState={getFieldState}
-                  formState={formState}
-                  errors={errors}
-                />
-              }
-            />
-            <Route
-              path={SIGN_UP_INFO.BELONG_TEAM}
-              element={<BelongTeam onChecked={onChecked} isTeamBelong={isTeamBelong} />}
-            />
-            <Route path={SIGN_UP_INFO.IMG_PORTFOLIO} element={<ProfileImage />} />
-            <Route
-              path={SIGN_UP_INFO.CONTENT}
-              element={<Introduction mdcontent={mdcontent} setMdContent={setMdContent} />}
-            />
+            <Route index element={<Nickname />} />
+            <Route path={SIGN_UP_INFO.SKILL} element={<Skills />} />
+            <Route path={SIGN_UP_INFO.PROFILE_IMAGE} element={<ProfileImage />} />
+            <Route path={SIGN_UP_INFO.SESSION_JOB} element={<SessionJob />} />
+            <Route path={SIGN_UP_INFO.SLOGAN} element={<Slogan />} />
+            <Route path={SIGN_UP_INFO.BELONG_TEAM} element={<BelongTeam />} />
+            <Route path={SIGN_UP_INFO.CONTENT} element={<Introduction />} />
+            <Route path={SIGN_UP_INFO.PROTFOLIO} element={<Portfolio />} />
           </Routes>
         </S.Form>
       </S.DialogContainer>
