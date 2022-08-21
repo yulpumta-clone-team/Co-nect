@@ -34,4 +34,8 @@ export const API = {
     LIKE: '/comment/liking',
     UNLIKE: '/comment/unliking',
   },
+  SKILLS: {
+    CATEGORY: '/teckstack',
+    ALL: 'teckstack/all',
+  },
 };

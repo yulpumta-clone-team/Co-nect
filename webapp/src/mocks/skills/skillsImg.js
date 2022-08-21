@@ -1,16 +1,13 @@
-import react from '/mocks/skills/Image/react.svg';
-import html from '/mocks/skills/Image/html.svg';
-import typescript from '/mocks/skills/Image/typescript.svg';
-import python from '/mocks/skills/Image/python.svg';
-import css from '/mocks/skills/Image/css.svg';
+import javascript from '/mocks/skills/Image/javascript.png';
+
 export const skillsImg = [
-  { id: 0, value: { react }, label: 'react' },
-  { id: 1, value: { html }, label: 'html' },
-  { id: 2, value: { typescript }, label: 'typescript' },
-  { id: 3, value: { python }, label: 'python' },
-  { id: 4, value: { css }, label: 'css' },
-  { id: 5, value: { react }, label: 'react' },
-  { id: 6, value: { html }, label: 'html' },
-  { id: 7, value: { typescript }, label: 'typescript' },
-  { id: 8, value: { python }, label: 'python' },
+  { id: 0, value: { javascript }, label: 'javascript' },
+  { id: 1, value: { javascript }, label: 'javascript' },
+  { id: 2, value: { javascript }, label: 'javascript' },
+  { id: 3, value: { javascript }, label: 'javascript' },
+  { id: 4, value: { javascript }, label: 'javascript' },
+  { id: 5, value: { javascript }, label: 'javascript' },
+  { id: 6, value: { javascript }, label: 'javascript' },
+  { id: 7, value: { javascript }, label: 'javascript' },
+  { id: 8, value: { javascript }, label: 'javascript' },
 ];
