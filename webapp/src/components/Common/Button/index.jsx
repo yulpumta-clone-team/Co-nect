@@ -13,7 +13,7 @@ Button.propTypes = {
 
 export default function Button({ children, theme, customStyle, disabled, ...rest }) {
   return (
-    <S.Container mytheme={S.themes[theme]} customStyle={customStyle} {...rest}>
+    <S.Container mytheme={S.themes[theme]} customStyle={customStyle} disabled={disabled} {...rest}>
       {children}
     </S.Container>
   );

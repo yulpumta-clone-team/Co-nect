@@ -16,6 +16,12 @@ export const Container = styled.button`
   && {
     ${({ customStyle }) => customStyle}
   }
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+    background-color: ${({ theme: { colors } }) => colors.greyScale.nonActive};
+    color: ${({ theme: { colors } }) => colors.greyScale.normal};
+  }
 `;
 
 export const themes = {
