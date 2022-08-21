@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as alarm } from '/assets/icons/alarm.svg';
+import { ReactComponent as alarm } from 'assets/icons/alarm.svg';
 
 // 상단 파란색 상자
 export const TopContainer = styled.div`
