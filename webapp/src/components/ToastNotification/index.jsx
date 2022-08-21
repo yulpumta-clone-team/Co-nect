@@ -4,7 +4,7 @@ import checkIcon from 'assets/icons/check.svg';
 import errorIcon from 'assets/icons/error.svg';
 import infoIcon from 'assets/icons/info.svg';
 import warningIcon from 'assets/icons/warning.svg';
-import * as S from './style';
+import * as S from './ToastNotification.style';
 
 ToastNotification.propTypes = {
   toastList: PropTypes.arrayOf(

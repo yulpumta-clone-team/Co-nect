@@ -7,22 +7,45 @@ const useDropdown = (initialMode = false) => {
 
   const shouldCloseDropdown = (event) => {
     const isParentExistInComposedPath = event.composedPath().includes(parent.current);
-    if (isParentExistInComposedPath) return;
-    closeDropdown();
+    if (isParentExistInComposedPath) {
+      console.log(parent);
+    } else {
+      closeDropdown();
+    }
   };
 
-  const closeDropdown = () => setIsDropdownOpen(false);
+  const handleClickOutside = (event) => {
+    if (parent.current && !parent.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
 
-  const openDropdown = () => setIsDropdownOpen(true);
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
+  const openDropdown = (event) => {
+    // if (parent.current && parent.current.contains(event.target)) {
+    //   setIsDropdownOpen(true);
+    // }
+    setIsDropdownOpen(true);
+  };
 
   useEffect(() => {
-    window.addEventListener('click', shouldCloseDropdown, true);
+    window.addEventListener('click', handleClickOutside, true);
 
     return () => {
-      window.removeEventListener('click', shouldCloseDropdown, true);
+      window.removeEventListener('click', handleClickOutside, true);
     };
   }, [parent]);
-  return [parent, isDropdownOpen, shouldCloseDropdown, openDropdown, closeDropdown];
+  return {
+    parent,
+    isDropdownOpen,
+    handleClickOutside,
+    shouldCloseDropdown,
+    openDropdown,
+    closeDropdown,
+  };
 };
 
 export default useDropdown;

@@ -2,29 +2,30 @@ import { css } from 'styled-components';
 import mixin from './mixin';
 
 export const FONT = {
-  SIZE: {
-    // html {font-size: 10px}
-    BASE: '1.6rem',
-    MEDIUM: '2.4rem',
-    LARGE: '3.6rem',
+  FAMILY: {
+    KOREAN: "'AppleSDGothicNeo', 'Noto Sans KR', sans-serif",
+    ENGLISH: "'Open Sans', sans-serif",
   },
-  HEIGHT: {
-    // html {line-height: 10px}
-    BASE: '2.4rem',
-    MEDIUM: '3.2rem',
-    LARGE: '3.2rem',
+  STYLE: {
+    BASE: 'normal',
+    ITALIC: 'italic',
   },
   WEIGHT: {
     REGULAR: '400',
     BOLD: '700',
   },
-  FAMILY: {
-    KOREAN: "'NotoSansKR', sans-serif",
-    ENGLISH: "'Arimo', sans-serif",
+  SIZE: {
+    // html {font-size: 10px}
+    BASE: '1.6rem',
+    MEDIUM: '2.4rem',
+    LARGE: '3.6rem',
+    X_LARGE: '4rem',
   },
-  STYLE: {
-    BASE: 'normal',
-    ITALIC: 'italic',
+  HEIGHT: {
+    // html {line-height: 10px}
+    BASE: '1.6rem',
+    MEDIUM: '2.4rem',
+    LARGE: '3.2rem',
   },
 };
 
@@ -32,6 +33,7 @@ const COLORS = {
   BLUE: {
     900: '#036EFF',
     700: '#81B7FF',
+    100: '#e6f1ff',
   },
   YELLOW: {
     900: '#FFBC39',
@@ -45,6 +47,7 @@ const COLORS = {
   GRAY: {
     fff: '#ffffff',
     200: '#979797',
+    300: '#F0F0F0',
     400: '#DEDEDE',
     500: '#c2c2c2',
     600: '#979797',
@@ -59,6 +62,13 @@ const fonts = {
     title: css`
       font-family: ${FONT.FAMILY.KOREAN};
       font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.BOLD};
+      font-size: ${FONT.SIZE.X_LARGE};
+      line-height: ${FONT.HEIGHT.LARGE};
+    `,
+    subTitle: css`
+      font-family: ${FONT.FAMILY.KOREAN};
+      font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.REGULAR};
       font-size: ${FONT.SIZE.MEDIUM};
       line-height: ${FONT.HEIGHT.LARGE};
@@ -66,7 +76,7 @@ const fonts = {
     emphasis: css`
       font-family: ${FONT.FAMILY.KOREAN};
       font-style: ${FONT.STYLE.BASE};
-      font-weight: ${FONT.WEIGHT.BOLD};
+      font-weight: ${FONT.WEIGHT.REGULAR};
       font-size: ${FONT.SIZE.BASE};
       line-height: ${FONT.HEIGHT.MEDIUM};
     `,
@@ -75,7 +85,7 @@ const fonts = {
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.REGULAR};
       font-size: ${FONT.SIZE.BASE};
-      line-height: ${FONT.HEIGHT.BASE};
+      line-height: ${FONT.HEIGHT.MEDIUM};
     `,
   },
   english: {
@@ -90,7 +100,7 @@ const fonts = {
       font-family: ${FONT.FAMILY.ENGLISH};
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
-      font-size: ${FONT.SIZE.MEDIUM};
+      font-size: ${FONT.SIZE.BASE};
       line-height: ${FONT.HEIGHT.MEDIUM};
     `,
     default: css`
@@ -98,7 +108,7 @@ const fonts = {
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
       font-size: ${FONT.SIZE.BASE};
-      line-height: ${FONT.HEIGHT.BASE};
+      line-height: ${FONT.HEIGHT.MEDIUM};
     `,
   },
 };
@@ -107,6 +117,7 @@ const colors = {
   primary: {
     normal: COLORS.BLUE[900],
     light: COLORS.BLUE[700],
+    shadow: COLORS.BLUE[100],
   },
   secondary: {
     normal: COLORS.YELLOW[900],
@@ -124,15 +135,21 @@ const colors = {
     subTitle: COLORS.GRAY[700],
     guide: COLORS.GRAY[600],
     pressed: COLORS.GRAY[600],
+    placeHolder: COLORS.GRAY[500],
     border: COLORS.GRAY[500],
     nonActive: COLORS.GRAY[400],
+    background: COLORS.GRAY[300],
     hover: COLORS.GRAY[200],
   },
 };
 
-// export const zIndex = {
-//   gnbLevel: 500,
-// };
+export const zIndex = {
+  gnbLevel: 100,
+  dropModalLevel: 200,
+  modalLayout: 900,
+  modalLevel: 950,
+  modalContent: 999,
+};
 
 const deviceSizes = {
   mobile: '375px',
@@ -146,6 +163,6 @@ export const device = {
   pc: `screen and (max-width: ${deviceSizes.pc})`,
 };
 
-const theme = { fonts, colors, device, mixin };
+const theme = { fonts, colors, device, zIndex, mixin };
 
 export default theme;

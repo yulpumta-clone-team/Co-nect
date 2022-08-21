@@ -1,8 +1,9 @@
-import AUTH from './auth';
-import COMMENT from './comment';
-import TEAM from './team';
-import USER from './user';
+import authHandler from './authHandler.mock';
+import commentHandler from './commentHandler.mock';
+import teamHandler from './teamHandler.mock';
+import userHandler from './userHandler.mock';
+import etcHandler from './etcHandler.mock';
 
-const handlers = [...AUTH, ...USER, ...TEAM, ...COMMENT];
+const handlers = [...authHandler, ...userHandler, ...teamHandler, ...commentHandler, ...etcHandler];
 
 export default handlers;

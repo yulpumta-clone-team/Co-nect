@@ -1,5 +1,5 @@
 import { USER_INFO } from 'constant';
-import { TOKEN } from 'constant/api';
+import { TOKEN } from 'constant/api.constant';
 import handleLocalstorage from 'utils/handleLocalstorage';
 
 export const updateUserInfo = (rawUserInfo) => {

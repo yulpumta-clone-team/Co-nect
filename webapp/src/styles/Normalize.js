@@ -352,6 +352,10 @@ const Normalize = css`
   [hidden] {
     display: none;
   }
+
+  dialog {
+    padding: 0;
+  }
 `;
 
 export default Normalize;

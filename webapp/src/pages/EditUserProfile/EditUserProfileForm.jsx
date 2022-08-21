@@ -5,7 +5,7 @@ import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
-import userApi from 'api/user';
+import userApi from 'api/user.api';
 import { userType } from 'types/user.type';
 
 EditUserProfileForm.propTypes = {

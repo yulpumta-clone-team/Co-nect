@@ -1,7 +1,7 @@
 import React from 'react';
-import teamApi from 'api/team';
+import teamApi from 'api/team.api';
 import TeamCard from 'components/TeamCard';
-import { TEAM } from 'constant/route';
+import { TEAM } from 'constant/route.constant';
 import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
 import CardsGrid from 'components/CardsGrid';
 import * as S from './style';

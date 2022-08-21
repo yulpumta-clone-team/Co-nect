@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import authApi from 'api/auth';
+import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import signUpValidate from 'service/signUp.validation';
 import useForm from 'hooks/useForm';
-import Input from 'components/Common/Input';
+import TextInput from 'components/Common/TextInput';
 import Divider from 'components/Common/Divider';
 import Button from 'components/Common/Button';
 import SocailLoginButtons from 'components/SocialLoginButtons';
@@ -32,7 +32,7 @@ export default function SignUp() {
     }
   };
 
-  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidites } =
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
     useForm({
       initialValues: { email: '', password: '', verifiedPassword: '' },
       submitCallback,
@@ -43,7 +43,7 @@ export default function SignUp() {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
     try {
-      const response = await authApi.checkDuplicateEmail({ data: inputValues.email });
+      const response = await authApi.checkDuplicateEmail({ email: inputValues.email });
       const { message } = response.data;
       notifyNewMessage(notifyDispatch, message, 'Success');
     } catch (error) {
@@ -61,7 +61,7 @@ export default function SignUp() {
       </S.Header>
       <S.Form onSubmit={submitHandler}>
         <S.DuplicateCheckInput>
-          <Input
+          <TextInput
             name="email"
             type="email"
             placeholder="이메일"
@@ -78,7 +78,7 @@ export default function SignUp() {
             중복확인
           </Button>
         </S.DuplicateCheckInput>
-        <Input
+        <TextInput
           name="password"
           type="password"
           placeholder="비밀번호"
@@ -87,9 +87,9 @@ export default function SignUp() {
           isError={!!validateError.password}
           helperText={validateError.password}
         />
-        <Input
+        <TextInput
           name="verifiedPassword"
-          type="verifiedPassword"
+          type="password"
           placeholder="비밀번호 확인"
           value={inputValues.verifiedPassword}
           onChange={onChangeHandler}
@@ -100,7 +100,7 @@ export default function SignUp() {
       <Button
         theme="primary"
         type="submit"
-        disabled={!satisfyAllValidites}
+        disabled={!satisfyAllValidates}
         customStyle={S.SubmitButton}
       >
         Sign up

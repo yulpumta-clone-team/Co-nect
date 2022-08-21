@@ -19,7 +19,6 @@ export const Header = styled.header`
   margin-bottom: 66px;
   > h1 {
     ${({ theme: { fonts } }) => fonts.english.title}
-
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;

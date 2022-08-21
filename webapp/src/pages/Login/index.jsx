@@ -1,16 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import authApi from 'api/auth';
+import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import loginValidate from 'service/login.validation';
 import useForm from 'hooks/useForm';
-import Input from 'components/Common/Input';
+import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
 import Divider from 'components/Common/Divider';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import SocailLoginButtons from 'components/SocialLoginButtons';
-import { TOKEN } from 'constant/api';
+import { TOKEN } from 'constant/api.constant';
 import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
 import * as S from './Login.style';
@@ -40,7 +40,7 @@ export default function Login() {
     }
   };
 
-  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidites } =
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
     useForm({
       initialValues: { email: '', password: '' },
       submitCallback,
@@ -55,7 +55,7 @@ export default function Login() {
         <h1>Co-nect</h1>
       </S.Header>
       <S.Form onSubmit={submitHandler}>
-        <Input
+        <TextInput
           name="email"
           type="email"
           placeholder="이메일"
@@ -64,7 +64,7 @@ export default function Login() {
           isError={!!validateError.email}
           helperText={validateError.email}
         />
-        <Input
+        <TextInput
           name="password"
           type="password"
           placeholder="비밀번호"
@@ -77,7 +77,7 @@ export default function Login() {
       <Button
         theme="primary"
         type="submit"
-        disabled={!satisfyAllValidites}
+        disabled={!satisfyAllValidates}
         customStyle={S.SubmitButton}
       >
         Login

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import commentApi from 'api/comment';
+import commentApi from 'api/comment.api';
 import { useCallback, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getUserInfo } from 'service/auth';
