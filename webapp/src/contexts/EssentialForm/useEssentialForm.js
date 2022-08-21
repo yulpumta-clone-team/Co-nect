@@ -38,9 +38,21 @@ const useEssentialForm = () => {
   const notifyDispatch = useToastNotificationAction();
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
 
-  const handleMove = () => {};
+  const handleClickNextButton = useCallback(() => {
+    const currentPathname = location.pathname;
+    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
+    // 타켓팅한 요소의 인덱스가 배열의 길이보다 크거가 같을 때는 이동하지 않는다.
+    if (currentSubPageIndex >= essentailSubPagesRouteOrder.length - 1) return;
+    navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1]);
+  }, [location.pathname, navigate]);
 
-  console.log('location :>> ', location);
+  const handleClickPrevButton = useCallback(() => {
+    const currentPathname = location.pathname;
+    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
+    // 타켓팅한 요소의 인덱스가 배열의 길이보다 크거가 같을 때는 이동하지 않는다.
+    if (currentSubPageIndex <= 0) return;
+    navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1]);
+  }, [location.pathname, navigate]);
 
   const submitCallback = async (submitData) => {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
@@ -92,8 +104,17 @@ const useEssentialForm = () => {
       submitHandler,
       onClickCheckDuplicateNickname,
       isTargetSatisfyValidate,
+      handleClickNextButton,
+      handleClickPrevButton,
     }),
-    [onChangeHandler, submitHandler, onClickCheckDuplicateNickname, isTargetSatisfyValidate],
+    [
+      onChangeHandler,
+      submitHandler,
+      onClickCheckDuplicateNickname,
+      isTargetSatisfyValidate,
+      handleClickNextButton,
+      handleClickPrevButton,
+    ],
   );
 
   const states = useMemo(

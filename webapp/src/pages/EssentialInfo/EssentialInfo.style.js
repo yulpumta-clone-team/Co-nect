@@ -32,7 +32,6 @@ export const DialogContainer = styled.dialog`
 export const Form = styled.form`
   width: 100%;
   height: 100%;
-  z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
 `;
 
 export const Content = styled.div`
@@ -58,6 +57,7 @@ export const InputContainer = styled.div`
   align-items: center;
   gap: 10px;
   ${({ theme: { mixin } }) => mixin.positionCenterY()};
+  z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
 `;
 
 // 공통 스타일
@@ -100,7 +100,6 @@ export const CloseLarge = styled(CloseLargeIcon)`
 export const AngleContainer = styled.div`
   ${({ theme: { mixin } }) => mixin.positionCenterY()};
   ${({ theme: { mixin } }) => mixin.flexBox({ direction: 'row', justify: 'space-between' })};
-  z-index: ${({ theme: { zIndex } }) => zIndex.modalLevel};
   width: 100%;
   padding: 0 4%;
 `;
@@ -108,6 +107,9 @@ export const AngleContainer = styled.div`
 export const AngleButton = css`
   width: 50px;
   height: 50px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const LeftAngle = styled(LeftAngleIcon)`

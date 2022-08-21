@@ -12,8 +12,12 @@ import * as S from '../EssentialInfo.style';
 export default function Nickname() {
   const navigate = useNavigate();
   const { inputValues, validateError, isNicknameDuplicate } = useEssentialFormsState();
-  const { onChangeHandler, onClickCheckDuplicateNickname, isTargetSatisfyValidate } =
-    useEssentialFormsAction();
+  const {
+    onChangeHandler,
+    onClickCheckDuplicateNickname,
+    isTargetSatisfyValidate,
+    handleClickNextButton,
+  } = useEssentialFormsAction();
   const isNicknameValidateError = isTargetSatisfyValidate('nickname');
   const canActiveNextButton = isNicknameValidateError || isNicknameDuplicate;
   return (
@@ -45,9 +49,7 @@ export default function Nickname() {
           type="submit"
           disabled={canActiveNextButton}
           customStyle={S.NextButton}
-          onClick={() => {
-            navigate(ESSENTIAL_INFO.INDEX + ESSENTIAL_INFO.SKILL);
-          }}
+          onClick={handleClickNextButton}
         >
           다음
         </Button>

@@ -1,25 +1,19 @@
 import React, { useCallback, useState } from 'react';
-import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { ESSENTIAL_INFO } from 'constant/route.constant';
 import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth.api';
 import Button from 'components/Common/Button';
 import WithProvider from 'hoc/withProvider';
-import EssentialFormProvider from 'contexts/EssentialForm/EssentialForm.Provider';
-import Nickname from './SubPages/Nickname';
-import ProfileImage from './SubPages/ProfileImage';
-import SessionJob from './SubPages/SessionJob';
-import BelongTeam from './SubPages/BelongTeam';
-import Slogan from './SubPages/Slogan';
-import Introduction from './SubPages/Introduction';
-import Skills from './SubPages/Skills';
-import Portfolio from './SubPages/Portfolio';
+import EssentialFormProvider, {
+  useEssentialFormsAction,
+} from 'contexts/EssentialForm/EssentialForm.Provider';
 import * as S from './EssentialInfo.style';
 
 export default WithProvider({ Provider: EssentialFormProvider, Component: EssentialInfo });
 
 function EssentialInfo() {
+  const { handleClickNextButton, handleClickPrevButton } = useEssentialFormsAction();
   const navigate = useNavigate();
   const {
     getFieldState,
@@ -108,14 +102,15 @@ function EssentialInfo() {
           <S.CloseLarge />
         </Button>
         <S.AngleContainer>
-          <Button theme="none" customStyle={S.AngleButton}>
+          <Button theme="none" customStyle={S.AngleButton} onClick={handleClickPrevButton}>
             <S.LeftAngle />
           </Button>
-          <Button theme="none" customStyle={S.AngleButton}>
+          <Button theme="none" customStyle={S.AngleButton} onClick={handleClickNextButton}>
             <S.RightAngle />
           </Button>
         </S.AngleContainer>
         <S.Form onSubmit={handleSubmit(onValid)}>
+          {/* Outlet === subPage  */}
           <Outlet />
         </S.Form>
       </S.DialogContainer>

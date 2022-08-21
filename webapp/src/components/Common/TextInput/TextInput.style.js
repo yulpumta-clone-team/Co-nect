@@ -19,7 +19,7 @@ export const InputContainer = styled.div`
   ${({ isError }) => {
     if (isError) {
       return css`
-        margin-bottom: 4px;
+        margin-bottom: 12px;
         border: 1px solid ${({ theme: { colors } }) => colors.important.normal};
         ${Input} {
           color: ${({ theme: { colors } }) => colors.important.normal};
