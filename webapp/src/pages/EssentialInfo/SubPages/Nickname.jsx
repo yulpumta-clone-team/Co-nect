@@ -6,7 +6,7 @@ import {
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
 import { useNavigate } from 'react-router-dom';
-import { ESSENTIAL_INFO, SIGN_UP_INFO } from 'constant/route.constant';
+import { ESSENTIAL_INFO } from 'constant/route.constant';
 import * as S from '../EssentialInfo.style';
 
 export default function Nickname() {
@@ -46,7 +46,7 @@ export default function Nickname() {
           disabled={canActiveNextButton}
           customStyle={S.NextButton}
           onClick={() => {
-            navigate(ESSENTIAL_INFO + SIGN_UP_INFO.SKILL);
+            navigate(ESSENTIAL_INFO.INDEX + ESSENTIAL_INFO.SKILL);
           }}
         >
           다음

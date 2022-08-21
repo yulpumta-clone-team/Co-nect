@@ -6,7 +6,7 @@ import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import useForm from 'hooks/useForm';
 import authApi from 'api/auth.api';
 import userApi from 'api/user.api';
-import { SIGN_UP_INFO } from 'constant/route.constant';
+import { ESSENTIAL_INFO } from 'constant/route.constant';
 import essentialValidation from 'service/essentialForm.validation';
 
 const initialValues = {
@@ -22,14 +22,14 @@ const initialValues = {
 };
 
 const essentailSubPagesRouteOrder = [
-  SIGN_UP_INFO.NICKNAME,
-  SIGN_UP_INFO.SKILL,
-  SIGN_UP_INFO.PROFILE_IMAGE,
-  SIGN_UP_INFO.SESSION_JOB,
-  SIGN_UP_INFO.SLOGAN,
-  SIGN_UP_INFO.BELONG_TEAM,
-  SIGN_UP_INFO.CONTENT,
-  SIGN_UP_INFO.PROTFOLIO,
+  ESSENTIAL_INFO.NICKNAME,
+  ESSENTIAL_INFO.SKILL,
+  ESSENTIAL_INFO.PROFILE_IMAGE,
+  ESSENTIAL_INFO.SESSION_JOB,
+  ESSENTIAL_INFO.SLOGAN,
+  ESSENTIAL_INFO.BELONG_TEAM,
+  ESSENTIAL_INFO.CONTENT,
+  ESSENTIAL_INFO.PROTFOLIO,
 ];
 
 const useEssentialForm = () => {
@@ -37,6 +37,8 @@ const useEssentialForm = () => {
   const location = useLocation();
   const notifyDispatch = useToastNotificationAction();
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
+
+  const handleMove = () => {};
 
   console.log('location :>> ', location);
 

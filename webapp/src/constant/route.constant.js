@@ -8,17 +8,17 @@ export const TEAM_EDIT = '/team/edit';
 export const MY_LIST = '/my-list';
 export const NEW_POST = '/new-post';
 export const MY_POST = '/my-post';
-export const ESSENTIAL_INFO = '/essential-info';
 export const NOTFOUND = '*';
-export const SIGN_UP_INFO = {
-  NICKNAME: '/nickname',
-  SKILL: '/skill',
-  SLOGAN: '/slogan',
-  SESSION_JOB: '/session-job',
-  BELONG_TEAM: '/belong-team',
-  PROFILE_IMAGE: '/profile-image',
-  CONTENT: '/content',
-  PROTFOLIO: 'portfolio',
+export const ESSENTIAL_INFO = {
+  INDEX: '/essential-info',
+  NICKNAME: '/essential-info/nickname',
+  SKILL: '/essential-info/skill',
+  SLOGAN: '/essential-info/slogan',
+  SESSION_JOB: '/essential-info/session-job',
+  BELONG_TEAM: '/essential-info/belong-team',
+  PROFILE_IMAGE: '/essential-info/profile-image',
+  CONTENT: '/essential-info/content',
+  PROTFOLIO: '/essential-info/portfolio',
 };
 export const OAUTH_URL = {
   GITHUB: `${process.env.REACT_APP_SERVER_API}oauth2/authorization/github`,

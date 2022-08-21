@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { SIGN_UP_INFO } from 'constant/route.constant';
+import { ESSENTIAL_INFO } from 'constant/route.constant';
 import { updateUserInfo } from 'service/auth';
 import authApi from 'api/auth.api';
 import Button from 'components/Common/Button';
@@ -116,16 +116,7 @@ function EssentialInfo() {
           </Button>
         </S.AngleContainer>
         <S.Form onSubmit={handleSubmit(onValid)}>
-          <Routes>
-            <Route index element={<Nickname />} />
-            <Route path={SIGN_UP_INFO.SKILL} element={<Skills />} />
-            <Route path={SIGN_UP_INFO.PROFILE_IMAGE} element={<ProfileImage />} />
-            <Route path={SIGN_UP_INFO.SESSION_JOB} element={<SessionJob />} />
-            <Route path={SIGN_UP_INFO.SLOGAN} element={<Slogan />} />
-            <Route path={SIGN_UP_INFO.BELONG_TEAM} element={<BelongTeam />} />
-            <Route path={SIGN_UP_INFO.CONTENT} element={<Introduction />} />
-            <Route path={SIGN_UP_INFO.PROTFOLIO} element={<Portfolio />} />
-          </Routes>
+          <Outlet />
         </S.Form>
       </S.DialogContainer>
     </S.Layout>
