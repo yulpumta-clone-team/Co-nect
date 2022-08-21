@@ -33,18 +33,6 @@ const essentialValidation = ({
     validateErrors.slogan = '슬로건이 입력되지 않았습니다.';
   }
 
-  if (!hopeSession) {
-    validateErrors.hopeSession = '희망작업 기간을 선택해주세요.';
-  }
-
-  if (!job) {
-    validateErrors.job = '현재 직업을 선택해주세요.';
-  }
-
-  if (!belongTeam) {
-    validateErrors.belongTeam = '팀 소속 여부를 선택해주세요.';
-  }
-
   return validateErrors;
 };
 

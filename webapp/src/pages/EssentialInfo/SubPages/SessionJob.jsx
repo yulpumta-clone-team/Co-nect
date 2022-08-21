@@ -9,12 +9,9 @@ import {
 import * as S from '../EssentialInfo.style';
 
 export default function SessionJob() {
-  const { inputValues, validateError } = useEssentialFormsState();
-  const { onChangeHandlerWithSelect, isTargetSatisfyValidate, handleClickNextButton } =
-    useEssentialFormsAction();
-  const isHopeSesstionValidateError = isTargetSatisfyValidate('hopeSession');
-  const isJobValidateError = isTargetSatisfyValidate('job');
-  const canActiveNextButton = isHopeSesstionValidateError || isJobValidateError;
+  const { inputValues } = useEssentialFormsState();
+  const { onChangeHandlerWithSelect, handleClickNextButton } = useEssentialFormsAction();
+
   return (
     <S.Content>
       <h2>직업과 희망 기간을 선택해주세요.</h2>
@@ -26,8 +23,6 @@ export default function SessionJob() {
           options={hopeSessionOption}
           value={inputValues.hopeSession}
           onChange={onChangeHandlerWithSelect}
-          isError={isHopeSesstionValidateError}
-          helperText={validateError.hopeSession}
         />
         <SelectInput
           name="job"
@@ -36,20 +31,13 @@ export default function SessionJob() {
           options={jobOptions}
           value={inputValues.job}
           onChange={onChangeHandlerWithSelect}
-          isError={isJobValidateError}
-          helperText={validateError.job}
         />
       </S.InputContainer>
       <S.NextButtonContainer>
-        <Button
-          theme="primary"
-          disabled={canActiveNextButton}
-          customStyle={S.NextButton}
-          onClick={handleClickNextButton}
-        >
+        <Button theme="primary" customStyle={S.NextButton} onClick={handleClickNextButton}>
           다음
         </Button>
-        <span>필수 입력 항목입니다.</span>
+        <span>직업과 희망 기간 선택 없이 가입을 원할 경우 다음을 눌러주세요.</span>
       </S.NextButtonContainer>
     </S.Content>
   );
