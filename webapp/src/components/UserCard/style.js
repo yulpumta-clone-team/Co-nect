@@ -139,6 +139,7 @@ export const SkillBoard = styled.div`
   > img {
     width: 10px;
     height: 60px;
+    cursor: pointer;
   }
 `;
 // * : skill이 5개씩 보여지는 부분
