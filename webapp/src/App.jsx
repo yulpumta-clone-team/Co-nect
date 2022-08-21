@@ -40,6 +40,7 @@ import Slogan from 'pages/EssentialInfo/SubPages/Slogan';
 import BelongTeam from 'pages/EssentialInfo/SubPages/BelongTeam';
 import Introduction from 'pages/EssentialInfo/SubPages/Introduction';
 import Portfolio from 'pages/EssentialInfo/SubPages/Portfolio';
+import EssentailCallback from 'pages/EssentialInfo/SubPages/EssentailCallback';
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
             <Route path={ESSENTIAL_INFO.BELONG_TEAM} element={<BelongTeam />} />
             <Route path={ESSENTIAL_INFO.CONTENT} element={<Introduction />} />
             <Route path={ESSENTIAL_INFO.PROTFOLIO} element={<Portfolio />} />
+            <Route path={ESSENTIAL_INFO.CALLBACK} element={<EssentailCallback />} />
           </Route>
           <Route path={SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
           <Route path={MY_LIST} element={<PrivateRoute Component={MyList} />} />

@@ -8,6 +8,7 @@ import authApi from 'api/auth.api';
 import userApi from 'api/user.api';
 import { ESSENTIAL_INFO } from 'constant/route.constant';
 import essentialValidation from 'service/essentialForm.validation';
+import { updateUserInfo } from 'service/auth';
 
 const initialValues = {
   nickname: '',
@@ -30,6 +31,7 @@ const essentailSubPagesRouteOrder = [
   ESSENTIAL_INFO.BELONG_TEAM,
   ESSENTIAL_INFO.CONTENT,
   ESSENTIAL_INFO.PROTFOLIO,
+  ESSENTIAL_INFO.CALLBACK,
 ];
 
 const useEssentialForm = () => {
@@ -41,6 +43,9 @@ const useEssentialForm = () => {
   const submitCallback = async (submitData) => {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
+
+    console.log('submitData', submitData);
+
     try {
       const response = await userApi.POST_ESSENTIAL_INFO(submitData);
       const { message } = response.data;
@@ -98,6 +103,19 @@ const useEssentialForm = () => {
       setIsNicknameDuplicate(true);
     }
   }, [inputValues.email, notifyDispatch]);
+
+  // try {
+  //   const response = await authApi.GET_ESSENTIAL_INFO();
+  //   console.log(response);
+  //   updateUserInfo({
+  //     userId: response.data.id,
+  //     profileImg: response.data.image,
+  //     name: response.data.name,
+  //   });
+  //   navigate('/');
+  // } catch (apiError) {
+  //   console.error(apiError);
+  // }
 
   const actions = useMemo(
     () => ({

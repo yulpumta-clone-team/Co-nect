@@ -23,7 +23,7 @@ export default function Portfolio() {
       </S.InputContainer>
       <S.NextButtonContainer>
         <Button theme="primary" customStyle={S.NextButton} onClick={handleClickNextButton}>
-          다음
+          가입!
         </Button>
         <span>포트폴리오 작업 없이 가입을 원할 경우 다음을 눌러주세요.</span>
       </S.NextButtonContainer>

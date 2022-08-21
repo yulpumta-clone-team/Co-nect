@@ -29,11 +29,6 @@ export const DialogContainer = styled.dialog`
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
 `;
 
-export const Form = styled.form`
-  width: 100%;
-  height: 100%;
-`;
-
 export const Content = styled.div`
   padding: 0 5% 5% 5%;
   width: 100%;

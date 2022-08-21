@@ -19,6 +19,7 @@ export const ESSENTIAL_INFO = {
   PROFILE_IMAGE: '/essential-info/profile-image',
   CONTENT: '/essential-info/content',
   PROTFOLIO: '/essential-info/portfolio',
+  CALLBACK: '/essential-info/callback',
 };
 export const OAUTH_URL = {
   GITHUB: `${process.env.REACT_APP_SERVER_API}oauth2/authorization/github`,
