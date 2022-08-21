@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import teamApi from 'api/team';
+import teamApi from 'api/team.api';
 import WithLoading from 'hoc/WithLoading';
 import TeamPostDetail from './TeamPostDetail';
 

@@ -53,20 +53,20 @@ const mixin = {
     border: 0 !important;
   `,
   handlePlaceHolderColor: ({ color, fonts }) => css`
-    ::placeholder {
+    &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: ${color};
       opacity: 1; /* Firefox */
       ${fonts}
     }
 
-    :-ms-input-placeholder {
+    &:-ms-input-placeholder {
       /* Internet Explorer 10-11 */
       color: ${color};
       ${fonts}
     }
 
-    ::-ms-input-placeholder {
+    &::-ms-input-placeholder {
       /* Microsoft Edge */
       color: ${color};
       ${fonts}

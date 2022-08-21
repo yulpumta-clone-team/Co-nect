@@ -1,8 +1,8 @@
 import React from 'react';
-import userApi from 'api/user';
+import userApi from 'api/user.api';
 import CardsGrid from 'components/CardsGrid';
 import TeamCard from 'components/TeamCard';
-import { TEAM_EDIT } from 'constant/route';
+import { TEAM_EDIT } from 'constant/route.constant';
 import WithLoading from 'hoc/WithLoading';
 
 import * as S from './style';

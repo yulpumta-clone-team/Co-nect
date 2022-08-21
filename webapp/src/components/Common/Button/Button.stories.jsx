@@ -53,6 +53,12 @@ Gray.args = {
   theme: 'gray',
 };
 
+export const None = Template.bind({});
+None.args = {
+  children: <span>버튼</span>,
+  theme: 'none',
+};
+
 // TODO: disabled일 때 피그마 추가되면 추가하기
 // export const Disabled = Template.bind({});
 // Disabled.args = {

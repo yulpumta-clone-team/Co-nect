@@ -5,7 +5,7 @@ import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
-import teamApi from 'api/team';
+import teamApi from 'api/team.api';
 
 EditTeamForm.propTypes = {};
 

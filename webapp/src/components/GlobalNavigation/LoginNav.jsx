@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HOME, NEW_POST, TEAM, USER } from 'constant/route';
+import { HOME, NEW_POST, TEAM, USER } from 'constant/route.constant';
 import useDropdown from 'hooks/useDropdown';
 import { loggedUserType } from 'types/user.type';
 import Logo from 'assets/icons/nav-logo.svg';
@@ -13,7 +13,8 @@ LoginNav.propTypes = {
 };
 
 export default function LoginNav({ userInfo }) {
-  const [parent, isDropdownOpen, shouldCloseDropdown, openDropdown, closeDropdown] = useDropdown();
+  const { parent, isDropdownOpen, shouldCloseDropdown, openDropdown, closeDropdown } =
+    useDropdown();
   const { name, profileImg } = userInfo;
 
   return (

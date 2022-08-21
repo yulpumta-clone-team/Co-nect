@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import {
   HOME,
   LOGIN,
@@ -13,7 +13,7 @@ import {
   TEAM_EDIT,
   NOTFOUND,
   ESSENTIAL_INFO,
-} from 'constant/route';
+} from 'constant/route.constant';
 import Login from 'pages/Login';
 import Main from 'pages/Main';
 import SignUp from 'pages/SignUp';
@@ -32,6 +32,15 @@ import EssentialInfo from 'pages/EssentialInfo';
 import PublicRoute from 'hoc/PublicRoute';
 import PrivateRoute from 'hoc/PrivateRoute';
 import Layout from 'layouts';
+import Nickname from 'pages/EssentialInfo/SubPages/Nickname';
+import Skills from 'pages/EssentialInfo/SubPages/Skills';
+import ProfileImage from 'pages/EssentialInfo/SubPages/ProfileImage';
+import SessionJob from 'pages/EssentialInfo/SubPages/SessionJob';
+import Slogan from 'pages/EssentialInfo/SubPages/Slogan';
+import BelongTeam from 'pages/EssentialInfo/SubPages/BelongTeam';
+import Introduction from 'pages/EssentialInfo/SubPages/Introduction';
+import Portfolio from 'pages/EssentialInfo/SubPages/Portfolio';
+import EssentailCallback from 'pages/EssentialInfo/SubPages/EssentailCallback';
 
 function App() {
   return (
@@ -44,9 +53,20 @@ function App() {
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
           <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
           <Route
-            path={`${ESSENTIAL_INFO}/${NOTFOUND}`}
+            path={`${ESSENTIAL_INFO.INDEX}`}
             element={<PublicRoute Component={EssentialInfo} restricted />}
-          />
+          >
+            <Route index element={<Navigate to={ESSENTIAL_INFO.NICKNAME} replace />} />
+            <Route path={ESSENTIAL_INFO.NICKNAME} element={<Nickname />} />
+            <Route path={ESSENTIAL_INFO.SKILL} element={<Skills />} />
+            <Route path={ESSENTIAL_INFO.PROFILE_IMAGE} element={<ProfileImage />} />
+            <Route path={ESSENTIAL_INFO.SESSION_JOB} element={<SessionJob />} />
+            <Route path={ESSENTIAL_INFO.SLOGAN} element={<Slogan />} />
+            <Route path={ESSENTIAL_INFO.BELONG_TEAM} element={<BelongTeam />} />
+            <Route path={ESSENTIAL_INFO.CONTENT} element={<Introduction />} />
+            <Route path={ESSENTIAL_INFO.PROTFOLIO} element={<Portfolio />} />
+            <Route path={ESSENTIAL_INFO.CALLBACK} element={<EssentailCallback />} />
+          </Route>
           <Route path={SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
           <Route path={MY_LIST} element={<PrivateRoute Component={MyList} />} />
           <Route path={NEW_POST} element={<PrivateRoute Component={NewPost} />} />
