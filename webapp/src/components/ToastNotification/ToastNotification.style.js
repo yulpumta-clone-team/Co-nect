@@ -76,9 +76,10 @@ export const Info = styled.div`
   > h3 {
     font-weight: 700;
     font-size: 16px;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
   }
   > p {
+    padding: 2px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
