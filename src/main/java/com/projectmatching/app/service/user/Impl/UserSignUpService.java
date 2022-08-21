@@ -28,6 +28,7 @@ public class UserSignUpService {
     private final UserRepository userRepository;
     private final TechStackProviderImpl techStackProvider;
 
+
     @Transactional
     @Validation
     public Long join(UserJoinDto userJoinDto) {

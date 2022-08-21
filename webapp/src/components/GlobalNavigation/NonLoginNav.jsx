@@ -1,30 +1,39 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM, USER } from 'constant/route.constant';
+import Logo from 'assets/icons/nav-logo.svg';
+import Button from 'components/Common/Button';
+import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM, USER } from 'constant/route';
 
 import * as S from './style';
 
-function NonLoginNav() {
+export default function NonLoginNav() {
   return (
-    <S.LinkList>
-      <li>
-        <Link to={HOME}>Main</Link>
-      </li>
-      <li>
-        <Link to={USER}>User Board</Link>
-      </li>
-      <li>
-        <Link to={TEAM}>Team Board</Link>
-      </li>
-      <li>
-        <Link to={LOGIN}>Log In</Link>
-      </li>
-      <li>
-        <Link to={SIGN_UP}>Sign Up</Link>
-      </li>
-    </S.LinkList>
+    <S.Container>
+      <S.TopContainer />
+      <S.BoardList>
+        <S.Logo>
+          <img src={Logo} alt="conect-logo" />
+        </S.Logo>
+        <S.LinkList>
+          <S.Hover>
+            <Link to={HOME}>Home</Link>
+          </S.Hover>
+          <S.Hover>
+            <Link to={USER}>Single</Link>
+          </S.Hover>
+          <S.Hover>
+            <Link to={TEAM}>Team</Link>
+          </S.Hover>
+        </S.LinkList>
+        <S.AssignList isLogin={false}>
+          <Button theme="primary" customStyle={{ width: 99, height: 35 }}>
+            <Link to={LOGIN}>로그인</Link>
+          </Button>
+          <Button theme="gray" customStyle={{ width: 99, height: 35 }}>
+            <Link to={SIGN_UP}>회원가입</Link>
+          </Button>
+        </S.AssignList>
+      </S.BoardList>
+    </S.Container>
   );
 }
-
-export default NonLoginNav;
