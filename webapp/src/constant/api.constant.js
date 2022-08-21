@@ -40,4 +40,8 @@ export const API = {
     POST: '/upload',
     DELETE: '/upload/cancel',
   },
+  TECH_STACK: {
+    ALL: '/techstack/all',
+    CATEGORY: '/techstack',
+  },
 };

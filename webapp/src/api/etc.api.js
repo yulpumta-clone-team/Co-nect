@@ -1,7 +1,7 @@
 import { API } from 'constant/api.constant';
 import privateApiInstance from './instance/privateApiInstance';
 
-const uploadApi = {
+const etcApi = {
   uploadImage(formData) {
     return privateApiInstance({
       url: API.UPLOAD.POST,
@@ -21,6 +21,21 @@ const uploadApi = {
       },
     });
   },
+  getTechStackAll() {
+    return privateApiInstance({
+      url: API.TECH_STACK.ALL,
+      method: 'get',
+    });
+  },
+  getTechStackWithCategory(category) {
+    return privateApiInstance({
+      url: API.TECH_STACK.CATEGORY,
+      method: 'get',
+      params: {
+        category,
+      },
+    });
+  },
 };
 
-export default uploadApi;
+export default etcApi;
