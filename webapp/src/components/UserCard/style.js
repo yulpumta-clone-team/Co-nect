@@ -84,7 +84,7 @@ export const Name = styled.div`
   display: grid;
   height: 40%;
   width: 100%;
-  ${({ theme: { fonts } }) => fonts.korean.title}
+  ${({ theme: { fonts } }) => fonts.korean.subTitle}
   font-weight: 700;
 `;
 
