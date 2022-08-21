@@ -68,8 +68,11 @@ export const Select = styled.ul`
 export const Option = styled.li`
   width: 100%;
   height: 29px;
-  background-color: ${({ theme: { colors } }) => colors.primary.shadow};
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
+  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
+  &:hover {
+    background-color: ${({ theme: { colors } }) => colors.primary.shadow};
+  }
 `;
 
 export const CloseButton = styled.button``;
