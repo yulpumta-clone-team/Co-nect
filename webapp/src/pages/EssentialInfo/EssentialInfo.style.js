@@ -73,6 +73,14 @@ export const NextButtonContainer = styled.div`
   }
 `;
 
+export const NextButtonContainerInProfileImage = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  position: absolute;
+  top: 75%;
+`;
+
 // 버튼들
 
 export const NextButton = css`
@@ -148,6 +156,14 @@ export const DuplicateCheckButton = css`
   height: 34px;
   padding: 5px 20px;
   ${({ theme: { fonts } }) => fonts.korean.default}
+`;
+
+export const ImageThunbnail = styled.img`
+  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
+  width: 144px;
+  height: 144px;
+  border-radius: 50%;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})};
 `;
 
 export const InputTypeImageHandler = styled.label`

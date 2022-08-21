@@ -11,7 +11,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
 };
 
-export default function Button({ children, theme, customStyle, disabled, ...rest }) {
+export default function Button({ children, theme, customStyle, disabled = false, ...rest }) {
   return (
     <S.Container mytheme={S.themes[theme]} customStyle={customStyle} disabled={disabled} {...rest}>
       {children}

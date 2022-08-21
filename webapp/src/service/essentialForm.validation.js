@@ -25,10 +25,6 @@ const essentialValidation = ({
     validateErrors.nickname = '닉네임이 입력되지 않았습니다. ';
   }
 
-  // if (!profileImage) {
-  //   validateErrors.profileImage = '';
-  // }
-
   if (!skills) {
     validateErrors.skills = '최소 한 개 이상의 언어를 선택해주세요.';
   }
