@@ -1,26 +1,37 @@
 import React from 'react';
 import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
+import {
+  useEssentialFormsAction,
+  useEssentialFormsState,
+} from 'contexts/EssentialForm/EssentialForm.Provider';
 import * as S from '../EssentialInfo.style';
 
-Slogan.propTypes = {};
-
-export default function Slogan({}) {
+export default function Slogan() {
+  const { inputValues, validateError } = useEssentialFormsState();
+  const { onChangeHandler, isTargetSatisfyValidate, handleClickNextButton } =
+    useEssentialFormsAction();
+  const isSloganValidateError = isTargetSatisfyValidate('slogan');
   return (
     <S.Content>
       <h2>슬로건을 입력해주세요.</h2>
       <S.InputContainer>
         <TextInput
-          name="nickname"
+          name="slogan"
           placeholder="슬로건"
-          value=""
-          onChange={() => {}}
-          isError={false}
-          helperText=""
+          value={inputValues.slogan}
+          onChange={onChangeHandler}
+          isError={isSloganValidateError}
+          helperText={validateError.slogan}
         />
       </S.InputContainer>
       <S.NextButtonContainer>
-        <Button theme="primary" type="submit" disabled={false} customStyle={S.NextButton}>
+        <Button
+          theme="primary"
+          disabled={isSloganValidateError}
+          customStyle={S.NextButton}
+          onClick={handleClickNextButton}
+        >
           다음
         </Button>
         <span>필수 입력 항목입니다.</span>
