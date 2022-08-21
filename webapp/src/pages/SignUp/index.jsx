@@ -32,7 +32,7 @@ export default function SignUp() {
     }
   };
 
-  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidites } =
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
     useForm({
       initialValues: { email: '', password: '', verifiedPassword: '' },
       submitCallback,
@@ -100,7 +100,7 @@ export default function SignUp() {
       <Button
         theme="primary"
         type="submit"
-        disabled={!satisfyAllValidites}
+        disabled={!satisfyAllValidates}
         customStyle={S.SubmitButton}
       >
         Sign up

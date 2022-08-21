@@ -40,7 +40,7 @@ export default function Login() {
     }
   };
 
-  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidites } =
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
     useForm({
       initialValues: { email: '', password: '' },
       submitCallback,
@@ -77,7 +77,7 @@ export default function Login() {
       <Button
         theme="primary"
         type="submit"
-        disabled={!satisfyAllValidites}
+        disabled={!satisfyAllValidates}
         customStyle={S.SubmitButton}
       >
         Login

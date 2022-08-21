@@ -6,7 +6,9 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
 
   // validateError 객체에 있는 모든 데이터의 value가 ""이거나 null이면 true를 반환
 
-  const satisfyAllValidites = Object.values(validateError).every((value) => !value);
+  const satisfyAllValidates = Object.values(validateError).every((value) => !value);
+
+  // const satisftyTargetValidate =
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -17,7 +19,7 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    if (!satisfyAllValidites) {
+    if (!satisfyAllValidates) {
       return;
     }
     await submitCallback(inputValues);
@@ -28,7 +30,7 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
     validateError,
     onChangeHandler,
     submitHandler,
-    satisfyAllValidites,
+    satisfyAllValidates,
   };
 };
 
