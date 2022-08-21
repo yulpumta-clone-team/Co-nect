@@ -24,7 +24,7 @@ export const InputContainer = styled.div`
         ${Input} {
           color: ${({ theme: { colors } }) => colors.important.normal};
           ${({ theme: { mixin, colors } }) =>
-            mixin.handlePlaceHolderColor(colors.important.normal)};
+            mixin.handlePlaceHolderColor({ color: colors.important.normal })};
         }
       `;
     }
