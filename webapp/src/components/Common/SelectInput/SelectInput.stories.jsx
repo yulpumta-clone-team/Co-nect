@@ -1,4 +1,3 @@
-import { hopeSessionOption } from 'constant';
 import React from 'react';
 import SelectInput from './index';
 
@@ -15,6 +14,8 @@ function Template(args) {
 
 export const Default = Template.bind({});
 Default.args = {
+  value: '',
+  name: '기본',
   label: '기본',
   defaultOption: { id: 0, value: '기본1', label: '기본1' },
   options: [
@@ -27,7 +28,9 @@ Default.args = {
 
 export const WithError = Template.bind({});
 WithError.args = {
-  label: '기본',
+  value: '',
+  name: '에러',
+  label: '에러',
   defaultOption: { id: 0, value: '기본1', label: '기본1' },
   options: [
     { id: 0, value: '기본1', label: '기본1' },

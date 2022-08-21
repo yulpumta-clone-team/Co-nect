@@ -17,6 +17,7 @@ function Template(args) {
 
 export const Default = Template.bind({});
 Default.args = {
+  name: '기본',
   value: '',
   placeholder: 'TextArea placeholder',
 };

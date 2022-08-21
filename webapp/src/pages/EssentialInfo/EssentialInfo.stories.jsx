@@ -41,7 +41,7 @@ function Template({ children }) {
                 <S.RightAngle />
               </Button>
             </S.AngleContainer>
-            <S.Form>{children}</S.Form>
+            {children}
           </S.DialogContainer>
         </S.Layout>
       </EssentialFormProvider>

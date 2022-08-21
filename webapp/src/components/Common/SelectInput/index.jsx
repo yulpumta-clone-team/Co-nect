@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
 import * as S from './SelectInput.style';
