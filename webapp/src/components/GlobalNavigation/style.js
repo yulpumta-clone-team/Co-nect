@@ -114,3 +114,8 @@ export const UserInfoDropdown = {
     ${({ theme: { fonts } }) => fonts.korean.emphasis};
   `,
 };
+
+export const AssignListButton = css`
+  width: 99;
+  height: 35;
+`;
