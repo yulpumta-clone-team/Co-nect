@@ -12,11 +12,22 @@ SelectInput.propTypes = {
     }),
   ).isRequired,
   label: PropTypes.string.isRequired,
+  isError: PropTypes.bool,
+  helperText: PropTypes.string,
   defaultOption: PropTypes.object.isRequired,
+
   customStyle: PropTypes.array,
 };
 
-export default function SelectInput({ options, label, defaultOption, customStyle, ...rest }) {
+export default function SelectInput({
+  options,
+  label,
+  defaultOption,
+  isError = false,
+  helperText,
+  customStyle,
+  ...rest
+}) {
   const { parent, handleClickOutside, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
   const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
   const handleClick = () => {
@@ -24,10 +35,11 @@ export default function SelectInput({ options, label, defaultOption, customStyle
   };
   return (
     <S.Container customStyle={customStyle} ref={parent} onClick={openDropdown}>
-      <S.PlaceHolder>
-        <h3>{label}</h3>
+      <S.PlaceHolder isError={isError}>
+        <S.Label>{label}</S.Label>
         <AngleButton onClick={closeDropdown} />
       </S.PlaceHolder>
+      {isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen}>
         {options.map(({ id, value, label }) => (
           <S.Option key={id} value={value} onClick={handleClick}>
