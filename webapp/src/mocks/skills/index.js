@@ -3,7 +3,7 @@ import { getRandomStatusErrorCode, getResonseWithData } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { skillsImg } from '.skillsImg';
 
-// TeckStack API 추가하기.
+// todo : TeckStack 연결 하기.
 
 export const SKILLS = [
   // GET_SKILLS_IMG

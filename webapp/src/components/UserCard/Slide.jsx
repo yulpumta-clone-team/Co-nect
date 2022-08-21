@@ -11,6 +11,9 @@ export default function Slide({ img }) {
 }
 
 const IMG = styled.img`
-  width: 500px;
-  height: 500px;
+  width: 52px;
+  height: 85%;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px 1px #cdcdcd;
 `;

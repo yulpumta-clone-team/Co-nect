@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// * : Card Container
 export const CardWrapper = styled.li`
   position: relative;
   width: 368px;
@@ -10,6 +11,7 @@ export const CardWrapper = styled.li`
   border-radius: 10px;
 `;
 
+// * : 카드 상단 파란색 부분
 export const CardTop = styled.div`
   position: relative;
   display: flex;
@@ -30,8 +32,9 @@ export const Heart = styled.div`
     height: 100%;
   }
 `;
+
 export const ProfileImg = styled.img`
-  position: absolute; // relative로 바꾸면 동그란 이미지가 깨짐
+  position: absolute; // * : 각 div 상자에 걸쳐있는 프로필 이미지 때문에 absolute로 위치를 설정해 줌.
   display: flex;
   width: 100px;
   height: 100px;
@@ -40,6 +43,7 @@ export const ProfileImg = styled.img`
 
   border-radius: 50%;
 `;
+// * : 지금은 Figma color 참고하여 div 태그로 구성하여 줬지만, 추후 img로 수정 필요.
 export const BackgroundImg = styled.div`
   position: relative;
   align-items: flex-start;
@@ -49,7 +53,22 @@ export const BackgroundImg = styled.div`
   background: #eaeaea;
   padding: 1em;
 `;
+// * : 직업 버튼 형식
+export const Job = styled.div`
+  background-color: ${({ theme: { colors } }) => colors.secondary.normal};
 
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 78px;
+  height: 28px;
+  border-radius: 50px;
+
+  color: ${({ theme: { colors } }) => colors.greyScale.white};
+  ${({ theme: { fonts } }) => fonts.korean.default}
+`;
+// * : User 정보
 export const UserInfo = styled.div`
   position: relative;
   display: flex;
@@ -65,7 +84,6 @@ export const Name = styled.div`
   display: grid;
   height: 40%;
   width: 100%;
-  align-items: center;
   ${({ theme: { fonts } }) => fonts.korean.title}
   font-weight: 700;
 `;
@@ -76,7 +94,7 @@ export const Team = styled.li`
 
   justify-content: space-between;
   align-items: center;
-  width: 45%;
+  width: 40%;
 
   ${({ theme: { fonts } }) => fonts.korean.default}
   font-weight: 700;
@@ -89,82 +107,59 @@ export const Team = styled.li`
 export const Session = styled.li`
   position: relative;
   display: flex;
+  align-items: center;
 
   width: 80%;
   ${({ theme: { fonts } }) => fonts.korean.default}
   font-weight: 700;
 `;
+// * : User가 선택한 기간
 export const UserSession = styled.li`
   position: relative;
   display: flex;
 
   ${({ theme: { fonts } }) => fonts.korean.default}
 `;
-
-export const Job = styled.div`
-  background-color: ${({ theme: { colors } }) => colors.secondary.normal};
-
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 78px;
-  height: 28px;
-  border-radius: 50px;
-
-  color: ${({ theme: { colors } }) => colors.greyScale.white};
-  ${({ theme: { fonts } }) => fonts.korean.default}
-`;
-
+// * : 구분선
 export const Divider = styled.div`
   top: 20px;
   height: 2px;
   width: 100%;
   background: ${({ theme: { colors } }) => colors.greyScale.nonActive};
 `;
-export const Skills = styled.div`
-  position: absolute;
-  display: flex;
-  height: 60px;
-  width: 500px;
-  left: 20px;
-
-  border: 1px solid red;
-`;
-
-export const Skill = styled.div`
-  position: relative;
-  display: flex;
-  height: 82px;
-  width: 320px;
-  overflow: hidden;
-
-  align-items: center;
-  background-color: #f5f5f5;
-
-  justify-content: space-around;
-
-  > img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 70%;
-  }
-`;
-
+// * : 이동 버튼 포함 기술스택 정렬 박스
 export const SkillBoard = styled.div`
   position: relative;
   display: flex;
   height: 20%;
   width: 100%;
   justify-content: space-between;
-  padding: 0px 10px 0px;
+  align-items: center;
+  padding: 5px 10px;
   > img {
     width: 10px;
     height: 60px;
   }
 `;
-
+// * : skill이 5개씩 보여지는 부분
+export const Skills = styled.div`
+  position: relative;
+  display: flex;
+  height: 60px;
+  width: 300px;
+  overflow: hidden;
+  align-items: center;
+`;
+// * : slideRef 로 지정한 하나의 슬라이드 style
+export const Skill = styled.div`
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 99%;
+  align-items: center;
+  justify-content: space-between;
+`;
+// * : 조회수와 댓글수가 보여지는 부분
 export const CountBoard = styled.div`
   position: relative;
   display: flex;
