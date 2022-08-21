@@ -43,7 +43,7 @@ export const Logo = styled.div`
 export const LinkList = styled.ul`
   display: flex;
   flex-direction: ${(props) => (props.IsflexDirectionColumn ? 'column' : 'row')};
-  width: 20%;
+  width: 350px;
   height: 100%;
   justify-content: space-around;
   align-items: center;
@@ -54,7 +54,7 @@ export const LinkList = styled.ul`
 export const AssignList = styled.ul`
   position: relative;
   display: flex;
-  width: ${({ isLogin }) => (isLogin ? '300px' : '10%')};
+  width: ${({ isLogin }) => (isLogin ? '300px' : '210px')};
   height: 100%;
   align-items: center;
   justify-content: space-between;
