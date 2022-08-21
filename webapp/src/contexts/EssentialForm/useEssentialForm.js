@@ -38,22 +38,6 @@ const useEssentialForm = () => {
   const notifyDispatch = useToastNotificationAction();
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
 
-  const handleClickNextButton = useCallback(() => {
-    const currentPathname = location.pathname;
-    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
-    // 타켓팅한 요소의 인덱스가 배열의 길이보다 크거가 같을 때는 이동하지 않는다.
-    if (currentSubPageIndex >= essentailSubPagesRouteOrder.length - 1) return;
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1]);
-  }, [location.pathname, navigate]);
-
-  const handleClickPrevButton = useCallback(() => {
-    const currentPathname = location.pathname;
-    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
-    // 타켓팅한 요소의 인덱스가 배열의 길이보다 크거가 같을 때는 이동하지 않는다.
-    if (currentSubPageIndex <= 0) return;
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1]);
-  }, [location.pathname, navigate]);
-
   const submitCallback = async (submitData) => {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
@@ -74,6 +58,7 @@ const useEssentialForm = () => {
     inputValues,
     validateError,
     onChangeHandler,
+    onChangeHandlerWithSelect,
     submitHandler,
     satisfyAllValidates,
     isTargetSatisfyValidate,
@@ -82,6 +67,22 @@ const useEssentialForm = () => {
     submitCallback,
     validate: essentialValidation,
   });
+
+  const handleClickNextButton = useCallback(() => {
+    const currentPathname = location.pathname;
+    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
+    // 타켓팅한 요소의 인덱스가 배열의 길이보다 크거가 같을 때는 이동하지 않는다.
+    if (currentSubPageIndex >= essentailSubPagesRouteOrder.length - 1) return;
+    navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1]);
+  }, [location.pathname, navigate]);
+
+  const handleClickPrevButton = useCallback(() => {
+    const currentPathname = location.pathname;
+    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
+    // 타켓팅한 요소의 인덱스가 배열의 길이보다 작거나 같을 때는 이동하지 않는다.
+    if (currentSubPageIndex <= 0) return;
+    navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1]);
+  }, [location.pathname, navigate]);
 
   const onClickCheckDuplicateNickname = useCallback(async () => {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
@@ -101,6 +102,7 @@ const useEssentialForm = () => {
   const actions = useMemo(
     () => ({
       onChangeHandler,
+      onChangeHandlerWithSelect,
       submitHandler,
       onClickCheckDuplicateNickname,
       isTargetSatisfyValidate,
@@ -109,6 +111,7 @@ const useEssentialForm = () => {
     }),
     [
       onChangeHandler,
+      onChangeHandlerWithSelect,
       submitHandler,
       onClickCheckDuplicateNickname,
       isTargetSatisfyValidate,

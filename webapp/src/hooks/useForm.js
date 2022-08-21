@@ -16,6 +16,11 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
     setValidateError(validate({ ...inputValues, [name]: value }));
   };
 
+  const onChangeHandlerWithSelect = ({ name, value }) => {
+    setInputValues({ ...inputValues, [name]: value });
+    setValidateError(validate({ ...inputValues, [name]: value }));
+  };
+
   const submitHandler = async (event) => {
     event.preventDefault();
 
@@ -29,6 +34,7 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
     inputValues,
     validateError,
     onChangeHandler,
+    onChangeHandlerWithSelect,
     submitHandler,
     satisfyAllValidates,
     isTargetSatisfyValidate,

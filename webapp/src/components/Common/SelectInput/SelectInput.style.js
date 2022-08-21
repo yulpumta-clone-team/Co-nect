@@ -41,6 +41,8 @@ export const PlaceHolder = styled.div`
   }}
 `;
 
+export const DisplayValue = styled.span``;
+
 export const Label = styled.label`
   color: ${({ theme: { colors } }) => colors.greyScale.placeHolder};
 `;

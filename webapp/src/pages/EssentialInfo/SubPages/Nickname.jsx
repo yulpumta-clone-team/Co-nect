@@ -5,12 +5,9 @@ import {
   useEssentialFormsAction,
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
-import { useNavigate } from 'react-router-dom';
-import { ESSENTIAL_INFO } from 'constant/route.constant';
 import * as S from '../EssentialInfo.style';
 
 export default function Nickname() {
-  const navigate = useNavigate();
   const { inputValues, validateError, isNicknameDuplicate } = useEssentialFormsState();
   const {
     onChangeHandler,
