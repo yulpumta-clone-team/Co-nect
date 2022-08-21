@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { skillOptions } from 'constant';
 import SelectInput from 'components/Common/SelectInput';
 import Button from 'components/Common/Button';
@@ -14,12 +14,6 @@ export default function Skills() {
     useEssentialFormsAction();
   const isSkillsValidateError = isTargetSatisfyValidate('skills');
 
-  const [userSkill, setUserSkill] = useState('');
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const onSkillChange = (event) => {
-    setUserSkill(event.target.id);
-    setSelectedSkills((prev) => [...prev, event.target.value]);
-  };
   return (
     <S.Content>
       <h2>가능한 기술들을 선택해주세요.</h2>

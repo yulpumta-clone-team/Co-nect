@@ -55,7 +55,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
   ${({ theme: { mixin } }) => mixin.positionCenterY()};
   z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
 `;

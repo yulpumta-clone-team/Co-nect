@@ -43,7 +43,6 @@ export default function Nickname() {
       <S.NextButtonContainer>
         <Button
           theme="primary"
-          type="submit"
           disabled={canActiveNextButton}
           customStyle={S.NextButton}
           onClick={handleClickNextButton}
