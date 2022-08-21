@@ -36,7 +36,7 @@ export default function LoginNav({ userInfo }) {
           </S.Hover>
         </S.LinkList>
         <S.AssignList isLogin>
-          <Button theme="primary" customStyle={{ width: 99, height: 35 }}>
+          <Button theme="primary" customStyle={S.AssignListButton}>
             <Link to={NEW_POST}>새글쓰기</Link>
           </Button>
           <S.Alarm />
