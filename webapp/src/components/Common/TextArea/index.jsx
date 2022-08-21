@@ -6,6 +6,7 @@ TextArea.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   label: PropTypes.string,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
@@ -14,6 +15,7 @@ TextArea.propTypes = {
 
 export default function TextArea({
   label,
+  name,
   value,
   onChange,
   placeholder,
@@ -36,7 +38,7 @@ export default function TextArea({
       <S.TextArea
         ref={textAreaRef}
         placeholder={placeholder}
-        name={label}
+        name={name}
         id={label}
         value={value}
         onChange={onChange}
