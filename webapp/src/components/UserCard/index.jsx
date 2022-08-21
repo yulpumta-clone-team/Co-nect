@@ -8,7 +8,7 @@ import chat from 'assets/icons/chat.svg';
 import view from 'assets/icons/view.svg';
 import left_skill from 'assets/icons/left-skill.svg';
 import right_skill from 'assets/icons/right-skill.svg';
-import { skillsImg } from 'mocks/skills/skillsImg';
+import { skillsImg } from 'mocks/teckStack/skillsImg';
 import Slide from './Slide';
 
 import * as S from './style';

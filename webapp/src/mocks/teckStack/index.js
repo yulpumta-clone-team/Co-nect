@@ -5,9 +5,9 @@ import { skillsImg } from '.skillsImg';
 
 // todo : TeckStack 연결 하기.
 
-export const SKILLS = [
+export const TECH_STACK = [
   // GET_SKILLS_IMG
-  rest.get(`${ROOT_API_URL + API.SKILLS.CATEGORY}`, (req, res, ctx) => {
+  rest.get(`${ROOT_API_URL + API.TECH_STACK.CATEGORY}`, (req, res, ctx) => {
     const randomStatusErrorCode = getRandomStatusErrorCode();
     return res(ctx.status(randomStatusErrorCode), ctx.json(getResonseWithData(skillsImg)));
   }),
