@@ -96,7 +96,7 @@ const fonts = {
     default: css`
       font-family: ${FONT.FAMILY.ENGLISH};
       font-style: ${FONT.STYLE.BASE};
-      font-weight: ${FONT.WEIGHT.REGULAR};
+      font-weight: ${FONT.WEIGHT.BOLD};
       font-size: ${FONT.SIZE.BASE};
       line-height: ${FONT.HEIGHT.BASE};
     `,
