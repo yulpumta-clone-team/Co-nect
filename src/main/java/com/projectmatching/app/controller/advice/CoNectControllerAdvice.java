@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -22,6 +23,22 @@ public class CoNectControllerAdvice {
         ResponseTemplateStatus status = e.getResponseTemplateStatus();
         return ResponseEntity.status(status.getHttpStatus()) //http code
                 .body(ResponseTemplate.of(status));
+    }
+
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ResponseTemplate<Void>> except(Exception e){
+        e.printStackTrace();
+        log.info("Controller Advice , Exception : {}",e);
+        return ResponseEntity.badRequest()
+                .body(ResponseTemplate.error(ResponseTemplateStatus.LOGICAL_ERROR));
+    }
+
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    public ResponseEntity<ResponseTemplate<Void>> except(MissingRequestHeaderException e) {
+        log.error("Excepted MissingRequestHeaderException ==> {}", e.getMessage());
+        return ResponseEntity.badRequest()
+                .body(ResponseTemplate.error(ResponseTemplateStatus.LOGICAL_ERROR));
     }
 
 

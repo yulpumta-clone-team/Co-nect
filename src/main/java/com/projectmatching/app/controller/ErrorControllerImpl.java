@@ -25,7 +25,7 @@ public class ErrorControllerImpl implements ErrorController {
         HttpStatus httpStatus = HttpStatus.valueOf(response.getStatus());
         return ResponseEntity
                 .status(httpStatus)
-                .body(ResponseTemplate.error(ResponseTemplateStatus.FORBIDDEN));
+                .body(ResponseTemplate.error(ResponseTemplateStatus.LOGICAL_ERROR));
     }
 
 }
