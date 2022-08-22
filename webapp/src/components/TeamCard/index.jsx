@@ -18,7 +18,7 @@ TeamCard.propTypes = {
 
 export default function TeamCard({ cardInfo, onClick }) {
   // * : teamCard 에 표시되는 정보
-  const { user, name, hopeSession, img, job } = cardInfo;
+  const { user, name, hopeSession, img, status } = cardInfo;
   // * : 현재 슬라이드를 나타내는 useState
   const [currentSlide, setCurrentSlide] = useState(0);
   // * : Slide 넘어가는 effect
@@ -55,7 +55,7 @@ export default function TeamCard({ cardInfo, onClick }) {
         </S.Heart>
       </S.CardTop>
       <S.BackgroundImg>
-        <S.Job>{job}</S.Job>
+        <S.Job>{status}</S.Job>
       </S.BackgroundImg>
       <S.ProfileImg src={img} alt="프로필" />
       <S.TeamInfo>
