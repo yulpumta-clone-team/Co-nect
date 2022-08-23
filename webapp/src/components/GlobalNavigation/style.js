@@ -116,6 +116,6 @@ export const UserInfoDropdown = {
 };
 
 export const AssignListButton = css`
-  width: 99;
-  height: 35;
+  width: 99px;
+  height: 35px;
 `;
