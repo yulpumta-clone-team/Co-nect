@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import { ReactComponent as LeftAngleIcon } from 'assets/icons/left-angle.svg';
+import { ReactComponent as rightAngleIcon } from 'assets/icons/right-angle.svg';
 
 // * : Card Container
-export const CardWrapper = styled.li`
+export const CardWrapper = styled.div`
   position: relative;
   width: 368px;
   height: 429px;
@@ -88,7 +90,7 @@ export const Name = styled.div`
   font-weight: 700;
 `;
 
-export const Team = styled.li`
+export const Team = styled.div`
   position: relative;
   display: flex;
 
@@ -104,7 +106,7 @@ export const Team = styled.li`
     object-fit: cover;
   }
 `;
-export const Session = styled.li`
+export const Session = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -114,7 +116,7 @@ export const Session = styled.li`
   font-weight: 700;
 `;
 // * : User가 선택한 기간
-export const UserSession = styled.li`
+export const UserSession = styled.div`
   position: relative;
   display: flex;
 
@@ -130,9 +132,9 @@ export const Divider = styled.div`
 // * : 이동 버튼 포함 기술스택 정렬 박스
 export const SkillBoard = styled.div`
   position: relative;
-  display: flex;
   height: 20%;
   width: 100%;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px 10px;
@@ -143,34 +145,57 @@ export const SkillBoard = styled.div`
   }
 `;
 // * : skill이 5개씩 보여지는 부분
-export const Skills = styled.div`
+export const SkillContainer = styled.div`
   position: relative;
-  display: flex;
   height: 60px;
   width: 300px;
   overflow: hidden;
+  display: flex;
   align-items: center;
 `;
 // * : slideRef 로 지정한 하나의 슬라이드 style
 export const Skill = styled.div`
   position: relative;
-  display: flex;
   height: 100%;
-  width: 99%;
+  width: 100%;
+  display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
 `;
 // * : 조회수와 댓글수가 보여지는 부분
 export const CountBoard = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   height: 12%;
   width: 100%;
-  justify-content: flex-end;
   padding: 1em;
   > img {
     width: 15%;
     height: 100%;
+  }
+`;
+
+export const SkillImage = styled.img`
+  object-fit: cover;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px 1px #cdcdcd;
+`;
+
+export const LeftAngle = styled(LeftAngleIcon)`
+  & path {
+    fill: ${({ theme: { colors } }) => colors.greyScale.black};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+  }
+`;
+
+export const RightAngle = styled(rightAngleIcon)`
+  & path {
+    fill: ${({ theme: { colors } }) => colors.greyScale.black};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
   }
 `;
