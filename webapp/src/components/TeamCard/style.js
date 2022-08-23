@@ -169,7 +169,7 @@ export const CountBoard = styled.div`
   padding: 1em;
 `;
 
-//Icon
+// Icon
 export const Heart = styled(heartIcon)`
   position: relative;
   display: flex;
