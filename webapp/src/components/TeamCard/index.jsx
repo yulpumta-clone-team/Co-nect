@@ -59,7 +59,7 @@ export default function TeamCard({ cardInfo, onClick }) {
       </S.BackgroundImg>
       <S.ProfileImg src={img} alt="프로필" />
       <S.TeamInfo>
-        <S.UserName>{user}님의 모집</S.UserName>
+        <S.UserName>{user.name}님의 모집</S.UserName>
         <S.TeamName>{name}</S.TeamName>
 
         <S.Session>

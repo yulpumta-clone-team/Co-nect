@@ -14,7 +14,11 @@ export default function TeamBoard() {
   });
   return (
     <S.BoardWrapper>
-      <UserCardsGridWithInfiniteScroll CardComponent={TeamCard} clickLink={`${TEAM}/`} />
+      <UserCardsGridWithInfiniteScroll
+        CardComponent={TeamCard}
+        clickLink={`${TEAM}/`}
+        style={S.CardWrapper}
+      />
     </S.BoardWrapper>
   );
 }
