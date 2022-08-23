@@ -28,7 +28,7 @@ Default.args = {
     id: 0,
     name: '홍길동',
     userJob: '학생',
-    hopeSession: '6개월 이하',
+    hopeSession: '6 개월 이하',
     likeCnt: 3,
     img: 'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png',
     job: '학생',

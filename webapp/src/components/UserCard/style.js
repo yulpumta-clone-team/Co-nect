@@ -1,13 +1,21 @@
 import styled from 'styled-components';
-import { ReactComponent as LeftAngleIcon } from 'assets/icons/left-angle.svg';
+import { ReactComponent as leftAngleIcon } from 'assets/icons/left-angle.svg';
 import { ReactComponent as rightAngleIcon } from 'assets/icons/right-angle.svg';
+import { ReactComponent as heartIcon } from 'assets/icons/heart.svg';
+import { ReactComponent as checkIcon } from 'assets/icons/check-button.svg';
+import { ReactComponent as crossIcon } from 'assets/icons/cross-button.svg';
+import { ReactComponent as chatIcon } from 'assets/icons/chat.svg';
+import { ReactComponent as viewIcon } from 'assets/icons/view.svg';
+import { userCardType } from 'types/user.type';
+
+const belong_team = userCardType;
+const teamIcon = belong_team ? checkIcon : crossIcon;
 
 // * : Card Container
 export const CardWrapper = styled.div`
   position: relative;
   width: 368px;
   height: 429px;
-  justify-content: center;
   background: #ffffff;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -17,27 +25,17 @@ export const CardWrapper = styled.div`
 export const CardTop = styled.div`
   position: relative;
   display: flex;
-  height: 50px;
+
+  height: 10%;
   width: 100%;
   background: #036eff;
   border-radius: 10px 10px 0px 0px;
 `;
 
-export const Heart = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 15%;
-  > img {
-    width: 40%;
-    height: 100%;
-  }
-`;
-
 export const ProfileImg = styled.img`
   position: absolute; // * : 각 div 상자에 걸쳐있는 프로필 이미지 때문에 absolute로 위치를 설정해 줌.
   display: flex;
+
   width: 100px;
   height: 100px;
   left: 243px;
@@ -48,21 +46,23 @@ export const ProfileImg = styled.img`
 // * : 지금은 Figma color 참고하여 div 태그로 구성하여 줬지만, 추후 img로 수정 필요.
 export const BackgroundImg = styled.div`
   position: relative;
-  align-items: flex-start;
   display: flex;
+  align-items: flex-start;
+
   width: 100%;
   height: 20%;
   background: #eaeaea;
   padding: 1em;
 `;
 // * : 직업 버튼 형식
-export const Job = styled.div`
+export const UserJob = styled.div`
   background-color: ${({ theme: { colors } }) => colors.secondary.normal};
 
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+
   width: 78px;
   height: 28px;
   border-radius: 50px;
@@ -74,39 +74,36 @@ export const Job = styled.div`
 export const UserInfo = styled.div`
   position: relative;
   display: flex;
-  width: 100%;
-  height: 35%;
   flex-wrap: wrap;
   flex-direction: row;
+
+  width: 100%;
+  height: 35%;
   padding: 1em;
 `;
 
-export const Name = styled.div`
+export const UserName = styled.div`
   position: relative;
   display: grid;
+
   height: 40%;
   width: 100%;
   ${({ theme: { fonts } }) => fonts.korean.subTitle}
   font-weight: 700;
 `;
 
-export const Team = styled.div`
+export const TeamBelongBoard = styled.div`
   position: relative;
   display: flex;
-
   justify-content: space-between;
   align-items: center;
+
   width: 40%;
 
   ${({ theme: { fonts } }) => fonts.korean.default}
   font-weight: 700;
-  > img {
-    width: 20px;
-    height: 20px;
-    object-fit: cover;
-  }
 `;
-export const Session = styled.div`
+export const HopeSession = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -116,9 +113,11 @@ export const Session = styled.div`
   font-weight: 700;
 `;
 // * : User가 선택한 기간
-export const UserSession = styled.div`
+export const UserHopeSession = styled.div`
   position: relative;
   display: flex;
+  width: 35%;
+  justify-content: center;
 
   ${({ theme: { fonts } }) => fonts.korean.default}
 `;
@@ -132,51 +131,39 @@ export const Divider = styled.div`
 // * : 이동 버튼 포함 기술스택 정렬 박스
 export const SkillBoard = styled.div`
   position: relative;
-  height: 20%;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
-  > img {
-    width: 10px;
-    height: 60px;
-    cursor: pointer;
-  }
+
+  height: 20%;
+  width: 100%;
+  padding: 5px 0px;
 `;
 // * : skill이 5개씩 보여지는 부분
 export const SkillContainer = styled.div`
   position: relative;
-  height: 60px;
-  width: 300px;
-  overflow: hidden;
   display: flex;
   align-items: center;
-`;
-// * : slideRef 로 지정한 하나의 슬라이드 style
-export const Skill = styled.div`
-  position: relative;
+
   height: 100%;
   width: 100%;
+  overflow: hidden;
+`;
+// * : slideRef 로 지정한 하나의 슬라이드 style
+export const SkillSlide = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-`;
-// * : 조회수와 댓글수가 보여지는 부분
-export const CountBoard = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  height: 12%;
+
+  height: 100%;
   width: 100%;
-  padding: 1em;
-  > img {
-    width: 15%;
-    height: 100%;
-  }
+  gap: 12px;
 `;
+// ! : 카드에 보여지는 기술 개수가 4개로 변경 됐을 시 삼항연산자로 gap을 다르게 줘야합니다.
+// ! : 하지만, 지금 당장 그 조건을 주면 4개만 있을 때 gap차이가 달라져 각 Card들끼리 정돈되어 보이지 않을것이라고 판단했습니다.
+// ! : 변경 시 수정 필요 !
+// ! : 박스 길이(100% - (8%+8%)=84%) / (gap 크기(12px) * (viewingSkill + 1))
 
 export const SkillImage = styled.img`
   object-fit: cover;
@@ -186,7 +173,33 @@ export const SkillImage = styled.img`
   box-shadow: 1px 1px 1px 1px #cdcdcd;
 `;
 
-export const LeftAngle = styled(LeftAngleIcon)`
+// * : 조회수와 댓글수가 보여지는 부분
+export const CountBoard = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 12%;
+  width: 100%;
+  padding: 1em;
+`;
+
+// Icon
+export const Heart = styled(heartIcon)`
+  position: relative;
+  display: flex;
+  align-items: center;
+  left: -50px;
+  top: 12px;
+
+  width: 40%;
+  height: 40%;
+`;
+
+export const LeftAngle = styled(leftAngleIcon)`
+  width: 8%;
+  height: 60%;
+  cursor: pointer;
   & path {
     fill: ${({ theme: { colors } }) => colors.greyScale.black};
     stroke: ${({ theme: { colors } }) => colors.greyScale.black};
@@ -194,8 +207,26 @@ export const LeftAngle = styled(LeftAngleIcon)`
 `;
 
 export const RightAngle = styled(rightAngleIcon)`
+  width: 8%;
+  height: 60%;
+  cursor: pointer;
   & path {
     fill: ${({ theme: { colors } }) => colors.greyScale.black};
     stroke: ${({ theme: { colors } }) => colors.greyScale.black};
   }
+`;
+
+// * : team 소속 여부 아이콘
+export const TeamBelong = styled(teamIcon)`
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+`;
+export const Chat = styled(chatIcon)`
+  width: 15%;
+  height: 100%;
+`;
+export const View = styled(viewIcon)`
+  width: 15%;
+  height: 100%;
 `;
