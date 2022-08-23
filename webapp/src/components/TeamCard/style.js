@@ -135,8 +135,8 @@ export const SkillContainer = styled.div`
   display: flex;
   align-items: center;
 
-  height: 60px;
-  width: 300px;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 `;
 // * : slideRef 로 지정한 하나의 슬라이드 style
