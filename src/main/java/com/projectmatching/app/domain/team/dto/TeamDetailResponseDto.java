@@ -4,6 +4,7 @@ import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 public class TeamDetailResponseDto {
 
     private Long id;
-    private UserDto user;
+    private UserInfo user;
     private String name;
     private String content;
     private String session;
@@ -44,6 +45,7 @@ public class TeamDetailResponseDto {
     public static TeamDetailResponseDto of(Team team){
         TeamDetailResponseDto teamResponseDto = createEmpty();
         BeanUtils.copyProperties(team, teamResponseDto);
+
 
         teamResponseDto.commentCnt = team.getTeamComments().size();
         teamResponseDto.likeCnt = team.getTeamLikings().size();

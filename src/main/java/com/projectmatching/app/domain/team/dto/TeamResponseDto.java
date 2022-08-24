@@ -3,6 +3,7 @@ package com.projectmatching.app.domain.team.dto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 public class TeamResponseDto {
 
     private Long id;
-    private UserDto user;
+    private UserInfo user;
     private String name;
     private String session;
     private Long read;

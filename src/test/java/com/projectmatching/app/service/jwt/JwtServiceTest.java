@@ -3,17 +3,12 @@ package com.projectmatching.app.service.jwt;
 
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.dto.UserDto;
-import com.projectmatching.app.domain.user.dto.UserLoginResDto;
 import com.projectmatching.app.service.ServiceTest;
 import com.projectmatching.app.util.AuthTokenProvider;
-import io.jsonwebtoken.ClaimJwtException;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.*;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 

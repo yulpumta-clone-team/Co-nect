@@ -48,24 +48,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin().disable()
                 .headers()
                 .frameOptions().sameOrigin()
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+//                .and()
+//                .exceptionHandling()
+//                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/api/user/login").permitAll()
-                    .antMatchers("/api/user/join/**").permitAll()
                     .antMatchers(
-                        "/api/swagger*/**",
-                        "/webjars/**",
-                        "/v2/api-docs",
-                        "/swagger-resources/configuration/ui",
+                            "/v2/api-docs",
                         "/swagger-resources/**",
-                        "/swagger-resources/configuration/security",
                         "/swagger-ui/**",
-                        "/webjars/**",
-                        "/v2/api-docs"
+                        "/webjars/**"
                     ).permitAll()
+                .antMatchers("/**").permitAll()
                 .antMatchers(FilterPatternConstant.pathArray).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -117,14 +111,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
 
         web.ignoring().antMatchers(
-                "**/api/v2/api-docs",
-                "/swagger-resources/configuration/ui",
+                "/v2/api-docs",
                 "/swagger-resources/**",
-                "/swagger-resources/configuration/security",
                 "/swagger-ui/**",
                 "/webjars/**",
-                "/swagger*/**"
-        ,"/swagger-ui.html");
+                "/swagger*/**",
+        "/swagger-ui.html");
+
+
+
 
 
     }

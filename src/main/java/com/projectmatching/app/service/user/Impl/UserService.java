@@ -20,7 +20,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGICAL_ERROR;
-import static com.projectmatching.app.domain.user.dto.UserInfo.toUserInfoByUser;
+import static com.projectmatching.app.domain.user.dto.UserInfo.of;
 
 @Service
 @RequiredArgsConstructor
@@ -54,7 +53,7 @@ public class UserService  {
     public UserInfo getUserEssentialInfo(UserDetailsImpl userDetails){
         User user = userRepository.findByEmail(userDetails.getEmail())
                 .orElseThrow(CoNectNotFoundException::new);
-        return toUserInfoByUser(user);
+        return of(user);
 
     }
 

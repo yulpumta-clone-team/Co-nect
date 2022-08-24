@@ -7,10 +7,8 @@ import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserIsFirstDto;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
-import com.projectmatching.app.domain.user.dto.UserLoginResDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectNotFoundException;
-import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGIN_USER_ERROR;
 
