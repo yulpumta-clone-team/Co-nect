@@ -9,15 +9,24 @@ Divider.propTypes = {
   height: PropTypes.string,
   marginTop: PropTypes.string,
   marginBottom: PropTypes.string,
+  customStyle: PropTypes.array,
 };
 
-export default function Divider({ isRow = true, width, height, marginTop, marginBottom }) {
+export default function Divider({
+  isRow = true,
+  width,
+  height,
+  marginTop,
+  marginBottom,
+  customStyle,
+}) {
   return isRow ? (
     <S.RowContainer
       width={width}
       height={height}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      customStyle={customStyle}
     />
   ) : (
     <S.ColContainer
@@ -25,6 +34,7 @@ export default function Divider({ isRow = true, width, height, marginTop, margin
       height={height}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      customStyle={customStyle}
     />
   );
 }
