@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
 import * as S from './SelectInput.style';
-import Divider from '../Divider';
+import SinglePlaceHolder from './SinglePlaceHolder';
 
 SelectInput.propTypes = {
   value: PropTypes.string.isRequired,
@@ -16,6 +16,7 @@ SelectInput.propTypes = {
   ).isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  isMulti: PropTypes.bool,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
   defaultOption: PropTypes.object.isRequired,
@@ -29,13 +30,13 @@ export default function SelectInput({
   label,
   name,
   defaultOption,
+  isMulti = false,
   isError = false,
   helperText,
   customStyle,
   ...rest
 }) {
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
-  const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
   const handleClickOption = (event) => {
     onChange({ name, value: event.target.getAttribute('value') });
     closeDropdown();
@@ -47,24 +48,15 @@ export default function SelectInput({
 
   return (
     <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
-      <S.PlaceHolder isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
-        {value ? (
-          <S.DisplayValue>
-            <span>{value}</span>
-          </S.DisplayValue>
-        ) : (
-          <S.Label>{label}</S.Label>
-        )}
-        <S.ButtonContainer>
-          {value && (
-            <S.ClearableButton onClick={handleClickReset}>
-              <S.CloseNormal />
-            </S.ClearableButton>
-          )}
-          <Divider isRow={false} />
-          <AngleButton onClick={closeDropdown} />
-        </S.ButtonContainer>
-      </S.PlaceHolder>
+      <SinglePlaceHolder
+        isError={isError}
+        parent={parent}
+        isDropdownOpen={isDropdownOpen}
+        value={value}
+        label={label}
+        handleClickReset={handleClickReset}
+        closeDropdown={closeDropdown}
+      />
       {isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen}>
         {options.map(({ id, value, label }) => (
