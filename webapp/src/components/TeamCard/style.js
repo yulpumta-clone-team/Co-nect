@@ -8,8 +8,8 @@ import { ReactComponent as viewIcon } from 'assets/icons/view.svg';
 // * : Card Container
 export const CardWrapper = styled.li`
   position: relative;
-  width: 368px;
-  height: 429px;
+  width: 100%;
+  height: 80%;
   justify-content: center;
   background: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
@@ -127,7 +127,7 @@ export const SkillBoard = styled.div`
 
   height: 20%;
   width: 100%;
-  padding: 5px 0px;
+  padding: 1% 0%;
 `;
 // * : skill이 5개씩 보여지는 부분
 export const SkillContainer = styled.div`
@@ -147,13 +147,13 @@ export const SkillSlide = styled.div`
   justify-content: space-between;
 
   height: 100%;
-  width: 99%;
-  gap: 12px; // ! : 변경 시 수정 필요 !
+  width: 100%;
+  gap: 4%; // ! : 변경 시 수정 필요 !
 `;
 export const SkillImage = styled.img`
   object-fit: cover;
-  width: 52px;
-  height: 52px;
+  width: 66%;
+  height: 65%;
   border-radius: 50%;
   box-shadow: 1px 1px 1px 1px #cdcdcd;
 `;
@@ -164,7 +164,7 @@ export const CountBoard = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  height: 12%;
+  height: 14%;
   width: 100%;
   padding: 1em;
 `;
@@ -174,11 +174,11 @@ export const Heart = styled(heartIcon)`
   position: relative;
   display: flex;
   align-items: center;
-  left: -50px;
-  top: 12px;
+  left: -40px;
+  top: 16px;
 
-  width: 40%;
-  height: 40%;
+  width: 45%;
+  height: 45%;
 `;
 export const LeftAngle = styled(leftAngleIcon)`
   width: 8%;
