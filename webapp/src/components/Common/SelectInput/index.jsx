@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
 import * as S from './SelectInput.style';
+import Divider from '../Divider';
 
 SelectInput.propTypes = {
   value: PropTypes.string.isRequired,
@@ -33,25 +34,41 @@ export default function SelectInput({
   customStyle,
   ...rest
 }) {
-  const { parent, handleClickOutside, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
+  const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
   const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
-  const [displayValue, setDisplayValue] = useState(value);
-  const handleClick = (event) => {
-    setDisplayValue(event.target.getAttribute('value'));
+  const handleClickOption = (event) => {
     onChange({ name, value: event.target.getAttribute('value') });
     closeDropdown();
   };
 
+  const handleClickReset = () => {
+    onChange({ name, value: '' });
+  };
+
   return (
-    <S.Container customStyle={customStyle} ref={parent} onClick={openDropdown}>
-      <S.PlaceHolder isError={isError}>
-        {value ? <S.DisplayValue>{value}</S.DisplayValue> : <S.Label>{label}</S.Label>}
-        <AngleButton onClick={closeDropdown} />
+    <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
+      <S.PlaceHolder isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
+        {value ? (
+          <S.DisplayValue>
+            <span>{value}</span>
+          </S.DisplayValue>
+        ) : (
+          <S.Label>{label}</S.Label>
+        )}
+        <S.ButtonContainer>
+          {value && (
+            <S.ClearableButton onClick={handleClickReset}>
+              <S.CloseNormal />
+            </S.ClearableButton>
+          )}
+          <Divider isRow={false} />
+          <AngleButton onClick={closeDropdown} />
+        </S.ButtonContainer>
       </S.PlaceHolder>
       {isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen}>
         {options.map(({ id, value, label }) => (
-          <S.Option key={id} value={value} onClick={handleClick}>
+          <S.Option key={id} value={value} onClick={handleClickOption}>
             {label}
           </S.Option>
         ))}

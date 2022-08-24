@@ -2,6 +2,7 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as UpAngleIcon } from 'assets/icons/up-angle.svg';
 import { ReactComponent as DownAngleIcon } from 'assets/icons/down-angle.svg';
+import { ReactComponent as CloseNormalIcon } from 'assets/icons/close-normal.svg';
 
 export const Container = styled.div`
   box-sizing: border-box;
@@ -9,7 +10,6 @@ export const Container = styled.div`
   width: 100%;
   height: 40px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
-
   background: ${({ theme: { colors } }) => colors.greyScale.white};
   ${({ customStyle }) => customStyle}
 `;
@@ -23,6 +23,21 @@ export const PlaceHolder = styled.div`
   border: 1px solid ${({ theme: { colors } }) => colors.greyScale.border};
   border-radius: 3px;
   padding: 6px 16px;
+
+  ${({ isDropdownOpen }) => {
+    if (isDropdownOpen) {
+      return css`
+        border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
+        ${UpAngle}, ${DownAngle}, , ${CloseNormal} {
+          & path {
+            fill: ${({ theme: { colors } }) => colors.primary.normal};
+            stroke: ${({ theme: { colors } }) => colors.primary.normal};
+          }
+        }
+      `;
+    }
+  }}
+
   ${({ isError }) => {
     if (isError) {
       return css`
@@ -41,7 +56,13 @@ export const PlaceHolder = styled.div`
   }}
 `;
 
-export const DisplayValue = styled.span``;
+export const DisplayValue = styled.div`
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 export const Label = styled.label`
   color: ${({ theme: { colors } }) => colors.greyScale.placeHolder};
@@ -75,19 +96,36 @@ export const Option = styled.li`
   }
 `;
 
-export const CloseButton = styled.button``;
+export const CommonAngle = css``;
 
-export const CommonAngle = css`
+export const ButtonContainer = styled.div`
   position: absolute;
   right: 15px;
+  height: 75%;
+  gap: 8px;
+  ${({ theme: { mixin } }) => mixin.flexCenter({ direction: 'row' })};
+  & path {
+    fill: ${({ theme: { colors } }) => colors.greyScale.placeHolder};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.placeHolder};
+  }
+  & path {
+    &:hover {
+      fill: ${({ theme: { colors } }) => colors.primary.normal};
+      stroke: ${({ theme: { colors } }) => colors.primary.normal};
+    }
+  }
 `;
 
-export const UpAngle = styled(UpAngleIcon)`
-  ${CommonAngle};
-`;
+export const ClearableButton = styled.button``;
+
+export const UpAngle = styled(UpAngleIcon)``;
 
 export const DownAngle = styled(DownAngleIcon)`
-  ${CommonAngle};
+  ${CommonAngle}
+`;
+
+export const CloseNormal = styled(CloseNormalIcon)`
+  ${CommonAngle}
 `;
 
 export const Error = styled.span`
