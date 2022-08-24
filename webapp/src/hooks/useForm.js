@@ -20,14 +20,13 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
     setValidateError(validate({ ...inputValues, [name]: value }));
   };
 
-  const onChangeHandlerWithSelect = ({ name, value }) => {
-    const targetInput = inputValues[name];
-    if (Array.isArray(targetInput)) {
-      const NonDuplicateValues = new Set([...targetInput, value]);
-      setInputValues({ ...inputValues, [name]: [...NonDuplicateValues] });
-    } else {
-      setInputValues({ ...inputValues, [name]: value });
+  const onChangeHandlerWithSelect = ({ name, value, isClear }) => {
+    if (isClear) {
+      setInputValues({ ...inputValues, [name]: initialValues[name] });
+      setValidateError(validate({ ...inputValues, [name]: value }));
+      return;
     }
+    setInputValues({ ...inputValues, [name]: value });
     setValidateError(validate({ ...inputValues, [name]: value }));
   };
 

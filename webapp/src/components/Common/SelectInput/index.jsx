@@ -50,7 +50,13 @@ export default function SelectInput({
   };
 
   const multiClickOption = (targetValue) => {
-    onChange({ name, value: targetValue });
+    const NonDuplicateValues = [...new Set([...value, targetValue])];
+    onChange({ name, value: NonDuplicateValues });
+  };
+
+  const handleClickTargetDelete = ({ targetValue }) => {
+    const filteredValues = value.filter((element) => targetValue !== element);
+    onChange({ name, value: filteredValues });
   };
 
   const handleClickReset = () => {
@@ -68,7 +74,11 @@ export default function SelectInput({
     <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
       <S.PlaceHolder isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
         {isMulti ? (
-          <MultiPlaceHolder values={value} label={label} />
+          <MultiPlaceHolder
+            values={value}
+            label={label}
+            handleClickTargetDelete={handleClickTargetDelete}
+          />
         ) : (
           <SinglePlaceHolder value={value} label={label} />
         )}

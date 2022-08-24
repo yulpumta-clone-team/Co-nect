@@ -5,17 +5,18 @@ import * as S from './SelectInput.style';
 MultiPlaceHolder.propTypes = {
   values: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
+  handleClickTargetDelete: PropTypes.func.isRequired,
 };
 
-export default function MultiPlaceHolder({ values, label }) {
+export default function MultiPlaceHolder({ values, label, handleClickTargetDelete }) {
   const isValues = values.length !== 0;
 
   return isValues ? (
     <S.DisplayValues>
       {values.map((value) => (
-        <S.DisplaySingleValue>
+        <S.DisplaySingleValue key={value}>
           <span>{value}</span>
-          <S.CloseNormal />
+          <S.CloseNormal onClick={() => handleClickTargetDelete({ targetValue: value })} />
         </S.DisplaySingleValue>
       ))}
     </S.DisplayValues>
