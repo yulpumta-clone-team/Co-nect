@@ -28,7 +28,6 @@ import java.io.IOException;
 
 
 @RequiredArgsConstructor
-@Component
 @Slf4j
 public class JwtAuthFilter extends OncePerRequestFilter {
 
@@ -53,7 +52,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
 
         }
-//        else throw new CoNectUnAuthorizationException("인증 토큰 없음");
+        else throw new CoNectUnAuthorizationException();
 //         유효한 토큰인지 확인합니다.
 
         filterChain.doFilter(request, response);

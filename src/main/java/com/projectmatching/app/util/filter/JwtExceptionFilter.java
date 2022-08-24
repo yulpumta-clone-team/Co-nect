@@ -3,6 +3,7 @@ package com.projectmatching.app.util.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
+import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.exception.CoNectRuntimeException;
 import com.projectmatching.app.exception.CoNectUnAuthorizationException;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,6 @@ import java.io.IOException;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.findByHttpStatus;
 
-@Component
 @RequiredArgsConstructor
 public class JwtExceptionFilter extends OncePerRequestFilter {
     private final ObjectMapper objectMapper;

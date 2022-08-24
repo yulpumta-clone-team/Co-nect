@@ -113,7 +113,7 @@ public enum ResponseTemplateStatus {
 
     public static ResponseTemplateStatus findByHttpStatus(HttpStatus httpStatus) {
         return Arrays.stream(values())
-                .filter(responseTemplateStatus -> responseTemplateStatus.getHttpStatus() == httpStatus)
+                .filter(responseTemplateStatus -> responseTemplateStatus.getHttpStatus().equals(httpStatus))
                 .findFirst()
                 .orElse(ResponseTemplateStatus.LOGICAL_ERROR);
     }

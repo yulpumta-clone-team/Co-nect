@@ -11,6 +11,7 @@ import com.projectmatching.app.util.AuthTokenProvider;
 import com.projectmatching.app.util.filter.JwtAuthFilter;
 import com.projectmatching.app.util.filter.JwtExceptionFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthTokenProvider authTokenProvider;
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Override
     protected void configure(HttpSecurity http)throws Exception {
@@ -48,18 +50,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin().disable()
                 .headers()
                 .frameOptions().sameOrigin()
-//                .and()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                     .authorizeRequests()
-                    .antMatchers(
+                .antMatchers(
                             "/v2/api-docs",
                         "/swagger-resources/**",
                         "/swagger-ui/**",
                         "/webjars/**"
                     ).permitAll()
-                .antMatchers("/**").permitAll()
                 .antMatchers(FilterPatternConstant.pathArray).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -118,8 +119,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger*/**",
         "/swagger-ui.html");
 
-
-
+        web.ignoring().antMatchers(FilterPatternConstant.pathArray);
 
 
     }
