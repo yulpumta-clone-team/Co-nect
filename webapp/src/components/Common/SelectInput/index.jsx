@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
 import * as S from './SelectInput.style';
-import SinglePlaceHolder from './SinglePlaceHolder';
-import MultiPlaceHolder from './MultiPlaceHolder';
+import SinglePlaceHolder from './PlaceHolder/SinglePlaceHolder';
+import MultiPlaceHolder from './PlaceHolder/MultiPlaceHolder';
 
 // isMulti = true일 때는 value가 배열입니다.
 SelectInput.propTypes = {

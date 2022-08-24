@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as S from './SelectInput.style';
+import * as S from '../SelectInput.style';
 
 SinglePlaceHolder.propTypes = {
   value: PropTypes.string.isRequired,
