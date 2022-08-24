@@ -51,11 +51,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     }
                 }
             }
+
         }
-        else throw new CoNectUnAuthorizationException("인증 토큰 없음");
-        // 유효한 토큰인지 확인합니다.
+//        else throw new CoNectUnAuthorizationException("인증 토큰 없음");
+//         유효한 토큰인지 확인합니다.
 
         filterChain.doFilter(request, response);
+
+
+
     }
 
     private void setAuthentication(String token){

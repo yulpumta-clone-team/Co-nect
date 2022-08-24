@@ -12,13 +12,10 @@ public class UserInfo {
 
     private Long id;
     private String name;
-
     private String image;
 
 
-
-
-    public static UserInfo toUserInfoByUser(User user){
+    public static UserInfo of(User user){
         UserInfo userInfo = new UserInfo();
         userInfo.setId(user.getId());
         userInfo.setName(user.getName());
@@ -26,5 +23,7 @@ public class UserInfo {
         return userInfo;
 
     }
+
+
 
 }

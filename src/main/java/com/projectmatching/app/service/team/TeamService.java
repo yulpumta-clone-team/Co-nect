@@ -19,6 +19,7 @@ import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.UserTeamRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
@@ -228,11 +229,11 @@ public class TeamService {
     }
 
 
-    public UserDto findTeamUser(Team team){
+    public UserInfo findTeamUser(Team team){
         List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
         if(userTeamList.size() != 0) {
             UserTeam findUser = userTeamList.get(0);
-            return UserDto.of(findUser.getUser());
+            return UserInfo.of(findUser.getUser());
         }
         else return null;
     }
