@@ -90,16 +90,19 @@ export const Label = styled.label`
 export const Select = styled.ul`
   ${({ isDropdownOpen, theme: { mixin } }) => {
     if (isDropdownOpen) {
-      return mixin.flexCenter({});
+      return css`
+        display: block;
+      `;
     }
     return css`
       display: none;
     `;
   }}
-  box-sizing: border-box;
   position: absolute;
   top: 42px;
   width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
   border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 5px;
   z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
@@ -107,7 +110,7 @@ export const Select = styled.ul`
 
 export const Option = styled.li`
   width: 100%;
-  height: 29px;
+  height: 50px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   border-radius: 5px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};

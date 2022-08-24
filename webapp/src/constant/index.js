@@ -17,6 +17,9 @@ export const skillOptions = [
   { id: 8, value: 'sevlte', label: 'sevlte' },
   { id: 9, value: 'vite', label: 'vite' },
   { id: 10, value: 'webpack', label: 'webpack' },
+  { id: 11, value: 'go', label: 'go' },
+  { id: 12, value: 'mongodb', label: 'mongodb' },
+  { id: 13, value: 'mysql', label: 'mysql' },
 ];
 
 export const jobOptions = [

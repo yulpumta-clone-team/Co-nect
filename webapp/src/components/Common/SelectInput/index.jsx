@@ -21,7 +21,7 @@ SelectInput.propTypes = {
   isMulti: PropTypes.bool,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
-  defaultOption: PropTypes.object.isRequired,
+  defaultOption: PropTypes.object,
   customStyle: PropTypes.array,
 };
 
