@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
 import * as S from './SelectInput.style';
@@ -64,10 +64,10 @@ export default function SelectInput({
   };
 
   const singleClickReset = () => {
-    onChange({ name, value: '', isClear: true });
+    onChange({ name, value: '' });
   };
   const multiClickReset = () => {
-    onChange({ name, value: [], isClear: true });
+    onChange({ name, value: [] });
   };
 
   return (

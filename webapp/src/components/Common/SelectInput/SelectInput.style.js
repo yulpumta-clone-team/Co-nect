@@ -108,8 +108,9 @@ export const Select = styled.ul`
 export const Option = styled.li`
   width: 100%;
   height: 29px;
-  ${({ theme: { mixin } }) => mixin.flexCenter({})};
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
+  border-radius: 5px;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})};
   &:hover {
     background-color: ${({ theme: { colors } }) => colors.primary.shadow};
   }
@@ -135,12 +136,6 @@ export const ButtonDivider = styled(Divider)``;
 
 const CommonButtonStyle = css`
   cursor: pointer;
-  & path {
-    &:hover {
-      fill: ${({ theme: { colors } }) => colors.primary.normal};
-      stroke: ${({ theme: { colors } }) => colors.primary.normal};
-    }
-  }
 `;
 
 export const ClearableButton = styled.button``;

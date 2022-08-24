@@ -20,12 +20,7 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
     setValidateError(validate({ ...inputValues, [name]: value }));
   };
 
-  const onChangeHandlerWithSelect = ({ name, value, isClear }) => {
-    if (isClear) {
-      setInputValues({ ...inputValues, [name]: initialValues[name] });
-      setValidateError(validate({ ...inputValues, [name]: value }));
-      return;
-    }
+  const onChangeHandlerWithSelect = ({ name, value }) => {
     setInputValues({ ...inputValues, [name]: value });
     setValidateError(validate({ ...inputValues, [name]: value }));
   };
