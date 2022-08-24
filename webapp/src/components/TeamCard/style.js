@@ -11,7 +11,7 @@ export const CardWrapper = styled.li`
   width: 368px;
   height: 429px;
   justify-content: center;
-  background: ${({ theme: { colors } }) => colors.greyScale.white};
+  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `;
@@ -46,8 +46,8 @@ export const BackgroundImg = styled.div`
 
   width: 100%;
   height: 20%;
-  background: #eaeaea;
-  padding: 1em;
+  background-color: #eaeaea;
+  padding: 1rem;
 `;
 // * : Team 모집중 / 모집 안함 상태 나타내는 버튼
 export const TeamStatus = styled.div`
@@ -116,7 +116,7 @@ export const Divider = styled.div`
   top: 20px;
   height: 2px;
   width: 100%;
-  background: ${({ theme: { colors } }) => colors.greyScale.nonActive};
+  background-color: ${({ theme: { colors } }) => colors.greyScale.nonActive};
 `;
 // * : 이동 버튼 포함 기술스택 정렬 박스
 export const SkillBoard = styled.div`
