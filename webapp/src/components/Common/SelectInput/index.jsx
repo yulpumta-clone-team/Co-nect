@@ -42,19 +42,26 @@ export default function SelectInput({
   const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
   const handleClickOption = (event) => {
     const targetValue = event.target.getAttribute('value');
-    isMulti ? multiHandleClickOption(targetValue) : singleHandleClickOption(targetValue);
+    isMulti ? multiClickOption(targetValue) : singleClickOption(targetValue);
   };
 
-  const singleHandleClickOption = (targetValue) => {
+  const singleClickOption = (targetValue) => {
     onChange({ name, value: targetValue });
   };
 
-  const multiHandleClickOption = (targetValue) => {
+  const multiClickOption = (targetValue) => {
     onChange({ name, value: targetValue });
   };
 
   const handleClickReset = () => {
-    onChange({ name, value: '' });
+    isMulti ? singleClickReset() : multiClickReset();
+  };
+
+  const singleClickReset = () => {
+    onChange({ name, value: '', isClear: true });
+  };
+  const multiClickReset = () => {
+    onChange({ name, value: [], isClear: true });
   };
 
   return (

@@ -37,6 +37,7 @@ const COLORS = {
   },
   YELLOW: {
     900: '#FFBC39',
+    700: '#FFD175',
     200: '#FFDE9C',
   },
   RED: {
@@ -121,7 +122,8 @@ const colors = {
   },
   secondary: {
     normal: COLORS.YELLOW[900],
-    light: COLORS.YELLOW[200],
+    light: COLORS.YELLOW[700],
+    shadow: COLORS.YELLOW[200],
   },
   important: {
     normal: COLORS.RED[400],

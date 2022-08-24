@@ -29,7 +29,7 @@ export const PlaceHolder = styled.div`
     if (isDropdownOpen) {
       return css`
         border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
-        ${UpAngle}, ${DownAngle}, ${CloseNormal} {
+        ${UpAngle}, ${DownAngle}, ${ClearableButton} {
           & path {
             fill: ${({ theme: { colors } }) => colors.primary.normal};
             stroke: ${({ theme: { colors } }) => colors.primary.normal};
@@ -49,7 +49,7 @@ export const PlaceHolder = styled.div`
         ${Label} {
           color: ${({ theme: { colors } }) => colors.important.normal};
         }
-        ${UpAngle}, ${DownAngle} {
+        ${UpAngle}, ${DownAngle}, ${ClearableButton} {
           & path {
             fill: ${({ theme: { colors } }) => colors.important.normal};
             stroke: ${({ theme: { colors } }) => colors.important.normal};
