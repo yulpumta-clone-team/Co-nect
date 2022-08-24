@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
-import { hopeSessionOption, skillOptions } from 'constant';
+import { hopeSessionOption, skillStack } from 'constant';
 import teamApi from 'api/team.api';
+import { skillStackParserToSelectInput } from 'service/skillStack.parser';
 import * as S from './style';
 
 export default function NewTeamPost() {
@@ -52,6 +53,9 @@ export default function NewTeamPost() {
     }
     navigate('/');
   };
+
+  const parsedSkillStack = skillStackParserToSelectInput(skillStack);
+
   return (
     <S.Container>
       <button onClick={onClickback}>back</button>
@@ -65,7 +69,7 @@ export default function NewTeamPost() {
         </div>
         <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
         <select value={userSkill} onChange={onSkillChange}>
-          {skillOptions.map(({ id, value, label }) => (
+          {parsedSkillStack.map(({ id, value, label }) => (
             <option key={id} value={value}>
               {label}
             </option>

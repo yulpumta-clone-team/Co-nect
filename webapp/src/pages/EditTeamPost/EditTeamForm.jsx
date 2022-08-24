@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileUploader';
 import useInput from 'hooks/useInput';
-import { hopeSessionOption, skillOptions } from 'constant';
+import { hopeSessionOption, skillStack } from 'constant';
 import teamApi from 'api/team.api';
+import { skillStackParserToSelectInput } from 'service/skillStack.parser';
 
 EditTeamForm.propTypes = {};
 
@@ -76,6 +77,8 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
       </div>
     );
 
+  const parsedSkillStack = skillStackParserToSelectInput(skillStack);
+
   return (
     <div>
       <h3> 프로필 이미지 </h3>
@@ -87,7 +90,7 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
         </div>
         <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
         <select value={teamSkill} onChange={onSkillChange}>
-          {skillOptions.map(({ id, value, label }) => (
+          {parsedSkillStack.map(({ id, value, label }) => (
             <option key={id} value={value}>
               {label}
             </option>
