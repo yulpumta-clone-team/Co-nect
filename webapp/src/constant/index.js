@@ -13,6 +13,13 @@ export const skillOptions = [
   { id: 4, value: 'react', label: 'react' },
   { id: 5, value: 'spring', label: 'spring' },
   { id: 6, value: 'xd', label: 'xd' },
+  { id: 7, value: 'docker', label: 'docker' },
+  { id: 8, value: 'sevlte', label: 'sevlte' },
+  { id: 9, value: 'vite', label: 'vite' },
+  { id: 10, value: 'webpack', label: 'webpack' },
+  { id: 11, value: 'go', label: 'go' },
+  { id: 12, value: 'mongodb', label: 'mongodb' },
+  { id: 13, value: 'mysql', label: 'mysql' },
 ];
 
 export const jobOptions = [

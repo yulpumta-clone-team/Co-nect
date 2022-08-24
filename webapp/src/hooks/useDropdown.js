@@ -21,7 +21,7 @@ const useDropdown = (initialMode = false) => {
   };
 
   const closeDropdown = () => {
-    setIsDropdownOpen(false);
+    setIsDropdownOpen((prev) => !prev);
   };
 
   const openDropdown = (event) => {
@@ -32,10 +32,10 @@ const useDropdown = (initialMode = false) => {
   };
 
   useEffect(() => {
-    window.addEventListener('click', handleClickOutside, true);
+    window.addEventListener('click', handleClickOutside);
 
     return () => {
-      window.removeEventListener('click', handleClickOutside, true);
+      window.removeEventListener('click', handleClickOutside);
     };
   }, [parent]);
   return {

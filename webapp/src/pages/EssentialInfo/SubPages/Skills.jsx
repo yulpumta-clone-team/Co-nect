@@ -13,12 +13,12 @@ export default function Skills() {
   const { onChangeHandlerWithSelect, isTargetSatisfyValidate, handleClickNextButton } =
     useEssentialFormsAction();
   const isSkillsValidateError = isTargetSatisfyValidate('skills');
-
   return (
     <S.Content>
       <h2>가능한 기술들을 선택해주세요.</h2>
       <S.InputContainer>
         <SelectInput
+          isMulti
           name="skills"
           label="기술"
           defaultOption={skillOptions[0]}
