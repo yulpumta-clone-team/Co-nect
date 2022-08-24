@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable consistent-return */
 import styled, { css } from 'styled-components';
 import { ReactComponent as UpAngleIcon } from 'assets/icons/up-angle.svg';
@@ -20,7 +21,6 @@ export const PlaceHolder = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 100%;
   border: 1px solid ${({ theme: { colors } }) => colors.greyScale.border};
   border-radius: 3px;
   padding: 6px 16px;
@@ -63,12 +63,24 @@ export const PlaceHolder = styled.div`
   }}
 `;
 
-export const DisplayValue = styled.div`
+export const DisplayValues = styled.div`
   width: 95%;
   height: 100%;
   display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 0%;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 4px;
+`;
+
+export const DisplaySingleValue = styled.div`
+  ${({ theme: { mixin } }) => mixin.flexCenter({ direction: 'row' })};
+  padding: 2px 0 2px 6px;
+  background-color: ${({ theme: { colors } }) => colors.secondary.shadow};
+  &:hover {
+    background-color: ${({ theme: { colors } }) => colors.secondary.light};
+  }
 `;
 
 export const Label = styled.label`
@@ -104,9 +116,7 @@ export const Option = styled.li`
 `;
 
 export const ButtonContainer = styled.div`
-  position: absolute;
-  right: 15px;
-  height: 75%;
+  height: 100%;
   gap: 8px;
   ${({ theme: { mixin } }) => mixin.flexCenter({ direction: 'row' })};
   & path {
@@ -123,13 +133,29 @@ export const ButtonContainer = styled.div`
 
 export const ButtonDivider = styled(Divider)``;
 
+const CommonButtonStyle = css`
+  cursor: pointer;
+  & path {
+    &:hover {
+      fill: ${({ theme: { colors } }) => colors.primary.normal};
+      stroke: ${({ theme: { colors } }) => colors.primary.normal};
+    }
+  }
+`;
+
 export const ClearableButton = styled.button``;
 
-export const UpAngle = styled(UpAngleIcon)``;
+export const UpAngle = styled(UpAngleIcon)`
+  ${CommonButtonStyle}
+`;
 
-export const DownAngle = styled(DownAngleIcon)``;
+export const DownAngle = styled(DownAngleIcon)`
+  ${CommonButtonStyle}
+`;
 
-export const CloseNormal = styled(CloseNormalIcon)``;
+export const CloseNormal = styled(CloseNormalIcon)`
+  ${CommonButtonStyle}
+`;
 
 export const Error = styled.span`
   position: absolute;

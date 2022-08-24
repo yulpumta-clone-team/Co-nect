@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
 import * as S from './SelectInput.style';
@@ -39,7 +39,7 @@ export default function SelectInput({
   ...rest
 }) {
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
-
+  const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
   const handleClickOption = (event) => {
     const targetValue = event.target.getAttribute('value');
     isMulti ? multiHandleClickOption(targetValue) : singleHandleClickOption(targetValue);
@@ -61,22 +61,21 @@ export default function SelectInput({
     <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
       <S.PlaceHolder isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
         {isMulti ? (
-          <MultiPlaceHolder
-            values={value}
-            label={label}
-            isDropdownOpen={isDropdownOpen}
-            handleClickReset={handleClickReset}
-            closeDropdown={closeDropdown}
-          />
+          <MultiPlaceHolder values={value} label={label} />
         ) : (
-          <SinglePlaceHolder
-            value={value}
-            label={label}
-            isDropdownOpen={isDropdownOpen}
-            handleClickReset={handleClickReset}
-            closeDropdown={closeDropdown}
-          />
+          <SinglePlaceHolder value={value} label={label} />
         )}
+        <S.ButtonContainer>
+          {value && (
+            <>
+              <S.ClearableButton onClick={handleClickReset}>
+                <S.CloseNormal />
+              </S.ClearableButton>
+              <S.ButtonDivider isRow={false} />
+            </>
+          )}
+          <AngleButton onClick={closeDropdown} />
+        </S.ButtonContainer>
       </S.PlaceHolder>
       {isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen}>
