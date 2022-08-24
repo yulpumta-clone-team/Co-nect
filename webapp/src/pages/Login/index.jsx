@@ -54,7 +54,7 @@ export default function Login() {
         <S.MainLogo />
         <h1>Co-nect</h1>
       </S.Header>
-      <S.Form onSubmit={submitHandler}>
+      <S.Form onSubmit={submitHandler} id="loginForm">
         <TextInput
           name="email"
           type="email"
@@ -77,6 +77,7 @@ export default function Login() {
       <Button
         theme="primary"
         type="submit"
+        form="loginForm"
         disabled={!satisfyAllValidates}
         customStyle={S.SubmitButton}
       >
