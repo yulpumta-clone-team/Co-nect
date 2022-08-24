@@ -82,7 +82,7 @@ export default function Login() {
       >
         Login
       </Button>
-      <Divider width="500" marginTop="67" marginBottom="38" />
+      <Divider width="500px" marginTop="67px" marginBottom="38px" />
       <SocailLoginButtons>소셜계정으로 로그인</SocailLoginButtons>
     </S.Container>
   );
