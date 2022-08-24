@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
 import * as S from './SelectInput.style';
 import SinglePlaceHolder from './SinglePlaceHolder';
+import MultiPlaceHolder from './MultiPlaceHolder';
 
+// isMulti = true일 때는 value가 배열입니다.
 SelectInput.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -37,9 +39,18 @@ export default function SelectInput({
   ...rest
 }) {
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
+
   const handleClickOption = (event) => {
-    onChange({ name, value: event.target.getAttribute('value') });
-    closeDropdown();
+    const targetValue = event.target.getAttribute('value');
+    isMulti ? multiHandleClickOption(targetValue) : singleHandleClickOption(targetValue);
+  };
+
+  const singleHandleClickOption = (targetValue) => {
+    onChange({ name, value: targetValue });
+  };
+
+  const multiHandleClickOption = (targetValue) => {
+    onChange({ name, value: targetValue });
   };
 
   const handleClickReset = () => {
@@ -48,15 +59,25 @@ export default function SelectInput({
 
   return (
     <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
-      <SinglePlaceHolder
-        isError={isError}
-        parent={parent}
-        isDropdownOpen={isDropdownOpen}
-        value={value}
-        label={label}
-        handleClickReset={handleClickReset}
-        closeDropdown={closeDropdown}
-      />
+      <S.PlaceHolder isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
+        {isMulti ? (
+          <MultiPlaceHolder
+            values={value}
+            label={label}
+            isDropdownOpen={isDropdownOpen}
+            handleClickReset={handleClickReset}
+            closeDropdown={closeDropdown}
+          />
+        ) : (
+          <SinglePlaceHolder
+            value={value}
+            label={label}
+            isDropdownOpen={isDropdownOpen}
+            handleClickReset={handleClickReset}
+            closeDropdown={closeDropdown}
+          />
+        )}
+      </S.PlaceHolder>
       {isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen}>
         {options.map(({ id, value, label }) => (
