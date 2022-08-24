@@ -60,7 +60,7 @@ export default function SelectInput({
   };
 
   const handleClickReset = () => {
-    isMulti ? singleClickReset() : multiClickReset();
+    isMulti ? multiClickReset() : singleClickReset();
   };
 
   const singleClickReset = () => {
