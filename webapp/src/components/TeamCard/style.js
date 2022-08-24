@@ -33,8 +33,8 @@ export const ProfileImg = styled.img`
 
   width: 100px;
   height: 100px;
-  left: 243px;
-  top: 80px;
+  left: 180px;
+  top: 110px;
 
   border-radius: 50%;
 `;
@@ -148,12 +148,12 @@ export const SkillSlide = styled.div`
 
   height: 100%;
   width: 100%;
-  gap: 4%; // ! : 변경 시 수정 필요 !
+  gap: 3.5%; // ! : 변경 시 수정 필요 !
 `;
 export const SkillImage = styled.img`
   object-fit: cover;
-  width: 66%;
-  height: 65%;
+  width: 60%;
+  height: 60%;
   border-radius: 50%;
   box-shadow: 1px 1px 1px 1px #cdcdcd;
 `;

@@ -17,7 +17,7 @@ export const Container = styled.nav`
   align-content: space-around;
   justify-content: space-around;
   width: 100%;
-  height: 100px;
+  height: 95%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 `;

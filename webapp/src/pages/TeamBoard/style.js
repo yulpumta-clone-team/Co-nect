@@ -2,9 +2,8 @@
 import styled from 'styled-components';
 
 export const BoardWrapper = styled.div`
-  display: flex;
-
   width: 95%;
   height: 85vh;
   margin: 0 auto;
+  border: 1px solid black;
 `;
