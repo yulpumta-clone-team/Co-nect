@@ -8,12 +8,11 @@ import authApi from 'api/auth.api';
 import userApi from 'api/user.api';
 import { ESSENTIAL_INFO } from 'constant/route.constant';
 import essentialValidation from 'service/essentialForm.validation';
-import { updateUserInfo } from 'service/auth';
 
 const initialValues = {
   nickname: '',
   profileImage: '',
-  skills: '',
+  skills: [],
   slogan: '',
   hopeSession: '',
   job: '',
