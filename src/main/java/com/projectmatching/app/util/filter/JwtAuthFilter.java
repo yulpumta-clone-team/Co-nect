@@ -3,7 +3,9 @@ package com.projectmatching.app.util.filter;
 import com.projectmatching.app.constant.JwtConstant;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.exception.CoNectForbiddenException;
 import com.projectmatching.app.exception.CoNectNotFoundException;
+import com.projectmatching.app.exception.CoNectUnAuthorizationException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -49,6 +52,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 }
             }
         }
+        else throw new CoNectUnAuthorizationException("인증 토큰 없음");
         // 유효한 토큰인지 확인합니다.
 
         filterChain.doFilter(request, response);

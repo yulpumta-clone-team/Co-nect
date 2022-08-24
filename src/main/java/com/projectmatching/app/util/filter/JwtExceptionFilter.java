@@ -2,10 +2,13 @@ package com.projectmatching.app.util.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
+import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.exception.CoNectRuntimeException;
+import com.projectmatching.app.exception.CoNectUnAuthorizationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -14,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static com.projectmatching.app.constant.ResponseTemplateStatus.findByHttpStatus;
 
 @Component
 @RequiredArgsConstructor
@@ -30,8 +35,8 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setCharacterEncoding("UTF-8");
-//            ResponseTemplate errorDetail = ResponseTemplate.of(e);
-            objectMapper.writeValue(response.getWriter(),e);
+            ResponseTemplateStatus errorDetail = ResponseTemplateStatus.findByHttpStatus(e.getHttpStatus());
+            objectMapper.writeValue(response.getWriter(), ResponseTemplate.of(errorDetail,e.getMessage()));
         }
     }
 }

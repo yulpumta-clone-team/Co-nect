@@ -68,7 +68,6 @@ export default function TeamCard({ cardInfo, onClick }) {
       <S.TeamInfo>
         <S.UserName>{user.name}님의 모집</S.UserName>
         <S.TeamName>{name}</S.TeamName>
-
         <S.HopeSession>
           예상 기간 &nbsp; <S.TeamHopeSession>{hopeSession}</S.TeamHopeSession>
         </S.HopeSession>

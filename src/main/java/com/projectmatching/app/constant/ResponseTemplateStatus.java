@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
+import java.util.Arrays;
+
 @Getter
 @RequiredArgsConstructor
 public enum ResponseTemplateStatus {
@@ -108,6 +110,14 @@ public enum ResponseTemplateStatus {
         this.code = code;
         this.message = message;
     }
+
+    public static ResponseTemplateStatus findByHttpStatus(HttpStatus httpStatus) {
+        return Arrays.stream(values())
+                .filter(responseTemplateStatus -> responseTemplateStatus.getHttpStatus() == httpStatus)
+                .findFirst()
+                .orElse(ResponseTemplateStatus.LOGICAL_ERROR);
+    }
+
 
 
 

@@ -48,7 +48,7 @@ export const LinkList = styled.ul`
   justify-content: space-around;
   align-items: center;
 
-  ${({ theme: { fonts } }) => fonts.english.emphasis};
+  ${({ theme: { fonts } }) => fonts.english.title};
 `;
 
 export const AssignList = styled.ul`
@@ -94,7 +94,7 @@ export const UserName = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  width: 27%;
+  width: 28%;
   height: 100%;
 
   > span {

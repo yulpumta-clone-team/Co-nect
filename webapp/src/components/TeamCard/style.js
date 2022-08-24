@@ -12,6 +12,7 @@ export const CardWrapper = styled.li`
   height: 80%;
   justify-content: center;
   background: ${({ theme: { colors } }) => colors.greyScale.white};
+
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `;
@@ -33,6 +34,7 @@ export const ProfileImg = styled.img`
 
   width: 100px;
   height: 100px;
+
   left: 180px;
   top: 110px;
 
@@ -47,7 +49,7 @@ export const BackgroundImg = styled.div`
   width: 100%;
   height: 20%;
   background: #eaeaea;
-  padding: 1em;
+  padding: 1rem;
 `;
 // * : Team 모집중 / 모집 안함 상태 나타내는 버튼
 export const TeamStatus = styled.div`
@@ -116,7 +118,8 @@ export const Divider = styled.div`
   top: 20px;
   height: 2px;
   width: 100%;
-  background: ${({ theme: { colors } }) => colors.greyScale.nonActive};
+
+  background-color: ${({ theme: { colors } }) => colors.greyScale.nonActive};
 `;
 // * : 이동 버튼 포함 기술스택 정렬 박스
 export const SkillBoard = styled.div`
@@ -147,6 +150,7 @@ export const SkillSlide = styled.div`
   justify-content: space-between;
 
   height: 100%;
+
   width: 100%;
   gap: 3.5%; // ! : 변경 시 수정 필요 !
 `;
@@ -154,6 +158,7 @@ export const SkillImage = styled.img`
   object-fit: cover;
   width: 60%;
   height: 60%;
+
   border-radius: 50%;
   box-shadow: 1px 1px 1px 1px #cdcdcd;
 `;
@@ -164,7 +169,9 @@ export const CountBoard = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
   height: 14%;
+
   width: 100%;
   padding: 1em;
 `;
@@ -174,6 +181,7 @@ export const Heart = styled(heartIcon)`
   position: relative;
   display: flex;
   align-items: center;
+
   left: -40px;
   top: 16px;
 
