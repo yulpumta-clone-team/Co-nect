@@ -17,6 +17,7 @@ export default function SignUp() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
   const submitCallback = async (submitData) => {
+    console.log('submitCallback');
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
@@ -40,6 +41,7 @@ export default function SignUp() {
     });
 
   const onClickCheckDuplicateEmail = async () => {
+    console.log('onClickCheckDuplicateEmail');
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
     try {
@@ -59,7 +61,7 @@ export default function SignUp() {
         <h2>환영합니다!</h2>
         <span>회원 가입을 통해 팀에게 꼭 맞는 팀원을 만나보세요!</span>
       </S.Header>
-      <S.Form onSubmit={submitHandler}>
+      <S.Form onSubmit={submitHandler} id="signupForm">
         <S.DuplicateCheckInput>
           <TextInput
             name="email"
@@ -71,6 +73,7 @@ export default function SignUp() {
             helperText={validateError.email}
           />
           <Button
+            type="button"
             theme="secondary"
             customStyle={S.DuplicateCheckButton}
             onClick={onClickCheckDuplicateEmail}
@@ -99,6 +102,7 @@ export default function SignUp() {
       </S.Form>
       <Button
         theme="primary"
+        form="signupForm"
         type="submit"
         disabled={!satisfyAllValidates}
         customStyle={S.SubmitButton}
