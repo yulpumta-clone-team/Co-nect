@@ -181,7 +181,7 @@ export const CountBoard = styled.div`
   justify-content: flex-end;
   height: 12%;
   width: 100%;
-  padding: 1em;
+  padding: 1rem;
 `;
 
 // Icon
