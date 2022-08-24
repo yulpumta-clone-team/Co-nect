@@ -13,6 +13,7 @@ import SocailLoginButtons from 'components/SocialLoginButtons';
 import { TOKEN } from 'constant/api.constant';
 import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
+import { ESSENTIAL_INFO, LOGIN } from 'constant/route.constant';
 import * as S from './Login.style';
 
 export default function Login() {
@@ -22,7 +23,7 @@ export default function Login() {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
-      const response = await authApi.signUp({ data: submitData });
+      const response = await authApi.login({ data: submitData });
       const {
         headers,
         data: { isFirst: isFirstLogin },
@@ -31,8 +32,8 @@ export default function Login() {
       handleToken.saveRefreshToken(headers[TOKEN.REFRESH]);
       notifyNewMessage(notifyDispatch, '로그인이 성공적으로 완료되었습니다.', TOAST_TYPE.Success);
       setTimeout(() => {
-        if (isFirstLogin) navigate('/essential_info');
-        navigate('/login');
+        if (isFirstLogin) navigate(ESSENTIAL_INFO.INDEX);
+        navigate(LOGIN);
       }, 1000);
     } catch (error) {
       console.error(error);

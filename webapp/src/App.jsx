@@ -53,7 +53,7 @@ function App() {
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
           <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
           <Route
-            path={`${ESSENTIAL_INFO.INDEX}`}
+            path={ESSENTIAL_INFO.INDEX}
             element={<PublicRoute Component={EssentialInfo} restricted />}
           >
             <Route index element={<Navigate to={ESSENTIAL_INFO.NICKNAME} replace />} />

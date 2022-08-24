@@ -2,7 +2,7 @@ import { API } from 'constant/api.constant';
 import publicApiInstance from './instance/publicApiInstance';
 
 const authApi = {
-  POST_LOGIN(data) {
+  login(data) {
     return publicApiInstance({
       url: API.AUTH.LOGIN,
       method: 'post',
