@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as UpAngleIcon } from 'assets/icons/up-angle.svg';
 import { ReactComponent as DownAngleIcon } from 'assets/icons/down-angle.svg';
 import { ReactComponent as CloseNormalIcon } from 'assets/icons/close-normal.svg';
+import Divider from '../Divider';
 
 export const Container = styled.div`
   box-sizing: border-box;
@@ -28,11 +29,14 @@ export const PlaceHolder = styled.div`
     if (isDropdownOpen) {
       return css`
         border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
-        ${UpAngle}, ${DownAngle}, , ${CloseNormal} {
+        ${UpAngle}, ${DownAngle}, ${CloseNormal} {
           & path {
             fill: ${({ theme: { colors } }) => colors.primary.normal};
             stroke: ${({ theme: { colors } }) => colors.primary.normal};
           }
+        }
+        ${ButtonDivider} {
+          background-color: ${({ theme: { colors } }) => colors.primary.normal};
         }
       `;
     }
@@ -50,6 +54,9 @@ export const PlaceHolder = styled.div`
             fill: ${({ theme: { colors } }) => colors.important.normal};
             stroke: ${({ theme: { colors } }) => colors.important.normal};
           }
+        }
+        ${ButtonDivider} {
+          background-color: ${({ theme: { colors } }) => colors.important.normal};
         }
       `;
     }
@@ -96,8 +103,6 @@ export const Option = styled.li`
   }
 `;
 
-export const CommonAngle = css``;
-
 export const ButtonContainer = styled.div`
   position: absolute;
   right: 15px;
@@ -116,17 +121,15 @@ export const ButtonContainer = styled.div`
   }
 `;
 
+export const ButtonDivider = styled(Divider)``;
+
 export const ClearableButton = styled.button``;
 
 export const UpAngle = styled(UpAngleIcon)``;
 
-export const DownAngle = styled(DownAngleIcon)`
-  ${CommonAngle}
-`;
+export const DownAngle = styled(DownAngleIcon)``;
 
-export const CloseNormal = styled(CloseNormalIcon)`
-  ${CommonAngle}
-`;
+export const CloseNormal = styled(CloseNormalIcon)``;
 
 export const Error = styled.span`
   position: absolute;

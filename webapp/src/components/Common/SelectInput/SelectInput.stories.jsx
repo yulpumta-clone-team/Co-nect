@@ -26,11 +26,26 @@ Default.args = {
   ],
 };
 
-export const WithValue = Template.bind({});
-WithValue.args = {
-  value: 'WithValue',
-  name: 'WithValue',
-  label: 'WithValue',
+export const SignlePlaceHolder = Template.bind({});
+SignlePlaceHolder.args = {
+  value: 'SignlePlaceHolder',
+  name: 'SignlePlaceHolder',
+  label: 'SignlePlaceHolder',
+  defaultOption: { id: 0, value: '기본1', label: '기본1' },
+  options: [
+    { id: 0, value: '기본1', label: '기본1' },
+    { id: 1, value: '기본2', label: '기본2' },
+    { id: 2, value: '기본3', label: '기본3' },
+    { id: 3, value: '기본4', label: '기본4' },
+  ],
+};
+
+export const MultiPlaceHolder = Template.bind({});
+MultiPlaceHolder.args = {
+  value: 'MultiPlaceHolder',
+  name: 'MultiPlaceHolder',
+  label: 'MultiPlaceHolder',
+  isMulti: true,
   defaultOption: { id: 0, value: '기본1', label: '기본1' },
   options: [
     { id: 0, value: '기본1', label: '기본1' },
