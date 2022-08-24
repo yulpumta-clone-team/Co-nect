@@ -105,7 +105,7 @@ export default function SignUp() {
       >
         Sign up
       </Button>
-      <Divider width="500" marginTop="73" marginBottom="38" />
+      <Divider width="500px" marginTop="73px" marginBottom="38px" />
       <SocailLoginButtons>소셜계정으로 회원가입</SocailLoginButtons>
     </S.Container>
   );
