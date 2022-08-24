@@ -27,6 +27,8 @@ select,
 textarea {
   background-color: transparent;
   border: 0;
+  padding: 0;
+  margin: 0;
   &:focus {
     outline: none;
     box-shadow: none;
