@@ -102,7 +102,7 @@ const fonts = {
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
       font-size: ${FONT.SIZE.BASE};
-      line-height: ${FONT.HEIGHT.MEDIUM};
+      line-height: ${FONT.HEIGHT.LARGE};
     `,
     default: css`
       font-family: ${FONT.FAMILY.ENGLISH};
