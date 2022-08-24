@@ -26,6 +26,20 @@ Default.args = {
   ],
 };
 
+export const WithValue = Template.bind({});
+WithValue.args = {
+  value: 'WithValue',
+  name: 'WithValue',
+  label: 'WithValue',
+  defaultOption: { id: 0, value: '기본1', label: '기본1' },
+  options: [
+    { id: 0, value: '기본1', label: '기본1' },
+    { id: 1, value: '기본2', label: '기본2' },
+    { id: 2, value: '기본3', label: '기본3' },
+    { id: 3, value: '기본4', label: '기본4' },
+  ],
+};
+
 export const WithError = Template.bind({});
 WithError.args = {
   value: '',
