@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { teamCardType } from 'types/team.type';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
-import { setDefaultProfileImage } from 'utils';
+import ProfileImg from 'components/Common/ProfileImg';
+
+import { DEFAULT_PROFILE_IMG } from 'constant';
 
 import * as S from './style';
 
@@ -56,8 +58,7 @@ export default function TeamCard({ cardInfo, onClick }) {
     slideRef.current.style.transition = 'all 0.5s ease-in-out';
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
-  const S3Img = { S3_IMAGE_SERVER_URL } + { img };
-  // ! : Slide 부분을 위해 mock data skillsImg를 생성하고 map을 활용해보려 했는데, 잘 작동시키지 못했습니다. 도움 요청합니다 ㅠ.ㅠ
+  const S3Img = S3_IMAGE_SERVER_URL + img;
   return (
     <S.CardWrapper onClick={onClick}>
       <S.CardTop>
@@ -66,7 +67,7 @@ export default function TeamCard({ cardInfo, onClick }) {
       <S.BackgroundImg>
         <S.TeamStatus>{status}</S.TeamStatus>
       </S.BackgroundImg>
-      <S.ProfileImg src={setDefaultProfileImage(img)} alt="프로필" />
+      <ProfileImg src={S3Img} />
       <S.TeamInfo>
         <S.UserName>{user.name}님의 모집</S.UserName>
         <S.TeamName>{name}</S.TeamName>

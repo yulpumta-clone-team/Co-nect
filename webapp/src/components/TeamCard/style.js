@@ -28,18 +28,6 @@ export const CardTop = styled.div`
   border-radius: 10px 10px 0px 0px;
 `;
 
-export const ProfileImg = styled.img`
-  position: absolute; // * : 각 div 상자에 걸쳐있는 프로필 이미지 때문에 absolute로 위치를 설정해 줌.
-  display: flex;
-
-  width: 30%;
-  height: 25%;
-
-  left: 62%;
-  top: 18%;
-
-  border-radius: 50%;
-`;
 // * : 지금은 Figma color 참고하여 div 태그로 구성하여 줬지만, 추후 img로 수정 필요.
 export const BackgroundImg = styled.div`
   position: relative;
@@ -89,6 +77,7 @@ export const UserName = styled.div`
 export const TeamName = styled.div`
   position: relative;
   display: flex;
+  align-items: center;
 
   height: 40%;
   width: 100%;
