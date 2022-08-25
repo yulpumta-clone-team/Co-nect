@@ -12,7 +12,8 @@ export const Layout = styled.div`
   top: 0;
   right: 0;
   z-index: ${({ theme: { zIndex } }) => zIndex.modalLayout};
-  background-color: ${({ theme: { colors } }) => colors.greyScale.border};
+  /* background-color: ${({ theme: { colors } }) => colors.greyScale.border}; */
+  background-color: rgba(255, 255, 255, 0.75);
 `;
 
 export const DialogContainer = styled.dialog`
@@ -24,7 +25,7 @@ export const DialogContainer = styled.dialog`
   height: 520px;
   z-index: ${({ theme: { zIndex } }) => zIndex.modalLevel};
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
-  border: none;
+  /* border: none; */
   border-radius: 20px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
 `;

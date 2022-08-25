@@ -72,6 +72,10 @@ const useEssentialForm = () => {
     validate: essentialValidation,
   });
 
+  const handleClickLayout = useCallback(() => {
+    navigate(LOGIN);
+  }, [navigate]);
+
   const handleClickNextButton = useCallback(() => {
     const currentPathname = location.pathname;
     const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
@@ -133,6 +137,7 @@ const useEssentialForm = () => {
       isTargetSatisfyValidate,
       handleClickNextButton,
       handleClickPrevButton,
+      handleClickLayout,
     }),
     [
       onChangeHandler,
@@ -142,6 +147,7 @@ const useEssentialForm = () => {
       isTargetSatisfyValidate,
       handleClickNextButton,
       handleClickPrevButton,
+      handleClickLayout,
     ],
   );
 

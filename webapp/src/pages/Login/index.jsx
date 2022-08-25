@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
@@ -20,6 +20,11 @@ import * as S from './Login.style';
 export default function Login() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
+
+  const handleShowEssesntialModal = () => {
+    navigate(ESSENTIAL_INFO.INDEX);
+  };
+
   const submitCallback = async (submitData) => {
     const parsedSubmitData = loginParser(submitData);
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
@@ -34,8 +39,11 @@ export default function Login() {
       handleToken.saveRefreshToken(headers[TOKEN.REFRESH]);
       notifyNewMessage(notifyDispatch, '로그인이 성공적으로 완료되었습니다.', TOAST_TYPE.Success);
       setTimeout(() => {
-        if (isFirstLogin) navigate(ESSENTIAL_INFO.INDEX);
-        navigate(LOGIN);
+        if (isFirstLogin) {
+          handleShowEssesntialModal();
+        } else {
+          navigate(LOGIN);
+        }
       }, 1000);
     } catch (error) {
       console.error(error);
@@ -88,6 +96,7 @@ export default function Login() {
       </Button>
       <Divider width="500px" marginTop="67px" marginBottom="38px" />
       <SocailLoginButtons>소셜계정으로 로그인</SocailLoginButtons>
+      <Outlet />
     </S.Container>
   );
 }

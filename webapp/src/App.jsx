@@ -51,21 +51,22 @@ function App() {
           <Route path={USER} element={<PublicRoute Component={UserBoard} restricted={false} />} />
           <Route path={TEAM} element={<PublicRoute Component={TeamBoard} restricted={false} />} />
           <Route path={PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
-          <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />} />
-          <Route
-            path={ESSENTIAL_INFO.INDEX}
-            element={<PublicRoute Component={EssentialInfo} restricted />}
-          >
-            <Route index element={<Navigate to={ESSENTIAL_INFO.NICKNAME} replace />} />
-            <Route path={ESSENTIAL_INFO.NICKNAME} element={<Nickname />} />
-            <Route path={ESSENTIAL_INFO.SKILL} element={<Skills />} />
-            <Route path={ESSENTIAL_INFO.PROFILE_IMAGE} element={<ProfileImage />} />
-            <Route path={ESSENTIAL_INFO.SESSION_JOB} element={<SessionJob />} />
-            <Route path={ESSENTIAL_INFO.SLOGAN} element={<Slogan />} />
-            <Route path={ESSENTIAL_INFO.BELONG_TEAM} element={<BelongTeam />} />
-            <Route path={ESSENTIAL_INFO.CONTENT} element={<Introduction />} />
-            <Route path={ESSENTIAL_INFO.PROTFOLIO} element={<Portfolio />} />
-            <Route path={ESSENTIAL_INFO.CALLBACK} element={<EssentailCallback />} />
+          <Route path={LOGIN} element={<PublicRoute Component={Login} restricted />}>
+            <Route
+              path={ESSENTIAL_INFO.INDEX}
+              element={<PublicRoute Component={EssentialInfo} restricted />}
+            >
+              <Route index element={<Navigate to={ESSENTIAL_INFO.NICKNAME} replace />} />
+              <Route path={ESSENTIAL_INFO.NICKNAME} element={<Nickname />} />
+              <Route path={ESSENTIAL_INFO.SKILL} element={<Skills />} />
+              <Route path={ESSENTIAL_INFO.PROFILE_IMAGE} element={<ProfileImage />} />
+              <Route path={ESSENTIAL_INFO.SESSION_JOB} element={<SessionJob />} />
+              <Route path={ESSENTIAL_INFO.SLOGAN} element={<Slogan />} />
+              <Route path={ESSENTIAL_INFO.BELONG_TEAM} element={<BelongTeam />} />
+              <Route path={ESSENTIAL_INFO.CONTENT} element={<Introduction />} />
+              <Route path={ESSENTIAL_INFO.PROTFOLIO} element={<Portfolio />} />
+              <Route path={ESSENTIAL_INFO.CALLBACK} element={<EssentailCallback />} />
+            </Route>
           </Route>
           <Route path={SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
           <Route path={MY_LIST} element={<PrivateRoute Component={MyList} />} />
