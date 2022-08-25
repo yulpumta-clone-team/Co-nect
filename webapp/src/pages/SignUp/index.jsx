@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
@@ -11,18 +11,20 @@ import Button from 'components/Common/Button';
 import SocailLoginButtons from 'components/SocialLoginButtons';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import BackButton from 'components/Common/BackButton';
+import { signUpParser } from 'service/auth.parser';
 import * as S from './SignUp.style';
 
 export default function SignUp() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
+  const [isEmailDuplicate, setIsEmailDuplicate] = useState(true);
   const submitCallback = async (submitData) => {
-    console.log('submitCallback');
+    const parsedSubmitData = signUpParser(submitData);
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
-      const response = await authApi.signUp({ data: submitData });
-      const { message } = response.data;
+      const response = await authApi.signUp({ submitData: parsedSubmitData });
+      const { message } = response;
       notifyNewMessage(notifyDispatch, message, TOAST_TYPE.Success);
       setTimeout(() => {
         navigate('/login');
@@ -41,18 +43,20 @@ export default function SignUp() {
     });
 
   const onClickCheckDuplicateEmail = async () => {
-    console.log('onClickCheckDuplicateEmail');
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
     try {
       const response = await authApi.checkDuplicateEmail({ email: inputValues.email });
-      const { message } = response.data;
-      notifyNewMessage(notifyDispatch, message, 'Success');
+      const { message } = response;
+      notifyNewMessage(notifyDispatch, '사용가능한 이메일입니다!', 'Success');
+      setIsEmailDuplicate(false);
     } catch (error) {
       console.error(error);
       notifyNewMessage(notifyDispatch, error, 'Error');
     }
   };
+
+  const canActiveSingupButton = !satisfyAllValidates || isEmailDuplicate;
 
   return (
     <S.Container>
@@ -104,7 +108,7 @@ export default function SignUp() {
         theme="primary"
         form="signupForm"
         type="submit"
-        disabled={!satisfyAllValidates}
+        disabled={canActiveSingupButton}
         customStyle={S.SubmitButton}
       >
         Sign up

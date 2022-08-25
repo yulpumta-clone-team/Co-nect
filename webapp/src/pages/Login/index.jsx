@@ -14,16 +14,18 @@ import { TOKEN } from 'constant/api.constant';
 import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
 import { ESSENTIAL_INFO, LOGIN } from 'constant/route.constant';
+import { loginParser } from 'service/auth.parser';
 import * as S from './Login.style';
 
 export default function Login() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
   const submitCallback = async (submitData) => {
+    const parsedSubmitData = loginParser(submitData);
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
-      const response = await authApi.login({ data: submitData });
+      const response = await authApi.login({ submitData: parsedSubmitData });
       const {
         headers,
         data: { isFirst: isFirstLogin },
