@@ -19,7 +19,7 @@ const setAcessTokenInRequestConfig = (config) => {
   if (!config?.headers || !accessToken || !refreshToken) {
     return config;
   }
-  config.headers.Authorization = `Bearer ${accessToken}`;
+  config.headers.Authorization = accessToken;
   config.headers[TOKEN.REFRESH] = refreshToken;
   return config;
 };
