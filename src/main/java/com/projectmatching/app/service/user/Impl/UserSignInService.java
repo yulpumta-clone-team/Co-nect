@@ -41,6 +41,7 @@ public class UserSignInService {
     public AuthToken userLogin(UserLoginDto userLoginDto){
         try {
             User user = userRepository.findByEmail(userLoginDto.getEmail()).orElseThrow(CoNectNotFoundException::new);
+
             if(passwordEncoder.matches(userLoginDto.getPwd(),user.getPwd())){
                 return jwtTokenProvider.createTokens(UserDto.of(user));
 
