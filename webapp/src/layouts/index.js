@@ -8,20 +8,15 @@ import ToastNotificationProvider, {
 import WithProvider from 'hoc/withProvider';
 import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
-import EssentialModalProvider, {
-  useEssentialModalState,
-} from 'contexts/EssentialModal/EssentialModal.Provider';
-import EssentialInfo from 'components/EssentialInfo';
 import * as S from './style';
 
 export default WithProvider({
-  Providers: [ToastNotificationProvider, EssentialModalProvider],
+  Providers: [ToastNotificationProvider],
   Component: Layout,
 });
 
 function Layout() {
   const { toastList } = useToastNotificationState();
-  const { isOpen } = useEssentialModalState();
   const notifyDispatch = useToastNotificationAction();
   const deleteToastCallback = (id) => {
     deleteMessage(notifyDispatch, id);
@@ -34,7 +29,6 @@ function Layout() {
       <S.Main>
         <Outlet />
       </S.Main>
-      <EssentialInfo isShow={isOpen} />
       <ToastNotification
         toastList={toastList}
         col="top"
