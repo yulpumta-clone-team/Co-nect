@@ -5,11 +5,11 @@ import { mockLoginData, mockSignUpData } from './mockMyData';
 
 const authHandler = [
   // 이메일 중복체크 요청
-  rest.post(ROOT_API_URL + API.AUTH.CHECK_DUPLICATE_EMAIL, (req, res, ctx) => {
+  rest.patch(ROOT_API_URL + API.AUTH.CHECK_DUPLICATE_EMAIL, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // 닉네임 중복체크 요청
-  rest.post(ROOT_API_URL + API.AUTH.CHECK_DUPLICATE_NICKNAME, (req, res, ctx) => {
+  rest.patch(ROOT_API_URL + API.AUTH.CHECK_DUPLICATE_NICKNAME, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // 로그인 요청
