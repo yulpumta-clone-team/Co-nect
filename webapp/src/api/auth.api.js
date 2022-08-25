@@ -2,18 +2,18 @@ import { API } from 'constant/api.constant';
 import publicApiInstance from './instance/publicApiInstance';
 
 const authApi = {
-  login(data) {
+  login({ submitData }) {
     return publicApiInstance({
       url: API.AUTH.LOGIN,
       method: 'post',
-      data,
+      data: submitData,
     });
   },
-  signUp(data) {
+  signUp({ submitData }) {
     return publicApiInstance({
       url: API.AUTH.SIGNUP,
       method: 'post',
-      data,
+      data: submitData,
     });
   },
   DEL_WITHDRAWAL() {
@@ -25,14 +25,14 @@ const authApi = {
   checkDuplicateEmail({ email }) {
     return publicApiInstance({
       url: API.AUTH.CHECK_DUPLICATE_EMAIL,
-      method: 'post',
+      method: 'patch',
       params: { email },
     });
   },
   checkDuplicateNickName(config) {
     return publicApiInstance({
       url: API.AUTH.CHECK_DUPLICATE_NICKNAME,
-      method: 'post',
+      method: 'patch',
       ...config,
     });
   },
