@@ -3,6 +3,7 @@ package com.projectmatching.app.service.jwt;
 
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserLoginDto;
 import com.projectmatching.app.service.ServiceTest;
 import com.projectmatching.app.util.AuthTokenProvider;
 import io.jsonwebtoken.Claims;
@@ -40,9 +41,9 @@ public class JwtServiceTest extends ServiceTest {
     @Mock
     private HttpServletResponse httpServletResponse;
 
-    private UserLoginResDto userLoginResDto = UserLoginResDto.builder()
-            .name("testName")
+    private UserLoginDto userLoginResDto = UserLoginDto.builder()
             .email("test@email.com")
+            .pwd("!@#add@na88")
             .build();
 
 
@@ -66,7 +67,6 @@ public class JwtServiceTest extends ServiceTest {
 
         //given
         claims.put(CLAIM_EMAIL,userLoginResDto.getEmail());
-        claims.put(CLAIM_NAME,userLoginResDto.getName());
 
         Date now = new Date();
         String jwts =Jwts.builder()
@@ -83,7 +83,6 @@ public class JwtServiceTest extends ServiceTest {
         //then
 
         Assertions.assertEquals(userLoginResDto.getEmail(),authTokenProvider.getUserEmail(token));
-        Assertions.assertEquals(userLoginResDto.getName(),authTokenProvider.getUserName(token));
     }
 
 
@@ -112,7 +111,6 @@ public class JwtServiceTest extends ServiceTest {
 
         //then
         Assertions.assertEquals(userLoginResDto.getEmail(),authTokenProvider.getUserEmail(token));
-        Assertions.assertEquals(userLoginResDto.getName(),authTokenProvider.getUserName(token));
     }
 
 

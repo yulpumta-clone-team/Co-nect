@@ -3,9 +3,7 @@ package com.projectmatching.app.domain.user.dto;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.Validatable;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -16,7 +14,9 @@ import static com.projectmatching.app.constant.ServiceConstant.REGEX_EMAIL;
  * Validate 검사 필요한 dto
  */
 @Getter @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserLoginDto implements Validatable {
 
     @Email

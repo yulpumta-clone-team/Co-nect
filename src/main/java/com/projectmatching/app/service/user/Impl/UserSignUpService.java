@@ -59,7 +59,7 @@ public class UserSignUpService {
     public void updateUserEssentialInfo(UserEssentialDto userEssentialDto, UserDetailsImpl userDetails){
         checkDuplicateName(userEssentialDto.getName());
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
-        user.updateEssentialInfo(userEssentialDto,techStackProvider);
+        user.updateEssentialInfo(userEssentialDto);
 
         addUsersTechStackByUserEssentialDto(userEssentialDto, user);
 
@@ -74,9 +74,9 @@ public class UserSignUpService {
                 .stream()
                 .map(techCode -> TechStack.of(techCode))
                 .map(techStack ->{
-                        techStackRepository.save(techStack);
-                        return UserTech.of(techStack, user);
-                    }
+                            techStackRepository.save(techStack);
+                            return UserTech.of(techStack, user);
+                        }
                 ).forEach(userTech->userTechRepository.save(userTech));
     }
 

@@ -101,9 +101,8 @@ public class UserSignUpServiceTest extends ServiceTest {
                 .build();
 
         User user = mock(User.class);
-        when(user.updateEssentialInfo(userEssentialDto,techStackProvider)).thenReturn(user);
+        when(user.updateEssentialInfo(userEssentialDto)).thenReturn(user);
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
-        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(userDetails.getUserId()).thenReturn(anyLong());
 
         userSignUpService.updateUserEssentialInfo(userEssentialDto,userDetails);
