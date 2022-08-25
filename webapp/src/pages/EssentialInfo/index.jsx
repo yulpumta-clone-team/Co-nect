@@ -22,9 +22,9 @@ function EssentialInfo() {
           <Button theme="none" customStyle={S.AngleButton} onClick={handleClickPrevButton}>
             <S.LeftAngle />
           </Button>
-          <Button theme="none" customStyle={S.AngleButton} onClick={handleClickNextButton}>
+          {/* <Button theme="none" customStyle={S.AngleButton} onClick={handleClickNextButton}>
             <S.RightAngle />
-          </Button>
+          </Button> */}
         </S.AngleContainer>
         {/* Outlet === subPage  */}
         <Outlet />
