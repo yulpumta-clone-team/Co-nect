@@ -61,15 +61,23 @@ public class UserSignUpService {
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
         user.updateEssentialInfo(userEssentialDto,techStackProvider);
 
+        addUsersTechStackByUserEssentialDto(userEssentialDto, user);
+
+    }
+
+    //유저 기술스택 저장을 위해 차례로 db에 insert
+    // 1. techCode to TechStack Entity then save TechStack
+    // 2. make UserTech Entity by user and TechStack
+    // 3. save UserTech entity to Repository
+    private void addUsersTechStackByUserEssentialDto(UserEssentialDto userEssentialDto, User user) {
         techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills())
                 .stream()
                 .map(techCode -> TechStack.of(techCode))
                 .map(techStack ->{
                         techStackRepository.save(techStack);
-                        return UserTech.of(techStack,user);
+                        return UserTech.of(techStack, user);
                     }
                 ).forEach(userTech->userTechRepository.save(userTech));
-
     }
 
 
