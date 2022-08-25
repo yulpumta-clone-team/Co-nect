@@ -30,7 +30,7 @@ public class QTechCode extends EntityPathBase<TechCode> {
 
     public final StringPath image = createString("image");
 
-    public final NumberPath<Integer> key = createNumber("key", Integer.class);
+    public final NumberPath<Integer> keys = createNumber("keys", Integer.class);
 
     //inherited
     public final StringPath status = _super.status;

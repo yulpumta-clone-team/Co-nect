@@ -18,7 +18,7 @@ public class TechStackProviderImpl implements TechStackProvider{
     public List<TechCode> extractTechCodeByKeys(List<Integer> keys) {
         return techStackCode.getTechCodeList()
                 .stream()
-                .filter(t-> keys.contains(t.getKey())).collect(Collectors.toList());
+                .filter(t-> keys.contains(t.getKeys())).collect(Collectors.toList());
     }
 
     @Override

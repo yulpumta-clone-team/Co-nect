@@ -19,18 +19,19 @@ import javax.persistence.*;
 public class TechCode extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
     private Long id;
 
-    private int key;
+    @Column(columnDefinition = "BIGINT")
+    private Integer keys;
 
     private String category;
-
-    private String image;
-
     //기술 이름
     @Column(name = "tech_name")
     private String techName;
+
+    private String image;
+
+
 
 
 

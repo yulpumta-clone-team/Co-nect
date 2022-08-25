@@ -26,7 +26,7 @@ public class QTechStack extends EntityPathBase<TechStack> {
 
     public final StringPath image = createString("image");
 
-    public final NumberPath<Integer> key = createNumber("key", Integer.class);
+    public final NumberPath<Integer> keys = createNumber("keys", Integer.class);
 
     public final SetPath<com.projectmatching.app.domain.team.entity.TeamTech, com.projectmatching.app.domain.team.entity.QTeamTech> teamTechs = this.<com.projectmatching.app.domain.team.entity.TeamTech, com.projectmatching.app.domain.team.entity.QTeamTech>createSet("teamTechs", com.projectmatching.app.domain.team.entity.TeamTech.class, com.projectmatching.app.domain.team.entity.QTeamTech.class, PathInits.DIRECT2);
 

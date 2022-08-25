@@ -3,6 +3,7 @@ package com.projectmatching.app.service.user.Impl;
 import com.projectmatching.app.annotation.Validation;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
+import com.projectmatching.app.domain.techStack.TechStackRepository;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.techStack.provider.TechStackProviderImpl;
 import com.projectmatching.app.domain.user.Role;
@@ -34,7 +35,7 @@ public class UserSignUpService {
     private final UserRepository userRepository;
     private final TechStackProviderImpl techStackProvider;
     private final UserTechRepository userTechRepository;
-
+    private final TechStackRepository techStackRepository;
 
     @Transactional
     @Validation
@@ -63,8 +64,10 @@ public class UserSignUpService {
         techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills())
                 .stream()
                 .map(techCode -> TechStack.of(techCode))
-                .map(techStack ->
-                        UserTech.of(techStack,user)
+                .map(techStack ->{
+                        techStackRepository.save(techStack);
+                        return UserTech.of(techStack,user);
+                    }
                 ).forEach(userTech->userTechRepository.save(userTech));
 
     }
