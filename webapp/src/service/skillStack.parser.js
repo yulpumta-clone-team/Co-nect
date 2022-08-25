@@ -1,5 +1,5 @@
-export const skillStackParserToSelectInput = (mockSkills) => {
-  return mockSkills
+export const skillStackParserToSelectInput = (techSkills) =>
+  techSkills
     .map(({ key, category, techName, image }) => ({
       label: techName,
       value: techName,
@@ -8,4 +8,5 @@ export const skillStackParserToSelectInput = (mockSkills) => {
       category,
     }))
     .sort((a, b) => a.id - b.id); // id를 기준으로 오름차순 정렬
-};
+
+export const skillStackParserToIds = (techSkills) => techSkills.map(({ key }) => key);
