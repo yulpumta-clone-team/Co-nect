@@ -10,8 +10,7 @@ import * as S from './EssentialInfo.style';
 export default WithProvider({ Providers: [EssentialFormProvider], Component: EssentialInfo });
 
 function EssentialInfo() {
-  const { handleClickNextButton, handleClickPrevButton, handleClickLayout } =
-    useEssentialFormsAction();
+  const { handleClickPrevButton, handleClickLayout } = useEssentialFormsAction();
   return (
     <S.Layout onClick={handleClickLayout}>
       <S.DialogContainer onClick={(event) => event.stopPropagation()}>
@@ -22,9 +21,6 @@ function EssentialInfo() {
           <Button theme="none" customStyle={S.AngleButton} onClick={handleClickPrevButton}>
             <S.LeftAngle />
           </Button>
-          {/* <Button theme="none" customStyle={S.AngleButton} onClick={handleClickNextButton}>
-            <S.RightAngle />
-          </Button> */}
         </S.AngleContainer>
         {/* Outlet === subPage  */}
         <Outlet />
