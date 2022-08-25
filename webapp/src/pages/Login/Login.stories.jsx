@@ -3,7 +3,7 @@ import WithProvider from 'hoc/withProvider';
 import React from 'react';
 import Login from './index';
 
-const WithToastLogin = WithProvider({ Provider: ToastNotificationProvider, Component: Login });
+const WithToastLogin = WithProvider({ Providers: [ToastNotificationProvider], Component: Login });
 
 export default {
   title: 'Pages/Login',
