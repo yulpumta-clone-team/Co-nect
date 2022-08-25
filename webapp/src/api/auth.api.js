@@ -29,11 +29,11 @@ const authApi = {
       params: { email },
     });
   },
-  checkDuplicateNickName(config) {
+  checkDuplicateNickName({ name }) {
     return publicApiInstance({
       url: API.AUTH.CHECK_DUPLICATE_NICKNAME,
       method: 'patch',
-      ...config,
+      params: { name },
     });
   },
 };
