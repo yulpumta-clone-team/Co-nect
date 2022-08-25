@@ -137,11 +137,8 @@ public class User extends BaseTimeEntity  {
         this.slogan = userEssentialDto.getSlogan();
         this.image = userEssentialDto.getImage();
         this.content = userEssentialDto.getContent();
-        this.skills = techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills())
-                .stream()
-                .map(t ->
-                    TechCode.toUserTechWithAddedUser(t,this)
-                ).collect(Collectors.toSet());
+
+
         this.portfolio = userEssentialDto.getPortfolio();
         this.hope_session = userEssentialDto.getHope_session();
 

@@ -24,11 +24,13 @@ public class QTechStack extends EntityPathBase<TechStack> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final NumberPath<Long> key = createNumber("key", Long.class);
+    public final StringPath image = createString("image");
 
-    public final StringPath name = createString("name");
+    public final NumberPath<Integer> key = createNumber("key", Integer.class);
 
     public final SetPath<com.projectmatching.app.domain.team.entity.TeamTech, com.projectmatching.app.domain.team.entity.QTeamTech> teamTechs = this.<com.projectmatching.app.domain.team.entity.TeamTech, com.projectmatching.app.domain.team.entity.QTeamTech>createSet("teamTechs", com.projectmatching.app.domain.team.entity.TeamTech.class, com.projectmatching.app.domain.team.entity.QTeamTech.class, PathInits.DIRECT2);
+
+    public final StringPath techName = createString("techName");
 
     public final SetPath<com.projectmatching.app.domain.user.entity.UserTech, com.projectmatching.app.domain.user.entity.QUserTech> userTechs = this.<com.projectmatching.app.domain.user.entity.UserTech, com.projectmatching.app.domain.user.entity.QUserTech>createSet("userTechs", com.projectmatching.app.domain.user.entity.UserTech.class, com.projectmatching.app.domain.user.entity.QUserTech.class, PathInits.DIRECT2);
 

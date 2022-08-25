@@ -3,6 +3,7 @@ package com.projectmatching.app.domain.techStack.entity;
 import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.user.entity.UserTech;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,17 +19,18 @@ public class TechStack {
 
 
     @Id
-    @Column(name = "tech_stack_id")
+    @GeneratedValue
     private Long id;
 
     @Column
     private String category;
 
-    @Column
-    private String name; //기술 이름
+    private String techName; //기술 이름
 
     @Column
-    private Long key;
+    private Integer key;
+
+    private String image;
 
 
     @OneToMany(mappedBy = "techStack", cascade = CascadeType.ALL)
@@ -43,4 +45,12 @@ public class TechStack {
     private Set<UserTech> userTechs = new HashSet<>();
 
 
+
+
+    public static TechStack of(TechCode techCode){
+        TechStack techStack = new TechStack();
+        BeanUtils.copyProperties(techCode,techStack);
+        return techStack;
+
+    }
 }

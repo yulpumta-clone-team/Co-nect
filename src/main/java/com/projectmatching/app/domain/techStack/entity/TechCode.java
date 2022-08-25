@@ -34,19 +34,7 @@ public class TechCode extends BaseTimeEntity {
 
 
 
-    public static TechStack toTechStackEntity(TechCode techCode){
-        TechStack techStack = new TechStack();
-        BeanUtils.copyProperties(techCode,techStack);
-        return techStack;
 
-    }
-    public static UserTech toUserTechWithAddedUser(TechCode techCode, User user){
-        UserTech userTech = new UserTech();
-        userTech.setTechStack(toTechStackEntity(techCode));
-        userTech.setUser(user);
-        userTech.setId(IdGenerator.number());
-        return userTech;
-    }
 
 
 }
