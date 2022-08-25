@@ -47,9 +47,14 @@ export default function SignUp() {
     notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
     try {
       const response = await authApi.checkDuplicateEmail({ email: inputValues.email });
-      const { message } = response;
-      notifyNewMessage(notifyDispatch, '사용가능한 이메일입니다!', 'Success');
-      setIsEmailDuplicate(false);
+      const isDuplicated = response.data;
+      if (isDuplicated) {
+        notifyNewMessage(notifyDispatch, '이미 사용중인 닉네임입니다!', TOAST_TYPE.Warning);
+        setIsEmailDuplicate(true);
+      } else {
+        notifyNewMessage(notifyDispatch, '사용가능한 닉네임입니다!', TOAST_TYPE.Success);
+        setIsEmailDuplicate(false);
+      }
     } catch (error) {
       console.error(error);
       notifyNewMessage(notifyDispatch, error, 'Error');
