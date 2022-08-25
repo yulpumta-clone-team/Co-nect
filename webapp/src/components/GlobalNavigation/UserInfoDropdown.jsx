@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from 'components/Common/Dropdown';
 import { deleteUserInfo } from 'service/auth';
-import { MY_POST, PROFILE, MY_LIST } from 'constant/route.constant';
-import authApi from 'api/auth.api';
+import { ROUTE } from 'constant/route.constant';
 import * as S from './style';
 
 UserInfoDropdown.propTypes = {
@@ -33,9 +32,9 @@ export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, 
       customStyle={S.UserInfoDropdown}
     >
       <ul>
-        <S.Link onClick={() => onClickLinkLi(MY_POST)}>내 작성글</S.Link>
-        <S.Link onClick={() => onClickLinkLi(MY_LIST)}>내 관심글</S.Link>
-        <S.Link onClick={() => onClickLinkLi(PROFILE)}>프로필 설정</S.Link>
+        <S.Link onClick={() => onClickLinkLi(ROUTE.MY_POST)}>내 작성글</S.Link>
+        <S.Link onClick={() => onClickLinkLi(ROUTE.MY_LIST)}>내 관심글</S.Link>
+        <S.Link onClick={() => onClickLinkLi(ROUTE.PROFILE)}>프로필 설정</S.Link>
         <S.Link onClick={onClickLogout}>로그아웃</S.Link>
       </ul>
     </Dropdown>

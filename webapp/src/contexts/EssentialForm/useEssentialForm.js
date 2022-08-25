@@ -6,7 +6,7 @@ import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import useForm from 'hooks/useForm';
 import authApi from 'api/auth.api';
 import userApi from 'api/user.api';
-import { ESSENTIAL_INFO, LOGIN } from 'constant/route.constant';
+import { ROUTE } from 'constant/route.constant';
 import essentialValidation from 'service/essentialForm.validation';
 import { essentialInfoParser } from 'service/auth.parser';
 
@@ -23,15 +23,15 @@ const initialValues = {
 };
 
 const essentailSubPagesRouteOrder = [
-  ESSENTIAL_INFO.NICKNAME,
-  ESSENTIAL_INFO.SKILL,
-  ESSENTIAL_INFO.PROFILE_IMAGE,
-  ESSENTIAL_INFO.SESSION_JOB,
-  ESSENTIAL_INFO.SLOGAN,
-  ESSENTIAL_INFO.BELONG_TEAM,
-  ESSENTIAL_INFO.CONTENT,
-  ESSENTIAL_INFO.PROTFOLIO,
-  ESSENTIAL_INFO.CALLBACK,
+  ROUTE.ESSENTIAL_INFO.NICKNAME,
+  ROUTE.ESSENTIAL_INFO.SKILL,
+  ROUTE.ESSENTIAL_INFO.PROFILE_IMAGE,
+  ROUTE.ESSENTIAL_INFO.SESSION_JOB,
+  ROUTE.ESSENTIAL_INFO.SLOGAN,
+  ROUTE.ESSENTIAL_INFO.BELONG_TEAM,
+  ROUTE.ESSENTIAL_INFO.CONTENT,
+  ROUTE.ESSENTIAL_INFO.PROTFOLIO,
+  ROUTE.ESSENTIAL_INFO.CALLBACK,
 ];
 
 const useEssentialForm = () => {
@@ -73,7 +73,7 @@ const useEssentialForm = () => {
   });
 
   const handleClickLayout = useCallback(() => {
-    navigate(LOGIN);
+    navigate(ROUTE.LOGIN);
   }, [navigate]);
 
   const handleClickNextButton = useCallback(() => {
@@ -89,7 +89,7 @@ const useEssentialForm = () => {
     const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
     // 타켓팅한 요소의 인덱스가 배열의 길이보다 작거나 같을 때는 이동하지 않는다.
     if (currentSubPageIndex <= 0) {
-      navigate(LOGIN);
+      navigate(ROUTE.LOGIN);
       return;
     }
     navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1]);

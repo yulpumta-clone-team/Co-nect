@@ -1,7 +1,7 @@
 import React from 'react';
 import teamApi from 'api/team.api';
 import TeamCard from 'components/TeamCard';
-import { TEAM } from 'constant/route.constant';
+import { ROUTE } from 'constant/route.constant';
 import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
 import CardsGrid from 'components/CardsGrid';
 import * as S from './style';
@@ -14,7 +14,7 @@ export default function TeamBoard() {
   });
   return (
     <S.BoardWrapper>
-      <UserCardsGridWithInfiniteScroll CardComponent={TeamCard} clickLink={`${TEAM}/`} />
+      <UserCardsGridWithInfiniteScroll CardComponent={TeamCard} clickLink={`${ROUTE.TEAM}/`} />
     </S.BoardWrapper>
   );
 }

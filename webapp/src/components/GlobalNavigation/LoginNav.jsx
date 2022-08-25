@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HOME, NEW_POST, TEAM, USER } from 'constant/route.constant';
+import { ROUTE } from 'constant/route.constant';
 import useDropdown from 'hooks/useDropdown';
 import { loggedUserType } from 'types/user.type';
 import Logo from 'assets/icons/nav-logo.svg';
@@ -26,18 +26,18 @@ export default function LoginNav({ userInfo }) {
         </S.Logo>
         <S.LinkList>
           <S.Hover>
-            <Link to={HOME}>Home</Link>
+            <Link to={ROUTE.HOME}>Home</Link>
           </S.Hover>
           <S.Hover>
-            <Link to={USER}>Single</Link>
+            <Link to={ROUTE.USER}>Single</Link>
           </S.Hover>
           <S.Hover>
-            <Link to={TEAM}>Team</Link>
+            <Link to={ROUTE.TEAM}>Team</Link>
           </S.Hover>
         </S.LinkList>
         <S.AssignList isLogin>
           <Button theme="primary" customStyle={S.AssignListButton}>
-            <Link to={NEW_POST}>새글쓰기</Link>
+            <Link to={ROUTE.NEW_POST}>새글쓰기</Link>
           </Button>
           <S.Alarm />
           <img src={profileImg} alt="profile" ref={parent} onClick={openDropdown} />

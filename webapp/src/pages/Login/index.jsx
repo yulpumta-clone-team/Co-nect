@@ -11,9 +11,9 @@ import Divider from 'components/Common/Divider';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import SocailLoginButtons from 'components/SocialLoginButtons';
 import { TOKEN } from 'constant/api.constant';
+import { ROUTE } from 'constant/route.constant';
 import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
-import { ESSENTIAL_INFO, LOGIN } from 'constant/route.constant';
 import { loginParser } from 'service/auth.parser';
 import * as S from './Login.style';
 
@@ -22,7 +22,7 @@ export default function Login() {
   const notifyDispatch = useToastNotificationAction();
 
   const handleShowEssesntialModal = () => {
-    navigate(ESSENTIAL_INFO.INDEX);
+    navigate(ROUTE.ESSENTIAL_INFO.INDEX);
   };
 
   const submitCallback = async (submitData) => {
@@ -42,7 +42,7 @@ export default function Login() {
         if (isFirstLogin) {
           handleShowEssesntialModal();
         } else {
-          navigate(LOGIN);
+          navigate(ROUTE.LOGIN);
         }
       }, 1000);
     } catch (error) {
