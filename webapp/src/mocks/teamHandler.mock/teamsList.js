@@ -1,3 +1,5 @@
+import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
+
 export const teamsList = [
   {
     id: 1,
@@ -19,7 +21,7 @@ export const teamsList = [
     },
     name: 'epett0',
     session: '3개월',
-    img: '0fbfc5d8-bf6c-48eb-8440-c0a18d25e805',
+    img: '',
     read: 90,
     commentCnt: 59,
     likeCnt: 87,

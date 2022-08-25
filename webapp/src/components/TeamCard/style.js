@@ -8,8 +8,8 @@ import { ReactComponent as viewIcon } from 'assets/icons/view.svg';
 // * : Card Container
 export const CardWrapper = styled.li`
   position: relative;
-  width: 100%;
-  height: 80%;
+  width: 260px;
+  height: 300px;
   justify-content: center;
   background: ${({ theme: { colors } }) => colors.greyScale.white};
 
@@ -22,8 +22,8 @@ export const CardTop = styled.div`
   position: relative;
   display: flex;
 
-  height: 50px;
-  width: 100%;
+  height: 30px;
+  width: 260px;
   background: #036eff;
   border-radius: 10px 10px 0px 0px;
 `;
@@ -32,11 +32,11 @@ export const ProfileImg = styled.img`
   position: absolute; // * : 각 div 상자에 걸쳐있는 프로필 이미지 때문에 absolute로 위치를 설정해 줌.
   display: flex;
 
-  width: 100px;
-  height: 100px;
+  width: 30%;
+  height: 25%;
 
-  left: 180px;
-  top: 110px;
+  left: 62%;
+  top: 18%;
 
   border-radius: 50%;
 `;
@@ -75,8 +75,8 @@ export const TeamInfo = styled.div`
   flex-direction: row;
 
   width: 100%;
-  height: 35%;
-  padding: 1em;
+  height: 40%;
+  padding: 1rem;
 `;
 export const UserName = styled.div`
   position: relative;
@@ -102,6 +102,7 @@ export const HopeSession = styled.div`
   align-items: center;
 
   width: 80%;
+  height: 70%;
   ${({ theme: { fonts } }) => fonts.korean.default}
   font-weight: 700;
 `;
@@ -115,7 +116,6 @@ export const TeamHopeSession = styled.div`
 `;
 // * : 구분선
 export const Divider = styled.div`
-  top: 20px;
   height: 2px;
   width: 100%;
 
@@ -152,12 +152,12 @@ export const SkillSlide = styled.div`
   height: 100%;
 
   width: 100%;
-  gap: 3.5%; // ! : 변경 시 수정 필요 !
+  gap: 11px; // ! : 변경 시 수정 필요 !
 `;
 export const SkillImage = styled.img`
   object-fit: cover;
-  width: 60%;
-  height: 60%;
+  width: 65%;
+  height: 65%;
 
   border-radius: 50%;
   box-shadow: 1px 1px 1px 1px #cdcdcd;
@@ -168,12 +168,12 @@ export const CountBoard = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 
-  height: 14%;
-
-  width: 100%;
-  padding: 1em;
+  height: 7%;
+  width: 50%;
+  padding: 1rem;
+  left: 50%;
 `;
 
 // Icon
@@ -182,11 +182,11 @@ export const Heart = styled(heartIcon)`
   display: flex;
   align-items: center;
 
-  left: -40px;
-  top: 16px;
+  left: 14px;
+  top: 6px;
 
-  width: 45%;
-  height: 45%;
+  width: 20px;
+  height: 20px;
 `;
 export const LeftAngle = styled(leftAngleIcon)`
   width: 8%;
@@ -207,10 +207,10 @@ export const RightAngle = styled(rightAngleIcon)`
   }
 `;
 export const Chat = styled(chatIcon)`
-  width: 15%;
-  height: 100%;
+  width: 18px;
+  height: 18px;
 `;
 export const View = styled(viewIcon)`
-  width: 15%;
-  height: 100%;
+  width: 18px;
+  height: 18px;
 `;

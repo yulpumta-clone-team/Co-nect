@@ -17,7 +17,7 @@ export const Container = styled.nav`
   align-content: space-around;
   justify-content: space-around;
   width: 100%;
-  height: 95%;
+  height: 70px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 `;
@@ -43,7 +43,7 @@ export const Logo = styled.div`
 export const LinkList = styled.ul`
   display: flex;
   flex-direction: ${(props) => (props.IsflexDirectionColumn ? 'column' : 'row')};
-  width: 350px;
+  width: 20%;
   height: 100%;
   justify-content: space-around;
   align-items: center;

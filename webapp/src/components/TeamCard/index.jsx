@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { teamCardType } from 'types/team.type';
+import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
+import { setDefaultProfileImage } from 'utils';
 
 import * as S from './style';
 
@@ -26,7 +28,7 @@ export const skillsImg = [
 
 export default function TeamCard({ cardInfo, onClick }) {
   // * : teamCard 에 표시되는 정보
-  const { user, name, hopeSession, img, status } = cardInfo;
+  const { user, name, session, img, status } = cardInfo;
   // * : 현재 슬라이드를 나타내는 useState
   const [currentSlide, setCurrentSlide] = useState(0);
   // * : Slide 넘어가는 effect
@@ -54,22 +56,22 @@ export default function TeamCard({ cardInfo, onClick }) {
     slideRef.current.style.transition = 'all 0.5s ease-in-out';
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
-
+  const S3Img = { S3_IMAGE_SERVER_URL } + { img };
   // ! : Slide 부분을 위해 mock data skillsImg를 생성하고 map을 활용해보려 했는데, 잘 작동시키지 못했습니다. 도움 요청합니다 ㅠ.ㅠ
   return (
     <S.CardWrapper onClick={onClick}>
       <S.CardTop>
-        <S.Heart />
+        <S.Heart alt="좋아요 아이콘" />
       </S.CardTop>
       <S.BackgroundImg>
         <S.TeamStatus>{status}</S.TeamStatus>
       </S.BackgroundImg>
-      <S.ProfileImg src={img} alt="프로필" />
+      <S.ProfileImg src={setDefaultProfileImage(img)} alt="프로필" />
       <S.TeamInfo>
         <S.UserName>{user.name}님의 모집</S.UserName>
         <S.TeamName>{name}</S.TeamName>
         <S.HopeSession>
-          예상 기간 &nbsp; <S.TeamHopeSession>{hopeSession}</S.TeamHopeSession>
+          예상 기간 &nbsp; <S.TeamHopeSession>{session}</S.TeamHopeSession>
         </S.HopeSession>
       </S.TeamInfo>
       <S.Divider />
@@ -78,16 +80,16 @@ export default function TeamCard({ cardInfo, onClick }) {
         <S.SkillContainer>
           <S.SkillSlide ref={slideRef}>
             {skillsImg.map(({ imageUrl, id }) => (
-              <S.SkillImage key={id} src={imageUrl} />
+              <S.SkillImage key={id} src={imageUrl} alt="선택한 기술" />
             ))}
           </S.SkillSlide>
         </S.SkillContainer>
         <S.RightAngle onClick={handleClickNextSlide} />
       </S.SkillBoard>
       <S.CountBoard>
-        <S.Chat />
+        <S.Chat alt="댓글 아이콘" />
         000
-        <S.View />
+        <S.View alt="조회수 아이콘" />
         000
       </S.CountBoard>
     </S.CardWrapper>
