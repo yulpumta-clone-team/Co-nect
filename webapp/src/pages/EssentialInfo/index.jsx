@@ -15,7 +15,7 @@ function EssentialInfo() {
   return (
     <S.Layout onClick={handleClickLayout}>
       <S.DialogContainer onClick={(event) => event.stopPropagation()}>
-        <Button theme="none" customStyle={S.CloseButton} onClick={handleClickPrevButton}>
+        <Button theme="none" customStyle={S.CloseButton} onClick={handleClickLayout}>
           <S.CloseLarge />
         </Button>
         <S.AngleContainer>
