@@ -12,7 +12,7 @@ import essentialValidation from 'service/essentialForm.validation';
 const initialValues = {
   nickname: '',
   profileImage: '',
-  skills: [],
+  techSkills: [],
   slogan: '',
   hopeSession: '',
   job: '',

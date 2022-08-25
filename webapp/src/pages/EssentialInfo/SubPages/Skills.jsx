@@ -1,11 +1,11 @@
 import React from 'react';
 import { skillStack } from 'constant';
-import SelectInput from 'components/Common/SelectInput';
 import Button from 'components/Common/Button';
 import {
   useEssentialFormsAction,
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
+import TechStackSelectInput from 'components/TechStackSelectInput';
 import { skillStackParserToSelectInput } from 'service/skillStack.parser';
 import * as S from '../EssentialInfo.style';
 
@@ -13,7 +13,7 @@ export default function Skills() {
   const { inputValues, validateError } = useEssentialFormsState();
   const { onChangeHandlerWithSelect, isTargetSatisfyValidate, handleClickNextButton } =
     useEssentialFormsAction();
-  const isSkillsValidateError = isTargetSatisfyValidate('skills');
+  const isSkillsValidateError = isTargetSatisfyValidate('techSkills');
 
   const parsedSkillStack = skillStackParserToSelectInput(skillStack);
 
@@ -21,15 +21,15 @@ export default function Skills() {
     <S.Content>
       <h2>가능한 기술들을 선택해주세요.</h2>
       <S.InputContainer>
-        <SelectInput
-          isMulti
-          name="skills"
+        <TechStackSelectInput
+          name="techSkills"
+          placeholder="기술"
           label="기술"
-          options={parsedSkillStack}
-          value={inputValues.skills}
+          selectedTechSkills={inputValues.techSkills}
+          techSkillOptions={parsedSkillStack}
           onChange={onChangeHandlerWithSelect}
           isError={isSkillsValidateError}
-          helperText={validateError.skills}
+          helperText={validateError.techSkills}
         />
       </S.InputContainer>
       <S.NextButtonContainer>
