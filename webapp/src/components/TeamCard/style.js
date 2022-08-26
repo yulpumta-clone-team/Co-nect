@@ -39,7 +39,6 @@ export const BackgroundImg = styled.div`
   background: #eaeaea;
   padding: 1rem;
 `;
-import styled from 'styled-components';
 
 // * : Team 모집중 / 모집 안함 상태 나타내는 버튼
 export const TeamStatus = styled.div`
