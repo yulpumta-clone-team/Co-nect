@@ -14,8 +14,9 @@ const teamIcon = belong_team ? checkIcon : crossIcon;
 // * : Card Container
 export const CardWrapper = styled.div`
   position: relative;
-  width: 368px;
-  height: 429px;
+  width: 260px;
+  height: 300px;
+
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -26,8 +27,8 @@ export const CardTop = styled.div`
   position: relative;
   display: flex;
 
-  height: 10%;
-  width: 100%;
+  height: 30px;
+  width: 260px;
   background-color: #036eff;
   border-radius: 10px 10px 0px 0px;
 `;
@@ -52,7 +53,7 @@ export const BackgroundImg = styled.div`
   width: 100%;
   height: 20%;
   background-color: #eaeaea;
-  padding: 1em;
+  padding: 1rem;
 `;
 // * : 직업 버튼 형식
 export const UserJob = styled.div`
@@ -78,8 +79,8 @@ export const UserInfo = styled.div`
   flex-direction: row;
 
   width: 100%;
-  height: 35%;
-  padding: 1em;
+  height: 40%;
+  padding: 1rem;
 `;
 
 export const UserName = styled.div`
@@ -123,7 +124,6 @@ export const UserHopeSession = styled.div`
 `;
 // * : 구분선
 export const Divider = styled.div`
-  top: 20px;
   height: 2px;
   width: 100%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.nonActive};
@@ -137,7 +137,7 @@ export const SkillBoard = styled.div`
 
   height: 20%;
   width: 100%;
-  padding: 5px 0px;
+  padding: 1% 0%;
 `;
 // * : skill이 5개씩 보여지는 부분
 export const SkillContainer = styled.div`
@@ -158,17 +158,16 @@ export const SkillSlide = styled.div`
 
   height: 100%;
   width: 100%;
-  gap: 12px;
+  gap: 11px;
 `;
-// ! : 카드에 보여지는 기술 개수가 4개로 변경 됐을 시 삼항연산자로 gap을 다르게 줘야합니다.
-// ! : 하지만, 지금 당장 그 조건을 주면 4개만 있을 때 gap차이가 달라져 각 Card들끼리 정돈되어 보이지 않을것이라고 판단했습니다.
 // ! : 변경 시 수정 필요 !
 // ! : 박스 길이(100% - (8%+8%)=84%) / (gap 크기(12px) * (viewingSkill + 1))
 
 export const SkillImage = styled.img`
   object-fit: cover;
-  width: 52px;
-  height: 52px;
+  width: 65%;
+  height: 65%;
+
   border-radius: 50%;
   box-shadow: 1px 1px 1px 1px #cdcdcd;
 `;
@@ -178,10 +177,11 @@ export const CountBoard = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  height: 12%;
-  width: 100%;
+  justify-content: space-between;
+  height: 7%;
+  width: 50%;
   padding: 1rem;
+  left: 50%;
 `;
 
 // Icon
@@ -189,11 +189,11 @@ export const Heart = styled(heartIcon)`
   position: relative;
   display: flex;
   align-items: center;
-  left: -50px;
-  top: 12px;
+  left: 14px;
+  top: 6px;
 
-  width: 40%;
-  height: 40%;
+  width: 20px;
+  height: 20px;
 `;
 
 export const LeftAngle = styled(leftAngleIcon)`
@@ -223,10 +223,10 @@ export const TeamBelong = styled(teamIcon)`
   object-fit: cover;
 `;
 export const Chat = styled(chatIcon)`
-  width: 15%;
-  height: 100%;
+  width: 18px;
+  height: 18px;
 `;
 export const View = styled(viewIcon)`
-  width: 15%;
-  height: 100%;
+  width: 18px;
+  height: 18px;
 `;
