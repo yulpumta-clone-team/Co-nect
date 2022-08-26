@@ -24,7 +24,7 @@ export const CardTop = styled.div`
 
   height: 30px;
   width: 260px;
-  background: #036eff;
+  background-color: #036eff;
   border-radius: 10px 10px 0px 0px;
 `;
 
@@ -36,7 +36,7 @@ export const BackgroundImg = styled.div`
 
   width: 100%;
   height: 20%;
-  background: #eaeaea;
+  background-color: #eaeaea;
   padding: 1rem;
 `;
 
