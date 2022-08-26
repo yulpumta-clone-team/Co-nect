@@ -3,6 +3,7 @@ import Button from 'components/Common/Button';
 import WithProvider from 'hoc/withProvider';
 import EssentialFormProvider, {
   useEssentialFormsAction,
+  useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
 import { Outlet } from 'react-router-dom';
 import * as S from './EssentialInfo.style';
@@ -10,11 +11,13 @@ import * as S from './EssentialInfo.style';
 export default WithProvider({ Providers: [EssentialFormProvider], Component: EssentialInfo });
 
 function EssentialInfo() {
-  const { handleClickPrevButton, handleClickLayout } = useEssentialFormsAction();
+  const { handleClickPrevButton, handleClickLayout, closeEssentialModal } =
+    useEssentialFormsAction();
+  const { layoutRef } = useEssentialFormsState();
   return (
-    <S.Layout onClick={handleClickLayout}>
-      <S.DialogContainer onClick={(event) => event.stopPropagation()}>
-        <Button theme="none" customStyle={S.CloseButton} onClick={handleClickLayout}>
+    <S.Layout ref={layoutRef} onClick={handleClickLayout}>
+      <S.DialogContainer>
+        <Button theme="none" customStyle={S.CloseButton} onClick={closeEssentialModal}>
           <S.CloseLarge />
         </Button>
         <S.AngleContainer>

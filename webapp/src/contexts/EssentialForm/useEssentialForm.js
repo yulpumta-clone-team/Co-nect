@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
@@ -35,6 +35,7 @@ const essentailSubPagesRouteOrder = [
 ];
 
 const useEssentialForm = () => {
+  const layoutRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
   const notifyDispatch = useToastNotificationAction();
@@ -47,8 +48,8 @@ const useEssentialForm = () => {
 
     try {
       const response = await userApi.POST_ESSENTIAL_INFO({ submitData: parsedSubmitData });
-      const { message } = response.data;
-      notifyNewMessage(notifyDispatch, message, TOAST_TYPE.Success);
+      // const { message } = response;
+      notifyNewMessage(notifyDispatch, '유저정보가 성공적으로 저장되었습니다!', TOAST_TYPE.Success);
       setTimeout(() => {
         navigate('/login');
       }, 1000);
@@ -72,9 +73,19 @@ const useEssentialForm = () => {
     validate: essentialValidation,
   });
 
-  const handleClickLayout = useCallback(() => {
+  const closeEssentialModal = useCallback(() => {
     navigate(ROUTE.LOGIN);
   }, [navigate]);
+
+  const handleClickLayout = useCallback(
+    (event) => {
+      const isTargetOnlyLayout = layoutRef.current === event.target;
+      if (isTargetOnlyLayout) {
+        closeEssentialModal();
+      }
+    },
+    [closeEssentialModal],
+  );
 
   const handleClickNextButton = useCallback(() => {
     const currentPathname = location.pathname;
@@ -138,6 +149,7 @@ const useEssentialForm = () => {
       handleClickNextButton,
       handleClickPrevButton,
       handleClickLayout,
+      closeEssentialModal,
     }),
     [
       onChangeHandler,
@@ -148,17 +160,19 @@ const useEssentialForm = () => {
       handleClickNextButton,
       handleClickPrevButton,
       handleClickLayout,
+      closeEssentialModal,
     ],
   );
 
   const states = useMemo(
     () => ({
+      layoutRef,
       inputValues,
       validateError,
       satisfyAllValidates,
       isNicknameDuplicate,
     }),
-    [inputValues, validateError, satisfyAllValidates, isNicknameDuplicate],
+    [layoutRef, inputValues, validateError, satisfyAllValidates, isNicknameDuplicate],
   );
 
   return [states, actions];
