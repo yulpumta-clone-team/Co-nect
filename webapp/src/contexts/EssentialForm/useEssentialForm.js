@@ -9,6 +9,7 @@ import userApi from 'api/user.api';
 import { ROUTE } from 'constant/route.constant';
 import essentialValidation from 'service/essentialForm.validation';
 import { essentialInfoParser } from 'service/auth.parser';
+import useUserInfo from 'hooks/useUserInfo';
 
 const initialValues = {
   nickname: '',
@@ -39,20 +40,18 @@ const useEssentialForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const notifyDispatch = useToastNotificationAction();
+  const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
 
   const submitCallback = async (submitData) => {
     const parsedSubmitData = essentialInfoParser(submitData);
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
-
     try {
       const response = await userApi.POST_ESSENTIAL_INFO({ submitData: parsedSubmitData });
       // const { message } = response;
       notifyNewMessage(notifyDispatch, '유저정보가 성공적으로 저장되었습니다!', TOAST_TYPE.Success);
-      setTimeout(() => {
-        navigate('/login');
-      }, 1000);
+      updateUserInfo();
     } catch (error) {
       console.error(error);
       notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
@@ -108,7 +107,7 @@ const useEssentialForm = () => {
 
   const onClickCheckDuplicateNickname = useCallback(async () => {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
+    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
       const response = await authApi.checkDuplicateNickName({ name: inputValues.nickname });
       const isDuplicated = response.data;
@@ -121,23 +120,10 @@ const useEssentialForm = () => {
       }
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, 'Error');
+      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
       setIsNicknameDuplicate(true);
     }
   }, [inputValues.nickname, notifyDispatch]);
-
-  // try {
-  //   const response = await authApi.GET_ESSENTIAL_INFO();
-  //   console.log(response);
-  //   updateUserInfo({
-  //     userId: response.data.id,
-  //     profileImg: response.data.image,
-  //     name: response.data.name,
-  //   });
-  //   navigate('/');
-  // } catch (apiError) {
-  //   console.error(apiError);
-  // }
 
   const actions = useMemo(
     () => ({

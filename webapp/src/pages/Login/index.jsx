@@ -15,11 +15,13 @@ import { ROUTE } from 'constant/route.constant';
 import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
 import { loginParser } from 'service/auth.parser';
+import useUserInfo from 'hooks/useUserInfo';
 import * as S from './Login.style';
 
 export default function Login() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
+  const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
 
   const handleShowEssesntialModal = () => {
     navigate(ROUTE.ESSENTIAL_INFO.INDEX);
@@ -42,7 +44,7 @@ export default function Login() {
         if (isFirstLogin) {
           handleShowEssesntialModal();
         } else {
-          navigate(ROUTE.LOGIN);
+          updateUserInfo();
         }
       }, 1000);
     } catch (error) {
