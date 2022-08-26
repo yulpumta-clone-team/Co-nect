@@ -2,12 +2,12 @@ import { USER_INFO } from 'constant';
 import { TOKEN } from 'constant/api.constant';
 import handleLocalstorage from 'utils/handleLocalstorage';
 
-export const updateUserInfo = (rawUserInfo) => {
+export const updateUserInfoInLocalstorage = (rawUserInfo) => {
   const userInfo = changeUserInfoKey(rawUserInfo);
   handleLocalstorage.set(USER_INFO, userInfo);
 };
 
-export const deleteUserInfo = () => handleLocalstorage.remove(USER_INFO);
+export const deleteUserInfoInLocalStorage = () => handleLocalstorage.remove(USER_INFO);
 
 export const getUserInfo = () => handleLocalstorage.get(USER_INFO);
 
