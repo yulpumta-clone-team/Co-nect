@@ -2,11 +2,12 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import MarkdownEditor from 'components/MdEditor';
-import useFileUploader from 'hooks/useFileUploader';
+import useFileUploader from 'hooks/useFileInput';
 import useInput from 'hooks/useInput';
-import { hopeSessionOption, skillOptions } from 'constant';
+import { hopeSessionOption, skillOptions, skillStack } from 'constant';
 import userApi from 'api/user.api';
 import { userType } from 'types/user.type';
+import { skillStackParserToSelectInput } from 'service/skillStack.parser';
 
 EditUserProfileForm.propTypes = {
   targetUser: userType.isRequired,
@@ -81,6 +82,8 @@ export default function EditUserProfileForm({ targetUser, onClickback }) {
       </div>
     );
 
+  const parsedSkillStack = skillStackParserToSelectInput(skillStack);
+
   return (
     <div>
       <h3> 프로필 이미지 </h3>
@@ -89,7 +92,7 @@ export default function EditUserProfileForm({ targetUser, onClickback }) {
       <form onSubmit={handleSubmit}>
         <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
         <select value={userSkill} onChange={onSkillChange}>
-          {skillOptions.map(({ id, value, label }) => (
+          {parsedSkillStack.map(({ id, value, label }) => (
             <option key={id} value={value}>
               {label}
             </option>

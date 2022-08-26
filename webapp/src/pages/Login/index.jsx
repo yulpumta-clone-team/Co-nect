@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
@@ -11,18 +11,28 @@ import Divider from 'components/Common/Divider';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import SocailLoginButtons from 'components/SocialLoginButtons';
 import { TOKEN } from 'constant/api.constant';
+import { ROUTE } from 'constant/route.constant';
 import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
+import { loginParser } from 'service/auth.parser';
+import useUserInfo from 'hooks/useUserInfo';
 import * as S from './Login.style';
 
 export default function Login() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
+  const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
+
+  const handleShowEssesntialModal = (isFirstLogin) => {
+    navigate(ROUTE.ESSENTIAL_INFO.NICKNAME, { state: { isFirstLogin } });
+  };
+
   const submitCallback = async (submitData) => {
+    const parsedSubmitData = loginParser(submitData);
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
-      const response = await authApi.signUp({ data: submitData });
+      const response = await authApi.login({ submitData: parsedSubmitData });
       const {
         headers,
         data: { isFirst: isFirstLogin },
@@ -31,8 +41,11 @@ export default function Login() {
       handleToken.saveRefreshToken(headers[TOKEN.REFRESH]);
       notifyNewMessage(notifyDispatch, '로그인이 성공적으로 완료되었습니다.', TOAST_TYPE.Success);
       setTimeout(() => {
-        if (isFirstLogin) navigate('/essential_info');
-        navigate('/login');
+        if (isFirstLogin) {
+          handleShowEssesntialModal(isFirstLogin);
+        } else {
+          updateUserInfo();
+        }
       }, 1000);
     } catch (error) {
       console.error(error);
@@ -54,7 +67,7 @@ export default function Login() {
         <S.MainLogo />
         <h1>Co-nect</h1>
       </S.Header>
-      <S.Form onSubmit={submitHandler}>
+      <S.Form onSubmit={submitHandler} id="loginForm">
         <TextInput
           name="email"
           type="email"
@@ -77,6 +90,7 @@ export default function Login() {
       <Button
         theme="primary"
         type="submit"
+        form="loginForm"
         disabled={!satisfyAllValidates}
         customStyle={S.SubmitButton}
       >
@@ -84,6 +98,7 @@ export default function Login() {
       </Button>
       <Divider width="500px" marginTop="67px" marginBottom="38px" />
       <SocailLoginButtons>소셜계정으로 로그인</SocailLoginButtons>
+      <Outlet />
     </S.Container>
   );
 }

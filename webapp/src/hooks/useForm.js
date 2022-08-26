@@ -1,7 +1,7 @@
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const useForm = ({ initialValues, submitCallback, validate }) => {
   const [inputValues, setInputValues] = useState(initialValues);
@@ -25,21 +25,23 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
     setValidateError(validate({ ...inputValues, [name]: value }));
   };
 
-  const submitHandler = async (event) => {
-    event && event.preventDefault();
+  const submitHandler = useCallback(
+    async (event) => {
+      event && event.preventDefault();
 
-    if (!satisfyAllValidates) {
-      Object.values(validateError)
-        .filter((error) => error)
-        .forEach((error) => {
-          notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
-        });
+      if (!satisfyAllValidates) {
+        Object.values(validateError)
+          .filter((error) => error)
+          .forEach((error) => {
+            notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
+          });
 
-      return;
-    }
-    await submitCallback(inputValues);
-  };
-
+        return;
+      }
+      await submitCallback(inputValues);
+    },
+    [inputValues, notifyDispatch, satisfyAllValidates, submitCallback, validateError],
+  );
   return {
     inputValues,
     validateError,

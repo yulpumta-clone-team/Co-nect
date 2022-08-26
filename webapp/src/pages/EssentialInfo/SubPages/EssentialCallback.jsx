@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Loader from 'components/Common/Loader';
-import { useEssentialFormsAction } from 'contexts/EssentialForm/EssentialForm.Provider';
+
 import * as S from '../EssentialInfo.style';
 
+// TODO: 특정시간동안 반응없으면 essential-info로 이동시키기
 export default function EssentailCallback() {
-  const { submitHandler } = useEssentialFormsAction();
-
-  useEffect(() => {
-    submitHandler();
-  }, []);
-
   return (
     <S.Content>
       <h2>Loading....</h2>

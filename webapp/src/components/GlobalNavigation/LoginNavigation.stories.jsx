@@ -1,3 +1,4 @@
+import ToastNotificationProvider from 'contexts/ToastNotification';
 import React from 'react';
 import { loggedUserType } from 'types/user.type';
 import LoginNavigation from './LoginNav';
@@ -19,9 +20,11 @@ Template.propTypes = {
 
 function Template(args) {
   return (
-    <S.Container>
-      <LoginNavigation {...args} />
-    </S.Container>
+    <ToastNotificationProvider>
+      <S.Container>
+        <LoginNavigation {...args} />
+      </S.Container>
+    </ToastNotificationProvider>
   );
 }
 
@@ -30,8 +33,8 @@ function Template(args) {
 export const Default = Template.bind({});
 Default.args = {
   userInfo: {
-    userId: '1aafaf21',
-    name: 'User name',
+    id: '1aafaf21',
+    nickname: 'User name',
     profileImg:
       'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png',
   },

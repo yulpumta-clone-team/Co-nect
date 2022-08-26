@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from 'assets/icons/nav-logo.svg';
 import Button from 'components/Common/Button';
-import { HOME, LOGIN, PROFILE, SIGN_UP, TEAM, USER } from 'constant/route.constant';
+import { ROUTE } from 'constant/route.constant';
 
 import * as S from './style';
 
@@ -16,21 +16,21 @@ export default function NonLoginNav() {
         </S.Logo>
         <S.LinkList>
           <S.Hover>
-            <Link to={HOME}>Home</Link>
+            <Link to={ROUTE.HOME}>Home</Link>
           </S.Hover>
           <S.Hover>
-            <Link to={USER}>Single</Link>
+            <Link to={ROUTE.USER}>Single</Link>
           </S.Hover>
           <S.Hover>
-            <Link to={TEAM}>Team</Link>
+            <Link to={ROUTE.TEAM}>Team</Link>
           </S.Hover>
         </S.LinkList>
         <S.AssignList isLogin={false}>
           <Button theme="primary" customStyle={S.AssignListButton}>
-            <Link to={LOGIN}>로그인</Link>
+            <Link to={ROUTE.LOGIN}>로그인</Link>
           </Button>
           <Button theme="gray" customStyle={S.AssignListButton}>
-            <Link to={SIGN_UP}>회원가입</Link>
+            <Link to={ROUTE.SIGN_UP}>회원가입</Link>
           </Button>
         </S.AssignList>
       </S.BoardList>

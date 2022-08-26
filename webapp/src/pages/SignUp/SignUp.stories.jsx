@@ -3,7 +3,7 @@ import WithProvider from 'hoc/withProvider';
 import React from 'react';
 import SignUp from './index';
 
-const WithToastSignUp = WithProvider({ Provider: ToastNotificationProvider, Component: SignUp });
+const WithToastSignUp = WithProvider({ Providers: [ToastNotificationProvider], Component: SignUp });
 
 export default {
   title: 'Pages/SignUp',
