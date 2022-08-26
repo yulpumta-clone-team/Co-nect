@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
@@ -48,9 +48,11 @@ const useEssentialForm = () => {
     notifyDispatch,
   });
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
+  const [submitTrigger, setSubmitTrigger] = useState(Date.now());
 
   const submitCallback = async (submitData) => {
     const parsedSubmitData = essentialInfoParser(submitData);
+    console.log('object :>> ', submitData, parsedSubmitData);
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
@@ -78,18 +80,18 @@ const useEssentialForm = () => {
     validate: essentialValidation,
   });
 
-  const uploadProfileImageBeforeSubmit = useCallback(async () => {
+  const uploadProfileImageBeforeSubmit = async () => {
     const response = await uploadFileOnS3();
     if (response) {
       const { path, id } = response;
-      onChangeHandlerWithSelect({ name: 'profileImage', value: S3_IMAGE_SERVER_URL + id });
-      submitHandler();
+      onChangeHandlerWithSelect({ name: 'profileImage', value: S3_IMAGE_SERVER_URL + path });
+      setSubmitTrigger(Date.now());
     }
-  }, [onChangeHandlerWithSelect, submitHandler, uploadFileOnS3]);
+  };
 
-  const handleApiRequestInLastSubPage = useCallback(() => {
+  const handleApiRequestInLastSubPage = () => {
     uploadProfileImageBeforeSubmit();
-  }, [uploadProfileImageBeforeSubmit]);
+  };
 
   const closeEssentialModal = useCallback(() => {
     navigate(ROUTE.LOGIN);
@@ -118,7 +120,7 @@ const useEssentialForm = () => {
     if (isCurrentSubPageOverLast) return;
 
     navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1]);
-  }, [handleApiRequestInLastSubPage, location.pathname, navigate]);
+  }, [location.pathname, navigate]);
 
   const handleClickPrevButton = useCallback(() => {
     const currentPathname = location.pathname;
@@ -151,6 +153,10 @@ const useEssentialForm = () => {
       setIsNicknameDuplicate(true);
     }
   }, [inputValues.nickname, notifyDispatch]);
+
+  useEffect(() => {
+    submitHandler();
+  }, [submitTrigger]);
 
   const actions = useMemo(
     () => ({
