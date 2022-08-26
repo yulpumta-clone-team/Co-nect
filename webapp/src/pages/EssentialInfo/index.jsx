@@ -5,12 +5,14 @@ import EssentialFormProvider, {
   useEssentialFormsAction,
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import * as S from './EssentialInfo.style';
 
 export default WithProvider({ Providers: [EssentialFormProvider], Component: EssentialInfo });
 
 function EssentialInfo() {
+  // const location = useLocation();
+  // console.log(location);
   const { handleClickPrevButton, handleClickLayout, closeEssentialModal } =
     useEssentialFormsAction();
   const { layoutRef } = useEssentialFormsState();

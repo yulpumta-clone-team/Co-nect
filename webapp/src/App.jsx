@@ -64,15 +64,42 @@ function App() {
               element={<PublicRoute Component={EssentialInfo} restricted />}
             >
               <Route index element={<Navigate to={ROUTE.ESSENTIAL_INFO.NICKNAME} replace />} />
-              <Route path={ROUTE.ESSENTIAL_INFO.NICKNAME} element={<Nickname />} />
-              <Route path={ROUTE.ESSENTIAL_INFO.SKILL} element={<Skills />} />
-              <Route path={ROUTE.ESSENTIAL_INFO.PROFILE_IMAGE} element={<ProfileImage />} />
-              <Route path={ROUTE.ESSENTIAL_INFO.SESSION_JOB} element={<SessionJob />} />
-              <Route path={ROUTE.ESSENTIAL_INFO.SLOGAN} element={<Slogan />} />
-              <Route path={ROUTE.ESSENTIAL_INFO.BELONG_TEAM} element={<BelongTeam />} />
-              <Route path={ROUTE.ESSENTIAL_INFO.CONTENT} element={<Introduction />} />
-              <Route path={ROUTE.ESSENTIAL_INFO.PROTFOLIO} element={<Portfolio />} />
-              <Route path={ROUTE.ESSENTIAL_INFO.CALLBACK} element={<EssentialCallback />} />
+              <Route
+                path={ROUTE.ESSENTIAL_INFO.NICKNAME}
+                element={<PublicRoute Component={Nickname} restricted />}
+              />
+              <Route
+                path={ROUTE.ESSENTIAL_INFO.SKILL}
+                element={<PublicRoute Component={Skills} restricted />}
+              />
+              <Route
+                path={ROUTE.ESSENTIAL_INFO.PROFILE_IMAGE}
+                element={<PublicRoute Component={ProfileImage} restricted />}
+              />
+              <Route
+                path={ROUTE.ESSENTIAL_INFO.SESSION_JOB}
+                element={<PublicRoute Component={SessionJob} restricted />}
+              />
+              <Route
+                path={ROUTE.ESSENTIAL_INFO.SLOGAN}
+                element={<PublicRoute Component={Slogan} restricted />}
+              />
+              <Route
+                path={ROUTE.ESSENTIAL_INFO.BELONG_TEAM}
+                element={<PublicRoute Component={BelongTeam} restricted />}
+              />
+              <Route
+                path={ROUTE.ESSENTIAL_INFO.CONTENT}
+                element={<PublicRoute Component={Introduction} restricted />}
+              />
+              <Route
+                path={ROUTE.ESSENTIAL_INFO.PROTFOLIO}
+                element={<PublicRoute Component={Portfolio} restricted />}
+              />
+              <Route
+                path={ROUTE.ESSENTIAL_INFO.CALLBACK}
+                element={<PublicRoute Component={EssentialCallback} restricted />}
+              />
             </Route>
           </Route>
           <Route path={ROUTE.SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />

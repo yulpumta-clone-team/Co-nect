@@ -41,6 +41,17 @@ const useEssentialForm = () => {
   const layoutRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleProtectedUrl = (locationState) => {
+    if (!locationState) {
+      navigate(ROUTE.LOGIN);
+      return;
+    }
+    if (!locationState.isFirstLogin) {
+      navigate(ROUTE.LOGIN);
+    }
+  };
+
   const notifyDispatch = useToastNotificationAction();
   const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
@@ -118,7 +129,9 @@ const useEssentialForm = () => {
 
     if (isCurrentSubPageOverLast) return;
 
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1]);
+    navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1], {
+      state: { isFirstLogin: true },
+    });
   }, [location.pathname, navigate]);
 
   const handleClickPrevButton = useCallback(() => {
@@ -130,7 +143,9 @@ const useEssentialForm = () => {
       navigate(ROUTE.LOGIN);
       return;
     }
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1]);
+    navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1], {
+      state: { isFirstLogin: true },
+    });
   }, [location.pathname, navigate]);
 
   const onClickCheckDuplicateNickname = useCallback(async () => {
@@ -152,6 +167,10 @@ const useEssentialForm = () => {
       setIsNicknameDuplicate(true);
     }
   }, [inputValues.nickname, notifyDispatch]);
+
+  useEffect(() => {
+    handleProtectedUrl(location.state);
+  }, [location.pathname]);
 
   const actions = useMemo(
     () => ({

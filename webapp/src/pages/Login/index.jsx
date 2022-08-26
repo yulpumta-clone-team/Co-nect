@@ -23,8 +23,8 @@ export default function Login() {
   const notifyDispatch = useToastNotificationAction();
   const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
 
-  const handleShowEssesntialModal = () => {
-    navigate(ROUTE.ESSENTIAL_INFO.INDEX);
+  const handleShowEssesntialModal = (isFirstLogin) => {
+    navigate(ROUTE.ESSENTIAL_INFO.NICKNAME, { state: { isFirstLogin } });
   };
 
   const submitCallback = async (submitData) => {
@@ -42,7 +42,7 @@ export default function Login() {
       notifyNewMessage(notifyDispatch, '로그인이 성공적으로 완료되었습니다.', TOAST_TYPE.Success);
       setTimeout(() => {
         if (isFirstLogin) {
-          handleShowEssesntialModal();
+          handleShowEssesntialModal(isFirstLogin);
         } else {
           updateUserInfo();
         }
