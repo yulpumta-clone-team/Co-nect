@@ -10,6 +10,8 @@ import { ROUTE } from 'constant/route.constant';
 import essentialValidation from 'service/essentialForm.validation';
 import { essentialInfoParser } from 'service/auth.parser';
 import useUserInfo from 'hooks/useUserInfo';
+import useFileUploader from 'hooks/useFileUploader';
+import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 
 const initialValues = {
   nickname: '',
@@ -41,6 +43,10 @@ const useEssentialForm = () => {
   const location = useLocation();
   const notifyDispatch = useToastNotificationAction();
   const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
+  const { imageFile, onChangeFile, uploadFileOnS3 } = useFileUploader({
+    notifyNewMessage,
+    notifyDispatch,
+  });
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
 
   const submitCallback = async (submitData) => {
@@ -49,7 +55,7 @@ const useEssentialForm = () => {
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
       const response = await userApi.POST_ESSENTIAL_INFO({ submitData: parsedSubmitData });
-      // const { message } = response;
+      // // const { message } = response;
       notifyNewMessage(notifyDispatch, '유저정보가 성공적으로 저장되었습니다!', TOAST_TYPE.Success);
       updateUserInfo();
     } catch (error) {
@@ -72,6 +78,19 @@ const useEssentialForm = () => {
     validate: essentialValidation,
   });
 
+  const uploadProfileImageBeforeSubmit = useCallback(async () => {
+    const response = await uploadFileOnS3();
+    if (response) {
+      const { path, id } = response;
+      onChangeHandlerWithSelect({ name: 'profileImage', value: S3_IMAGE_SERVER_URL + id });
+      submitHandler();
+    }
+  }, [onChangeHandlerWithSelect, submitHandler, uploadFileOnS3]);
+
+  const handleApiRequestInLastSubPage = useCallback(() => {
+    uploadProfileImageBeforeSubmit();
+  }, [uploadProfileImageBeforeSubmit]);
+
   const closeEssentialModal = useCallback(() => {
     navigate(ROUTE.LOGIN);
   }, [navigate]);
@@ -89,16 +108,24 @@ const useEssentialForm = () => {
   const handleClickNextButton = useCallback(() => {
     const currentPathname = location.pathname;
     const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
-    // 타켓팅한 요소의 인덱스가 배열의 길이보다 크거가 같을 때는 이동하지 않는다.
-    if (currentSubPageIndex >= essentailSubPagesRouteOrder.length - 1) return;
+    const isCurrentSubPageInLast = currentSubPageIndex === essentailSubPagesRouteOrder.length - 2;
+    const isCurrentSubPageOverLast = currentSubPageIndex > essentailSubPagesRouteOrder.length - 2;
+
+    if (isCurrentSubPageInLast) {
+      handleApiRequestInLastSubPage();
+    }
+
+    if (isCurrentSubPageOverLast) return;
+
     navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1]);
-  }, [location.pathname, navigate]);
+  }, [handleApiRequestInLastSubPage, location.pathname, navigate]);
 
   const handleClickPrevButton = useCallback(() => {
     const currentPathname = location.pathname;
     const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
-    // 타켓팅한 요소의 인덱스가 배열의 길이보다 작거나 같을 때는 이동하지 않는다.
-    if (currentSubPageIndex <= 0) {
+    const isCurrentSubPageUnderInit = currentSubPageIndex <= 0;
+
+    if (isCurrentSubPageUnderInit) {
       navigate(ROUTE.LOGIN);
       return;
     }
@@ -136,6 +163,7 @@ const useEssentialForm = () => {
       handleClickPrevButton,
       handleClickLayout,
       closeEssentialModal,
+      onChangeFile,
     }),
     [
       onChangeHandler,
@@ -147,6 +175,7 @@ const useEssentialForm = () => {
       handleClickPrevButton,
       handleClickLayout,
       closeEssentialModal,
+      onChangeFile,
     ],
   );
 
@@ -157,8 +186,9 @@ const useEssentialForm = () => {
       validateError,
       satisfyAllValidates,
       isNicknameDuplicate,
+      imageFile,
     }),
-    [layoutRef, inputValues, validateError, satisfyAllValidates, isNicknameDuplicate],
+    [layoutRef, inputValues, validateError, satisfyAllValidates, isNicknameDuplicate, imageFile],
   );
 
   return [states, actions];
