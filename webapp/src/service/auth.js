@@ -1,22 +1,19 @@
 import { USER_INFO } from 'constant';
 import { TOKEN } from 'constant/api.constant';
 import handleLocalstorage from 'utils/handleLocalstorage';
+import { userInfoParser } from './auth.parser';
 
 export const updateUserInfoInLocalstorage = (rawUserInfo) => {
-  const userInfo = changeUserInfoKey(rawUserInfo);
-  handleLocalstorage.set(USER_INFO, userInfo);
+  const parseduserInfo = userInfoParser(rawUserInfo);
+  handleLocalstorage.set(USER_INFO, parseduserInfo);
 };
 
 export const deleteUserInfoInLocalStorage = () => handleLocalstorage.remove(USER_INFO);
 
+// {id, profileImg, nickname}
 export const getUserInfo = () => handleLocalstorage.get(USER_INFO);
 
 export const isLogin = () => getUserInfo();
-
-export const changeUserInfoKey = (userInfo) => {
-  const { user_id, image, nickname } = userInfo;
-  return { userId: user_id, image, name: nickname };
-};
 
 export const handleToken = {
   getAccessToken() {

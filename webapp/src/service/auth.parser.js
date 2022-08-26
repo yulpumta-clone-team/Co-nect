@@ -10,6 +10,11 @@ export const loginParser = (loginRawData) => {
   return { email, pwd: password };
 };
 
+export const userInfoParser = (userInfoRaw) => {
+  const { id, image, name } = userInfoRaw;
+  return { id, nickname: name, profileImg: image };
+};
+
 export const essentialInfoParser = (essentialInfoRawData) => {
   const {
     introduction,
