@@ -6,13 +6,16 @@ import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions } from 'constant';
 import teamApi from 'api/team.api';
 import * as S from './style';
+import Button from 'components/Common/Button';
+import Input from 'components/Common/TextInput';
 
 export default function NewTeamPost() {
   const navigate = useNavigate();
   const onClickback = () => {
     navigate(-1);
   };
-  const [imageFile, fileHandler] = useFileUploader(null);
+
+  const { imageFile, fileHandler } = useFileUploader(null);
 
   const [teamName, onTeamChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
@@ -54,15 +57,15 @@ export default function NewTeamPost() {
   };
   return (
     <S.Container>
-      <button onClick={onClickback}>back</button>
+      <Button onClick={onClickback}>back</Button>
       <br />
       <h3> 프로필 이미지 </h3>
       <input type="file" accept="image/*" onChange={fileHandler} />
       <img src={imageFile} alt="profile" />
-      <form onSubmit={handleSubmit}>
-        <div>
-          팀이름 <input name="팀이름" onChange={onTeamChange} value={teamName} />
-        </div>
+      <S.Form onSubmit={handleSubmit}>
+        <S.TeamName>
+          팀이름 <Input name="팀이름" onChange={onTeamChange} value={teamName} />
+        </S.TeamName>
         <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
         <select value={userSkill} onChange={onSkillChange}>
           {skillOptions.map(({ id, value, label }) => (
@@ -80,8 +83,8 @@ export default function NewTeamPost() {
           ))}
         </select>
         <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
-        <button onSubmit={handleSubmit}>제출</button>
-      </form>
+        <Button onSubmit={handleSubmit}>제출</Button>
+      </S.Form>
     </S.Container>
   );
 }

@@ -32,7 +32,7 @@ import EssentialInfo from 'pages/EssentialInfo';
 import PublicRoute from 'hoc/PublicRoute';
 import PrivateRoute from 'hoc/PrivateRoute';
 import Layout from 'layouts/layout';
-import AssignLayout from 'layouts/layoutAssign';
+import AssignLayout from 'layout/layoutAssign';
 import Nickname from 'pages/EssentialInfo/SubPages/Nickname';
 import Skills from 'pages/EssentialInfo/SubPages/Skills';
 import ProfileImage from 'pages/EssentialInfo/SubPages/ProfileImage';
