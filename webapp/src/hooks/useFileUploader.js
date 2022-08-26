@@ -7,6 +7,7 @@ import { ROUTE } from 'constant/route.constant';
 const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
   const navigate = useNavigate();
   const [s3ImageId, setS3ImageId] = useState(null);
+  const [s3ImageObj, setS3ImageObj] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
   const onChangeFile = (event) => {
@@ -14,18 +15,24 @@ const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
     setImageFile(imageFile);
   };
 
-  const uploadFileOnS3 = async () => {
+  const uploadFileOnS3 = async (submitImageFile) => {
     try {
       const formData = new FormData();
-      formData.append('file', imageFile);
+      if (submitImageFile) {
+        formData.append('file', submitImageFile);
+      } else {
+        formData.append('file', imageFile);
+      }
       const response = await etcApi.uploadImage(formData);
       const {
         data: { id, path },
       } = response;
       setS3ImageId(id);
+      setS3ImageObj({ id, path });
       return { id, path };
     } catch (apiError) {
       console.error(apiError);
+      setS3ImageObj(null);
       notifyNewMessage(notifyDispatch, apiError, TOAST_TYPE.Error);
       navigate(ROUTE.ESSENTIAL_INFO.PROFILE_IMAGE);
       return null;
@@ -43,7 +50,7 @@ const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
     }
   };
 
-  return { imageFile, onChangeFile, s3ImageId, uploadFileOnS3, deleteFileOnS3 };
+  return { imageFile, onChangeFile, s3ImageId, s3ImageObj, uploadFileOnS3, deleteFileOnS3 };
 };
 
 export default useFileUploader;
