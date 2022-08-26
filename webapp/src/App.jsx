@@ -18,7 +18,8 @@ import NotFound from 'pages/NotFound';
 import EssentialInfo from 'pages/EssentialInfo';
 import PublicRoute from 'hoc/PublicRoute';
 import PrivateRoute from 'hoc/PrivateRoute';
-import Layout from 'layouts';
+import Layout from 'layouts/layout';
+import AssignLayout from 'layouts/layoutAssign';
 import Nickname from 'pages/EssentialInfo/SubPages/Nickname';
 import Skills from 'pages/EssentialInfo/SubPages/Skills';
 import ProfileImage from 'pages/EssentialInfo/SubPages/ProfileImage';
@@ -33,8 +34,21 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route element={<AssignLayout />}>
+          <Route path={ROUTE.SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
+          <Route path={ROUTE.LOGIN} element={<PublicRoute Component={Login} restricted />} />
+        </Route>
         <Route path={ROUTE.HOME} element={<Layout />}>
           <Route index element={<PublicRoute Component={Main} restricted={false} />} />
+          <Route
+            path={ROUTE.USER}
+            element={<PublicRoute Component={UserBoard} restricted={false} />}
+          />
+          <Route
+            path={ROUTE.TEAM}
+            element={<PublicRoute Component={TeamBoard} restricted={false} />}
+          />
+          <Route path={ROUTE.PROFILE} element={<PrivateRoute Component={EditUserProfile} />} />
           <Route
             path={ROUTE.USER}
             element={<PublicRoute Component={UserBoard} restricted={false} />}
