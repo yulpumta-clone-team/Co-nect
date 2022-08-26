@@ -99,7 +99,7 @@ export const TeamBelongBoard = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 40%;
+  width: 50%;
 
   ${({ theme: { fonts } }) => fonts.korean.default}
   font-weight: 700;
