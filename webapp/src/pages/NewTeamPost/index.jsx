@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MarkdownEditor from 'components/MdEditor';
-import useFileUploader from 'hooks/useFileUploader';
+import useFileUploader from 'hooks/useFileInput';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillStack } from 'constant';
 import teamApi from 'api/team.api';

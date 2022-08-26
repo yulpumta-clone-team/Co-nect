@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import MarkdownEditor from 'components/MdEditor';
-import useFileUploader from 'hooks/useFileUploader';
+import useFileUploader from 'hooks/useFileInput';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillOptions, skillStack } from 'constant';
 import userApi from 'api/user.api';

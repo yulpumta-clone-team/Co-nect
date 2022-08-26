@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import MarkdownEditor from 'components/MdEditor';
-import useFileUploader from 'hooks/useFileUploader';
+import useFileInput from 'hooks/useFileInput';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillStack } from 'constant';
 import teamApi from 'api/team.api';
@@ -26,7 +26,7 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
   } = targetTeam;
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(teamId);
-  const [imageFile, fileHandler, setFile] = useFileUploader(teamImage);
+  const [imageFile, fileHandler, setFile] = useFileInput(teamImage);
   const [session, onSessionChange, setSession] = useInput(teamSession);
   const [name, onNameChange] = useInput(teamName);
   const [mdcontent, setContent] = useState(teamContent);
