@@ -5,13 +5,13 @@ import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import useForm from 'hooks/useForm';
 import authApi from 'api/auth.api';
-import userApi from 'api/user.api';
+
 import { ROUTE } from 'constant/route.constant';
 import essentialValidation from 'service/essentialForm.validation';
 import { essentialInfoParser } from 'service/auth.parser';
 import useUserInfo from 'hooks/useUserInfo';
 import useFileUploader from 'hooks/useFileUploader';
-import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
+import userApi from 'api/user.api';
 
 const initialValues = {
   nickname: '',
@@ -43,16 +43,24 @@ const useEssentialForm = () => {
   const location = useLocation();
   const notifyDispatch = useToastNotificationAction();
   const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
-  const { imageFile, onChangeFile, uploadFileOnS3 } = useFileUploader({
+  const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
+  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader({
     notifyNewMessage,
     notifyDispatch,
   });
-  const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
-  const [submitTrigger, setSubmitTrigger] = useState(Date.now());
+
+  const uploadImageFileBeforeSubmit = async (submitData) => {
+    const response = await uploadFileOnS3();
+    if (response) {
+      const { id, path } = response;
+      return { ...submitData, profileImage: path };
+    }
+    return submitData;
+  };
 
   const submitCallback = async (submitData) => {
-    const parsedSubmitData = essentialInfoParser(submitData);
-    console.log('object :>> ', submitData, parsedSubmitData);
+    const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
+    const parsedSubmitData = essentialInfoParser(changedProfileImageSubmitData);
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
@@ -80,17 +88,8 @@ const useEssentialForm = () => {
     validate: essentialValidation,
   });
 
-  const uploadProfileImageBeforeSubmit = async () => {
-    const response = await uploadFileOnS3();
-    if (response) {
-      const { path, id } = response;
-      onChangeHandlerWithSelect({ name: 'profileImage', value: S3_IMAGE_SERVER_URL + path });
-      setSubmitTrigger(Date.now());
-    }
-  };
-
   const handleApiRequestInLastSubPage = () => {
-    uploadProfileImageBeforeSubmit();
+    submitHandler();
   };
 
   const closeEssentialModal = useCallback(() => {
@@ -153,10 +152,6 @@ const useEssentialForm = () => {
       setIsNicknameDuplicate(true);
     }
   }, [inputValues.nickname, notifyDispatch]);
-
-  useEffect(() => {
-    submitHandler();
-  }, [submitTrigger]);
 
   const actions = useMemo(
     () => ({
