@@ -9,7 +9,7 @@ import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
 import * as S from './style';
 
-export default WithProvider({ Provider: ToastNotificationProvider, Component: Layout });
+export default WithProvider({ Providers: [ToastNotificationProvider], Component: Layout });
 
 function Layout() {
   const { toastList } = useToastNotificationState();

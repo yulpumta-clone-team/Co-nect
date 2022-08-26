@@ -1,8 +1,8 @@
 import PropTypes, { shape } from 'prop-types';
 
 export const loggedUserType = shape({
-  userId: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  nickname: PropTypes.string.isRequired,
   profileImg: PropTypes.string.isRequired,
 });
 

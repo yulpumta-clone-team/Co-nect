@@ -37,9 +37,6 @@ function Template({ children }) {
               <Button theme="none" customStyle={S.AngleButton}>
                 <S.LeftAngle />
               </Button>
-              <Button theme="none" customStyle={S.AngleButton}>
-                <S.RightAngle />
-              </Button>
             </S.AngleContainer>
             {children}
           </S.DialogContainer>
