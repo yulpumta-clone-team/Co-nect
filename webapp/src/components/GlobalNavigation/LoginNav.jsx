@@ -8,6 +8,7 @@ import Button from 'components/Common/Button';
 import UserInfoDropdown from './UserInfoDropdown';
 import * as S from './style';
 
+// userInfo {id, profileImg, nickname}
 LoginNav.propTypes = {
   userInfo: loggedUserType.isRequired,
 };
@@ -15,7 +16,7 @@ LoginNav.propTypes = {
 export default function LoginNav({ userInfo }) {
   const { parent, isDropdownOpen, shouldCloseDropdown, openDropdown, closeDropdown } =
     useDropdown();
-  const { name, profileImg } = userInfo;
+  const { nickname, profileImg } = userInfo;
 
   return (
     <S.Container>
@@ -42,7 +43,7 @@ export default function LoginNav({ userInfo }) {
           <S.Alarm />
           <img src={profileImg} alt="profile" ref={parent} onClick={openDropdown} />
           <S.UserName ref={parent} onClick={openDropdown}>
-            <span>{name}</span>
+            <span>{nickname}</span>
           </S.UserName>
           <UserInfoDropdown
             isDropdownOpen={isDropdownOpen}
