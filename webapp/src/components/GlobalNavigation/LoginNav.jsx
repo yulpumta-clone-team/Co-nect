@@ -5,6 +5,7 @@ import useDropdown from 'hooks/useDropdown';
 import { loggedUserType } from 'types/user.type';
 import Logo from 'assets/icons/nav-logo.svg';
 import Button from 'components/Common/Button';
+import Image from 'components/Common/Image';
 import UserInfoDropdown from './UserInfoDropdown';
 import * as S from './style';
 
@@ -41,7 +42,7 @@ export default function LoginNav({ userInfo }) {
             <Link to={ROUTE.NEW_POST}>새글쓰기</Link>
           </Button>
           <S.Alarm />
-          <img src={profileImg} alt="profile" ref={parent} onClick={openDropdown} />
+          <Image src={profileImg} alt="profile" ref={parent} onClick={openDropdown} />
           <S.UserName ref={parent} onClick={openDropdown}>
             <span>{nickname}</span>
           </S.UserName>
