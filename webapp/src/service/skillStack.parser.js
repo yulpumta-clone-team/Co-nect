@@ -9,4 +9,5 @@ export const skillStackParserToSelectInput = (techSkills) =>
     }))
     .sort((a, b) => a.id - b.id); // id를 기준으로 오름차순 정렬
 
-export const skillStackParserToIds = (techSkills) => techSkills.map(({ key }) => key);
+// techskills: [{category: string, id: number, image: string, label: string, value: string}]
+export const skillStackParserToIds = (techSkills) => techSkills.map(({ id }) => id);

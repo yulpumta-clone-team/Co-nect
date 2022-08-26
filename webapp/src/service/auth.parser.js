@@ -31,6 +31,6 @@ export const essentialInfoParser = (essentialInfoRawData) => {
     name: nickname,
     portfolio,
     slogan,
-    skilss: paresedTechSkills,
+    skills: paresedTechSkills,
   };
 };
