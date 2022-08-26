@@ -19,7 +19,7 @@ public class TechCodeDto {
     public static TechCodeDto of(TechCode techCode){
 
         TechCodeDto techCodeDto = new TechCodeDto();
-        techCodeDto.key =techCode.getKey();
+        techCodeDto.key =techCode.getKeys();
         techCodeDto.category = techCode.getCategory();
         techCodeDto.image = techCode.getImage();
         techCodeDto.techName = techCode.getTechName();

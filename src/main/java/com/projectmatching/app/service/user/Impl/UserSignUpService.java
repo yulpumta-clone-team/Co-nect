@@ -3,12 +3,16 @@ package com.projectmatching.app.service.user.Impl;
 import com.projectmatching.app.annotation.Validation;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
+import com.projectmatching.app.domain.techStack.TechStackRepository;
+import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.techStack.provider.TechStackProviderImpl;
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserEssentialDto;
 import com.projectmatching.app.domain.user.dto.UserJoinDto;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.domain.user.entity.UserTech;
+import com.projectmatching.app.domain.user.repository.UserTechRepository;
 import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -27,7 +34,8 @@ public class UserSignUpService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final TechStackProviderImpl techStackProvider;
-
+    private final UserTechRepository userTechRepository;
+    private final TechStackRepository techStackRepository;
 
     @Transactional
     @Validation
@@ -51,8 +59,25 @@ public class UserSignUpService {
     public void updateUserEssentialInfo(UserEssentialDto userEssentialDto, UserDetailsImpl userDetails){
         checkDuplicateName(userEssentialDto.getName());
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
-        userRepository.save(user.updateEssentialInfo(userEssentialDto,techStackProvider));
+        user.updateEssentialInfo(userEssentialDto);
 
+        addUsersTechStackByUserEssentialDto(userEssentialDto, user);
+
+    }
+
+    //유저 기술스택 저장을 위해 차례로 db에 insert
+    // 1. techCode to TechStack Entity then save TechStack
+    // 2. make UserTech Entity by user and TechStack
+    // 3. save UserTech entity to Repository
+    private void addUsersTechStackByUserEssentialDto(UserEssentialDto userEssentialDto, User user) {
+        techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills())
+                .stream()
+                .map(techCode -> TechStack.of(techCode))
+                .map(techStack ->{
+                            techStackRepository.save(techStack);
+                            return UserTech.of(techStack, user);
+                        }
+                ).forEach(userTech->userTechRepository.save(userTech));
     }
 
 

@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { userCardType } from 'types/user.type';
+import ProfileImg from 'components/Common/ProfileImg';
+import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 
 import * as S from './style';
 
@@ -55,6 +57,7 @@ export default function UserCard({ cardInfo, onClick }) {
     slideRef.current.style.transition = 'all 0.5s ease-in-out';
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
+  const S3Img = S3_IMAGE_SERVER_URL + img;
   return (
     <S.CardWrapper onClick={onClick}>
       <S.CardTop>
@@ -63,7 +66,7 @@ export default function UserCard({ cardInfo, onClick }) {
       <S.BackgroundImg>
         <S.UserJob>{job}</S.UserJob>
       </S.BackgroundImg>
-      <S.ProfileImg src={img} alt="프로필" />
+      <ProfileImg src={S3Img} />
       <S.UserInfo>
         <S.UserName>{name}</S.UserName>
         <S.TeamBelongBoard>

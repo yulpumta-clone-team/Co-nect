@@ -44,17 +44,17 @@ public class TechStackServiceTest extends ServiceTest {
     void setup(){
         techCodeList = new ArrayList<>();
         techCodeList.add(TechCode.builder().techName("javascript")
-                        .image("url").category("front").key(100).build());
+                        .image("url").category("front").keys(100).build());
         techCodeList.add(TechCode.builder()
                 .techName("react")
                 .image("url")
                 .category("front")
-                .key(101).build());
+                .keys(101).build());
         techCodeList.add(TechCode.builder()
                 .techName("express")
                 .image("url")
                 .category("back")
-                .key(202).build());
+                .keys(202).build());
 
         techCodeDtoList = StreamUtil.map(techCodeList,TechCodeDto::of);
 

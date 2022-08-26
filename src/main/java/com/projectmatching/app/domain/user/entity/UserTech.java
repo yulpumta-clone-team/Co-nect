@@ -3,7 +3,9 @@ package com.projectmatching.app.domain.user.entity;
 
 import com.projectmatching.app.domain.techStack.entity.TechCode;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
+import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 
@@ -18,7 +20,6 @@ import javax.persistence.*;
 public class UserTech {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,6 +31,20 @@ public class UserTech {
     private User user;
 
 
+    public static TechStack of(TechCode techCode){
+        TechStack techStack = new TechStack();
+        BeanUtils.copyProperties(techCode,techStack);
+        techStack.setId(IdGenerator.number());
+        return techStack;
 
+    }
+    public static UserTech of(TechStack techStack, User user){
+        UserTech userTech = new UserTech();
+        System.out.println("techStack  !!!! "+techStack.getTechName());
+        userTech.setTechStack(techStack);
+        userTech.setUser(user);
+        userTech.setId(IdGenerator.number());
+        return userTech;
+    }
 
 }

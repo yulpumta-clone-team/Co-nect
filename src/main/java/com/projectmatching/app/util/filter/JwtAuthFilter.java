@@ -36,6 +36,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        log.info("jwt 필터");
         if(authTokenProvider.isTokenExist(request)){
             String token = authTokenProvider.resolveToken(request);
             if (authTokenProvider.isTokenValid(token)) {
@@ -81,7 +82,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     // JWT 토큰에서 인증 정보 조회
     private Authentication getAuthentication(String token) {
-        UserDetails userDetails = UserDetailsImpl.builder()
+        UserDetailsImpl userDetails = UserDetailsImpl.builder()
+                .id(authTokenProvider.getUserId(token))
                 .email(authTokenProvider.getUserEmail(token))
                 .name(authTokenProvider.getUserName(token))
                 .role(authTokenProvider.getUserRole(token))

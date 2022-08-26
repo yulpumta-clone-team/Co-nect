@@ -19,34 +19,23 @@ import javax.persistence.*;
 public class TechCode extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
     private Long id;
 
-    private int key;
+    @Column(columnDefinition = "BIGINT")
+    private Integer keys;
 
     private String category;
-
-    private String image;
-
     //기술 이름
     @Column(name = "tech_name")
     private String techName;
 
+    private String image;
 
 
-    public static TechStack toTechStackEntity(TechCode techCode){
-        TechStack techStack = new TechStack();
-        BeanUtils.copyProperties(techCode,techStack);
-        return techStack;
 
-    }
-    public static UserTech toUserTechWithAddedUser(TechCode techCode, User user){
-        UserTech userTech = new UserTech();
-        userTech.setTechStack(toTechStackEntity(techCode));
-        userTech.setUser(user);
-        userTech.setId(IdGenerator.number());
-        return userTech;
-    }
+
+
+
 
 
 }

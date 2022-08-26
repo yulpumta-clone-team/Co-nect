@@ -67,7 +67,7 @@ public class AuthTokenProvider {
         claims.put(CLAIM_ROLE, Role.USER); // 정보는 key / value 쌍으로 저장된다.
         claims.put(CLAIM_EMAIL,user.getEmail());
         claims.put(CLAIM_NAME,user.getName());
-        claims.put(CLAIM_ID,String.valueOf(user.getId()));
+        claims.put(CLAIM_ID,user.getId());
         claims.put(CLAIM_IMG,user.getImg());
         Date now = new Date();
         return Jwts.builder()
@@ -81,7 +81,7 @@ public class AuthTokenProvider {
 
     public String createRefreshToken(UserDto user){
         Claims claims = Jwts.claims();
-        claims.put(CLAIM_ID,String.valueOf(user.getId()));
+        claims.put(CLAIM_ID,user.getId());
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims)

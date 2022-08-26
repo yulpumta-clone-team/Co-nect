@@ -52,9 +52,6 @@ public class UserDetailsImpl implements UserDetails {
         return this.email;
     }
 
-    public String getUserEmail(){
-        return this.email;
-    } //유저 이메일
     public String getUserRealName(){
         return this.name;
     } //유저 닉네임
