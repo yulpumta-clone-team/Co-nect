@@ -58,7 +58,8 @@ const userHandler = [
   }),
   // GET_USER_DETAIL
   rest.get(`${ROOT_API_URL + API.USER.INDEX}/:id`, (req, res, ctx) => {
-    return randomResponse(res, ctx, userDetail);
+    // return randomResponse(res, ctx, userDetail);
+    return res(ctx.status(200), ctx.json(getResonseWithData(userDetail)));
   }),
   // EDIT_USER_PROFILE
   rest.patch(`${ROOT_API_URL + API.USER.INDEX}/:id`, (req, res, ctx) => {
