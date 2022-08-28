@@ -1,5 +1,4 @@
 import React from 'react';
-import GlobalNavigation from 'components/GlobalNavigation';
 import { Outlet } from 'react-router-dom';
 import ToastNotificationProvider, {
   useToastNotificationAction,
@@ -10,7 +9,7 @@ import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
 import * as S from './style';
 
-export default WithProvider({ Provider: ToastNotificationProvider, Component: Layout });
+export default WithProvider({ Providers: [ToastNotificationProvider], Component: Layout });
 
 function Layout() {
   const { toastList } = useToastNotificationState();
@@ -20,9 +19,6 @@ function Layout() {
   };
   return (
     <S.AppContainer>
-      <S.Header>
-        <GlobalNavigation />
-      </S.Header>
       <S.Main>
         <Outlet />
       </S.Main>

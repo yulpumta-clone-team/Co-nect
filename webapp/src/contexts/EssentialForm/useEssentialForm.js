@@ -1,18 +1,22 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import useForm from 'hooks/useForm';
 import authApi from 'api/auth.api';
-import userApi from 'api/user.api';
-import { ESSENTIAL_INFO } from 'constant/route.constant';
+
+import { ROUTE } from 'constant/route.constant';
 import essentialValidation from 'service/essentialForm.validation';
+import { essentialInfoParser } from 'service/auth.parser';
+import useUserInfo from 'hooks/useUserInfo';
+import useFileUploader from 'hooks/useFileUploader';
+import userApi from 'api/user.api';
 
 const initialValues = {
   nickname: '',
   profileImage: '',
-  skills: [],
+  techSkills: [],
   slogan: '',
   hopeSession: '',
   job: '',
@@ -22,36 +26,59 @@ const initialValues = {
 };
 
 const essentailSubPagesRouteOrder = [
-  ESSENTIAL_INFO.NICKNAME,
-  ESSENTIAL_INFO.SKILL,
-  ESSENTIAL_INFO.PROFILE_IMAGE,
-  ESSENTIAL_INFO.SESSION_JOB,
-  ESSENTIAL_INFO.SLOGAN,
-  ESSENTIAL_INFO.BELONG_TEAM,
-  ESSENTIAL_INFO.CONTENT,
-  ESSENTIAL_INFO.PROTFOLIO,
-  ESSENTIAL_INFO.CALLBACK,
+  ROUTE.ESSENTIAL_INFO.NICKNAME,
+  ROUTE.ESSENTIAL_INFO.SKILL,
+  ROUTE.ESSENTIAL_INFO.PROFILE_IMAGE,
+  ROUTE.ESSENTIAL_INFO.SESSION_JOB,
+  ROUTE.ESSENTIAL_INFO.SLOGAN,
+  ROUTE.ESSENTIAL_INFO.BELONG_TEAM,
+  ROUTE.ESSENTIAL_INFO.CONTENT,
+  ROUTE.ESSENTIAL_INFO.PROTFOLIO,
+  ROUTE.ESSENTIAL_INFO.CALLBACK,
 ];
 
 const useEssentialForm = () => {
+  const layoutRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleProtectedUrl = (locationState) => {
+    if (!locationState) {
+      navigate(ROUTE.LOGIN);
+      return;
+    }
+    if (!locationState.isFirstLogin) {
+      navigate(ROUTE.LOGIN);
+    }
+  };
+
   const notifyDispatch = useToastNotificationAction();
+  const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
+  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader({
+    notifyNewMessage,
+    notifyDispatch,
+  });
+
+  const uploadImageFileBeforeSubmit = async (submitData) => {
+    const response = await uploadFileOnS3();
+    if (response) {
+      const { id, path } = response;
+      return { ...submitData, profileImage: path };
+    }
+    return submitData;
+  };
 
   const submitCallback = async (submitData) => {
+    const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
+    const parsedSubmitData = essentialInfoParser(changedProfileImageSubmitData);
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
-
-    console.log('submitData', submitData);
-
     try {
-      const response = await userApi.POST_ESSENTIAL_INFO(submitData);
-      const { message } = response.data;
-      notifyNewMessage(notifyDispatch, message, TOAST_TYPE.Success);
-      setTimeout(() => {
-        navigate('/login');
-      }, 1000);
+      const response = await userApi.POST_ESSENTIAL_INFO({ submitData: parsedSubmitData });
+      // // const { message } = response;
+      notifyNewMessage(notifyDispatch, '유저정보가 성공적으로 저장되었습니다!', TOAST_TYPE.Success);
+      updateUserInfo();
     } catch (error) {
       console.error(error);
       notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
@@ -72,49 +99,78 @@ const useEssentialForm = () => {
     validate: essentialValidation,
   });
 
+  const handleApiRequestInLastSubPage = () => {
+    submitHandler();
+  };
+
+  const closeEssentialModal = useCallback(() => {
+    navigate(ROUTE.LOGIN);
+  }, [navigate]);
+
+  const handleClickLayout = useCallback(
+    (event) => {
+      const isTargetOnlyLayout = layoutRef.current === event.target;
+      if (isTargetOnlyLayout) {
+        closeEssentialModal();
+      }
+    },
+    [closeEssentialModal],
+  );
+
   const handleClickNextButton = useCallback(() => {
     const currentPathname = location.pathname;
     const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
-    // 타켓팅한 요소의 인덱스가 배열의 길이보다 크거가 같을 때는 이동하지 않는다.
-    if (currentSubPageIndex >= essentailSubPagesRouteOrder.length - 1) return;
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1]);
+    const isCurrentSubPageInLast = currentSubPageIndex === essentailSubPagesRouteOrder.length - 2;
+    const isCurrentSubPageOverLast = currentSubPageIndex > essentailSubPagesRouteOrder.length - 2;
+
+    if (isCurrentSubPageInLast) {
+      handleApiRequestInLastSubPage();
+    }
+
+    if (isCurrentSubPageOverLast) return;
+
+    navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1], {
+      state: { isFirstLogin: true },
+    });
   }, [location.pathname, navigate]);
 
   const handleClickPrevButton = useCallback(() => {
     const currentPathname = location.pathname;
     const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
-    // 타켓팅한 요소의 인덱스가 배열의 길이보다 작거나 같을 때는 이동하지 않는다.
-    if (currentSubPageIndex <= 0) return;
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1]);
+    const isCurrentSubPageUnderInit = currentSubPageIndex <= 0;
+
+    if (isCurrentSubPageUnderInit) {
+      navigate(ROUTE.LOGIN);
+      return;
+    }
+    navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1], {
+      state: { isFirstLogin: true },
+    });
   }, [location.pathname, navigate]);
 
   const onClickCheckDuplicateNickname = useCallback(async () => {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
+    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     try {
-      const response = await authApi.checkDuplicateNickName({ email: inputValues.email });
-      const { message } = response.data;
-      notifyNewMessage(notifyDispatch, message, 'Success');
-      setIsNicknameDuplicate(false);
+      const response = await authApi.checkDuplicateNickName({ name: inputValues.nickname });
+      const isDuplicated = response.data;
+      if (isDuplicated) {
+        notifyNewMessage(notifyDispatch, '이미 사용중인 닉네임입니다!', TOAST_TYPE.Warning);
+        setIsNicknameDuplicate(true);
+      } else {
+        notifyNewMessage(notifyDispatch, '사용가능한 닉네임입니다!', TOAST_TYPE.Success);
+        setIsNicknameDuplicate(false);
+      }
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, 'Error');
+      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
       setIsNicknameDuplicate(true);
     }
-  }, [inputValues.email, notifyDispatch]);
+  }, [inputValues.nickname, notifyDispatch]);
 
-  // try {
-  //   const response = await authApi.GET_ESSENTIAL_INFO();
-  //   console.log(response);
-  //   updateUserInfo({
-  //     userId: response.data.id,
-  //     profileImg: response.data.image,
-  //     name: response.data.name,
-  //   });
-  //   navigate('/');
-  // } catch (apiError) {
-  //   console.error(apiError);
-  // }
+  useEffect(() => {
+    handleProtectedUrl(location.state);
+  }, [location.pathname]);
 
   const actions = useMemo(
     () => ({
@@ -125,6 +181,9 @@ const useEssentialForm = () => {
       isTargetSatisfyValidate,
       handleClickNextButton,
       handleClickPrevButton,
+      handleClickLayout,
+      closeEssentialModal,
+      onChangeFile,
     }),
     [
       onChangeHandler,
@@ -134,17 +193,22 @@ const useEssentialForm = () => {
       isTargetSatisfyValidate,
       handleClickNextButton,
       handleClickPrevButton,
+      handleClickLayout,
+      closeEssentialModal,
+      onChangeFile,
     ],
   );
 
   const states = useMemo(
     () => ({
+      layoutRef,
       inputValues,
       validateError,
       satisfyAllValidates,
       isNicknameDuplicate,
+      imageFile,
     }),
-    [inputValues, validateError, satisfyAllValidates, isNicknameDuplicate],
+    [layoutRef, inputValues, validateError, satisfyAllValidates, isNicknameDuplicate, imageFile],
   );
 
   return [states, actions];

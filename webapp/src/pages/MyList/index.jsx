@@ -5,7 +5,7 @@ import userApi from 'api/user.api';
 import Tabs from 'components/Common/Tabs';
 import UserCard from 'components/UserCard';
 import TeamCard from 'components/TeamCard';
-import { TEAM, USER } from 'constant/route.constant';
+import { ROUTE } from 'constant/route.constant';
 import WithLoading from 'hoc/WithLoading';
 import * as S from './style';
 
@@ -15,7 +15,7 @@ export default function MyList() {
 
   const isUserList = postTabId === USER_ID;
   const CardComponent = isUserList ? UserCard : TeamCard;
-  const clickLink = isUserList ? USER : TEAM;
+  const clickLink = isUserList ? ROUTE.USER : ROUTE.TEAM;
 
   const activedFetcher = fetcherObj[postTabId][listTabId];
 

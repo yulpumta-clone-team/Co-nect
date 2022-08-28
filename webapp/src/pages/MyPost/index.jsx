@@ -2,7 +2,7 @@ import React from 'react';
 import userApi from 'api/user.api';
 import CardsGrid from 'components/CardsGrid';
 import TeamCard from 'components/TeamCard';
-import { TEAM_EDIT } from 'constant/route.constant';
+import { ROUTE } from 'constant/route.constant';
 import WithLoading from 'hoc/WithLoading';
 
 import * as S from './style';
@@ -17,7 +17,7 @@ export default function MyPost() {
 
   return (
     <S.Container>
-      <CardsView isUserList={false} CardComponent={TeamCard} clickLink={`${TEAM_EDIT}/`} />
+      <CardsView isUserList={false} CardComponent={TeamCard} clickLink={`${ROUTE.TEAM_EDIT}/`} />
     </S.Container>
   );
 }

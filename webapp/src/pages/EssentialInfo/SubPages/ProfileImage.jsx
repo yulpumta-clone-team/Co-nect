@@ -1,20 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef } from 'react';
 import Button from 'components/Common/Button';
-import useFileUploader from 'hooks/useFileUploader';
-import { useEssentialFormsAction } from 'contexts/EssentialForm/EssentialForm.Provider';
+import {
+  useEssentialFormsAction,
+  useEssentialFormsState,
+} from 'contexts/EssentialForm/EssentialForm.Provider';
 import * as S from '../EssentialInfo.style';
 
 // TODO: 이미지 업로드 후 디자인
 export default function ProfileImage() {
   const inputFileRef = useRef();
-  const { imageFile, fileHandler, setImageFile } = useFileUploader();
-  const { onChangeHandler, handleClickNextButton } = useEssentialFormsAction();
-
-  const handleOnChange = (event) => {
-    fileHandler(event);
-    onChangeHandler(event);
-  };
+  const { onChangeFile, handleClickNextButton } = useEssentialFormsAction();
+  const { imageFile } = useEssentialFormsState();
 
   const onUploadButtonClick = () => {
     inputFileRef.current.click();
@@ -61,7 +58,7 @@ export default function ProfileImage() {
         name="profileImage"
         type="file"
         accept="image/*"
-        onChange={handleOnChange}
+        onChange={onChangeFile}
       />
     </S.Content>
   );
