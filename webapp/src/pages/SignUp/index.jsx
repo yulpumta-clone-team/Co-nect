@@ -12,6 +12,7 @@ import SocailLoginButtons from 'components/SocialLoginButtons';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import BackButton from 'components/Common/BackButton';
 import { signUpParser } from 'service/auth.parser';
+import { ROUTE } from 'constant/route.constant';
 import * as S from './SignUp.style';
 
 export default function SignUp() {
@@ -65,7 +66,7 @@ export default function SignUp() {
 
   return (
     <S.Container>
-      <BackButton />
+      <BackButton url={ROUTE.HOME} />
       <S.Header>
         <h2>환영합니다!</h2>
         <span>회원 가입을 통해 팀에게 꼭 맞는 팀원을 만나보세요!</span>

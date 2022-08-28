@@ -62,7 +62,7 @@ export default function Login() {
 
   return (
     <S.Container>
-      <BackButton />
+      <BackButton url={ROUTE.HOME} />
       <S.Header>
         <S.MainLogo />
         <h1>Co-nect</h1>
