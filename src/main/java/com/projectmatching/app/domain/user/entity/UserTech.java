@@ -31,16 +31,8 @@ public class UserTech {
     private User user;
 
 
-    public static TechStack of(TechCode techCode){
-        TechStack techStack = new TechStack();
-        BeanUtils.copyProperties(techCode,techStack);
-        techStack.setId(IdGenerator.number());
-        return techStack;
-
-    }
     public static UserTech of(TechStack techStack, User user){
         UserTech userTech = new UserTech();
-        System.out.println("techStack  !!!! "+techStack.getTechName());
         userTech.setTechStack(techStack);
         userTech.setUser(user);
         userTech.setId(IdGenerator.number());
