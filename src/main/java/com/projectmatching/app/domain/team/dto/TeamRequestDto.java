@@ -22,6 +22,9 @@ public class TeamRequestDto {
     @ApiModelProperty(example = "팀 이름")
     private String name;
 
+    @ApiModelProperty(name = "팀 간단소개(슬로건)")
+    private String slogan;
+
     @ApiModelProperty(example = "프로젝트 기간")
     private String session;
 
