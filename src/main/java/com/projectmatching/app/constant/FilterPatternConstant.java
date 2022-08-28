@@ -12,7 +12,7 @@ public class FilterPatternConstant {
             "/user/login",
             "/team",
             "/team/{^[\\d]$}",
-            "/user/comment/{^[\\d+]$}",
+            "/user/comment/{user_id:\\d+}",
             "/upload/*",
             "/techstack/*",
 
