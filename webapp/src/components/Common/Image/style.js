@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Image = styled.img`
-  width: 30%;
-  height: 25%;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
 
   ${({ customStyle }) => customStyle}
