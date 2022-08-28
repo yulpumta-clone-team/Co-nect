@@ -35,6 +35,7 @@ public class UserDto {
     private String status;
     private int likeCnt;
     private int commentCnt;
+    private int readCnt;
 
     private List<String> skills;
 
