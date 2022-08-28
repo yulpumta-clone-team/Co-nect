@@ -7,7 +7,7 @@ public class FilterPatternConstant {
     public static String[] pathArray = new String[]{
             "/user",
             "/user/checkDuplicate/**",
-//            "/user/{\\d+}",
+            "/user/{^[\\d]$}",
             "/user/join",
             "/user/login",
             "/team",
