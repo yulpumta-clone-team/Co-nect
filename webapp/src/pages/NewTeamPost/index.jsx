@@ -48,7 +48,7 @@ export default function NewTeamPost() {
       console.error(error);
       setError({
         isError: true,
-        msg: error,
+        msg: error.message,
       });
     }
     navigate('/');

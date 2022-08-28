@@ -70,7 +70,7 @@ export default function EditUserProfileForm({ targetUser, onClickback }) {
       console.error(error);
       setError({
         isError: true,
-        msg: error,
+        msg: error.message,
       });
     }
   };

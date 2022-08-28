@@ -20,7 +20,7 @@ const useUserInfo = ({ notifyNewMessage, notifyDispatch }) => {
       navigate('/');
     } catch (apiError) {
       console.error(apiError);
-      notifyNewMessage(notifyDispatch, apiError, TOAST_TYPE.Error);
+      notifyNewMessage(notifyDispatch, apiError.message, TOAST_TYPE.Error);
       navigate(ROUTE.ESSENTIAL_INFO.INDEX);
     }
   };

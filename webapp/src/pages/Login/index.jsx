@@ -49,7 +49,7 @@ export default function Login() {
       }, 1000);
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
+      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
     }
   };
 

@@ -65,7 +65,7 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
       console.error(error);
       setError({
         isError: true,
-        msg: error,
+        msg: error.message,
       });
     }
   };

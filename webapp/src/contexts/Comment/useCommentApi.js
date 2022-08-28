@@ -48,7 +48,7 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       getExecution();
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
+      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
     }
   };
 
@@ -65,7 +65,7 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       console.error(error);
       setApiError({
         isError: true,
-        msg: error,
+        msg: error.message,
       });
     } finally {
       setIsLoading(false);

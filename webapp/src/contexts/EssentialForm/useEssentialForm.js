@@ -81,7 +81,7 @@ const useEssentialForm = () => {
       updateUserInfo();
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
+      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
     }
   };
 
@@ -163,7 +163,7 @@ const useEssentialForm = () => {
       }
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
+      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
       setIsNicknameDuplicate(true);
     }
   }, [inputValues.nickname, notifyDispatch]);
