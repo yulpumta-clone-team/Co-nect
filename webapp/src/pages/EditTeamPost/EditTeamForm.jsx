@@ -6,7 +6,7 @@ import useFileInput from 'hooks/useFileInput';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillStack } from 'constant';
 import teamApi from 'api/team.api';
-import { skillStackParserToSelectInput } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/skillStack.parser';
 
 EditTeamForm.propTypes = {};
 
@@ -77,7 +77,7 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
       </div>
     );
 
-  const parsedSkillStack = skillStackParserToSelectInput(skillStack);
+  const parsedSkillStack = skillStackParser(skillStack);
 
   return (
     <div>

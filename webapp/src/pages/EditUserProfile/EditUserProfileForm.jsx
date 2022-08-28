@@ -7,7 +7,7 @@ import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillStack } from 'constant';
 import userApi from 'api/user.api';
 import { userDetailType } from 'types/user.type';
-import { skillStackParserToSelectInput } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/skillStack.parser';
 
 EditUserProfileForm.propTypes = {
   targetUser: userDetailType.isRequired,
@@ -82,7 +82,7 @@ export default function EditUserProfileForm({ targetUser, onClickback }) {
       </div>
     );
 
-  const parsedSkillStack = skillStackParserToSelectInput(skillStack);
+  const parsedSkillStack = skillStackParser(skillStack);
 
   return (
     <div>
