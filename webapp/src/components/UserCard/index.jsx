@@ -4,6 +4,7 @@ import { userCardType } from 'types/user.type';
 import ProfileImg from 'components/ProfileImg';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 
+import { userCardParser } from 'service/user.parser';
 import * as S from './style';
 
 UserCard.propTypes = {
@@ -28,7 +29,8 @@ export const skillsImg = [
 
 export default function UserCard({ cardInfo, onClick }) {
   // * : userCard 에 표시되는 정보
-  const { name, hopeSession, img, job } = cardInfo;
+  const parsedCardInfo = userCardParser(cardInfo);
+  const { name, hopeSession, img, job } = parsedCardInfo;
   // * : 현재 슬라이드를 나타내는 useState
   const [currentSlide, setCurrentSlide] = useState(0);
   // * : Slide 넘어가는 effect
@@ -53,10 +55,12 @@ export default function UserCard({ cardInfo, onClick }) {
       setCurrentSlide(currentSlide - 1);
     }
   };
+
   useEffect(() => {
     slideRef.current.style.transition = 'all 0.5s ease-in-out';
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
+
   const S3Img = S3_IMAGE_SERVER_URL + img;
   return (
     <S.CardWrapper onClick={onClick}>
