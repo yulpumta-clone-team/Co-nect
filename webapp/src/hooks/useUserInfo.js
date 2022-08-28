@@ -20,8 +20,12 @@ const useUserInfo = ({ notifyNewMessage, notifyDispatch }) => {
       navigate('/');
     } catch (apiError) {
       console.error(apiError);
-      notifyNewMessage(notifyDispatch, apiError.message, TOAST_TYPE.Error);
-      navigate(ROUTE.ESSENTIAL_INFO.INDEX);
+      notifyNewMessage(
+        notifyDispatch,
+        `유저정보를 가져오지 못했습니다. \n다시 로그인해주세요 ㅠㅠ`,
+        TOAST_TYPE.Error,
+      );
+      navigate(ROUTE.LOGIN);
     }
   };
   const deleteUserInfo = () => {
