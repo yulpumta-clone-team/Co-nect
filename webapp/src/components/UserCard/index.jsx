@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { userCardType } from 'types/user.type';
-import ProfileImg from 'components/Common/ProfileImg';
+import ProfileImg from 'components/ProfileImg';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 
 import * as S from './style';

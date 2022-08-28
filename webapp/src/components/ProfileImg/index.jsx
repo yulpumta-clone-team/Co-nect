@@ -4,17 +4,16 @@ import MainLogoIcon from 'assets/icons/conect-main.svg';
 
 import * as S from './style';
 
-const Image = forwardRef(({ src, customStyle }, ref) => {
+const ProfileImg = forwardRef(({ src }, ref) => {
   const handleError = (event) => {
     event.target.onerror = null;
     event.target.src = MainLogoIcon;
   };
-  return <S.Image ref={ref} src={src} onError={handleError} customStyle={customStyle} />;
+  return <S.ProfileImg ref={ref} src={src} onError={handleError} />;
 });
 
-Image.propTypes = {
+ProfileImg.propTypes = {
   src: PropTypes.string.isRequired,
-  customStyle: PropTypes.array,
 };
 
-export default Image;
+export default ProfileImg;
