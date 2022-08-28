@@ -7,7 +7,6 @@ export const loggedUserType = shape({
 });
 
 const userSchema = {
-  description: PropTypes.string.isRequired,
   hopeSession: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   img: PropTypes.string.isRequired,
@@ -26,6 +25,7 @@ const userCardTypeSchema = {
 
 const userDetailTypeSchema = {
   ...userSchema,
+  description: PropTypes.string.isRequired,
   commentCnt: PropTypes.number.isRequired,
   content: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,

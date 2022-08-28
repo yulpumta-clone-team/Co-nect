@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import MarkdownEditor from 'components/MdEditor';
 import useFileUploader from 'hooks/useFileInput';
 import useInput from 'hooks/useInput';
-import { hopeSessionOption, skillOptions, skillStack } from 'constant';
+import { hopeSessionOption, skillStack } from 'constant';
 import userApi from 'api/user.api';
-import { userType } from 'types/user.type';
+import { userDetailType } from 'types/user.type';
 import { skillStackParserToSelectInput } from 'service/skillStack.parser';
 
 EditUserProfileForm.propTypes = {
-  targetUser: userType.isRequired,
+  targetUser: userDetailType.isRequired,
   onClickback: PropTypes.func.isRequired,
 };
 
