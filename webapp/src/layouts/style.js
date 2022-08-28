@@ -5,10 +5,11 @@ export const AppContainer = styled.div`
 `;
 
 export const Main = styled.main`
-  width: 100%;
+  max-width: 1180px;
   height: 100vh;
   padding-top: 100px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})}
+  margin: 0 auto;
 `;
 
 export const Header = styled.header`

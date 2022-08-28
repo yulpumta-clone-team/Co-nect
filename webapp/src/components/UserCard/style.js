@@ -128,49 +128,6 @@ export const Divider = styled.div`
   width: 100%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.nonActive};
 `;
-// * : 이동 버튼 포함 기술스택 정렬 박스
-export const SkillBoard = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  height: 20%;
-  width: 100%;
-  padding: 1% 0%;
-`;
-// * : skill이 5개씩 보여지는 부분
-export const SkillContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-`;
-// * : slideRef 로 지정한 하나의 슬라이드 style
-export const SkillSlide = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  height: 100%;
-  width: 100%;
-  gap: 11px;
-`;
-// ! : 변경 시 수정 필요 !
-// ! : 박스 길이(100% - (8%+8%)=84%) / (gap 크기(12px) * (viewingSkill + 1))
-
-export const SkillImage = styled.img`
-  object-fit: cover;
-  width: 65%;
-  height: 65%;
-
-  border-radius: 50%;
-  box-shadow: 1px 1px 1px 1px #cdcdcd;
-`;
 
 // * : 조회수와 댓글수가 보여지는 부분
 export const CountBoard = styled.div`

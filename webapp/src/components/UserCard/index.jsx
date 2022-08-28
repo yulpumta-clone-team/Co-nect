@@ -4,7 +4,7 @@ import { userCardType } from 'types/user.type';
 import ProfileImg from 'components/ProfileImg';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 import { userCardParser } from 'service/user.parser';
-import useSkillCarousel from 'hooks/useSkillCarousel';
+import TechSkills from 'components/TechSkills';
 import * as S from './style';
 
 UserCard.propTypes = {
@@ -15,13 +15,7 @@ UserCard.propTypes = {
 export default function UserCard({ cardInfo, onClick }) {
   const parsedCardInfo = userCardParser(cardInfo);
   const { name, hopeSession, img, job, skills } = parsedCardInfo;
-
   const S3Img = S3_IMAGE_SERVER_URL + img;
-
-  const { slideRef, handleClickNextSlide, handleClickPrevSlide } = useSkillCarousel({
-    skills,
-    viewingSkill: 5,
-  });
 
   return (
     <S.CardWrapper onClick={onClick}>
@@ -42,15 +36,7 @@ export default function UserCard({ cardInfo, onClick }) {
         </S.HopeSession>
       </S.UserInfo>
       <S.Divider />
-      <S.SkillBoard>
-        <S.LeftAngle onClick={handleClickPrevSlide} />
-        <S.SkillContainer>
-          <S.SkillSlide ref={slideRef}>
-            {skills && skills.map(({ imageUrl, id }) => <S.SkillImage key={id} src={imageUrl} />)}
-          </S.SkillSlide>
-        </S.SkillContainer>
-        <S.RightAngle onClick={handleClickNextSlide} />
-      </S.SkillBoard>
+      <TechSkills skills={skills} isCarousel imageSize="48px" gap="10px" />
       <S.CountBoard>
         <S.Chat />
         000
