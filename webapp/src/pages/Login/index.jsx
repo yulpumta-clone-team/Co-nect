@@ -21,7 +21,7 @@ import * as S from './Login.style';
 export default function Login() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
-  const { updateUserInfo } = useUserInfo();
+  const { handleUpdateUserInfo } = useUserInfo();
 
   const handleShowEssesntialModal = (isFirstLogin) => {
     navigate(ROUTE.ESSENTIAL_INFO.NICKNAME, { state: { isFirstLogin } });
@@ -44,7 +44,7 @@ export default function Login() {
         if (isFirstLogin) {
           handleShowEssesntialModal(isFirstLogin);
         } else {
-          updateUserInfo();
+          handleUpdateUserInfo();
         }
       }, 1000);
     } catch (error) {

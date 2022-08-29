@@ -13,9 +13,9 @@ UserInfoDropdown.propTypes = {
 };
 export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, closeDropdown }) {
   const navigate = useNavigate();
-  const { deleteUserInfo } = useUserInfo();
+  const { handleDeleteUserInfo } = useUserInfo();
   const onClickLogout = async () => {
-    deleteUserInfo();
+    handleDeleteUserInfo();
   };
   const onClickLinkLi = (link) => {
     navigate(link);

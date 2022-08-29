@@ -9,7 +9,7 @@ import { updateUserInfo, deleteUserInfo } from 'service/auth';
 const useUserInfo = () => {
   const notifyDispatch = useToastNotificationAction();
   const navigate = useNavigate();
-  const updateUserInfo = async () => {
+  const handleUpdateUserInfo = async () => {
     try {
       const response = await userApi.GET_ESSENTIAL_INFO();
       const {
@@ -31,7 +31,7 @@ const useUserInfo = () => {
       navigate(ROUTE.LOGIN);
     }
   };
-  const deleteUserInfo = () => {
+  const handleDeleteUserInfo = () => {
     deleteUserInfo();
     navigate('/');
     notifyNewMessage(notifyDispatch, '로그아웃 되었습니다', TOAST_TYPE.Info);
@@ -56,7 +56,7 @@ const useUserInfo = () => {
     }, 1000);
   };
 
-  return { updateUserInfo, deleteUserInfo, handleExiredToken };
+  return { handleUpdateUserInfo, handleDeleteUserInfo, handleExiredToken };
 };
 
 export default useUserInfo;

@@ -53,7 +53,7 @@ const useEssentialForm = () => {
   };
 
   const notifyDispatch = useToastNotificationAction();
-  const { updateUserInfo } = useUserInfo();
+  const { handleUpdateUserInfo } = useUserInfo();
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
   const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader({
     notifyNewMessage,
@@ -78,7 +78,7 @@ const useEssentialForm = () => {
       const response = await userApi.POST_ESSENTIAL_INFO({ submitData: parsedSubmitData });
       // // const { message } = response;
       notifyNewMessage(notifyDispatch, '유저정보가 성공적으로 저장되었습니다!', TOAST_TYPE.Success);
-      updateUserInfo();
+      handleUpdateUserInfo();
     } catch (error) {
       console.error(error);
       notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
