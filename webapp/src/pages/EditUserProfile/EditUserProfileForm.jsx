@@ -8,6 +8,7 @@ import { hopeSessionOption, skillStack } from 'constant';
 import userApi from 'api/user.api';
 import { userDetailType } from 'types/user.type';
 import { skillStackParser } from 'service/skillStack.parser';
+import useAxios from 'hooks/useAxios';
 
 EditUserProfileForm.propTypes = {
   targetUser: userDetailType.isRequired,
@@ -31,10 +32,14 @@ export default function EditUserProfileForm({ targetUser, onClickback }) {
     commentCnt,
     likeCnt,
   } = targetUser;
-  const [loading, setLoading] = useState(false);
+
+  const [state, execution, foreceRefetch] = useAxios({
+    axiosInstance: userApi.EDIT_USER_PROFILE,
+    immediate: false,
+  });
 
   const [id, setId] = useState(userId);
-  const [imageFile, fileHandler, setFile] = useFileUploader(userImage);
+  // const [imageFile, fileHandler, setFile] = useFileUploader(userImage);
   const [session, onSessionChange, setSession] = useInput(userSession);
   const [name, setName] = useState(userName);
   const [mdcontent, setContent] = useState(userContent);
@@ -54,25 +59,13 @@ export default function EditUserProfileForm({ targetUser, onClickback }) {
     event.preventDefault();
     const submitData = {
       name,
-      img: imageFile,
+      img: 'imageFile',
       session,
       techs: selectedSkills,
       content: mdcontent,
     };
-    try {
-      const {
-        status,
-        data: { data },
-      } = await userApi.EDIT_USER_PROFILE({ id, data: submitData });
-      console.log('data', data);
-      // TODO: 성공시 이동할 페이지 정해서 이동시키기
-    } catch (error) {
-      console.error(error);
-      setError({
-        isError: true,
-        msg: error.message,
-      });
-    }
+    await execution({ id, data: submitData });
+    // TODO: 성공시 이동할 페이지 정해서 이동시키기
   };
 
   if (error.isError)
@@ -87,8 +80,8 @@ export default function EditUserProfileForm({ targetUser, onClickback }) {
   return (
     <div>
       <h3> 프로필 이미지 </h3>
-      <input type="file" accept="image/*" onChange={fileHandler} />
-      <img src={imageFile} alt="profile" />
+      {/* <input type="file" accept="image/*" onChange={fileHandler} />
+      <img src={imageFile} alt="profile" /> */}
       <form onSubmit={handleSubmit}>
         <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
         <select value={userSkill} onChange={onSkillChange}>
