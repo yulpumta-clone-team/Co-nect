@@ -53,11 +53,12 @@ const userHandler = [
   // 내가 쓴 목록 조회
   rest.get(ROOT_API_URL + API.USER.MYPOSTS, (req, res, ctx) => {
     const randomStatusErrorCode = getRandomStatusErrorCode();
-    return res(
-      ctx.status(randomStatusErrorCode),
-      ctx.delay(1500),
-      ctx.json(getResonseWithData(myPosts)),
-    );
+    // return res(
+    //   ctx.status(randomStatusErrorCode),
+    //   ctx.delay(1500),
+    //   ctx.json(getResonseWithData(myPosts)),
+    // );
+    return res(ctx.status(200), ctx.json(getResonseWithData(myPosts)));
   }),
   // 유저 디테일 정보 조회
   rest.get(`${ROOT_API_URL + API.USER.INDEX}/:id`, (req, res, ctx) => {
