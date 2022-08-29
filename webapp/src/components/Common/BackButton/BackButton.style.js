@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as LeftArrowIcon } from 'assets/icons/left-arrow.svg';
 
 export const Container = styled.button`
-  position: fixed;
+  position: absolute;
   left: 1.56%;
   top: 3.33%;
 

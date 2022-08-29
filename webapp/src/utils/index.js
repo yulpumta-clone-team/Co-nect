@@ -16,6 +16,9 @@ export function setPostIdOnSubmitData(postType, postId, submitData) {
   };
 }
 
+export const parsedNumberToThreeDigits = (number) =>
+  number > 999 ? String(999) : String(number).padStart(3, '0');
+
 export async function handleFetcher(fetcher, submitData) {
   const fetchResult = {
     isError: true,

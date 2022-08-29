@@ -8,6 +8,9 @@ export const RowContainer = styled.div`
   width: ${({ width }) => `${width}`};
   margin-top: ${({ marginTop }) => `${marginTop}`};
   margin-bottom: ${({ marginBottom }) => `${marginBottom}`};
+  && {
+    ${({ customStyle }) => customStyle}
+  }
 `;
 
 export const ColContainer = styled.div`
@@ -18,4 +21,7 @@ export const ColContainer = styled.div`
   width: ${({ width }) => `${width}`};
   margin-top: ${({ marginTop }) => `${marginTop}`};
   margin-bottom: ${({ marginBottom }) => `${marginBottom}`};
+  && {
+    ${({ customStyle }) => customStyle}
+  }
 `;

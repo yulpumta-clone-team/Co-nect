@@ -1,17 +1,14 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import userApi from 'api/user.api';
 import WithLoading from 'hoc/WithLoading';
+import BackButton from 'components/Common/BackButton';
 import UserPostDetail from './UserPostDetail';
+import * as S from './UserPost.style';
 
 export default function UserPost() {
   const { userId: stringUserId } = useParams();
   const userId = Number(stringUserId);
-  const navigate = useNavigate();
-
-  const onClickback = () => {
-    navigate(-1);
-  };
 
   const UserPostDetailWithLoading = WithLoading({
     Component: UserPostDetail,
@@ -21,9 +18,9 @@ export default function UserPost() {
   });
 
   return (
-    <div>
-      <button onClick={onClickback}>back</button>
+    <S.Container>
+      <BackButton />
       <UserPostDetailWithLoading />
-    </div>
+    </S.Container>
   );
 }

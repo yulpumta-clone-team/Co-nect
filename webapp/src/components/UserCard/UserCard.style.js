@@ -2,14 +2,10 @@ import styled from 'styled-components';
 import { ReactComponent as leftAngleIcon } from 'assets/icons/left-angle.svg';
 import { ReactComponent as rightAngleIcon } from 'assets/icons/right-angle.svg';
 import { ReactComponent as heartIcon } from 'assets/icons/heart.svg';
-import { ReactComponent as checkIcon } from 'assets/icons/check-button.svg';
-import { ReactComponent as crossIcon } from 'assets/icons/cross-button.svg';
 import { ReactComponent as chatIcon } from 'assets/icons/chat.svg';
 import { ReactComponent as viewIcon } from 'assets/icons/view.svg';
-import { userCardType } from 'types/user.type';
-
-const belong_team = userCardType;
-const teamIcon = belong_team ? checkIcon : crossIcon;
+import { ReactComponent as closeNormalIcon } from 'assets/icons/close-normal.svg';
+import { ReactComponent as checkCircleIcon } from 'assets/icons/check-button.svg';
 
 // * : Card Container
 export const CardWrapper = styled.div`
@@ -28,7 +24,7 @@ export const CardTop = styled.div`
   display: flex;
 
   height: 30px;
-  width: 260px;
+  width: 100%;
   background-color: #036eff;
   border-radius: 10px 10px 0px 0px;
 `;
@@ -96,13 +92,10 @@ export const UserName = styled.div`
 export const TeamBelongBoard = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
-  width: 50%;
-
   ${({ theme: { fonts } }) => fonts.korean.default}
   font-weight: 700;
+  gap: 4px;
 `;
 export const HopeSession = styled.div`
   position: relative;
@@ -128,70 +121,29 @@ export const Divider = styled.div`
   width: 100%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.nonActive};
 `;
-// * : 이동 버튼 포함 기술스택 정렬 박스
-export const SkillBoard = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  height: 20%;
-  width: 100%;
-  padding: 1% 0%;
-`;
-// * : skill이 5개씩 보여지는 부분
-export const SkillContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-`;
-// * : slideRef 로 지정한 하나의 슬라이드 style
-export const SkillSlide = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  height: 100%;
-  width: 100%;
-  gap: 11px;
-`;
-// ! : 변경 시 수정 필요 !
-// ! : 박스 길이(100% - (8%+8%)=84%) / (gap 크기(12px) * (viewingSkill + 1))
-
-export const SkillImage = styled.img`
-  object-fit: cover;
-  width: 65%;
-  height: 65%;
-
-  border-radius: 50%;
-  box-shadow: 1px 1px 1px 1px #cdcdcd;
-`;
 
 // * : 조회수와 댓글수가 보여지는 부분
-export const CountBoard = styled.div`
-  position: relative;
+export const CardInfoIndicator = styled.div`
+  position: absolute;
+  bottom: 1.2rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 7%;
-  width: 50%;
-  padding: 1rem;
-  left: 50%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 1rem 1rem 0 0;
+  gap: 12px;
+`;
+
+export const SingleIndicator = styled.div`
+  ${({ theme: { mixin } }) => mixin.flexCenter({ direction: 'row' })};
+  gap: 4px;
 `;
 
 // Icon
 export const Heart = styled(heartIcon)`
   position: relative;
-  display: flex;
-  align-items: center;
   left: 14px;
   top: 6px;
-
   width: 20px;
   height: 20px;
 `;
@@ -201,8 +153,8 @@ export const LeftAngle = styled(leftAngleIcon)`
   height: 60%;
   cursor: pointer;
   & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.black};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+    fill: ${({ theme: { colors } }) => colors.greyScale.normal};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
   }
 `;
 
@@ -211,17 +163,30 @@ export const RightAngle = styled(rightAngleIcon)`
   height: 60%;
   cursor: pointer;
   & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.black};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+    fill: ${({ theme: { colors } }) => colors.greyScale.normal};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
   }
 `;
 
 // * : team 소속 여부 아이콘
-export const TeamBelong = styled(teamIcon)`
-  width: 20px;
+
+export const CloseNormal = styled(closeNormalIcon)`
   height: 20px;
-  object-fit: cover;
+  width: 20px;
+  & path {
+    fill: ${({ theme: { colors } }) => colors.greyScale.normal};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
+  }
 `;
+export const CheckCircle = styled(checkCircleIcon)`
+  height: 20px;
+  width: 20px;
+  & path {
+    fill: ${({ theme: { colors } }) => colors.secondary.normal};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
+  }
+`;
+
 export const Chat = styled(chatIcon)`
   width: 18px;
   height: 18px;
