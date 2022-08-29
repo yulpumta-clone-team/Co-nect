@@ -7,11 +7,11 @@ import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillStack } from 'constant';
 import teamApi from 'api/team.api';
 import { skillStackParser } from 'service/skillStack.parser';
+import useAxios from 'hooks/useAxios';
 
 EditTeamForm.propTypes = {};
 
 export default function EditTeamForm({ targetTeam, onClickback }) {
-  console.log('targetTeam', targetTeam);
   const {
     id: teamId,
     name: teamName,
@@ -24,9 +24,13 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
     likeCnt,
     user,
   } = targetTeam;
-  const [loading, setLoading] = useState(false);
+
+  const [state, execution, foreceRefetch] = useAxios({
+    axiosInstance: teamApi.EDIT_TEAM_POST,
+    immediate: false,
+  });
   const [id, setId] = useState(teamId);
-  const [imageFile, fileHandler, setFile] = useFileInput(teamImage);
+  // const [imageFile, fileHandler, setFile] = useFileInput(teamImage);
   const [session, onSessionChange, setSession] = useInput(teamSession);
   const [name, onNameChange] = useInput(teamName);
   const [mdcontent, setContent] = useState(teamContent);
@@ -46,28 +50,16 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
     event.preventDefault();
     const submitData = {
       name,
-      img: imageFile,
+      img: 'imageFile',
       session,
       skills: selectedSkills,
       content: mdcontent,
     };
-    try {
-      const {
-        status,
-        data: { data },
-      } = await teamApi.EDIT_TEAM_POST({
-        id,
-        data: submitData,
-      });
-      console.log('data', data);
-      // TODO: 성공시 이동할 페이지 정해서 이동시키기
-    } catch (error) {
-      console.error(error);
-      setError({
-        isError: true,
-        msg: error.message,
-      });
-    }
+    await execution({
+      id,
+      data: submitData,
+    });
+    // TODO: 성공시 이동할 페이지 정해서 이동시키기
   };
 
   if (error.isError)
@@ -82,8 +74,8 @@ export default function EditTeamForm({ targetTeam, onClickback }) {
   return (
     <div>
       <h3> 프로필 이미지 </h3>
-      <input type="file" accept="image/*" onChange={fileHandler} />
-      <img src={imageFile} alt="profile" />
+      {/* <input type="file" accept="image/*" onChange={fileHandler} />
+      <img src={imageFile} alt="profile" /> */}
       <form onSubmit={handleSubmit}>
         <div>
           팀이름 <input name="팀이름" onChange={onNameChange} value={name} />
