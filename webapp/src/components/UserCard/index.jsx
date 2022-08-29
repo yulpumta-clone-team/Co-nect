@@ -14,8 +14,9 @@ UserCard.propTypes = {
 
 export default function UserCard({ cardInfo, onClick }) {
   const parsedCardInfo = userCardParser(cardInfo);
-  const { name, hopeSession, img, job, skills, commentCnt, likeCnt } = parsedCardInfo;
+  const { name, hopeSession, img, job, skills, commentCnt, likeCnt, status } = parsedCardInfo;
   const S3Img = S3_IMAGE_SERVER_URL + img;
+  const BelongStatus = status ? <S.CheckCircle /> : <S.CloseNormal />;
 
   return (
     <S.CardWrapper onClick={onClick}>
@@ -29,7 +30,8 @@ export default function UserCard({ cardInfo, onClick }) {
       <S.UserInfo>
         <S.UserName>{name}</S.UserName>
         <S.TeamBelongBoard>
-          현재 소속 여부 <S.TeamBelong />
+          <span>현재 소속 여부</span>
+          {BelongStatus}
         </S.TeamBelongBoard>
         <S.HopeSession>
           희망 기간 &nbsp; <S.UserHopeSession>{hopeSession}</S.UserHopeSession>

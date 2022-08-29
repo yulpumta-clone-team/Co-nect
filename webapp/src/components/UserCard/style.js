@@ -2,14 +2,10 @@ import styled from 'styled-components';
 import { ReactComponent as leftAngleIcon } from 'assets/icons/left-angle.svg';
 import { ReactComponent as rightAngleIcon } from 'assets/icons/right-angle.svg';
 import { ReactComponent as heartIcon } from 'assets/icons/heart.svg';
-import { ReactComponent as checkIcon } from 'assets/icons/check-button.svg';
-import { ReactComponent as crossIcon } from 'assets/icons/cross-button.svg';
 import { ReactComponent as chatIcon } from 'assets/icons/chat.svg';
 import { ReactComponent as viewIcon } from 'assets/icons/view.svg';
-import { userCardType } from 'types/user.type';
-
-const belong_team = userCardType;
-const teamIcon = belong_team ? checkIcon : crossIcon;
+import { ReactComponent as closeNormalIcon } from 'assets/icons/close-normal.svg';
+import { ReactComponent as checkCircleIcon } from 'assets/icons/check-button.svg';
 
 // * : Card Container
 export const CardWrapper = styled.div`
@@ -96,13 +92,10 @@ export const UserName = styled.div`
 export const TeamBelongBoard = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
-  width: 50%;
-
   ${({ theme: { fonts } }) => fonts.korean.default}
   font-weight: 700;
+  gap: 4px;
 `;
 export const HopeSession = styled.div`
   position: relative;
@@ -162,8 +155,8 @@ export const LeftAngle = styled(leftAngleIcon)`
   height: 60%;
   cursor: pointer;
   & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.black};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+    fill: ${({ theme: { colors } }) => colors.greyScale.normal};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
   }
 `;
 
@@ -172,17 +165,30 @@ export const RightAngle = styled(rightAngleIcon)`
   height: 60%;
   cursor: pointer;
   & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.black};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+    fill: ${({ theme: { colors } }) => colors.greyScale.normal};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
   }
 `;
 
 // * : team 소속 여부 아이콘
-export const TeamBelong = styled(teamIcon)`
-  width: 20px;
+
+export const CloseNormal = styled(closeNormalIcon)`
   height: 20px;
-  object-fit: cover;
+  width: 20px;
+  & path {
+    fill: ${({ theme: { colors } }) => colors.greyScale.normal};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
+  }
 `;
+export const CheckCircle = styled(checkCircleIcon)`
+  height: 20px;
+  width: 20px;
+  & path {
+    fill: ${({ theme: { colors } }) => colors.secondary.normal};
+    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
+  }
+`;
+
 export const Chat = styled(chatIcon)`
   width: 18px;
   height: 18px;
