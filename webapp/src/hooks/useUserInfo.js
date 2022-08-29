@@ -4,7 +4,7 @@ import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useNavigate } from 'react-router-dom';
-import { updateUserInfoInLocalstorage, deleteUserInfoInLocalStorage } from 'service/auth';
+import { updateUserInfo, deleteUserInfo } from 'service/auth';
 
 const useUserInfo = () => {
   const notifyDispatch = useToastNotificationAction();
@@ -15,7 +15,7 @@ const useUserInfo = () => {
       const {
         data: { id, image, name },
       } = response;
-      updateUserInfoInLocalstorage({
+      updateUserInfo({
         id,
         image,
         name,
@@ -32,7 +32,7 @@ const useUserInfo = () => {
     }
   };
   const deleteUserInfo = () => {
-    deleteUserInfoInLocalStorage();
+    deleteUserInfo();
     navigate('/');
     notifyNewMessage(notifyDispatch, '로그아웃 되었습니다', TOAST_TYPE.Info);
     setTimeout(() => {
@@ -44,7 +44,7 @@ const useUserInfo = () => {
     if (httpStatus !== 403 && httpStatus !== 401) {
       return;
     }
-    deleteUserInfoInLocalStorage();
+    deleteUserInfo();
     navigate('/');
     notifyNewMessage(
       notifyDispatch,
