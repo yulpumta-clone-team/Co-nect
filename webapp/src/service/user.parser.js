@@ -1,16 +1,20 @@
 /* eslint-disable no-prototype-builtins */
-
 import { hopeSessionOption, jobOptions } from 'constant';
+import { parsedNumberToThreeDigits } from 'utils';
 
 export const userCardParser = (userCardInfo) => {
   const job = userCardInfo.job || jobOptions[0].value;
   const hopeSession = userCardInfo.hopeSession || hopeSessionOption[0].value;
   const skills = userCardInfo.skills || [];
+  const commentCnt = parsedNumberToThreeDigits(userCardInfo.commentCnt);
+  const likeCnt = parsedNumberToThreeDigits(userCardInfo.likeCnt);
   return {
     ...userCardInfo,
     job,
     hopeSession,
     skills,
+    commentCnt,
+    likeCnt,
   };
 };
 

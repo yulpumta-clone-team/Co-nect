@@ -14,7 +14,7 @@ UserCard.propTypes = {
 
 export default function UserCard({ cardInfo, onClick }) {
   const parsedCardInfo = userCardParser(cardInfo);
-  const { name, hopeSession, img, job, skills } = parsedCardInfo;
+  const { name, hopeSession, img, job, skills, commentCnt, likeCnt } = parsedCardInfo;
   const S3Img = S3_IMAGE_SERVER_URL + img;
 
   return (
@@ -36,13 +36,17 @@ export default function UserCard({ cardInfo, onClick }) {
         </S.HopeSession>
       </S.UserInfo>
       <S.Divider />
-      <TechSkills skills={skills} isCarousel imageSize="48px" gap="10px" />
-      <S.CountBoard>
-        <S.Chat />
-        000
-        <S.View />
-        000
-      </S.CountBoard>
+      <TechSkills skills={skills} isCarousel imageSize="35px" gap="11px" />
+      <S.CardInfoIndicator>
+        <S.SingleIndicator>
+          <S.Chat />
+          {commentCnt}
+        </S.SingleIndicator>
+        <S.SingleIndicator>
+          <S.View />
+          {likeCnt}
+        </S.SingleIndicator>
+      </S.CardInfoIndicator>
     </S.CardWrapper>
   );
 }

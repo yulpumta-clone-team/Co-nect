@@ -28,7 +28,7 @@ export const CardTop = styled.div`
   display: flex;
 
   height: 30px;
-  width: 260px;
+  width: 100%;
   background-color: #036eff;
   border-radius: 10px 10px 0px 0px;
 `;
@@ -130,15 +130,19 @@ export const Divider = styled.div`
 `;
 
 // * : 조회수와 댓글수가 보여지는 부분
-export const CountBoard = styled.div`
+export const CardInfoIndicator = styled.div`
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 7%;
-  width: 50%;
-  padding: 1rem;
-  left: 50%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 1rem 1rem 0 0;
+  gap: 12px;
+`;
+
+export const SingleIndicator = styled.div`
+  ${({ theme: { mixin } }) => mixin.flexCenter({ direction: 'row' })};
+  gap: 4px;
 `;
 
 // Icon

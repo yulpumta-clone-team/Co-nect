@@ -24,7 +24,7 @@ export const SkillSlide = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: ${({ gap }) => gap || '11px'};
   width: 100%;
   height: 100%;

@@ -15,6 +15,13 @@ export const userList = [
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
       {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
         key: 501,
         category: 'arichitecture',
         techName: 'docker',
@@ -53,6 +60,13 @@ export const userList = [
         key: 500,
         category: 'arichitecture',
         techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
         image:
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
@@ -99,6 +113,13 @@ export const userList = [
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
       {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
         key: 501,
         category: 'arichitecture',
         techName: 'docker',
@@ -137,6 +158,13 @@ export const userList = [
         key: 500,
         category: 'arichitecture',
         techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
         image:
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
@@ -183,6 +211,13 @@ export const userList = [
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
       {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
         key: 501,
         category: 'arichitecture',
         techName: 'docker',
@@ -221,6 +256,13 @@ export const userList = [
         key: 500,
         category: 'arichitecture',
         techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
         image:
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
@@ -267,6 +309,13 @@ export const userList = [
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
       {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
         key: 501,
         category: 'arichitecture',
         techName: 'docker',
@@ -305,6 +354,13 @@ export const userList = [
         key: 500,
         category: 'arichitecture',
         techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
         image:
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
@@ -351,6 +407,13 @@ export const userList = [
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
       {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
         key: 501,
         category: 'arichitecture',
         techName: 'docker',
@@ -389,6 +452,13 @@ export const userList = [
         key: 500,
         category: 'arichitecture',
         techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
         image:
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
@@ -435,6 +505,13 @@ export const userList = [
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
       {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
         key: 501,
         category: 'arichitecture',
         techName: 'docker',
@@ -473,6 +550,13 @@ export const userList = [
         key: 500,
         category: 'arichitecture',
         techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
         image:
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
@@ -519,6 +603,13 @@ export const userList = [
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
       {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
         key: 501,
         category: 'arichitecture',
         techName: 'docker',
@@ -557,6 +648,13 @@ export const userList = [
         key: 500,
         category: 'arichitecture',
         techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
         image:
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
@@ -603,6 +701,13 @@ export const userList = [
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
       {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
         key: 501,
         category: 'arichitecture',
         techName: 'docker',
@@ -645,6 +750,13 @@ export const userList = [
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
       {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
         key: 501,
         category: 'arichitecture',
         techName: 'docker',
@@ -683,6 +795,13 @@ export const userList = [
         key: 500,
         category: 'arichitecture',
         techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
         image:
           'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
       },
