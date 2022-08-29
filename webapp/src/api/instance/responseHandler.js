@@ -18,11 +18,6 @@ export function errorHandler(error) {
       response: { data: apiData, status },
     } = error;
 
-    // silent refresh api 호출하기
-    if (status === 401 || status === 403) {
-      // console.log(status, apiData.message);
-    }
-
     // 서버에서 설정한 커스텀 에러 타입 키값들
     // code, message, status
     const hasCode = apiData && apiData.hasOwnProperty('code');
