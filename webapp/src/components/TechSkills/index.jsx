@@ -27,7 +27,12 @@ export default function TechSkills({
   const parsedTechSkills = skillStackParser(skills);
 
   return (
-    <S.SkillBoard customStyle={customStyle} width={width} height={height}>
+    <S.SkillBoard
+      customStyle={customStyle}
+      width={width}
+      height={height}
+      onClick={(event) => event.stopPropagation()}
+    >
       {isCarousel ? (
         <TechSkillCarousel skills={parsedTechSkills} imageSize={imageSize} gap={gap} />
       ) : (
