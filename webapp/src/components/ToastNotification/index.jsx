@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import approveIcon from 'assets/icons/approve-circle.svg';
+import checkIcon from 'assets/icons/check.svg';
 import errorIcon from 'assets/icons/error.svg';
 import infoIcon from 'assets/icons/info.svg';
 import warningIcon from 'assets/icons/warning.svg';
@@ -69,7 +69,7 @@ export default function ToastNotification({
 }
 
 const MESSAGE_ICON = {
-  Success: approveIcon,
+  Success: checkIcon,
   Error: errorIcon,
   Warning: warningIcon,
   Info: infoIcon,
