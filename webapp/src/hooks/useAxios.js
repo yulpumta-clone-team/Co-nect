@@ -1,6 +1,8 @@
 import { useEffect, useReducer, useState } from 'react';
+import useUserInfo from './useUserInfo';
 
 const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
+  const { handleExiredToken } = useUserInfo();
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     responseData: null,
@@ -29,6 +31,7 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
       });
       dispatch({ type: SUCCESS_TYPE, responseData });
     } catch (error) {
+      handleExiredToken(error.httpStatus);
       console.error(error);
       dispatch({ type: ERROR_TYPE, error });
     }
