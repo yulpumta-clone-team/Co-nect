@@ -6,32 +6,26 @@ import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillStack } from 'constant';
 import teamApi from 'api/team.api';
 import { skillStackParserToSelectInput } from 'service/skillStack.parser';
-import * as S from './style';
 import Button from 'components/Common/Button';
 import Input from 'components/Common/TextInput';
+import BackButton from 'components/Common/BackButton';
+import TechStackSelectInput from 'components/TechStackSelectInput';
+import useForm from 'hooks/useForm';
+import essentialValidation from 'service/essentialForm.validation';
+import SelectInput from 'components/Common/SelectInput';
+
+import * as S from './style';
 
 export default function NewTeamPost() {
   const navigate = useNavigate();
-  const onClickback = () => {
-    navigate(-1);
-  };
 
   const { imageFile, fileHandler } = useFileUploader(null);
 
   const [teamName, onTeamChange] = useInput('');
+  const [slogan, onSloganChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
-  const [userSkill, setUserSkill] = useState('');
-  const [selectedSkills, setSelectedSkills] = useState([]);
   const [mdcontent, setContent] = useState('');
   const [error, setError] = useState({ isError: false, msg: '' });
-
-  const onSkillChange = useCallback(
-    (e) => {
-      setUserSkill(e.target.value);
-      setSelectedSkills((prev) => [...prev, e.target.value]);
-    },
-    [setUserSkill],
-  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,7 +33,7 @@ export default function NewTeamPost() {
     const submitData = {
       name: teamName,
       session: hopeSession,
-      skills: selectedSkills,
+      skills: inputValues.techSkills,
       content: mdcontent,
     };
     try {
@@ -56,39 +50,71 @@ export default function NewTeamPost() {
     }
     navigate('/');
   };
+  const {
+    inputValues,
+    validateError,
+    onChangeHandlerWithSelect,
+    isTargetSatisfyValidate,
+    submitHandler,
+    satisfyAllValidates,
+  } = useForm({
+    initialValues: { techSkills: 'javascript' },
+    handleSubmit,
+    validate: essentialValidation,
+  });
+  const isSkillsValidateError = isTargetSatisfyValidate('techSkills');
 
   const parsedSkillStack = skillStackParserToSelectInput(skillStack);
 
   return (
-    <S.Container>
-      <Button onClick={onClickback}>back</Button>
-      <br />
-      <h3> 프로필 이미지 </h3>
-      <input type="file" accept="image/*" onChange={fileHandler} />
-      <img src={imageFile} alt="profile" />
-      <S.Form onSubmit={handleSubmit}>
-        <S.TeamName>
-          팀이름 <Input name="팀이름" onChange={onTeamChange} value={teamName} />
-        </S.TeamName>
-        <span>선택한 기술 스킬: {selectedSkills.join(', ')}</span>
-        <select value={userSkill} onChange={onSkillChange}>
-          {parsedSkillStack.map(({ id, value, label }) => (
-            <option key={id} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
-        <span>희망 작업 기간</span>
-        <select value={hopeSession} onChange={onHopeSessionChange}>
-          {hopeSessionOption.map(({ id, value }) => (
-            <option key={id} value={value}>
-              {value}
-            </option>
-          ))}
-        </select>
-        <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
-        <Button onSubmit={handleSubmit}>제출</Button>
-      </S.Form>
-    </S.Container>
+    <S.PageContainer>
+      <BackButton />
+      <S.Container>
+        <S.ImgContainer>
+          <S.ViewingImage src={imageFile} alt="profile" />
+          <Input type="file" accept="image/*" onChange={fileHandler} />
+        </S.ImgContainer>
+        <S.Form onSubmit={handleSubmit}>
+          <S.TeamName>
+            팀이름{' '}
+            <Input name="팀이름" onChange={onTeamChange} value={teamName} placeholder="팀이름" />
+          </S.TeamName>
+          <S.TechStack>
+            기술 스택
+            <TechStackSelectInput
+              name="techSkills"
+              label="기술"
+              selectedTechSkills={inputValues.techSkills}
+              techSkillOptions={parsedSkillStack}
+              onChange={onChangeHandlerWithSelect}
+              isError={isSkillsValidateError}
+              helperText={validateError.techSkills}
+            />
+          </S.TechStack>
+          <S.HopeSession>
+            희망 작업 기간
+            <SelectInput
+              name="hopeSession"
+              label="회망 기간"
+              defaultOption={hopeSessionOption[0]}
+              options={hopeSessionOption}
+              value={inputValues.hopeSession}
+              onChange={onChangeHandlerWithSelect}
+            />
+          </S.HopeSession>
+          <S.Slogan>
+            프로젝트 슬로건
+            <Input
+              name="팀이름"
+              onChange={onSloganChange}
+              value={slogan}
+              placeholder="프로젝트슬로건"
+            />
+          </S.Slogan>
+          <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
+          <Button onSubmit={handleSubmit}>제출</Button>
+        </S.Form>
+      </S.Container>
+    </S.PageContainer>
   );
 }

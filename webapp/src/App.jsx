@@ -19,7 +19,7 @@ import EssentialInfo from 'pages/EssentialInfo';
 import PublicRoute from 'hoc/PublicRoute';
 import PrivateRoute from 'hoc/PrivateRoute';
 import Layout from 'layouts/layout';
-import AssignLayout from 'layout/layoutAssign';
+import AssignLayout from 'layouts/layoutAssign';
 import Nickname from 'pages/EssentialInfo/SubPages/Nickname';
 import Skills from 'pages/EssentialInfo/SubPages/Skills';
 import ProfileImage from 'pages/EssentialInfo/SubPages/ProfileImage';
@@ -104,7 +104,10 @@ function App() {
           </Route>
           <Route path={ROUTE.SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
           <Route path={ROUTE.MY_LIST} element={<PrivateRoute Component={MyList} />} />
-          <Route path={ROUTE.NEW_POST} element={<PrivateRoute Component={NewPost} />} />
+          <Route
+            path={ROUTE.NEW_POST}
+            element={<PublicRoute Component={NewPost} restricted={false} />}
+          />
           <Route path={ROUTE.MY_POST} element={<PrivateRoute Component={MyPost} />} />
           <Route
             path={`${ROUTE.USER}/:userId`}

@@ -6,6 +6,10 @@ import NonLoginNav from './NonLoginNav';
 import * as S from './style';
 
 export default function Navigation() {
-  const userInfo = getUserInfo(); // {id, profileImg, nickname}
-  return <S.Container>{userInfo ? <LoginNav userInfo={userInfo} /> : <NonLoginNav />}</S.Container>;
+  const userInfo = { id: 1234, profileImg: '', nickname: '홍길동' }; // {id, profileImg, nickname}
+  return (
+    <S.Container>
+      <LoginNav userInfo={userInfo} />
+    </S.Container>
+  );
 }
