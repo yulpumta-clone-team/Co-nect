@@ -27,9 +27,10 @@ const userHandler = [
     const lastPage = req.url.searchParams.get('lastPage');
     const newUserList = userList.map((user) => ({ ...user, id: Number(user.id + lastPage) }));
     if (Number(lastPage) === 3) {
-      return res(ctx.status(500), ctx.json(getResonseWithData(errorResponse)));
+      return res(ctx.status(500), ctx.json(getResonseWithData(newUserList)));
     }
-    return randomResponse(res, ctx, userList);
+    // return randomResponse(res, ctx, userList);
+    return res(ctx.status(200), ctx.json(getResonseWithData(userList)));
   }),
   // 유저가 좋아요 누른 항목 조회
   rest.get(ROOT_API_URL + API.USER.LIKES, (req, res, ctx) => {
