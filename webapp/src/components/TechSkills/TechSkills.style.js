@@ -18,6 +18,12 @@ export const SkillBoard = styled.div`
   }
 `;
 
+export const EmptySkillSlide = styled.div`
+  width: 100%;
+  padding: 2rem 1rem;
+  height: ${({ imageSize }) => imageSize};
+`;
+
 // * : slideRef 로 지정한 하나의 슬라이드 style
 export const SkillSlide = styled.div`
   padding: 2px;
@@ -50,9 +56,6 @@ export const SkillContainer = styled.div`
       overflow: hidden;
     `}
 `;
-
-// ! : 변경 시 수정 필요 !
-// ! : 박스 길이(100% - (8%+8%)=84%) / (gap 크기(12px) * (viewingSkill + 1))
 
 export const SkillImage = styled.img`
   object-fit: cover;

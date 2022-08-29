@@ -1,7 +1,7 @@
 import React from 'react';
 import UserCard from './index';
 
-import * as S from './style';
+import * as S from './UserCard.style';
 
 export default {
   title: 'Component/UserCard',

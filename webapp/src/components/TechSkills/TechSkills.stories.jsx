@@ -135,3 +135,11 @@ Carousel.args = {
     },
   ],
 };
+
+export const EmptySkills = Template.bind({});
+EmptySkills.args = {
+  isCarousel: true,
+  imageSize: '50px',
+  gap: '12px',
+  skills: [],
+};

@@ -124,7 +124,8 @@ export const Divider = styled.div`
 
 // * : 조회수와 댓글수가 보여지는 부분
 export const CardInfoIndicator = styled.div`
-  position: relative;
+  position: absolute;
+  bottom: 1.2rem;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;

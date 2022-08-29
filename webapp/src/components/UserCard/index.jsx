@@ -5,7 +5,7 @@ import ProfileImg from 'components/ProfileImg';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 import { userCardParser } from 'service/user.parser';
 import TechSkills from 'components/TechSkills';
-import * as S from './style';
+import * as S from './UserCard.style';
 
 UserCard.propTypes = {
   cardInfo: userCardType.isRequired,

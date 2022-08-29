@@ -4,6 +4,7 @@ import { skillStackParser } from 'service/skillStack.parser';
 import TechSkillCarousel from './TechSkillCarousel';
 import TechSkillNormal from './TechSkillNormal';
 import * as S from './TechSkills.style';
+import EmptyTechSkills from './EmptyTechSkills';
 
 TechSkills.propTypes = {
   skills: PropTypes.array.isRequired,
@@ -25,6 +26,8 @@ export default function TechSkills({
   customStyle,
 }) {
   const parsedTechSkills = skillStackParser(skills);
+
+  if (parsedTechSkills.length === 0) return <EmptyTechSkills />;
 
   return (
     <S.SkillBoard
