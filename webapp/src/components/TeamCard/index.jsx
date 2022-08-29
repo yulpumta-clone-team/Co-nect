@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { teamCardType } from 'types/team.type';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
-import ProfileImg from 'components/Common/ProfileImg';
+import ProfileImg from 'components/ProfileImg';
 
 import { DEFAULT_PROFILE_IMG } from 'constant';
 

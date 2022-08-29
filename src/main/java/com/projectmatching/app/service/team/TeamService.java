@@ -52,7 +52,6 @@ public class TeamService {
     //팀 게시글 저장
     public Long save(TeamRequestDto requestDto, String email) throws ResponeException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
-        try {
             Team team = Team.builder()
                     .name(requestDto.getName())
                     .session(requestDto.getSession())
@@ -62,7 +61,6 @@ public class TeamService {
 
             Long teamId = teamRepository.save(team).getId();
 
-            //TODO : REFACTORING
             List<Integer> techs = requestDto.getSkills();
 
             List<TechCode> techStacks = techStackProvider.extractTechCodeByKeys(techs);
@@ -80,9 +78,7 @@ public class TeamService {
 
             return teamId;
 
-        }catch (Exception e){
-            throw new ResponeException(SAVE_TEAM_ERROR);
-        }
+
     }
 
     //팀 게시글 조회

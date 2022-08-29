@@ -5,7 +5,6 @@ import useFileUploader from 'hooks/useFileInput';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillStack } from 'constant';
 import teamApi from 'api/team.api';
-import { skillStackParserToSelectInput } from 'service/skillStack.parser';
 import Button from 'components/Common/Button';
 import Input from 'components/Common/TextInput';
 import BackButton from 'components/Common/BackButton';
@@ -13,7 +12,7 @@ import TechStackSelectInput from 'components/TechStackSelectInput';
 import useForm from 'hooks/useForm';
 import essentialValidation from 'service/essentialForm.validation';
 import SelectInput from 'components/Common/SelectInput';
-
+import { skillStackParser } from 'service/skillStack.parser';
 import * as S from './style';
 
 export default function NewTeamPost() {
@@ -64,7 +63,7 @@ export default function NewTeamPost() {
   });
   const isSkillsValidateError = isTargetSatisfyValidate('techSkills');
 
-  const parsedSkillStack = skillStackParserToSelectInput(skillStack);
+  const parsedSkillStack = skillStackParser(skillStack);
 
   return (
     <S.PageContainer>

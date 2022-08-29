@@ -1,6 +1,6 @@
 import { skillStack } from 'constant';
 import React from 'react';
-import { skillStackParserToSelectInput } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/skillStack.parser';
 import TechStackSelectInput from './index';
 
 export default {
@@ -28,7 +28,7 @@ Default.args = {
   ],
   name: 'TechStackSelectInput',
   label: 'TechStackSelectInput',
-  techSkillOptions: skillStackParserToSelectInput(skillStack),
+  techSkillOptions: skillStackParser(skillStack),
   placeholder: 'selectedTechSkills',
 };
 
@@ -37,7 +37,7 @@ WithError.args = {
   selectedTechSkills: [],
   name: 'name',
   label: 'label',
-  techSkillOptions: skillStackParserToSelectInput(skillStack),
+  techSkillOptions: skillStackParser(skillStack),
   placeholder: 'Error',
   isError: true,
   helperText: '에러 입니다.',
