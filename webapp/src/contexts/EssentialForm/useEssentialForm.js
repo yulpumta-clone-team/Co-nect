@@ -53,7 +53,7 @@ const useEssentialForm = () => {
   };
 
   const notifyDispatch = useToastNotificationAction();
-  const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
+  const { updateUserInfo } = useUserInfo();
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
   const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader({
     notifyNewMessage,

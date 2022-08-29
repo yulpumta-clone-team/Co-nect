@@ -21,7 +21,7 @@ import * as S from './Login.style';
 export default function Login() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
-  const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
+  const { updateUserInfo } = useUserInfo();
 
   const handleShowEssesntialModal = (isFirstLogin) => {
     navigate(ROUTE.ESSENTIAL_INFO.NICKNAME, { state: { isFirstLogin } });
