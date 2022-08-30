@@ -64,11 +64,9 @@ export const Notification = styled.div`
 export const Image = styled.div`
   float: left;
   margin-right: 15px;
-  width: 30px;
-  height: 30px;
   > img {
-    width: 100%;
-    height: 100%;
+    width: 30px;
+    height: 30px;
   }
 `;
 
@@ -80,9 +78,9 @@ export const Info = styled.div`
   }
   > p {
     padding: 2px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    word-wrap: break-word;
+    line-height: 2rem;
+    white-space: pre-wrap;
   }
 `;
 

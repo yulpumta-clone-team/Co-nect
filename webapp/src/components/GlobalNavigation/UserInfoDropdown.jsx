@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from 'components/Common/Dropdown';
-import { deleteUserInfoInLocalStorage } from 'service/auth';
 import { ROUTE } from 'constant/route.constant';
-import { useToastNotificationAction } from 'contexts/ToastNotification';
-import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import useUserInfo from 'hooks/useUserInfo';
 import * as S from './style';
 
@@ -16,10 +13,9 @@ UserInfoDropdown.propTypes = {
 };
 export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, closeDropdown }) {
   const navigate = useNavigate();
-  const notifyDispatch = useToastNotificationAction();
-  const { deleteUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
+  const { handleDeleteUserInfo } = useUserInfo();
   const onClickLogout = async () => {
-    deleteUserInfo();
+    handleDeleteUserInfo();
   };
   const onClickLinkLi = (link) => {
     navigate(link);

@@ -1,10 +1,12 @@
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
+import useUserInfo from 'hooks/useUserInfo';
 import { useEffect, useState } from 'react';
 
 const useCommentApi = (initKey, initInstance, initConfig) => {
   const notifyDispatch = useToastNotificationAction();
+  const { handleExiredToken } = useUserInfo();
   const getInstance = {
     key: initKey,
     instance: initInstance,
@@ -48,7 +50,8 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       getExecution();
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
+      handleExiredToken(error.httpStatus);
+      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
     }
   };
 
@@ -65,7 +68,7 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       console.error(error);
       setApiError({
         isError: true,
-        msg: error,
+        msg: error.message,
       });
     } finally {
       setIsLoading(false);
@@ -74,7 +77,7 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
 
   const changeApi = (key, instance, config) => {
     setAxiosInstance({ key, instance, config });
-    execution();
+    setTrigger(Date.now());
   };
 
   const isGetRequest = axiosInstance.key === getInstance.key;

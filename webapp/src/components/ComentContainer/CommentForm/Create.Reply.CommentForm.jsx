@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import * as S from '../style';
-
-CreateReplyCommentForm.propTypes = {};
 
 export function CreateReplyCommentForm() {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
+  const notifyDispatch = useToastNotificationAction();
   const {
     register,
     handleSubmit,
@@ -26,7 +27,8 @@ export function CreateReplyCommentForm() {
 
   const onSubmit = async ({ createRootCommentForm }) => {
     if (!userInfo) {
-      alert('로그인을 먼저해주세요');
+      notifyNewMessage(notifyDispatch, '로그인을 먼저해주세요', TOAST_TYPE.Warning);
+      return;
     }
     const newCommentData = setPostIdOnSubmitData(postType, postId, {
       writer: userInfo?.name,

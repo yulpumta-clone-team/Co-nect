@@ -13,18 +13,18 @@ import useForm from 'hooks/useForm';
 import essentialValidation from 'service/essentialForm.validation';
 import SelectInput from 'components/Common/SelectInput';
 import { skillStackParser } from 'service/skillStack.parser';
+import useAxios from 'hooks/useAxios';
+import { ROUTE } from 'constant/route.constant';
 import * as S from './style';
 
 export default function NewTeamPost() {
+  const [state, execution] = useAxios({ axiosInstance: teamApi.POST_TEAM_POST, immediate: false });
   const navigate = useNavigate();
-
   const { imageFile, fileHandler } = useFileUploader(null);
-
   const [teamName, onTeamChange] = useInput('');
   const [slogan, onSloganChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
   const [mdcontent, setContent] = useState('');
-  const [error, setError] = useState({ isError: false, msg: '' });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,19 +35,8 @@ export default function NewTeamPost() {
       skills: inputValues.techSkills,
       content: mdcontent,
     };
-    try {
-      const response = await teamApi.POST_TEAM_POST({ submitData });
-      console.log(response);
-      // console.log('data', data);
-      // TODO: 성공시 이동할 페이지 정해서 이동시키기
-    } catch (error) {
-      console.error(error);
-      setError({
-        isError: true,
-        msg: error,
-      });
-    }
-    navigate('/');
+    await execution({ submitData });
+    navigate(ROUTE.HOME);
   };
   const {
     inputValues,

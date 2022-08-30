@@ -21,7 +21,7 @@ import * as S from './Login.style';
 export default function Login() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
-  const { updateUserInfo } = useUserInfo({ notifyNewMessage, notifyDispatch });
+  const { handleUpdateUserInfo } = useUserInfo();
 
   const handleShowEssesntialModal = (isFirstLogin) => {
     navigate(ROUTE.ESSENTIAL_INFO.NICKNAME, { state: { isFirstLogin } });
@@ -44,12 +44,12 @@ export default function Login() {
         if (isFirstLogin) {
           handleShowEssesntialModal(isFirstLogin);
         } else {
-          updateUserInfo();
+          handleUpdateUserInfo();
         }
       }, 1000);
     } catch (error) {
       console.error(error);
-      notifyNewMessage(notifyDispatch, error, TOAST_TYPE.Error);
+      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
     }
   };
 
@@ -62,7 +62,7 @@ export default function Login() {
 
   return (
     <S.Container>
-      <BackButton />
+      <BackButton url={ROUTE.HOME} />
       <S.Header>
         <S.MainLogo />
         <h1>Co-nect</h1>
