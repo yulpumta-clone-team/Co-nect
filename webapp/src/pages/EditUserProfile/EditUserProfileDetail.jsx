@@ -18,7 +18,7 @@ import { userEditType } from 'types/user.type';
 import MarkdownEditor from 'components/MarkdownEditor';
 import * as S from './EditUserProfile.style';
 
-EditUserProfileView.propTypes = {
+EditUserProfileDetail.propTypes = {
   targetUser: userEditType,
   submitCallback: PropTypes.func.isRequired,
   onChangeFile: PropTypes.func.isRequired,
@@ -37,7 +37,7 @@ const initialValues = {
   portfolio: '',
 };
 
-export default function EditUserProfileView({
+export default function EditUserProfileDetail({
   targetUser,
   submitCallback,
   onChangeFile,
