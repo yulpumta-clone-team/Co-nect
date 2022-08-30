@@ -64,11 +64,12 @@ const userHandler = [
   rest.get(`${ROOT_API_URL + API.USER.INDEX}/:id`, (req, res, ctx) => {
     // return randomResponse(res, ctx, userDetail);
     return res(ctx.status(200), ctx.json(getResonseWithData(userDetail)));
+    // return res(ctx.status(403), ctx.json(getResonseWithData(errorResponse)));
   }),
   // 유저 정보 수정 요청
   rest.patch(`${ROOT_API_URL + API.USER.INDEX}/:id`, (req, res, ctx) => {
-    // return res(ctx.status(200), ctx.json(getResonseWithData(userDetail)));
-    return res(ctx.status(403), ctx.json(getResonseWithData(errorResponse)));
+    return res(ctx.status(200), ctx.json(getResonseWithData(userDetail)));
+    // return res(ctx.status(403), ctx.json(errorResponse));
   }),
 ];
 

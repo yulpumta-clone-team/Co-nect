@@ -1,5 +1,5 @@
 import { API, ROOT_API_URL } from 'constant/api.constant';
-import { getResonseWithData, randomResponse } from 'mocks/mockUtils';
+import { errorResponse, getResonseWithData, randomResponse } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { teamComments } from './teamComments';
 import { userComments } from './userComments';
@@ -13,6 +13,7 @@ const commentHandler = [
   // POST_USER_COMMENT
   rest.post(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}`, (req, res, ctx) => {
     return randomResponse(res, ctx, {});
+    // return res(ctx.status(403), ctx.json(errorResponse));
     // return res(ctx.status(500), ctx.json(errorResponse));
   }),
   // DELETE_USER_COMMENT
