@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   box-sizing: border-box;
+  position: relative;
   width: 100%;
   height: 40px;
   background: ${({ theme: { colors } }) => colors.greyScale.white};
@@ -31,7 +32,14 @@ export const InputContainer = styled.div`
   }}
 `;
 
-export const Label = styled.label``;
+export const Label = styled.label`
+  position: absolute;
+  top: -3rem;
+  left: 0.5rem;
+  color: ${({ theme }) => theme.colors.primary.normal};
+  ${({ theme: { fonts } }) => fonts.korean.emphasis};
+  font-weight: 700;
+`;
 
 export const Input = styled.input`
   ${({ theme: { mixin, colors, fonts } }) =>

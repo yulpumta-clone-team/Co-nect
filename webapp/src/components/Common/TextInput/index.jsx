@@ -27,7 +27,7 @@ export default function Input({
 }) {
   return (
     <S.Container isError={isError} customStyle={customStyle}>
-      <S.Label>{label}</S.Label>
+      {label && <S.Label>{label}</S.Label>}
       <S.InputContainer isError={isError}>
         <S.Input
           label={label}
