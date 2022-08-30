@@ -33,9 +33,9 @@ const useUserInfo = () => {
   };
   const handleDeleteUserInfo = () => {
     deleteUserInfo();
-    navigate('/');
     notifyNewMessage(notifyDispatch, '로그아웃 되었습니다', TOAST_TYPE.Info);
     setTimeout(() => {
+      navigate(ROUTE.HOME);
       window.location.reload();
     }, 1000);
   };
@@ -45,15 +45,14 @@ const useUserInfo = () => {
       return;
     }
     deleteUserInfo();
-    navigate('/');
     notifyNewMessage(
       notifyDispatch,
       '토큰이 만료되었습니다. \n다시 로그인해주세요.',
       TOAST_TYPE.Info,
     );
     setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+      navigate(ROUTE.LOGIN);
+    }, 2000);
   };
 
   return { handleUpdateUserInfo, handleDeleteUserInfo, handleExiredToken };
