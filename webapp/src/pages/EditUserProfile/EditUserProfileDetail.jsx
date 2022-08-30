@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Image from 'components/Common/Image';
 import { userEditParser } from 'service/user.parser';
@@ -21,6 +21,8 @@ import * as S from './EditUserProfile.style';
 EditUserProfileView.propTypes = {
   targetUser: userEditType,
   submitCallback: PropTypes.func.isRequired,
+  onChangeFile: PropTypes.func.isRequired,
+  imageFile: PropTypes.string.isRequired,
 };
 
 const initialValues = {
@@ -35,9 +37,16 @@ const initialValues = {
   portfolio: '',
 };
 
-export default function EditUserProfileView({ targetUser, submitCallback }) {
+export default function EditUserProfileView({
+  targetUser,
+  submitCallback,
+  onChangeFile,
+  imageFile,
+}) {
   const notifyDispatch = useToastNotificationAction();
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
+  const inputFileRef = useRef();
+
   const {
     inputValues,
     validateError,
@@ -72,6 +81,10 @@ export default function EditUserProfileView({ targetUser, submitCallback }) {
     }
   };
 
+  const onUploadButtonClick = () => {
+    inputFileRef.current.click();
+  };
+
   const isSkillsValidateError = isTargetSatisfyValidate('techSkills');
   const isNicknameValidateError = isTargetSatisfyValidate('nickname');
   const isSloganValidateError = isTargetSatisfyValidate('slogan');
@@ -83,7 +96,28 @@ export default function EditUserProfileView({ targetUser, submitCallback }) {
   return (
     <S.PostContainer>
       <S.ProfileImageContainer>
-        <Image src="img" alt="프로필 이미지" />
+        {imageFile ? (
+          <S.InputTypeImageHandler htmlFor="profileImage">
+            <S.ImageThunbnail alt="upload" src={URL.createObjectURL(imageFile)} />
+            <Button theme="secondary" customStyle={S.ImageEditButton} onClick={onUploadButtonClick}>
+              수정
+            </Button>
+          </S.InputTypeImageHandler>
+        ) : (
+          <S.InputTypeImageHandler htmlFor="profileImage">
+            <div>
+              <S.PlusSolid />
+            </div>
+          </S.InputTypeImageHandler>
+        )}
+        <S.HiddenInputHandler
+          ref={inputFileRef}
+          id="profileImage"
+          name="profileImage"
+          type="file"
+          accept="image/*"
+          onChange={onChangeFile}
+        />
       </S.ProfileImageContainer>
       <S.InfoContainer>
         <S.DuplicateCheckInput>
