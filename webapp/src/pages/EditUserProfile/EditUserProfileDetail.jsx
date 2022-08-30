@@ -15,6 +15,7 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import authApi from 'api/auth.api';
 import useForm from 'hooks/useForm';
 import { userEditType } from 'types/user.type';
+import MarkdownEditor from 'components/MarkdownEditor';
 import * as S from './EditUserProfile.style';
 
 EditUserProfileView.propTypes = {
@@ -147,6 +148,7 @@ export default function EditUserProfileView({ targetUser, submitCallback }) {
           value={inputValues.belongTeam}
           onChange={onChangeHandlerWithSelect}
         />
+        <MarkdownEditor />
         <TextInput
           name="portfolio"
           label="포트폴리오(url)"

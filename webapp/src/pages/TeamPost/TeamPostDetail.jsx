@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import MarkdownViewer from 'components/MdViewer';
+import MarkdownViewer from 'components/MarkdownViewer';
 import CommentContainer from 'components/ComentContainer';
 import { POST_TYPE } from 'constant';
 
