@@ -77,7 +77,7 @@ export default function EditUserProfileView({ targetUser, submitCallback }) {
   const isSloganValidateError = isTargetSatisfyValidate('slogan');
 
   const parsedTargerUserInfo = userEditParser(targetUser);
-  const { userId, skills } = parsedTargerUserInfo;
+  const { userId, skills, content } = parsedTargerUserInfo;
   const parsedSkillStack = skillStackParser(skills);
 
   return (
@@ -148,7 +148,7 @@ export default function EditUserProfileView({ targetUser, submitCallback }) {
           value={inputValues.belongTeam}
           onChange={onChangeHandlerWithSelect}
         />
-        <MarkdownEditor />
+        <MarkdownEditor onlyViewer={false} content={content} />
         <TextInput
           name="portfolio"
           label="포트폴리오(url)"

@@ -1,27 +1,23 @@
-import '@toast-ui/editor/dist/toastui-editor.css';
-import React, { useCallback, useRef } from 'react';
+import React, { useState } from 'react';
+import MDEditor from '@uiw/react-md-editor';
 import PropTypes from 'prop-types';
-import { Editor, Viewer } from '@toast-ui/react-editor';
+import * as S from './MarkdownEditor.style';
 
 MarkdownEditor.propTypes = {
-  mdValue: PropTypes.string.isRequired,
-  setContent: PropTypes.func.isRequired,
-  height: PropTypes.string,
+  onlyViewer: PropTypes.bool.isRequired,
+  content: PropTypes.string.isRequired,
+  customStyle: PropTypes.array,
 };
 
-export default function MarkdownEditor({ mdValue, setContent, height = '300px' }) {
-  const editorRef = useRef(null);
-  const onChangeEditorTextHandler = useCallback(() => {
-    setContent(editorRef.current?.getInstance().getMarkdown());
-  }, [setContent]);
+export default function MarkdownEditor({ onlyViewer, content, customStyle }) {
+  const [value, setValue] = useState(content);
   return (
-    <Editor
-      initialValue={mdValue}
-      initialEditType="markdown"
-      useCommandShortcut
-      ref={editorRef}
-      height={height}
-      onChange={onChangeEditorTextHandler}
-    />
+    <S.Container data-color-mode="light" customStyle={customStyle}>
+      {onlyViewer ? (
+        <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} />
+      ) : (
+        <MDEditor value={value} onChange={setValue} />
+      )}
+    </S.Container>
   );
 }
