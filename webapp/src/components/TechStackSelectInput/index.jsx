@@ -58,18 +58,19 @@ export default function TechStackSelectInput({
 
   return (
     <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
-      <S.PlaceHolder isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
+      {label && <S.Label>{label}</S.Label>}
+      <S.ValueViewer isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
         {isValues ? (
           <S.SelectedStacks>
             {selectedTechSkills.map(({ id, label, value }) => (
               <S.SingleStack key={id}>
-                <span>{label}</span>
+                <span>{placeholder}</span>
                 <S.CloseNormal onClick={() => handleClickTargetDelete({ targetId: id })} />
               </S.SingleStack>
             ))}
           </S.SelectedStacks>
         ) : (
-          <S.Label>{placeholder}</S.Label>
+          <S.PlaceHolder>{placeholder}</S.PlaceHolder>
         )}
         <S.ButtonContainer>
           {selectedTechSkills && (
@@ -82,7 +83,7 @@ export default function TechStackSelectInput({
           )}
           <AngleButton onClick={closeDropdown} />
         </S.ButtonContainer>
-      </S.PlaceHolder>
+      </S.ValueViewer>
       {isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen}>
         {techSkillOptions.map(({ id, value, label }) => (

@@ -12,11 +12,11 @@ export const Container = styled.div`
   width: 100%;
   height: 40px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
-  background: ${({ theme: { colors } }) => colors.greyScale.white};
+  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   ${({ customStyle }) => customStyle}
 `;
 
-export const PlaceHolder = styled.div`
+export const ValueViewer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -46,7 +46,7 @@ export const PlaceHolder = styled.div`
     if (isError) {
       return css`
         border: 1px solid ${({ theme: { colors } }) => colors.important.normal};
-        ${Label} {
+        ${PlaceHolder} {
           color: ${({ theme: { colors } }) => colors.important.normal};
         }
         ${UpAngle}, ${DownAngle}, ${ClearableButton} {
@@ -84,6 +84,15 @@ export const SingleStack = styled.div`
 `;
 
 export const Label = styled.label`
+  position: absolute;
+  top: -3rem;
+  left: 0.5rem;
+  color: ${({ theme }) => theme.colors.primary.normal};
+  ${({ theme: { fonts } }) => fonts.korean.emphasis};
+  font-weight: 700;
+`;
+
+export const PlaceHolder = styled.label`
   color: ${({ theme: { colors } }) => colors.greyScale.placeHolder};
 `;
 
