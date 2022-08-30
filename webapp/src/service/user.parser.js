@@ -38,3 +38,11 @@ export const userDetailParser = (userDetailInfo) => {
     slogan,
   };
 };
+
+export const userEditParser = (targetUserInfo) => {
+  const skills = targetUserInfo.skills || [];
+  return {
+    ...targetUserInfo,
+    skills,
+  };
+};
