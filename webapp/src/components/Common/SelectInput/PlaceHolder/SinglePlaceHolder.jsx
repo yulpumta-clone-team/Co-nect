@@ -13,6 +13,6 @@ export default function SinglePlaceHolder({ value, label }) {
       <span>{value}</span>
     </S.DisplayValues>
   ) : (
-    <S.Label>{label}</S.Label>
+    <S.PlaceHolder>{label}</S.PlaceHolder>
   );
 }

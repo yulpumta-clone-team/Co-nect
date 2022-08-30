@@ -21,6 +21,6 @@ export default function MultiPlaceHolder({ values, label, handleClickTargetDelet
       ))}
     </S.DisplayValues>
   ) : (
-    <S.Label>{label}</S.Label>
+    <S.PlaceHolder>{label}</S.PlaceHolder>
   );
 }

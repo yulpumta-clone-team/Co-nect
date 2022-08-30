@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
-import * as S from './SelectInput.style';
 import SinglePlaceHolder from './PlaceHolder/SinglePlaceHolder';
 import MultiPlaceHolder from './PlaceHolder/MultiPlaceHolder';
+import * as S from './SelectInput.style';
 
 // isMulti = true일 때는 value가 배열입니다.
 SelectInput.propTypes = {
@@ -74,7 +74,8 @@ export default function SelectInput({
 
   return (
     <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
-      <S.PlaceHolder isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
+      {label && <S.Label>{label}</S.Label>}
+      <S.ValueViewer isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
         {isMulti ? (
           <MultiPlaceHolder
             values={value}
@@ -95,7 +96,7 @@ export default function SelectInput({
           )}
           <AngleButton onClick={closeDropdown} />
         </S.ButtonContainer>
-      </S.PlaceHolder>
+      </S.ValueViewer>
       {isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen}>
         {options.map(({ id, value, label }) => (

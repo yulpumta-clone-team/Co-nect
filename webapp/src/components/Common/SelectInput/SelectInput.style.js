@@ -16,7 +16,7 @@ export const Container = styled.div`
   ${({ customStyle }) => customStyle}
 `;
 
-export const PlaceHolder = styled.div`
+export const ValueViewer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -84,6 +84,16 @@ export const DisplaySingleValue = styled.div`
 `;
 
 export const Label = styled.label`
+  position: absolute;
+  top: -3rem;
+  left: 0.5rem;
+  color: ${({ theme }) => theme.colors.primary.normal};
+  ${({ theme: { fonts } }) => fonts.korean.emphasis};
+  margin-bottom: 10px;
+  font-weight: 700;
+`;
+
+export const PlaceHolder = styled.label`
   color: ${({ theme: { colors } }) => colors.greyScale.placeHolder};
 `;
 
