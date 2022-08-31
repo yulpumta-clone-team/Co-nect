@@ -30,6 +30,8 @@ export default function EditUserProfileDetail({
   onChangeFile,
   imageFile,
 }) {
+  const notifyDispatch = useToastNotificationAction();
+
   const parsedTargerUserInfo = userEditParser(targetUser);
   const {
     userId,
@@ -43,12 +45,12 @@ export default function EditUserProfileDetail({
     introduction,
     portfolio,
   } = parsedTargerUserInfo;
+
   const parsedSkillStackOptions = skillStackParser(skillStack);
   const parsedSkillStack = skillStackParser(techSkills);
 
-  const notifyDispatch = useToastNotificationAction();
-  const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
   const inputFileRef = useRef();
+  const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(false);
 
   const {
     inputValues,
@@ -77,6 +79,11 @@ export default function EditUserProfileDetail({
   const onClickCheckDuplicateNickname = async () => {
     // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
     notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
+    // 원래 사용하던 닉네임과 같으면 확인하지 않음.
+    if (inputValues.nickname === nickname) {
+      notifyNewMessage(notifyDispatch, '원래 닉네임이어서 사용가능합니다!', TOAST_TYPE.Info);
+      return;
+    }
     try {
       const response = await authApi.checkDuplicateNickName({ name: inputValues.nickname });
       const isDuplicated = response.data;
@@ -102,9 +109,11 @@ export default function EditUserProfileDetail({
   const isNicknameValidateError = isTargetSatisfyValidate('nickname');
   const isSloganValidateError = isTargetSatisfyValidate('slogan');
 
+  const canActiveSubmitButton = !satisfyAllValidates && isNicknameDuplicate;
+
   return (
-    <S.PostContainer onSubmit={submitHandler} id="editUserProfileForm">
-      <S.Form>
+    <S.PostContainer>
+      <S.Form onSubmit={submitHandler} id="editUserProfileForm">
         <S.ProfileImageContainer>
           {imageFile ? (
             <S.InputTypeImageHandler htmlFor="profileImage">
@@ -136,6 +145,7 @@ export default function EditUserProfileDetail({
         <S.InfoContainer>
           <S.DuplicateCheckInput>
             <TextInput
+              id="checkDuplicateNickname"
               name="nickname"
               label="닉네임"
               placeholder="닉네임"
@@ -145,6 +155,8 @@ export default function EditUserProfileDetail({
               helperText={validateError.nickname}
             />
             <Button
+              type="button"
+              htmlFor="checkDuplicateNickname"
               theme="secondary"
               customStyle={S.DuplicateCheckButton}
               disabled={isNicknameValidateError}
@@ -196,7 +208,7 @@ export default function EditUserProfileDetail({
             placeHolder="팀 소속 여부"
             defaultOption={belongTeamOptions[0]}
             options={belongTeamOptions}
-            value={inputValues.belongTeam.value}
+            value={inputValues.belongTeam.label}
             onChange={onChangeHandlerWithSelect}
           />
           <MarkdownEditor
@@ -219,7 +231,7 @@ export default function EditUserProfileDetail({
           theme="primary"
           type="submit"
           form="editUserProfileForm"
-          disabled={!satisfyAllValidates}
+          disabled={canActiveSubmitButton}
           customStyle={S.SubmitButton}
         >
           저장
