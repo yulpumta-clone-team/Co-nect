@@ -17,7 +17,7 @@ export default function BelongTeam() {
       <S.InputContainer>
         <SelectInput
           name="belongTeam"
-          label="팀 소속 여부"
+          placeHolder="팀 소속 여부"
           defaultOption={belongTeamOptions[0]}
           options={belongTeamOptions}
           value={inputValues.belongTeam}
