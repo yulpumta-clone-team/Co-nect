@@ -10,19 +10,19 @@ import { skillStackParser } from 'service/skillStack.parser';
 import * as S from './EditUserProfile.style';
 
 EditUserProfileView.propTypes = {
-  inputValues: PropTypes.any,
-  onChangeHandler: PropTypes.any,
-  onChangeHandlerWithSelect: PropTypes.any,
-  submitHandler: PropTypes.any,
-  validateError: PropTypes.any,
-  satisfyAllValidates: PropTypes.any,
-  isTargetSatisfyValidate: PropTypes.any,
-  isNicknameDuplicate: PropTypes.any,
-  isNickNameSameWithOrigin: PropTypes.any,
-  onChangeCheckNicknameDuplicate: PropTypes.any,
-  onClickCheckDuplicateNickname: PropTypes.any,
-  imageFile: PropTypes.any,
-  onChangeFile: PropTypes.any,
+  inputValues: PropTypes.object.isRequired,
+  onChangeHandler: PropTypes.func.isRequired,
+  onChangeHandlerWithSelect: PropTypes.func.isRequired,
+  submitHandler: PropTypes.func.isRequired,
+  validateError: PropTypes.object.isRequired,
+  satisfyAllValidates: PropTypes.bool.isRequired,
+  isTargetSatisfyValidate: PropTypes.func.isRequired,
+  isNicknameDuplicate: PropTypes.bool.isRequired,
+  isNickNameSameWithOrigin: PropTypes.bool.isRequired,
+  onChangeCheckNicknameDuplicate: PropTypes.func.isRequired,
+  onClickCheckDuplicateNickname: PropTypes.func.isRequired,
+  imageFile: PropTypes.string,
+  onChangeFile: PropTypes.func.isRequired,
 };
 
 export default function EditUserProfileView({

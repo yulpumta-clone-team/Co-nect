@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { userEditParser, userPostEditParser } from 'service/user.parser';
 import { skillStackParser } from 'service/skillStack.parser';
 import { editUserValidation } from 'service/user.validation';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
-import authApi from 'api/auth.api';
 import useForm from 'hooks/useForm';
 import { userEditType } from 'types/user.type';
 import useAxios from 'hooks/useAxios';
 import userApi from 'api/user.api';
 import useFileUploader from 'hooks/useFileUploader';
-
 import useCheckNicknameDuplicate from 'hooks/useCheckNicknameDuplicate';
 import EditUserProfileView from './EditUserProfile.view';
 
