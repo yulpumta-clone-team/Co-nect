@@ -1,5 +1,5 @@
 /* eslint-disable no-prototype-builtins */
-import { hopeSessionOption, jobOptions } from 'constant';
+import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
 
 export const userCardParser = (userCardInfo) => {
@@ -40,9 +40,26 @@ export const userDetailParser = (userDetailInfo) => {
 };
 
 export const userEditParser = (targetUserInfo) => {
-  const skills = targetUserInfo.skills || [];
+  const userId = targetUserInfo.id;
+  const techSkills = targetUserInfo.skills || [];
+  const nickname = targetUserInfo.name;
+  const profileImage = targetUserInfo.img;
+  const { slogan } = targetUserInfo;
+  const { hopeSession } = targetUserInfo;
+  const { job } = targetUserInfo;
+  const belongTeam = targetUserInfo.status ? belongTeamOptions[0] : belongTeamOptions[1];
+  const introduction = targetUserInfo.content;
+  const { portfolio } = targetUserInfo;
   return {
-    ...targetUserInfo,
-    skills,
+    userId,
+    nickname,
+    profileImage,
+    techSkills,
+    slogan,
+    hopeSession,
+    job,
+    belongTeam,
+    introduction,
+    portfolio,
   };
 };
