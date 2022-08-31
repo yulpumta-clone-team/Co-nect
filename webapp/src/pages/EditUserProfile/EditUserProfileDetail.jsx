@@ -103,111 +103,128 @@ export default function EditUserProfileDetail({
   const isSloganValidateError = isTargetSatisfyValidate('slogan');
 
   return (
-    <S.PostContainer>
-      <S.ProfileImageContainer>
-        {imageFile ? (
-          <S.InputTypeImageHandler htmlFor="profileImage">
-            <S.ImageThunbnail alt="upload" src={URL.createObjectURL(imageFile)} />
-            <Button theme="secondary" customStyle={S.ImageEditButton} onClick={onUploadButtonClick}>
-              수정
-            </Button>
-          </S.InputTypeImageHandler>
-        ) : (
-          <S.InputTypeImageHandler htmlFor="profileImage">
-            <div>
-              <S.PlusSolid />
-            </div>
-          </S.InputTypeImageHandler>
-        )}
-        <S.HiddenInputHandler
-          ref={inputFileRef}
-          id="profileImage"
-          name="profileImage"
-          type="file"
-          accept="image/*"
-          onChange={onChangeFile}
-        />
-      </S.ProfileImageContainer>
-      <S.InfoContainer>
-        <S.DuplicateCheckInput>
-          <TextInput
-            name="nickname"
-            label="닉네임"
-            placeholder="닉네임"
-            value={inputValues.nickname}
-            onChange={onChangeHandler}
-            isError={isNicknameValidateError}
-            helperText={validateError.nickname}
+    <S.PostContainer onSubmit={submitHandler} id="editUserProfileForm">
+      <S.Form>
+        <S.ProfileImageContainer>
+          {imageFile ? (
+            <S.InputTypeImageHandler htmlFor="profileImage">
+              <S.ImageThunbnail alt="upload" src={URL.createObjectURL(imageFile)} />
+              <Button
+                theme="secondary"
+                customStyle={S.ImageEditButton}
+                onClick={onUploadButtonClick}
+              >
+                수정
+              </Button>
+            </S.InputTypeImageHandler>
+          ) : (
+            <S.InputTypeImageHandler htmlFor="profileImage">
+              <div>
+                <S.PlusSolid />
+              </div>
+            </S.InputTypeImageHandler>
+          )}
+          <S.HiddenInputHandler
+            ref={inputFileRef}
+            id="profileImage"
+            name="profileImage"
+            type="file"
+            accept="image/*"
+            onChange={onChangeFile}
           />
-          <Button
-            theme="secondary"
-            customStyle={S.DuplicateCheckButton}
-            disabled={isNicknameValidateError}
-            onClick={onClickCheckDuplicateNickname}
-          >
-            중복확인
-          </Button>
-        </S.DuplicateCheckInput>
-        <TechStackSelectInput
-          name="techSkills"
-          placeholder="기술"
-          label="기술"
-          selectedTechSkills={inputValues.techSkills}
-          techSkillOptions={parsedSkillStackOptions}
-          onChange={onChangeHandlerWithSelect}
-          isError={isSkillsValidateError}
-          helperText={validateError.techSkills}
-        />
-        <TextInput
-          name="slogan"
-          label="슬로건"
-          placeholder="슬로건"
-          value={inputValues.slogan}
-          onChange={onChangeHandler}
-          isError={isSloganValidateError}
-          helperText={validateError.slogan}
-        />
-        <SelectInput
-          name="hopeSession"
-          label="회망 기간"
-          placeHolder="회망 기간"
-          defaultOption={hopeSessionOption[0]}
-          options={hopeSessionOption}
-          value={inputValues.hopeSession}
-          onChange={onChangeHandlerWithSelect}
-        />
-        <SelectInput
-          name="job"
-          label="직업"
-          placeHolder="직업"
-          defaultOption={jobOptions[0]}
-          options={jobOptions}
-          value={inputValues.job}
-          onChange={onChangeHandlerWithSelect}
-        />
-        <SelectInput
-          name="belongTeam"
-          label="팀 소속 여부"
-          placeHolder="팀 소속 여부"
-          defaultOption={belongTeamOptions[0]}
-          options={belongTeamOptions}
-          value={inputValues.belongTeam.value}
-          onChange={onChangeHandlerWithSelect}
-        />
-        <MarkdownEditor
-          onlyViewer={false}
-          label="자기 소개"
-          placeholder="자기 소개를 입력해주세요."
-          content={introduction}
-        />
-        <TextInput
-          name="portfolio"
-          label="포트폴리오(url)"
-          placeholder="포트폴리오(url)"
-          value={inputValues.portfolio}
-          onChange={onChangeHandler}
-        />
-      </S.InfoContainer>
+        </S.ProfileImageContainer>
+        <S.InfoContainer>
+          <S.DuplicateCheckInput>
+            <TextInput
+              name="nickname"
+              label="닉네임"
+              placeholder="닉네임"
+              value={inputValues.nickname}
+              onChange={onChangeHandler}
+              isError={isNicknameValidateError}
+              helperText={validateError.nickname}
+            />
+            <Button
+              theme="secondary"
+              customStyle={S.DuplicateCheckButton}
+              disabled={isNicknameValidateError}
+              onClick={onClickCheckDuplicateNickname}
+            >
+              중복확인
+            </Button>
+          </S.DuplicateCheckInput>
+          <TechStackSelectInput
+            name="techSkills"
+            placeholder="기술"
+            label="기술"
+            selectedTechSkills={inputValues.techSkills}
+            techSkillOptions={parsedSkillStackOptions}
+            onChange={onChangeHandlerWithSelect}
+            isError={isSkillsValidateError}
+            helperText={validateError.techSkills}
+          />
+          <TextInput
+            name="slogan"
+            label="슬로건"
+            placeholder="슬로건"
+            value={inputValues.slogan}
+            onChange={onChangeHandler}
+            isError={isSloganValidateError}
+            helperText={validateError.slogan}
+          />
+          <SelectInput
+            name="hopeSession"
+            label="회망 기간"
+            placeHolder="회망 기간"
+            defaultOption={hopeSessionOption[0]}
+            options={hopeSessionOption}
+            value={inputValues.hopeSession}
+            onChange={onChangeHandlerWithSelect}
+          />
+          <SelectInput
+            name="job"
+            label="직업"
+            placeHolder="직업"
+            defaultOption={jobOptions[0]}
+            options={jobOptions}
+            value={inputValues.job}
+            onChange={onChangeHandlerWithSelect}
+          />
+          <SelectInput
+            name="belongTeam"
+            label="팀 소속 여부"
+            placeHolder="팀 소속 여부"
+            defaultOption={belongTeamOptions[0]}
+            options={belongTeamOptions}
+            value={inputValues.belongTeam.value}
+            onChange={onChangeHandlerWithSelect}
+          />
+          <MarkdownEditor
+            onlyViewer={false}
+            label="자기 소개"
+            placeholder="자기 소개를 입력해주세요."
+            content={introduction}
+          />
+          <TextInput
+            name="portfolio"
+            label="포트폴리오(url)"
+            placeholder="포트폴리오(url)"
+            value={inputValues.portfolio}
+            onChange={onChangeHandler}
+          />
+        </S.InfoContainer>
+      </S.Form>
+      <S.ButtonContainer>
+        <Button
+          theme="primary"
+          type="submit"
+          form="editUserProfileForm"
+          disabled={!satisfyAllValidates}
+          customStyle={S.SubmitButton}
+        >
+          저장
+        </Button>
+      </S.ButtonContainer>
     </S.PostContainer>
   );
 }

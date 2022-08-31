@@ -9,7 +9,16 @@ export const Container = styled.div`
 
 export const PostContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  width: 800px;
+  justify-content: space-between;
+  margin: 0 auto;
 `;
 
 export const InfoContainer = styled.div`
@@ -23,6 +32,21 @@ export const InfoContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   gap: 1.5rem;
+`;
+
+export const ButtonContainer = styled.div`
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+// TODO: theme 혹은 common버튼의 속성으로 추가하기
+export const SubmitButton = css`
+  width: 270px;
+  height: 56px;
+  margin-top: 19px;
+  ${({ theme: { fonts } }) => fonts.english.title};
 `;
 
 export const UserInfoContainer = styled.div`
