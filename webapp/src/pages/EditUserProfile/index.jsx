@@ -6,21 +6,21 @@ import BackButton from 'components/Common/BackButton';
 import useFileUploader from 'hooks/useFileUploader';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { getUserInfo } from 'service/auth';
+import UpperButton from 'components/Common/UpperButton';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import EditUserProfileDetail from './EditUserProfileDetail';
 import * as S from './EditUserProfile.style';
 
-const USER_ID = 3;
-
 export default function EditUserProfile() {
+  const userInfo = getUserInfo(); // {id, name, profileImg}
   const notifyDispatch = useToastNotificationAction();
   const EditUserProfileDetailWithLoading = WithLoading({
     Component: EditUserProfileDetail,
     responseDataKey: 'targetUser',
     axiosInstance: userApi.GET_USER_DETAIL,
-    axiosConfig: { id: USER_ID },
+    axiosConfig: { id: userInfo.id },
   });
-
-  const [id, setId] = useState(USER_ID);
 
   const [state, execution, foreceRefetch] = useAxios({
     axiosInstance: userApi.EDIT_USER_PROFILE,
@@ -43,8 +43,10 @@ export default function EditUserProfile() {
 
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
-    await execution({ id, data: changedProfileImageSubmitData });
+    console.log(changedProfileImageSubmitData);
+    await execution({ data: changedProfileImageSubmitData });
     // TODO: 성공시 이동할 페이지 정해서 이동시키기
+    notifyNewMessage(notifyDispatch, '수정 완료!', TOAST_TYPE.Success);
   };
 
   return (
@@ -55,6 +57,7 @@ export default function EditUserProfile() {
         onChangeFile={onChangeFile}
         imageFile={imageFile}
       />
+      <UpperButton />
     </S.Container>
   );
 }
