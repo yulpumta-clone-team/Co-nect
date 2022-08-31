@@ -6,17 +6,32 @@ import * as S from './MarkdownEditor.style';
 MarkdownEditor.propTypes = {
   onlyViewer: PropTypes.bool.isRequired,
   content: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  label: PropTypes.string,
   customStyle: PropTypes.array,
 };
 
-export default function MarkdownEditor({ onlyViewer, content, customStyle }) {
+export default function MarkdownEditor({ onlyViewer, content, placeholder, label, customStyle }) {
   const [value, setValue] = useState(content);
   return (
     <S.Container data-color-mode="light" customStyle={customStyle}>
+      {label && <S.Label>{label}</S.Label>}
       {onlyViewer ? (
-        <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} />
+        <MDEditor.Markdown
+          source={value}
+          style={{ whiteSpace: 'pre-wrap' }}
+          textareaProps={{
+            placeholder,
+          }}
+        />
       ) : (
-        <MDEditor value={value} onChange={setValue} />
+        <MDEditor
+          value={value}
+          onChange={setValue}
+          textareaProps={{
+            placeholder,
+          }}
+        />
       )}
     </S.Container>
   );
