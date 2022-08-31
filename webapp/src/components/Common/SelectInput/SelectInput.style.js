@@ -10,9 +10,9 @@ export const Container = styled.div`
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  height: 40px;
+  height: 100%;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
-  background: ${({ theme: { colors } }) => colors.greyScale.white};
+  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   ${({ customStyle }) => customStyle}
 `;
 
@@ -84,12 +84,11 @@ export const DisplaySingleValue = styled.div`
 `;
 
 export const Label = styled.label`
-  position: absolute;
-  top: -3rem;
-  left: 0.5rem;
+  width: 100%;
+  align-items: flex-start;
+  margin-bottom: 1rem;
   color: ${({ theme }) => theme.colors.primary.normal};
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
-  margin-bottom: 10px;
   font-weight: 700;
 `;
 
@@ -109,7 +108,7 @@ export const Select = styled.ul`
     `;
   }}
   position: absolute;
-  top: 42px;
+  top: 105%;
   width: 100%;
   max-height: 300px;
   overflow-y: auto;
@@ -166,8 +165,7 @@ export const CloseNormal = styled(CloseNormalIcon)`
 `;
 
 export const Error = styled.span`
-  position: absolute;
-  top: 50px;
-  padding-left: 6px;
+  align-self: flex-start;
+  padding-left: 1rem;
   color: ${({ theme }) => theme.colors.important.normal};
 `;

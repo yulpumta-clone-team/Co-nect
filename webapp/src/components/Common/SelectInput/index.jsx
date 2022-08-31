@@ -16,14 +16,17 @@ SelectInput.propTypes = {
       label: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  label: PropTypes.string.isRequired,
+  placeHolder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  label: PropTypes.string,
   image: PropTypes.string,
   isMulti: PropTypes.bool,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
   defaultOption: PropTypes.object,
   customStyle: PropTypes.array,
+  height: PropTypes.string,
+  width: PropTypes.string,
 };
 
 export default function SelectInput({
@@ -31,6 +34,7 @@ export default function SelectInput({
   onChange,
   options,
   label,
+  placeHolder,
   name,
   image,
   defaultOption,
@@ -38,6 +42,8 @@ export default function SelectInput({
   isError = false,
   helperText,
   customStyle,
+  height,
+  width,
   ...rest
 }) {
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
@@ -73,17 +79,23 @@ export default function SelectInput({
   };
 
   return (
-    <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
+    <S.Container
+      width={width}
+      height={height}
+      customStyle={customStyle}
+      onClick={openDropdown}
+      {...rest}
+    >
       {label && <S.Label>{label}</S.Label>}
       <S.ValueViewer isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
         {isMulti ? (
           <MultiPlaceHolder
             values={value}
-            label={label}
+            placeHolder={placeHolder}
             handleClickTargetDelete={handleClickTargetDelete}
           />
         ) : (
-          <SinglePlaceHolder value={value} label={label} />
+          <SinglePlaceHolder value={value} placeHolder={placeHolder} />
         )}
         <S.ButtonContainer>
           {value && (

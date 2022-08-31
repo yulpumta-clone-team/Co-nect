@@ -4,15 +4,15 @@ import * as S from '../SelectInput.style';
 
 SinglePlaceHolder.propTypes = {
   value: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  placeHolder: PropTypes.string.isRequired,
 };
 
-export default function SinglePlaceHolder({ value, label }) {
+export default function SinglePlaceHolder({ value, placeHolder }) {
   return value ? (
     <S.DisplayValues>
       <span>{value}</span>
     </S.DisplayValues>
   ) : (
-    <S.PlaceHolder>{label}</S.PlaceHolder>
+    <S.PlaceHolder>{placeHolder}</S.PlaceHolder>
   );
 }
