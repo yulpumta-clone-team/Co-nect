@@ -19,6 +19,7 @@ EditUserProfileView.propTypes = {
   isTargetSatisfyValidate: PropTypes.any,
   isNicknameDuplicate: PropTypes.any,
   isNickNameSameWithOrigin: PropTypes.any,
+  onChangeCheckNicknameDuplicate: PropTypes.any,
   onClickCheckDuplicateNickname: PropTypes.any,
   imageFile: PropTypes.any,
   onChangeFile: PropTypes.any,
@@ -34,6 +35,7 @@ export default function EditUserProfileView({
   isTargetSatisfyValidate,
   isNicknameDuplicate,
   isNickNameSameWithOrigin,
+  onChangeCheckNicknameDuplicate,
   onClickCheckDuplicateNickname,
   imageFile,
   onChangeFile,
@@ -52,7 +54,8 @@ export default function EditUserProfileView({
 
   // FIXME: 로직 수정하기 (아래 조건 모두 만족할 때만 활성화)
   // 원래 닉네임과 닉네임 인풋 값이 같을 때, 원래 닉네임과 닉네임 인풋 값이 다른데 중복도 아닐 때,모든 인풋값에 대한 validation 만족,
-  const canActiveSubmitButton = !satisfyAllValidates && isNicknameDuplicate;
+  const canActiveSubmitButton =
+    isNickNameSameWithOrigin && isNicknameDuplicate && satisfyAllValidates;
 
   return (
     <S.PostContainer>
@@ -94,7 +97,10 @@ export default function EditUserProfileView({
               label="닉네임"
               placeholder="닉네임"
               value={inputValues.nickname}
-              onChange={onChangeHandler}
+              onChange={(event) => {
+                onChangeCheckNicknameDuplicate(event);
+                onChangeHandler(event);
+              }}
               isError={isNicknameValidateError}
               helperText={validateError.nickname}
             />
@@ -160,6 +166,7 @@ export default function EditUserProfileView({
             label="자기 소개"
             placeholder="자기 소개를 입력해주세요."
             content={inputValues.introduction}
+            onChange={onChangeHandler}
           />
           <TextInput
             name="portfolio"

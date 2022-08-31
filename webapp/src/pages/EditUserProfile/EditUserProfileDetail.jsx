@@ -11,6 +11,8 @@ import { userEditType } from 'types/user.type';
 import useAxios from 'hooks/useAxios';
 import userApi from 'api/user.api';
 import useFileUploader from 'hooks/useFileUploader';
+
+import useCheckNicknameDuplicate from 'hooks/useCheckNicknameDuplicate';
 import EditUserProfileView from './EditUserProfile.view';
 
 EditUserProfileDetail.propTypes = {
@@ -36,7 +38,12 @@ export default function EditUserProfileDetail({ targetUser }) {
 
   const parsedSkillStack = skillStackParser(techSkills);
 
-  const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(false);
+  const {
+    isNicknameDuplicate,
+    isNickNameSameWithOrigin,
+    onChangeCheckNicknameDuplicate,
+    onClickCheckDuplicateNickname,
+  } = useCheckNicknameDuplicate(nickname);
 
   // 수정 요청 api hooks
   const [state, execution, foreceRefetch] = useAxios({
@@ -92,33 +99,6 @@ export default function EditUserProfileDetail({ targetUser }) {
     validate: editUserValidation,
   });
 
-  const onClickCheckDuplicateNickname = async () => {
-    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
-    // 원래 사용하던 닉네임과 같으면 확인하지 않음.
-    if (inputValues.nickname === nickname) {
-      notifyNewMessage(notifyDispatch, '원래 닉네임이어서 사용가능합니다!', TOAST_TYPE.Info);
-      return;
-    }
-    try {
-      const response = await authApi.checkDuplicateNickName({ name: inputValues.nickname });
-      const isDuplicated = response.data;
-      if (isDuplicated) {
-        notifyNewMessage(notifyDispatch, '이미 사용중인 닉네임입니다!', TOAST_TYPE.Warning);
-        setIsNicknameDuplicate(true);
-      } else {
-        notifyNewMessage(notifyDispatch, '사용가능한 닉네임입니다!', TOAST_TYPE.Success);
-        setIsNicknameDuplicate(false);
-      }
-    } catch (error) {
-      console.error(error);
-      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
-      setIsNicknameDuplicate(true);
-    }
-  };
-
-  const isNickNameSameWithOrigin = nickname === inputValues.nickname;
-
   return (
     <EditUserProfileView
       inputValues={inputValues}
@@ -130,6 +110,7 @@ export default function EditUserProfileDetail({ targetUser }) {
       isTargetSatisfyValidate={isTargetSatisfyValidate}
       isNicknameDuplicate={isNicknameDuplicate}
       isNickNameSameWithOrigin={isNickNameSameWithOrigin}
+      onChangeCheckNicknameDuplicate={onChangeCheckNicknameDuplicate}
       onClickCheckDuplicateNickname={onClickCheckDuplicateNickname}
       imageFile={imageFile}
       onChangeFile={onChangeFile}
