@@ -8,13 +8,15 @@ TechStackSelectInput.propTypes = {
   selectedTechSkills: PropTypes.arrayOf(parsedTechStackType).isRequired,
   techSkillOptions: PropTypes.arrayOf(parsedTechStackType).isRequired,
   onChange: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
   defaultOption: PropTypes.object,
   customStyle: PropTypes.array,
+  height: PropTypes.string,
+  width: PropTypes.string,
 };
 
 export default function TechStackSelectInput({
@@ -28,6 +30,8 @@ export default function TechStackSelectInput({
   isError = false,
   helperText,
   customStyle,
+  height,
+  width,
   ...rest
 }) {
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
@@ -57,14 +61,20 @@ export default function TechStackSelectInput({
   };
 
   return (
-    <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
+    <S.Container
+      width={width}
+      height={height}
+      customStyle={customStyle}
+      onClick={openDropdown}
+      {...rest}
+    >
       {label && <S.Label>{label}</S.Label>}
       <S.ValueViewer isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
         {isValues ? (
           <S.SelectedStacks>
             {selectedTechSkills.map(({ id, label, value }) => (
               <S.SingleStack key={id}>
-                <span>{placeholder}</span>
+                <span>{label}</span>
                 <S.CloseNormal onClick={() => handleClickTargetDelete({ targetId: id })} />
               </S.SingleStack>
             ))}

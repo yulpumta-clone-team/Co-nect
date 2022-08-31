@@ -10,7 +10,7 @@ export const Container = styled.div`
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  height: 40px;
+  height: 100%;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   ${({ customStyle }) => customStyle}
@@ -68,7 +68,6 @@ export const SelectedStacks = styled.div`
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-  flex: 1 1 0%;
   align-items: center;
   justify-content: flex-start;
   gap: 4px;
@@ -84,9 +83,9 @@ export const SingleStack = styled.div`
 `;
 
 export const Label = styled.label`
-  position: absolute;
-  top: -3rem;
-  left: 0.5rem;
+  width: 100%;
+  align-items: flex-start;
+  margin-bottom: 1rem;
   color: ${({ theme }) => theme.colors.primary.normal};
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
   font-weight: 700;
@@ -97,7 +96,7 @@ export const PlaceHolder = styled.label`
 `;
 
 export const Select = styled.ul`
-  ${({ isDropdownOpen, theme: { mixin } }) => {
+  ${({ isDropdownOpen }) => {
     if (isDropdownOpen) {
       return css`
         display: block;
@@ -108,7 +107,7 @@ export const Select = styled.ul`
     `;
   }}
   position: absolute;
-  top: 42px;
+  top: 105%;
   width: 100%;
   max-height: 300px;
   overflow-y: auto;
@@ -165,8 +164,8 @@ export const CloseNormal = styled(CloseNormalIcon)`
 `;
 
 export const Error = styled.span`
-  position: absolute;
-  top: 50px;
-  padding-left: 6px;
+  margin-top: 1rem;
+  align-self: flex-start;
+  padding-left: 1rem;
   color: ${({ theme }) => theme.colors.important.normal};
 `;
