@@ -1,6 +1,7 @@
 /* eslint-disable no-prototype-builtins */
 import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
+import { skillStackParserToIds } from './skillStack.parser';
 
 export const userCardParser = (userCardInfo) => {
   const job = userCardInfo.job || jobOptions[0].value;
@@ -39,17 +40,20 @@ export const userDetailParser = (userDetailInfo) => {
   };
 };
 
+// get 요청 후
 export const userEditParser = (targetUserInfo) => {
   const userId = targetUserInfo.id;
   const techSkills = targetUserInfo.skills || [];
   const nickname = targetUserInfo.name;
-  const profileImage = targetUserInfo.img;
-  const { slogan } = targetUserInfo;
-  const { hopeSession } = targetUserInfo;
-  const { job } = targetUserInfo;
-  const belongTeam = targetUserInfo.status ? belongTeamOptions[0] : belongTeamOptions[1];
-  const introduction = targetUserInfo.content;
-  const { portfolio } = targetUserInfo;
+  const profileImage = targetUserInfo.img || '';
+  const slogan = targetUserInfo.slogan || '';
+  const hopeSession = targetUserInfo.hopeSession || '';
+  const job = targetUserInfo.job || '';
+  const belongTeam = targetUserInfo.status
+    ? belongTeamOptions[0].value
+    : belongTeamOptions[1].value;
+  const introduction = targetUserInfo.content || '';
+  const portfolio = targetUserInfo.portfolio || '';
   return {
     userId,
     nickname,
@@ -61,5 +65,57 @@ export const userEditParser = (targetUserInfo) => {
     belongTeam,
     introduction,
     portfolio,
+  };
+};
+
+// post 요청 전
+export const userPostEditParser = (userInfoRawData) => {
+  const {
+    introduction,
+    hopeSession,
+    profileImage,
+    job,
+    nickname,
+    portfolio,
+    slogan,
+    techSkills,
+    belongTeam,
+  } = userInfoRawData;
+  const paresedTechSkills = skillStackParserToIds(techSkills);
+  return {
+    content: introduction,
+    hope_session: hopeSession,
+    image: profileImage,
+    job,
+    name: nickname,
+    portfolio,
+    slogan,
+    skills: paresedTechSkills,
+  };
+};
+
+// post 요청 전
+export const essentialInfoParser = (essentialInfoRawData) => {
+  const {
+    introduction,
+    hopeSession,
+    profileImage,
+    job,
+    nickname,
+    portfolio,
+    slogan,
+    techSkills,
+    belongTeam,
+  } = essentialInfoRawData;
+  const paresedTechSkills = skillStackParserToIds(techSkills);
+  return {
+    content: introduction,
+    hope_session: hopeSession,
+    image: profileImage,
+    job,
+    name: nickname,
+    portfolio,
+    slogan,
+    skills: paresedTechSkills,
   };
 };

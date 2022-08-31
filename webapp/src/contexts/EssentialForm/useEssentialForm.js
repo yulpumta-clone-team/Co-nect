@@ -8,7 +8,7 @@ import authApi from 'api/auth.api';
 
 import { ROUTE } from 'constant/route.constant';
 import essentialValidation from 'service/essentialForm.validation';
-import { essentialInfoParser } from 'service/auth.parser';
+import { essentialInfoParser } from 'service/user.parser';
 import useUserInfo from 'hooks/useUserInfo';
 import useFileUploader from 'hooks/useFileUploader';
 import userApi from 'api/user.api';
