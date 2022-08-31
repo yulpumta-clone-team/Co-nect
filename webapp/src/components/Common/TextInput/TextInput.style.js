@@ -2,15 +2,16 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
-  box-sizing: border-box;
   position: relative;
   width: 100%;
-  height: 40px;
-  background: ${({ theme: { colors } }) => colors.greyScale.white};
+  height: 100%;
+  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
+  ${({ theme: { mixin } }) => mixin.flexCenter({})};
   ${({ customStyle }) => customStyle}
 `;
 
 export const InputContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,9 +34,10 @@ export const InputContainer = styled.div`
 `;
 
 export const Label = styled.label`
-  position: absolute;
-  top: -3rem;
-  left: 0.5rem;
+  width: 100%;
+  display: block;
+  align-items: flex-start;
+  margin-bottom: 1rem;
   color: ${({ theme }) => theme.colors.primary.normal};
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
   font-weight: 700;
@@ -47,6 +49,7 @@ export const Input = styled.input`
 `;
 
 export const Error = styled.span`
-  padding-left: 6px;
+  align-self: flex-start;
+  padding-left: 1rem;
   color: ${({ theme }) => theme.colors.important.normal};
 `;
