@@ -1,13 +1,12 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import Image from 'components/Common/Image';
 import { userEditParser } from 'service/user.parser';
 import TechStackSelectInput from 'components/TechStackSelectInput';
 import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
 import SelectInput from 'components/Common/SelectInput';
 import { skillStackParser } from 'service/skillStack.parser';
-import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
+import { belongTeamOptions, hopeSessionOption, jobOptions, skillStack } from 'constant';
 import { editUserValidation } from 'service/user.validation';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
@@ -22,19 +21,7 @@ EditUserProfileDetail.propTypes = {
   targetUser: userEditType,
   submitCallback: PropTypes.func.isRequired,
   onChangeFile: PropTypes.func.isRequired,
-  imageFile: PropTypes.string.isRequired,
-};
-
-const initialValues = {
-  nickname: '',
-  profileImage: '',
-  techSkills: [],
-  slogan: '',
-  hopeSession: '',
-  job: '',
-  belongTeam: '',
-  introduction: '',
-  portfolio: '',
+  imageFile: PropTypes.string,
 };
 
 export default function EditUserProfileDetail({
@@ -43,6 +30,22 @@ export default function EditUserProfileDetail({
   onChangeFile,
   imageFile,
 }) {
+  const parsedTargerUserInfo = userEditParser(targetUser);
+  const {
+    userId,
+    nickname,
+    profileImage,
+    techSkills,
+    slogan,
+    hopeSession,
+    job,
+    belongTeam,
+    introduction,
+    portfolio,
+  } = parsedTargerUserInfo;
+  const parsedSkillStackOptions = skillStackParser(skillStack);
+  const parsedSkillStack = skillStackParser(techSkills);
+
   const notifyDispatch = useToastNotificationAction();
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
   const inputFileRef = useRef();
@@ -56,7 +59,17 @@ export default function EditUserProfileDetail({
     satisfyAllValidates,
     isTargetSatisfyValidate,
   } = useForm({
-    initialValues,
+    initialValues: {
+      nickname,
+      profileImage,
+      techSkills: parsedSkillStack,
+      slogan,
+      hopeSession,
+      job,
+      belongTeam,
+      introduction,
+      portfolio,
+    },
     submitCallback,
     validate: editUserValidation,
   });
@@ -88,10 +101,6 @@ export default function EditUserProfileDetail({
   const isSkillsValidateError = isTargetSatisfyValidate('techSkills');
   const isNicknameValidateError = isTargetSatisfyValidate('nickname');
   const isSloganValidateError = isTargetSatisfyValidate('slogan');
-
-  const parsedTargerUserInfo = userEditParser(targetUser);
-  const { userId, skills, content } = parsedTargerUserInfo;
-  const parsedSkillStack = skillStackParser(skills);
 
   return (
     <S.PostContainer>
@@ -144,7 +153,7 @@ export default function EditUserProfileDetail({
           placeholder="기술"
           label="기술"
           selectedTechSkills={inputValues.techSkills}
-          techSkillOptions={parsedSkillStack}
+          techSkillOptions={parsedSkillStackOptions}
           onChange={onChangeHandlerWithSelect}
           isError={isSkillsValidateError}
           helperText={validateError.techSkills}
@@ -161,6 +170,7 @@ export default function EditUserProfileDetail({
         <SelectInput
           name="hopeSession"
           label="회망 기간"
+          placeHolder="회망 기간"
           defaultOption={hopeSessionOption[0]}
           options={hopeSessionOption}
           value={inputValues.hopeSession}
@@ -169,6 +179,7 @@ export default function EditUserProfileDetail({
         <SelectInput
           name="job"
           label="직업"
+          placeHolder="직업"
           defaultOption={jobOptions[0]}
           options={jobOptions}
           value={inputValues.job}
@@ -177,12 +188,18 @@ export default function EditUserProfileDetail({
         <SelectInput
           name="belongTeam"
           label="팀 소속 여부"
+          placeHolder="팀 소속 여부"
           defaultOption={belongTeamOptions[0]}
           options={belongTeamOptions}
-          value={inputValues.belongTeam}
+          value={inputValues.belongTeam.value}
           onChange={onChangeHandlerWithSelect}
         />
-        <MarkdownEditor onlyViewer={false} content={content} />
+        <MarkdownEditor
+          onlyViewer={false}
+          label="자기 소개"
+          placeholder="자기 소개를 입력해주세요."
+          content={introduction}
+        />
         <TextInput
           name="portfolio"
           label="포트폴리오(url)"

@@ -10,7 +10,6 @@ export const Container = styled.div`
 export const PostContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 57px;
 `;
 
 export const InfoContainer = styled.div`
@@ -23,7 +22,7 @@ export const InfoContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 6rem;
+  gap: 1.5rem;
 `;
 
 export const UserInfoContainer = styled.div`
@@ -41,6 +40,7 @@ export const DuplicateCheckButton = css`
   width: 120px;
   height: 34px;
   padding: 5px 20px;
+  align-self: flex-end;
   ${({ theme: { fonts } }) => fonts.korean.default}
 `;
 
