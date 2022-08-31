@@ -15,6 +15,7 @@ import SelectInput from 'components/Common/SelectInput';
 import { skillStackParser } from 'service/skillStack.parser';
 import useAxios from 'hooks/useAxios';
 import { ROUTE } from 'constant/route.constant';
+import { useToastNotificationAction } from 'contexts/ToastNotification';
 import * as S from './style';
 
 export default function NewTeamPost() {
@@ -25,6 +26,7 @@ export default function NewTeamPost() {
   const [slogan, onSloganChange] = useInput('');
   const [hopeSession, onHopeSessionChange] = useInput('무관');
   const [mdcontent, setContent] = useState('');
+  const notifyDispatch = useToastNotificationAction();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,7 +48,7 @@ export default function NewTeamPost() {
     submitHandler,
     satisfyAllValidates,
   } = useForm({
-    initialValues: { techSkills: 'javascript' },
+    initialValues: { techSkills: [] },
     handleSubmit,
     validate: essentialValidation,
   });
@@ -60,12 +62,18 @@ export default function NewTeamPost() {
       <S.Container>
         <S.ImgContainer>
           <S.ViewingImage src={imageFile} alt="profile" />
-          <Input type="file" accept="image/*" onChange={fileHandler} />
+          <input id="ex_file" type="file" accept="image/*" onChange={fileHandler} />
         </S.ImgContainer>
         <S.Form onSubmit={handleSubmit}>
           <S.TeamName>
-            팀이름{' '}
-            <Input name="팀이름" onChange={onTeamChange} value={teamName} placeholder="팀이름" />
+            팀 이름
+            <Input
+              name="팀이름"
+              onChange={onTeamChange}
+              value={teamName}
+              placeholder="팀이름"
+              customStyle={S.PostInput}
+            />
           </S.TeamName>
           <S.TechStack>
             기술 스택
@@ -93,14 +101,19 @@ export default function NewTeamPost() {
           <S.Slogan>
             프로젝트 슬로건
             <Input
-              name="팀이름"
+              name="프로젝트슬로건"
               onChange={onSloganChange}
               value={slogan}
               placeholder="프로젝트슬로건"
             />
           </S.Slogan>
-          <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
-          <Button onSubmit={handleSubmit}>제출</Button>
+          <S.Content>
+            프로젝트 소개
+            <MarkdownEditor mdValue={mdcontent} setContent={setContent} />
+          </S.Content>
+          <Button theme="primary" onSubmit={handleSubmit} customStyle={S.SubmitButton}>
+            저장
+          </Button>
         </S.Form>
       </S.Container>
     </S.PageContainer>
