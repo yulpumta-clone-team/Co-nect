@@ -50,7 +50,8 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
   };
 
   useEffect(() => {
-    resetState();
+    // resetState 내부의 dispatch 때문에 두 번 execution이 발생함.
+    // resetState();
     if (immediate) {
       execution();
     }
