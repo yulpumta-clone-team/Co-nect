@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import MarkdownEditor from 'components/MdEditor';
+import MarkdownEditor from 'components/MarkdownEditor';
 import useFileInput from 'hooks/useFileInput';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillStack } from 'constant';

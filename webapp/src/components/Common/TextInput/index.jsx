@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import * as S from './TextInput.style';
 
-Input.propTypes = {
+TextInput.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
@@ -12,9 +12,11 @@ Input.propTypes = {
   isError: PropTypes.bool,
   helperText: PropTypes.string,
   customStyle: PropTypes.array,
+  height: PropTypes.string,
+  width: PropTypes.string,
 };
 
-export default function Input({
+export default function TextInput({
   label,
   value,
   onChange,
@@ -23,11 +25,13 @@ export default function Input({
   isError = false,
   helperText,
   customStyle,
+  height,
+  width,
   ...rest
 }) {
   return (
-    <S.Container isError={isError} customStyle={customStyle}>
-      <S.Label>{label}</S.Label>
+    <S.Container isError={isError} customStyle={customStyle} width={width} height={height}>
+      {label && <S.Label>{label}</S.Label>}
       <S.InputContainer isError={isError}>
         <S.Input
           label={label}

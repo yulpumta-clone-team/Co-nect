@@ -24,7 +24,6 @@ export default function Skills() {
         <TechStackSelectInput
           name="techSkills"
           placeholder="기술"
-          label="기술"
           selectedTechSkills={inputValues.techSkills}
           techSkillOptions={parsedSkillStack}
           onChange={onChangeHandlerWithSelect}

@@ -4,9 +4,9 @@ import AuthErrorCallback from './AuthErrorCallback';
 import ApiErrorCallback from './ApiErrorCallback';
 
 Callback.propTypes = {
-  errorStatus: PropTypes.number.isRequired,
-  errorMessage: PropTypes.string.isRequired,
-  forceRefetch: PropTypes.func.isRequired,
+  errorStatus: PropTypes.number,
+  errorMessage: PropTypes.string,
+  forceRefetch: PropTypes.func,
 };
 
 export default function Callback({ errorStatus, errorMessage, forceRefetch }) {
