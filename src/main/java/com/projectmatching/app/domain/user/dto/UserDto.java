@@ -2,12 +2,18 @@ package com.projectmatching.app.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
+import com.projectmatching.app.domain.techStack.dto.TechStackDto;
+import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.domain.user.entity.UserTech;
 import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.projectmatching.app.util.StreamUtil.map;
 
@@ -36,7 +42,7 @@ public class UserDto {
     private int likeCnt;
     private int commentCnt;
 
-    private List<String> skills;
+    private List<TechStackDto> skills;
 
 
     public static UserDto createEmpty() { return new UserDto();}
@@ -47,8 +53,8 @@ public class UserDto {
         BeanUtils.copyProperties(user, userDto);
         userDto.commentCnt = user.getUserComments().size();
         userDto.likeCnt = user.getRespected();
-
-//        userDto.skills =  map(user.getSkills(),)
+        userDto.skills = user.getSkills().stream().map(UserTech::toTechStack)
+                        .map(TechStackDto::of).collect(Collectors.toList());
 
         return userDto;
     }

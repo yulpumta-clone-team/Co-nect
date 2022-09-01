@@ -72,7 +72,11 @@ public class QUserRepository {
      */
     public Optional<User> find(Long id){
         return Optional.ofNullable(jpaQueryFactory
-                .select(user).innerJoin(userTech).innerJoin(techStack)
+                .selectFrom(user).leftJoin(user.skills).fetchJoin()
+                        .leftJoin(user.userTeams).fetchJoin()
+                        .leftJoin(user.userComments).fetchJoin()
+                        .leftJoin(user.userHistories).fetchJoin()
+                        .leftJoin(user.userCommentLikings).fetchJoin()
                 .where(user.id.eq(id))
                 .fetchOne()
         );
