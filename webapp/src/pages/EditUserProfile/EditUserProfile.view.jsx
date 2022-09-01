@@ -21,7 +21,7 @@ EditUserProfileView.propTypes = {
   isNickNameSameWithOrigin: PropTypes.bool.isRequired,
   onChangeCheckNicknameDuplicate: PropTypes.func.isRequired,
   onClickCheckDuplicateNickname: PropTypes.func.isRequired,
-  imageFile: PropTypes.string,
+  profileImageSrc: PropTypes.string,
   onChangeFile: PropTypes.func.isRequired,
 };
 
@@ -37,7 +37,7 @@ export default function EditUserProfileView({
   isNickNameSameWithOrigin,
   onChangeCheckNicknameDuplicate,
   onClickCheckDuplicateNickname,
-  imageFile,
+  profileImageSrc,
   onChangeFile,
 }) {
   const inputFileRef = useRef();
@@ -61,9 +61,9 @@ export default function EditUserProfileView({
     <S.PostContainer>
       <S.Form onSubmit={submitHandler} id="editUserProfileForm">
         <S.ProfileImageContainer>
-          {imageFile ? (
+          {profileImageSrc ? (
             <S.InputTypeImageHandler htmlFor="profileImage">
-              <S.ImageThunbnail alt="upload" src={URL.createObjectURL(imageFile)} />
+              <S.ImageThunbnail alt="upload" src={profileImageSrc} />
               <Button
                 type="button"
                 theme="secondary"
@@ -162,6 +162,7 @@ export default function EditUserProfileView({
             onChange={onChangeHandlerWithSelect}
           />
           <MarkdownEditor
+            name="introduction"
             onlyViewer={false}
             label="자기 소개"
             placeholder="자기 소개를 입력해주세요."
