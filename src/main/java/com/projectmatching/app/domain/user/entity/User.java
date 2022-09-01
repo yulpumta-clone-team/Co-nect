@@ -52,7 +52,9 @@ public class User extends BaseTimeEntity  {
     private String content;
 
 
-    private String hope_session;
+    @Column(name = "hope_session")
+    private String hopeSession;
+
 
 
     private String job;
@@ -138,7 +140,7 @@ public class User extends BaseTimeEntity  {
         this.image = userEssentialDto.getImage();
         this.content = userEssentialDto.getContent();
         this.portfolio = userEssentialDto.getPortfolio();
-        this.hope_session = userEssentialDto.getHope_session();
+        this.hopeSession = userEssentialDto.getHope_session();
     }
 
     /**
