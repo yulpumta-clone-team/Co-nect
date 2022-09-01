@@ -11,11 +11,15 @@ const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
   const [imageFile, setImageFile] = useState(null);
 
   const onChangeFile = (event) => {
-    const imageFile = event.target.files[0];
-    setImageFile(imageFile);
+    const targetImageFile = event.target.files[0];
+    setImageFile(targetImageFile);
   };
 
   const uploadFileOnS3 = async (submitImageFile) => {
+    // 둘다 없을 때 실행하지 않는다.
+    if (!imageFile && !submitImageFile) {
+      return null;
+    }
     try {
       const formData = new FormData();
       if (submitImageFile) {
@@ -33,8 +37,7 @@ const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
     } catch (apiError) {
       console.error(apiError);
       setS3ImageObj(null);
-      notifyNewMessage(notifyDispatch, apiError, TOAST_TYPE.Error);
-      navigate(ROUTE.ESSENTIAL_INFO.PROFILE_IMAGE);
+      notifyNewMessage(notifyDispatch, apiError.message, TOAST_TYPE.Error);
       return null;
     }
   };
@@ -45,7 +48,7 @@ const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
       console.log('response :>> ', response);
     } catch (apiError) {
       console.error(apiError);
-      notifyNewMessage(notifyDispatch, apiError, TOAST_TYPE.Error);
+      notifyNewMessage(notifyDispatch, apiError.message, TOAST_TYPE.Error);
       navigate(ROUTE.ESSENTIAL_INFO.INDEX);
     }
   };

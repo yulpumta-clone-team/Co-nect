@@ -6,7 +6,7 @@ import {
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
 import TechStackSelectInput from 'components/TechStackSelectInput';
-import { skillStackParserToSelectInput } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/skillStack.parser';
 import * as S from '../EssentialInfo.style';
 
 export default function Skills() {
@@ -15,7 +15,7 @@ export default function Skills() {
     useEssentialFormsAction();
   const isSkillsValidateError = isTargetSatisfyValidate('techSkills');
 
-  const parsedSkillStack = skillStackParserToSelectInput(skillStack);
+  const parsedSkillStack = skillStackParser(skillStack);
 
   return (
     <S.Content>
@@ -24,7 +24,6 @@ export default function Skills() {
         <TechStackSelectInput
           name="techSkills"
           placeholder="기술"
-          label="기술"
           selectedTechSkills={inputValues.techSkills}
           techSkillOptions={parsedSkillStack}
           onChange={onChangeHandlerWithSelect}

@@ -8,13 +8,15 @@ TechStackSelectInput.propTypes = {
   selectedTechSkills: PropTypes.arrayOf(parsedTechStackType).isRequired,
   techSkillOptions: PropTypes.arrayOf(parsedTechStackType).isRequired,
   onChange: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
   defaultOption: PropTypes.object,
   customStyle: PropTypes.array,
+  height: PropTypes.string,
+  width: PropTypes.string,
 };
 
 export default function TechStackSelectInput({
@@ -28,6 +30,8 @@ export default function TechStackSelectInput({
   isError = false,
   helperText,
   customStyle,
+  height,
+  width,
   ...rest
 }) {
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
@@ -57,8 +61,15 @@ export default function TechStackSelectInput({
   };
 
   return (
-    <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
-      <S.PlaceHolder isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
+    <S.Container
+      width={width}
+      height={height}
+      customStyle={customStyle}
+      onClick={openDropdown}
+      {...rest}
+    >
+      {label && <S.Label>{label}</S.Label>}
+      <S.ValueViewer isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
         {isValues ? (
           <S.SelectedStacks>
             {selectedTechSkills.map(({ id, label, value }) => (
@@ -69,7 +80,7 @@ export default function TechStackSelectInput({
             ))}
           </S.SelectedStacks>
         ) : (
-          <S.Label>{placeholder}</S.Label>
+          <S.PlaceHolder>{placeholder}</S.PlaceHolder>
         )}
         <S.ButtonContainer>
           {selectedTechSkills && (
@@ -82,7 +93,7 @@ export default function TechStackSelectInput({
           )}
           <AngleButton onClick={closeDropdown} />
         </S.ButtonContainer>
-      </S.PlaceHolder>
+      </S.ValueViewer>
       {isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen}>
         {techSkillOptions.map(({ id, value, label }) => (

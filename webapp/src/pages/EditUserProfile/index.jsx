@@ -1,32 +1,26 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import userApi from 'api/user.api';
-
 import WithLoading from 'hoc/WithLoading';
-import * as S from './style';
-import EditUserProfileForm from './EditUserProfileForm';
-
-const USER_ID = 3;
+import BackButton from 'components/Common/BackButton';
+import { getUserInfo } from 'service/auth';
+import UpperButton from 'components/Common/UpperButton';
+import EditUserProfileDetail from './EditUserProfileDetail';
+import * as S from './EditUserProfile.style';
 
 export default function EditUserProfile() {
-  const navigate = useNavigate();
-
-  const onClickback = () => {
-    navigate(-1);
-  };
-
-  const EditUserProfileFormWithLoading = WithLoading({
-    Component: EditUserProfileForm,
+  const userInfo = getUserInfo(); // {id, name, profileImg}
+  const EditUserProfileDetailWithLoading = WithLoading({
+    Component: EditUserProfileDetail,
     responseDataKey: 'targetUser',
     axiosInstance: userApi.GET_USER_DETAIL,
-    axiosConfig: { id: USER_ID },
+    axiosConfig: { id: userInfo?.id },
   });
 
   return (
     <S.Container>
-      <button onClick={onClickback}>back</button>
-      <br />
-      <EditUserProfileFormWithLoading onClickback={onClickback} />
+      <BackButton />
+      <EditUserProfileDetailWithLoading />
+      <UpperButton />
     </S.Container>
   );
 }

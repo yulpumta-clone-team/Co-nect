@@ -1,5 +1,8 @@
 /* eslint-disable no-prototype-builtins */
 
+import { response } from 'msw';
+import { HttpError } from 'utils/customError';
+
 export function successHandler(response) {
   const { data, headers } = response;
   return { ...data, headers };
@@ -11,21 +14,22 @@ export function errorHandler(error) {
   if (error.response) {
     // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
 
-    // 서버에서 설정한 커스텀 에러 타입 키값들
-    // code, message, status
-
     const {
       response: { data: apiData, status },
     } = error;
+
+    // 서버에서 설정한 커스텀 에러 타입 키값들
+    // code, message, status
     const hasCode = apiData && apiData.hasOwnProperty('code');
     const hasMessage = apiData && apiData.hasOwnProperty('message');
     const hasStatus = apiData && apiData.hasOwnProperty('status');
 
+    // 서버에서 보낸 custom 에러 메세지가 있을 경우 해당 메세지를 에러 메세지로 전달
     if (hasCode && hasMessage && hasStatus) {
-      return Promise.reject(apiData.message);
+      return Promise.reject(new HttpError(apiData.message, status));
     }
 
-    return Promise.reject(error.response.message);
+    return Promise.reject(new HttpError(response.message, status));
   }
   if (error.request) {
     // 요청이 이루어 졌으나 응답을 받지 못했습니다.

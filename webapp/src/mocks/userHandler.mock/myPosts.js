@@ -12,7 +12,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -23,7 +52,36 @@ export const myPosts = [
     read: 90,
     commentCnt: 59,
     likeCnt: 87,
-    skills: [103],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: true,
   },
   {
@@ -39,7 +97,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -50,7 +137,36 @@ export const myPosts = [
     read: 49,
     commentCnt: 73,
     likeCnt: 43,
-    skills: [103],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: true,
   },
   {
@@ -66,7 +182,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -77,7 +222,36 @@ export const myPosts = [
     read: 2,
     commentCnt: 95,
     likeCnt: 16,
-    skills: [103],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: true,
   },
   {
@@ -93,7 +267,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -104,7 +307,36 @@ export const myPosts = [
     read: 58,
     commentCnt: 72,
     likeCnt: 55,
-    skills: [201],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: false,
   },
   {
@@ -120,7 +352,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -131,7 +392,36 @@ export const myPosts = [
     read: 46,
     commentCnt: 3,
     likeCnt: 66,
-    skills: [202],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: false,
   },
   {
@@ -147,7 +437,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -158,7 +477,36 @@ export const myPosts = [
     read: 23,
     commentCnt: 77,
     likeCnt: 22,
-    skills: [201],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: true,
   },
   {
@@ -174,7 +522,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -185,7 +562,36 @@ export const myPosts = [
     read: 30,
     commentCnt: 91,
     likeCnt: 26,
-    skills: [101],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: true,
   },
   {
@@ -201,7 +607,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -212,7 +647,36 @@ export const myPosts = [
     read: 51,
     commentCnt: 98,
     likeCnt: 71,
-    skills: [103],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: true,
   },
   {
@@ -228,7 +692,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -239,7 +732,36 @@ export const myPosts = [
     read: 37,
     commentCnt: 70,
     likeCnt: 20,
-    skills: [201],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: true,
   },
   {
@@ -255,7 +777,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -266,7 +817,36 @@ export const myPosts = [
     read: 42,
     commentCnt: 80,
     likeCnt: 35,
-    skills: [201],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: false,
   },
   {
@@ -282,7 +862,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -293,7 +902,36 @@ export const myPosts = [
     read: 72,
     commentCnt: 48,
     likeCnt: 67,
-    skills: [202],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: false,
   },
   {
@@ -309,7 +947,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -320,7 +987,36 @@ export const myPosts = [
     read: 57,
     commentCnt: 47,
     likeCnt: 30,
-    skills: [202],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: false,
   },
   {
@@ -336,7 +1032,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -347,7 +1072,36 @@ export const myPosts = [
     read: 57,
     commentCnt: 25,
     likeCnt: 39,
-    skills: [101],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: false,
   },
   {
@@ -363,7 +1117,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -374,7 +1157,36 @@ export const myPosts = [
     read: 2,
     commentCnt: 12,
     likeCnt: 67,
-    skills: [202],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: false,
   },
   {
@@ -390,7 +1202,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -401,7 +1242,36 @@ export const myPosts = [
     read: 82,
     commentCnt: 80,
     likeCnt: 49,
-    skills: [103],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: false,
   },
   {
@@ -417,7 +1287,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -428,7 +1327,36 @@ export const myPosts = [
     read: 30,
     commentCnt: 82,
     likeCnt: 77,
-    skills: [202],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: true,
   },
   {
@@ -444,7 +1372,36 @@ export const myPosts = [
       img: 'img url',
       hopeSession: '3개월',
       job: '학생',
-      skills: [101, 202],
+      skills: [
+        {
+          key: 500,
+          category: 'arichitecture',
+          techName: 'git',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 501,
+          category: 'arichitecture',
+          techName: 'docker',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 502,
+          category: 'arichitecture',
+          techName: 'kubernetes',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+        {
+          key: 503,
+          category: 'arichitecture',
+          techName: 'aws',
+          image:
+            'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+        },
+      ],
       status: false,
       commentCnt: 3,
       likeCnt: 3,
@@ -455,7 +1412,36 @@ export const myPosts = [
     read: 96,
     commentCnt: 67,
     likeCnt: 7,
-    skills: [202],
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
     status: false,
   },
 ];
