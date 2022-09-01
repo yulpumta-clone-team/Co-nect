@@ -63,11 +63,9 @@ export default function EditUserProfileDetail({ targetUser }) {
 
   // 수정 요청
   const submitCallback = async (submitData) => {
-    // console.log('submitData', submitData);
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = userPostEditParser(changedProfileImageSubmitData);
-    console.log('parsedSubmitData', parsedSubmitData);
-    // await execution({ data: parsedSubmitData });
+    await execution({ data: parsedSubmitData });
     // TODO: 성공시 이동할 페이지 정해서 이동시키기
     notifyNewMessage(notifyDispatch, '수정 완료!', TOAST_TYPE.Success);
   };

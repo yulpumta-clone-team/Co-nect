@@ -81,11 +81,12 @@ export const userPostEditParser = (userInfoRawData) => {
     techSkills,
     belongTeam,
   } = userInfoRawData;
+  console.log('userInfoRawData', userInfoRawData);
   const paresedTechSkills = skillStackParserToIds(techSkills);
   return {
-    content: introduction,
+    description: introduction,
     hope_session: hopeSession,
-    image: profileImage,
+    img: profileImage,
     job,
     name: nickname,
     portfolio,
