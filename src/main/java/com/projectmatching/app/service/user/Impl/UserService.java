@@ -68,15 +68,15 @@ public class UserService  {
     }
 
 
-    //유저 업데이트
-    @Transactional
-    public UserDto updateUser(UserDto NewUserDto) {
-        String userEmail = userDetails.getUsername();
-        UserDto DBUser =  Optional.ofNullable(userRepository.findByEmail(userEmail))
-              .map(u -> UserDto.of(u.get())).orElse(UserDto.createEmpty());
-        BeanUtils.copyProperties(NewUserDto,DBUser);
-       return UserDto.of(userRepository.save(DBUser.asEntity()));
-    }
+//    //유저 업데이트
+//    @Transactional
+//    public UserDto updateUser(UserDto NewUserDto) {
+//        String userEmail = userDetails.getUsername();
+//        UserDto DBUser =  Optional.ofNullable(userRepository.findByEmail(userEmail))
+//              .map(u -> UserDto.of(u.get())).orElse(UserDto.createEmpty());
+//        BeanUtils.copyProperties(NewUserDto,DBUser);
+//       return UserDto.of(userRepository.save(DBUser.asEntity()));
+//    }
 
     //유저 게시물 조회
     @Transactional(readOnly = true)

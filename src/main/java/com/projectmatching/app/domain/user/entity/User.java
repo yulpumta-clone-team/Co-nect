@@ -132,15 +132,13 @@ public class User extends BaseTimeEntity  {
     }
 
 
-    public User updateEssentialInfo(UserEssentialDto userEssentialDto){
+    public void updateEssentialInfo(UserEssentialDto userEssentialDto){
         this.name = userEssentialDto.getName();
         this.slogan = userEssentialDto.getSlogan();
         this.image = userEssentialDto.getImage();
         this.content = userEssentialDto.getContent();
         this.portfolio = userEssentialDto.getPortfolio();
         this.hope_session = userEssentialDto.getHope_session();
-
-        return this;
     }
 
     /**
