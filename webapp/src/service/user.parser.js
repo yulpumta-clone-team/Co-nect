@@ -48,7 +48,7 @@ export const userEditParser = (targetUserInfo) => {
   const profileImage = targetUserInfo.img || '';
   const slogan = targetUserInfo.slogan || '';
   const hopeSession = targetUserInfo.hopeSession || '';
-  const job = targetUserInfo.job || '';
+  const job = targetUserInfo.job || jobOptions[0].value;
   const belongTeam = targetUserInfo.status
     ? belongTeamOptions[0].value
     : belongTeamOptions[1].value;
