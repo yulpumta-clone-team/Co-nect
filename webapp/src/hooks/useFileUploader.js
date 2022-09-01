@@ -1,11 +1,16 @@
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useState } from 'react';
 import etcApi from 'api/etc.api';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from 'constant/route.constant';
+import useUserInfo from './useUserInfo';
 
-const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
+const useFileUploader = () => {
+  const notifyDispatch = useToastNotificationAction();
   const navigate = useNavigate();
+  const { handleExiredToken } = useUserInfo();
   const [s3ImageId, setS3ImageId] = useState(null);
   const [s3ImageObj, setS3ImageObj] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -37,6 +42,7 @@ const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
     } catch (apiError) {
       console.error(apiError);
       setS3ImageObj(null);
+      handleExiredToken(apiError.httpStatus);
       notifyNewMessage(notifyDispatch, apiError.message, TOAST_TYPE.Error);
       return null;
     }

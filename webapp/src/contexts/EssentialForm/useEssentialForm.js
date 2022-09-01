@@ -55,10 +55,7 @@ const useEssentialForm = () => {
   const notifyDispatch = useToastNotificationAction();
   const { handleUpdateUserInfo } = useUserInfo();
   const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
-  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader({
-    notifyNewMessage,
-    notifyDispatch,
-  });
+  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();
 
   const uploadImageFileBeforeSubmit = async (submitData) => {
     const response = await uploadFileOnS3();

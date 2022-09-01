@@ -50,10 +50,7 @@ export default function EditUserProfileDetail({ targetUser }) {
   });
 
   // s3 이미지 업로더 api hooks
-  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader({
-    notifyNewMessage,
-    notifyDispatch,
-  });
+  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();
 
   const uploadImageFileBeforeSubmit = async (submitData) => {
     const response = await uploadFileOnS3();
@@ -66,9 +63,11 @@ export default function EditUserProfileDetail({ targetUser }) {
 
   // 수정 요청
   const submitCallback = async (submitData) => {
+    // console.log('submitData', submitData);
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = userPostEditParser(changedProfileImageSubmitData);
-    await execution({ data: parsedSubmitData });
+    console.log('parsedSubmitData', parsedSubmitData);
+    // await execution({ data: parsedSubmitData });
     // TODO: 성공시 이동할 페이지 정해서 이동시키기
     notifyNewMessage(notifyDispatch, '수정 완료!', TOAST_TYPE.Success);
   };
@@ -97,6 +96,8 @@ export default function EditUserProfileDetail({ targetUser }) {
     validate: editUserValidation,
   });
 
+  const profileImageSrc = inputValues.profileImage || (imageFile && URL.createObjectURL(imageFile));
+
   return (
     <EditUserProfileView
       inputValues={inputValues}
@@ -110,7 +111,7 @@ export default function EditUserProfileDetail({ targetUser }) {
       isNickNameSameWithOrigin={isNickNameSameWithOrigin}
       onChangeCheckNicknameDuplicate={onChangeCheckNicknameDuplicate}
       onClickCheckDuplicateNickname={onClickCheckDuplicateNickname}
-      imageFile={imageFile}
+      profileImageSrc={profileImageSrc}
       onChangeFile={onChangeFile}
     />
   );
