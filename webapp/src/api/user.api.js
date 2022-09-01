@@ -50,7 +50,7 @@ const userApi = {
   EDIT_USER_PROFILE({ data }) {
     return privateApiInstance({
       url: API.USER.PROFILE,
-      method: 'post',
+      method: 'patch',
       data,
     });
   },
