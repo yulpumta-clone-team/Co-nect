@@ -5,6 +5,11 @@ export const USER_INFO = 'userInfo';
 export const DEFAULT_PROFILE_IMG =
   'https://user-images.githubusercontent.com/71386219/157435570-a48382a8-63e5-4d25-91f4-e506289424b5.png';
 
+export const belongTeamOptions = [
+  { id: 0, label: '팀소속 ✅', value: '팀소속 ✅' },
+  { id: 1, label: '팀소속 ❌', value: '팀소속 ❌' },
+];
+
 export const jobOptions = [
   { id: 0, value: '학생', label: '학생' },
   { id: 1, value: '실무자', label: '실무자' },

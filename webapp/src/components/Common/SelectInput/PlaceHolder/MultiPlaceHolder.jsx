@@ -4,11 +4,11 @@ import * as S from '../SelectInput.style';
 
 MultiPlaceHolder.propTypes = {
   values: PropTypes.array.isRequired,
-  label: PropTypes.string.isRequired,
+  placeHolder: PropTypes.string.isRequired,
   handleClickTargetDelete: PropTypes.func.isRequired,
 };
 
-export default function MultiPlaceHolder({ values, label, handleClickTargetDelete }) {
+export default function MultiPlaceHolder({ values, placeHolder, handleClickTargetDelete }) {
   const isValues = values.length !== 0;
 
   return isValues ? (
@@ -21,6 +21,6 @@ export default function MultiPlaceHolder({ values, label, handleClickTargetDelet
       ))}
     </S.DisplayValues>
   ) : (
-    <S.Label>{label}</S.Label>
+    <S.PlaceHolder>{placeHolder}</S.PlaceHolder>
   );
 }

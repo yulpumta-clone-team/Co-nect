@@ -18,7 +18,7 @@ export default function SessionJob() {
       <S.InputContainer>
         <SelectInput
           name="hopeSession"
-          label="회망 기간"
+          placeHolder="회망 기간"
           defaultOption={hopeSessionOption[0]}
           options={hopeSessionOption}
           value={inputValues.hopeSession}
@@ -26,7 +26,7 @@ export default function SessionJob() {
         />
         <SelectInput
           name="job"
-          label="직업"
+          placeHolder="직업"
           defaultOption={jobOptions[0]}
           options={jobOptions}
           value={inputValues.job}

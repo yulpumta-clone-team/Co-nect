@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import MarkdownViewer from 'components/MdViewer';
 import CommentContainer from 'components/ComentContainer';
 import { POST_TYPE } from 'constant';
 import { userDetailParser } from 'service/user.parser';
 import Image from 'components/Common/Image';
 import Divider from 'components/Common/Divider';
 import TechSkills from 'components/TechSkills';
+import MarkdownEditor from 'components/MarkdownEditor';
 import * as S from './UserPost.style';
 
 export default function UserPostDetail({ targetUser }) {
@@ -80,9 +80,7 @@ export default function UserPostDetail({ targetUser }) {
           </S.SingleInfo>
           <S.SingleInfo>
             <S.SingleInfoTitle>자기소개</S.SingleInfoTitle>
-            <div>
-              <span>{content}</span>
-            </div>
+            <MarkdownEditor onlyViewer content={content} />
           </S.SingleInfo>
         </S.UserInfoContainer>
         <Divider customStyle={S.CommentDivder} />
