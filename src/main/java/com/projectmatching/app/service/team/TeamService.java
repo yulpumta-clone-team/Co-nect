@@ -49,6 +49,7 @@ public class TeamService {
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
         Team team = Team.valueOf(requestDto,user);
         addTeamTechByTeamRequest(requestDto,team);
+        teamRepository.save(team);
 
     }
 
