@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'jacoco'
 }
 
 group = 'com.projectmatching'
@@ -52,55 +53,81 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
     testImplementation 'io.rest-assured:rest-assured:3.3.0'
     testImplementation 'org.mockito:mockito-inline:3.6.0'
+
+
+
 }
 
 test {
     useJUnitPlatform()
+
+    finalizedBy jacocoTestReport // report is always generated after tests run
+    jacoco {
+        excludes=["**/Q*.class"]
+     }
+
 }
-//
-//def reactDir = "$projectDir/webapp"
-//
-//sourceSets{
-//    main{
-//        resources{
-//            srcDirs = ["$projectDir/src/main/resources"]
-//        }
-//    }
-//}
-//
-//processResources{
-//    dependsOn "copyReactBuildFiles"
-//}
-//
-//task installReact(type:Exec){
-//    workingDir "$reactDir"
-//    inputs.dir "$reactDir"
-//    group = BasePlugin.BUILD_GROUP
-//
-//    if(System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')){
-//        commandLine "npm.cmd", "audit", "fix"
-//        commandLine 'npm.cmd', 'install'
-//    }else{
-//        commandLine "npm", "audit", "fix"
-//        commandLine 'npm', 'install'
-//    }
-//}
-//
-//task buildReact(type:Exec){
-//    dependsOn "installReact"
-//    workingDir "$reactDir"
-//    inputs.dir "$reactDir"
-//    group = BasePlugin.BUILD_GROUP
-//
-//    if(System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')){
-//        commandLine "npm.cmd", "run-script", "build"
-//    }else{
-//        commandLine "npm", "run-script", "build"
-//    }
-//}
-//
-//task copyReactBuildFiles(type:Copy){
-//    dependsOn "buildReact"
-//    from "$reactDir/build"
-//    into "$projectDir/src/main/resources/static"
-//}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+    reports {
+        html.required = true
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/config/*",
+                    "**/Q*.class"
+            ])
+        }))
+}
+
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.2
+            }
+            excludes=['**/config/*','**/Q*.class']
+
+        }
+
+        rule {
+            enabled = false
+            element = 'CLASS'
+
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                minimum = 0.3
+            }
+
+        }
+    }
+}
+
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+
+
+
+
+task testCoverage(type: Test) {
+    group 'verification'
+    description 'Runs the unit tests with coverage'
+
+    dependsOn(':test',
+            ':jacocoTestReport',
+            ':jacocoTestCoverageVerification')
+
+    tasks['jacocoTestReport'].mustRunAfter(tasks['test'])
+    tasks['jacocoTestCoverageVerification'].mustRunAfter(tasks['jacocoTestReport'])
+}

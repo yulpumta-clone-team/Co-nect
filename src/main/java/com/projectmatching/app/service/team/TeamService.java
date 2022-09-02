@@ -67,16 +67,7 @@ public class TeamService {
 
             List<TechCode> techStacks = techStackProvider.extractTechCodeByKeys(techs);
 
-//
-//            teamTechRepository.save(teamTech);
-//
-//
-//            UserTeam userTeam = UserTeam.builder()
-//                    .user(user)
-//                    .team(team)
-//                    .build();
-//
-//            userTeamRepository.save(userTeam);
+
 
             return teamId;
 
