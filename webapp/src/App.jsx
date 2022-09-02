@@ -12,7 +12,7 @@ import Callback from 'pages/Callback';
 import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
 import MyList from 'pages/MyList';
-import NewPost from 'pages/NewTeamPost';
+import NewPost from 'pages/NewTeamPost/NewTeamPost.view';
 import MyPost from 'pages/MyPost';
 import NotFound from 'pages/NotFound';
 import EssentialInfo from 'pages/EssentialInfo';
@@ -106,7 +106,7 @@ function App() {
           <Route path={ROUTE.MY_LIST} element={<PrivateRoute Component={MyList} />} />
           <Route
             path={ROUTE.NEW_POST}
-            element={<PublicRoute Component={NewPost} restricted={false} />}
+            element={<PrivateRoute Component={NewPost} restricted={false} />}
           />
           <Route path={ROUTE.MY_POST} element={<PrivateRoute Component={MyPost} />} />
           <Route
