@@ -2,6 +2,8 @@ package com.projectmatching.app.domain.team.entity;
 
 import com.projectmatching.app.domain.BaseTimeEntity;
 import com.projectmatching.app.domain.techStack.entity.TechCode;
+import com.projectmatching.app.domain.techStack.entity.TechStack;
+import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +19,6 @@ import javax.persistence.*;
 public class TeamTech extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,5 +27,15 @@ public class TeamTech extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="tech_id")
-    private TechCode techStack;
+    private TechStack techStack;
+
+    public static TeamTech of(TechStack techStack,Team team){
+        TeamTech teamTech = new TeamTech();
+        teamTech.id = IdGenerator.number();
+        teamTech.team = team;
+        teamTech.techStack = techStack;
+
+        return teamTech;
+    }
+
 }

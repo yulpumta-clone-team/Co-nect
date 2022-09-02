@@ -13,9 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TeamRequestDto {
 
-    @ApiModelProperty(example = "1",name = "작성자 아이디")
-    private Long userId;
-
     @ApiModelProperty(name = "팀 이미지")
     private String image;
 

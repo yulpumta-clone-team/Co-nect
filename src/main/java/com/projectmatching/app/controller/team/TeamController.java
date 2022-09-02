@@ -3,7 +3,6 @@ package com.projectmatching.app.controller.team;
 
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
-import com.projectmatching.app.constant.ServiceConstant;
 import com.projectmatching.app.domain.common.Paging;
 import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.projectmatching.app.constant.ResponseTemplateStatus.EMPTY_TEAM_NAME;
 import static com.projectmatching.app.constant.ServiceConstant.PAGING_SIZE;
 
 
@@ -39,11 +37,9 @@ public class TeamController {
      */
     @ApiOperation(value = "team 생성 API", notes = "team을 생성합니다.")
     @PostMapping("/team")
-    public ResponseTemplate<Long> saveTeam(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody TeamRequestDto requestDto){
-        if(requestDto.getName()==null) return ResponseTemplate.of(EMPTY_TEAM_NAME);
-
-        Long result = teamService.save(requestDto, userDetails.getEmail());
-        return ResponseTemplate.valueOf(result);
+    public ResponseTemplate<Void> saveTeam(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody TeamRequestDto requestDto){
+        teamService.TeamSave(requestDto,userDetails);
+        return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
     }
 
     /**

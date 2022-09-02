@@ -1,11 +1,8 @@
 package com.projectmatching.app.service.team;
 
 import com.projectmatching.app.config.resTemplate.ResponeException;
-import com.projectmatching.app.domain.comment.entity.TeamComment;
-import com.projectmatching.app.domain.liking.entity.TeamCommentLiking;
 import com.projectmatching.app.domain.liking.entity.TeamLiking;
 import com.projectmatching.app.domain.liking.repository.TeamLikingRepository;
-import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
 import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
 import com.projectmatching.app.domain.team.dto.TeamResponseDto;
@@ -14,25 +11,22 @@ import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.team.repository.TeamRepository;
 import com.projectmatching.app.domain.team.repository.TeamTechRepository;
 import com.projectmatching.app.domain.techStack.TechStackRepository;
-import com.projectmatching.app.domain.techStack.entity.TechCode;
+import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.UserTeamRepository;
-import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
 import static org.springframework.beans.BeanUtils.copyProperties;
@@ -48,32 +42,25 @@ public class TeamService {
     private final UserRepository userRepository;
     private final UserTeamRepository userTeamRepository;
     private final TeamLikingRepository teamLikingRepository;
+    private final TechStackRepository techStackRepository;
 
     //팀 게시글 저장
-    public Long save(TeamRequestDto requestDto, String email) throws ResponeException {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
-        try {
-            Team team = Team.builder()
-                    .name(requestDto.getName())
-                    .session(requestDto.getSession())
-                    .content(requestDto.getContent())
-                    .read(0L)
-                    .build();
+    public void TeamSave(TeamRequestDto requestDto, UserDetailsImpl userDetails) throws ResponeException {
+        User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
+        Team team = Team.valueOf(requestDto,user);
+        addTeamTechByTeamRequest(requestDto,team);
 
-            Long teamId = teamRepository.save(team).getId();
+    }
 
-            //TODO : REFACTORING
-            List<Integer> techs = requestDto.getSkills();
-
-            List<TechCode> techStacks = techStackProvider.extractTechCodeByKeys(techs);
-
-
-
-            return teamId;
-
-        }catch (Exception e){
-            throw new ResponeException(SAVE_TEAM_ERROR);
-        }
+    private void addTeamTechByTeamRequest(TeamRequestDto teamRequestDto,Team team){
+        techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
+                .stream()
+                .map(techCode -> TechStack.of(techCode))
+                .map(techStack ->{
+                            techStackRepository.save(techStack);
+                            return TeamTech.of(techStack,team);
+                        }
+                ).forEach(teamTech -> teamTechRepository.save(teamTech));
     }
 
     //팀 게시글 조회
