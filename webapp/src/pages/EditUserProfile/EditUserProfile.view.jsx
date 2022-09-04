@@ -52,10 +52,18 @@ export default function EditUserProfileView({
   const isNicknameValidateError = isTargetSatisfyValidate('nickname');
   const isSloganValidateError = isTargetSatisfyValidate('slogan');
 
-  // FIXME: 로직 수정하기 (아래 조건 모두 만족할 때만 활성화)
+  const canActivateNicknameDuplicateButton = isNickNameSameWithOrigin;
+
   // 원래 닉네임과 닉네임 인풋 값이 같을 때, 원래 닉네임과 닉네임 인풋 값이 다른데 중복도 아닐 때,모든 인풋값에 대한 validation 만족,
-  const canActiveSubmitButton =
-    isNickNameSameWithOrigin && isNicknameDuplicate && satisfyAllValidates;
+  const canActiveSubmitButton = () => {
+    if (isNickNameSameWithOrigin) {
+      return !satisfyAllValidates;
+    }
+    if (isNicknameDuplicate) {
+      return true;
+    }
+    return !satisfyAllValidates;
+  };
 
   return (
     <S.PostContainer>
@@ -109,7 +117,7 @@ export default function EditUserProfileView({
               htmlFor="checkDuplicateNickname"
               theme="secondary"
               customStyle={S.DuplicateCheckButton}
-              disabled={isNicknameValidateError}
+              disabled={canActivateNicknameDuplicateButton}
               onClick={onClickCheckDuplicateNickname}
             >
               중복확인
@@ -183,7 +191,7 @@ export default function EditUserProfileView({
           theme="primary"
           type="submit"
           form="editUserProfileForm"
-          disabled={canActiveSubmitButton}
+          disabled={canActiveSubmitButton()}
           customStyle={S.SubmitButton}
         >
           저장
