@@ -38,8 +38,7 @@ public class TechStack {
     @Builder.Default
     private Set<TeamTech> teamTechs = new HashSet<>();
 
-    @OneToMany
-    @JoinColumn(name = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserTech> userTechs = new HashSet<>();

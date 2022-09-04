@@ -44,11 +44,12 @@ public class TeamService {
     private final TechStackRepository techStackRepository;
 
     //팀 게시글 저장
+    @Transactional
     public void TeamSave(TeamRequestDto requestDto, UserDetailsImpl userDetails) throws ResponeException {
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
         Team team = Team.valueOf(requestDto,user);
-        addTeamTechByTeamRequest(requestDto,team);
         teamRepository.save(team);
+        addTeamTechByTeamRequest(requestDto,team);
 
     }
 
@@ -56,9 +57,7 @@ public class TeamService {
         techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
                 .stream()
                 .map(techCode -> TechStack.of(techCode))
-                .map(techStack ->{
-                            return TeamTech.of(techStack,team);
-                        }
+                .map(techStack -> TeamTech.of(techStack,team)
                 ).forEach(teamTech -> team.getTeamTeches().add(teamTech));
     }
 

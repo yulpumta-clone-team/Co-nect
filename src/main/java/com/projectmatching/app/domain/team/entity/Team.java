@@ -41,8 +41,8 @@ public class Team extends BaseTimeEntity {
     @Column
     private String session;
 
-    @Column(name = "read")
-    private Long read;
+    @Column(name = "readCnt")
+    private Long readCnt;
 
     @Column(columnDefinition = "TEXT")
     private String content;
