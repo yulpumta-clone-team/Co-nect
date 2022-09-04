@@ -6,29 +6,35 @@ import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import useForm from 'hooks/useForm';
-import { teamDetailType } from 'types/team.type';
 import useAxios from 'hooks/useAxios';
 import teamApi from 'api/team.api';
 import useFileUploader from 'hooks/useFileUploader';
+import { ROUTE } from 'constant/route.constant';
+import { useNavigate } from 'react-router-dom';
+import { newTeamPostType } from 'types/team.type';
 import NewTeamPostView from './NewTeamPost.view';
-import { newTeamPostParser } from 'service/team.parser';
 
-NewTeamPostDetail.propTypes = {
-  targetUser: teamDetailType,
-};
+NewTeamPostDetail.propTypes = { targetNewTeamPost: newTeamPostType };
 
 export default function NewTeamPostDetail({ targetNewTeamPost }) {
+  const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
 
   const parsedTargetNewTeamPost = newTeamPostParser(targetNewTeamPost);
-  const { name, session, skills, content, slogan } = parsedTargetNewTeamPost;
-
+  const { name, profileImage, techSkills, slogan, hopeSession, introduction } =
+    parsedTargetNewTeamPost;
   const parsedSkillStack = skillStackParser(techSkills);
 
-  const [state, execution] = useAxios({ axiosInstance: teamApi.POST_TEAM_POST, immediate: false });
+  const [state, execution] = useAxios({
+    axiosInstance: teamApi.POST_TEAM_POST,
+    immediate: false,
+  });
 
   // s3 이미지 업로더 api hooks
-  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();
+  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader({
+    notifyNewMessage,
+    notifyDispatch,
+  });
 
   const uploadImageFileBeforeSubmit = async (submitData) => {
     const response = await uploadFileOnS3();
@@ -53,14 +59,15 @@ export default function NewTeamPostDetail({ targetNewTeamPost }) {
     onChangeHandler,
     onChangeHandlerWithSelect,
     submitHandler,
+    satisfyAllValidates,
     isTargetSatisfyValidate,
   } = useForm({
     initialValues: {
       name,
-      profileImage,
       techSkills: parsedSkillStack,
-      slogan,
+      profileImage,
       hopeSession,
+      slogan,
       introduction,
     },
     submitCallback,
@@ -76,6 +83,7 @@ export default function NewTeamPostDetail({ targetNewTeamPost }) {
       onChangeHandlerWithSelect={onChangeHandlerWithSelect}
       submitHandler={submitHandler}
       validateError={validateError}
+      satisfyAllValidates={satisfyAllValidates}
       isTargetSatisfyValidate={isTargetSatisfyValidate}
       profileImageSrc={profileImageSrc}
       onChangeFile={onChangeFile}

@@ -25,8 +25,18 @@ const teamDetailTypeSchema = {
   likeCnt: PropTypes.number.isRequired,
 };
 
+const newTeamPostSchema = {
+  img: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  session: PropTypes.string.isRequired,
+  skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+  slogan: PropTypes.string.isRequired,
+};
+
 export const teamType = shape(teamSchema);
 
 export const teamCardType = shape(teamCardTypeSchema);
 
 export const teamDetailType = shape(teamDetailTypeSchema);
+
+export const newTeamPostType = shape(newTeamPostSchema);

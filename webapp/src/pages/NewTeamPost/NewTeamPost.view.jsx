@@ -18,6 +18,7 @@ NewTeamPostView.propTypes = {
   isTargetSatisfyValidate: PropTypes.func.isRequired,
   profileImageSrc: PropTypes.string,
   onChangeFile: PropTypes.func.isRequired,
+  satisfyAllValidates: PropTypes.bool.isRequired,
 };
 export default function NewTeamPostView({
   inputValues,
@@ -28,6 +29,7 @@ export default function NewTeamPostView({
   isTargetSatisfyValidate,
   profileImageSrc,
   onChangeFile,
+  satisfyAllValidates,
 }) {
   const inputFileRef = useRef();
 
@@ -40,6 +42,7 @@ export default function NewTeamPostView({
   const isTeamNameValidateError = isTargetSatisfyValidate('teamName');
   const isSloganValidateError = isTargetSatisfyValidate('slogan');
 
+  const canActivateSubmitButton = !satisfyAllValidates;
   return (
     <S.PostContainer>
       <S.Form onSubmit={submitHandler} id="newTeamPostForm">
@@ -121,7 +124,13 @@ export default function NewTeamPostView({
         </S.InfoContainer>
       </S.Form>
       <S.ButtonContainer>
-        <Button theme="primary" type="submit" form="newTeamPostForm" customStyle={S.SubmitButton}>
+        <Button
+          theme="primary"
+          type="submit"
+          form="newTeamPostForm"
+          disabled={canActivateSubmitButton}
+          customStyle={S.SubmitButton}
+        >
           저장
         </Button>
       </S.ButtonContainer>
