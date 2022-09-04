@@ -104,7 +104,10 @@ function App() {
           </Route>
           <Route path={ROUTE.SIGN_UP} element={<PublicRoute Component={SignUp} restricted />} />
           <Route path={ROUTE.MY_LIST} element={<PrivateRoute Component={MyList} />} />
-          <Route path={ROUTE.NEW_POST} element={<PrivateRoute Component={NewPost} />} />
+          <Route
+            path={ROUTE.NEW_POST}
+            element={<PrivateRoute Component={NewPost} restricted={false} />}
+          />
           <Route path={ROUTE.MY_POST} element={<PrivateRoute Component={MyPost} />} />
           <Route
             path={`${ROUTE.USER}/:userId`}
