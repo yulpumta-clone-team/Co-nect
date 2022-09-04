@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
@@ -17,4 +17,9 @@ export const PostContainer = styled.div`
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+`;
+
+export const CommentDivider = css`
+  width: 95%;
+  background-color: ${({ theme: { colors } }) => colors.primary.normal};
 `;
