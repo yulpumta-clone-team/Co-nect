@@ -12,7 +12,7 @@ import Callback from 'pages/Callback';
 import EditUserProfile from 'pages/EditUserProfile';
 import EditTeamProfile from 'pages/EditTeamPost';
 import MyList from 'pages/MyList';
-import NewPost from 'pages/NewTeamPost/NewTeamPost.view';
+import NewPost from 'pages/NewTeamPost';
 import MyPost from 'pages/MyPost';
 import NotFound from 'pages/NotFound';
 import EssentialInfo from 'pages/EssentialInfo';

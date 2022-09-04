@@ -11,19 +11,11 @@ import teamApi from 'api/team.api';
 import useFileUploader from 'hooks/useFileUploader';
 import { ROUTE } from 'constant/route.constant';
 import { useNavigate } from 'react-router-dom';
-import { newTeamPostType } from 'types/team.type';
 import NewTeamPostView from './NewTeamPost.view';
 
-NewTeamPostDetail.propTypes = { targetNewTeamPost: newTeamPostType };
-
-export default function NewTeamPostDetail({ targetNewTeamPost }) {
+export default function NewTeamPostDetail() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
-
-  const parsedTargetNewTeamPost = newTeamPostParser(targetNewTeamPost);
-  const { name, profileImage, techSkills, slogan, hopeSession, introduction } =
-    parsedTargetNewTeamPost;
-  const parsedSkillStack = skillStackParser(techSkills);
 
   const [state, execution] = useAxios({
     axiosInstance: teamApi.POST_TEAM_POST,
@@ -63,12 +55,12 @@ export default function NewTeamPostDetail({ targetNewTeamPost }) {
     isTargetSatisfyValidate,
   } = useForm({
     initialValues: {
-      name,
-      techSkills: parsedSkillStack,
-      profileImage,
-      hopeSession,
-      slogan,
-      introduction,
+      name: '',
+      techSkills: [],
+      profileImage: '',
+      hopeSession: '',
+      slogan: '',
+      introduction: '',
     },
     submitCallback,
     validate: newTeamPostValidation,
