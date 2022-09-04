@@ -39,4 +39,9 @@ public class UserTech {
         return userTech;
     }
 
+    public static TechStack toTechStack(UserTech userTech){
+        return userTech.getTechStack();
+    }
+
+
 }

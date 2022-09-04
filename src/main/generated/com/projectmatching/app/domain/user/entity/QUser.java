@@ -29,7 +29,7 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath email = createString("email");
 
-    public final StringPath hope_session = createString("hope_session");
+    public final StringPath hopeSession = createString("hopeSession");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
