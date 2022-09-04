@@ -68,15 +68,6 @@ public class UserService  {
     }
 
 
-    //유저 업데이트
-    @Transactional
-    public UserDto updateUser(UserDto NewUserDto) {
-        String userEmail = userDetails.getUsername();
-        UserDto DBUser =  Optional.ofNullable(userRepository.findByEmail(userEmail))
-              .map(u -> UserDto.of(u.get())).orElse(UserDto.createEmpty());
-        BeanUtils.copyProperties(NewUserDto,DBUser);
-       return UserDto.of(userRepository.save(DBUser.asEntity()));
-    }
 
     //유저 게시물 조회
     @Transactional(readOnly = true)
@@ -108,33 +99,6 @@ public class UserService  {
     }
 
 
-    //게시물 등록, 프로필 생성하기
-    @Transactional
-    public void postingUserProfile(PostUserProfileDto postUserProfileDto, UserDetailsImpl userDetails) {
-        //TODO 이부분 수정 필요, 현재 안쓰임
-        UserProfileDto userProfileDto = UserProfileDto.builder()
-                .name(userDetails.getUserRealName())
-                .image(postUserProfileDto.getImg())
-                .skills(postUserProfileDto.getSkills())
-                .job(postUserProfileDto.getJob())
-                .build();
-
-        if(userRepository.existsByName(userProfileDto.getName())) updateUserPosting(postUserProfileDto,userDetails);
-        else userRepository.save(userProfileDto.asEntity());
-
-    }
-
-    //게시물 수정
-    @Transactional
-    public UserDto updateUserPosting(PostUserProfileDto postUserProfileDto, UserDetailsImpl userDetails) {
-        if(!userRepository.existsByName(userDetails.getUserRealName()))throw new ResponeException(LOGICAL_ERROR); //등록하지 않은것을 수정 불가
-        else{
-            User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
-            BeanUtils.copyProperties(postUserProfileDto,user);
-            return UserDto.of(user);
-        }
-
-    }
 
 
     // 내가 좋아요한 유저 목록 가져오기
