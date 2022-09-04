@@ -14,6 +14,7 @@ const useCheckNicknameDuplicate = (initValue) => {
   const onChangeCheckNicknameDuplicate = (event) => {
     const updateNickname = event.target.value;
     setNickname(updateNickname);
+    setIsNicknameDuplicate(true);
   };
 
   const onClickCheckDuplicateNickname = async () => {

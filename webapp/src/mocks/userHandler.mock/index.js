@@ -67,7 +67,7 @@ const userHandler = [
     // return res(ctx.status(403), ctx.json(getResonseWithData(errorResponse)));
   }),
   // 유저 정보 수정 요청
-  rest.post(`${ROOT_API_URL + API.USER.INDEX}/:id`, (req, res, ctx) => {
+  rest.post(`${ROOT_API_URL + API.USER.ESSENTIAL_INFO}/:id`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getResonseWithData(userDetail)));
     // return res(ctx.status(403), ctx.json(errorResponse));
   }),
