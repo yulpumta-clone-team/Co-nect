@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as addImg } from 'assets/icons/add-img.svg';
+import { ReactComponent as addImgIcon } from 'assets/icons/add-img.svg';
 import { ReactComponent as editIcon } from 'assets/icons/edit.svg';
 
 export const ImgContainer = styled.div`
@@ -47,7 +47,7 @@ export const InputTypeImageHandler = styled.label`
 export const HiddenInputHandler = styled.input`
   display: none;
 `;
-export const AddImage = styled(addImg)`
+export const AddImage = styled(addImgIcon)`
   width: 50px;
   height: 50px;
 `;
