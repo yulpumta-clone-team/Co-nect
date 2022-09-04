@@ -6,7 +6,7 @@ import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.common.Paging;
 import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
-import com.projectmatching.app.domain.team.dto.TeamResponseDto;
+import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.service.team.TeamService;
 import com.projectmatching.app.service.user.Impl.UserService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
@@ -47,7 +47,7 @@ public class TeamController {
      */
     @ApiOperation(value = "team 카드 조회 API", notes = "팀 리스트를 조회합니다.")
     @GetMapping("/team")
-    public ResponseTemplate<List<TeamResponseDto>> getTeams(@RequestParam(name="lastPage") int page){
+    public ResponseTemplate<List<Team>> getTeams(@RequestParam(name="lastPage") int page){
         Paging paging = new Paging(page,PAGING_SIZE);
         return ResponseTemplate.valueOf(teamService.getTeams(paging));
     }
@@ -106,9 +106,9 @@ public class TeamController {
     /**
      * 내가 좋아요 한 팀 목록
      */
-    @ApiOperation(value = "내가 좋아요한 팀 목록")
-    @GetMapping("team/favorite")
-    public ResponseTemplate<List<TeamResponseDto>> getMyFavoriteTeam(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        return ResponseTemplate.valueOf(teamService.getTeamLikingList(userDetails));
-    }
+//    @ApiOperation(value = "내가 좋아요한 팀 목록")
+//    @GetMapping("team/favorite")
+//    public ResponseTemplate<List<Team>> getMyFavoriteTeam(@AuthenticationPrincipal UserDetailsImpl userDetails){
+//        return ResponseTemplate.valueOf(teamService.getTeamLikingList(userDetails));
+//    }
 }

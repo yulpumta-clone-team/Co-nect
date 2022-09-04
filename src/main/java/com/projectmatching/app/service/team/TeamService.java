@@ -5,7 +5,6 @@ import com.projectmatching.app.domain.liking.entity.TeamLiking;
 import com.projectmatching.app.domain.liking.repository.TeamLikingRepository;
 import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
-import com.projectmatching.app.domain.team.dto.TeamResponseDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.team.repository.TeamRepository;
@@ -47,13 +46,13 @@ public class TeamService {
     //팀 게시글 저장
     public void TeamSave(TeamRequestDto requestDto, UserDetailsImpl userDetails) throws ResponeException {
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
-        Team team = Team.valueOf(requestDto,user);
+        com.projectmatching.app.domain.team.entity.Team team = com.projectmatching.app.domain.team.entity.Team.valueOf(requestDto,user);
         addTeamTechByTeamRequest(requestDto,team);
         teamRepository.save(team);
 
     }
 
-    private void addTeamTechByTeamRequest(TeamRequestDto teamRequestDto,Team team){
+    private void addTeamTechByTeamRequest(TeamRequestDto teamRequestDto, com.projectmatching.app.domain.team.entity.Team team){
         techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
                 .stream()
                 .map(techCode -> TechStack.of(techCode))
@@ -64,36 +63,18 @@ public class TeamService {
                 ).forEach(teamTech -> teamTechRepository.save(teamTech));
     }
 
+
     //팀 게시글 조회
-    public List<TeamResponseDto> getTeams(PageRequest pageRequest) throws ResponeException {
+    public List<Team> getTeams(PageRequest pageRequest) throws ResponeException {
 
-        try {
-            List<Team> teams = teamRepository.getTeams(pageRequest);
-            List<TeamResponseDto> responseDtos = new ArrayList<>();
+        List<Team> teams = teamRepository.getTeams(pageRequest);
+        return teams;
 
-            for(Team team : teams){
-                TeamResponseDto teamResponseDto = new TeamResponseDto();
-                copyProperties(team, teamResponseDto);
-                teamResponseDto.setUser(findTeamUser(team));
-                teamResponseDto.setSkills(findTeamTech(team));
-                teamResponseDto.setCommentCnt(team.getTeamComments().size());
-                teamResponseDto.setLikeCnt(team.getTeamLikings().size());
-
-
-                responseDtos.add(teamResponseDto);
-            }
-
-            return entityToDtoList(teams);
-
-
-        }catch (Exception e){
-            throw new ResponeException(GET_TEAMS_ERROR);
-        }
     }
 
     //팀 게시글 상세조회
     public TeamDetailResponseDto getTeam(Long teamId) throws ResponeException {
-        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+        com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
         try{
             TeamDetailResponseDto teamDetailResponseDto = new TeamDetailResponseDto();
             copyProperties(team, teamDetailResponseDto);
@@ -113,7 +94,7 @@ public class TeamService {
     //팀 게시글 삭제
     public void delete(Long teamId, String email) throws ResponeException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
-        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+        com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
 
         if(checkTeamUser(team, user)==false) throw new ResponeException(PERMISSION_DENIED);
 
@@ -126,7 +107,7 @@ public class TeamService {
 
     //팀 게시글 수정
     public void update(Long teamId, TeamRequestDto teamRequestDto, String email) throws ResponeException {
-        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+        com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
 
         if(checkTeamUser(team, user)==false) throw new ResponeException(PERMISSION_DENIED);
@@ -155,7 +136,7 @@ public class TeamService {
     public void doTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException {
         try {
             User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
-            Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
+            com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
 
             TeamLiking teamLiking = TeamLiking.builder()
                     .id(IdGenerator.number())
@@ -173,7 +154,7 @@ public class TeamService {
     public void cancelTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException{
         try{
             User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
-            Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
+            com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
             TeamLiking teamLiking = teamLikingRepository.findByUser_IdAndTeam_Id(user.getId(), team.getId()).orElseThrow(NullPointerException::new);
 
             teamLikingRepository.delete(teamLiking);
@@ -182,33 +163,33 @@ public class TeamService {
         }
     }
 
-    //좋아요한 팀 게시글 목록 조회
-    public List<TeamResponseDto> getTeamLikingList(UserDetailsImpl userDetails){
-        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+//    //좋아요한 팀 게시글 목록 조회
+//    public List<Team> getTeamLikingList(UserDetailsImpl userDetails){
+//        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+//
+//        List<TeamLiking> teamLikings = teamLikingRepository.findTeamLikingByUser_Id(user.getId());
+//        List<com.projectmatching.app.domain.team.entity.Team> teams = teamLikings.stream().map(t -> teamRepository.findById(t.getTeam().getId()).orElseThrow(RuntimeException::new)).collect(Collectors.toList());
+//
+//        return entityToDtoList(teams);
+//    }
+//
+//    public List<Team> entityToDtoList(List<com.projectmatching.app.domain.team.entity.Team> teams){
+//        List<Team> responseDto = new ArrayList<>();
+//
+//        for(com.projectmatching.app.domain.team.entity.Team team : teams){
+//            Team teamResponseDto = new Team();
+//            copyProperties(team, teamResponseDto);
+//            teamResponseDto.setUser(findTeamUser(team));
+//            teamResponseDto.setSkills(findTeamTech(team));
+//            teamResponseDto.setCommentCnt(team.getTeamComments().size());
+//            teamResponseDto.setLikeCnt(team.getTeamLikings().size());
+//            responseDto.add(teamResponseDto);
+//        }
+//        return responseDto;
+//    }
 
-        List<TeamLiking> teamLikings = teamLikingRepository.findTeamLikingByUser_Id(user.getId());
-        List<Team> teams = teamLikings.stream().map(t -> teamRepository.findById(t.getTeam().getId()).orElseThrow(RuntimeException::new)).collect(Collectors.toList());
 
-        return entityToDtoList(teams);
-    }
-
-    public List<TeamResponseDto> entityToDtoList(List<Team> teams){
-        List<TeamResponseDto> responseDto = new ArrayList<>();
-
-        for(Team team : teams){
-            TeamResponseDto teamResponseDto = new TeamResponseDto();
-            copyProperties(team, teamResponseDto);
-            teamResponseDto.setUser(findTeamUser(team));
-            teamResponseDto.setSkills(findTeamTech(team));
-            teamResponseDto.setCommentCnt(team.getTeamComments().size());
-            teamResponseDto.setLikeCnt(team.getTeamLikings().size());
-            responseDto.add(teamResponseDto);
-        }
-        return responseDto;
-    }
-
-
-    public UserInfo findTeamUser(Team team){
+    public UserInfo findTeamUser(com.projectmatching.app.domain.team.entity.Team team){
         List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
         if(userTeamList.size() != 0) {
             UserTeam findUser = userTeamList.get(0);
@@ -217,7 +198,7 @@ public class TeamService {
         else return null;
     }
 
-    public List<String> findTeamTech(Team team){
+    public List<String> findTeamTech(com.projectmatching.app.domain.team.entity.Team team){
         Set<TeamTech> teamTechSet = team.getTeamTeches();
 //        List<String> findTeamTech = new ArrayList<>();
 //        for (TeamTech tech : teamTechSet){
@@ -229,7 +210,7 @@ public class TeamService {
 
 
 
-    public boolean checkTeamUser(Team team, User user){
+    public boolean checkTeamUser(com.projectmatching.app.domain.team.entity.Team team, User user){
         List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
         boolean find = false;
         for(UserTeam userTeam : userTeamList){

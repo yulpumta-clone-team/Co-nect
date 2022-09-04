@@ -1,6 +1,5 @@
 package com.projectmatching.app.domain.team.repository;
 
-import com.projectmatching.app.domain.team.dto.TeamResponseDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import org.springframework.data.domain.PageRequest;
 
