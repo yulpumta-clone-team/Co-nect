@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import teamApi from 'api/team.api';
 import WithLoading from 'hoc/WithLoading';
 import TeamPostDetail from './TeamPostDetail';
+import * as S from './style';
 
 export default function TeamPost() {
   const { teamId: stringTeamId } = useParams();
@@ -21,9 +22,9 @@ export default function TeamPost() {
   });
 
   return (
-    <div>
+    <S.Container>
       <button onClick={onClickback}>back</button>
       <UserPostDetailWithLoading />
-    </div>
+    </S.Container>
   );
 }

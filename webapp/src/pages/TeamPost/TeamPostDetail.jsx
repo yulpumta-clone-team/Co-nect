@@ -10,7 +10,7 @@ export default function TeamPostDetail({ targetTeam }) {
   const { id, name, content, session, img, read, skills, commentCnt, likeCnt, user } = targetTeam;
 
   return (
-    <S.Container>
+    <S.PostContainer>
       <img src={img} alt="게시글" />
       <MarkdownEditor onlyViewer content={content} />
       <div>
@@ -18,6 +18,6 @@ export default function TeamPostDetail({ targetTeam }) {
       </div>
       <div>좋아요 개수 : {likeCnt}</div>
       <CommentContainer postType={POST_TYPE.TEAM} postWriter={user.name} postId={id} />
-    </S.Container>
+    </S.PostContainer>
   );
 }
