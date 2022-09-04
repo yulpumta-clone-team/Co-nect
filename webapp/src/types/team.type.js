@@ -10,6 +10,7 @@ const teamSchema = {
   skills: PropTypes.arrayOf(PropTypes.string).isRequired,
   status: PropTypes.string.isRequired,
   user: userDetailType.isRequired, // 작성자 정보
+  slogan: PropTypes.string.isRequired,
 };
 
 const teamCardTypeSchema = {
