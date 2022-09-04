@@ -48,7 +48,7 @@ export const userEditParser = (targetUserInfo) => {
   const profileImage = targetUserInfo.img || '';
   const slogan = targetUserInfo.slogan || '';
   const hopeSession = targetUserInfo.hopeSession || '';
-  const job = targetUserInfo.job || '';
+  const job = targetUserInfo.job || jobOptions[0].value;
   const belongTeam = targetUserInfo.status
     ? belongTeamOptions[0].value
     : belongTeamOptions[1].value;
@@ -81,11 +81,12 @@ export const userPostEditParser = (userInfoRawData) => {
     techSkills,
     belongTeam,
   } = userInfoRawData;
+  console.log('userInfoRawData', userInfoRawData);
   const paresedTechSkills = skillStackParserToIds(techSkills);
   return {
-    content: introduction,
+    description: introduction,
     hope_session: hopeSession,
-    image: profileImage,
+    img: profileImage,
     job,
     name: nickname,
     portfolio,

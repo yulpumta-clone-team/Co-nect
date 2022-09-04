@@ -33,7 +33,6 @@ export default function EditUserProfileDetail({ targetUser }) {
     introduction,
     portfolio,
   } = parsedTargerUserInfo;
-
   const parsedSkillStack = skillStackParser(techSkills);
 
   const {
@@ -50,10 +49,7 @@ export default function EditUserProfileDetail({ targetUser }) {
   });
 
   // s3 이미지 업로더 api hooks
-  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader({
-    notifyNewMessage,
-    notifyDispatch,
-  });
+  const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();
 
   const uploadImageFileBeforeSubmit = async (submitData) => {
     const response = await uploadFileOnS3();
@@ -97,6 +93,8 @@ export default function EditUserProfileDetail({ targetUser }) {
     validate: editUserValidation,
   });
 
+  const profileImageSrc = inputValues.profileImage || (imageFile && URL.createObjectURL(imageFile));
+
   return (
     <EditUserProfileView
       inputValues={inputValues}
@@ -110,7 +108,7 @@ export default function EditUserProfileDetail({ targetUser }) {
       isNickNameSameWithOrigin={isNickNameSameWithOrigin}
       onChangeCheckNicknameDuplicate={onChangeCheckNicknameDuplicate}
       onClickCheckDuplicateNickname={onClickCheckDuplicateNickname}
-      imageFile={imageFile}
+      profileImageSrc={profileImageSrc}
       onChangeFile={onChangeFile}
     />
   );

@@ -3,6 +3,7 @@ export const skillStackParser = (techSkills) => {
     return [];
   }
   return techSkills
+    .filter((arr, index, callback) => index === callback.findIndex((t) => t.key === arr.key))
     .map(({ key, category, techName, image }) => ({
       label: techName,
       value: techName,
