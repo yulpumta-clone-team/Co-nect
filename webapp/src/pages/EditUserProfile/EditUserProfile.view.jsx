@@ -54,13 +54,15 @@ export default function EditUserProfileView({
 
   const canActivateNicknameDuplicateButton = isNickNameSameWithOrigin;
 
-  // 원래 닉네임과 닉네임 인풋 값이 같을 때, 원래 닉네임과 닉네임 인풋 값이 다른데 중복도 아닐 때,모든 인풋값에 대한 validation 만족,
+  //  원래 닉네임과 닉네임 인풋 값이 다른데 중복도 아닐 때,모든 인풋값에 대한 validation 만족,
   const canActiveSubmitButton = () => {
+    // 원래 닉네임과 닉네임 인풋 값이 같을 때는 모든 인풋값에 대한 validation만 체크
     if (isNickNameSameWithOrigin) {
       return !satisfyAllValidates;
     }
+    // 원랙 닉네임과 닉네임 인풋이 다를 때는 중복 체크 및 모든 인풋값에 대한 validation만 체크
     if (isNicknameDuplicate) {
-      return true;
+      return true || !satisfyAllValidates;
     }
     return !satisfyAllValidates;
   };
