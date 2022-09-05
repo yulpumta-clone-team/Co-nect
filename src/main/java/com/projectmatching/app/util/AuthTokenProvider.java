@@ -38,7 +38,6 @@ import static com.projectmatching.app.constant.JwtConstant.*;
 @Getter @Setter
 public class AuthTokenProvider {
 
-
     private static Key key;
     private String secretKey = Secret.JWT_SECRET_KEY;
 
@@ -66,9 +65,9 @@ public class AuthTokenProvider {
         Claims claims = Jwts.claims();
         claims.put(CLAIM_ROLE, Role.USER); // 정보는 key / value 쌍으로 저장된다.
         claims.put(CLAIM_EMAIL,user.getEmail());
-        claims.put(CLAIM_NAME,user.getName());
+        claims.put(CLAIM_NAME,user.getUserInfo().getName());
         claims.put(CLAIM_ID,user.getId());
-        claims.put(CLAIM_IMG,user.getImg());
+        claims.put(CLAIM_IMG,user.getUserInfo().getImage());
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장
