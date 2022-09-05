@@ -64,7 +64,6 @@ public class TeamService {
 
     //팀 게시글 조회
     public List<Team> getTeams(PageRequest pageRequest) throws ResponeException {
-
         List<Team> teams = teamRepository.getTeams(pageRequest);
         return teams;
 
@@ -72,20 +71,18 @@ public class TeamService {
 
     //팀 게시글 상세조회
     public TeamDetailResponseDto getTeam(Long teamId) throws ResponeException {
-        com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
-        try{
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+
             TeamDetailResponseDto teamDetailResponseDto = new TeamDetailResponseDto();
             copyProperties(team, teamDetailResponseDto);
             teamDetailResponseDto.setUser(findTeamUser(team));
-//            teamDetailResponseDto.setSkills(findTeamTech(team));
+    //            teamDetailResponseDto.setSkills(findTeamTech(team));
             teamDetailResponseDto.setCommentCnt(team.getTeamComments().size());
             teamDetailResponseDto.setLikeCnt(team.getTeamLikings().size());
 
 
             return teamDetailResponseDto;
-        }catch (Exception e){
-            throw new ResponeException(GET_TEAM_ERROR);
-        }
+
     }
 
 
