@@ -1,463 +1,1722 @@
-import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
-
 export const teamsList = [
   {
     id: 1,
-    user: {
-      id: 123,
-      oauthId: 'asdf',
-      email: 'tem@naver.com',
-      name: 'connect',
-      portfolio: 'portfolio link',
-      slogan: 'slogan string',
-      content: 'user content',
-      img: 'img url',
-      hopeSession: '3개월',
-      job: '학생',
-      skills: ['javascript', 'java'],
-      status: '모집완료',
-      commentCnt: 3,
-      likeCnt: 3,
-    },
-    name: 'epett0',
-    session: '3개월',
-    img: '',
-    read: 90,
-    commentCnt: 59,
-    likeCnt: 87,
-    skills: ['javascript'],
-    status: '모집중',
+    name: 'Lotstring',
+    commentCnt: 74,
+    likeCnt: 51,
+    read: 22,
+    session: '6개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: { id: 1, image: 'http://dummyimage.com/131x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
   {
     id: 2,
+    name: 'Alpha',
+    commentCnt: 16,
+    likeCnt: 42,
+    read: 3,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
     user: {
-      id: 123,
-      oauthId: 'asdf',
-      email: 'tem@naver.com',
-      name: 'connect',
-      portfolio: 'portfolio link',
-      slogan: 'slogan string',
-      content: 'user content',
-      img: 'img url',
-      hopeSession: '3개월',
-      job: '학생',
-      skills: ['javascript', 'java'],
-      status: '모집완료',
-      commentCnt: 3,
-      likeCnt: 3,
+      id: 2,
+      image: 'http://dummyimage.com/169x100.png/5fa2dd/ffffff',
+      name: 'NASDAQ',
     },
-    name: 'hehrat1',
-    session: '3개월',
-    img: '127e1101-87c4-464b-a6f9-55965e36f61f',
-    read: 49,
-    commentCnt: 73,
-    likeCnt: 43,
-    skills: ['javascript'],
-    status: '모집중',
   },
   {
     id: 3,
-    user: {
-      id: 123,
-      oauthId: 'asdf',
-      email: 'tem@naver.com',
-      name: 'connect',
-      portfolio: 'portfolio link',
-      slogan: 'slogan string',
-      content: 'user content',
-      img: 'img url',
-      hopeSession: '3개월',
-      job: '학생',
-      skills: ['javascript', 'java'],
-      status: '모집완료',
-      commentCnt: 3,
-      likeCnt: 3,
-    },
-    name: 'phoneywood2',
+    name: 'Bamity',
+    commentCnt: 37,
+    likeCnt: 18,
+    read: 87,
     session: '3개월',
-    img: '7ce0da50-dc4d-47c8-8ea2-6565ec151bb0',
-    read: 2,
-    commentCnt: 95,
-    likeCnt: 16,
-    skills: ['javascript'],
-    status: '모집중',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: { id: 3, image: 'http://dummyimage.com/146x100.png/cc0000/ffffff', name: 'NYSE' },
   },
   {
     id: 4,
+    name: 'Pannier',
+    commentCnt: 99,
+    likeCnt: 23,
+    read: 7,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
     user: {
-      id: 123,
-      oauthId: 'asdf',
-      email: 'tem@naver.com',
-      name: 'connect',
-      portfolio: 'portfolio link',
-      slogan: 'slogan string',
-      content: 'user content',
-      img: 'img url',
-      hopeSession: '3개월',
-      job: '학생',
-      skills: ['javascript', 'java'],
-      status: '모집완료',
-      commentCnt: 3,
-      likeCnt: 3,
+      id: 4,
+      image: 'http://dummyimage.com/210x100.png/cc0000/ffffff',
+      name: 'NASDAQ',
     },
-    name: 'tclapson3',
-    session: '6개월',
-    img: 'f0f78cff-3a34-4be0-8419-12d6958f2bc4',
-    read: 58,
-    commentCnt: 72,
-    likeCnt: 55,
-    skills: ['javascript'],
-    status: '모집완료',
   },
   {
     id: 5,
-    user: {
-      id: 123,
-      oauthId: 'asdf',
-      email: 'tem@naver.com',
-      name: 'connect',
-      portfolio: 'portfolio link',
-      slogan: 'slogan string',
-      content: 'user content',
-      img: 'img url',
-      hopeSession: '3개월',
-      job: '학생',
-      skills: ['javascript', 'java'],
-      status: '모집완료',
-      commentCnt: 3,
-      likeCnt: 3,
-    },
-    name: 'tdilworth4',
-    session: '3개월',
-    img: '8d0bf037-8bb5-4a8c-883e-b9bdf651e31d',
-    read: 46,
-    commentCnt: 3,
-    likeCnt: 66,
-    skills: ['javascript'],
-    status: '모집완료',
+    name: 'Zathin',
+    commentCnt: 77,
+    likeCnt: 17,
+    read: 67,
+    session: '6개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 5, image: 'http://dummyimage.com/132x100.png/ff4444/ffffff', name: 'NYSE' },
   },
-  // {
-  //   id: 6,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'bheadan5',
-  //   session: '6개월',
-  //   img: 'e1f3266e-c4c7-4da4-8c25-c7d677f9d66c',
-  //   read: 23,
-  //   commentCnt: 77,
-  //   likeCnt: 22,
-  //   skills: [201],
-  //   status: 모집중,
-  // },
-  // {
-  //   id: 7,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'fgawkroge6',
-  //   session: '1개월',
-  //   img: 'e6327109-10bf-4b1a-8756-db2f60b60bdf',
-  //   read: 30,
-  //   commentCnt: 91,
-  //   likeCnt: 26,
-  //   skills: [101],
-  //   status: 모집중,
-  // },
-  // {
-  //   id: 8,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'ddrynan7',
-  //   session: '6개월',
-  //   img: '06dce801-77bd-47ef-b4d2-5f8c8005604f',
-  //   read: 51,
-  //   commentCnt: 98,
-  //   likeCnt: 71,
-  //   skills: [103],
-  //   status: 모집중,
-  // },
-  // {
-  //   id: 9,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'dbull8',
-  //   session: '1개월',
-  //   img: 'b56a9109-a850-44b1-9f3a-6cd4fffde0e8',
-  //   read: 37,
-  //   commentCnt: 70,
-  //   likeCnt: 20,
-  //   skills: [201],
-  //   status: 모집중,
-  // },
-  // {
-  //   id: 10,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'cklehyn9',
-  //   session: '1개월',
-  //   img: '00d37196-6374-4229-b764-042fb9da05d5',
-  //   read: 42,
-  //   commentCnt: 80,
-  //   likeCnt: 35,
-  //   skills: [201],
-  //   status: 모집완료,
-  // },
-  // {
-  //   id: 11,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'adonaghiea',
-  //   session: '3개월',
-  //   img: 'f477fedf-81ef-47ce-829c-a8d576ba2f23',
-  //   read: 72,
-  //   commentCnt: 48,
-  //   likeCnt: 67,
-  //   skills: [202],
-  //   status: 모집완료,
-  // },
-  // {
-  //   id: 12,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'dberndtssonb',
-  //   session: '6개월',
-  //   img: '95039d56-8d77-4fa3-8996-f95ba835bd29',
-  //   read: 57,
-  //   commentCnt: 47,
-  //   likeCnt: 30,
-  //   skills: [202],
-  //   status: 모집완료,
-  // },
-  // {
-  //   id: 13,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'seklessc',
-  //   session: '1개월',
-  //   img: '6815dbbf-4fcc-4291-a49c-96ffa2d2ca01',
-  //   read: 57,
-  //   commentCnt: 25,
-  //   likeCnt: 39,
-  //   skills: [101],
-  //   status: 모집완료,
-  // },
-  // {
-  //   id: 14,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'hbeaversd',
-  //   session: '1개월',
-  //   img: '84e0b59d-4726-465d-8e45-9e5915bb9d42',
-  //   read: 2,
-  //   commentCnt: 12,
-  //   likeCnt: 67,
-  //   skills: [202],
-  //   status: 모집완료,
-  // },
-  // {
-  //   id: 15,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'dyushankine',
-  //   session: '6개월',
-  //   img: '3a8b280f-0422-4bcc-948f-d9a10541aea5',
-  //   read: 82,
-  //   commentCnt: 80,
-  //   likeCnt: 49,
-  //   skills: [103],
-  //   status: 모집완료,
-  // },
-  // {
-  //   id: 16,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'edraytonf',
-  //   session: '6개월',
-  //   img: 'e7263a39-1934-4ed8-bcc9-01eafbe31c0a',
-  //   read: 30,
-  //   commentCnt: 82,
-  //   likeCnt: 77,
-  //   skills: [202],
-  //   status: 모집중,
-  // },
-  // {
-  //   id: 17,
-  //   user: {
-  //     id: 123,
-  //     oauthId: 'asdf',
-  //     email: 'tem@naver.com',
-  //     name: 'connect',
-  //     portfolio: 'portfolio link',
-  //     slogan: 'slogan string',
-  //     content: 'user content',
-  //     img: 'img url',
-  //     hopeSession: '3개월',
-  //     job: '학생',
-  //     skills: [101, 202],
-  //     status: 모집완료,
-  //     commentCnt: 3,
-  //     likeCnt: 3,
-  //   },
-  //   name: 'gcocklandg',
-  //   session: '6개월',
-  //   img: '3776b987-0fe6-4730-bc74-426acc6618bc',
-  //   read: 96,
-  //   commentCnt: 67,
-  //   likeCnt: 7,
-  //   skills: [202],
-  //   status: 모집완료,
-  // },
+  {
+    id: 6,
+    name: 'Duobam',
+    commentCnt: 16,
+    likeCnt: 10,
+    read: 2,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: { id: 6, image: 'http://dummyimage.com/111x100.png/5fa2dd/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 7,
+    name: 'Tres-Zap',
+    commentCnt: 70,
+    likeCnt: 29,
+    read: 88,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 7, image: 'http://dummyimage.com/200x100.png/ff4444/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 8,
+    name: 'Fix San',
+    commentCnt: 99,
+    likeCnt: 32,
+    read: 64,
+    session: '6개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: { id: 8, image: 'http://dummyimage.com/179x100.png/ff4444/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 9,
+    name: 'Voltsillam',
+    commentCnt: 95,
+    likeCnt: 66,
+    read: 2,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: {
+      id: 9,
+      image: 'http://dummyimage.com/115x100.png/5fa2dd/ffffff',
+      name: 'NASDAQ',
+    },
+  },
+  {
+    id: 10,
+    name: 'Alpha',
+    commentCnt: 94,
+    likeCnt: 90,
+    read: 86,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: {
+      id: 10,
+      image: 'http://dummyimage.com/122x100.png/5fa2dd/ffffff',
+      name: 'NASDAQ',
+    },
+  },
+  {
+    id: 11,
+    name: 'Solarbreeze',
+    commentCnt: 93,
+    likeCnt: 28,
+    read: 33,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: {
+      id: 11,
+      image: 'http://dummyimage.com/105x100.png/ff4444/ffffff',
+      name: 'NASDAQ',
+    },
+  },
+  {
+    id: 12,
+    name: 'Voyatouch',
+    commentCnt: 21,
+    likeCnt: 77,
+    read: 43,
+    session: '6개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 12, image: 'http://dummyimage.com/177x100.png/5fa2dd/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 13,
+    name: 'Lotstring',
+    commentCnt: 20,
+    likeCnt: 60,
+    read: 8,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: { id: 13, image: 'http://dummyimage.com/224x100.png/ff4444/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 14,
+    name: 'Flowdesk',
+    commentCnt: 7,
+    likeCnt: 62,
+    read: 45,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 14, image: 'http://dummyimage.com/145x100.png/dddddd/000000', name: 'NYSE' },
+  },
+  {
+    id: 15,
+    name: 'Konklab',
+    commentCnt: 69,
+    likeCnt: 7,
+    read: 15,
+    session: '6개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 15, image: 'http://dummyimage.com/177x100.png/cc0000/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 16,
+    name: 'Rank',
+    commentCnt: 14,
+    likeCnt: 83,
+    read: 44,
+    session: '6개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: { id: 16, image: 'http://dummyimage.com/127x100.png/dddddd/000000', name: 'NYSE' },
+  },
+  {
+    id: 17,
+    name: 'Span',
+    commentCnt: 73,
+    likeCnt: 24,
+    read: 3,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: {
+      id: 17,
+      image: 'http://dummyimage.com/188x100.png/cc0000/ffffff',
+      name: 'NASDAQ',
+    },
+  },
+  {
+    id: 18,
+    name: 'Pannier',
+    commentCnt: 17,
+    likeCnt: 65,
+    read: 69,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: {
+      id: 18,
+      image: 'http://dummyimage.com/211x100.png/ff4444/ffffff',
+      name: 'NASDAQ',
+    },
+  },
+  {
+    id: 19,
+    name: 'Sonsing',
+    commentCnt: 12,
+    likeCnt: 7,
+    read: 67,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 19, image: 'http://dummyimage.com/130x100.png/5fa2dd/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 20,
+    name: 'Toughjoyfax',
+    commentCnt: 74,
+    likeCnt: 16,
+    read: 76,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: {
+      id: 20,
+      image: 'http://dummyimage.com/127x100.png/ff4444/ffffff',
+      name: 'NASDAQ',
+    },
+  },
+  {
+    id: 21,
+    name: 'Bitchip',
+    commentCnt: 71,
+    likeCnt: 60,
+    read: 64,
+    session: '6개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: {
+      id: 21,
+      image: 'http://dummyimage.com/175x100.png/cc0000/ffffff',
+      name: 'NASDAQ',
+    },
+  },
+  {
+    id: 22,
+    name: 'Veribet',
+    commentCnt: 91,
+    likeCnt: 41,
+    read: 97,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 22, image: 'http://dummyimage.com/143x100.png/5fa2dd/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 23,
+    name: 'Span',
+    commentCnt: 3,
+    likeCnt: 97,
+    read: 27,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: {
+      id: 23,
+      image: 'http://dummyimage.com/160x100.png/5fa2dd/ffffff',
+      name: 'NASDAQ',
+    },
+  },
+  {
+    id: 24,
+    name: 'Flexidy',
+    commentCnt: 49,
+    likeCnt: 76,
+    read: 26,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 24, image: 'http://dummyimage.com/201x100.png/cc0000/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 25,
+    name: 'Solarbreeze',
+    commentCnt: 62,
+    likeCnt: 14,
+    read: 37,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: { id: 25, image: 'http://dummyimage.com/194x100.png/dddddd/000000', name: 'NYSE' },
+  },
+  {
+    id: 26,
+    name: 'Domainer',
+    commentCnt: 83,
+    likeCnt: 41,
+    read: 9,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 26, image: 'http://dummyimage.com/186x100.png/cc0000/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 27,
+    name: 'Lotstring',
+    commentCnt: 85,
+    likeCnt: 23,
+    read: 100,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: { id: 27, image: 'http://dummyimage.com/204x100.png/5fa2dd/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 28,
+    name: 'Tin',
+    commentCnt: 14,
+    likeCnt: 8,
+    read: 24,
+    session: '3개월',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 28, image: 'http://dummyimage.com/174x100.png/ff4444/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 29,
+    name: 'Span',
+    commentCnt: 44,
+    likeCnt: 13,
+    read: 61,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: false,
+    user: { id: 29, image: 'http://dummyimage.com/185x100.png/ff4444/ffffff', name: 'NYSE' },
+  },
+  {
+    id: 30,
+    name: 'Cardify',
+    commentCnt: 65,
+    likeCnt: 61,
+    read: 27,
+    session: '무관',
+    image:
+      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    skills: [
+      {
+        key: 500,
+        category: 'arichitecture',
+        techName: 'git',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 104,
+        category: 'front',
+        techName: 'svelte',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 501,
+        category: 'arichitecture',
+        techName: 'docker',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 303,
+        category: 'mobile',
+        techName: 'swift',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 502,
+        category: 'arichitecture',
+        techName: 'kubernetes',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+      {
+        key: 503,
+        category: 'arichitecture',
+        techName: 'aws',
+        image:
+          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+      },
+    ],
+    status: true,
+    user: { id: 30, image: 'http://dummyimage.com/118x100.png/5fa2dd/ffffff', name: 'NYSE' },
+  },
 ];
