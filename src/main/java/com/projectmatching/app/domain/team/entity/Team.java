@@ -47,6 +47,8 @@ public class Team extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    @Column(name = "owner_id")
+    private Long ownerId;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     @BatchSize(size = 8)
@@ -75,6 +77,7 @@ public class Team extends BaseTimeEntity {
     public static Team valueOf(TeamRequestDto teamRequestDto, User user){
         Team team = new Team();
         team.userTeams.add(UserTeam.valueOf(user,team));
+        team.ownerId = user.getId();
         team.id = IdGenerator.number();
         team.name = teamRequestDto.getName();
         team.content = teamRequestDto.getContent();

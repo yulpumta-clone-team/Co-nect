@@ -2,12 +2,14 @@ package com.projectmatching.app.domain.team.dto;
 
 
 import com.amazonaws.services.ec2.model.InternetGateway;
+import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -28,5 +30,11 @@ public class TeamSimpleDto {
     private int commentCnt;
     private int likeCnt;
 
+
+    public static TeamSimpleDto of(Team team){
+       TeamSimpleDto teamSimpleDto = new TeamSimpleDto();
+        BeanUtils.copyProperties(team,teamSimpleDto);
+        teamSimpleDto.userInfo.setName();
+    }
 
 }
