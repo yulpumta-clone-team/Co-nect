@@ -1,8 +1,6 @@
 package com.projectmatching.app.domain.team.dto;
 
 
-import com.amazonaws.services.ec2.model.InternetGateway;
-import com.projectmatching.app.domain.team.Enum.TeamStatus;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.dto.UserInfo;

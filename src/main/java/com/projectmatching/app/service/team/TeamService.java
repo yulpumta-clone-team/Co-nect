@@ -4,7 +4,9 @@ import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.domain.liking.entity.TeamLiking;
 import com.projectmatching.app.domain.liking.repository.TeamLikingRepository;
 import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
+import com.projectmatching.app.domain.team.dto.TeamDto;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
+import com.projectmatching.app.domain.team.dto.TeamSimpleDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.team.repository.TeamRepository;
@@ -17,6 +19,7 @@ import com.projectmatching.app.domain.user.UserTeamRepository;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
+import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
@@ -62,26 +65,21 @@ public class TeamService {
     }
 
 
-    //팀 게시글 조회
-    public List<Team> getTeams(PageRequest pageRequest) throws ResponeException {
-        List<Team> teams = teamRepository.getTeams(pageRequest);
-        return teams;
+    //팀 게시글 조회`
+    @Transactional(readOnly = true)
+    public List<TeamSimpleDto> getTeamSimples(PageRequest pageRequest) throws ResponeException {
+        return teamRepository.getTeams(pageRequest).stream()
+                .map(team -> {
+            User user = userRepository.findById(team.getOwnerId()).orElseThrow(CoNectNotFoundException::new);
+            return TeamSimpleDto.valueOf(team,user);
+        }).collect(Collectors.toList());
 
     }
 
     //팀 게시글 상세조회
-    public TeamDetailResponseDto getTeam(Long teamId) throws ResponeException {
+    public TeamDto getTeam(Long teamId) throws ResponeException {
         Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
-
-            TeamDetailResponseDto teamDetailResponseDto = new TeamDetailResponseDto();
-            copyProperties(team, teamDetailResponseDto);
-            teamDetailResponseDto.setUser(findTeamUser(team));
-    //            teamDetailResponseDto.setSkills(findTeamTech(team));
-            teamDetailResponseDto.setCommentCnt(team.getTeamComments().size());
-            teamDetailResponseDto.setLikeCnt(team.getTeamLikings().size());
-
-
-            return teamDetailResponseDto;
+        return TeamDto.of(team);
 
     }
 

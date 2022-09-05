@@ -5,7 +5,9 @@ import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.common.Paging;
 import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
+import com.projectmatching.app.domain.team.dto.TeamDto;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
+import com.projectmatching.app.domain.team.dto.TeamSimpleDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.service.team.TeamService;
 import com.projectmatching.app.service.user.Impl.UserService;
@@ -47,9 +49,9 @@ public class TeamController {
      */
     @ApiOperation(value = "team 카드 조회 API", notes = "팀 리스트를 조회합니다.")
     @GetMapping("/team")
-    public ResponseTemplate<List<Team>> getTeams(@RequestParam(name="lastPage") int page){
+    public ResponseTemplate<List<TeamSimpleDto>> getTeams(@RequestParam(name="lastPage") int page){
         Paging paging = new Paging(page,PAGING_SIZE);
-        return ResponseTemplate.valueOf(teamService.getTeams(paging));
+        return ResponseTemplate.valueOf(teamService.getTeamSimples(paging));
     }
 
     /**
@@ -68,7 +70,7 @@ public class TeamController {
      */
     @ApiOperation(value = "team 게시글 상세 조회 API", notes = "팀 게시글 상세 페이지를 조회합니다.")
     @GetMapping("/team/{team_id}")
-    public ResponseTemplate<TeamDetailResponseDto> getTeamDetail(@PathVariable Long team_id){
+    public ResponseTemplate<TeamDto> getTeamDetail(@PathVariable Long team_id){
         return ResponseTemplate.valueOf(teamService.getTeam(team_id));
     }
 
