@@ -79,8 +79,8 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private UserDto toDto(OAuth2User oAuth2User) {
        Map<String,Object> attributes = oAuth2User.getAttributes();
         return UserDto.builder()
-                .email((String)attributes.get("email"))
-                .name((String)attributes.get("name")).build();
+                .email((String)attributes.get("email")).build();
+//                .userInfo.setName(((String)attributes.get("name"))).build();
 
     }
 }

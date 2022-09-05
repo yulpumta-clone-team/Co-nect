@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-
 @Getter
 @Setter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -15,7 +12,7 @@ import javax.persistence.Id;
 @JsonInclude(JsonInclude.Include.NON_NULL) //null 이면 생성되지 않음
 public class TechStackDto {
 
-    private Integer keys;
+    private Integer key;
 
     private String category;
 
@@ -26,7 +23,7 @@ public class TechStackDto {
 
     public static TechStackDto of(TechStack techStack){
         TechStackDto techStackDto = new TechStackDto();
-        techStackDto.keys = techStack.getKeys();
+        techStackDto.key = techStack.getKey();
         techStackDto.category = techStack.getCategory();
         techStackDto.techName = techStack.getTechName();
         techStackDto.image = techStack.getImage();
