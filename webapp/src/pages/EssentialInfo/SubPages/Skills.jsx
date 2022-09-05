@@ -1,12 +1,10 @@
 import React from 'react';
-import { skillStack } from 'constant';
 import Button from 'components/Common/Button';
 import {
   useEssentialFormsAction,
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
 import TechStackSelectInput from 'components/TechStackSelectInput';
-import { skillStackParser } from 'service/skillStack.parser';
 import * as S from '../EssentialInfo.style';
 
 export default function Skills() {
@@ -14,8 +12,6 @@ export default function Skills() {
   const { onChangeHandlerWithSelect, isTargetSatisfyValidate, handleClickNextButton } =
     useEssentialFormsAction();
   const isSkillsValidateError = isTargetSatisfyValidate('techSkills');
-
-  const parsedSkillStack = skillStackParser(skillStack);
 
   return (
     <S.Content>
@@ -25,7 +21,6 @@ export default function Skills() {
           name="techSkills"
           placeholder="기술"
           selectedTechSkills={inputValues.techSkills}
-          techSkillOptions={parsedSkillStack}
           onChange={onChangeHandlerWithSelect}
           isError={isSkillsValidateError}
           helperText={validateError.techSkills}

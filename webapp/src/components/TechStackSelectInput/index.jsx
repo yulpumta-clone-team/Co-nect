@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useDropdown from 'hooks/useDropdown';
 import { parsedTechStackType } from 'types/techSkill.type';
-import * as S from './TechStackSelectInput.style';
+import WithLoading from 'hoc/WithLoading';
+import etcApi from 'api/etc.api';
+import TechStackSelectInputView from './TechStackSelectInput.view';
 
 TechStackSelectInput.propTypes = {
   selectedTechSkills: PropTypes.arrayOf(parsedTechStackType).isRequired,
-  techSkillOptions: PropTypes.arrayOf(parsedTechStackType).isRequired,
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
@@ -22,7 +22,6 @@ TechStackSelectInput.propTypes = {
 export default function TechStackSelectInput({
   selectedTechSkills,
   onChange,
-  techSkillOptions,
   label,
   placeholder,
   name,
@@ -34,74 +33,24 @@ export default function TechStackSelectInput({
   width,
   ...rest
 }) {
-  const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
-  const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
-  // FIXME: 아래 로직을 조금 더 깔끔하게 수정할 수 없을까?
-  const handleClickOption = ({ targetId }) => {
-    const targetTechSkill = techSkillOptions.find((techSkill) => techSkill.id === targetId);
-    const isTargetInSelectedTechSkills = selectedTechSkills.find(
-      (techSkill) => techSkill.id === targetId,
-    );
-    if (isTargetInSelectedTechSkills) {
-      onChange({ name, value: [...selectedTechSkills] });
-    } else {
-      onChange({ name, value: [...selectedTechSkills, targetTechSkill] });
-    }
-  };
-
-  const isValues = selectedTechSkills.length !== 0;
-
-  const handleClickTargetDelete = ({ targetId }) => {
-    const filteredTechSkills = selectedTechSkills.filter((techSkill) => techSkill.id !== targetId);
-    onChange({ name, value: [...filteredTechSkills] });
-  };
-
-  const handleClickReset = () => {
-    onChange({ name, value: [] });
-  };
-
+  const TechSstackSelectInputViewWithLoading = WithLoading({
+    Component: TechStackSelectInputView,
+    responseDataKey: 'skillStack',
+    axiosInstance: etcApi.getTechStackAll,
+  });
   return (
-    <S.Container
-      width={width}
-      height={height}
+    <TechSstackSelectInputViewWithLoading
+      selectedTechSkills={selectedTechSkills}
+      onChange={onChange}
+      label={label}
+      placeholder={placeholder}
+      name={name}
+      isError={isError}
+      helperText={helperText}
+      defaultOption={defaultOption}
       customStyle={customStyle}
-      onClick={openDropdown}
-      {...rest}
-    >
-      {label && <S.Label>{label}</S.Label>}
-      <S.ValueViewer isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
-        {isValues ? (
-          <S.SelectedStacks>
-            {selectedTechSkills.map(({ id, label, value }) => (
-              <S.SingleStack key={id}>
-                <span>{label}</span>
-                <S.CloseNormal onClick={() => handleClickTargetDelete({ targetId: id })} />
-              </S.SingleStack>
-            ))}
-          </S.SelectedStacks>
-        ) : (
-          <S.PlaceHolder>{placeholder}</S.PlaceHolder>
-        )}
-        <S.ButtonContainer>
-          {selectedTechSkills && (
-            <>
-              <S.ClearableButton onClick={handleClickReset}>
-                <S.CloseNormal />
-              </S.ClearableButton>
-              <S.ButtonDivider isRow={false} />
-            </>
-          )}
-          <AngleButton onClick={closeDropdown} />
-        </S.ButtonContainer>
-      </S.ValueViewer>
-      {isError && <S.Error>{helperText}</S.Error>}
-      <S.Select isDropdownOpen={isDropdownOpen}>
-        {techSkillOptions.map(({ id, value, label }) => (
-          <S.Option key={id} value={value} onClick={() => handleClickOption({ targetId: id })}>
-            {label}
-          </S.Option>
-        ))}
-      </S.Select>
-    </S.Container>
+      height={height}
+      width={width}
+    />
   );
 }
