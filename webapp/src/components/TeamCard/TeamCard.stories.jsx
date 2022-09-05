@@ -1,7 +1,7 @@
 import React from 'react';
 import TeamCard from './index';
 
-import * as S from './style';
+import * as S from './TeamCard.style';
 
 export default {
   title: 'Component/TeamCard',
