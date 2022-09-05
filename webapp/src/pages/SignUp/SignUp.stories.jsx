@@ -1,19 +1,15 @@
-import ToastNotificationProvider from 'contexts/ToastNotification';
-import WithProvider from 'hoc/withProvider';
 import React from 'react';
 import SignUp from './index';
 
-const WithToastSignUp = WithProvider({ Providers: [ToastNotificationProvider], Component: SignUp });
-
 export default {
   title: 'Pages/SignUp',
-  component: WithToastSignUp,
+  component: SignUp,
   args: {},
   layout: 'fullscreen',
 };
 
 function Template() {
-  return <WithToastSignUp />;
+  return <SignUp />;
 }
 
 export const Default = Template.bind({});

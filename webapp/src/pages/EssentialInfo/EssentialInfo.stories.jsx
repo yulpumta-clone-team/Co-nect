@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'components/Common/Button';
 import EssentialFormProvider from 'contexts/EssentialForm/EssentialForm.Provider';
-import ToastNotificationProvider from 'contexts/ToastNotification';
 import EssentialInfo from './index';
 import Nickname from './SubPages/Nickname';
 import ProfileImage from './SubPages/ProfileImage';
@@ -26,23 +25,21 @@ Template.propTypes = {
 
 function Template({ children }) {
   return (
-    <ToastNotificationProvider>
-      <EssentialFormProvider>
-        <S.Layout>
-          <S.DialogContainer>
-            <Button theme="none" customStyle={S.CloseButton}>
-              <S.CloseLarge />
+    <EssentialFormProvider>
+      <S.Layout>
+        <S.DialogContainer>
+          <Button theme="none" customStyle={S.CloseButton}>
+            <S.CloseLarge />
+          </Button>
+          <S.AngleContainer>
+            <Button theme="none" customStyle={S.AngleButton}>
+              <S.LeftAngle />
             </Button>
-            <S.AngleContainer>
-              <Button theme="none" customStyle={S.AngleButton}>
-                <S.LeftAngle />
-              </Button>
-            </S.AngleContainer>
-            {children}
-          </S.DialogContainer>
-        </S.Layout>
-      </EssentialFormProvider>
-    </ToastNotificationProvider>
+          </S.AngleContainer>
+          {children}
+        </S.DialogContainer>
+      </S.Layout>
+    </EssentialFormProvider>
   );
 }
 
