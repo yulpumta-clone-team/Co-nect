@@ -4,10 +4,10 @@ import etcApi from 'api/etc.api';
 import useDropdown from 'hooks/useDropdown';
 import { parsedTechStackType } from 'types/techSkill.type';
 import useAxios from 'hooks/useAxios';
-import { skillStack } from 'constant';
-import { skillStackParser } from 'service/skillStack.parser';
-import * as S from './TechStackSelectInput.style';
+import { skillStackParser, skillStackParserWithCategory } from 'service/skillStack.parser';
 import TechStackSelectedViewer from './TechStackSelectedViewer';
+import TechStackOptions from './TechStackOptions';
+import * as S from './TechStackSelectInput.style';
 
 TechStackSelectInput.propTypes = {
   selectedTechSkills: PropTypes.arrayOf(parsedTechStackType).isRequired,
@@ -43,6 +43,8 @@ export default function TechStackSelectInput({
     ? skillStackParser(techStackOptionsApiState.responseData)
     : [];
 
+  const techSkillOptionsWithCategory = skillStackParserWithCategory(techSkillOptions);
+
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
 
   const isValues = selectedTechSkills.length !== 0;
@@ -69,8 +71,6 @@ export default function TechStackSelectInput({
     }
   };
 
-  console.log('techStackOptionsApiState :>> ', techStackOptionsApiState);
-
   return (
     <S.Container
       width={width}
@@ -94,11 +94,14 @@ export default function TechStackSelectInput({
       />
       {isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen}>
-        {techSkillOptions.map(({ id, value, label }) => (
-          <S.Option key={id} value={value} onClick={() => handleClickOption({ targetId: id })}>
-            {label}
-          </S.Option>
-        ))}
+        {techStackOptionsApiState.error ? (
+          <span>에러</span>
+        ) : (
+          <TechStackOptions
+            techSkillOptionsWithCategory={techSkillOptionsWithCategory}
+            handleClickOption={handleClickOption}
+          />
+        )}
       </S.Select>
     </S.Container>
   );
