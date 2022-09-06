@@ -21,6 +21,7 @@ export const ValueViewer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: 100%;
   border: 1px solid ${({ theme: { colors } }) => colors.greyScale.border};
   border-radius: 3px;
   padding: 6px 16px;
@@ -143,7 +144,9 @@ export const ButtonContainer = styled.div`
   }
 `;
 
-export const ButtonDivider = styled(Divider)``;
+export const ButtonDivider = styled(Divider)`
+  height: 24px;
+`;
 
 const CommonButtonStyle = css`
   cursor: pointer;
