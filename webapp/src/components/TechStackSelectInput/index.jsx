@@ -4,7 +4,7 @@ import etcApi from 'api/etc.api';
 import useDropdown from 'hooks/useDropdown';
 import { parsedTechStackType } from 'types/techSkill.type';
 import useAxios from 'hooks/useAxios';
-import { skillStackParser, skillStackParserWithCategory } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/skillStack.parser';
 import TechStackSelectedViewer from './TechStackSelectedViewer';
 import TechStackOptions from './TechStackOptions';
 import * as S from './TechStackSelectInput.style';
@@ -12,9 +12,10 @@ import * as S from './TechStackSelectInput.style';
 TechStackSelectInput.propTypes = {
   selectedTechSkills: PropTypes.arrayOf(parsedTechStackType).isRequired,
   onChange: PropTypes.func.isRequired,
-  label: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  showSelectedOption: PropTypes.bool,
+  label: PropTypes.string,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
   defaultOption: PropTypes.object,
@@ -30,6 +31,7 @@ export default function TechStackSelectInput({
   placeholder,
   name,
   defaultOption,
+  showSelectedOption = false,
   isError = false,
   helperText,
   customStyle,
@@ -39,19 +41,25 @@ export default function TechStackSelectInput({
 }) {
   const [techStackOptionsApiState] = useAxios({ axiosInstance: etcApi.getTechStackAll });
 
+  const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
+
   const techSkillOptions = techStackOptionsApiState.responseData
     ? skillStackParser(techStackOptionsApiState.responseData)
     : [];
 
-  const techSkillOptionsWithCategory = skillStackParserWithCategory(techSkillOptions);
-
-  const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
-
   const isValues = selectedTechSkills.length !== 0;
 
-  const handleClickTargetDelete = ({ targetId }) => {
+  const deleteTarget = (targetId) => {
     const filteredTechSkills = selectedTechSkills.filter((techSkill) => techSkill.id !== targetId);
     onChange({ name, value: [...filteredTechSkills] });
+  };
+
+  const addTarget = (targetTechSkill) => {
+    onChange({ name, value: [...selectedTechSkills, targetTechSkill] });
+  };
+
+  const handleClickTargetDelete = ({ targetId }) => {
+    deleteTarget(targetId);
   };
 
   const handleClickReset = () => {
@@ -65,9 +73,9 @@ export default function TechStackSelectInput({
     );
     if (!targetTechSkill) return;
     if (isTargetInSelectedTechSkills) {
-      onChange({ name, value: [...selectedTechSkills] });
+      deleteTarget(targetId);
     } else {
-      onChange({ name, value: [...selectedTechSkills, targetTechSkill] });
+      addTarget(targetTechSkill);
     }
   };
 
@@ -76,33 +84,31 @@ export default function TechStackSelectInput({
       width={width}
       height={height}
       customStyle={customStyle}
-      onClick={openDropdown}
+      // onClick={openDropdown}
       {...rest}
     >
       {label && <S.Label>{label}</S.Label>}
-      <TechStackSelectedViewer
-        isError={isError}
-        parent={parent}
-        isDropdownOpen={isDropdownOpen}
-        isValues={isValues}
-        isLoading={techStackOptionsApiState.isLoading}
-        selectedTechSkills={selectedTechSkills}
-        handleClickTargetDelete={handleClickTargetDelete}
-        placeholder={placeholder}
-        handleClickReset={handleClickReset}
-        closeDropdown={closeDropdown}
-      />
+      {showSelectedOption && (
+        <TechStackSelectedViewer
+          isError={isError}
+          parent={parent}
+          isDropdownOpen={isDropdownOpen}
+          isValues={isValues}
+          isLoading={techStackOptionsApiState.isLoading}
+          selectedTechSkills={selectedTechSkills}
+          handleClickTargetDelete={handleClickTargetDelete}
+          placeholder={placeholder}
+          handleClickReset={handleClickReset}
+          closeDropdown={closeDropdown}
+        />
+      )}
       {isError && <S.Error>{helperText}</S.Error>}
-      <S.Select isDropdownOpen={isDropdownOpen}>
-        {techStackOptionsApiState.error ? (
-          <span>에러</span>
-        ) : (
-          <TechStackOptions
-            techSkillOptionsWithCategory={techSkillOptionsWithCategory}
-            handleClickOption={handleClickOption}
-          />
-        )}
-      </S.Select>
+      <TechStackOptions
+        selectedTechSkills={selectedTechSkills}
+        techSkillOptions={techSkillOptions}
+        techStackOptionsApiState={techStackOptionsApiState}
+        handleClickOption={handleClickOption}
+      />
     </S.Container>
   );
 }
