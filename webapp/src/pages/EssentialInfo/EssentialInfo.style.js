@@ -12,7 +12,6 @@ export const Layout = styled.div`
   top: 0;
   right: 0;
   z-index: ${({ theme: { zIndex } }) => zIndex.modalLayout};
-  /* background-color: ${({ theme: { colors } }) => colors.greyScale.border}; */
   background-color: rgba(255, 255, 255, 0.75);
 `;
 
@@ -57,7 +56,6 @@ export const InputContainer = styled.div`
 
 export const TechSkillContainer = styled(InputContainer)`
   width: 70%;
-  top: 30%;
 `;
 
 // 공통 스타일

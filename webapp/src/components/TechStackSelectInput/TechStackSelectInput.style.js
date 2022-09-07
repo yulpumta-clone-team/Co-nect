@@ -122,16 +122,20 @@ export const Select = styled.div`
   }};
 
   width: 100%;
-  max-height: 200px;
+  height: 200px;
+  max-height: 300px;
   overflow-y: auto;
   border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 5px;
   padding: 0 57px;
+  padding-top: 24px;
   z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
 `;
 
 export const OptionCategory = styled.div`
-  padding-top: 24px;
+  &:not(:first-child) {
+    padding-top: 24px;
+  }
   &:last-child {
     padding-bottom: 24px;
   }

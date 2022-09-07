@@ -39,7 +39,9 @@ export default function TechStackSelectInput({
   width,
   ...rest
 }) {
-  const [techStackOptionsApiState] = useAxios({ axiosInstance: etcApi.getTechStackAll });
+  const [techStackOptionsApiState, execution, forceRefetchTeckStackOptions] = useAxios({
+    axiosInstance: etcApi.getTechStackAll,
+  });
 
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
 
@@ -103,13 +105,15 @@ export default function TechStackSelectInput({
         />
       )}
       {isError && <S.Error>{helperText}</S.Error>}
-      <TechStackOptions
-        showSelectedOption={showSelectedOption}
-        selectedTechSkills={selectedTechSkills}
-        techSkillOptions={techSkillOptions}
-        techStackOptionsApiState={techStackOptionsApiState}
-        handleClickOption={handleClickOption}
-      />
+      <S.Select isDropdownOpen showSelectedOption={showSelectedOption}>
+        <TechStackOptions
+          techStackOptionsApiState={techStackOptionsApiState}
+          selectedTechSkills={selectedTechSkills}
+          techSkillOptions={techSkillOptions}
+          handleClickOption={handleClickOption}
+          forceRefetchTeckStackOptions={forceRefetchTeckStackOptions}
+        />
+      </S.Select>
     </S.Container>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Divider from 'components/Common/Divider';
 import { skillStackParserWithCategory } from 'service/skillStack.parser';
+import Callback from 'pages/Callback';
 import * as S from './TechStackSelectInput.style';
 
 TechStackOptions.propTypes = {
@@ -10,27 +11,37 @@ TechStackOptions.propTypes = {
     responseData: PropTypes.object,
     error: PropTypes.object,
   }).isRequired,
-  showSelectedOption: PropTypes.bool.isRequired,
   techSkillOptions: PropTypes.array.isRequired,
   selectedTechSkills: PropTypes.array.isRequired,
   handleClickOption: PropTypes.func.isRequired,
+  forceRefetchTeckStackOptions: PropTypes.func.isRequired,
 };
 
 export default function TechStackOptions({
   techStackOptionsApiState,
   selectedTechSkills,
-  showSelectedOption,
   techSkillOptions,
   handleClickOption,
+  forceRefetchTeckStackOptions,
 }) {
-  if (techStackOptionsApiState.isLoading) return <div>...</div>;
-  if (techStackOptionsApiState.error) return <div>...</div>;
+  if (techStackOptionsApiState.isLoading) return <>...</>;
+  if (techStackOptionsApiState.error) {
+    const { error } = techStackOptionsApiState;
+    return (
+      <Callback
+        errorStatus={error.httpStatus}
+        errorMessage={error.message}
+        forceRefetch={forceRefetchTeckStackOptions}
+      />
+    );
+  }
 
   const isSelected = (targetId) => !!selectedTechSkills.find((option) => option.id === targetId);
 
   const techSkillOptionsWithCategory = skillStackParserWithCategory(techSkillOptions);
+
   return (
-    <S.Select isDropdownOpen showSelectedOption={showSelectedOption}>
+    <>
       {Object.entries(techSkillOptionsWithCategory).map(([category, categoryList]) => (
         <S.OptionCategory key={category}>
           <S.OptionCategoryName>{category}</S.OptionCategoryName>
@@ -49,6 +60,6 @@ export default function TechStackOptions({
           </S.Options>
         </S.OptionCategory>
       ))}
-    </S.Select>
+    </>
   );
 }
