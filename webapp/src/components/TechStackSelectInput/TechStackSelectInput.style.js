@@ -198,7 +198,7 @@ export const CloseNormal = styled(CloseNormalIcon)`
 `;
 
 export const Error = styled.span`
-  margin-top: 1rem;
+  margin: 1rem 0;
   align-self: flex-start;
   padding-left: 1rem;
   color: ${({ theme }) => theme.colors.important.normal};
