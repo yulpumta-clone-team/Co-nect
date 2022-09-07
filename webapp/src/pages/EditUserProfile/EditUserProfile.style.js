@@ -22,7 +22,7 @@ export const Form = styled.form`
 `;
 
 export const InfoContainer = styled.div`
-  width: 610px;
+  width: 650px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
   border: 3px solid ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 20px;
