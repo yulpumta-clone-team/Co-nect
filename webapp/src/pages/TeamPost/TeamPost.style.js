@@ -117,17 +117,17 @@ export const UserImg = css`
   width: 3%;
   height: 100%;
 `;
-export const TeamName = css`
+export const TeamName = styled(SingleInfoTitle)`
   ${({ theme: { fonts } }) => fonts.korean.title};
   color: #3c3c3c;
 `;
-export const Slogan = css`
+export const Slogan = styled(SingleInfoTitle)`
   ${({ theme: { fonts } }) => fonts.korean.subTitle};
   font-weight: 700;
   color: #3c3c3c;
 `;
 
-export const TeamSkillSession = css`
+export const TeamSkillSession = styled(SingleInfoTitle)`
   position: relative;
   width: 3%;
 `;

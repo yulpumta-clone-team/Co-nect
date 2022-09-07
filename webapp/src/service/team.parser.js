@@ -41,6 +41,8 @@ export const teamDetailParser = (teamDetailInfo) => {
   const skills = teamDetailInfo.skills || [];
   const content = teamDetailInfo.content || '입력한 자기소개가 없습니다.';
   const slogan = teamDetailInfo.slogan || '입력한 슬로건이 없습니다.';
+  const commentCnt = parsedNumberToThreeDigits(teamDetailInfo.commentCnt);
+  const likeCnt = parsedNumberToThreeDigits(teamDetailInfo.likeCnt);
 
   return {
     ...teamDetailInfo,
@@ -48,5 +50,7 @@ export const teamDetailParser = (teamDetailInfo) => {
     skills,
     content,
     slogan,
+    commentCnt,
+    likeCnt,
   };
 };
