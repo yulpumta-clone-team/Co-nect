@@ -104,6 +104,7 @@ export default function TechStackSelectInput({
       )}
       {isError && <S.Error>{helperText}</S.Error>}
       <TechStackOptions
+        showSelectedOption={showSelectedOption}
         selectedTechSkills={selectedTechSkills}
         techSkillOptions={techSkillOptions}
         techStackOptionsApiState={techStackOptionsApiState}

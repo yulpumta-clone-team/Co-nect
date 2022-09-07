@@ -10,6 +10,7 @@ TechStackOptions.propTypes = {
     responseData: PropTypes.object,
     error: PropTypes.object,
   }).isRequired,
+  showSelectedOption: PropTypes.bool.isRequired,
   techSkillOptions: PropTypes.array.isRequired,
   selectedTechSkills: PropTypes.array.isRequired,
   handleClickOption: PropTypes.func.isRequired,
@@ -18,6 +19,7 @@ TechStackOptions.propTypes = {
 export default function TechStackOptions({
   techStackOptionsApiState,
   selectedTechSkills,
+  showSelectedOption,
   techSkillOptions,
   handleClickOption,
 }) {
@@ -28,7 +30,7 @@ export default function TechStackOptions({
 
   const techSkillOptionsWithCategory = skillStackParserWithCategory(techSkillOptions);
   return (
-    <S.Select isDropdownOpen>
+    <S.Select isDropdownOpen showSelectedOption={showSelectedOption}>
       {Object.entries(techSkillOptionsWithCategory).map(([category, categoryList]) => (
         <S.OptionCategory key={category}>
           <S.OptionCategoryName>{category}</S.OptionCategoryName>

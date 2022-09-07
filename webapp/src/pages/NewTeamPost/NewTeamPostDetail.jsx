@@ -1,6 +1,5 @@
 import React from 'react';
 import { newTeamPostParser } from 'service/team.parser';
-import { skillStackParser } from 'service/skillStack.parser';
 import { newTeamPostValidation } from 'service/team.validation';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';

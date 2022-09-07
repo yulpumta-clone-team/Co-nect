@@ -108,8 +108,19 @@ export const Select = styled.div`
       display: none;
     `;
   }}
-  position: absolute;
-  top: 105%;
+
+  ${({ showSelectedOption }) => {
+    if (showSelectedOption) {
+      return css`
+        position: absolute;
+        top: 105%;
+      `;
+    }
+    return css`
+      position: relative;
+    `;
+  }};
+
   width: 100%;
   max-height: 200px;
   overflow-y: auto;
