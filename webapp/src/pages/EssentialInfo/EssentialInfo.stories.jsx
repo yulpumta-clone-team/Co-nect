@@ -1,4 +1,5 @@
 import React from 'react';
+import handlers from 'mocks/handlers';
 import PropTypes from 'prop-types';
 import Button from 'components/Common/Button';
 import EssentialFormProvider from 'contexts/EssentialForm/EssentialForm.Provider';
@@ -16,6 +17,9 @@ import * as S from './EssentialInfo.style';
 export default {
   title: 'pages/EssentialInfo',
   component: EssentialInfo,
+  parameters: {
+    msw: handlers,
+  },
   layout: 'fullscreen',
 };
 
