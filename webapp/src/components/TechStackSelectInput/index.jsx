@@ -84,7 +84,7 @@ export default function TechStackSelectInput({
       width={width}
       height={height}
       customStyle={customStyle}
-      // onClick={openDropdown}
+      onClick={openDropdown}
       {...rest}
     >
       {label && <S.Label>{label}</S.Label>}

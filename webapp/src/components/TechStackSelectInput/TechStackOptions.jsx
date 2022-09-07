@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Divider from 'components/Common/Divider';
-import { skillStackParser, skillStackParserWithCategory } from 'service/skillStack.parser';
+import { skillStackParserWithCategory } from 'service/skillStack.parser';
 import * as S from './TechStackSelectInput.style';
 
 TechStackOptions.propTypes = {
