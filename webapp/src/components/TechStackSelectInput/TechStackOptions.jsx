@@ -11,7 +11,7 @@ TechStackOptions.propTypes = {
     responseData: PropTypes.object,
     error: PropTypes.object,
   }).isRequired,
-  techSkillOptions: PropTypes.array.isRequired,
+  techSkillOptions: PropTypes.object.isRequired,
   selectedTechSkills: PropTypes.array.isRequired,
   handleClickOption: PropTypes.func.isRequired,
   forceRefetchTeckStackOptions: PropTypes.func.isRequired,
