@@ -33,6 +33,8 @@ public class QTeam extends EntityPathBase<Team> {
 
     public final StringPath name = createString("name");
 
+    public final NumberPath<Long> ownerId = createNumber("ownerId", Long.class);
+
     public final NumberPath<Long> readCnt = createNumber("readCnt", Long.class);
 
     public final StringPath session = createString("session");

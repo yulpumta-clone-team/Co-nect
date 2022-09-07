@@ -49,7 +49,7 @@ public class TeamService {
     //팀 게시글 저장
     @Transactional
     public void TeamSave(TeamRequestDto requestDto, UserDetailsImpl userDetails) throws ResponeException {
-        User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
+        User user = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
         Team team = Team.valueOf(requestDto,user);
         teamRepository.save(team);
         addTeamTechByTeamRequest(requestDto,team);
@@ -77,6 +77,7 @@ public class TeamService {
     }
 
     //팀 게시글 상세조회
+    @Transactional(readOnly = true)
     public TeamDto getTeam(Long teamId) throws ResponeException {
         Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
         return TeamDto.of(team);
@@ -84,10 +85,12 @@ public class TeamService {
     }
 
 
+
+
     //팀 게시글 삭제
     public void delete(Long teamId, String email) throws ResponeException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
-        com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
 
         if(checkTeamUser(team, user)==false) throw new ResponeException(PERMISSION_DENIED);
 
