@@ -16,7 +16,7 @@ export default function Skills() {
   return (
     <S.Content>
       <h2>가능한 기술들을 선택해주세요.</h2>
-      <S.InputContainer>
+      <S.TechSkillContainer>
         <TechStackSelectInput
           name="techSkills"
           placeholder="기술"
@@ -25,7 +25,7 @@ export default function Skills() {
           isError={isSkillsValidateError}
           helperText={validateError.techSkills}
         />
-      </S.InputContainer>
+      </S.TechSkillContainer>
       <S.NextButtonContainer>
         <Button
           theme="primary"

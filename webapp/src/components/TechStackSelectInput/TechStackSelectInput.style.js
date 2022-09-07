@@ -111,7 +111,7 @@ export const Select = styled.div`
   position: absolute;
   top: 105%;
   width: 100%;
-  max-height: 400px;
+  max-height: 200px;
   overflow-y: auto;
   border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 5px;

@@ -37,7 +37,6 @@ export const Content = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   > h2 {
     ${({ theme: { fonts } }) => fonts.korean.title}
@@ -54,6 +53,11 @@ export const InputContainer = styled.div`
   gap: 30px;
   ${({ theme: { mixin } }) => mixin.positionCenterY()};
   z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
+`;
+
+export const TechSkillContainer = styled(InputContainer)`
+  width: 70%;
+  top: 30%;
 `;
 
 // 공통 스타일
