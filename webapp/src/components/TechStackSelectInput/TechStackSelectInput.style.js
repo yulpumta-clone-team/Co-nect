@@ -10,6 +10,7 @@ export const Container = styled.div`
   box-sizing: border-box;
   position: relative;
   width: 100%;
+  max-width: 700px;
   height: 100%;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
@@ -110,7 +111,7 @@ export const Select = styled.div`
   position: absolute;
   top: 105%;
   width: 100%;
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
   border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 5px;
@@ -145,13 +146,16 @@ export const Option = styled.li`
   width: 80px;
   height: 80px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
-  &:hover {
-    background-color: ${({ theme: { colors } }) => colors.primary.shadow};
-  }
   > img {
+    object-fit: scale-down;
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    border: ${({ isSelected, theme: { colors } }) =>
+      isSelected && `3px solid ${colors.primary.normal}`};
+    &:hover {
+      border: 3px solid ${({ theme: { colors } }) => colors.primary.normal};
+    }
   }
 `;
 
