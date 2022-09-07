@@ -36,3 +36,21 @@ export const newTeamPostParser = (newTeamPostData) => {
     slogan,
   };
 };
+export const teamDetailParser = (teamDetailInfo) => {
+  const hopeSession = teamDetailInfo.hopeSession || hopeSessionOption[0].value;
+  const skills = teamDetailInfo.skills || [];
+  const content = teamDetailInfo.content || '입력한 자기소개가 없습니다.';
+  const slogan = teamDetailInfo.slogan || '입력한 슬로건이 없습니다.';
+  const commentCnt = parsedNumberToThreeDigits(teamDetailInfo.commentCnt);
+  const likeCnt = parsedNumberToThreeDigits(teamDetailInfo.likeCnt);
+
+  return {
+    ...teamDetailInfo,
+    hopeSession,
+    skills,
+    content,
+    slogan,
+    commentCnt,
+    likeCnt,
+  };
+};
