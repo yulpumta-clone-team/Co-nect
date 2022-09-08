@@ -92,19 +92,15 @@ public class TeamService {
 
 
 
-
     //팀 게시글 삭제
-    public void delete(Long teamId, String email) throws ResponeException {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
+    @Transactional
+    public void delete(Long teamId, UserDetailsImpl userDetails) throws ResponeException {
+        User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
         Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
 
-        if(checkTeamUser(team, user)==false) throw new ResponeException(PERMISSION_DENIED);
+        if(checkTeamUser(team, user) == false) throw new CoNectLogicalException(PERMISSION_DENIED);
+        teamRepository.deleteTeam(teamId);
 
-        try{
-            teamRepository.deleteTeam(teamId);
-        }catch(Exception e){
-            throw new ResponeException(DELETE_TEAM_ERROR);
-        }
     }
 
     //팀 게시글 수정
@@ -132,6 +128,18 @@ public class TeamService {
         }catch(Exception e){
             throw new ResponeException(UPDATE_TEAM_ERROR);
         }
+    }
+
+
+    /**
+     * 해당 팀 게시물이 해당 유저가 쓴것인지 체크
+     * @param team
+     * @param user
+     * @return Boolean
+     */
+    public boolean checkTeamUser(Team team, User user){
+        if(team.getOwnerId().equals(user.getId())) return true;
+        else return false;
     }
 
     //팀 좋아요 누르기
@@ -212,12 +220,5 @@ public class TeamService {
 
 
 
-    public boolean checkTeamUser(com.projectmatching.app.domain.team.entity.Team team, User user){
-        List<UserTeam> userTeamList = team.getUserTeams().stream().collect(Collectors.toList());
-        boolean find = false;
-        for(UserTeam userTeam : userTeamList){
-            if(userTeam.getUser().getId() == user.getId()) find = true;
-        }
-        return find;
-    }
+
 }

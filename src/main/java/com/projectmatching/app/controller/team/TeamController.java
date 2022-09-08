@@ -60,7 +60,7 @@ public class TeamController {
     @ApiOperation(value = "team 게시글 삭제 API", notes = "팀 게시글을 삭제합니다.")
     @DeleteMapping("/team/{team_id}")
     public ResponseTemplate<String> deleteTeam(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long team_id){
-        teamService.delete(team_id, userDetails.getEmail());
+        teamService.delete(team_id, userDetails);
         String result = "팀 삭제에 성공하였습니다.";
         return ResponseTemplate.valueOf(result);
     }
