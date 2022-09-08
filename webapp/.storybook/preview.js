@@ -1,6 +1,11 @@
 import React from 'react';
+import ToastNotificationProvider from 'contexts/ToastNotification';
+import Styles from 'styles';
 import { MemoryRouter } from 'react-router-dom';
-import Styles from '../src/styles';
+import { initialize, mswDecorator } from 'msw-storybook-addon';
+
+// Initialize MSW
+initialize();
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -13,11 +18,14 @@ export const parameters = {
 };
 
 export const decorators = [
+  mswDecorator,
   (Story) => (
     <Styles>
-      <MemoryRouter>
-        <Story />
-      </MemoryRouter>
+      <ToastNotificationProvider>
+        <MemoryRouter>
+          <Story />
+        </MemoryRouter>
+      </ToastNotificationProvider>
     </Styles>
   ),
 ];

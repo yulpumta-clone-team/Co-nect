@@ -15,4 +15,18 @@ export const skillStackParser = (techSkills) => {
 };
 
 // techskills: [{category: string, id: number, image: string, label: string, value: string}]
+export const skillStackParserWithCategory = (techSkills) =>
+  techSkills.reduce((acc, cur) => {
+    const newAcc = { ...acc };
+    const { category } = cur;
+    const targetCategory = newAcc[category];
+    if (targetCategory) {
+      newAcc[category] = [...newAcc[category], cur];
+    } else {
+      newAcc[category] = [cur];
+    }
+    return newAcc;
+  }, {});
+
+// techskills: [{category: string, id: number, image: string, label: string, value: string}]
 export const skillStackParserToIds = (techSkills) => techSkills.map(({ id }) => id);

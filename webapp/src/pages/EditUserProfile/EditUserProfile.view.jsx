@@ -5,8 +5,7 @@ import TextInput from 'components/Common/TextInput';
 import TechStackSelectInput from 'components/TechStackSelectInput';
 import SelectInput from 'components/Common/SelectInput';
 import MarkdownEditor from 'components/MarkdownEditor';
-import { belongTeamOptions, hopeSessionOption, jobOptions, skillStack } from 'constant';
-import { skillStackParser } from 'service/skillStack.parser';
+import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
 import * as S from './EditUserProfile.style';
 
 EditUserProfileView.propTypes = {
@@ -45,8 +44,6 @@ export default function EditUserProfileView({
   const onUploadButtonClick = () => {
     inputFileRef.current.click();
   };
-
-  const parsedSkillStackOptions = skillStackParser(skillStack);
 
   const isSkillsValidateError = isTargetSatisfyValidate('techSkills');
   const isNicknameValidateError = isTargetSatisfyValidate('nickname');
@@ -130,7 +127,6 @@ export default function EditUserProfileView({
             placeholder="기술"
             label="기술"
             selectedTechSkills={inputValues.techSkills}
-            techSkillOptions={parsedSkillStackOptions}
             onChange={onChangeHandlerWithSelect}
             isError={isSkillsValidateError}
             helperText={validateError.techSkills}
