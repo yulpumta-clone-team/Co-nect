@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static java.util.Objects.nonNull;
 
 
 @RequiredArgsConstructor
@@ -39,11 +40,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         log.info("jwt 필터");
         if(authTokenProvider.isTokenExist(request)){
             String token = authTokenProvider.resolveToken(request);
-            if (authTokenProvider.isTokenValid(token)) {
+            if (authTokenProvider.isTokenValid(token) && !existsAuthentication()) {
                 log.info("토큰 유효");
                 // SecurityContext 에 Authentication 객체를 저장합니다.
                 setAuthentication(token);
             }else{
+                log.info("리프레쉬 토큰 확인");
                 if(authTokenProvider.isRefreshTokenExist(request)){
                     String refreshToken = authTokenProvider.resolveRefreshToken(request);
                     if(!authTokenProvider.isTokenValid(refreshToken)){
@@ -64,6 +66,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private void setAuthentication(String token){
         SecurityContextHolder.getContext().setAuthentication(getAuthentication(token));
+    }
+
+    private boolean existsAuthentication() {
+        return nonNull(SecurityContextHolder.getContext().getAuthentication());
     }
 
     private void reIssueAccessToken(String refreshToken, HttpServletResponse response){

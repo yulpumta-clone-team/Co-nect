@@ -1,21 +1,30 @@
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useState } from 'react';
 import etcApi from 'api/etc.api';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from 'constant/route.constant';
+import useUserInfo from './useUserInfo';
 
-const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
+const useFileUploader = () => {
+  const notifyDispatch = useToastNotificationAction();
   const navigate = useNavigate();
+  const { handleExiredToken } = useUserInfo();
   const [s3ImageId, setS3ImageId] = useState(null);
   const [s3ImageObj, setS3ImageObj] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
   const onChangeFile = (event) => {
-    const imageFile = event.target.files[0];
-    setImageFile(imageFile);
+    const targetImageFile = event.target.files[0];
+    setImageFile(targetImageFile);
   };
 
   const uploadFileOnS3 = async (submitImageFile) => {
+    // 둘다 없을 때 실행하지 않는다.
+    if (!imageFile && !submitImageFile) {
+      return null;
+    }
     try {
       const formData = new FormData();
       if (submitImageFile) {
@@ -33,8 +42,8 @@ const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
     } catch (apiError) {
       console.error(apiError);
       setS3ImageObj(null);
-      notifyNewMessage(notifyDispatch, apiError, TOAST_TYPE.Error);
-      navigate(ROUTE.ESSENTIAL_INFO.PROFILE_IMAGE);
+      handleExiredToken(apiError.httpStatus);
+      notifyNewMessage(notifyDispatch, apiError.message, TOAST_TYPE.Error);
       return null;
     }
   };
@@ -45,7 +54,7 @@ const useFileUploader = ({ notifyNewMessage, notifyDispatch }) => {
       console.log('response :>> ', response);
     } catch (apiError) {
       console.error(apiError);
-      notifyNewMessage(notifyDispatch, apiError, TOAST_TYPE.Error);
+      notifyNewMessage(notifyDispatch, apiError.message, TOAST_TYPE.Error);
       navigate(ROUTE.ESSENTIAL_INFO.INDEX);
     }
   };

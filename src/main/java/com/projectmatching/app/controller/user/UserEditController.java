@@ -44,26 +44,7 @@ public class UserEditController {
     }
 
 
-    /**
-     * 유저 프로필 생성(유저 게시물 등록)
-     */
-    @ApiOperation(value = "유저 게시물 등록")
-    @PostMapping("/myprofile")
-    public ResponseTemplate<Void> addUserProfilePosting(@RequestBody PostUserProfileDto postUserProfileDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        userService.postingUserProfile(postUserProfileDto,userDetails);
-        return ResponseTemplate.of(SUCCESS);
-    }
 
-
-    /**
-     * 유저 프로필 수정(등록된 게시물 수정)
-     */
-
-    @ApiOperation(value = "유저 게시물 수정")
-    @PatchMapping("/myprofile")
-    public ResponseTemplate<UserDto> updateUserPosting(@RequestBody PostUserProfileDto postUserProfileDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return ResponseTemplate.valueOf(userService.updateUserPosting(postUserProfileDto,userDetails));
-    }
 
 
 }

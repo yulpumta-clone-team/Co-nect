@@ -5,11 +5,12 @@ const teamSchema = {
   id: PropTypes.number.isRequired,
   img: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  session: PropTypes.string.isRequired,
+  hopeSession: PropTypes.string.isRequired,
   read: PropTypes.number.isRequired,
   skills: PropTypes.arrayOf(PropTypes.string).isRequired,
   status: PropTypes.string.isRequired,
   user: userDetailType.isRequired, // 작성자 정보
+  slogan: PropTypes.string.isRequired,
 };
 
 const teamCardTypeSchema = {

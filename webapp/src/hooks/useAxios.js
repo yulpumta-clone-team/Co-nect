@@ -1,6 +1,12 @@
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useEffect, useReducer, useState } from 'react';
+import useUserInfo from './useUserInfo';
 
 const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
+  const notifyDispatch = useToastNotificationAction();
+  const { handleExiredToken } = useUserInfo();
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     responseData: null,
@@ -27,15 +33,25 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
         ...newConfig,
         signal: ctrl.signal,
       });
+      !immediate && notifyNewMessage(notifyDispatch, '요청 성공!', TOAST_TYPE.Success);
       dispatch({ type: SUCCESS_TYPE, responseData });
     } catch (error) {
       console.error(error);
-      dispatch({ type: ERROR_TYPE, error });
+      handleExiredToken(error.httpStatus);
+      !immediate && notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
+      dispatch({
+        type: ERROR_TYPE,
+        error: {
+          httpStatus: error.httpStatus,
+          message: error.message,
+        },
+      });
     }
   };
 
   useEffect(() => {
-    resetState();
+    // resetState 내부의 dispatch 때문에 두 번 execution이 발생함.
+    // resetState();
     if (immediate) {
       execution();
     }

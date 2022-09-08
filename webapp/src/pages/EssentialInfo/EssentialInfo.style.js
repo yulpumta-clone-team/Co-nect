@@ -12,7 +12,6 @@ export const Layout = styled.div`
   top: 0;
   right: 0;
   z-index: ${({ theme: { zIndex } }) => zIndex.modalLayout};
-  /* background-color: ${({ theme: { colors } }) => colors.greyScale.border}; */
   background-color: rgba(255, 255, 255, 0.75);
 `;
 
@@ -37,7 +36,6 @@ export const Content = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   > h2 {
     ${({ theme: { fonts } }) => fonts.korean.title}
@@ -54,6 +52,10 @@ export const InputContainer = styled.div`
   gap: 30px;
   ${({ theme: { mixin } }) => mixin.positionCenterY()};
   z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
+`;
+
+export const TechSkillContainer = styled(InputContainer)`
+  width: 70%;
 `;
 
 // 공통 스타일

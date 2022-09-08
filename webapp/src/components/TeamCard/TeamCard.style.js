@@ -42,7 +42,8 @@ export const BackgroundImg = styled.div`
 
 // * : Team 모집중 / 모집 안함 상태 나타내는 버튼
 export const TeamStatus = styled.div`
-  background-color: ${({ theme: { colors } }) => colors.secondary.normal};
+  background-color: ${({ isRecruitng, theme: { colors } }) =>
+    isRecruitng ? colors.secondary.normal : colors.greyScale.placeHolder};
 
   position: relative;
   display: flex;
@@ -111,59 +112,22 @@ export const Divider = styled.div`
 
   background-color: ${({ theme: { colors } }) => colors.greyScale.nonActive};
 `;
-// * : 이동 버튼 포함 기술스택 정렬 박스
-export const SkillBoard = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  height: 20%;
-  width: 100%;
-  padding: 1% 0%;
-`;
-// * : skill이 5개씩 보여지는 부분
-export const SkillContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-`;
-// * : slideRef 로 지정한 하나의 슬라이드 style
-export const SkillSlide = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  height: 100%;
-
-  width: 100%;
-  gap: 11px; // ! : 변경 시 수정 필요 !
-`;
-export const SkillImage = styled.img`
-  object-fit: cover;
-  width: 65%;
-  height: 65%;
-
-  border-radius: 50%;
-  box-shadow: 1px 1px 1px 1px #cdcdcd;
-`;
 
 // * : 조회수와 댓글수가 보여지는 부분
-export const CountBoard = styled.div`
-  position: relative;
+export const CardInfoIndicator = styled.div`
+  position: absolute;
+  bottom: 1.2rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 1rem 1rem 0 0;
+  gap: 12px;
+`;
 
-  height: 7%;
-  width: 50%;
-  padding: 1rem;
-  left: 50%;
+export const SingleIndicator = styled.div`
+  ${({ theme: { mixin } }) => mixin.flexCenter({ direction: 'row' })};
+  gap: 4px;
 `;
 
 // Icon

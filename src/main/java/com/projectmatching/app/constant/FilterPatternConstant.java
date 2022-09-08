@@ -15,6 +15,5 @@ public class FilterPatternConstant {
             "/upload/*",
             "/techstack/*",
 
-
     };
 }

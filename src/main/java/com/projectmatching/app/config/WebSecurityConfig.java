@@ -37,7 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthTokenProvider authTokenProvider;
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Override
     protected void configure(HttpSecurity http)throws Exception {
@@ -52,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .frameOptions().sameOrigin()
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
                 .and()
                     .authorizeRequests()
                 .antMatchers(
@@ -120,6 +119,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         "/swagger-ui.html");
 
         web.ignoring().antMatchers(FilterPatternConstant.pathArray);
+
 
 
     }

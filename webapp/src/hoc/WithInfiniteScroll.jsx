@@ -41,7 +41,7 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
         } else {
           setError({
             isError: true,
-            msg: error,
+            msg: error.message,
           });
         }
       } finally {

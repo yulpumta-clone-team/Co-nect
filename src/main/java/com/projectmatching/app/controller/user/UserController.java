@@ -61,17 +61,17 @@ public class UserController {
     }
 
 
-
-    /**
-     * 유저 프로필 수정
-     */
-    @ApiOperation(value ="유저 프로필 수정 요청")
-    @PatchMapping("/profile")
-    public ResponseTemplate<Void> createUserProfile(@RequestBody UserDto userDto){
-        userService.updateUser(userDto);
-        return ResponseTemplate.of(SUCCESS);
-
-    }
+//
+//    /**
+//     * 유저 프로필 수정
+//     */
+//    @ApiOperation(value ="유저 프로필 수정 요청")
+//    @PatchMapping("/profile")
+//    public ResponseTemplate<Void> createUserProfile(@RequestBody UserDto userDto){
+//        userService.updateUser(userDto);
+//        return ResponseTemplate.of(SUCCESS);
+//
+//    }
 
 
     /**

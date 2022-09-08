@@ -47,10 +47,11 @@ const userApi = {
       method: 'get',
     });
   },
+  // 유저 프로필 수정 (일단 필수정보입력이랑 같은 요청으로 덮었는 로직입니다.)
   EDIT_USER_PROFILE({ data }) {
     return privateApiInstance({
-      url: API.USER.PROFILE,
-      method: 'patch',
+      url: API.USER.ESSENTIAL_INFO,
+      method: 'post',
       data,
     });
   },

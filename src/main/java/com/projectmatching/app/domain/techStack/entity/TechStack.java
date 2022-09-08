@@ -22,8 +22,8 @@ public class TechStack {
     @Id
     private Long id;
 
-    @Column(columnDefinition = "BIGINT",name = "`keys`")
-    private Integer keys;
+    @Column(columnDefinition = "BIGINT",name = "`key`")
+    private Integer key;
 
     private String category;
 

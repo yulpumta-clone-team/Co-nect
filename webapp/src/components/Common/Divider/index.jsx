@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as S from './Divider.style';
 
 Divider.propTypes = {
+  className: PropTypes.string,
   isRow: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
@@ -13,6 +14,7 @@ Divider.propTypes = {
 };
 
 export default function Divider({
+  className,
   isRow = true,
   width,
   height,
@@ -22,6 +24,7 @@ export default function Divider({
 }) {
   return isRow ? (
     <S.RowContainer
+      className={className}
       width={width}
       height={height}
       marginTop={marginTop}
@@ -30,6 +33,7 @@ export default function Divider({
     />
   ) : (
     <S.ColContainer
+      className={className}
       width={width}
       height={height}
       marginTop={marginTop}

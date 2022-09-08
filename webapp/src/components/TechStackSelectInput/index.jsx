@@ -1,95 +1,118 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import etcApi from 'api/etc.api';
 import useDropdown from 'hooks/useDropdown';
 import { parsedTechStackType } from 'types/techSkill.type';
+import useAxios from 'hooks/useAxios';
+import { skillStackParser } from 'service/skillStack.parser';
+import TechStackSelectedViewer from './TechStackSelectedViewer';
+import TechStackOptions from './TechStackOptions';
 import * as S from './TechStackSelectInput.style';
 
 TechStackSelectInput.propTypes = {
   selectedTechSkills: PropTypes.arrayOf(parsedTechStackType).isRequired,
-  techSkillOptions: PropTypes.arrayOf(parsedTechStackType).isRequired,
   onChange: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  showSelectedOption: PropTypes.bool,
+  label: PropTypes.string,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
   defaultOption: PropTypes.object,
   customStyle: PropTypes.array,
+  height: PropTypes.string,
+  width: PropTypes.string,
 };
 
 export default function TechStackSelectInput({
   selectedTechSkills,
   onChange,
-  techSkillOptions,
   label,
   placeholder,
   name,
   defaultOption,
+  showSelectedOption = false,
   isError = false,
   helperText,
   customStyle,
+  height,
+  width,
   ...rest
 }) {
+  const [techStackOptionsApiState, execution, forceRefetchTeckStackOptions] = useAxios({
+    axiosInstance: etcApi.getTechStackAll,
+  });
+
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
-  const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
-  // FIXME: 아래 로직을 조금 더 깔끔하게 수정할 수 없을까?
-  const handleClickOption = ({ targetId }) => {
-    const targetTechSkill = techSkillOptions.find((techSkill) => techSkill.id === targetId);
-    const isTargetInSelectedTechSkills = selectedTechSkills.find(
-      (techSkill) => techSkill.id === targetId,
-    );
-    if (isTargetInSelectedTechSkills) {
-      onChange({ name, value: [...selectedTechSkills] });
-    } else {
-      onChange({ name, value: [...selectedTechSkills, targetTechSkill] });
-    }
-  };
+
+  const techSkillOptions = techStackOptionsApiState.responseData
+    ? skillStackParser(techStackOptionsApiState.responseData)
+    : [];
 
   const isValues = selectedTechSkills.length !== 0;
 
-  const handleClickTargetDelete = ({ targetId }) => {
+  const deleteTarget = (targetId) => {
     const filteredTechSkills = selectedTechSkills.filter((techSkill) => techSkill.id !== targetId);
     onChange({ name, value: [...filteredTechSkills] });
+  };
+
+  const addTarget = (targetTechSkill) => {
+    onChange({ name, value: [...selectedTechSkills, targetTechSkill] });
+  };
+
+  const handleClickTargetDelete = ({ targetId }) => {
+    deleteTarget(targetId);
   };
 
   const handleClickReset = () => {
     onChange({ name, value: [] });
   };
 
+  const handleClickOption = ({ targetId }) => {
+    const targetTechSkill = techSkillOptions.find((techSkill) => techSkill.id === targetId);
+    const isTargetInSelectedTechSkills = selectedTechSkills.find(
+      (techSkill) => techSkill.id === targetId,
+    );
+    if (!targetTechSkill) return;
+    if (isTargetInSelectedTechSkills) {
+      deleteTarget(targetId);
+    } else {
+      addTarget(targetTechSkill);
+    }
+  };
+
   return (
-    <S.Container customStyle={customStyle} onClick={openDropdown} {...rest}>
-      <S.PlaceHolder isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
-        {isValues ? (
-          <S.SelectedStacks>
-            {selectedTechSkills.map(({ id, label, value }) => (
-              <S.SingleStack key={id}>
-                <span>{label}</span>
-                <S.CloseNormal onClick={() => handleClickTargetDelete({ targetId: id })} />
-              </S.SingleStack>
-            ))}
-          </S.SelectedStacks>
-        ) : (
-          <S.Label>{placeholder}</S.Label>
-        )}
-        <S.ButtonContainer>
-          {selectedTechSkills && (
-            <>
-              <S.ClearableButton onClick={handleClickReset}>
-                <S.CloseNormal />
-              </S.ClearableButton>
-              <S.ButtonDivider isRow={false} />
-            </>
-          )}
-          <AngleButton onClick={closeDropdown} />
-        </S.ButtonContainer>
-      </S.PlaceHolder>
+    <S.Container
+      width={width}
+      height={height}
+      customStyle={customStyle}
+      onClick={openDropdown}
+      {...rest}
+    >
+      {label && <S.Label>{label}</S.Label>}
+      {showSelectedOption && (
+        <TechStackSelectedViewer
+          isError={isError}
+          parent={parent}
+          isDropdownOpen={isDropdownOpen}
+          isValues={isValues}
+          isLoading={techStackOptionsApiState.isLoading}
+          selectedTechSkills={selectedTechSkills}
+          handleClickTargetDelete={handleClickTargetDelete}
+          placeholder={placeholder}
+          handleClickReset={handleClickReset}
+          closeDropdown={closeDropdown}
+        />
+      )}
       {isError && <S.Error>{helperText}</S.Error>}
-      <S.Select isDropdownOpen={isDropdownOpen}>
-        {techSkillOptions.map(({ id, value, label }) => (
-          <S.Option key={id} value={value} onClick={() => handleClickOption({ targetId: id })}>
-            {label}
-          </S.Option>
-        ))}
+      <S.Select isDropdownOpen showSelectedOption={showSelectedOption}>
+        <TechStackOptions
+          techStackOptionsApiState={techStackOptionsApiState}
+          selectedTechSkills={selectedTechSkills}
+          techSkillOptions={techSkillOptions}
+          handleClickOption={handleClickOption}
+          forceRefetchTeckStackOptions={forceRefetchTeckStackOptions}
+        />
       </S.Select>
     </S.Container>
   );

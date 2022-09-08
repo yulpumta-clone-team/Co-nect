@@ -5,12 +5,8 @@ import {
   useEssentialFormsAction,
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
+import { belongTeamOptions } from 'constant';
 import * as S from '../EssentialInfo.style';
-
-const belongTeamOptions = [
-  { id: 0, label: '팀소속 ✅', value: '팀소속 ✅' },
-  { id: 1, label: '팀소속 ❌', value: '팀소속 ❌' },
-];
 
 export default function BelongTeam() {
   const { inputValues } = useEssentialFormsState();
@@ -21,7 +17,7 @@ export default function BelongTeam() {
       <S.InputContainer>
         <SelectInput
           name="belongTeam"
-          label="팀 소속 여부"
+          placeHolder="팀 소속 여부"
           defaultOption={belongTeamOptions[0]}
           options={belongTeamOptions}
           value={inputValues.belongTeam}

@@ -38,7 +38,7 @@ const teamHandler = [
   // POST_TEAM_POST
   rest.post(`${ROOT_API_URL + API.TEAM.INDEX}`, (req, res, ctx) => {
     console.log(req.body);
-    return res(ctx.status(200), ctx.json(getResonseWithData(teamDetail)));
+    return res(ctx.status(200), ctx.delay(2000), ctx.json(getResonseWithData(teamDetail)));
   }),
   // EDIT_TEAM_POST
   rest.patch(`${ROOT_API_URL + API.TEAM.INDEX}/:id`, (req, res, ctx) => {

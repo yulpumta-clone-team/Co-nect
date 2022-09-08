@@ -1,4 +1,3 @@
-import ToastNotificationProvider from 'contexts/ToastNotification';
 import React from 'react';
 import { loggedUserType } from 'types/user.type';
 import LoginNavigation from './LoginNav';
@@ -20,11 +19,9 @@ Template.propTypes = {
 
 function Template(args) {
   return (
-    <ToastNotificationProvider>
-      <S.Container>
-        <LoginNavigation {...args} />
-      </S.Container>
-    </ToastNotificationProvider>
+    <S.Container>
+      <LoginNavigation {...args} />
+    </S.Container>
   );
 }
 

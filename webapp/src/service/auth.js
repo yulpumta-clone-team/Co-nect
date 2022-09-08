@@ -3,12 +3,12 @@ import { TOKEN } from 'constant/api.constant';
 import handleLocalstorage from 'utils/handleLocalstorage';
 import { userInfoParser } from './auth.parser';
 
-export const updateUserInfoInLocalstorage = (rawUserInfo) => {
+export const updateUserInfo = (rawUserInfo) => {
   const parseduserInfo = userInfoParser(rawUserInfo);
   handleLocalstorage.set(USER_INFO, parseduserInfo);
 };
 
-export const deleteUserInfoInLocalStorage = () => handleLocalstorage.remove(USER_INFO);
+export const deleteUserInfo = () => handleLocalstorage.remove(USER_INFO);
 
 // {id, profileImg, nickname}
 export const getUserInfo = () => handleLocalstorage.get(USER_INFO);
