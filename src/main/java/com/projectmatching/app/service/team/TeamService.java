@@ -1,10 +1,8 @@
 package com.projectmatching.app.service.team;
 
 import com.projectmatching.app.config.resTemplate.ResponeException;
-import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.liking.entity.TeamLiking;
 import com.projectmatching.app.domain.liking.repository.TeamLikingRepository;
-import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
 import com.projectmatching.app.domain.team.dto.TeamDto;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
 import com.projectmatching.app.domain.team.dto.TeamSimpleDto;
@@ -61,6 +59,12 @@ public class TeamService {
 
     }
 
+
+    /**
+     * teamRequestDto로 team에 스킬 추가
+     * @param teamRequestDto
+     * @param team
+     */
     private void addTeamTechByTeamRequest(TeamRequestDto teamRequestDto, Team team){
          techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
                 .stream()
@@ -95,8 +99,8 @@ public class TeamService {
     //팀 게시글 삭제
     @Transactional
     public void delete(Long teamId, UserDetailsImpl userDetails) throws ResponeException {
-        User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
-        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+        User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new CoNectNotFoundException(NOT_EXIST_USER));
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new CoNectNotFoundException(NOT_EXIST_TEAM));
 
         if(checkTeamUser(team, user) == false) throw new CoNectLogicalException(PERMISSION_DENIED);
         teamRepository.deleteTeam(teamId);
@@ -104,30 +108,18 @@ public class TeamService {
     }
 
     //팀 게시글 수정
-    public void update(Long teamId, TeamRequestDto teamRequestDto, String email) throws ResponeException {
-        com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponeException(NOT_EXIST_USER));
+    @Transactional
+    public void update(Long teamId, TeamRequestDto teamRequestDto, UserDetailsImpl userDetails) throws ResponeException {
+        Team team = teamRepository.findById(teamId).orElseThrow(() ->  new CoNectNotFoundException(NOT_EXIST_TEAM));
+        User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() ->  new CoNectNotFoundException(NOT_EXIST_USER));
 
-        if(checkTeamUser(team, user)==false) throw new ResponeException(PERMISSION_DENIED);
+        if(checkTeamUser(team, user)==false) throw new CoNectLogicalException(PERMISSION_DENIED);
+        team.updateWith(teamRequestDto);
+        //이미 있는것들 비우고 다시 넣음
+        Set<TeamTech> teamTeches = team.getTeamTeches();
+        teamTeches.clear();
+        addTeamTechByTeamRequest(teamRequestDto,team);
 
-        try {
-            team.update(teamRequestDto);
-            teamTechRepository.deleteAllByTeam_Id(team.getId());
-
-//            List<Long> techs = teamRequestDto.getSkills();
-//            for (Long t : techs) {
-//                TechStack techStack = techStackRepository.findById(t).orElseThrow(() -> new ResponeException(SAVE_TEAM_ERROR));
-//                TeamTech teamTech = TeamTech.builder()
-//                        .team(team)
-//                        .techStack(techStack)
-//                        .build();
-//
-//                teamTechRepository.save(teamTech);
-//            }
-            teamRepository.save(team);
-        }catch(Exception e){
-            throw new ResponeException(UPDATE_TEAM_ERROR);
-        }
     }
 
 
@@ -141,6 +133,8 @@ public class TeamService {
         if(team.getOwnerId().equals(user.getId())) return true;
         else return false;
     }
+
+
 
     //팀 좋아요 누르기
     public void doTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException {

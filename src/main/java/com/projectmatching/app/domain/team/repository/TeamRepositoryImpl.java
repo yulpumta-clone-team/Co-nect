@@ -27,11 +27,11 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom{
     }
 
     @Override
-    public void deleteTeam(Long team_id) {
+    public void deleteTeam(Long teamId) {
         queryFactory.update(team)
                 .set(team.status, "removed")
                 .where(
-                        team.id.eq(team_id)
+                        team.id.eq(teamId)
                 ).execute();
     }
 }

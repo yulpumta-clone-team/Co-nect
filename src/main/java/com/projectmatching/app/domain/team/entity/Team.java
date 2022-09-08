@@ -72,10 +72,13 @@ public class Team extends BaseTimeEntity {
     @Builder.Default
     private Set<TeamLiking> teamLikings = new HashSet<>();
 
-    public void update(TeamRequestDto teamRequestDto){
+    public void updateWith(TeamRequestDto teamRequestDto){
+        this.image = teamRequestDto.getImage();
         this.name = teamRequestDto.getName();
+        this.slogan = teamRequestDto.getSlogan();
         this.session = teamRequestDto.getSession();
         this.content = teamRequestDto.getContent();
+
     }
 
     public static Team valueOf(TeamRequestDto teamRequestDto, User user){

@@ -1,6 +1,7 @@
 package com.projectmatching.app.service.user.userdetail;
 
 import com.projectmatching.app.domain.user.Role;
+import com.projectmatching.app.domain.user.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,18 @@ public class UserDetailsImpl implements UserDetails {
         this.name = name;
         this.pwd = pwd;
     }
+
+    public UserDetailsImpl(User user){
+
+        this.id = user.getId();
+        this.oauthId = user.getOauthId();
+        this.role = user.getRole();
+        this.email = user.getEmail();
+        this.name = user.getName();
+        this.pwd = user.getPwd();
+
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

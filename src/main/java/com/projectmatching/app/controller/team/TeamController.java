@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
 import static com.projectmatching.app.constant.ServiceConstant.PAGING_SIZE;
 
 
@@ -41,7 +42,7 @@ public class TeamController {
     @PostMapping("/team")
     public ResponseTemplate<Void> saveTeam(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody TeamRequestDto requestDto){
         teamService.TeamSave(requestDto,userDetails);
-        return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
+        return ResponseTemplate.of(SUCCESS);
     }
 
     /**
@@ -80,9 +81,8 @@ public class TeamController {
     @ApiOperation(value = "team 게시글 수정 API", notes = "팀 게시글을 수정합니다.")
     @PatchMapping("/team/{team_id}")
     public ResponseTemplate<String> updateTeam(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long team_id, @RequestBody TeamRequestDto requestDto){
-        teamService.update(team_id, requestDto, userDetails.getEmail());
-        String result = "팀 수정에 성공하였습니다.";
-        return ResponseTemplate.valueOf(result);
+        teamService.update(team_id, requestDto, userDetails);
+        return ResponseTemplate.of(SUCCESS);
     }
 
     /**
@@ -92,7 +92,7 @@ public class TeamController {
     @PatchMapping("/team/liking/{team_id}")
     public ResponseTemplate<Boolean> doTeamLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "team_id") Long teamId){
         teamService.doTeamLiking(userDetails, teamId);
-        return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
+        return ResponseTemplate.of(SUCCESS);
     }
 
     /**
@@ -102,7 +102,7 @@ public class TeamController {
     @DeleteMapping("/team/unliking/{team_id}")
     public ResponseTemplate<Boolean> cancelTeamLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "team_id") Long teamId){
         teamService.cancelTeamLiking(userDetails, teamId);
-        return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
+        return ResponseTemplate.of(SUCCESS);
     }
 
     /**
