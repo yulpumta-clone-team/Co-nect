@@ -38,4 +38,6 @@ public class TeamTech extends BaseTimeEntity {
         return teamTech;
     }
 
+
+
 }

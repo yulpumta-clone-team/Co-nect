@@ -1,6 +1,7 @@
 package com.projectmatching.app.service.team;
 
 import com.projectmatching.app.config.resTemplate.ResponeException;
+import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.liking.entity.TeamLiking;
 import com.projectmatching.app.domain.liking.repository.TeamLikingRepository;
 import com.projectmatching.app.domain.team.dto.TeamDetailResponseDto;
@@ -19,10 +20,12 @@ import com.projectmatching.app.domain.user.UserTeamRepository;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
+import com.projectmatching.app.exception.CoNectLogicalException;
 import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +40,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @RequiredArgsConstructor
 @Service
 @Transactional
+@Slf4j
 public class TeamService {
     private final TeamRepository teamRepository;
     private final TechStackProvider techStackProvider;
@@ -54,14 +58,16 @@ public class TeamService {
         teamRepository.save(team);
         addTeamTechByTeamRequest(requestDto,team);
 
+
     }
 
     private void addTeamTechByTeamRequest(TeamRequestDto teamRequestDto, Team team){
-        techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
+         techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
                 .stream()
                 .map(techCode -> TechStack.of(techCode))
                 .map(techStack -> TeamTech.of(techStack,team)
                 ).forEach(teamTech -> team.getTeamTeches().add(teamTech));
+
     }
 
 
@@ -70,7 +76,7 @@ public class TeamService {
     public List<TeamSimpleDto> getTeamSimples(PageRequest pageRequest) throws ResponeException {
         return teamRepository.getTeams(pageRequest).stream()
                 .map(team -> {
-            User user = userRepository.findById(team.getOwnerId()).orElseThrow(CoNectNotFoundException::new);
+            User user = userRepository.findById(team.getOwnerId()).orElseThrow(()-> new CoNectNotFoundException(NOT_EXIST_USER));
             return TeamSimpleDto.valueOf(team,user);
         }).collect(Collectors.toList());
 
@@ -79,7 +85,7 @@ public class TeamService {
     //팀 게시글 상세조회
     @Transactional(readOnly = true)
     public TeamDto getTeam(Long teamId) throws ResponeException {
-        Team team = teamRepository.findById(teamId).orElseThrow(() -> new ResponeException(NOT_EXIST_TEAM));
+        Team team = teamRepository.findById(teamId).orElseThrow(()-> new CoNectNotFoundException(NOT_EXIST_TEAM));
         return TeamDto.of(team);
 
     }

@@ -52,20 +52,24 @@ public class Team extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     @BatchSize(size = 8)
+    @Builder.Default
     private Set<UserTeam> userTeams = new HashSet<>();
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     @BatchSize(size = 8)
+    @Builder.Default
     private Set<TeamComment> teamComments = new HashSet<>();
 
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     @BatchSize(size = 8)
+    @Builder.Default
     private Set<TeamTech> teamTeches = new HashSet<>();
 
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     @BatchSize(size = 8)
+    @Builder.Default
     private Set<TeamLiking> teamLikings = new HashSet<>();
 
     public void update(TeamRequestDto teamRequestDto){

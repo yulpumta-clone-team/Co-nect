@@ -12,4 +12,5 @@ public class CoNectNotFoundException extends ResponeException {
     public CoNectNotFoundException(){super(ResponseTemplateStatus.NOT_FOUND);}
 
 
+
 }
