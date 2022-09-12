@@ -23,30 +23,19 @@ const userCardTypeSchema = {
 
 const userDetailTypeSchema = {
   ...userSchema,
-  job: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-  hopeSession: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
   commentCnt: PropTypes.number.isRequired,
   content: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  hopeSession: PropTypes.string.isRequired,
+  job: PropTypes.string.isRequired,
   likeCnt: PropTypes.number.isRequired,
-  oauthId: PropTypes.string.isRequired,
   portfolio: PropTypes.string.isRequired,
-};
-
-const userEditTypeSchema = {
-  ...userSchema,
-  job: PropTypes.string,
-  img: PropTypes.string,
-  hopeSession: PropTypes.string,
-  description: PropTypes.string,
-  content: PropTypes.string,
-  portfolio: PropTypes.string,
-  email: PropTypes.string.isRequired,
-  commentCnt: PropTypes.number.isRequired,
-  likeCnt: PropTypes.number.isRequired,
-  oauthId: PropTypes.string.isRequired,
+  readCnt: PropTypes.number.isRequired,
+  userInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
 };
 
 export const userType = shape(userSchema);
@@ -54,5 +43,3 @@ export const userType = shape(userSchema);
 export const userCardType = shape(userCardTypeSchema);
 
 export const userDetailType = shape(userDetailTypeSchema);
-
-export const userEditType = shape(userEditTypeSchema);
