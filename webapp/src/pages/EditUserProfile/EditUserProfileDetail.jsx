@@ -1,7 +1,7 @@
 import React from 'react';
 import { userEditParser, userPostEditParser } from 'service/user.parser';
 import { skillStackParser } from 'service/skillStack.parser';
-import { editUserValidation } from 'service/user.validation';
+import { editUserValidation } from 'service/user/user.validation';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
