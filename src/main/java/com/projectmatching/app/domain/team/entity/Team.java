@@ -4,7 +4,10 @@ import com.projectmatching.app.domain.BaseTimeEntity;
 import com.projectmatching.app.domain.comment.entity.TeamComment;
 import com.projectmatching.app.domain.liking.entity.TeamLiking;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
+import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
+import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
+import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
 
@@ -24,8 +27,13 @@ import java.util.Set;
 public class Team extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private String image;
+
+    @Column
+    private String slogan;
 
     @Column
     private String name;
@@ -33,35 +41,60 @@ public class Team extends BaseTimeEntity {
     @Column
     private String session;
 
-
-    @Column
-    private Long read;
+    @Column(name = "readCnt")
+    private Long readCnt;
 
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    @Column(name = "owner_id")
+    private Long ownerId;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     @BatchSize(size = 8)
+    @Builder.Default
     private Set<UserTeam> userTeams = new HashSet<>();
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     @BatchSize(size = 8)
+    @Builder.Default
     private Set<TeamComment> teamComments = new HashSet<>();
 
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     @BatchSize(size = 8)
+    @Builder.Default
     private Set<TeamTech> teamTeches = new HashSet<>();
 
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     @BatchSize(size = 8)
+    @Builder.Default
     private Set<TeamLiking> teamLikings = new HashSet<>();
 
-    public void update(TeamRequestDto teamRequestDto){
+    public void updateWith(TeamRequestDto teamRequestDto){
+        this.image = teamRequestDto.getImage();
         this.name = teamRequestDto.getName();
+        this.slogan = teamRequestDto.getSlogan();
         this.session = teamRequestDto.getSession();
         this.content = teamRequestDto.getContent();
+
     }
+
+    public static Team valueOf(TeamRequestDto teamRequestDto, User user){
+        Team team = new Team();
+        team.userTeams.add(UserTeam.valueOf(user,team));
+        team.ownerId = user.getId();
+        team.id = IdGenerator.number();
+        team.name = teamRequestDto.getName();
+        team.content = teamRequestDto.getContent();
+        team.image = teamRequestDto.getImage();
+        team.slogan = teamRequestDto.getSlogan();
+        team.session = teamRequestDto.getSession();
+
+        return team;
+    }
+
+
+
 }
