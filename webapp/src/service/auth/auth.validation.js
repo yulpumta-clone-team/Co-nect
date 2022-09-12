@@ -1,14 +1,14 @@
 import { emailRegex, passwordRegex } from 'constant/service.constant';
 
 /**
- * 로그인용 - input들의 key, value로 이뤄진 에러 객체
+ * 로그인: Inputs Object - input들의 key, value로 이뤄진 에러 객체
  * @typedef {Object} validateErrors
  * @property {string} name
  * @property {string} password
  */
 
 /**
- * 로그인용 - input들의 key, value로 이뤄진 객체
+ * 로그인: Erros Object - input들의 key, value로 이뤄진 객체
  * @typedef {Object} validateObj
  * @property {string} email  email
  * @property {string} password  password
@@ -19,7 +19,6 @@ import { emailRegex, passwordRegex } from 'constant/service.constant';
  * @param {validateObj} validtionObj input들의 key, value로 이뤄진 객체
  * @returns {validateErrors} input들의 key, value로 이뤄진 에러 객체
  */
-
 export const loginValidate = ({ email, password }) => {
   const validateErrors = {
     email: '',
@@ -44,7 +43,7 @@ export const loginValidate = ({ email, password }) => {
 };
 
 /**
- * 회원가입용 - input들의 key, value로 이뤄진 에러 객체
+ * 회원가입: Inputs Object - input들의 key, value로 이뤄진 에러 객체
  * @typedef {Object} validateErrors
  * @property {string} name
  * @property {string} password
@@ -52,7 +51,7 @@ export const loginValidate = ({ email, password }) => {
  */
 
 /**
- * 회원가입용 - input들의 key, value로 이뤄진 객체
+ * 회원가입: Erros Object - input들의 key, value로 이뤄진 객체
  * @typedef {Object} validateObj
  * @property {string} email  email
  * @property {string} password  password
@@ -64,7 +63,6 @@ export const loginValidate = ({ email, password }) => {
  * @param {validateObj} validtionObj input들의 key, value로 이뤄진 객체
  * @returns {validateErrors} input들의 key, value로 이뤄진 에러 객체
  */
-
 export const signUpValidate = ({ email, password, verifiedPassword }) => {
   const validateErrors = {
     email: '',

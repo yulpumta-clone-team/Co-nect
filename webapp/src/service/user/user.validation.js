@@ -1,3 +1,22 @@
+/**
+ * 유저프로필수정: Inputs Object - input들의 key, value로 이뤄진 객체
+ * @typedef {Object} validateObj
+ * @property {string} nickname  nickname
+ * @property {Array} techSkills  techSkills
+ */
+
+/**
+ * 유저프로필수정: Erros Object - input들의 key, value로 이뤄진 에러 객체
+ * @typedef {Object} validateErrors
+ * @property {string} nickname
+ * @property {string} techSkills
+ */
+
+/**
+ * 유저 프로필 수정 vaidation
+ * @param {validateObj} validtionObj input들의 key, value로 이뤄진 객체
+ * @returns {validateErrors} input들의 key, value로 이뤄진 에러 객체
+ */
 export const editUserValidation = ({ nickname, techSkills }) => {
   const validateErrors = {
     nickname: '',
@@ -15,6 +34,39 @@ export const editUserValidation = ({ nickname, techSkills }) => {
   return validateErrors;
 };
 
+/**
+ * 필수정보입력: Inputs Object - input들의 key, value로 이뤄진 객체
+ * @typedef {Object} validateObj
+ * @property {string} nickname
+ * @property {string} profileImage
+ * @property {string} skills
+ * @property {string} slogan
+ * @property {string} hopeSession
+ * @property {string} job
+ * @property {string} belongTeam
+ * @property {string} introduction
+ * @property {string} portfolio
+ */
+
+/**
+ * 필수정보입력: Erros Object - input들의 key, value로 이뤄진 에러 객체
+ * @typedef {Object} validateErrors
+ * @property {string} nickname
+ * @property {string} profileImage
+ * @property {Array} skills
+ * @property {string} slogan
+ * @property {string} hopeSession
+ * @property {string} job
+ * @property {string} belongTeam
+ * @property {string} introduction
+ * @property {string} portfolio
+ */
+
+/**
+ * 유저 프로필 수정 vaidation
+ * @param {validateObj} validtionObj input들의 key, value로 이뤄진 객체
+ * @returns {validateErrors} input들의 key, value로 이뤄진 에러 객체
+ */
 export const essentialValidation = ({
   nickname,
   profileImage,
