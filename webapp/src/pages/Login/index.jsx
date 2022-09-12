@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
-import loginValidate from 'service/login.validation';
+import { loginValidate } from 'service/auth.validation';
 import useForm from 'hooks/useForm';
 import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
