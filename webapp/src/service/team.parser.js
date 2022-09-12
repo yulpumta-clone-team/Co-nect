@@ -29,7 +29,7 @@ export const newTeamPostParser = (newTeamPostData) => {
   const parsedTechSkills = skillStackParserToIds(techSkills);
   return {
     content: introduction,
-    hope_session: hopeSession,
+    session: hopeSession,
     image: profileImage,
     name,
     skills: parsedTechSkills,
