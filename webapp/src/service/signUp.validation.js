@@ -1,5 +1,26 @@
 import { emailRegex, passwordRegex } from 'constant/service.constant';
 
+/**
+ * input들의 key, value로 이뤄진 에러 객체
+ * @typedef {Object} validateErrors
+ * @property {string} name
+ * @property {string} password
+ */
+
+/**
+ * input들의 key, value로 이뤄진 객체
+ * @typedef {Object} validateObj
+ * @property {string} email  email
+ * @property {string} password  password
+ * @property {string} verifiedPassword verifiedPassword
+ */
+
+/**
+ * signup vaidation
+ * @param {validateObj} validtionObj input들의 key, value로 이뤄진 객체
+ * @returns {validateErrors} input들의 key, value로 이뤄진 에러 객체
+ */
+
 const signUpValidate = ({ email, password, verifiedPassword }) => {
   const validateErrors = {
     email: '',
