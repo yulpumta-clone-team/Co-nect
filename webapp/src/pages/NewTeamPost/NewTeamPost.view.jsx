@@ -71,12 +71,12 @@ export default function NewTeamPostView({
           </S.ImgContainer>
           <S.PostInfoContainer>
             <TextInput
-              name="name"
+              name="teamName"
               label="팀 이름"
               placeholder="팀 이름"
-              value={inputValues.name}
+              value={inputValues.teamName}
               onChange={onChangeHandler}
-              helperText={validateError.name}
+              helperText={validateError.teamName}
               isError={isTeamNameValidateError}
             />
             <TechStackSelectInput

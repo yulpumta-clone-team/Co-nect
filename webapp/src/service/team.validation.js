@@ -1,12 +1,12 @@
-export const newTeamPostValidation = ({ name, techSkills, slogan }) => {
+export const newTeamPostValidation = ({ teamName, techSkills, slogan }) => {
   const validateErrors = {
-    name: '',
+    teamName: '',
     techSkills: '',
     slogan: '',
   };
 
-  if (!name) {
-    validateErrors.name = '팀이름이 입력되지 않았습니다. ';
+  if (!teamName) {
+    validateErrors.teamName = '팀이름이 입력되지 않았습니다. ';
   }
 
   if (techSkills.length === 0) {

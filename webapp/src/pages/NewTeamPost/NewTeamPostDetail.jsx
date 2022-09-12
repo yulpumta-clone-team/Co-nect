@@ -54,7 +54,7 @@ export default function NewTeamPostDetail() {
     isTargetSatisfyValidate,
   } = useForm({
     initialValues: {
-      name: '',
+      teamName: '',
       techSkills: [],
       profileImage: '',
       hopeSession: '',
