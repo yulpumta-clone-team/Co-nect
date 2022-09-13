@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { userCardType } from 'types/user.type';
 import ProfileImg from 'components/ProfileImg';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
-import { userCardParser } from 'service/user.parser';
+import { userCardParser } from 'service/user/user.parser';
 import TechSkills from 'components/TechSkills';
 import * as S from './UserCard.style';
 

@@ -1,8 +1,13 @@
 /* eslint-disable no-prototype-builtins */
 import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
-import { skillStackParserToIds } from './skillStack.parser';
+import { skillStackParserToIds } from '../skillStack.parser';
 
+/**
+ * 유저 카드 Parser: 없는 정보를 기본 값으로 세팅하고, key값을 구체적인 네이밍으로 변경
+ * @param {UserCardSchema} userCardInfo
+ * @returns {validateErrors} parsing된 userCardInfo 객체
+ */
 export const userCardParser = (userCardInfo) => {
   const job = userCardInfo.job || jobOptions[0].value;
   const hopeSession = userCardInfo.hopeSession || hopeSessionOption[0].value;
@@ -21,6 +26,11 @@ export const userCardParser = (userCardInfo) => {
   };
 };
 
+/**
+ * 유저 카드 Parser: 없는 정보를 기본 값으로 세팅하고, key값을 구체적인 네이밍으로 변경
+ * @param {UserCardSchema} userCardInfo
+ * @returns {validateErrors} parsing된 userCardInfo 객체
+ */
 export const userDetailParser = (userDetailInfo) => {
   const job = userDetailInfo.job || jobOptions[0].value;
   const hopeSession = userDetailInfo.hopeSession || hopeSessionOption[0].value;

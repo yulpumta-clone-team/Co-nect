@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CommentContainer from 'components/ComentContainer';
 import { POST_TYPE } from 'constant';
-import { userDetailParser } from 'service/user.parser';
+import { userDetailParser } from 'service/user/user.parser';
 import Image from 'components/Common/Image';
 import Divider from 'components/Common/Divider';
 import TechSkills from 'components/TechSkills';
