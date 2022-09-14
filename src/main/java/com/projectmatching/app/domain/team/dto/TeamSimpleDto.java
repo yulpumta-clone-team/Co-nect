@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TeamSimpleDto {
 
+    private Long id;
     private String name;
     private UserInfo userInfo;
     private String session;
