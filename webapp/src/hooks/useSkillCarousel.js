@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 /**
  * useSkillCarousel가 동작하기 위해 외부에서 주입해야하는 params
  * @typedef {Object} useSkillCarouselParams
- * @property {Function} array 캐러셀에서 보여줄 기술스택 목록
+ * @property {array} skills 캐러셀에서 보여줄 기술스택 목록
  * @property {number} viewingSkill 한 화면에 보여줄 기술스택 수
  */
 
@@ -11,12 +11,12 @@ import { useEffect, useRef, useState } from 'react';
  * useSkillCarousel를 사용하는 곳에서 사용할 method 및 state
  * @typedef {Object} useSkillCarouselReturns
  * @property {Object} slideRef carousel container에 등록한 useRef 객체
- * @property {function} handleClickNextSlide 캐러셀 왼쪽으로 이동하는 함수
- * @property {function} handleClickPrevSlide 캐러셀 오른쪽으로 이동하는 함수
+ * @property {() => void} handleClickNextSlide 캐러셀 왼쪽으로 이동하는 함수
+ * @property {() => void} handleClickPrevSlide 캐러셀 오른쪽으로 이동하는 함수
  */
 
 /**
- * custom useSkillCarousel hooks
+ * 기술스택 캐러셀 로직을 위한 custom hooks
  * @param {useSkillCarouselParams} useSkillCarouselParams useSkillCarousel가 동작하기 위해 외부에서 주입해야하는 params
  * @returns {useSkillCarouselReturns} useSkillCarousel를 사용하는 곳에서 사용할 method 및 state
  */

@@ -7,7 +7,7 @@ import useUserInfo from './useUserInfo';
 /**
  * useAxios가 동작하기 위해 외부에서 주입해야하는 params
  * @typedef {Object} useAxiosParams
- * @property {Function} axiosInstance axios instance
+ * @property {(axiosConfig: Object) => Promise<any>} axiosInstance axios instance
  * @property {Object} axiosConfig axios intance를 실행할 때 넘겨줄 params
  * @property {boolean} immediate 컴포넌트가 렌더링되자마자 요청 보내는지 여부 (get요청일 때만 true)
  */

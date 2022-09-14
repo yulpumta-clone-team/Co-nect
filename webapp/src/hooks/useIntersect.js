@@ -14,7 +14,7 @@ const defaultOption = {
  * @type {Array}
  * @property {Object} loadMoreRef root에 등록할 useRef 객체
  * @property {number} page 증가할 page 숫자
- * @property {function: () => void} resetPage page를 0으로 만드는 함수
+ * @property {() => void} resetPage page를 0으로 만드는 함수
  */
 
 /**

@@ -14,7 +14,7 @@ import { useCallback, useState } from 'react';
  * useform이 동작하기 위해 외부에서 주입해야하는 params
  * @typedef {Object} userFormParams
  * @property {Object} initialValues  form에서 사용할 input들의 객체
- * @property {function} submitCallback  form에서 사용할 submit 함수
+ * @property {(inputValues: Object) => Promise<void>} submitCallback  form에서 사용할 submit 함수
  * @property {ValidateChecker} validate  form에서 사용할 Input들의 객체에 대한 validation을 체크하는 함수
  */
 
@@ -23,10 +23,10 @@ import { useCallback, useState } from 'react';
  * @typedef {Object} userFormReturns
  * @property {Object} inputValues  form에서 사용하는 input들의 객체
  * @property {Object} validateError   form에서 사용하는 input에 해당하는 에러 객체
- * @property {function} onChangeHandler  inputValues 중 모든 text Input OnChange를 위한 함수
- * @property {function} onChangeHandlerWithSelect  inputValues 중 모든 select 태그 OnChange를 위한 함수
- * @property {function} submitHandler  모든 validate 조건을 만족하면 submitcallback 실행
- * @property {function} isTargetSatisfyValidate  validation을 체크하고 싶은 input의 키 값을 넣으면 boolean을 반환
+ * @property {(Event) => void} onChangeHandler  inputValues 중 모든 text Input OnChange를 위한 함수
+ * @property {(Event) => void} onChangeHandlerWithSelect  inputValues 중 모든 select 태그 OnChange를 위한 함수
+ * @property {(Event) => Promise<void>} submitHandler  모든 validate 조건을 만족하면 submitcallback 실행
+ * @property {(target: string) => boolean} isTargetSatisfyValidate  validation을 체크하고 싶은 input의 키 값을 넣으면 boolean을 반환
  * @property {boolean} satisfyAllValidates  validateError 객체에 있는 모든 데이터의 value가 ""이거나 null이면 true를 반환
  */
 

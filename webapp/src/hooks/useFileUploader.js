@@ -11,11 +11,11 @@ import useUserInfo from './useUserInfo';
  * useFileUploader를 사용하는 곳에서 사용할 method 및 state
  * @typedef {Object} useFileUploaderReturns
  * @property {string} imageFile isLoading, responseData, error로 구성
- * @property {function} onChangeFile 새로운 axios config와 함께 api호출을 실행하는 함수
+ * @property {(Event) => void} onChangeFile 새로운 axios config와 함께 api호출을 실행하는 함수
  * @property {string} s3ImageId 기존 axios config로 같은 api호출을 실행하는 함수
  * @property {Object} s3ImageObj id: s3ImageId, path: /image/:s3ImageId
- * @property {function} uploadFileOnS3
- * @property {function} deleteFileOnS3
+ * @property {(submitImageFile: File) => Promise<{id: string, path: string} | null>} uploadFileOnS3 s3에 이미지 업로드 요청하는 함수
+ * @property {() => Promise<void>} deleteFileOnS3  s3에 올라간 이미지를 제거 요청하는 함수
  */
 
 /**
