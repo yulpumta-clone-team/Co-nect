@@ -19,7 +19,7 @@ import { useCallback, useState } from 'react';
  */
 
 /**
- * useForm을 사용하는 곳에서 사용할 method 및 값들
+ * useForm을 사용하는 곳에서 사용할 method 및 state
  * @typedef {Object} userFormReturns
  * @property {Object} inputValues  form에서 사용하는 input들의 객체
  * @property {Object} validateError   form에서 사용하는 input에 해당하는 에러 객체
