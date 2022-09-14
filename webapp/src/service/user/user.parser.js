@@ -4,9 +4,21 @@ import { parsedNumberToThreeDigits } from 'utils';
 import { skillStackParserToIds } from '../skillStack.parser';
 
 /**
+ * userCardParser의 반환값
+ * @typedef parsedUserCardInfo
+ * @property {number} id
+ * @property {string} name
+ * @property {array} skills
+ * @property {string} slogan
+ * @property {boolean} status
+ * @property {number} commentCnt
+ * @property {number} likeCnt
+ */
+
+/**
  * 유저 카드 Parser: 없는 정보를 기본 값으로 세팅하고, key값을 구체적인 네이밍으로 변경
- * @param {UserCardSchema} userCardInfo
- * @returns {validateErrors} parsing된 userCardInfo 객체
+ * @param {UserCardSchema} userCardInfo src/types/user.typedef.js
+ * @returns {parsedUserCardInfo} parsing된 userCardInfo 객체
  */
 export const userCardParser = (userCardInfo) => {
   const job = userCardInfo.job || jobOptions[0].value;
@@ -27,58 +39,84 @@ export const userCardParser = (userCardInfo) => {
 };
 
 /**
- * 유저 카드 Parser: 없는 정보를 기본 값으로 세팅하고, key값을 구체적인 네이밍으로 변경
- * @param {UserCardSchema} userCardInfo
- * @returns {validateErrors} parsing된 userCardInfo 객체
+ * userDetailParser 반환값
+ * @typedef parsedUserDetailInfo
+ * @property {boolean} belongTeam 유저의 팀 소속 여부
+ * @property {number} commentCnt
+ * @property {string} email
+ * @property {string} hopeSession 유저의 희망작업기간
+ * @property {string} introduction 유저의 자기소개
+ * @property {string} job 유저의 현재직업
+ * @property {number} likeCnt
+ * @property {string} nickname 유저 닉네임
+ * @property {number} userId 유저 아이디
+ * @property {string} portfolio 유저의 포트폴리오 링크
+ * @property {string} profileImage
+ * @property {number} readCnt
+ * @property {array} techSkills 유저의 기술 스택
+ * @property {string} slogan 유저의 슬로건
  */
-export const userDetailParser = (userDetailInfo) => {
-  const job = userDetailInfo.job || jobOptions[0].value;
-  const hopeSession = userDetailInfo.hopeSession || hopeSessionOption[0].value;
-  const skills = userDetailInfo.skills || [];
-  const portfolio = userDetailInfo.portfolio || '포트폴리오가 없습니다.';
-  const content = userDetailInfo.content || '입력한 자기소개가 없습니다.';
-  const slogan = userDetailInfo.slogan || '입력한 슬로건이 없습니다.';
 
-  return {
-    ...userDetailInfo,
-    job,
-    hopeSession,
-    skills,
-    portfolio,
-    content,
-    slogan,
-  };
-};
+/**
+ * 유저 프로필 Detail Parser: 없는 정보를 기본 값으로 세팅하고, key값을 구체적인 네이밍으로 변경
+ * @param {UserDetailSchema} userDetailInfo src/types/user.typedef.js
+ * @returns {parsedUserDetailInfo} parsing된 userDetail 객체
+ */
 
-// get 요청 후
-export const userEditParser = (targetUserInfo) => {
-  const userId = targetUserInfo.id;
+export const userDetailParser = (targetUserInfo) => {
+  const userId = targetUserInfo.userInfo.id;
+  const nickname = targetUserInfo.userInfo.name;
+  const profileImage = targetUserInfo.userInfo.image || '';
+  const { email } = targetUserInfo;
   const techSkills = targetUserInfo.skills || [];
-  const nickname = targetUserInfo.name;
-  const profileImage = targetUserInfo.img || '';
-  const slogan = targetUserInfo.slogan || '';
-  const hopeSession = targetUserInfo.hopeSession || '';
+  const slogan = targetUserInfo.slogan || '입력된 슬로건이 없네요.';
+  const hopeSession = targetUserInfo.hopeSession || hopeSessionOption[0].value;
   const job = targetUserInfo.job || jobOptions[0].value;
   const belongTeam = targetUserInfo.status
     ? belongTeamOptions[0].value
     : belongTeamOptions[1].value;
-  const introduction = targetUserInfo.content || '';
+  const introduction = targetUserInfo.content || '입력된 자기소개가 없네요.';
   const portfolio = targetUserInfo.portfolio || '';
+  const commentCnt = parsedNumberToThreeDigits(targetUserInfo.commentCnt);
+  const likeCnt = parsedNumberToThreeDigits(targetUserInfo.likeCnt);
+  const readCnt = parsedNumberToThreeDigits(targetUserInfo.readCnt);
   return {
-    userId,
+    belongTeam,
+    commentCnt,
+    email,
+    hopeSession,
+    introduction,
+    job,
+    likeCnt,
     nickname,
+    userId,
+    portfolio,
     profileImage,
+    readCnt,
     techSkills,
     slogan,
-    hopeSession,
-    job,
-    belongTeam,
-    introduction,
-    portfolio,
   };
 };
 
-// post 요청 전
+/**
+ * userPostEditParser 반환값
+ * @typedef parsedEditUserInfo
+ * @property {string} content 유저의 자기소개
+ * @property {string} hope_session 유저의 희망작업기간
+ * @property {string} image 유저의 프로필 이미지
+ * @property {string} job 유저의 현재직업
+ * @property {string} name 유저 닉네임
+ * @property {string} portfolio 유저의 포트폴리오 링크
+ * @property {array} skills 유저의 기술 스택
+ * @property {string} slogan 유저의 슬로건
+ */
+
+/**
+ * 유저 프로필 수정 요청 parser: key값을 서버에서 사용하는 키값으로 변경
+ * @param {UserInfoInputSchema} userInfoRawData src/types/user.typedef.js
+ * @returns {parsedEditUserInfo} parsing된 edit user profile 객체
+ */
+
 export const userPostEditParser = (userInfoRawData) => {
   const {
     introduction,
@@ -91,12 +129,11 @@ export const userPostEditParser = (userInfoRawData) => {
     techSkills,
     belongTeam,
   } = userInfoRawData;
-  console.log('userInfoRawData', userInfoRawData);
   const paresedTechSkills = skillStackParserToIds(techSkills);
   return {
-    description: introduction,
+    content: introduction,
     hope_session: hopeSession,
-    img: profileImage,
+    image: profileImage,
     job,
     name: nickname,
     portfolio,
@@ -105,7 +142,25 @@ export const userPostEditParser = (userInfoRawData) => {
   };
 };
 
-// post 요청 전
+/**
+ * essentialInfoParser 반환값
+ * @typedef parsedEssentialInfo
+ * @property {string} content 유저의 자기소개
+ * @property {string} hope_session 유저의 희망작업기간
+ * @property {string} image 유저의 프로필 이미지
+ * @property {string} job 유저의 현재직업
+ * @property {string} name 유저 닉네임
+ * @property {string} portfolio 유저의 포트폴리오 링크
+ * @property {array} skills 유저의 기술 스택
+ * @property {string} slogan 유저의 슬로건
+ */
+
+/**
+ * 유저 필수정보 입력 요청 parser: key값을 서버에서 사용하는 키값으로 변경
+ * @param {UserInfoInputSchema} essentialInfoRawData src/types/user.typedef.js
+ * @returns {parsedEssentialInfo} parsing된 유저의 필수정보 객체
+ */
+
 export const essentialInfoParser = (essentialInfoRawData) => {
   const {
     introduction,

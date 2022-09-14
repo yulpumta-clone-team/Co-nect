@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
 import CommentContainer from 'components/ComentContainer';
 import { POST_TYPE } from 'constant';
 import { userDetailParser } from 'service/user/user.parser';
@@ -8,38 +6,43 @@ import Image from 'components/Common/Image';
 import Divider from 'components/Common/Divider';
 import TechSkills from 'components/TechSkills';
 import MarkdownEditor from 'components/MarkdownEditor';
+import { userDetailType } from 'types/user.type';
 import * as S from './UserPost.style';
+
+UserPostDetail.propTypes = {
+  targetUser: userDetailType,
+};
 
 export default function UserPostDetail({ targetUser }) {
   const parsedTargetUser = userDetailParser(targetUser);
   const {
-    id,
-    oauthId,
-    email,
-    name,
-    portfolio,
-    slogan,
-    content,
-    img,
-    hopeSession,
-    job,
-    skills,
-    status,
+    belongTeam,
     commentCnt,
+    email,
+    hopeSession,
+    introduction,
+    job,
     likeCnt,
+    nickname,
+    userId,
+    portfolio,
+    profileImage,
+    readCnt,
+    techSkills,
+    slogan,
   } = parsedTargetUser;
 
   return (
     <S.PostContainer>
       <S.ProfileImageContainer>
-        <Image src={img} alt="프로필 이미지" />
+        <Image src={profileImage} alt="프로필 이미지" />
       </S.ProfileImageContainer>
       <S.InfoContainer>
         <S.UserInfoContainer>
           <S.SingleInfo>
             <S.SingleInfoTitle>닉네임</S.SingleInfoTitle>
             <div>
-              <span>{name}</span>
+              <span>{nickname}</span>
             </div>
           </S.SingleInfo>
           <S.SingleInfo>
@@ -69,22 +72,22 @@ export default function UserPostDetail({ targetUser }) {
           <S.SingleInfo>
             <S.SingleInfoTitle>현재 상태</S.SingleInfoTitle>
             <div>
-              <span>{status ? '팀 있음' : '팀 없음'}</span>
+              <span>{belongTeam}</span>
             </div>
           </S.SingleInfo>
           <S.SingleInfo>
             <S.SingleInfoTitle>기술스택</S.SingleInfoTitle>
             <div>
-              <TechSkills skills={skills} imageSize="30px" />
+              <TechSkills skills={techSkills} imageSize="30px" />
             </div>
           </S.SingleInfo>
           <S.SingleInfo>
             <S.SingleInfoTitle>자기소개</S.SingleInfoTitle>
-            <MarkdownEditor onlyViewer content={content} />
+            <MarkdownEditor onlyViewer content={introduction} />
           </S.SingleInfo>
         </S.UserInfoContainer>
         <Divider customStyle={S.CommentDivder} />
-        <CommentContainer postType={POST_TYPE.USER} postWriter={name} postId={id} />
+        <CommentContainer postType={POST_TYPE.USER} postWriter={nickname} postId={userId} />
       </S.InfoContainer>
     </S.PostContainer>
   );

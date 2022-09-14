@@ -8,7 +8,7 @@ import * as S from './TechStackSelectInput.style';
 TechStackOptions.propTypes = {
   techStackOptionsApiState: PropTypes.shape({
     isLoading: PropTypes.bool.isRequired,
-    responseData: PropTypes.object,
+    responseData: PropTypes.array,
     error: PropTypes.object,
   }).isRequired,
   techSkillOptions: PropTypes.array.isRequired,

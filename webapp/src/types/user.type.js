@@ -4,7 +4,7 @@ import { rawResponseTechStackType } from './techSkill.type';
 export const loggedUserType = shape({
   id: PropTypes.number.isRequired,
   nickname: PropTypes.string.isRequired,
-  profileImg: PropTypes.string.isRequired,
+  profileImg: PropTypes.string,
 });
 
 const userSchema = {
@@ -22,7 +22,10 @@ const userCardTypeSchema = {
 };
 
 const userDetailTypeSchema = {
-  ...userSchema,
+  id: PropTypes.number.isRequired,
+  skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,
+  slogan: PropTypes.string.isRequired,
+  status: PropTypes.bool.isRequired,
   commentCnt: PropTypes.number.isRequired,
   content: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,

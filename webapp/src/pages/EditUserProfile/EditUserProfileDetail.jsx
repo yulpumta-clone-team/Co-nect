@@ -1,5 +1,5 @@
 import React from 'react';
-import { userEditParser, userPostEditParser } from 'service/user/user.parser';
+import { userDetailParser, userPostEditParser } from 'service/user/user.parser';
 import { skillStackParser } from 'service/skillStack.parser';
 import { editUserValidation } from 'service/user/user.validation';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
@@ -20,7 +20,7 @@ EditUserProfileDetail.propTypes = {
 export default function EditUserProfileDetail({ targetUser }) {
   const notifyDispatch = useToastNotificationAction();
 
-  const parsedTargerUserInfo = userEditParser(targetUser);
+  const parsedTargerUserInfo = userDetailParser(targetUser);
   const {
     userId,
     nickname,
