@@ -1,28 +1,41 @@
 import PropTypes, { shape } from 'prop-types';
-import { userDetailType } from './user.type';
+import { rawResponseTechStackType } from './techSkill.type';
 
+/**
+ * @type {TeamSchema}
+ */
 const teamSchema = {
   id: PropTypes.number.isRequired,
-  img: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  hopeSession: PropTypes.string.isRequired,
-  read: PropTypes.number.isRequired,
-  skills: PropTypes.arrayOf(PropTypes.string).isRequired,
-  status: PropTypes.string.isRequired,
-  user: userDetailType.isRequired, // 작성자 정보
+  skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,
+  session: PropTypes.string.isRequired,
   slogan: PropTypes.string.isRequired,
+  userInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
 };
 
+/**
+ * @type {TeamCardSchema}
+ */
 const teamCardTypeSchema = {
   ...teamSchema,
   commentCnt: PropTypes.number.isRequired,
   likeCnt: PropTypes.number.isRequired,
+  readCnt: PropTypes.number.isRequired,
 };
 
+/**
+ * @type {TeamDetailSchema}
+ */
 const teamDetailTypeSchema = {
   ...teamSchema,
   commentCnt: PropTypes.number.isRequired,
   likeCnt: PropTypes.number.isRequired,
+  readCnt: PropTypes.number.isRequired,
 };
 
 export const teamType = shape(teamSchema);

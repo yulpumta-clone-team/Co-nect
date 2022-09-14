@@ -1,4 +1,12 @@
 /**
+ * 유저 필수 정보 서버측 스키마
+ * @typedef UserInfoSchema
+ * @property {number} id
+ * @property {string} name
+ * @property {string} image
+ */
+
+/**
  * 유저의 서버측 스키마
  * @typedef UserSchema
  * @property {number} id
@@ -39,7 +47,7 @@
  * @property {number} likeCnt
  * @property {string} portfolio
  * @property {number} readCnt
- * @property {Object} userInfo id, image, name
+ * @property {UserInfoSchema} userInfo id, image, name
  */
 
 /**
