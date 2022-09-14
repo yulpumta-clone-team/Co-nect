@@ -7,6 +7,9 @@ export const loggedUserType = shape({
   profileImg: PropTypes.string,
 });
 
+/**
+ * @type {UserSchema}
+ */
 const userSchema = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
@@ -15,12 +18,18 @@ const userSchema = {
   status: PropTypes.bool.isRequired,
 };
 
+/**
+ * @type {UserCardSchema}
+ */
 const userCardTypeSchema = {
   ...userSchema,
   commentCnt: PropTypes.number.isRequired,
   likeCnt: PropTypes.number.isRequired,
 };
 
+/**
+ * @type {UserDetailSchema}
+ */
 const userDetailTypeSchema = {
   id: PropTypes.number.isRequired,
   skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,

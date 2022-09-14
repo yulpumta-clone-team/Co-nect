@@ -10,16 +10,27 @@
 
 /**
  * 유저 카드의 서버측 스키마
- * @typedef CardSchema
+ * @typedef UserCardSchema
+
+ * @property {number} id
+ * @property {string} name
+ * @property {array} skills
+ * @property {string} slogan
+ * @property {boolean} status
+ * 
  * @property {number} commentCnt
  * @property {number} likeCnt
- *
- * @typedef {UserSchema & CardSchema} UserCardSchema
  */
 
 /**
  * 유저 디테일 페이지 서버측 스키마
- * @typedef DetailSchema
+ * @typedef UserDetailSchema
+ * @property {number} id
+ * @property {string} name
+ * @property {array} skills
+ * @property {string} slogan
+ * @property {boolean} status
+ *
  * @property {number} commentCnt
  * @property {string} content
  * @property {string} email
@@ -29,8 +40,6 @@
  * @property {string} portfolio
  * @property {number} readCnt
  * @property {Object} userInfo id, image, name
- *
- * @typedef {UserSchema & DetailSchema} UserDetailSchema
  */
 
 /**
