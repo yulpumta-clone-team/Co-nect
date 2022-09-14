@@ -4,7 +4,7 @@ import CommentContainer from 'components/ComentContainer';
 import MarkdownEditor from 'components/MarkdownEditor';
 import { POST_TYPE } from 'constant';
 import Divider from 'components/Common/Divider';
-import { teamDetailParser } from 'service/team.parser';
+import { teamDetailParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
 import Image from 'components/Common/Image';
 import Slogan from 'pages/EssentialInfo/SubPages/Slogan';

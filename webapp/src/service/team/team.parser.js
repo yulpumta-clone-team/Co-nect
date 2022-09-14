@@ -1,6 +1,6 @@
 import { hopeSessionOption } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
-import { skillStackParserToIds } from './skillStack.parser';
+import { skillStackParserToIds } from '../skillStack.parser';
 
 /**
  * teamCardParser 반환값

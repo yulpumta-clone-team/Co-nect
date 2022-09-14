@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { teamCardType } from 'types/team.type';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 import ProfileImg from 'components/ProfileImg';
-import { teamCardParser } from 'service/team.parser';
+import { teamCardParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
 import * as S from './TeamCard.style';
 
