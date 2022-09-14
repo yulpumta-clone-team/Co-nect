@@ -1,3 +1,24 @@
+/**
+ * 팀 공고글 생성: Inputs Object - input들의 key, value로 이뤄진 객체
+ * @typedef {Object} newTeamPostValidateObj
+ * @property {string} name  nickname
+ * @property {Array} techSkills  techSkills
+ * @property {string} slogan slogan
+ */
+
+/**
+ * 팀 공고글 생성: Erros Object - input들의 key, value로 이뤄진 에러 객체
+ * @typedef {Object} newTeamPostValidateErrors
+ * @property {string} nickname
+ * @property {string} techSkills
+ * @property {string} slogan
+ */
+
+/**
+ * 팀 공고글 생성 vaidation
+ * @param {newTeamPostValidateObj} newTeamPostValidateObj input들의 key, value로 이뤄진 객체
+ * @returns {newTeamPostValidateErrors} input들의 key, value로 이뤄진 에러 객체
+ */
 export const newTeamPostValidation = ({ name, techSkills, slogan }) => {
   const validateErrors = {
     name: '',
