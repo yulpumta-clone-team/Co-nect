@@ -1,6 +1,6 @@
 import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
-import { skillStackParserToIds } from '../skillStack.parser';
+import { skillStackParserToIds } from '../etc/skillStack.parser';
 
 /**
  * userCardParser의 반환값

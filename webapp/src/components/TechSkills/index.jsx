@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { skillStackParser } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/etc/skillStack.parser';
 import TechSkillCarousel from './TechSkillCarousel';
 import TechSkillNormal from './TechSkillNormal';
 import * as S from './TechSkills.style';

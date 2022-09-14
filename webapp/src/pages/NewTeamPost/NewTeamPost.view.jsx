@@ -5,7 +5,7 @@ import { hopeSessionOption, skillStack } from 'constant';
 import Button from 'components/Common/Button';
 import TechStackSelectInput from 'components/TechStackSelectInput';
 import SelectInput from 'components/Common/SelectInput';
-import { skillStackParser } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/etc/skillStack.parser';
 import TextInput from 'components/Common/TextInput';
 import * as S from './NewTeamPost.style';
 

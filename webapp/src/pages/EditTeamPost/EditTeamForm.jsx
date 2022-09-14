@@ -6,7 +6,7 @@ import useFileInput from 'hooks/useFileInput';
 import useInput from 'hooks/useInput';
 import { hopeSessionOption, skillStack } from 'constant';
 import teamApi from 'api/team.api';
-import { skillStackParser } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/etc/skillStack.parser';
 import useAxios from 'hooks/useAxios';
 
 EditTeamForm.propTypes = {};

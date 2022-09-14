@@ -1,6 +1,6 @@
 import React from 'react';
 import { userDetailParser, userPostEditParser } from 'service/user/user.parser';
-import { skillStackParser } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/etc/skillStack.parser';
 import { editUserValidation } from 'service/user/user.validation';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
