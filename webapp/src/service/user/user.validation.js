@@ -1,21 +1,21 @@
 /**
  * 유저프로필수정: Inputs Object - input들의 key, value로 이뤄진 객체
- * @typedef {Object} validateObj
+ * @typedef {Object} editUserValidateObj
  * @property {string} nickname  nickname
  * @property {Array} techSkills  techSkills
  */
 
 /**
  * 유저프로필수정: Erros Object - input들의 key, value로 이뤄진 에러 객체
- * @typedef {Object} validateErrors
+ * @typedef {Object} editUserValidateErrors
  * @property {string} nickname
  * @property {string} techSkills
  */
 
 /**
  * 유저 프로필 수정 vaidation
- * @param {validateObj} validtionObj input들의 key, value로 이뤄진 객체
- * @returns {validateErrors} input들의 key, value로 이뤄진 에러 객체
+ * @param {editUserValidateObj} editUserValidateObj input들의 key, value로 이뤄진 객체
+ * @returns {editUserValidateErrors} input들의 key, value로 이뤄진 에러 객체
  */
 export const editUserValidation = ({ nickname, techSkills }) => {
   const validateErrors = {
@@ -36,7 +36,7 @@ export const editUserValidation = ({ nickname, techSkills }) => {
 
 /**
  * 필수정보입력: Inputs Object - input들의 key, value로 이뤄진 객체
- * @typedef {Object} validateObj
+ * @typedef {Object} essentialValidateObj
  * @property {string} nickname
  * @property {string} profileImage
  * @property {string} skills
@@ -50,7 +50,7 @@ export const editUserValidation = ({ nickname, techSkills }) => {
 
 /**
  * 필수정보입력: Erros Object - input들의 key, value로 이뤄진 에러 객체
- * @typedef {Object} validateErrors
+ * @typedef {Object} essentialValidateErros
  * @property {string} nickname
  * @property {string} profileImage
  * @property {Array} skills
@@ -63,9 +63,9 @@ export const editUserValidation = ({ nickname, techSkills }) => {
  */
 
 /**
- * 유저 프로필 수정 vaidation
- * @param {validateObj} validtionObj input들의 key, value로 이뤄진 객체
- * @returns {validateErrors} input들의 key, value로 이뤄진 에러 객체
+ * 필수 정보 입력 vaidation
+ * @param {essentialValidateObj} essentialValidateObj input들의 key, value로 이뤄진 객체
+ * @returns {essentialValidateErros} input들의 key, value로 이뤄진 에러 객체
  */
 export const essentialValidation = ({
   nickname,
