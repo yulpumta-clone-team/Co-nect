@@ -1,4 +1,3 @@
-/* eslint-disable no-prototype-builtins */
 import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
 import { skillStackParserToIds } from '../skillStack.parser';
@@ -62,7 +61,6 @@ export const userCardParser = (userCardInfo) => {
  * @param {UserDetailSchema} userDetailInfo src/types/user.typedef.js
  * @returns {parsedUserDetailInfo} parsing된 userDetail 객체
  */
-
 export const userDetailParser = (targetUserInfo) => {
   const userId = targetUserInfo.userInfo.id;
   const nickname = targetUserInfo.userInfo.name;

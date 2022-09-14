@@ -47,15 +47,13 @@
 
 /**
  * 팀 정보 입력 스키마
- * @typedef UserInfoInputSchema
+ * @typedef TeamInfoInputSchema
  * @property {string} introduction - 팀 자기소개
  * @property {string} hopeSession - 팀 희망 작업 기간
  * @property {string} profileImage - 팀 프로필 이미지
  * @property {string} job - 팀 직업
- * @property {string} nickname - 팀 닉네임
+ * @property {string} name - 팀 이름
  * @property {string} portfolio - 팀 포트폴리오 링크
- * @property {string} slogan - 팀 슬로건
  * @property {array} techSkills - 팀 기술 스택
- * @property {string} belongTeam - 팀 팀 소속 여부
- *
+ * @property {string} slogan - 팀 슬로건
  */

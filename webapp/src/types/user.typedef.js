@@ -62,5 +62,4 @@
  * @property {string} slogan - 유저의 슬로건
  * @property {array} techSkills - 유저의 기술 스택
  * @property {string} belongTeam - 유저의 팀 소속 여부
- *
  */
