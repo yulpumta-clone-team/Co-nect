@@ -6,13 +6,13 @@ const defaultOption = {
   threshold: 0.5,
 };
 
-// FIXME: react hooks return 타입을 jsdoc로 만들 수 없다.. 추론이 안되네요.
+// FIXME: react hooks return 타입을 jsdoc로 만들 수 없다.. 추론이 안되네요. object로 변경 필요
 
 /**
  * useIntersect를 사용하는 곳에서 사용할 method 및 state
  * @typedef useIntersectReturns
  * @type {Array}
- * @property {Object} loadMoreRef useRef 객체
+ * @property {Object} loadMoreRef root에 등록할 useRef 객체
  * @property {number} page 증가할 page 숫자
  * @property {function: () => void} resetPage page를 0으로 만드는 함수
  */
