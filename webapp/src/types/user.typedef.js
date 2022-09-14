@@ -1,5 +1,5 @@
 /**
- * 유저의 스키마
+ * 유저의 서버측 스키마
  * @typedef UserSchema
  * @property {number} id
  * @property {string} name
@@ -9,7 +9,7 @@
  */
 
 /**
- * 유저 카드의 스키마
+ * 유저 카드의 서버측 스키마
  * @typedef CardSchema
  * @property {number} commentCnt
  * @property {number} likeCnt
@@ -18,7 +18,7 @@
  */
 
 /**
- * 유저 디테일 페이지 스키마
+ * 유저 디테일 페이지 서버측 스키마
  * @typedef DetailSchema
  * @property {number} commentCnt
  * @property {string} content
@@ -28,7 +28,22 @@
  * @property {number} likeCnt
  * @property {string} portfolio
  * @property {number} readCnt
- * @property {Object} userInfo
+ * @property {Object} userInfo id, image, name
  *
  * @typedef {UserSchema & DetailSchema} UserDetailSchema
+ */
+
+/**
+ * 유저 정보 입력 스키마
+ * @typedef UserInfoInputSchema
+ * @property {string} introduction - 유저의 자기소개
+ * @property {string} hopeSession - 유저의 희망 작업 기간
+ * @property {string} profileImage - 유저의 프로필 이미지
+ * @property {string} job - 유저의 직업
+ * @property {string} nickname - 유저의 닉네임
+ * @property {string} portfolio - 유저의 포트폴리오 링크
+ * @property {string} slogan - 유저의 슬로건
+ * @property {array} techSkills - 유저의 기술 스택
+ * @property {string} belongTeam - 유저의 팀 소속 여부
+ *
  */
