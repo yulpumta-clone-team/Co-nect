@@ -25,13 +25,14 @@ export const teamCardParser = (teamCardInfo) => {
 };
 
 export const newTeamPostParser = (newTeamPostData) => {
-  const { introduction, hopeSession, profileImage, name, techSkills, slogan } = newTeamPostData;
+  const { introduction, hopeSession, profileImage, teamName, techSkills, slogan } = newTeamPostData;
+  const session = hopeSession || hopeSessionOption[0].value;
   const parsedTechSkills = skillStackParserToIds(techSkills);
   return {
     content: introduction,
-    hope_session: hopeSession,
     image: profileImage,
-    name,
+    session,
+    name: teamName,
     skills: parsedTechSkills,
     slogan,
   };

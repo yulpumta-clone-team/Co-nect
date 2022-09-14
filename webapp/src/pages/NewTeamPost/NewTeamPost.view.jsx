@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import MarkdownEditor from 'components/MarkdownEditor';
-import { hopeSessionOption, skillStack } from 'constant';
+import { hopeSessionOption } from 'constant';
 import Button from 'components/Common/Button';
 import TechStackSelectInput from 'components/TechStackSelectInput';
 import SelectInput from 'components/Common/SelectInput';
-import { skillStackParser } from 'service/skillStack.parser';
 import TextInput from 'components/Common/TextInput';
 import * as S from './NewTeamPost.style';
 
@@ -36,7 +35,6 @@ export default function NewTeamPostView({
   const onUploadButtonClick = () => {
     inputFileRef.current.click();
   };
-  const parsedSkillStackOptions = skillStackParser(skillStack);
 
   const isSkillsValidateError = isTargetSatisfyValidate('techSkills');
   const isTeamNameValidateError = isTargetSatisfyValidate('teamName');
@@ -71,12 +69,12 @@ export default function NewTeamPostView({
           </S.ImgContainer>
           <S.PostInfoContainer>
             <TextInput
-              name="name"
+              name="teamName"
               label="팀 이름"
               placeholder="팀 이름"
-              value={inputValues.name}
+              value={inputValues.teamName}
               onChange={onChangeHandler}
-              helperText={validateError.name}
+              helperText={validateError.teamName}
               isError={isTeamNameValidateError}
             />
             <TechStackSelectInput
@@ -84,7 +82,6 @@ export default function NewTeamPostView({
               placeholder="필요 기술 스택"
               label="기술 스택"
               selectedTechSkills={inputValues.techSkills}
-              techSkillOptions={parsedSkillStackOptions}
               onChange={onChangeHandlerWithSelect}
               helperText={validateError.techSkills}
               isError={isSkillsValidateError}

@@ -4,7 +4,7 @@ import { rawResponseTechStackType } from './techSkill.type';
 export const loggedUserType = shape({
   id: PropTypes.number.isRequired,
   nickname: PropTypes.string.isRequired,
-  profileImg: PropTypes.string.isRequired,
+  profileImg: PropTypes.string,
 });
 
 const userSchema = {
