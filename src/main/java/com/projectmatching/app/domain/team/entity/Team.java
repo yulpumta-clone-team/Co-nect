@@ -51,25 +51,25 @@ public class Team extends BaseTimeEntity {
     private Long ownerId;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    @BatchSize(size = 8)
     @Builder.Default
+    @ToString.Exclude
     private Set<UserTeam> userTeams = new HashSet<>();
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    @BatchSize(size = 8)
     @Builder.Default
+    @ToString.Exclude
     private Set<TeamComment> teamComments = new HashSet<>();
 
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    @BatchSize(size = 8)
     @Builder.Default
+    @ToString.Exclude
     private Set<TeamTech> teamTeches = new HashSet<>();
 
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    @BatchSize(size = 8)
     @Builder.Default
+    @ToString.Exclude
     private Set<TeamLiking> teamLikings = new HashSet<>();
 
     public void updateWith(TeamRequestDto teamRequestDto){

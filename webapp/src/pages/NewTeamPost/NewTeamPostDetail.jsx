@@ -42,7 +42,6 @@ export default function NewTeamPostDetail() {
     const parsedSubmitData = newTeamPostParser(changedProfileImageSubmitData);
     await execution({ data: parsedSubmitData });
     navigate(ROUTE.HOME);
-    notifyNewMessage(notifyDispatch, '저장 완료!', TOAST_TYPE.Success);
   };
   const {
     inputValues,
@@ -54,7 +53,7 @@ export default function NewTeamPostDetail() {
     isTargetSatisfyValidate,
   } = useForm({
     initialValues: {
-      name: '',
+      teamName: '',
       techSkills: [],
       profileImage: '',
       hopeSession: '',

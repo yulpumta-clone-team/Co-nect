@@ -26,7 +26,6 @@ import static java.util.Objects.nonNull;
 public class TeamComment extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @ToString.Exclude
