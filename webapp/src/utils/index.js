@@ -1,9 +1,5 @@
 import { DEFAULT_PROFILE_IMG, POST_TYPE } from 'constant';
 
-export function setDefaultProfileImage(img) {
-  return (!img || img.length < 10) && DEFAULT_PROFILE_IMG;
-}
-
 /**
  * 유저글인지 팀 공고글인지 확인하는 함수
  * @param {sttring} postType user || team
