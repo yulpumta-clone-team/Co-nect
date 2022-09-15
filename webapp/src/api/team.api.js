@@ -42,6 +42,13 @@ const teamApi = {
       data,
     });
   },
+  PATCH_TEAM_LIKE({ id, data }) {
+    return privateApiInstance({
+      url: `${API.TEAM.INDEX}/${id}`,
+      method: 'patch',
+      data,
+    });
+  },
 };
 
 export default teamApi;

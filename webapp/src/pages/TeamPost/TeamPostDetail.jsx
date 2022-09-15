@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CommentContainer from 'components/ComentContainer';
 import MarkdownEditor from 'components/MarkdownEditor';
 import { POST_TYPE } from 'constant';
@@ -8,14 +8,30 @@ import { teamDetailParser } from 'service/team.parser';
 import TechSkills from 'components/TechSkills';
 import Image from 'components/Common/Image';
 import Slogan from 'pages/EssentialInfo/SubPages/Slogan';
+import HeartButton from 'components/Common/Like';
+import useAxios from 'hooks/useAxios';
+import teamApi from 'api/team.api';
 import * as S from './TeamPost.style';
 
 export default function TeamPostDetail({ targetTeam }) {
   const parsedTargetTeam = teamDetailParser(targetTeam);
   const { id, name, user, content, img, hopeSession, skills, slogan, commentCnt, likeCnt } =
     parsedTargetTeam;
+  const [like, setLike] = useState(false);
 
-  // const { id, name, content, session, img, read, skills, commentCnt, likeCnt, user } = targetTeam;
+  useEffect(async () => {
+    const fetchData = async () => {
+      const res = await teamApi.GET_TEAM_LIKES;
+      // if (res.data.likeCnt가 1 올라갔을때,,) setLike(true); // 여기 이 status 부분이 api가 뭐로 해줘야할까? likecnt가 1올라갔을때?
+    };
+    fetchData();
+  }, []);
+
+  const toggleLike = async (e) => {
+    const res = await teamApi.PATCH_TEAM_LIKE; // [POST] 사용자가 좋아요를 누름 -> DB 갱신
+    setLike(!like);
+  };
+
   return (
     <S.PostContainer>
       <S.ImgContainer>
@@ -53,7 +69,7 @@ export default function TeamPostDetail({ targetTeam }) {
           <div>
             <S.View />
           </div>
-          <S.Heart />
+          <HeartButton like={like} onClick={toggleLike} />
           {likeCnt}
           <S.Chat />
           {commentCnt}
