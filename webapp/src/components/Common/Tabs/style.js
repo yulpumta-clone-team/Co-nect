@@ -7,7 +7,6 @@ export const Tabs = styled.ul`
   align-items: flex-end;
   gap: 50px;
 `;
-// (isActive ? 'white' : '#036EFF')
 export const Tab = styled.li`
   display: flex;
   justify-content: center;
@@ -16,8 +15,10 @@ export const Tab = styled.li`
   height: 30px;
   border: 2px solid ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 5px;
-  background-color: ${({ isActive }) => isActive && '#036EFF'};
-  color: ${({ isActive }) => (isActive ? 'white' : '#036EFF')};
+  background-color: ${({ isActive }) =>
+    isActive ? ({ theme: { colors } }) => colors.primary.normal : 'white'};
+  color: ${({ isActive }) =>
+    isActive ? 'white' : ({ theme: { colors } }) => colors.primary.normal};
   ${({ theme: { fonts } }) => fonts.korean.title};
   font-size: 16px;
 
