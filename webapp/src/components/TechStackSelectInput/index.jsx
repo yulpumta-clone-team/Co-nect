@@ -4,7 +4,7 @@ import etcApi from 'api/etc.api';
 import useDropdown from 'hooks/useDropdown';
 import { parsedTechStackType } from 'types/techSkill.type';
 import useAxios from 'hooks/useAxios';
-import { skillStackParser } from 'service/skillStack.parser';
+import { skillStackParser } from 'service/etc/skillStack.parser';
 import TechStackSelectedViewer from './TechStackSelectedViewer';
 import TechStackOptions from './TechStackOptions';
 import * as S from './TechStackSelectInput.style';

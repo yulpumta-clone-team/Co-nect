@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import * as S from './MarkdownEditor.style';
 
 MarkdownEditor.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string, // viewer모드일때는 필요 없음
   onlyViewer: PropTypes.bool.isRequired,
   content: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  onChange: PropTypes.func, // viewer모드일때는 필요 없음
+  placeholder: PropTypes.string, // viewer모드일때는 필요 없음
   label: PropTypes.string,
   customStyle: PropTypes.array,
 };

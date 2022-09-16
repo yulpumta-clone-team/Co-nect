@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Divider from 'components/Common/Divider';
-import { skillStackParserWithCategory } from 'service/skillStack.parser';
+import { skillStackParserWithCategory } from 'service/etc/skillStack.parser';
 import Callback from 'pages/Callback';
 import * as S from './TechStackSelectInput.style';
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { setDefaultProfileImage } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { commentInfoType } from 'types/comment.type';
@@ -40,7 +39,7 @@ export default function RootCommentElement({ commentId, commentInfo }) {
     <S.CommentBox>
       <S.NormalCommentBox style={{ display: 'flex' }}>
         <S.UserInfo>
-          <img src={setDefaultProfileImage(img)} alt="profile" />
+          <img src={img} alt="profile" />
           <h3>{commenWriter}</h3>
         </S.UserInfo>
         {!isEditTargetComment && (

@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
-import loginValidate from 'service/login.validation';
+import { loginValidate } from 'service/auth/auth.validation';
 import useForm from 'hooks/useForm';
 import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
@@ -14,7 +14,7 @@ import { TOKEN } from 'constant/api.constant';
 import { ROUTE } from 'constant/route.constant';
 import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
-import { loginParser } from 'service/auth.parser';
+import { loginParser } from 'service/auth/auth.parser';
 import useUserInfo from 'hooks/useUserInfo';
 import * as S from './Login.style';
 

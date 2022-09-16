@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
-import signUpValidate from 'service/signUp.validation';
+import { signUpValidate } from 'service/auth/auth.validation';
 import useForm from 'hooks/useForm';
 import TextInput from 'components/Common/TextInput';
 import Divider from 'components/Common/Divider';
@@ -11,7 +11,7 @@ import Button from 'components/Common/Button';
 import SocailLoginButtons from 'components/SocialLoginButtons';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import BackButton from 'components/Common/BackButton';
-import { signUpParser } from 'service/auth.parser';
+import { signUpParser } from 'service/auth/auth.parser';
 import { ROUTE } from 'constant/route.constant';
 import * as S from './SignUp.style';
 
