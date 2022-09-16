@@ -2,6 +2,9 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import BlueHeartIcon from 'assets/icons/blue-heart.svg';
+import RedHeartIcon from 'assets/icons/red-heart.svg';
+
 import * as S from './style';
 
 Like.propTypes = {
@@ -9,8 +12,6 @@ Like.propTypes = {
   onClick: PropTypes.func,
 };
 
-function Like({ like, onClick }) {
-  return <S.Heart src={like ? <S.FilledHeart /> : <S.EmptyHeart />} onClick={onClick} />;
+export default function Like({ like, onClick }) {
+  return <S.Heart src={like ? { RedHeartIcon } : { BlueHeartIcon }} onClick={onClick} />;
 }
-
-export default Like;
