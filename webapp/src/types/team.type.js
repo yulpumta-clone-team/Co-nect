@@ -6,14 +6,14 @@ import { rawResponseTechStackType } from './techSkill.type';
  */
 const teamSchema = {
   id: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   name: PropTypes.string.isRequired,
   skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,
   session: PropTypes.string.isRequired,
   slogan: PropTypes.string.isRequired,
   userInfo: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     name: PropTypes.string.isRequired,
   }),
 };
