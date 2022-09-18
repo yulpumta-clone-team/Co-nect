@@ -36,7 +36,7 @@ const userHandler = [
   rest.get(ROOT_API_URL + API.USER.LIKES, (req, res, ctx) => {
     const randomStatusErrorCode = getRandomStatusErrorCode();
     return res(
-      ctx.status(randomStatusErrorCode),
+      // ctx.status(randomStatusErrorCode),
       ctx.delay(1500),
       ctx.json(getResonseWithData(userList)),
     );
@@ -45,7 +45,7 @@ const userHandler = [
   rest.get(ROOT_API_URL + API.USER.READS, (req, res, ctx) => {
     const randomStatusErrorCode = getRandomStatusErrorCode();
     return res(
-      ctx.status(randomStatusErrorCode),
+      // ctx.status(randomStatusErrorCode),
       ctx.delay(1500),
       ctx.json(getResonseWithData(userList)),
     );

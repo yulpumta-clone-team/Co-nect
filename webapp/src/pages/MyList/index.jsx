@@ -25,12 +25,15 @@ export default function MyList() {
     axiosInstance: activedFetcher,
     axiosConfig: {},
   });
-
+  // * <Tabs tabs={POST_TYPE_TABS} activeTabId={postTabId} setActiveTab={setPostTabId} /> 이거는 사이드에 넣어주기!
   return (
     <S.Container>
-      <Tabs tabs={LIST_TYPE_TABS} activeTabId={listTabId} setActiveTab={setListTabId} />
-      <Tabs tabs={POST_TYPE_TABS} activeTabId={postTabId} setActiveTab={setPostTabId} />
-      <CardsView CardComponent={CardComponent} clickLink={`${clickLink}/`} />
+      <S.SessionContainer>
+        <Tabs tabs={LIST_TYPE_TABS} activeTabId={listTabId} setActiveTab={setListTabId} />
+      </S.SessionContainer>
+      <S.BoardContainer>
+        <CardsView CardComponent={CardComponent} clickLink={`${clickLink}/`} />
+      </S.BoardContainer>
     </S.Container>
   );
 }
@@ -41,14 +44,14 @@ const USER_ID = 'user';
 const TEAM_ID = 'team';
 
 const LIST_TYPE_TABS = [
-  { id: LIKES_ID, title: '좋아요 누른 리스트' },
-  { id: READS_ID, title: '읽은 목록' },
+  { id: LIKES_ID, title: '내가 좋아요 한 글' },
+  { id: READS_ID, title: '내가 읽은 글' },
 ];
 
-const POST_TYPE_TABS = [
-  { id: USER_ID, title: '유저' },
-  { id: TEAM_ID, title: '팀' },
-];
+// const POST_TYPE_TABS = [
+//   { id: USER_ID, title: '유저' },
+//   { id: TEAM_ID, title: '팀' },
+// ];
 
 const fetcherObj = {
   [USER_ID]: {
