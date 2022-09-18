@@ -117,3 +117,36 @@ export const teamDetailParser = (teamDetailInfo) => {
     likeCnt,
   };
 };
+
+/**
+ * teamEditRequestParser 반환값
+ * @typedef parsedTeamEditRequestInfo
+ * @property {string} content 팀 게시글 상세내용
+ * @property {string} image 팀 이미지
+ * @property {array} name 팀 이름
+ * @property {string} session 프로젝트 희망 기간
+ * @property {UserInfoSchema} skills 기술 스택
+ * @property {string} slogan 팀 슬로건
+ */
+
+/**
+ *
+ * @param {TeamInfoInputSchema} teamInputInfo
+ * @returns {parsedTeamEditRequestInfo}  parsing된 teamEditRequestParser 객체
+ */
+export const teamEditRequestParser = (teamInputInfo) => {
+  const { content } = teamInputInfo;
+  const image = teamInputInfo.teamImage;
+  const name = teamInputInfo.teamName;
+  const session = teamInputInfo.hopeSession;
+  const skills = skillStackParserToIds(teamInputInfo.techSkills);
+  const { slogan } = teamInputInfo;
+  return {
+    content,
+    image,
+    name,
+    session,
+    skills,
+    slogan,
+  };
+};
