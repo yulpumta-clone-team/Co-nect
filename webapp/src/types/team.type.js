@@ -38,6 +38,7 @@ const teamDetailTypeSchema = {
   skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,
   session: PropTypes.string.isRequired,
   slogan: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
   userInfo: PropTypes.shape({
     id: PropTypes.number.isRequired,
     image: PropTypes.string,
