@@ -99,10 +99,10 @@ export const teamDetailParser = (teamDetailInfo) => {
   const techSkills = skillStackParser(teamDetailInfo.skills);
   const content = teamDetailInfo.content || '입력한 자기소개가 없습니다.';
   const slogan = teamDetailInfo.slogan || '입력한 슬로건이 없습니다.';
-  const writerInfo = teamDetailInfo.userInfo;
+  const writerInfo = teamDetailInfo.userTeamList[0]; // ! teamDetailInfo.userInfo가 아님. 백이랑 얘기해볼 필요가 있다.
 
-  // const commentCnt = parsedNumberToThreeDigits(teamDetailInfo.commentCnt);
-  // const likeCnt = parsedNumberToThreeDigits(teamDetailInfo.likeCnt);
+  const commentCnt = parsedNumberToThreeDigits(teamDetailInfo.commentCnt);
+  const likeCnt = parsedNumberToThreeDigits(teamDetailInfo.likeCnt);
 
   return {
     teamId,
@@ -113,5 +113,7 @@ export const teamDetailParser = (teamDetailInfo) => {
     content,
     slogan,
     writerInfo,
+    commentCnt,
+    likeCnt,
   };
 };

@@ -7,32 +7,43 @@ import Divider from 'components/Common/Divider';
 import { teamDetailParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
 import Image from 'components/Common/Image';
-import Slogan from 'pages/EssentialInfo/SubPages/Slogan';
 import * as S from './TeamPost.style';
 
 export default function TeamPostDetail({ targetTeam }) {
   const parsedTargetTeam = teamDetailParser(targetTeam);
-  const { id, name, user, content, img, hopeSession, skills, slogan, commentCnt, likeCnt } =
-    parsedTargetTeam;
-
-  // const { id, name, content, session, img, read, skills, commentCnt, likeCnt, user } = targetTeam;
+  const {
+    teamId,
+    teamName,
+    writerInfo,
+    teamImage,
+    content,
+    hopeSession,
+    techSkills,
+    slogan,
+    commentCnt,
+    likeCnt,
+  } = parsedTargetTeam;
   return (
     <S.PostContainer>
       <S.ImgContainer>
-        {img ? <S.ViewingImage src={img} alt="게시글" /> : <S.EmptyImage />}
+        {teamImage ? (
+          <Image src={teamImage} alt="게시글" customStyle={S.ViewingImage} />
+        ) : (
+          <S.EmptyImage />
+        )}
       </S.ImgContainer>
       <S.TeamInfoContainer>
         <S.UserName>
-          <Image src={img} alt="프로필 이미지" customStyle={S.UserImg} />
-          {user.name}
+          <Image src={teamImage} alt="프로필 이미지" customStyle={S.UserImg} />
+          {writerInfo.name}
         </S.UserName>
         <S.SingleInfo>
-          <S.TeamName>{name}</S.TeamName>
+          <S.TeamName>{teamName}</S.TeamName>
         </S.SingleInfo>
         <Divider />
         <S.Skill>
           <S.TeamSkillSession>기술 스택</S.TeamSkillSession>
-          <TechSkills skills={skills} imageSize="40px" />
+          <TechSkills skills={techSkills} imageSize="40px" />
         </S.Skill>
         <S.HopeSession>
           <S.TeamSkillSession> 희망 작업 기간</S.TeamSkillSession>
@@ -58,7 +69,7 @@ export default function TeamPostDetail({ targetTeam }) {
           <S.Chat />
           {commentCnt}
         </S.SingleInfo>
-        <CommentContainer postType={POST_TYPE.TEAM} postWriter={user.name} postId={id} />
+        <CommentContainer postType={POST_TYPE.TEAM} postWriter={writerInfo.name} postId={teamId} />
       </S.TeamInfoContainer>
     </S.PostContainer>
   );
