@@ -11,8 +11,9 @@ import { skillStackParser, skillStackParserToIds } from '../etc/skillStack.parse
  * @property {array} skills
  * @property {number} commentCnt
  * @property {number} readCnt
+ * @property {number} likeCnt
  * @property {boolean} isRecruitng
- * @property {UserInfoSchema} user
+ * @property {UserInfoSchema} writer id, name, image
  */
 
 /**
@@ -24,12 +25,12 @@ export const teamCardParser = (teamCardInfo) => {
   const teamName = teamCardInfo.name;
   const teamImage = teamCardInfo.image;
   const hopeSession = teamCardInfo.session || hopeSessionOption[0].value;
-  const skills = teamCardInfo.skills || [];
-  const isRecruitng = teamCardInfo.status || false;
+  const skills = teamCardInfo?.skills || [];
+  const isRecruitng = teamCardInfo.status || true;
   const commentCnt = parsedNumberToThreeDigits(teamCardInfo.commentCnt);
-  const readCnt = parsedNumberToThreeDigits(teamCardInfo.read);
-
-  const { user } = teamCardInfo;
+  const readCnt = parsedNumberToThreeDigits(teamCardInfo.readCnt);
+  const likeCnt = parsedNumberToThreeDigits(teamCardInfo.likeCnt);
+  const writer = teamCardInfo.userInfo;
   return {
     teamName,
     teamImage,
@@ -37,8 +38,9 @@ export const teamCardParser = (teamCardInfo) => {
     skills,
     commentCnt,
     readCnt,
+    likeCnt,
     isRecruitng,
-    user,
+    writer,
   };
 };
 
