@@ -1,6 +1,6 @@
 import { hopeSessionOption } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
-import { skillStackParserToIds } from '../etc/skillStack.parser';
+import { skillStackParser, skillStackParserToIds } from '../etc/skillStack.parser';
 
 /**
  * teamCardParser 반환값
@@ -74,20 +74,14 @@ export const newTeamPostParser = (newTeamPostData) => {
 /**
  * teamDetailParser 반환값
  * @typedef parsedTeamDetailInfo
- * @property {number} id
- * @property {string} name
- * @property {array} skills
- * @property {string} slogan
- * @property {boolean} status
- * @property {UserInfoSchema} userInfo id, image, name
- * @property {number} commentCnt
+ * @property {number} teamId
+ * @property {string} teamName
+ * @property {string} teamImage
+ * @property {array} techSkills
  * @property {string} content
- * @property {string} email
+ * @property {string} slogan
  * @property {string} hopeSession
- * @property {string} job
- * @property {number} likeCnt
- * @property {string} portfolio
- * @property {number} readCnt
+ * @property {UserInfoSchema} writerInfo id, image, name
  */
 
 /**
@@ -96,20 +90,26 @@ export const newTeamPostParser = (newTeamPostData) => {
  * @returns {parsedTeamDetailInfo} parsing된 teamDetailInfo 객체
  */
 export const teamDetailParser = (teamDetailInfo) => {
+  const teamId = teamDetailInfo.id;
+  const teamName = teamDetailInfo.name;
+  const teamImage = teamDetailInfo.image;
   const hopeSession = teamDetailInfo.hopeSession || hopeSessionOption[0].value;
-  const skills = teamDetailInfo.skills || [];
+  const techSkills = skillStackParser(teamDetailInfo.skills);
   const content = teamDetailInfo.content || '입력한 자기소개가 없습니다.';
   const slogan = teamDetailInfo.slogan || '입력한 슬로건이 없습니다.';
-  const commentCnt = parsedNumberToThreeDigits(teamDetailInfo.commentCnt);
-  const likeCnt = parsedNumberToThreeDigits(teamDetailInfo.likeCnt);
+  const writerInfo = teamDetailInfo.userInfo;
+
+  // const commentCnt = parsedNumberToThreeDigits(teamDetailInfo.commentCnt);
+  // const likeCnt = parsedNumberToThreeDigits(teamDetailInfo.likeCnt);
 
   return {
-    ...teamDetailInfo,
+    teamId,
+    teamName,
+    teamImage,
+    techSkills,
     hopeSession,
-    skills,
     content,
     slogan,
-    commentCnt,
-    likeCnt,
+    writerInfo,
   };
 };
