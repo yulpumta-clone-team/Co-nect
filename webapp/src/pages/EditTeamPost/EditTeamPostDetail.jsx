@@ -6,7 +6,7 @@ import useAxios from 'hooks/useAxios';
 import useFileUploader from 'hooks/useFileUploader';
 import useForm from 'hooks/useForm';
 import React from 'react';
-import { teamDetailParser } from 'service/team/team.parser';
+import { teamDetailParser, teamEditRequestParser } from 'service/team/team.parser';
 import { newTeamPostValidation } from 'service/team/team.validation';
 import { teamDetailType } from 'types/team.type';
 import EditTeamPostView from './EditTeamPost.view';
@@ -25,6 +25,7 @@ export default function EditTeamPostDetail({ targetTeam }) {
   const [state, execution, foreceRefetch] = useAxios({
     axiosInstance: teamApi.EDIT_TEAM_POST,
     immediate: false,
+    axiosConfig: { id: teamId },
   });
 
   // s3 이미지 업로더 api hooks
@@ -42,10 +43,8 @@ export default function EditTeamPostDetail({ targetTeam }) {
   // 수정 요청
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
-    console.log('changedProfileImageSubmitData', changedProfileImageSubmitData);
-    // const parsedSubmitData = userPostEditParser(changedProfileImageSubmitData);
-    // await execution({ data: parsedSubmitData });
-    // TODO: 성공시 이동할 페이지 정해서 이동시키기
+    const parsedSubmitData = teamEditRequestParser(changedProfileImageSubmitData);
+    await execution({ data: parsedSubmitData });
     notifyNewMessage(notifyDispatch, '수정 완료!', TOAST_TYPE.Success);
   };
 
