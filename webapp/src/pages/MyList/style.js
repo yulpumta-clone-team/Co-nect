@@ -11,7 +11,7 @@ export const SessionContainer = styled.div`
 `;
 
 export const BoardContainer = styled.div`
-  width: 1180px;
+  width: 1180px; // SessionContainer 때문에 layouts에서 width값을 정해줬지만 여기서 별도로 정해줘야합니다.
   margin: 0 auto;
   padding: 30px;
 `;
