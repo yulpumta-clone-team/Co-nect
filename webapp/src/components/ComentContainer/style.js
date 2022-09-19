@@ -1,12 +1,5 @@
+import { colors } from '@storybook/node-logger';
 import styled, { css } from 'styled-components';
-
-const CommonCommentBoxStyle = css`
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 8px;
-`;
 
 export const FormBox = styled.div`
   textarea {
@@ -30,17 +23,26 @@ export const ListBox = styled.ul`
 `;
 
 export const CommentBox = styled.div`
-  ${CommonCommentBoxStyle}
+  width: 100%;
+  display: flex;
+  padding-left: 40px;
+  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
 `;
 
+export const RootCommentBox = styled.div``;
+
 export const NestedCommentBox = styled.div`
-  ${CommonCommentBoxStyle}
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 8px;
   padding-left: 50px;
 `;
 
 export const SecretCommentBox = styled.div``;
 
-export const NormalCommentBox = styled.div`
+export const PublicCommentBox = styled.div`
   width: 100%;
   display: flex;
   align-items: center;

@@ -51,9 +51,9 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
   return (
-    <li>
-      <S.CommentBox>
-        <S.NormalCommentBox style={{ display: 'flex' }}>
+    <S.CommentBox>
+      <S.RootCommentBox>
+        <S.PublicCommentBox style={{ display: 'flex' }}>
           <S.UserInfo>
             <img src={img} alt="profile" />
             <h3>{commenWriter}</h3>
@@ -70,11 +70,11 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
             </S.ThumbSVG>
             <span>: {likesCount}</span>
           </S.LikeInfo>
-        </S.NormalCommentBox>
+        </S.PublicCommentBox>
         {isEditTargetComment && (
           <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
         )}
-      </S.CommentBox>
+      </S.RootCommentBox>
       <S.ReplyButtons>
         {isShowReplies && <button onClick={handleClickHideReplyButton}>답글 가리기</button>}
         {!isShowReplies && <button onClick={handleClickShowReplyButton}>답글 보여주기</button>}
@@ -86,6 +86,6 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
       {replies && replies.length !== 0 && isShowReplies && (
         <NestedCommentList postWriter={postWriter} comments={replies} />
       )}
-    </li>
+    </S.CommentBox>
   );
 }

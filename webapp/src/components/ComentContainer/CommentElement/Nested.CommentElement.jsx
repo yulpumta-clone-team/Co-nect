@@ -35,7 +35,7 @@ export default function NestedCommentElement({ commentId, commentInfo }) {
 
   return (
     <S.NestedCommentBox>
-      <S.NormalCommentBox style={{ display: 'flex' }}>
+      <S.PublicCommentBox style={{ display: 'flex' }}>
         <S.UserInfo>
           <img src={img} alt="profile" />
           <h3>{commenWriter}</h3>
@@ -52,7 +52,7 @@ export default function NestedCommentElement({ commentId, commentInfo }) {
           </S.ThumbSVG>
           <span>: {likesCount}</span>
         </S.LikeInfo>
-      </S.NormalCommentBox>
+      </S.PublicCommentBox>
       {isEditTargetComment && (
         <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
       )}
