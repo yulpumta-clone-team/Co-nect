@@ -13,6 +13,7 @@ import com.projectmatching.app.domain.team.repository.TeamTechRepository;
 import com.projectmatching.app.domain.techStack.TechStackRepository;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
+import com.projectmatching.app.domain.techStack.provider.TechStackProviderImpl;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.UserTeamRepository;
 import com.projectmatching.app.domain.user.dto.UserInfo;
@@ -46,7 +47,7 @@ import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
 @Slf4j
 public class TeamService {
     private final TeamRepository teamRepository;
-    private final TechStackProvider techStackProvider;
+    private final TechStackProviderImpl techStackProvider;
     private final TeamTechRepository teamTechRepository;
     private final UserRepository userRepository;
     private final UserTeamRepository userTeamRepository;
@@ -116,7 +117,7 @@ public class TeamService {
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new CoNectNotFoundException(NOT_EXIST_USER));
         Team team = teamRepository.findById(teamId).orElseThrow(() -> new CoNectNotFoundException(NOT_EXIST_TEAM));
 
-        if(checkTeamUser(team, user) == false) throw new CoNectLogicalException(PERMISSION_DENIED);
+        if(isTeamOfUser(team, user) == false) throw new CoNectLogicalException(PERMISSION_DENIED);
         teamRepository.deleteTeam(teamId);
 
     }
@@ -127,14 +128,12 @@ public class TeamService {
         Team team = teamRepository.findById(teamId).orElseThrow(() ->  new CoNectNotFoundException(NOT_EXIST_TEAM));
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() ->  new CoNectNotFoundException(NOT_EXIST_USER));
 
-        if(checkTeamUser(team, user)==false) throw new CoNectLogicalException(PERMISSION_DENIED);
+        if(isTeamOfUser(team, user)==false) throw new CoNectLogicalException(PERMISSION_DENIED);
         team.updateWith(teamRequestDto);
 
         //이미 있는것들 비우고 다시 넣음
         team.getTeamTeches().clear();
-
         addTeamTechByTeamRequest(teamRequestDto, team);
-
     }
 
 
@@ -146,7 +145,7 @@ public class TeamService {
      * @param user
      * @return Boolean
      */
-    public boolean checkTeamUser(Team team, User user){
+    public boolean isTeamOfUser(Team team, User user){
         if(team.getOwnerId().equals(user.getId())) return true;
         else return false;
     }
