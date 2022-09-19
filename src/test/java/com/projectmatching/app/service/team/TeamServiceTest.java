@@ -20,6 +20,6 @@ public class TeamServiceTest extends ServiceTest {
     protected TeamRepository teamRepository;
 
     @Mock
-    protected   TechStackProviderImpl techStackProvider;
+    protected TechStackProviderImpl techStackProvider;
 
 }
