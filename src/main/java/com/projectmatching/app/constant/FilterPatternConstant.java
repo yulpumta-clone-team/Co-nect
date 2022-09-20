@@ -11,6 +11,7 @@ public class FilterPatternConstant {
             "/user/join",
             "/user/login",
             "/team/{team_id:\\d+}",
+            "/team/comment/{team_id:\\d+}",
             "/user/comment/{user_id:\\d+}",
             "/upload/*",
             "/techstack/*",

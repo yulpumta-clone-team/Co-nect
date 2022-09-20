@@ -33,19 +33,20 @@ public class TeamDto {
 
     private String content;
     private Long readCnt;
+    private int likeCnt;
+    private int commentCnt;
+
     private List<UserTeamDto> userTeamList;
-
-    private List<TeamCommentDto> comments;
-
     private List<TeamLikingDto> teamLikings;
 
-    private List<TeamTechDto> teamTeches;
+    private List<TeamTechDto> skills;
 
     public static TeamDto of(Team team){
         TeamDto teamDto = new TeamDto();
         BeanUtils.copyProperties(team,teamDto);
-        teamDto.comments = team.getTeamComments().stream().map(TeamCommentDto::of)
-                .collect(Collectors.toList());
+        teamDto.readCnt = team.getReadCnt();
+        teamDto.commentCnt = team.getTeamComments().size();
+        teamDto.likeCnt = team.getTeamLikings().size();
 
         teamDto.userTeamList = team.getUserTeams().stream()
                 .map(UserTeamDto::forTeamOf).collect(Collectors.toList());
@@ -53,7 +54,7 @@ public class TeamDto {
         teamDto.teamLikings = team.getTeamLikings().stream()
                 .map(TeamLikingDto::of)
                 .collect(Collectors.toList());
-        teamDto.teamTeches = team.getTeamTeches().stream()
+        teamDto.skills = team.getTeamTeches().stream()
                 .map(TeamTechDto::of )
                 .collect(Collectors.toList());
 
