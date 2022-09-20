@@ -39,7 +39,7 @@ public class TeamDto {
     private List<UserTeamDto> userTeamList;
     private List<TeamLikingDto> teamLikings;
 
-    private List<TeamTechDto> teamTeches;
+    private List<TeamTechDto> skills;
 
     public static TeamDto of(Team team){
         TeamDto teamDto = new TeamDto();
@@ -54,7 +54,7 @@ public class TeamDto {
         teamDto.teamLikings = team.getTeamLikings().stream()
                 .map(TeamLikingDto::of)
                 .collect(Collectors.toList());
-        teamDto.teamTeches = team.getTeamTeches().stream()
+        teamDto.skills = team.getTeamTeches().stream()
                 .map(TeamTechDto::of )
                 .collect(Collectors.toList());
 
