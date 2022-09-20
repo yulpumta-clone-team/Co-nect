@@ -17,6 +17,7 @@ import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -51,7 +52,8 @@ public class TeamDto {
     public static TeamDto of(Team team){
         TeamDto teamDto = new TeamDto();
         BeanUtils.copyProperties(team,teamDto);
-        teamDto.readCnt = team.getReadCnt();
+        teamDto.readCnt = Optional.ofNullable(team.getReadCnt()).orElse(0L);
+
         teamDto.commentCnt = team.getTeamComments().size();
         teamDto.likeCnt = team.getTeamLikings().size();
 
