@@ -12,7 +12,6 @@ import com.projectmatching.app.util.AuthTokenProvider;
 import com.projectmatching.app.util.filter.JwtAuthFilter;
 import com.projectmatching.app.util.filter.JwtExceptionFilter;
 import lombok.RequiredArgsConstructor;
-import org.apache.http.client.methods.HttpOptions;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -126,9 +125,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger*/**",
         "/swagger-ui.html");
 
+        //TODO : 필터링 정리 필요
         web.ignoring().antMatchers(FilterPatternConstant.pathArray);
         web.ignoring().antMatchers(HttpMethod.GET,"/team");
-
+        web.ignoring().antMatchers(HttpMethod.GET, "/team/{team_id:\\d+}");
+        web.ignoring().antMatchers(HttpMethod.GET, "/user/comment/{user_id:\\d+}");
 
 
     }
