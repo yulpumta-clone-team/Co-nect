@@ -129,6 +129,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(FilterPatternConstant.pathArray);
         web.ignoring().antMatchers(HttpMethod.GET,"/team");
         web.ignoring().antMatchers(HttpMethod.GET, "/team/{team_id:\\d+}");
+        web.ignoring().antMatchers(HttpMethod.GET, "/user/comment/{user_id:\\d+}");
+
 
     }
 
