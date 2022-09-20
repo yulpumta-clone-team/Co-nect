@@ -9,6 +9,7 @@ import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.users.UserTeamDto;
+import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,12 @@ public class TeamDto {
 
     private List<TeamTechDto> skills;
 
+    public static TeamDto valueOf(Team team, User user){
+        TeamDto teamDto = TeamDto.of(team);
+        teamDto.userInfo =  UserInfo.of(user);
+        return teamDto;
+    }
+
     public static TeamDto of(Team team){
         TeamDto teamDto = new TeamDto();
         BeanUtils.copyProperties(team,teamDto);
@@ -55,10 +62,12 @@ public class TeamDto {
                 .map(TeamLikingDto::of)
                 .collect(Collectors.toList());
         teamDto.skills = team.getTeamTeches().stream()
-                .map(TeamTechDto::of )
+                .map(TeamTechDto::of)
                 .collect(Collectors.toList());
 
         return teamDto;
     }
+
+
 
 }
