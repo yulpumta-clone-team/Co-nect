@@ -32,7 +32,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
-import static org.springframework.beans.BeanUtils.copyProperties;
 
 
 @RequiredArgsConstructor
