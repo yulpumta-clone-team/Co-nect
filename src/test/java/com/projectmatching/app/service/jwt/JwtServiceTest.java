@@ -3,6 +3,7 @@ package com.projectmatching.app.service.jwt;
 
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
 import com.projectmatching.app.service.ServiceTest;
 import com.projectmatching.app.util.AuthTokenProvider;
@@ -46,10 +47,12 @@ public class JwtServiceTest extends ServiceTest {
             .pwd("!@#add@na88")
             .build();
 
+    private UserInfo userInfo =  UserInfo.
+            builder().name("testName")
+                    .id(1212121212L).build();
 
     private UserDto userDto = UserDto.builder()
-            .name("testName")
-            .email("test@email.com")
+            .userInfo(userInfo).email("test@email.com")
             .build();
 
     private Claims claims = Jwts.claims();
@@ -92,7 +95,7 @@ public class JwtServiceTest extends ServiceTest {
         //given
         claims.put(CLAIM_ROLE,Role.USER); // 정보는 key / value 쌍으로 저장된다.
         claims.put(CLAIM_EMAIL,userDto.getEmail());
-        claims.put(CLAIM_NAME,userDto.getName());
+        claims.put(CLAIM_NAME,userDto.getUserInfo().getName());
 
         Date now = new Date();
         String jwts =Jwts.builder()

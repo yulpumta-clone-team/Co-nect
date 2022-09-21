@@ -4,6 +4,8 @@ import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.domain.liking.dto.UserLikingDto;
 import com.projectmatching.app.domain.liking.entity.UserLiking;
 import com.projectmatching.app.domain.liking.repository.UserLikingRepository;
+import com.projectmatching.app.domain.team.dto.TeamSimpleDto;
+import com.projectmatching.app.domain.team.repository.TeamRepository;
 import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.PostUserProfileDto;
@@ -39,6 +41,7 @@ public class UserService  {
     private final UserRepository userRepository;
     private final UserLikingRepository userLikingRepository;
     private final UserDetails userDetails;
+    private final TeamRepository teamRepository;
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
@@ -62,7 +65,7 @@ public class UserService  {
     @Transactional(readOnly = true)
     public UserDto getUserDetail(Long id){
         User user = qUserRepository.find(id).orElseThrow(CoNectNotFoundException::new);
-        applicationEventPublisher.publishEvent(user);
+        applicationEventPublisher.publishEvent(user); //조회수 증가
         return UserDto.of(user);
 
     }
@@ -104,14 +107,24 @@ public class UserService  {
     // 내가 좋아요한 유저 목록 가져오기
     @Transactional(readOnly = true)
     public List<UserProfileDto> getUserLikingList(UserDetailsImpl userDetails) {
-        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(CoNectNotFoundException::new);
         List<UserLiking> userLikings = userLikingRepository.findUserLikingByFromUser(user);
 
         return userLikings.stream().map(u-> u.getToUser()).map(UserProfileDto::of).collect(Collectors.toList());
     }
 
 
+    @Transactional(readOnly = true)
+    public List<TeamSimpleDto> getMyTeamList(UserDetailsImpl userDetails) {
+        User user = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
+        List<TeamSimpleDto> myTeamList = teamRepository.findTeamByOwnerId(user.getId()).stream().map(t->{
+            return TeamSimpleDto.valueOf(t,user);
+        }).collect(Collectors.toList());
 
+        return myTeamList;
+
+
+    }
 
 
 
@@ -124,4 +137,6 @@ public class UserService  {
     public Boolean isDuplicateName(String name) {
         return userRepository.existsByName(name);
     }
+
+
 }

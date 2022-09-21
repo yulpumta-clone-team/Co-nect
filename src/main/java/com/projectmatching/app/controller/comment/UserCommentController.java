@@ -18,8 +18,8 @@ import java.util.List;
 @RequestMapping("/user")
 @Slf4j
 @RequiredArgsConstructor
-@Api(tags = "댓글 컨트롤러")
-public class CommentController {
+@Api(tags = "유저 댓글 컨트롤러")
+public class UserCommentController {
 
 
     private final CommentService commentService;

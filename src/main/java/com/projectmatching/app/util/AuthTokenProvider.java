@@ -2,7 +2,6 @@ package com.projectmatching.app.util;
 
 import com.projectmatching.app.config.secret.Secret;
 import com.projectmatching.app.domain.user.Role;
-import com.projectmatching.app.domain.user.UserInfoField;
 import com.projectmatching.app.domain.user.dto.UserDto;
 
 import com.projectmatching.app.exception.CoNectForbiddenException;
@@ -22,15 +21,12 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
-import static com.projectmatching.app.constant.CookieConstant.*;
 import static com.projectmatching.app.constant.JwtConstant.*;
 
 @Slf4j
