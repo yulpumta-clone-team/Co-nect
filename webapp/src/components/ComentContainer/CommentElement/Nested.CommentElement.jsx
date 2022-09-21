@@ -37,22 +37,26 @@ export default function NestedCommentElement({ commentId, commentInfo }) {
   return (
     <S.NestedCommentBox>
       <S.PublicCommentBox style={{ display: 'flex' }}>
-        <S.CommentTitle>
+        <S.CommentTitle isNested>
           <h3>{commenWriter}</h3>
           <span>2022.12.31</span>
         </S.CommentTitle>
-        <S.CommentContent>{content}</S.CommentContent>
+        <S.CommentContent isNested>{content}</S.CommentContent>
       </S.PublicCommentBox>
       <S.CommentInfo>
-        <S.SpecificInfo>
-          <S.HeartSvg isFill={isLikesContainUserId} onClick={handleClickThumbSvg} />
+        <S.SpecificInfo isNested>
+          <S.HeartSvg isFill={isLikesContainUserId} onClick={handleClickThumbSvg} isNested />
           <span>{parsedNumberToThreeDigits(likesCount)}</span>
         </S.SpecificInfo>
         {!isEditTargetComment && (
           <S.SpecificInfo>
-            <button onClick={() => selectEditTargetComment(commentId)}>댓글수정</button>
+            <S.EditButton isNested onClick={() => selectEditTargetComment(commentId)}>
+              댓글수정
+            </S.EditButton>
             <span>/</span>
-            <button onClick={() => selectEditTargetComment(commentId)}>삭제하기</button>
+            <S.EditButton isNested onClick={() => selectEditTargetComment(commentId)}>
+              삭제하기
+            </S.EditButton>
           </S.SpecificInfo>
         )}
       </S.CommentInfo>

@@ -38,21 +38,22 @@ export const CommentContainer = styled.div`
 `;
 
 export const RootCommentBox = styled.div`
-  width: 100%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
-  padding: 10px 20px;
+  padding: 7px 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2px;
 `;
 
 export const NestedCommentBox = styled.div`
+  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
+  padding: 10px 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  width: 100%;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 2px;
 `;
 
 export const SecretCommentBox = styled.div``;
@@ -70,6 +71,7 @@ export const CommentTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  color: ${({ isNested, theme: { COLORS } }) => (isNested ? COLORS.GRAY[700] : COLORS.GRAY[900])};
   > h3 {
     /* Kor_main_b */
     font-weight: 700;
@@ -80,7 +82,6 @@ export const CommentTitle = styled.div`
     font-weight: 400;
     font-size: 12px;
     line-height: 24px;
-    color: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
   }
 `;
 
@@ -88,7 +89,7 @@ export const CommentContent = styled.p`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+  color: ${({ isNested, theme: { COLORS } }) => (isNested ? COLORS.GRAY[700] : COLORS.GRAY[900])};
 `;
 
 export const UserProfileImage = css`
@@ -116,26 +117,27 @@ export const SpecificInfo = styled.div`
   gap: 6px;
   > span {
     /* 000자리 cnt 숫자 */
-    font-weight: 400;
+    font-weight: 700;
     font-size: 12px;
     line-height: 25px;
-    color: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+    color: ${({ isNested, theme: { COLORS } }) => (isNested ? COLORS.GRAY[700] : COLORS.GRAY[900])};
   }
 `;
 
 export const EditButton = styled.button`
-  font-weight: 400;
+  font-weight: 700;
   font-size: 12px;
   line-height: 25px;
-  color: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+  color: ${({ isNested, theme: { COLORS } }) => (isNested ? COLORS.GRAY[700] : COLORS.GRAY[900])};
 `;
 
 export const HeartSvg = styled(HeartIcon)`
   width: 15px;
   height: 15px;
   & path {
-    fill: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
-    stroke: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+    fill: ${({ isNested, theme: { COLORS } }) => (isNested ? COLORS.GRAY[700] : COLORS.GRAY[900])};
+    stroke: ${({ isNested, theme: { COLORS } }) =>
+      isNested ? COLORS.GRAY[700] : COLORS.GRAY[900]};
   }
 `;
 
