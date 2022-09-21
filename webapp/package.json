@@ -54,6 +54,8 @@
     "react-hook-form": "^7.25.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
+    "react-stomp": "^5.1.0",
+    "sockjs": "^0.3.24",
     "styled-components": "^5.3.3",
     "styled-reset": "^4.3.4",
     "util": "^0.12.4",

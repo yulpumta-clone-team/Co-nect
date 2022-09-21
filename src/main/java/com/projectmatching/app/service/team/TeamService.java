@@ -66,7 +66,9 @@ public class TeamService {
          techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
                 .stream()
                 .map(techCode -> TechStack.of(techCode))
-                .map(techStack -> TeamTech.of(techStack,team)
+                .map(techStack -> {
+                    techStackRepository.save(techStack);
+                    return TeamTech.valueOf(techStack,team);}
                 ).forEach(teamTech -> team.getTeamTeches().add(teamTech));
 
     }
