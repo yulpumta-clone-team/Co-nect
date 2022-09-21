@@ -1,7 +1,7 @@
 package com.projectmatching.app.controller.history;
 
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
-import com.projectmatching.app.domain.team.dto.TeamResponseDto;
+import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.service.history.TeamHistoryService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import io.swagger.annotations.Api;
@@ -24,7 +24,7 @@ public class TeamHistoryController {
 
     @ApiOperation(value = "히스토리 조회")
     @GetMapping("")
-    public ResponseTemplate<List<TeamResponseDto>> getTeamHistory(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public ResponseTemplate<List<Team>> getTeamHistory(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return ResponseTemplate.valueOf(teamHistoryService.getTeamHistory(userDetails));
     }
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { newTeamPostParser } from 'service/team.parser';
-import { newTeamPostValidation } from 'service/team.validation';
+import { newTeamPostParser } from 'service/team/team.parser';
+import { newTeamPostValidation } from 'service/team/team.validation';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
@@ -42,7 +42,6 @@ export default function NewTeamPostDetail() {
     const parsedSubmitData = newTeamPostParser(changedProfileImageSubmitData);
     await execution({ data: parsedSubmitData });
     navigate(ROUTE.HOME);
-    notifyNewMessage(notifyDispatch, '저장 완료!', TOAST_TYPE.Success);
   };
   const {
     inputValues,
@@ -54,7 +53,7 @@ export default function NewTeamPostDetail() {
     isTargetSatisfyValidate,
   } = useForm({
     initialValues: {
-      name: '',
+      teamName: '',
       techSkills: [],
       profileImage: '',
       hopeSession: '',

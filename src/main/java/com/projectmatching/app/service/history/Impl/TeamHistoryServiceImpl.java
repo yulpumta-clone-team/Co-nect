@@ -2,7 +2,6 @@ package com.projectmatching.app.service.history.Impl;
 
 import com.projectmatching.app.domain.history.TeamHistoryRepository;
 import com.projectmatching.app.domain.history.entity.TeamHistory;
-import com.projectmatching.app.domain.team.dto.TeamResponseDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.repository.TeamRepository;
 import com.projectmatching.app.domain.user.UserRepository;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -38,13 +36,19 @@ public class TeamHistoryServiceImpl implements TeamHistoryService {
 
         return teamHistoryRepository.save(teamHistory).getId();
     }
+//
+//    @Override
+//    public List<Team> getTeamHistory(UserDetailsImpl userDetails) {
+//        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+//
+//        List<TeamHistory> teamHistories = teamHistoryRepository.findTeamHistoriesByUser(user);
+//        List<com.projectmatching.app.domain.team.entity.Team> teams = teamHistories.stream().map(h -> teamRepository.findById(h.getVisited()).orElseThrow(NullPointerException::new)).collect(Collectors.toList());
+//        return teamService.entityToDtoList(teams);
+//    }
+
 
     @Override
-    public List<TeamResponseDto> getTeamHistory(UserDetailsImpl userDetails) {
-        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
-
-        List<TeamHistory> teamHistories = teamHistoryRepository.findTeamHistoriesByUser(user);
-        List<Team> teams = teamHistories.stream().map(h -> teamRepository.findById(h.getVisited()).orElseThrow(NullPointerException::new)).collect(Collectors.toList());
-        return teamService.entityToDtoList(teams);
+    public List<Team> getTeamHistory(UserDetailsImpl userDetails) {
+        return null;
     }
 }

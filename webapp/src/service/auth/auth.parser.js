@@ -1,5 +1,3 @@
-import { skillStackParserToIds } from './skillStack.parser';
-
 export const signUpParser = (sigupRawData) => {
   const { email, password } = sigupRawData;
   return { email, pwd: password };

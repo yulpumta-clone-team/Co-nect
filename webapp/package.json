@@ -75,6 +75,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "jsdoc": "^3.6.11",
     "msw": "^0.39.2",
     "msw-storybook-addon": "^1.6.3",
     "prettier": "^2.5.1",

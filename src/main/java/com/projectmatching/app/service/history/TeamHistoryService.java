@@ -1,6 +1,6 @@
 package com.projectmatching.app.service.history;
 
-import com.projectmatching.app.domain.team.dto.TeamResponseDto;
+import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 
 import java.util.List;
@@ -10,5 +10,5 @@ public interface TeamHistoryService {
     Long savedTeamHistory(UserDetailsImpl userDetails, Long visitedTeamId);
 
     //팀 게시글 조회 이력 열람 서비스
-    List<TeamResponseDto> getTeamHistory(UserDetailsImpl userDetails);
+    List<Team> getTeamHistory(UserDetailsImpl userDetails);
 }

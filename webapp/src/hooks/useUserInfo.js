@@ -6,9 +6,27 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useNavigate } from 'react-router-dom';
 import { updateUserInfo, deleteUserInfo } from 'service/auth';
 
+/**
+ * useUserInfo를 사용하는 곳에서 사용할 method 및 state
+ * @typedef {Object} useUserInfoReturns
+ * @property {() => Promise<void>} handleUpdateUserInfo 유저정보를 새롭게 요청하고 updateUserInfo service함수 실행
+ * @property {() => Promise<void>} handleDeleteUserInfo deleteUserInfo service함수를 실행
+ * @property {(httpStatus: number) => void} handleExiredToken httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
+ */
+
+/**
+ * 전역적으로 사용하는 유저정보를 관리하기 위한 custom hooks
+ * @param {useUserInfoParams} useUserInfoParams useUserInfo가 동작하기 위해 외부에서 주입해야하는 params
+ * @returns {useUserInfoReturns} useUserInfo를 사용하는 곳에서 사용할 method 및 state
+ */
 const useUserInfo = () => {
   const notifyDispatch = useToastNotificationAction();
   const navigate = useNavigate();
+
+  /**
+   * 유저정보를 새롭게 요청하고 updateUserInfo service함수 실행
+   * @returns {Promise<void>}
+   */
   const handleUpdateUserInfo = async () => {
     try {
       const response = await userApi.GET_ESSENTIAL_INFO();
@@ -31,6 +49,11 @@ const useUserInfo = () => {
       navigate(ROUTE.LOGIN);
     }
   };
+
+  /**
+   * deleteUserInfo service함수를 실행
+   * @returns {Promise<void>}
+   */
   const handleDeleteUserInfo = () => {
     deleteUserInfo();
     notifyNewMessage(notifyDispatch, '로그아웃 되었습니다', TOAST_TYPE.Info);
@@ -40,6 +63,11 @@ const useUserInfo = () => {
     }, 1000);
   };
 
+  /**
+   * httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
+   * @param {number} httpStatus
+   * @returns {Promise<void>}
+   */
   const handleExiredToken = (httpStatus) => {
     if (httpStatus !== 403 && httpStatus !== 401) {
       return;

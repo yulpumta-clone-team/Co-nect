@@ -4,7 +4,6 @@ import com.projectmatching.app.constant.bean.TechStackCodeBean;
 import com.projectmatching.app.domain.techStack.TechCodeRepository;
 import com.projectmatching.app.domain.techStack.dto.TechCodeDto;
 import com.projectmatching.app.domain.techStack.entity.TechCode;
-import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
 import com.projectmatching.app.domain.techStack.provider.TechStackProviderImpl;
 import com.projectmatching.app.service.ServiceTest;
 import com.projectmatching.app.util.StreamUtil;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;

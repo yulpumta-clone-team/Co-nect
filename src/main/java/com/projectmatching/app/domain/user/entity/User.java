@@ -70,7 +70,7 @@ public class User extends BaseTimeEntity  {
     /**
      * 내가 좋아요한 유저 목록
      */
-    @OneToMany(mappedBy = "fromUser")
+    @OneToMany(mappedBy = "fromUser",cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserLiking> userLikings = new HashSet<>();
@@ -80,31 +80,31 @@ public class User extends BaseTimeEntity  {
      * 나를 좋아요한 유저 목록
      *
      */
-    @OneToMany(mappedBy = "toUser")
+    @OneToMany(mappedBy = "toUser",cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserLiking> whoLikedMe = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserCommentLiking> userCommentLikings = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserComment> userComments = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserTech> skills = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserHistory> userHistories = new HashSet<>();

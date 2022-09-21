@@ -3,6 +3,7 @@ package com.projectmatching.app.controller.user;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.domain.common.Paging;
+import com.projectmatching.app.domain.team.dto.TeamSimpleDto;
 import com.projectmatching.app.domain.user.dto.*;
 
 import com.projectmatching.app.service.user.Impl.UserService;
@@ -110,5 +111,11 @@ public class UserController {
     }
 
 
+
+    @ApiOperation(value = "내가 작성한 팀 게시물 목록")
+    @GetMapping("/my-post")
+    public ResponseTemplate<List<TeamSimpleDto>> getMyTeamList(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseTemplate.valueOf(userService.getMyTeamList(userDetails));
+    }
 
 }
