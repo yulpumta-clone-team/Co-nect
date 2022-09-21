@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
 import { getUserInfo } from 'service/auth';
@@ -9,9 +8,7 @@ import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import * as S from '../style';
 
-CreateRootCommentForm.propTypes = {};
-
-export function CreateRootCommentForm({}) {
+export default function CreateRootCommentForm() {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const notifyDispatch = useToastNotificationAction();
   const {
@@ -42,7 +39,7 @@ export function CreateRootCommentForm({}) {
   };
 
   return (
-    <S.FormBox style={{ marginBottom: '12px' }}>
+    <S.FormBox>
       <form
         id="createRootCommentForm"
         style={{ display: 'flex', flexDirection: 'column' }}

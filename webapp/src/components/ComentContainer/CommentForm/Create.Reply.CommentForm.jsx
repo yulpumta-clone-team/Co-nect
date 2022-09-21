@@ -8,7 +8,7 @@ import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import * as S from '../style';
 
-export function CreateReplyCommentForm() {
+export default function CreateReplyCommentForm() {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const notifyDispatch = useToastNotificationAction();
   const {

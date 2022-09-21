@@ -4,7 +4,7 @@ import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { commentInfoType } from 'types/comment.type';
 import { parsedNumberToThreeDigits } from 'utils';
-import { EditRootCommentForm } from '../CommentForm/Edit.CommentForm';
+import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import * as S from '../style';
 
 NestedCommentElement.propTypes = {

@@ -14,7 +14,7 @@ EditRootCommentForm.propTypes = {
   secret: PropTypes.bool.isRequired,
 };
 
-export function EditRootCommentForm({ initialText, secret }) {
+export default function EditRootCommentForm({ initialText, secret }) {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const notifyDispatch = useToastNotificationAction();
   const {

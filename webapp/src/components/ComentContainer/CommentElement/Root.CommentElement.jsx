@@ -5,9 +5,9 @@ import { commentInfoType } from 'types/comment.type';
 import { getUserInfo } from 'service/auth';
 import Image from 'components/Common/Image';
 import { parsedNumberToThreeDigits } from 'utils';
-import { CreateReplyCommentForm } from '../CommentForm/Create.Reply.CommentForm';
+import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
 import NestedCommentList from '../CommentList/Nested.CommentList';
-import { EditRootCommentForm } from '../CommentForm/Edit.CommentForm';
+import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import * as S from '../style';
 
 HocNestedComment.propTypes = {
