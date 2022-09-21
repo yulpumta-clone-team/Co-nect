@@ -48,7 +48,7 @@ export const RootCommentBox = styled.div`
 
 export const NestedCommentBox = styled.div`
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
-  padding: 10px 20px;
+  padding-bottom: 7px;
   width: 100%;
   display: flex;
   flex-direction: column;
