@@ -5,10 +5,10 @@ import { commentInfoType } from 'types/comment.type';
 import { getUserInfo } from 'service/auth';
 import Image from 'components/Common/Image';
 import { parsedNumberToThreeDigits } from 'utils';
-import * as S from '../style';
 import { CreateReplyCommentForm } from '../CommentForm/Create.Reply.CommentForm';
 import NestedCommentList from '../CommentList/Nested.CommentList';
 import { EditRootCommentForm } from '../CommentForm/Edit.CommentForm';
+import * as S from '../style';
 
 HocNestedComment.propTypes = {
   commentInfo: commentInfoType.isRequired,
@@ -68,26 +68,39 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
         )}
         <S.CommentInfo>
           <S.SpecificInfo>
-            <S.ThumbSVG isFill={isLikesContainUserId} onClick={handleClickThumbSvg} />
+            <S.ChatSvg />
+            <span>{parsedNumberToThreeDigits(replies.length)}</span>
+          </S.SpecificInfo>
+          <S.SpecificInfo>
+            <S.HeartSvg isFill={isLikesContainUserId} onClick={handleClickThumbSvg} />
             <span>{parsedNumberToThreeDigits(likesCount)}</span>
           </S.SpecificInfo>
           <S.SpecificInfo>
-            <S.ThumbSVG isFill={isLikesContainUserId} onClick={handleClickThumbSvg} />
-            <span>{parsedNumberToThreeDigits(likesCount)}</span>
+            {!isEditTargetComment && (
+              <S.EditButton onClick={handleClickTargetComment}>댓글수정</S.EditButton>
+            )}
           </S.SpecificInfo>
-          {!isEditTargetComment && <button onClick={handleClickTargetComment}>댓글수정</button>}
         </S.CommentInfo>
-        <S.ReplyButtons>
-          {isShowReplies && <button onClick={handleClickHideReplyButton}>접기</button>}
-          {!isShowReplies && (
-            <button onClick={handleClickShowReplyButton}>
-              {parsedNumberToThreeDigits(replies.length)}개의 답글 보기
-            </button>
-          )}
-          {isShowCreateReplyForm && (
+        {replies && replies.length !== 0 && (
+          <S.ReplyButton>
+            {isShowReplies && (
+              <button onClick={handleClickHideReplyButton}>
+                <S.PolygonUpSvg />
+                <span>접기</span>
+              </button>
+            )}
+            {!isShowReplies && (
+              <button onClick={handleClickShowReplyButton}>
+                <S.PolygonDownSvg />
+                <span>{parsedNumberToThreeDigits(replies.length)}개의 답글 보기</span>
+              </button>
+            )}
+          </S.ReplyButton>
+        )}
+        {/* 답글 작성 form이 기본으로 보이는지 여부를 디자이너분께 질문해 놓은 상황 */}
+        {/* {isShowCreateReplyForm && (
             <button onClick={handleClickShowCreateForm}>답글 작성하기</button>
-          )}
-        </S.ReplyButtons>
+          )} */}
         {!isShowCreateReplyForm && <CreateReplyCommentForm commentId={commentId} />}
         {replies && replies.length !== 0 && isShowReplies && (
           <NestedCommentList postWriter={postWriter} comments={replies} />

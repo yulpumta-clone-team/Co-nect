@@ -8,7 +8,8 @@ const commentHandler = [
   // ------------ USER ------------
   // GET_USER_COMMENT
   rest.get(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
-    return randomResponse(res, ctx, userComments);
+    // return randomResponse(res, ctx, userComments);
+    return res(ctx.status(200), ctx.delay(1500), ctx.json(getResonseWithData(userComments)));
   }),
   // POST_USER_COMMENT
   rest.post(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}`, (req, res, ctx) => {

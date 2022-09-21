@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { commentInfoType } from 'types/comment.type';
-import * as S from '../style';
+import { parsedNumberToThreeDigits } from 'utils';
 import { EditRootCommentForm } from '../CommentForm/Edit.CommentForm';
+import * as S from '../style';
 
 NestedCommentElement.propTypes = {
   commentId: PropTypes.number.isRequired,
@@ -36,23 +37,25 @@ export default function NestedCommentElement({ commentId, commentInfo }) {
   return (
     <S.NestedCommentBox>
       <S.PublicCommentBox style={{ display: 'flex' }}>
-        <S.UserInfo>
-          <img src={img} alt="profile" />
+        <S.CommentTitle>
           <h3>{commenWriter}</h3>
-        </S.UserInfo>
-        {!isEditTargetComment && (
-          <S.ContentInfo>
-            <span>{content}</span>
-            <button onClick={() => selectEditTargetComment(commentId)}>수정</button>
-          </S.ContentInfo>
-        )}
-        <S.LikeInfo>
-          <S.ThumbSVG isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
-            👍
-          </S.ThumbSVG>
-          <span>: {likesCount}</span>
-        </S.LikeInfo>
+          <span>2022.12.31</span>
+        </S.CommentTitle>
+        <S.CommentContent>{content}</S.CommentContent>
       </S.PublicCommentBox>
+      <S.CommentInfo>
+        <S.SpecificInfo>
+          <S.HeartSvg isFill={isLikesContainUserId} onClick={handleClickThumbSvg} />
+          <span>{parsedNumberToThreeDigits(likesCount)}</span>
+        </S.SpecificInfo>
+        {!isEditTargetComment && (
+          <S.SpecificInfo>
+            <button onClick={() => selectEditTargetComment(commentId)}>댓글수정</button>
+            <span>/</span>
+            <button onClick={() => selectEditTargetComment(commentId)}>삭제하기</button>
+          </S.SpecificInfo>
+        )}
+      </S.CommentInfo>
       {isEditTargetComment && (
         <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
       )}

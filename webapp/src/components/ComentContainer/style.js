@@ -1,4 +1,8 @@
 import styled, { css } from 'styled-components';
+import { ReactComponent as HeartIcon } from 'assets/icons/heart.svg';
+import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
+import { ReactComponent as PolygonUpIcon } from 'assets/icons/polygon-up.svg';
+import { ReactComponent as PolygonDownIcon } from 'assets/icons/polygon-down.svg';
 
 export const FormBox = styled.div`
   textarea {
@@ -16,9 +20,15 @@ export const FormBox = styled.div`
   }
 `;
 
-export const ListBox = styled.ul`
+export const RootListContainer = styled.ul`
   width: 100%;
   box-sizing: border-box;
+`;
+
+export const NestedListContainer = styled.ul`
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 10px;
 `;
 
 export const CommentContainer = styled.div`
@@ -33,7 +43,7 @@ export const RootCommentBox = styled.div`
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2px;
 `;
 
 export const NestedCommentBox = styled.div`
@@ -41,7 +51,8 @@ export const NestedCommentBox = styled.div`
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
-  margin-bottom: 8px;
+  gap: 16px;
+  margin-bottom: 20px;
 `;
 
 export const SecretCommentBox = styled.div``;
@@ -52,7 +63,7 @@ export const PublicCommentBox = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
 `;
 
 export const CommentTitle = styled.div`
@@ -74,6 +85,9 @@ export const CommentTitle = styled.div`
 `;
 
 export const CommentContent = styled.p`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
   color: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
 `;
 
@@ -99,22 +113,73 @@ export const CommentInfo = styled.div`
 export const SpecificInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
-`;
-
-export const ThumbSVG = styled.div`
-  width: 12.5px;
-  height: 12.5px;
-  border-radius: 50%;
-  border: 1px solid black;
-  background-color: ${({ isFill }) => (isFill ? '#ff7600' : '#fff')};
-  &:hover {
-    cursor: pointer;
+  gap: 6px;
+  > span {
+    /* 000자리 cnt 숫자 */
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 25px;
+    color: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
   }
 `;
 
-export const ReplyButtons = styled.div`
+export const EditButton = styled.button`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 25px;
+  color: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+`;
+
+export const HeartSvg = styled(HeartIcon)`
+  width: 15px;
+  height: 15px;
+  & path {
+    fill: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+    stroke: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+  }
+`;
+
+export const ChatSvg = styled(ChatIcon)`
+  width: 15px;
+  height: 15px;
+  & path {
+    fill: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+    stroke: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+  }
+`;
+
+export const ReplyButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-start;
+  color: ${({ theme: { colors } }) => colors.primary.normal};
+  /* polygon button */
+  > button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    > span {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 24px;
+    }
+  }
+`;
+
+export const PolygonDownSvg = styled(PolygonDownIcon)`
+  width: 8px;
+  height: 8px;
+  & path {
+    fill: ${({ theme: { colors } }) => colors.primary.normal};
+    stroke: ${({ theme: { colors } }) => colors.primary.normal};
+  }
+`;
+
+export const PolygonUpSvg = styled(PolygonUpIcon)`
+  width: 8px;
+  height: 8px;
+  & path {
+    fill: ${({ theme: { colors } }) => colors.primary.normal};
+    stroke: ${({ theme: { colors } }) => colors.primary.normal};
+  }
 `;

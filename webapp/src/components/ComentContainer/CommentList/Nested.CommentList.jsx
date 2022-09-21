@@ -16,7 +16,7 @@ export default function NestedCommentList({ postWriter, comments }) {
 
   const loggedInUserName = userInfo?.name;
   return (
-    <S.ListBox>
+    <S.NestedListContainer>
       {comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
         const { secret, writer: commenWriter, parentId } = commentInfo;
         const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
@@ -30,6 +30,6 @@ export default function NestedCommentList({ postWriter, comments }) {
           />
         );
       })}
-    </S.ListBox>
+    </S.NestedListContainer>
   );
 }

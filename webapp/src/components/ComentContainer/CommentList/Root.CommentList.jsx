@@ -17,7 +17,7 @@ export default function RootCommentList({ postWriter, comments }) {
   const loggedInUserName = userInfo?.name;
 
   return (
-    <S.ListBox>
+    <S.RootListContainer>
       {comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
         const { secret, writer: commenWriter } = commentInfo;
         const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
@@ -31,6 +31,6 @@ export default function RootCommentList({ postWriter, comments }) {
           />
         );
       })}
-    </S.ListBox>
+    </S.RootListContainer>
   );
 }
