@@ -7,6 +7,7 @@ import { ReactComponent as viewIcon } from 'assets/icons/view.svg';
 
 // * : Card Container
 export const CardWrapper = styled.li`
+  cursor: pointer;
   position: relative;
   width: 260px;
   height: 300px;
