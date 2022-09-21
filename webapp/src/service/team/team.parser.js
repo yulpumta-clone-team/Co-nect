@@ -61,13 +61,13 @@ export const teamCardParser = (teamCardInfo) => {
  * @returns {parsedNewTeamPostObj} parsing된 팀 공고글 생성 객체
  */
 export const newTeamPostParser = (newTeamPostData) => {
-  const { introduction, hopeSession, profileImage, name, techSkills, slogan } = newTeamPostData;
+  const { introduction, hopeSession, profileImage, teamName, techSkills, slogan } = newTeamPostData;
   const parsedTechSkills = skillStackParserToIds(techSkills);
   return {
     content: introduction,
     hope_session: hopeSession,
     image: profileImage,
-    name,
+    name: teamName,
     skills: parsedTechSkills,
     slogan,
   };
