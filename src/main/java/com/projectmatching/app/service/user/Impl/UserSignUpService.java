@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @RequiredArgsConstructor
-@Repository
 @Service
 @Slf4j
 public class UserSignUpService {
@@ -69,14 +68,22 @@ public class UserSignUpService {
     // 2. make UserTech Entity by user and TechStack
     // 3. save UserTech entity to Repository
     private void addUsersTechStackByUserEssentialDto(UserEssentialDto userEssentialDto, User user) {
+
+        user.getSkills().clear();
         techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills())
                 .stream()
-                .map(techCode -> TechStack.of(techCode))
+                .map(techCode -> {
+                    TechStack techStack =  TechStack.of(techCode);
+                    techStackRepository.save(techStack);
+                    return techStack;
+                })
                 .map(techStack ->{
-                            techStackRepository.save(techStack);
-                            return UserTech.of(techStack, user);
+                            UserTech userTech = UserTech.of(techStack,user);
+                            return userTech;
                         }
-                ).forEach(userTech->userTechRepository.save(userTech));
+                ).forEach(userTech->user.getSkills().add(userTech));
+
+
     }
 
 

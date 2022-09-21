@@ -61,7 +61,7 @@ public class Team extends BaseTimeEntity {
     private Set<TeamComment> teamComments = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.MERGE)
     @Builder.Default
     @ToString.Exclude
     private Set<TeamTech> teamTeches = new HashSet<>();

@@ -49,6 +49,7 @@ public class TechStack {
     public static TechStack of(TechCode techCode){
         TechStack techStack = new TechStack();
         BeanUtils.copyProperties(techCode,techStack);
+        techStack.id = IdGenerator.number();
         techStack.key = techCode.getKeys();
         techStack.setId(IdGenerator.number());
         return techStack;

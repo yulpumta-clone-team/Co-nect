@@ -110,7 +110,7 @@ public class User extends BaseTimeEntity  {
     private Set<UserHistory> userHistories = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
     private Set<UserTeam> userTeams = new HashSet<>();
 
 
