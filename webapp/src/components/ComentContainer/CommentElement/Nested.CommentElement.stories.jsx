@@ -13,9 +13,11 @@ export default {
 function Template(args) {
   return (
     <CommentProvider>
-      <S.CommentContainer>
-        <NestedCommentElement {...args} />
-      </S.CommentContainer>
+      <S.RootCommentBox>
+        <S.NestedListContainer>
+          <NestedCommentElement {...args} />
+        </S.NestedListContainer>
+      </S.RootCommentBox>
     </CommentProvider>
   );
 }
