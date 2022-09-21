@@ -1,9 +1,10 @@
 package com.projectmatching.app.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.projectmatching.app.domain.comment.dto.UserCommentDto;
+
+import com.projectmatching.app.annotation.Generated;
+
 import com.projectmatching.app.domain.techStack.dto.TechStackDto;
-import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTech;
 import com.projectmatching.app.util.IdGenerator;
@@ -14,9 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static com.projectmatching.app.util.StreamUtil.map;
-
 
 @Getter
 @Setter
@@ -38,6 +36,7 @@ public class UserDto {
     private String status;
     private int likeCnt;
     private int commentCnt;
+    private int readCnt;
 
     private List<TechStackDto> skills;
 

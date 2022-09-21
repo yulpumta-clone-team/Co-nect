@@ -29,11 +29,17 @@ public class QTeam extends EntityPathBase<Team> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final StringPath image = createString("image");
+
     public final StringPath name = createString("name");
 
-    public final NumberPath<Long> read = createNumber("read", Long.class);
+    public final NumberPath<Long> ownerId = createNumber("ownerId", Long.class);
+
+    public final NumberPath<Long> readCnt = createNumber("readCnt", Long.class);
 
     public final StringPath session = createString("session");
+
+    public final StringPath slogan = createString("slogan");
 
     //inherited
     public final StringPath status = _super.status;

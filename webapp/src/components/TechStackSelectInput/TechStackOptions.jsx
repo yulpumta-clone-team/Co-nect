@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Divider from 'components/Common/Divider';
-import { skillStackParserWithCategory } from 'service/skillStack.parser';
+import { skillStackParserWithCategory } from 'service/etc/skillStack.parser';
 import Callback from 'pages/Callback';
 import * as S from './TechStackSelectInput.style';
 
 TechStackOptions.propTypes = {
   techStackOptionsApiState: PropTypes.shape({
     isLoading: PropTypes.bool.isRequired,
-    responseData: PropTypes.object,
+    responseData: PropTypes.array,
     error: PropTypes.object,
   }).isRequired,
-  techSkillOptions: PropTypes.object.isRequired,
+  techSkillOptions: PropTypes.array.isRequired,
   selectedTechSkills: PropTypes.array.isRequired,
   handleClickOption: PropTypes.func.isRequired,
   forceRefetchTeckStackOptions: PropTypes.func.isRequired,

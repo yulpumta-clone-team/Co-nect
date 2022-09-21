@@ -37,6 +37,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+
         log.info("jwt 필터");
         if(authTokenProvider.isTokenExist(request)){
             String token = authTokenProvider.resolveToken(request);

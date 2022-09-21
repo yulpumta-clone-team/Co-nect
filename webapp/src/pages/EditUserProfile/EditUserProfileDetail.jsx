@@ -1,12 +1,12 @@
 import React from 'react';
-import { userEditParser, userPostEditParser } from 'service/user.parser';
-import { skillStackParser } from 'service/skillStack.parser';
-import { editUserValidation } from 'service/user.validation';
+import { userDetailParser, userPostEditParser } from 'service/user/user.parser';
+import { skillStackParser } from 'service/etc/skillStack.parser';
+import { editUserValidation } from 'service/user/user.validation';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import useForm from 'hooks/useForm';
-import { userEditType } from 'types/user.type';
+import { userDetailType } from 'types/user.type';
 import useAxios from 'hooks/useAxios';
 import userApi from 'api/user.api';
 import useFileUploader from 'hooks/useFileUploader';
@@ -14,13 +14,13 @@ import useCheckNicknameDuplicate from 'hooks/useCheckNicknameDuplicate';
 import EditUserProfileView from './EditUserProfile.view';
 
 EditUserProfileDetail.propTypes = {
-  targetUser: userEditType,
+  targetUser: userDetailType,
 };
 
 export default function EditUserProfileDetail({ targetUser }) {
   const notifyDispatch = useToastNotificationAction();
 
-  const parsedTargerUserInfo = userEditParser(targetUser);
+  const parsedTargerUserInfo = userDetailParser(targetUser);
   const {
     userId,
     nickname,

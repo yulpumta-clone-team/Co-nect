@@ -6,6 +6,7 @@ import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.entity.UserTeam;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,15 +25,19 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class TeamDetailResponseDto {
 
+    @ApiModelProperty(name = "팀 게시물 id")
     private Long id;
+
     private UserInfo user;
     private String name;
     private String content;
     private String session;
     private List<Integer> skills;
-    private String img;
-    private Long read;
-    private String status;
+    private String image;
+
+    private String status; //모집완료 여부
+
+    private Long readCnt;
     private int commentCnt;
     private int likeCnt;
 

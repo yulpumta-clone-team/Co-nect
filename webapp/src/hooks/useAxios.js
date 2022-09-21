@@ -4,6 +4,27 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useEffect, useReducer, useState } from 'react';
 import useUserInfo from './useUserInfo';
 
+/**
+ * useAxios가 동작하기 위해 외부에서 주입해야하는 params
+ * @typedef {Object} useAxiosParams
+ * @property {(axiosConfig: Object) => Promise<any>} axiosInstance axios instance
+ * @property {Object} axiosConfig axios intance를 실행할 때 넘겨줄 params
+ * @property {boolean} immediate 컴포넌트가 렌더링되자마자 요청 보내는지 여부 (get요청일 때만 true)
+ */
+
+/**
+ * useAxios를 사용하는 곳에서 사용할 method 및 state
+ * @typedef {Object} useAxiosReturns
+ * @property {boolean} state isLoading, responseData, error로 구성
+ * @property {boolean} execution 새로운 axios config와 함께 api호출을 실행하는 함수
+ * @property {boolean} forceRefetch 기존 axios config로 같은 api호출을 실행하는 함수
+ */
+
+/**
+ * custom useAxios hooks
+ * @param {useAxiosParams} useAxiosParams useAxios가 동작하기 위해 외부에서 주입해야하는 params
+ * @returns {useAxiosReturns} useAxios를 사용하는 곳에서 사용할 method 및 state
+ */
 const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
   const notifyDispatch = useToastNotificationAction();
   const { handleExiredToken } = useUserInfo();
@@ -15,14 +36,24 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
   const [trigger, setTrigger] = useState(Date.now());
   const [controller, setController] = useState();
 
+  /**
+   * 기존 config값으로 api요청을 다시 요청
+   */
   const forceRefetch = () => {
     setTrigger(Date.now());
   };
 
+  /**
+   * state를 초기화
+   */
   const resetState = () => {
     dispatch({ type: RESET_TYPE });
   };
 
+  /**
+   * 새로운 axios config와 함께 api호출을 실행하는 함수
+   * @param {Object} newConfig axios instance에 넘겨줄 새로운 axios config
+   */
   const execution = async (newConfig) => {
     dispatch({ type: LOADING_TYPE });
     try {

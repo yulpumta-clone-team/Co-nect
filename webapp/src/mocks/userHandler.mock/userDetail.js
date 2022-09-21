@@ -1,14 +1,20 @@
 export const userDetail = {
   id: 1,
-  oauthId: 'asdfasdf',
   email: 'temp@naver.com',
-  name: 'kmorrieson0',
   portfolio: 'www.포트폴리오링크.com',
   slogan: 'string',
   content: '임시 자기 소개',
-  img: 'string',
   hopeSession: '1개월 이하',
   job: '학생',
+  status: false,
+  commentCnt: 12,
+  likeCnt: 12,
+  readCnt: 3,
+  userInfo: {
+    id: 1,
+    image: '',
+    name: 'kmorrieson0',
+  },
   skills: [
     {
       key: 500,
@@ -60,7 +66,4 @@ export const userDetail = {
         'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
     },
   ],
-  status: false,
-  commentCnt: 12,
-  likeCnt: 12,
 };

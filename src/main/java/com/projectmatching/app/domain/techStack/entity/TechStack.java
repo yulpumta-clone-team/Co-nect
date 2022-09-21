@@ -38,8 +38,7 @@ public class TechStack {
     @Builder.Default
     private Set<TeamTech> teamTechs = new HashSet<>();
 
-    @OneToMany
-    @JoinColumn(name = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserTech> userTechs = new HashSet<>();
@@ -50,6 +49,7 @@ public class TechStack {
     public static TechStack of(TechCode techCode){
         TechStack techStack = new TechStack();
         BeanUtils.copyProperties(techCode,techStack);
+        techStack.key = techCode.getKeys();
         techStack.setId(IdGenerator.number());
         return techStack;
 
