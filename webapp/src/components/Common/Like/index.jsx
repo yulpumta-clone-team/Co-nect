@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import BlueHeartIcon from 'assets/icons/blue-heart.svg';
-import RedHeartIcon from 'assets/icons/red-heart.svg';
+import FullHeartIcon from 'assets/icons/full-heart.svg';
 
 import * as S from './style';
 
@@ -13,5 +13,5 @@ Like.propTypes = {
 };
 
 export default function Like({ like, onClick }) {
-  return <S.Heart src={like ? RedHeartIcon : BlueHeartIcon} onClick={onClick} />;
+  return <S.Heart src={like ? FullHeartIcon : BlueHeartIcon} onClick={onClick} />;
 }
