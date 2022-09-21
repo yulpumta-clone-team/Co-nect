@@ -19,20 +19,20 @@ export default function TeamPostDetail({ targetTeam }) {
     parsedTargetTeam;
   const [like, setLike] = useState(false);
 
-  useEffect(async () => {
-    const fetchData = async () => {
-      const res = await teamApi.GET_TEAM_LIKES;
-      console.log(res);
-      if (res.data.likecnt === true) setLike(true); // 여기 이 status 부분이 api가 뭐로 해줘야할까? likecnt가 1올라갔을때?
-    };
-    fetchData();
-  }, []);
+  // useEffect(async () => {
+  //   const fetchData = async () => {
+  //     const res = await teamApi.GET_TEAM_LIKES;
+  //     console.log(res);
+  //     if (res.data.likecnt === true) setLike(true); // 여기 이 status 부분이 api가 뭐로 해줘야할까? likecnt가 1올라갔을때?
+  //   };
+  //   fetchData();
+  // }, []);
 
   const toggleLike = async (e) => {
     // [POST] 사용자가 좋아요를 누름 -> DB 갱신
     setLike(!like);
-    const res = await teamApi.PATCH_TEAM_LIKE({ id, like });
-    console.log(res.data);
+    // const res = await teamApi.PATCH_TEAM_LIKE({ id, like });
+    // console.log(res.data);
   };
 
   return (
