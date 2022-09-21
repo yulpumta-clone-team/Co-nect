@@ -31,7 +31,7 @@ public class TeamTech extends BaseTimeEntity {
     private TechStack techStack;
 
 
-    public static TeamTech of(TechStack techStack,Team team){
+    public static TeamTech valueOf(TechStack techStack, Team team){
         TeamTech teamTech = new TeamTech();
         teamTech.id = IdGenerator.number();
         teamTech.team = team;
