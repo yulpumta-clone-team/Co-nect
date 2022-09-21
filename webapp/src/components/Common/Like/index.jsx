@@ -13,5 +13,5 @@ Like.propTypes = {
 };
 
 export default function Like({ like, onClick }) {
-  return <S.Heart src={like ? { RedHeartIcon } : { BlueHeartIcon }} onClick={onClick} />;
+  return <S.Heart src={like ? RedHeartIcon : BlueHeartIcon} onClick={onClick} />;
 }

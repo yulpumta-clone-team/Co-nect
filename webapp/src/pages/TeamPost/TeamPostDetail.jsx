@@ -10,7 +10,7 @@ import Image from 'components/Common/Image';
 import Slogan from 'pages/EssentialInfo/SubPages/Slogan';
 import useAxios from 'hooks/useAxios';
 import teamApi from 'api/team.api';
-import { Like } from 'components/Common/Like';
+import Like from 'components/Common/Like';
 import * as S from './TeamPost.style';
 
 export default function TeamPostDetail({ targetTeam }) {
@@ -19,17 +19,20 @@ export default function TeamPostDetail({ targetTeam }) {
     parsedTargetTeam;
   const [like, setLike] = useState(false);
 
-  // useEffect(async () => {
-  //   const fetchData = async () => {
-  //     const res = await teamApi.GET_TEAM_LIKES;
-  //     // if (res.data.likeCnt가 1 올라갔을때,,) setLike(true); // 여기 이 status 부분이 api가 뭐로 해줘야할까? likecnt가 1올라갔을때?
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(async () => {
+    const fetchData = async () => {
+      const res = await teamApi.GET_TEAM_LIKES;
+      console.log(res);
+      if (res.data.likecnt === true) setLike(true); // 여기 이 status 부분이 api가 뭐로 해줘야할까? likecnt가 1올라갔을때?
+    };
+    fetchData();
+  }, []);
 
   const toggleLike = async (e) => {
-    // const res = await teamApi.PATCH_TEAM_LIKE; // [POST] 사용자가 좋아요를 누름 -> DB 갱신
+    // [POST] 사용자가 좋아요를 누름 -> DB 갱신
     setLike(!like);
+    const res = await teamApi.PATCH_TEAM_LIKE({ id, like });
+    console.log(res.data);
   };
 
   return (
