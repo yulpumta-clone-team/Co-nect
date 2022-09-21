@@ -3,6 +3,7 @@ import { ReactComponent as HeartIcon } from 'assets/icons/heart.svg';
 import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
 import { ReactComponent as PolygonUpIcon } from 'assets/icons/polygon-up.svg';
 import { ReactComponent as PolygonDownIcon } from 'assets/icons/polygon-down.svg';
+import { ReactComponent as RecycleBinIcon } from 'assets/icons/recycle-bin.svg';
 
 export const FormBox = styled.div`
   textarea {
@@ -68,6 +69,8 @@ export const PublicCommentBox = styled.div`
 `;
 
 export const CommentTitle = styled.div`
+  position: relative;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -82,6 +85,19 @@ export const CommentTitle = styled.div`
     font-weight: 400;
     font-size: 12px;
     line-height: 24px;
+  }
+  > button {
+    position: absolute;
+    right: 0;
+  }
+`;
+
+export const RecycleBinSvg = styled(RecycleBinIcon)`
+  width: 16px;
+  height: 16px;
+  & path {
+    fill: ${({ theme: { colors } }) => colors.primary.normal};
+    stroke: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
 

@@ -60,6 +60,9 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
           <S.CommentTitle>
             <h3>{commenWriter}</h3>
             <span>2022.12.31</span>
+            <button>
+              <S.RecycleBinSvg />
+            </button>
           </S.CommentTitle>
           <S.CommentContent>{content}</S.CommentContent>
         </S.PublicCommentBox>
