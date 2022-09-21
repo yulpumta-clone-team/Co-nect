@@ -89,7 +89,7 @@ public class TeamUpdateTest extends TeamServiceTest{
 
     private TeamTech teamTechFactory(Team team){
         TechStack techStack = TechStack.builder()
-                .keys(101)
+                .key(101)
                 .category("front")
                 .techName("react")
                 .build();

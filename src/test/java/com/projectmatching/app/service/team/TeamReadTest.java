@@ -99,8 +99,12 @@ public class TeamReadTest extends TeamServiceTest {
                 .content("testTeam")
                 .build();
 
-        when(teamRepository.findById(team.getId())).thenReturn(Optional.of(team));
+        User user = User.builder()
+                .id(team.getOwnerId())
+                .build();
 
+        when(teamRepository.findById(team.getId())).thenReturn(Optional.of(team));
+        when(userRepository.findById(team.getOwnerId())).thenReturn(Optional.of(user));
         TeamDto resultTeam = teamService.getTeam(team.getId());
 
         assertEquals(team.getId(),resultTeam.getId());

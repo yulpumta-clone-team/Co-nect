@@ -32,7 +32,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
-import static org.springframework.beans.BeanUtils.copyProperties;
 
 
 @RequiredArgsConstructor
@@ -87,8 +86,9 @@ public class TeamService {
     //팀 게시글 상세조회
     @Transactional(readOnly = true)
     public TeamDto getTeam(Long teamId) throws ResponeException {
-        Team team = teamRepository.findById(teamId).orElseThrow(()-> new CoNectNotFoundException(NOT_EXIST_TEAM));
-        return TeamDto.of(team);
+        Team team = teamRepository.findById(teamId).orElseThrow(CoNectNotFoundException::new);
+        User user = userRepository.findById(team.getOwnerId()).orElseThrow(CoNectNotFoundException::new);
+        return TeamDto.valueOf(team,user);
 
     }
 
