@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -37,7 +38,7 @@ public class TeamSimpleDto {
         BeanUtils.copyProperties(team,teamSimpleDto);
         teamSimpleDto.userInfo = UserInfo.of(user);
         teamSimpleDto.status = team.getStatus();
-        teamSimpleDto.readCnt = team.getReadCnt();
+        teamSimpleDto.readCnt = Optional.ofNullable(team.getReadCnt()).orElse(0L);
         teamSimpleDto.commentCnt = team.getTeamComments().size();
         teamSimpleDto.likeCnt = team.getTeamLikings().size();
         return teamSimpleDto;
