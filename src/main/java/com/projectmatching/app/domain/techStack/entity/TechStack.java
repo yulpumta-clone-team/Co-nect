@@ -33,12 +33,12 @@ public class TechStack {
     private String image;
 
 
-    @OneToMany(mappedBy = "techStack", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "techStack", cascade = CascadeType.ALL,orphanRemoval = true)
     @ToString.Exclude
     @Builder.Default
     private Set<TeamTech> teamTechs = new HashSet<>();
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     @ToString.Exclude
     @Builder.Default
     private Set<UserTech> userTechs = new HashSet<>();

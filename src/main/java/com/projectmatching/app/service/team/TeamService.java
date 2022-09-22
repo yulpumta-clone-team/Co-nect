@@ -53,6 +53,9 @@ public class TeamService {
     private final TeamLikingRepository teamLikingRepository;
     private final TechStackRepository techStackRepository;
 
+    @PersistenceContext
+    private final EntityManager em;
+
 
     //팀 게시글 저장
     @Transactional
@@ -74,14 +77,13 @@ public class TeamService {
                 .stream()
                 .map(techCode -> {
                     TechStack techStack = TechStack.of(techCode);
-                    techStackRepository.save(techStack);
                     return techStack;
                 })
                 .map(techStack -> {
                     TeamTech teamTech = TeamTech.valueOf(techStack,team);
                     return teamTech;
                 }
-                ).forEach(teamTech -> team.getTeamTeches().add(teamTech));
+                ).forEach(teamTech -> teamTechRepository.save(teamTech));
 
     }
 
@@ -127,11 +129,14 @@ public class TeamService {
 
         if(checkTeamUser(team, user)==false) throw new CoNectLogicalException(PERMISSION_DENIED);
         team.updateWith(teamRequestDto);
-        //이미 있는것들 비우고 다시 넣음 \
+
+        //이미 있는것들 비우고 다시 넣음
         team.getTeamTeches().clear();
+
         addTeamTechByTeamRequest(teamRequestDto, team);
 
     }
+
 
 
 

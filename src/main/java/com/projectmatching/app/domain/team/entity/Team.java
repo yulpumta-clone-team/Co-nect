@@ -50,24 +50,24 @@ public class Team extends BaseTimeEntity {
     @Column(name = "owner_id")
     private Long ownerId;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL,orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
     private Set<UserTeam> userTeams = new HashSet<>();
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL,orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
     private Set<TeamComment> teamComments = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL,orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
     private Set<TeamTech> teamTeches = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL,orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
     private Set<TeamLiking> teamLikings = new HashSet<>();
