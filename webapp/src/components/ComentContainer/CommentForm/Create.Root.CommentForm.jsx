@@ -41,7 +41,7 @@ export default function CreateRootCommentForm() {
   };
 
   return (
-    <S.FormBox>
+    <S.FormBox isNested={false}>
       <form id="createRootCommentForm" onSubmit={handleSubmit(onSubmit)}>
         <textarea
           {...register('createRootCommentForm', {

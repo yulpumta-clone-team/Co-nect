@@ -24,7 +24,7 @@ export const FormBox = styled.div`
   p {
     display: block;
     width: 100%;
-    height: 110px;
+    height: ${({ isNested }) => (isNested ? '60px' : '110px')};
     line-height: 1.5;
   }
 `;
