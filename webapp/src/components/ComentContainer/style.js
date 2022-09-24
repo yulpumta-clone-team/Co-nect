@@ -10,7 +10,7 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const FormBox = styled.div`
+export const FormBox = styled.form`
   width: 100%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   padding: 12px 15px;
@@ -24,12 +24,14 @@ export const FormBox = styled.div`
     scrollbar-width: none;
     background-color: ${({ theme: { colors } }) => colors.greyScale.white};
     padding: 8px;
+    height: 100%;
+    height: ${({ isNested }) => (isNested ? '60px' : '110px')};
   }
   textarea,
   p {
     display: block;
     width: 100%;
-    height: ${({ isNested }) => (isNested ? '60px' : '110px')};
+    height: 100%;
     line-height: 1.5;
   }
 `;
