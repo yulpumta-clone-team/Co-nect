@@ -21,7 +21,7 @@ export default function CheckInput({ label, name, value, onChange, customStyle, 
   const InputBox = value ? S.CheckRectangeSvg : S.RectangeSvg;
   return (
     <S.Container customStyle={customStyle}>
-      <InputBox onChange={handleClickCheck} cWidth={width} cHeight={height} />
+      <InputBox onChange={handleClickCheck} />
       <span>{label}</span>
     </S.Container>
   );

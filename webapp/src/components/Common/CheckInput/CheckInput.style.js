@@ -12,11 +12,11 @@ export const Container = styled.div`
 `;
 
 export const CheckRectangeSvg = styled(CheckRectangeIcon)`
-  width: ${({ cWidth }) => cWidth || '20px'};
-  height: ${({ cHeight }) => cHeight || '20px'};
+  width: 20px;
+  height: 20px;
 `;
 
 export const RectangeSvg = styled(RectangeIcon)`
-  width: ${({ cWidth }) => cWidth || '20px'};
-  height: ${({ cHeight }) => cHeight || '20px'};
+  width: 20px;
+  height: 20px;
 `;
