@@ -11,6 +11,8 @@ TextArea.propTypes = {
   isError: PropTypes.bool,
   helperText: PropTypes.string,
   customStyle: PropTypes.array,
+  width: PropTypes.string,
+  height: PropTypes.string,
 };
 
 export default function TextArea({
@@ -22,9 +24,12 @@ export default function TextArea({
   isError = false,
   helperText,
   customStyle,
+  width,
+  height,
   ...rest
 }) {
   const textAreaRef = useRef(null);
+  // FIXME: 기본높이가 78px로 되어지는 버그 수정하기. => 커스텀스타일이 적용가능하게수정하기
   useEffect(() => {
     if (textAreaRef.current) {
       textAreaRef.current.style.height = '0px'; // 글자 줄일 때도 사이즈가 줄어들어야해서
@@ -42,6 +47,8 @@ export default function TextArea({
         id={label}
         value={value}
         onChange={onChange}
+        width={width}
+        height={height}
       />
     </S.Container>
   );
