@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { setPostIdOnSubmitData } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
@@ -47,8 +47,8 @@ export default function CreateRootCommentForm() {
         placeholder="댓글을 입력하세요."
         value={inputValues.content}
         onChange={onChangeHandler}
-        isError={!!validateError.isError}
-        helperText={validateError.isError}
+        isError={!!validateError.isSecret}
+        helperText={validateError.isSecret}
       />
       <S.FormButtons>
         <CheckInput
