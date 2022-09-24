@@ -6,19 +6,39 @@ import { ReactComponent as PolygonDownIcon } from 'assets/icons/polygon-down.svg
 import { ReactComponent as RecycleBinIcon } from 'assets/icons/recycle-bin.svg';
 
 export const FormBox = styled.div`
+  width: 100%;
+  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   textarea {
     resize: none;
     width: 100%;
     overflow: hidden;
     scrollbar-width: none;
+    background-color: ${({ theme: { colors } }) => colors.greyScale.white};
+    padding: 8px;
   }
   textarea,
   p {
     display: block;
     width: 100%;
-    height: auto;
+    height: 110px;
     line-height: 1.5;
   }
+`;
+
+export const FormButtons = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const FormSubmitButton = css`
+  border-radius: 0;
+  width: 115px;
+  height: 35px;
 `;
 
 export const RootListContainer = styled.ul`
@@ -111,14 +131,6 @@ export const CommentContent = styled.p`
 export const UserProfileImage = css`
   width: 30px;
   height: 30px;
-`;
-
-// ! 지워야함
-export const ContentInfo = styled.div`
-  width: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 export const CommentInfo = styled.div`

@@ -6,6 +6,8 @@ import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Pr
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
+import Button from 'components/Common/Button';
+import CheckInput from 'components/Common/CheckInput';
 import * as S from '../style';
 
 export default function CreateRootCommentForm() {
@@ -40,11 +42,7 @@ export default function CreateRootCommentForm() {
 
   return (
     <S.FormBox>
-      <form
-        id="createRootCommentForm"
-        style={{ display: 'flex', flexDirection: 'column' }}
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form id="createRootCommentForm" onSubmit={handleSubmit(onSubmit)}>
         <textarea
           {...register('createRootCommentForm', {
             required: '내용을 입력해주세요.',
@@ -54,11 +52,17 @@ export default function CreateRootCommentForm() {
         <span>{errors?.createRootCommentForm?.message}</span>
         <span>{errors?.extraError?.message}</span>
       </form>
-      <span>비밀댓글여부</span>
-      <input type="checkbox" checked={isSecret} onChange={() => setIsSecret((prev) => !prev)} />
-      <button form="createRootCommentForm" type="submit">
-        작성
-      </button>
+      <S.FormButtons>
+        <CheckInput label="비밀댓글" name="isSecret" value onChange={() => {}} />
+        <Button
+          form="createRootCommentForm"
+          type="submit"
+          theme="primary"
+          customStyle={S.FormSubmitButton}
+        >
+          입력
+        </Button>
+      </S.FormButtons>
     </S.FormBox>
   );
 }
