@@ -5,6 +5,10 @@ import { ReactComponent as PolygonUpIcon } from 'assets/icons/polygon-up.svg';
 import { ReactComponent as PolygonDownIcon } from 'assets/icons/polygon-down.svg';
 import { ReactComponent as RecycleBinIcon } from 'assets/icons/recycle-bin.svg';
 
+export const Container = styled.div`
+  width: 100%;
+`;
+
 export const FormBox = styled.div`
   width: 100%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
@@ -56,6 +60,7 @@ export const CommentContainer = styled.div`
   width: 100%;
   display: flex;
   gap: 10px;
+  margin-bottom: 24px;
 `;
 
 export const RootCommentBox = styled.div`
