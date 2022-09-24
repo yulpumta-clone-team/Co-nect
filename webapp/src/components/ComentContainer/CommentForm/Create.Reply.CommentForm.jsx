@@ -6,6 +6,8 @@ import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Pr
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
+import CheckInput from 'components/Common/CheckInput';
+import Button from 'components/Common/Button';
 import * as S from '../style';
 
 export default function CreateReplyCommentForm() {
@@ -40,7 +42,7 @@ export default function CreateReplyCommentForm() {
     reset({ createRootCommentForm: '' });
   };
   return (
-    <S.FormBox style={{ marginBottom: '12px' }}>
+    <S.FormBox isNested>
       <form
         id="createReplyCommentForm"
         style={{ display: 'flex', flexDirection: 'column' }}
@@ -56,12 +58,17 @@ export default function CreateReplyCommentForm() {
         <span>{errors?.commentValue?.message}</span>
         <span>{errors?.extraError?.message}</span>
       </form>
-      <span>비밀댓글여부</span>
-      <input type="checkbox" checked={isSecret} onChange={() => setIsSecret((prev) => !prev)} />
-      <button form="createReplyCommentForm" type="submit">
-        작성
-      </button>
-      <button onClick={handleClickCancel}>취소</button>
+      <S.FormButtons>
+        <CheckInput label="비밀댓글" name="isSecret" value onChange={() => {}} />
+        <Button
+          form="createRootCommentForm"
+          type="submit"
+          theme="primary"
+          customStyle={S.FormSubmitButton}
+        >
+          입력
+        </Button>
+      </S.FormButtons>
     </S.FormBox>
   );
 }
