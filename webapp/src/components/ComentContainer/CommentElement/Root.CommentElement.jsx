@@ -117,9 +117,11 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
           )} */}
         {!isShowCreateReplyForm && <CreateReplyCommentForm commentId={commentId} />}
         {replies && replies.length !== 0 && isShowReplies && (
-          <NestedCommentList postWriter={postWriter} comments={replies} />
+          <>
+            <NestedCommentList postWriter={postWriter} comments={replies} />
+            <CreateReplyCommentForm />
+          </>
         )}
-        <CreateReplyCommentForm />
       </S.RootCommentBox>
     </S.CommentContainer>
   );
