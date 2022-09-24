@@ -4,7 +4,7 @@ import NestedCommentElement from './Nested.CommentElement';
 import * as S from '../style';
 
 export default {
-  title: 'CATEGORY/NestedCommentElement',
+  title: 'component/Comment.NestedCommentElement',
   component: NestedCommentElement,
   args: {},
   layout: 'fullscreen',

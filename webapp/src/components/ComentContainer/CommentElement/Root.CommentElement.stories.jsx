@@ -3,7 +3,7 @@ import CommentProvider from 'contexts/Comment/Comment.Provider';
 import RootCommentElement from './Root.CommentElement';
 
 export default {
-  title: 'CATEGORY/RootCommentElement',
+  title: 'component/Comment.RootCommentElement',
   component: RootCommentElement,
   args: {},
   layout: 'fullscreen',

@@ -1,11 +1,11 @@
 import React from 'react';
 import CommentProvider from 'contexts/Comment/Comment.Provider';
 import NestedCommentList from './Nested.CommentList';
-import * as S from '../style';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
+import * as S from '../style';
 
 export default {
-  title: 'CATEGORY/NestedCommentList',
+  title: 'component/Comment.NestedCommentList',
   component: NestedCommentList,
   args: {},
   layout: 'fullscreen',

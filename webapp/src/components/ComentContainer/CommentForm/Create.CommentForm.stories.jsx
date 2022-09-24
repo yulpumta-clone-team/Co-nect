@@ -4,7 +4,7 @@ import CreateCommentForm from './Create.Root.CommentForm';
 
 // Create.Root.CommentForm에서 import해왔지만 Create.Reply.CommentForm과 다른게 없어 CreateCommentForm으로 통합했습니다.
 export default {
-  title: 'CATEGORY/CreateCommentForm',
+  title: 'component/Comment.CreateCommentForm',
   component: CreateCommentForm,
   args: {},
   layout: 'fullscreen',
