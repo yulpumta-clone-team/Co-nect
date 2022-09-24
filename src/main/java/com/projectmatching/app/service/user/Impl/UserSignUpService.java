@@ -22,9 +22,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 
 @RequiredArgsConstructor
-@Repository
 @Service
 @Slf4j
 public class UserSignUpService {
@@ -33,6 +35,11 @@ public class UserSignUpService {
     private final TechStackProviderImpl techStackProvider;
     private final UserTechRepository userTechRepository;
     private final TechStackRepository techStackRepository;
+
+
+    @PersistenceContext
+    private final EntityManager em;
+
 
     @Transactional
     @Validation
@@ -58,6 +65,10 @@ public class UserSignUpService {
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
         user.updateEssentialInfo(userEssentialDto);
 
+        //이미 있는것들 비우고 다시 넣음
+        user.getSkills().clear();
+
+
         addUsersTechStackByUserEssentialDto(userEssentialDto, user);
 
 
@@ -69,14 +80,21 @@ public class UserSignUpService {
     // 2. make UserTech Entity by user and TechStack
     // 3. save UserTech entity to Repository
     private void addUsersTechStackByUserEssentialDto(UserEssentialDto userEssentialDto, User user) {
+
+
         techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills())
                 .stream()
-                .map(techCode -> TechStack.of(techCode))
+                .map(techCode -> {
+                    TechStack techStack =  TechStack.of(techCode);
+                    return techStack;
+                })
                 .map(techStack ->{
-                            techStackRepository.save(techStack);
-                            return UserTech.of(techStack, user);
+                            UserTech userTech = UserTech.of(techStack,user);
+                            return userTech;
                         }
-                ).forEach(userTech->userTechRepository.save(userTech));
+                ).forEach(userTech -> userTechRepository.save(userTech));
+
+
     }
 
 
