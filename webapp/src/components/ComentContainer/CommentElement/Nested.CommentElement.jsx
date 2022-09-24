@@ -6,18 +6,25 @@ import { commentInfoType } from 'types/comment.type';
 import { parsedNumberToThreeDigits } from 'utils';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import * as S from '../style';
+import SecretCommentElement from './Secret.CommentElement';
 
 NestedCommentElement.propTypes = {
   commentId: PropTypes.number.isRequired,
   commentInfo: commentInfoType.isRequired,
+  postWriter: PropTypes.string.isRequired,
 };
 
-export default function NestedCommentElement({ commentId, commentInfo }) {
+export default function NestedCommentElement({ commentId, commentInfo, postWriter }) {
   const { editTargetCommentId, postType } = useCommentsState();
-  const { selectEditTargetComment, handleClickLikeThumb, isLikesContainUserId } =
-    useCommentsAction();
+  const {
+    isShowSecretComment,
+    selectEditTargetComment,
+    handleClickLikeThumb,
+    isLikesContainUserId,
+  } = useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
+  const loggedInUserName = userInfo?.name;
   const {
     img,
     secret,
@@ -33,7 +40,7 @@ export default function NestedCommentElement({ commentId, commentInfo }) {
     const idObj = { commentId, loggedInUserId, parentId };
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
-
+  const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
   return (
     <S.NestedCommentBox>
       <S.PublicCommentBox style={{ display: 'flex' }}>
@@ -41,7 +48,11 @@ export default function NestedCommentElement({ commentId, commentInfo }) {
           <h3>{commenWriter}</h3>
           <span>2022.12.31</span>
         </S.CommentTitle>
-        <S.CommentContent isNested>{content}</S.CommentContent>
+        {isSecret ? (
+          <SecretCommentElement isNested />
+        ) : (
+          <S.CommentContent isNested>{content}</S.CommentContent>
+        )}
       </S.PublicCommentBox>
       <S.CommentInfo>
         <S.SpecificInfo isNested>

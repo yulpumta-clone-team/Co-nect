@@ -25,6 +25,7 @@ function Template(args) {
 export const Default = Template.bind({});
 Default.args = {
   commentId: 10,
+  postWriter: 'front_temp',
   commentInfo: {
     img: '',
     userId: 12512512,

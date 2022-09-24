@@ -4,6 +4,7 @@ import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
 import { ReactComponent as PolygonUpIcon } from 'assets/icons/polygon-up.svg';
 import { ReactComponent as PolygonDownIcon } from 'assets/icons/polygon-down.svg';
 import { ReactComponent as RecycleBinIcon } from 'assets/icons/recycle-bin.svg';
+import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 
 export const Container = styled.div`
   width: 100%;
@@ -82,7 +83,29 @@ export const NestedCommentBox = styled.div`
   gap: 2px;
 `;
 
-export const SecretCommentBox = styled.div``;
+export const SecretCommentBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  > span {
+    ${({ isNested, theme: { COLORS } }) => {
+      if (isNested) {
+        return css`
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 24px;
+          color: ${COLORS.GRAY[700]};
+        `;
+      }
+      return css`
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: ${COLORS.GRAY[900]};
+      `;
+    }};
+  }
+`;
 
 export const PublicCommentBox = styled.div`
   width: 100%;
@@ -216,5 +239,14 @@ export const PolygonUpSvg = styled(PolygonUpIcon)`
   & path {
     fill: ${({ theme: { colors } }) => colors.primary.normal};
     stroke: ${({ theme: { colors } }) => colors.primary.normal};
+  }
+`;
+
+export const LockSvg = styled(LockIcon)`
+  & path {
+    fill: ${({ isNested, theme: { colors } }) =>
+      isNested ? colors.greyScale.subTitle : colors.primary.normal};
+    stroke: ${({ isNested, theme: { colors } }) =>
+      isNested ? colors.greyScale.subTitle : colors.primary.normal};
   }
 `;

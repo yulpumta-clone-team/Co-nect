@@ -32,6 +32,21 @@ Default.args = {
   replies: [],
 };
 
+export const Secret = Template.bind({});
+Secret.args = {
+  commentInfo: {
+    id: 999,
+    img: '',
+    writer: '수정된',
+    parentId: null,
+    secret: true,
+    content: '수정된 연습용 댓긇',
+    feeling: [901092146501, 92719182999999, 927191821029312],
+  },
+  postWriter: 'front_temp',
+  replies: [],
+};
+
 export const WithReplies = Template.bind({});
 WithReplies.args = {
   commentInfo: {
@@ -46,12 +61,12 @@ WithReplies.args = {
   postWriter: 'front_temp',
   replies: [
     {
-      id: 10,
+      id: 1012,
       img: '',
-      userId: 12512512,
+      userId: 123137777,
       writer: 'front_temp',
       parentId: 999,
-      secret: false,
+      secret: true,
       content: '연습용',
       feeling: [901092146501],
     },
@@ -64,6 +79,16 @@ WithReplies.args = {
       secret: false,
       content: '수정된',
       feeling: [784833333333, 19148710],
+    },
+    {
+      id: 10,
+      img: '',
+      userId: 12512512,
+      writer: 'front_temp',
+      parentId: 999,
+      secret: false,
+      content: '연습용',
+      feeling: [901092146501],
     },
   ],
 };

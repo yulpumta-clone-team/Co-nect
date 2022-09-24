@@ -9,6 +9,7 @@ import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
 import NestedCommentList from '../CommentList/Nested.CommentList';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import * as S from '../style';
+import SecretCommentElement from './Secret.CommentElement';
 
 HocNestedComment.propTypes = {
   commentInfo: commentInfoType.isRequired,
@@ -29,9 +30,11 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
   } = commentInfo;
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
+  const loggedInUserName = userInfo?.name;
   const { createReplyTargetCommentId, targetReplyListId, postType, editTargetCommentId } =
     useCommentsState();
   const {
+    isShowSecretComment,
     showCreateReplyFormOnTargetComment,
     showReplyList,
     resetShowReplyList,
@@ -39,6 +42,7 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
     handleClickLikeThumb,
     isLikesContainUserId,
   } = useCommentsAction();
+
   const isShowCreateReplyForm = createReplyTargetCommentId !== commentId;
   const isShowReplies = commentId === targetReplyListId;
   const likesCount = likedUserIds.length;
@@ -52,6 +56,9 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
     const idObj = { commentId, loggedInUserId, parentId };
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
+
+  const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
+
   return (
     <S.CommentContainer>
       <Image src={img} alt="유저 프로필" customStyle={S.UserProfileImage} />
@@ -64,7 +71,11 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
               <S.RecycleBinSvg />
             </button>
           </S.CommentTitle>
-          <S.CommentContent>{content}</S.CommentContent>
+          {isSecret ? (
+            <SecretCommentElement isNested={false} />
+          ) : (
+            <S.CommentContent>{content}</S.CommentContent>
+          )}
         </S.PublicCommentBox>
         {isEditTargetComment && (
           <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />

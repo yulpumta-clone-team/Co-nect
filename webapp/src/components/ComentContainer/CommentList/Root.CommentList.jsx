@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
-import HocSecretComment from '../Hoc/HocSecretComment';
 import RootCommentElement from '../CommentElement/Root.CommentElement';
 import * as S from '../style';
 
@@ -11,26 +10,16 @@ RootCommentList.propTypes = {
 };
 
 export default function RootCommentList({ postWriter, comments }) {
-  const { isShowSecretComment } = useCommentsAction();
-  const { userInfo } = useCommentsState();
-
-  const loggedInUserName = userInfo?.name;
-
   return (
     <S.RootListContainer>
-      {comments.map(({ id, teamId, userId, replies, ...commentInfo }) => {
-        const { secret, writer: commenWriter } = commentInfo;
-        const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
-        const WithSecretComment = HocSecretComment({ isSecret, Component: RootCommentElement });
-        return (
-          <WithSecretComment
-            key={id}
-            commentInfo={{ ...commentInfo, id }}
-            postWriter={postWriter}
-            replies={replies}
-          />
-        );
-      })}
+      {comments.map(({ id, teamId, userId, replies, ...commentInfo }) => (
+        <RootCommentElement
+          key={id}
+          commentInfo={{ ...commentInfo, id }}
+          postWriter={postWriter}
+          replies={replies}
+        />
+      ))}
     </S.RootListContainer>
   );
 }

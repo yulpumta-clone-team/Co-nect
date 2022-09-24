@@ -27,12 +27,12 @@ Default.args = {
   postWriter: 'front_temp',
   comments: [
     {
-      id: 10,
+      id: 1012,
       img: '',
-      userId: 12512512,
+      userId: 123137777,
       writer: 'front_temp',
       parentId: 999,
-      secret: false,
+      secret: true,
       content: '연습용',
       feeling: [901092146501],
     },
@@ -45,6 +45,16 @@ Default.args = {
       secret: false,
       content: '수정된',
       feeling: [784833333333, 19148710],
+    },
+    {
+      id: 10,
+      img: '',
+      userId: 12512512,
+      writer: 'front_temp',
+      parentId: 999,
+      secret: false,
+      content: '연습용',
+      feeling: [901092146501],
     },
   ],
 };
