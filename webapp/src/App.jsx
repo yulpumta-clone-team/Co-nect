@@ -123,7 +123,6 @@ function App() {
           />
           <Route path={ROUTE.CALLBACK} element={<Callback />} />
           <Route path={ROUTE.NOTFOUND} element={<NotFound />} />
-
         </Route>
       </Routes>
     </Router>
