@@ -12,6 +12,7 @@ export const CardWrapper = styled.div`
   position: relative;
   width: 260px;
   height: 300px;
+  cursor: pointer;
 
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);

@@ -1,6 +1,6 @@
 import { hopeSessionOption } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
-import { skillStackParserToIds } from '../etc/skillStack.parser';
+import { skillStackParser, skillStackParserToIds } from '../etc/skillStack.parser';
 
 /**
  * teamCardParser 반환값
@@ -11,8 +11,9 @@ import { skillStackParserToIds } from '../etc/skillStack.parser';
  * @property {array} skills
  * @property {number} commentCnt
  * @property {number} readCnt
+ * @property {number} likeCnt
  * @property {boolean} isRecruitng
- * @property {UserInfoSchema} user
+ * @property {UserInfoSchema} writer id, name, image
  */
 
 /**
@@ -24,12 +25,12 @@ export const teamCardParser = (teamCardInfo) => {
   const teamName = teamCardInfo.name;
   const teamImage = teamCardInfo.image;
   const hopeSession = teamCardInfo.session || hopeSessionOption[0].value;
-  const skills = teamCardInfo.skills || [];
-  const isRecruitng = teamCardInfo.status || false;
+  const skills = teamCardInfo?.skills || [];
+  const isRecruitng = teamCardInfo.status || true;
   const commentCnt = parsedNumberToThreeDigits(teamCardInfo.commentCnt);
-  const readCnt = parsedNumberToThreeDigits(teamCardInfo.read);
-
-  const { user } = teamCardInfo;
+  const readCnt = parsedNumberToThreeDigits(teamCardInfo.readCnt);
+  const likeCnt = parsedNumberToThreeDigits(teamCardInfo.likeCnt);
+  const writer = teamCardInfo.userInfo;
   return {
     teamName,
     teamImage,
@@ -37,8 +38,9 @@ export const teamCardParser = (teamCardInfo) => {
     skills,
     commentCnt,
     readCnt,
+    likeCnt,
     isRecruitng,
-    user,
+    writer,
   };
 };
 
@@ -59,13 +61,13 @@ export const teamCardParser = (teamCardInfo) => {
  * @returns {parsedNewTeamPostObj} parsing된 팀 공고글 생성 객체
  */
 export const newTeamPostParser = (newTeamPostData) => {
-  const { introduction, hopeSession, profileImage, name, techSkills, slogan } = newTeamPostData;
+  const { introduction, hopeSession, profileImage, teamName, techSkills, slogan } = newTeamPostData;
   const parsedTechSkills = skillStackParserToIds(techSkills);
   return {
     content: introduction,
     hope_session: hopeSession,
     image: profileImage,
-    name,
+    name: teamName,
     skills: parsedTechSkills,
     slogan,
   };
@@ -74,20 +76,14 @@ export const newTeamPostParser = (newTeamPostData) => {
 /**
  * teamDetailParser 반환값
  * @typedef parsedTeamDetailInfo
- * @property {number} id
- * @property {string} name
- * @property {array} skills
- * @property {string} slogan
- * @property {boolean} status
- * @property {UserInfoSchema} userInfo id, image, name
- * @property {number} commentCnt
+ * @property {number} teamId
+ * @property {string} teamName
+ * @property {string} teamImage
+ * @property {array} techSkills
  * @property {string} content
- * @property {string} email
+ * @property {string} slogan
  * @property {string} hopeSession
- * @property {string} job
- * @property {number} likeCnt
- * @property {string} portfolio
- * @property {number} readCnt
+ * @property {UserInfoSchema} writerInfo id, image, name
  */
 
 /**
@@ -96,20 +92,61 @@ export const newTeamPostParser = (newTeamPostData) => {
  * @returns {parsedTeamDetailInfo} parsing된 teamDetailInfo 객체
  */
 export const teamDetailParser = (teamDetailInfo) => {
+  const teamId = teamDetailInfo.id;
+  const teamName = teamDetailInfo.name;
+  const teamImage = teamDetailInfo.image;
   const hopeSession = teamDetailInfo.hopeSession || hopeSessionOption[0].value;
-  const skills = teamDetailInfo.skills || [];
+  const techSkills = skillStackParser(teamDetailInfo.skills);
   const content = teamDetailInfo.content || '입력한 자기소개가 없습니다.';
   const slogan = teamDetailInfo.slogan || '입력한 슬로건이 없습니다.';
+  const writerInfo = teamDetailInfo.userTeamList[0]; // ! teamDetailInfo.userInfo가 아님. 백이랑 얘기해볼 필요가 있다.
+
   const commentCnt = parsedNumberToThreeDigits(teamDetailInfo.commentCnt);
   const likeCnt = parsedNumberToThreeDigits(teamDetailInfo.likeCnt);
 
   return {
-    ...teamDetailInfo,
+    teamId,
+    teamName,
+    teamImage,
+    techSkills,
     hopeSession,
-    skills,
     content,
     slogan,
+    writerInfo,
     commentCnt,
     likeCnt,
+  };
+};
+
+/**
+ * teamEditRequestParser 반환값
+ * @typedef parsedTeamEditRequestInfo
+ * @property {string} content 팀 게시글 상세내용
+ * @property {string} image 팀 이미지
+ * @property {array} name 팀 이름
+ * @property {string} session 프로젝트 희망 기간
+ * @property {UserInfoSchema} skills 기술 스택
+ * @property {string} slogan 팀 슬로건
+ */
+
+/**
+ *
+ * @param {TeamInfoInputSchema} teamInputInfo
+ * @returns {parsedTeamEditRequestInfo}  parsing된 teamEditRequestParser 객체
+ */
+export const teamEditRequestParser = (teamInputInfo) => {
+  const { content } = teamInputInfo;
+  const image = teamInputInfo.teamImage;
+  const name = teamInputInfo.teamName;
+  const session = teamInputInfo.hopeSession;
+  const skills = skillStackParserToIds(teamInputInfo.techSkills);
+  const { slogan } = teamInputInfo;
+  return {
+    content,
+    image,
+    name,
+    session,
+    skills,
+    slogan,
   };
 };
