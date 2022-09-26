@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
-import RootCommentList from '../CommentList/Root.CommentList';
+import RootCommentList from './CommentList/Root.CommentList';
 
 HocLoadingCommentList.propTypes = {
   postWriter: PropTypes.string.isRequired,
