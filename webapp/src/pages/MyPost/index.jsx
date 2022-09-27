@@ -17,7 +17,9 @@ export default function MyPost() {
 
   return (
     <S.Container>
-      <CardsView isUserList={false} CardComponent={TeamCard} clickLink={`${ROUTE.TEAM_EDIT}/`} />
+      <S.BoardContainer>
+        <CardsView isUserList={false} CardComponent={TeamCard} clickLink={`${ROUTE.TEAM_EDIT}/`} />
+      </S.BoardContainer>
     </S.Container>
   );
 }

@@ -15,7 +15,8 @@ TeamCard.propTypes = {
 export default function TeamCard({ cardInfo, onClick }) {
   const parsedTeamCardInfo = teamCardParser(cardInfo);
   // * : teamCard 에 표시되는 정보
-  const { teamName, teamImage, hopeSession, skills, commentCnt, readCnt, isRecruitng, userInfo } =
+
+  const { teamName, teamImage, hopeSession, skills, commentCnt, readCnt, isRecruitng, writer } =
     parsedTeamCardInfo;
 
   const S3Img = S3_IMAGE_SERVER_URL + teamImage;
@@ -30,7 +31,7 @@ export default function TeamCard({ cardInfo, onClick }) {
       </S.BackgroundImg>
       <ProfileImg src={S3Img} />
       <S.TeamInfo>
-        <S.UserName>{userInfo.name}님의 모집</S.UserName>
+        <S.UserName>{writer.name}님의 모집</S.UserName>
         <S.TeamName>{teamName}</S.TeamName>
         <S.HopeSession>
           예상 기간 &nbsp; <S.TeamHopeSession>{hopeSession}</S.TeamHopeSession>

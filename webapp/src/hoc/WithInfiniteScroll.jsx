@@ -10,7 +10,7 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState({ isError: false, msg: '' });
     const [cardList, setCardList] = useState([]);
-    const IsShowLoadRef = isLoading || error.isError ? 'none' : 'block';
+    const IsShowLoadRef = isLoading && error.isError ? 'block' : 'none'; // isLoading이 true이거나 isError가 true이면 ref엘리먼트를 보여주지 않음.
     const [trigger, setTrigger] = useState(Date.now());
 
     const resetError = () => {
@@ -70,7 +70,10 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
     return (
       <>
         <Component {...propsWithResponseData} />
-        <div ref={loadMoreRef} style={{ display: IsShowLoadRef, height: '100px' }}>
+        <div
+          ref={loadMoreRef}
+          style={{ display: IsShowLoadRef, height: '100px', backgroundColor: 'tomato' }}
+        >
           {isLoading && <div>Loading...</div>}
         </div>
         <UpperButton />

@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useForm } from 'react-hook-form';
 import { setPostIdOnSubmitData } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
+import useForm from 'hooks/useForm';
+import { commentFormValidation } from 'service/etc/comment.validation';
+import TextArea from 'components/Common/TextArea';
+import CheckInput from 'components/Common/CheckInput';
+import Button from 'components/Common/Button';
 import * as S from '../style';
 
 EditRootCommentForm.propTypes = {
@@ -14,61 +18,71 @@ EditRootCommentForm.propTypes = {
   secret: PropTypes.bool.isRequired,
 };
 
-export function EditRootCommentForm({ initialText, secret }) {
+export default function EditRootCommentForm({ initialText, secret }) {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const notifyDispatch = useToastNotificationAction();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {},
-  });
   const { postType, postId, editTargetCommentId, isLoading, apiError } = useCommentsState();
   const { patchCommentApi, resetEditTargetCommentId, forceRefetch } = useCommentsAction();
-  const [isSecret, setIsSecret] = useState(secret);
 
   const handleClickCancel = () => resetEditTargetCommentId();
 
-  const onSubmit = async ({ editRootCommentForm }) => {
+  const submitCallback = async (submitData) => {
     if (!userInfo) {
       notifyNewMessage(notifyDispatch, '로그인을 먼저해주세요', TOAST_TYPE.Warning);
       return;
     }
+    const { content, isSecret } = submitData;
     const newCommentData = setPostIdOnSubmitData(postType, postId, {
       writer: userInfo?.name,
       secret: isSecret,
-      content: editRootCommentForm,
+      content,
     });
     await patchCommentApi({ postType, id: editTargetCommentId, data: newCommentData });
-    setIsSecret(false);
-    reset({ editRootCommentForm: '' });
     resetEditTargetCommentId();
   };
+
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
+    useForm({
+      initialValues: { content: initialText, isSecret: false },
+      submitCallback,
+      validate: commentFormValidation,
+    });
+
   return (
-    <S.FormBox style={{ marginBottom: '12px' }}>
-      <form
-        id="editRootCommentForm"
-        style={{ display: 'flex', flexDirection: 'column' }}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <textarea
-          {...register('editRootCommentForm', {
-            required: '내용을 입력해주세요.',
-          })}
-          defaultValue={initialText}
-          placeholder="댓글을 입력하세요."
+    <S.FormBox id="editRootCommentForm" onSubmit={submitHandler}>
+      <TextArea
+        name="content"
+        placeholder="댓글을 입력하세요."
+        value={inputValues.content}
+        onChange={onChangeHandler}
+        isError={!!validateError.isSecret}
+        helperText={validateError.isSecret}
+      />
+      <S.FormButtons>
+        <CheckInput
+          label="비밀댓글"
+          name="isSecret"
+          value={inputValues.isSecret}
+          onChange={onChangeHandler}
         />
-        <span>{errors?.commentValue?.message}</span>
-        <span>{errors?.extraError?.message}</span>
-      </form>
-      <span>비밀댓글여부</span>
-      <input type="checkbox" checked={isSecret} onChange={() => setIsSecret((prev) => !prev)} />
-      <button form="editRootCommentForm" type="submit">
-        작성
-      </button>
-      <button onClick={handleClickCancel}>취소</button>
+        <Button
+          form="editRootCommentForm"
+          type="submit"
+          theme="primary"
+          customStyle={S.FormSubmitButton}
+        >
+          입력
+        </Button>
+        <Button
+          form="editRootCommentForm"
+          type="submit"
+          theme="primary"
+          customStyle={S.FormSubmitButton}
+          onClick={handleClickCancel}
+        >
+          취소
+        </Button>
+      </S.FormButtons>
     </S.FormBox>
   );
 }

@@ -26,12 +26,12 @@ public class TeamTech extends BaseTimeEntity {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.REMOVE,CascadeType.MERGE})
     @JoinColumn(name="tech_id")
     private TechStack techStack;
 
 
-    public static TeamTech of(TechStack techStack,Team team){
+    public static TeamTech valueOf(TechStack techStack, Team team){
         TeamTech teamTech = new TeamTech();
         teamTech.id = IdGenerator.number();
         teamTech.team = team;

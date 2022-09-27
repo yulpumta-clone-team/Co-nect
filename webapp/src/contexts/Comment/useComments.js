@@ -12,6 +12,8 @@ const useComments = () => {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
 
+  // FIXME: 스토리북에서 url이 달라서 데이터 요청을 못하는 에러 수정해야합니다.
+  // http://localhost:6006/?path=/story/category-createcommentform--default
   const location = useLocation();
   const [_, postType, postId] = location.pathname.split('/');
 

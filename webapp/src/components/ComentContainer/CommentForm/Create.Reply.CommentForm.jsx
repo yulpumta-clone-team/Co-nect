@@ -1,67 +1,72 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React from 'react';
 import { setPostIdOnSubmitData } from 'utils';
 import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
+import CheckInput from 'components/Common/CheckInput';
+import Button from 'components/Common/Button';
+import useForm from 'hooks/useForm';
+import { commentFormValidation } from 'service/etc/comment.validation';
+import TextArea from 'components/Common/TextArea';
 import * as S from '../style';
 
-export function CreateReplyCommentForm() {
+export default function CreateReplyCommentForm() {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const notifyDispatch = useToastNotificationAction();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {},
-  });
+
   const { postType, postId, isLoading, apiError } = useCommentsState();
   const { postReplyApi, resetCreateReplyTargetCommentId, forceRefetch } = useCommentsAction();
-  const [isSecret, setIsSecret] = useState(false);
 
   const handleClickCancel = () => resetCreateReplyTargetCommentId();
 
-  const onSubmit = async ({ createRootCommentForm }) => {
+  const submitCallback = async (submitData) => {
     if (!userInfo) {
       notifyNewMessage(notifyDispatch, '로그인을 먼저해주세요', TOAST_TYPE.Warning);
       return;
     }
+    const { content, isSecret } = submitData;
     const newCommentData = setPostIdOnSubmitData(postType, postId, {
       writer: userInfo?.name,
       secret: isSecret,
-      content: createRootCommentForm,
+      content,
     });
     await postReplyApi({ postType, data: newCommentData });
-    setIsSecret(false);
-    reset({ createRootCommentForm: '' });
   };
+
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
+    useForm({
+      initialValues: { content: '', isSecret: false },
+      submitCallback,
+      validate: commentFormValidation,
+    });
   return (
-    <S.FormBox style={{ marginBottom: '12px' }}>
-      <form
-        id="createReplyCommentForm"
-        style={{ display: 'flex', flexDirection: 'column' }}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <textarea
-          {...register('createReplyCommentForm', {
-            required: '내용을 입력해주세요.',
-          })}
-          defaultValue=""
-          placeholder="댓글을 입력하세요."
+    <S.FormBox isNested id="createReplyCommentForm" onSubmit={submitHandler}>
+      <TextArea
+        name="content"
+        placeholder="댓글을 입력하세요."
+        value={inputValues.content}
+        onChange={onChangeHandler}
+        isError={!!validateError.isSecret}
+        helperText={validateError.isSecret}
+      />
+      <S.FormButtons>
+        <CheckInput
+          label="비밀댓글"
+          name="isSecret"
+          value={inputValues.isSecret}
+          onChange={onChangeHandler}
         />
-        <span>{errors?.commentValue?.message}</span>
-        <span>{errors?.extraError?.message}</span>
-      </form>
-      <span>비밀댓글여부</span>
-      <input type="checkbox" checked={isSecret} onChange={() => setIsSecret((prev) => !prev)} />
-      <button form="createReplyCommentForm" type="submit">
-        작성
-      </button>
-      <button onClick={handleClickCancel}>취소</button>
+        <Button
+          form="createReplyCommentForm"
+          type="submit"
+          theme="primary"
+          customStyle={S.FormSubmitButton}
+        >
+          입력
+        </Button>
+      </S.FormButtons>
     </S.FormBox>
   );
 }

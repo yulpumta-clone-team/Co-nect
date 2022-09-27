@@ -1,7 +1,7 @@
 /**
  * 팀 공고글 생성: Inputs Object - input들의 key, value로 이뤄진 객체
  * @typedef {Object} newTeamPostValidateObj
- * @property {string} name  nickname
+ * @property {string} teamName  teamName
  * @property {Array} techSkills  techSkills
  * @property {string} slogan slogan
  */
@@ -9,7 +9,7 @@
 /**
  * 팀 공고글 생성: Erros Object - input들의 key, value로 이뤄진 에러 객체
  * @typedef {Object} newTeamPostValidateErrors
- * @property {string} nickname
+ * @property {string} teamName
  * @property {string} techSkills
  * @property {string} slogan
  */
@@ -19,15 +19,15 @@
  * @param {newTeamPostValidateObj} newTeamPostValidateObj input들의 key, value로 이뤄진 객체
  * @returns {newTeamPostValidateErrors} input들의 key, value로 이뤄진 에러 객체
  */
-export const newTeamPostValidation = ({ name, techSkills, slogan }) => {
+export const newTeamPostValidation = ({ teamName, techSkills, slogan }) => {
   const validateErrors = {
-    name: '',
+    teamName: '',
     techSkills: '',
     slogan: '',
   };
 
-  if (!name) {
-    validateErrors.name = '팀이름이 입력되지 않았습니다. ';
+  if (!teamName) {
+    validateErrors.teamName = '팀이름이 입력되지 않았습니다. ';
   }
 
   if (techSkills.length === 0) {

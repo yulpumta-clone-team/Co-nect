@@ -22,7 +22,7 @@ export const API = {
     LIKES: '/user/liking',
     READS: '/user/read',
     PROFILE: `/user/myprofile`,
-    MYPOSTS: '/user/myposts',
+    MYPOSTS: '/user/my-post',
     ESSENTIAL_INFO: '/user/essential_info',
   },
   TEAM: {

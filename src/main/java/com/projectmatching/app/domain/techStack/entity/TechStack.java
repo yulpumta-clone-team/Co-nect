@@ -33,12 +33,12 @@ public class TechStack {
     private String image;
 
 
-    @OneToMany(mappedBy = "techStack", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "techStack", cascade = CascadeType.ALL,orphanRemoval = true)
     @ToString.Exclude
     @Builder.Default
     private Set<TeamTech> teamTechs = new HashSet<>();
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     @ToString.Exclude
     @Builder.Default
     private Set<UserTech> userTechs = new HashSet<>();
@@ -49,6 +49,7 @@ public class TechStack {
     public static TechStack of(TechCode techCode){
         TechStack techStack = new TechStack();
         BeanUtils.copyProperties(techCode,techStack);
+        techStack.id = IdGenerator.number();
         techStack.key = techCode.getKeys();
         techStack.setId(IdGenerator.number());
         return techStack;
