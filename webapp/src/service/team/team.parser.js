@@ -29,7 +29,7 @@ export const teamCardParser = (teamCardInfo) => {
   const commentCnt = parsedNumberToThreeDigits(teamCardInfo.commentCnt);
   const readCnt = parsedNumberToThreeDigits(teamCardInfo.read);
 
-  const { user } = teamCardInfo;
+  const { userInfo } = teamCardInfo;
   return {
     teamName,
     teamImage,
@@ -38,7 +38,7 @@ export const teamCardParser = (teamCardInfo) => {
     commentCnt,
     readCnt,
     isRecruitng,
-    user,
+    userInfo,
   };
 };
 

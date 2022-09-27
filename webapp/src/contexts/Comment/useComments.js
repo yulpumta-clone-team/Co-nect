@@ -30,7 +30,7 @@ const useComments = () => {
   const patchCommentLikeApi = (config) =>
     changeApi('deleteComment', commentApi.PATCH_COMMENT_LIKE, config);
   const patchCommentUnLikeApi = (config) =>
-    changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
+    changeApi('deleteComment', commentApi.DELETE_COMMENT, config); // : DELETE_COMMENT_UNLIKE가 아닌가요 ?
 
   // useState관련 로직
   const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_TARGET);

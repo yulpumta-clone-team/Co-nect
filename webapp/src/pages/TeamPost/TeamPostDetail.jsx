@@ -15,25 +15,8 @@ import * as S from './TeamPost.style';
 
 export default function TeamPostDetail({ targetTeam }) {
   const parsedTargetTeam = teamDetailParser(targetTeam);
-  const { id, name, user, content, img, hopeSession, skills, slogan, commentCnt, likeCnt } =
+  const { id, name, userInfo, content, img, hopeSession, skills, slogan, commentCnt, likeCnt } =
     parsedTargetTeam;
-  const [like, setLike] = useState(false);
-
-  // useEffect(async () => {
-  //   const fetchData = async () => {
-  //     const res = await teamApi.GET_TEAM_LIKES;
-  //     console.log(res);
-  //     if (res.data.likecnt === true) setLike(true); // 여기 이 status 부분이 api가 뭐로 해줘야할까? likecnt가 1올라갔을때?
-  //   };
-  //   fetchData();
-  // }, []);
-
-  const toggleLike = async (e) => {
-    // [POST] 사용자가 좋아요를 누름 -> DB 갱신
-    setLike(!like);
-    // const res = await teamApi.PATCH_TEAM_LIKE({ id, like });
-    // console.log(res.data);
-  };
 
   return (
     <S.PostContainer>
@@ -43,7 +26,7 @@ export default function TeamPostDetail({ targetTeam }) {
       <S.TeamInfoContainer>
         <S.UserName>
           <Image src={img} alt="프로필 이미지" customStyle={S.UserImg} />
-          {user.name}
+          {userInfo.name}
         </S.UserName>
         <S.SingleInfo>
           <S.TeamName>{name}</S.TeamName>
@@ -72,12 +55,12 @@ export default function TeamPostDetail({ targetTeam }) {
           <div>
             <S.View />
           </div>
-          <Like like={like} onClick={toggleLike} />
+          <Like id={id} />
           {likeCnt}
           <S.Chat />
           {commentCnt}
         </S.SingleInfo>
-        <CommentContainer postType={POST_TYPE.TEAM} postWriter={user.name} postId={id} />
+        <CommentContainer postType={POST_TYPE.TEAM} postWriter={userInfo.name} postId={id} />
       </S.TeamInfoContainer>
     </S.PostContainer>
   );

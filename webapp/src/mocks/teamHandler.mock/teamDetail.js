@@ -1,6 +1,6 @@
 export const teamDetail = {
   id: 13132,
-  user: {
+  userInfo: {
     id: 1234,
     oauthId: 'string',
     email: 'string@naver.com',

@@ -27,7 +27,8 @@ export const API = {
   },
   TEAM: {
     INDEX: `/team`,
-    LIKES: '/team/liking',
+    LIKE: '/team/liking',
+    UNLIKE: '/team/unliking',
     READS: '/team/read',
   },
   COMMENT: {
