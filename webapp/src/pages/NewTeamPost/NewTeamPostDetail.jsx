@@ -3,7 +3,6 @@ import { newTeamPostParser } from 'service/team/team.parser';
 import { newTeamPostValidation } from 'service/team/team.validation';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
-import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import useForm from 'hooks/useForm';
 import useAxios from 'hooks/useAxios';
 import teamApi from 'api/team.api';
