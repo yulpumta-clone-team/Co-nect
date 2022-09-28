@@ -48,7 +48,7 @@ WtihValue.args = {
 
 export const WtihSelectedOptionViewer = Template.bind({});
 WtihSelectedOptionViewer.args = {
-  showSelectedOption: true,
+  isDropdownType: true,
   selectedTechSkills: [
     {
       id: 500,
@@ -105,7 +105,7 @@ WithErrorInSelectedOptionViewer.args = {
   placeholder: 'Error',
   isError: true,
   helperText: '에러 입니다.',
-  showSelectedOption: true,
+  isDropdownType: true,
 };
 
 export const WithError = Template.bind({});

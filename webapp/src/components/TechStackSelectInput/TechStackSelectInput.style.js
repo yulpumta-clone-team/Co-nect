@@ -100,7 +100,12 @@ export const PlaceHolder = styled.label`
 `;
 
 export const Select = styled.div`
-  ${({ isDropdownOpen }) => {
+  ${({ isDropdownOpen, isDropdownType }) => {
+    if (isDropdownType) {
+      return css`
+        display: block;
+      `;
+    }
     if (isDropdownOpen) {
       return css`
         display: block;
@@ -111,15 +116,15 @@ export const Select = styled.div`
     `;
   }}
 
-  ${({ showSelectedOption }) => {
-    if (showSelectedOption) {
+  ${({ isDropdownType }) => {
+    if (isDropdownType) {
       return css`
-        position: absolute;
-        top: 105%;
+        position: relative;
       `;
     }
     return css`
-      position: relative;
+      position: absolute;
+      top: 105%;
     `;
   }};
 

@@ -24,7 +24,7 @@ export default function Skills() {
           onChange={onChangeHandlerWithSelect}
           isError={isSkillsValidateError}
           helperText={validateError.techSkills}
-          showSelectedOption={false}
+          isDropdownType={false}
         />
       </S.TechSkillContainer>
       <S.NextButtonContainer>

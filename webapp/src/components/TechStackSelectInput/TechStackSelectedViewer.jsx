@@ -32,7 +32,7 @@ export default function TechStackSelectedViewer({
   const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
 
   const ClearButton = selectedTechSkills && (
-    <S.ClearableButton onClick={handleClickReset}>
+    <S.ClearableButton type="button" onClick={handleClickReset}>
       <S.CloseNormal />
     </S.ClearableButton>
   );
