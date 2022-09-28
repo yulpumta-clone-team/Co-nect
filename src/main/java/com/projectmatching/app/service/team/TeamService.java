@@ -24,10 +24,17 @@ import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -36,7 +43,6 @@ import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
 
 @RequiredArgsConstructor
 @Service
-@Transactional
 @Slf4j
 public class TeamService {
     private final TeamRepository teamRepository;
@@ -46,6 +52,10 @@ public class TeamService {
     private final UserTeamRepository userTeamRepository;
     private final TeamLikingRepository teamLikingRepository;
     private final TechStackRepository techStackRepository;
+
+    @PersistenceContext
+    private final EntityManager em;
+
 
     //팀 게시글 저장
     @Transactional
@@ -65,9 +75,15 @@ public class TeamService {
     private void addTeamTechByTeamRequest(TeamRequestDto teamRequestDto, Team team){
          techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
                 .stream()
-                .map(techCode -> TechStack.of(techCode))
-                .map(techStack -> TeamTech.of(techStack,team)
-                ).forEach(teamTech -> team.getTeamTeches().add(teamTech));
+                .map(techCode -> {
+                    TechStack techStack = TechStack.of(techCode);
+                    return techStack;
+                })
+                .map(techStack -> {
+                    TeamTech teamTech = TeamTech.valueOf(techStack,team);
+                    return teamTech;
+                }
+                ).forEach(teamTech -> teamTechRepository.save(teamTech));
 
     }
 
@@ -113,12 +129,15 @@ public class TeamService {
 
         if(checkTeamUser(team, user)==false) throw new CoNectLogicalException(PERMISSION_DENIED);
         team.updateWith(teamRequestDto);
+
         //이미 있는것들 비우고 다시 넣음
-        Set<TeamTech> teamTeches = team.getTeamTeches();
-        teamTeches.clear();
-        addTeamTechByTeamRequest(teamRequestDto,team);
+        team.getTeamTeches().clear();
+
+        addTeamTechByTeamRequest(teamRequestDto, team);
 
     }
+
+
 
 
     /**

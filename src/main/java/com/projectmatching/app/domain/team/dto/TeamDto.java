@@ -7,6 +7,7 @@ import com.projectmatching.app.domain.liking.dto.UserLikingDto;
 import com.projectmatching.app.domain.liking.entity.TeamLiking;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
+import com.projectmatching.app.domain.techStack.dto.TechStackDto;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.users.UserTeamDto;
 import com.projectmatching.app.domain.user.entity.User;
@@ -41,7 +42,7 @@ public class TeamDto {
     private List<UserTeamDto> userTeamList;
     private List<TeamLikingDto> teamLikings;
 
-    private List<TeamTechDto> skills;
+    private List<TechStackDto> skills;
 
     public static TeamDto valueOf(Team team, User user){
         TeamDto teamDto = TeamDto.of(team);
@@ -63,8 +64,10 @@ public class TeamDto {
         teamDto.teamLikings = team.getTeamLikings().stream()
                 .map(TeamLikingDto::of)
                 .collect(Collectors.toList());
+
         teamDto.skills = team.getTeamTeches().stream()
                 .map(TeamTechDto::of)
+                .map(teamTechDto ->  teamTechDto.getTechStack())
                 .collect(Collectors.toList());
 
         return teamDto;

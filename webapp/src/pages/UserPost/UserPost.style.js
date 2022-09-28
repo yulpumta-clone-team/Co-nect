@@ -22,10 +22,11 @@ export const InfoContainer = styled.div`
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
   border: 3px solid ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 20px;
+  padding: 35px;
 `;
 
 export const UserInfoContainer = styled.div`
-  padding: 32px 55px;
+  padding: 0 20px;
   width: 100%;
 `;
 
@@ -55,6 +56,10 @@ export const SingleInfoTitle = styled.span`
 `;
 
 export const CommentDivder = css`
-  width: 95%;
+  width: 100%;
   background-color: ${({ theme: { colors } }) => colors.primary.normal};
+`;
+
+export const PostInfo = styled.div`
+  margin: 12px 0 32px 0;
 `;

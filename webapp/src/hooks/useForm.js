@@ -40,6 +40,14 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
   const [validateError, setValidateError] = useState(validate(initialValues));
   const notifyDispatch = useToastNotificationAction();
 
+  const resetInputValues = () => {
+    setInputValues(initialValues);
+  };
+
+  const resetValidateErros = () => {
+    setValidateError(validate(initialValues));
+  };
+
   /**
    * validateError 객체에 있는 모든 데이터의 value가 ""이거나 null이면 true를 반환
    * @type {boolean}
@@ -93,6 +101,8 @@ const useForm = ({ initialValues, submitCallback, validate }) => {
         return;
       }
       await submitCallback(inputValues);
+      resetInputValues();
+      resetValidateErros();
     },
     [inputValues, notifyDispatch, satisfyAllValidates, submitCallback, validateError],
   );

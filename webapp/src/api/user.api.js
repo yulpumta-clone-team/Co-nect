@@ -29,20 +29,23 @@ const userApi = {
       method: 'get',
     });
   },
+  // 내가 좋아요한 목록 요청
   GET_USER_LIKES() {
     return publicApiInstance({
       url: API.USER.LIKES,
       method: 'get',
     });
   },
+  // 내가 읽은 목록 요청
   GET_USER_READS() {
-    return publicApiInstance({
+    return privateApiInstance({
       url: API.USER.READS,
       method: 'get',
     });
   },
+  // 내가 작성한 글 목록 요청
   GET_MY_POSTS() {
-    return publicApiInstance({
+    return privateApiInstance({
       url: API.USER.MYPOSTS,
       method: 'get',
     });

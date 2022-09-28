@@ -3,26 +3,20 @@ package com.projectmatching.app.service.team;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
-import com.projectmatching.app.domain.techStack.entity.TechCode;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
-import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
 import com.projectmatching.app.domain.techStack.provider.TechStackProviderImpl;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -94,7 +88,7 @@ public class TeamUpdateTest extends TeamServiceTest{
                 .techName("react")
                 .build();
 
-       return TeamTech.of(techStack,team);
+       return TeamTech.valueOf(techStack,team);
 
     }
 

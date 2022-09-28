@@ -1,21 +1,17 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import teamApi from 'api/team.api';
 import WithLoading from 'hoc/WithLoading';
-import * as S from './style';
-import EditTeamForm from './EditTeamForm';
+import BackButton from 'components/Common/BackButton';
+import UpperButton from 'components/Common/UpperButton';
+import * as S from './EditTeamPost.style';
+import EditTeamPostDetail from './EditTeamPostDetail';
 
 export default function EditTeamPost() {
   const { teamId: stringTeamId } = useParams();
   const teamId = Number(stringTeamId);
-  const navigate = useNavigate();
-
-  const onClickback = () => {
-    navigate(-1);
-  };
-
   const EditTeamFormWithLoading = WithLoading({
-    Component: EditTeamForm,
+    Component: EditTeamPostDetail,
     responseDataKey: 'targetTeam',
     axiosInstance: teamApi.GET_TEAM_DETAIL,
     axiosConfig: { id: teamId },
@@ -23,9 +19,9 @@ export default function EditTeamPost() {
 
   return (
     <S.Container>
-      <button onClick={onClickback}>back</button>
-      <br />
-      <EditTeamFormWithLoading onClickback={onClickback} />
+      <BackButton />
+      <EditTeamFormWithLoading />
+      <UpperButton />
     </S.Container>
   );
 }

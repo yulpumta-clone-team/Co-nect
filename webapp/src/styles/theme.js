@@ -54,6 +54,7 @@ const COLORS = {
     600: '#979797',
     700: '#818181',
     800: '#606060',
+    900: '#3C3C3C',
     1000: '#000000',
   },
 };
@@ -165,6 +166,6 @@ export const device = {
   pc: `screen and (max-width: ${deviceSizes.pc})`,
 };
 
-const theme = { fonts, colors, device, zIndex, mixin };
+const theme = { fonts, colors, COLORS, device, zIndex, mixin };
 
 export default theme;

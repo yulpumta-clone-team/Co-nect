@@ -22,12 +22,13 @@ export const API = {
     LIKES: '/user/liking',
     READS: '/user/read',
     PROFILE: `/user/myprofile`,
-    MYPOSTS: '/user/myposts',
+    MYPOSTS: '/user/my-post',
     ESSENTIAL_INFO: '/user/essential_info',
   },
   TEAM: {
     INDEX: `/team`,
-    LIKES: '/team/liking',
+    LIKE: '/team/liking',
+    UNLIKE: '/team/unliking',
     READS: '/team/read',
   },
   COMMENT: {

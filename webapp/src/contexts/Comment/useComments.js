@@ -12,6 +12,8 @@ const useComments = () => {
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
 
+  // FIXME: 스토리북에서 url이 달라서 데이터 요청을 못하는 에러 수정해야합니다.
+  // http://localhost:6006/?path=/story/category-createcommentform--default
   const location = useLocation();
   const [_, postType, postId] = location.pathname.split('/');
 
@@ -30,7 +32,7 @@ const useComments = () => {
   const patchCommentLikeApi = (config) =>
     changeApi('deleteComment', commentApi.PATCH_COMMENT_LIKE, config);
   const patchCommentUnLikeApi = (config) =>
-    changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
+    changeApi('deleteComment', commentApi.DELETE_COMMENT, config); // : DELETE_COMMENT_UNLIKE가 아닌가요 ?
 
   // useState관련 로직
   const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_TARGET);

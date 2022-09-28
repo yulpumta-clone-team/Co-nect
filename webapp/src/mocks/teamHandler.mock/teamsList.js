@@ -53,7 +53,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: { id: 1, image: 'http://dummyimage.com/131x100.png/5fa2dd/ffffff', name: 'NYSE' },
+    userInfo: { id: 1, image: 'http://dummyimage.com/131x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
   {
     id: 2,
@@ -109,7 +109,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: {
+    userInfo: {
       id: 2,
       image: 'http://dummyimage.com/169x100.png/5fa2dd/ffffff',
       name: 'NASDAQ',
@@ -169,7 +169,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: { id: 3, image: 'http://dummyimage.com/146x100.png/cc0000/ffffff', name: 'NYSE' },
+    userInfo: { id: 3, image: 'http://dummyimage.com/146x100.png/cc0000/ffffff', name: 'NYSE' },
   },
   {
     id: 4,
@@ -225,7 +225,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: {
+    userInfo: {
       id: 4,
       image: 'http://dummyimage.com/210x100.png/cc0000/ffffff',
       name: 'NASDAQ',
@@ -285,7 +285,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 5, image: 'http://dummyimage.com/132x100.png/ff4444/ffffff', name: 'NYSE' },
+    userInfo: { id: 5, image: 'http://dummyimage.com/132x100.png/ff4444/ffffff', name: 'NYSE' },
   },
   {
     id: 6,
@@ -341,7 +341,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: { id: 6, image: 'http://dummyimage.com/111x100.png/5fa2dd/ffffff', name: 'NYSE' },
+    userInfo: { id: 6, image: 'http://dummyimage.com/111x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
   {
     id: 7,
@@ -397,7 +397,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 7, image: 'http://dummyimage.com/200x100.png/ff4444/ffffff', name: 'NYSE' },
+    userInfo: { id: 7, image: 'http://dummyimage.com/200x100.png/ff4444/ffffff', name: 'NYSE' },
   },
   {
     id: 8,
@@ -453,7 +453,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: { id: 8, image: 'http://dummyimage.com/179x100.png/ff4444/ffffff', name: 'NYSE' },
+    userInfo: { id: 8, image: 'http://dummyimage.com/179x100.png/ff4444/ffffff', name: 'NYSE' },
   },
   {
     id: 9,
@@ -509,7 +509,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: {
+    userInfo: {
       id: 9,
       image: 'http://dummyimage.com/115x100.png/5fa2dd/ffffff',
       name: 'NASDAQ',
@@ -569,7 +569,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: {
+    userInfo: {
       id: 10,
       image: 'http://dummyimage.com/122x100.png/5fa2dd/ffffff',
       name: 'NASDAQ',
@@ -629,7 +629,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: {
+    userInfo: {
       id: 11,
       image: 'http://dummyimage.com/105x100.png/ff4444/ffffff',
       name: 'NASDAQ',
@@ -689,7 +689,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 12, image: 'http://dummyimage.com/177x100.png/5fa2dd/ffffff', name: 'NYSE' },
+    userInfo: { id: 12, image: 'http://dummyimage.com/177x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
   {
     id: 13,
@@ -745,7 +745,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: { id: 13, image: 'http://dummyimage.com/224x100.png/ff4444/ffffff', name: 'NYSE' },
+    userInfo: { id: 13, image: 'http://dummyimage.com/224x100.png/ff4444/ffffff', name: 'NYSE' },
   },
   {
     id: 14,
@@ -801,7 +801,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 14, image: 'http://dummyimage.com/145x100.png/dddddd/000000', name: 'NYSE' },
+    userInfo: { id: 14, image: 'http://dummyimage.com/145x100.png/dddddd/000000', name: 'NYSE' },
   },
   {
     id: 15,
@@ -857,7 +857,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 15, image: 'http://dummyimage.com/177x100.png/cc0000/ffffff', name: 'NYSE' },
+    userInfo: { id: 15, image: 'http://dummyimage.com/177x100.png/cc0000/ffffff', name: 'NYSE' },
   },
   {
     id: 16,
@@ -913,7 +913,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: { id: 16, image: 'http://dummyimage.com/127x100.png/dddddd/000000', name: 'NYSE' },
+    userInfo: { id: 16, image: 'http://dummyimage.com/127x100.png/dddddd/000000', name: 'NYSE' },
   },
   {
     id: 17,
@@ -969,7 +969,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: {
+    userInfo: {
       id: 17,
       image: 'http://dummyimage.com/188x100.png/cc0000/ffffff',
       name: 'NASDAQ',
@@ -1029,7 +1029,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: {
+    userInfo: {
       id: 18,
       image: 'http://dummyimage.com/211x100.png/ff4444/ffffff',
       name: 'NASDAQ',
@@ -1089,7 +1089,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 19, image: 'http://dummyimage.com/130x100.png/5fa2dd/ffffff', name: 'NYSE' },
+    userInfo: { id: 19, image: 'http://dummyimage.com/130x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
   {
     id: 20,
@@ -1145,7 +1145,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: {
+    userInfo: {
       id: 20,
       image: 'http://dummyimage.com/127x100.png/ff4444/ffffff',
       name: 'NASDAQ',
@@ -1205,7 +1205,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: {
+    userInfo: {
       id: 21,
       image: 'http://dummyimage.com/175x100.png/cc0000/ffffff',
       name: 'NASDAQ',
@@ -1265,7 +1265,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 22, image: 'http://dummyimage.com/143x100.png/5fa2dd/ffffff', name: 'NYSE' },
+    userInfo: { id: 22, image: 'http://dummyimage.com/143x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
   {
     id: 23,
@@ -1321,7 +1321,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: {
+    userInfo: {
       id: 23,
       image: 'http://dummyimage.com/160x100.png/5fa2dd/ffffff',
       name: 'NASDAQ',
@@ -1381,7 +1381,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 24, image: 'http://dummyimage.com/201x100.png/cc0000/ffffff', name: 'NYSE' },
+    userInfo: { id: 24, image: 'http://dummyimage.com/201x100.png/cc0000/ffffff', name: 'NYSE' },
   },
   {
     id: 25,
@@ -1437,7 +1437,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: { id: 25, image: 'http://dummyimage.com/194x100.png/dddddd/000000', name: 'NYSE' },
+    userInfo: { id: 25, image: 'http://dummyimage.com/194x100.png/dddddd/000000', name: 'NYSE' },
   },
   {
     id: 26,
@@ -1493,7 +1493,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 26, image: 'http://dummyimage.com/186x100.png/cc0000/ffffff', name: 'NYSE' },
+    userInfo: { id: 26, image: 'http://dummyimage.com/186x100.png/cc0000/ffffff', name: 'NYSE' },
   },
   {
     id: 27,
@@ -1549,7 +1549,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: { id: 27, image: 'http://dummyimage.com/204x100.png/5fa2dd/ffffff', name: 'NYSE' },
+    userInfo: { id: 27, image: 'http://dummyimage.com/204x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
   {
     id: 28,
@@ -1605,7 +1605,7 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 28, image: 'http://dummyimage.com/174x100.png/ff4444/ffffff', name: 'NYSE' },
+    userInfo: { id: 28, image: 'http://dummyimage.com/174x100.png/ff4444/ffffff', name: 'NYSE' },
   },
   {
     id: 29,
@@ -1661,7 +1661,7 @@ export const teamsList = [
       },
     ],
     status: false,
-    user: { id: 29, image: 'http://dummyimage.com/185x100.png/ff4444/ffffff', name: 'NYSE' },
+    userInfo: { id: 29, image: 'http://dummyimage.com/185x100.png/ff4444/ffffff', name: 'NYSE' },
   },
   {
     id: 30,
@@ -1717,6 +1717,6 @@ export const teamsList = [
       },
     ],
     status: true,
-    user: { id: 30, image: 'http://dummyimage.com/118x100.png/5fa2dd/ffffff', name: 'NYSE' },
+    userInfo: { id: 30, image: 'http://dummyimage.com/118x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
 ];

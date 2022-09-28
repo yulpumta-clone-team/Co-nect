@@ -23,7 +23,7 @@ export const Default = Template.bind({});
 Default.args = {
   cardInfo: {
     id: 0,
-    user: {
+    userInfo: {
       id: 123,
       image: '',
       name: '홍길통',

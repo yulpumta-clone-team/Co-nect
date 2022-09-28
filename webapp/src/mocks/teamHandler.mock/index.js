@@ -1,5 +1,5 @@
 import { API, ROOT_API_URL } from 'constant/api.constant';
-import { getRandomStatusErrorCode, getResonseWithData } from 'mocks/mockUtils';
+import { getRandomStatusErrorCode, getResonseWithData, randomResponse } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { editTeamDetail } from './editTeamDetail';
 import { teamDetail } from './teamDetail';
@@ -43,6 +43,14 @@ const teamHandler = [
   // EDIT_TEAM_POST
   rest.patch(`${ROOT_API_URL + API.TEAM.INDEX}/:id`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(getResonseWithData(editTeamDetail)));
+  }),
+  // ADD_TEAM_LIKE
+  rest.patch(`${ROOT_API_URL + API.TEAM.LIKE}/:id`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getResonseWithData(teamDetail)));
+  }),
+  // DELETE_TEAM_LIKE
+  rest.delete(`${ROOT_API_URL + API.TEAM.UNLIKE}/:id`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getResonseWithData(teamDetail)));
   }),
 ];
 
