@@ -31,7 +31,7 @@ export default function TechStackSelectInput({
   placeholder,
   name,
   defaultOption,
-  showSelectedOption = false,
+  showSelectedOption = true,
   isError = false,
   helperText,
   customStyle,
@@ -97,6 +97,7 @@ export default function TechStackSelectInput({
           isDropdownOpen={isDropdownOpen}
           isValues={isValues}
           isLoading={techStackOptionsApiState.isLoading}
+          helperText={helperText}
           selectedTechSkills={selectedTechSkills}
           handleClickTargetDelete={handleClickTargetDelete}
           placeholder={placeholder}
@@ -104,8 +105,8 @@ export default function TechStackSelectInput({
           closeDropdown={closeDropdown}
         />
       )}
-      {isError && <S.Error>{helperText}</S.Error>}
-      <S.Select isDropdownOpen showSelectedOption={showSelectedOption}>
+      {!showSelectedOption && isError && <S.Error>{helperText}</S.Error>}
+      <S.Select isDropdownOpen={isDropdownOpen} showSelectedOption={showSelectedOption}>
         <TechStackOptions
           techStackOptionsApiState={techStackOptionsApiState}
           selectedTechSkills={selectedTechSkills}

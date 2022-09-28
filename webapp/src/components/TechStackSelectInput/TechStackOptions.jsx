@@ -24,15 +24,17 @@ export default function TechStackOptions({
   handleClickOption,
   forceRefetchTeckStackOptions,
 }) {
-  if (techStackOptionsApiState.isLoading) return <>...</>;
+  if (techStackOptionsApiState.isLoading) return <S.OptionCategory>...</S.OptionCategory>;
   if (techStackOptionsApiState.error) {
     const { error } = techStackOptionsApiState;
     return (
-      <Callback
-        errorStatus={error.httpStatus}
-        errorMessage={error.message}
-        forceRefetch={forceRefetchTeckStackOptions}
-      />
+      <S.OptionCategory>
+        <Callback
+          errorStatus={error.httpStatus}
+          errorMessage={error.message}
+          forceRefetch={forceRefetchTeckStackOptions}
+        />
+      </S.OptionCategory>
     );
   }
 

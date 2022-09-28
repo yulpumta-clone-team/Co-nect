@@ -7,6 +7,7 @@ TechStackSelectedViewer.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   isDropdownOpen: PropTypes.bool.isRequired,
   isValues: PropTypes.bool.isRequired,
+  helperText: PropTypes.string,
   parent: PropTypes.object.isRequired,
   selectedTechSkills: PropTypes.array.isRequired,
   placeholder: PropTypes.string.isRequired,
@@ -21,6 +22,7 @@ export default function TechStackSelectedViewer({
   parent,
   isDropdownOpen,
   isValues,
+  helperText,
   selectedTechSkills,
   handleClickTargetDelete,
   placeholder,
@@ -41,15 +43,14 @@ export default function TechStackSelectedViewer({
     <S.ValueViewer isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
       {isValues ? (
         <S.SelectedStacks>
-          {selectedTechSkills.map(({ id, label, value }) => (
-            <S.SingleStack key={id}>
-              <span>{label}</span>
-              <S.CloseNormal onClick={() => handleClickTargetDelete({ targetId: id })} />
+          {selectedTechSkills.map(({ id, label, value, image }) => (
+            <S.SingleStack key={id} onClick={() => handleClickTargetDelete({ targetId: id })}>
+              <img src={image} alt={label} />
             </S.SingleStack>
           ))}
         </S.SelectedStacks>
       ) : (
-        <S.PlaceHolder>{placeholder}</S.PlaceHolder>
+        <S.PlaceHolder>{isError ? <S.Error>{helperText}</S.Error> : placeholder}</S.PlaceHolder>
       )}
       <S.ButtonContainer>
         {showLoaderWithClearButton}
