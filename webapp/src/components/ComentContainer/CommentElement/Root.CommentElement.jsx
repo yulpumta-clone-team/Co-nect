@@ -11,26 +11,26 @@ import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import * as S from '../style';
 import SecretCommentElement from './Secret.CommentElement';
 
-HocNestedComment.propTypes = {
+RootCommentElement.propTypes = {
   commentInfo: commentInfoType.isRequired,
   postWriter: PropTypes.string.isRequired,
   replies: PropTypes.array,
 };
 
 // 답글보여주기 상태에 따른 컴포넌트 렌더링
-export default function HocNestedComment({ commentInfo, postWriter, replies }) {
+export default function RootCommentElement({ commentInfo, postWriter, replies }) {
   const {
     id: commentId,
     img,
     secret,
     writer: commenWriter,
-    feeling: likedUserIds,
+    feelings: likedUserIds,
     content,
     parentId,
   } = commentInfo;
-  const userInfo = getUserInfo(); // {userId, name, profileImg}
+  const userInfo = getUserInfo(); // {userId, nickname, profileImg}
   const loggedInUserId = userInfo?.userId;
-  const loggedInUserName = userInfo?.name;
+  const loggedInUserNickname = userInfo?.nickname;
   const { createReplyTargetCommentId, targetReplyListId, postType, editTargetCommentId } =
     useCommentsState();
   const {
@@ -57,7 +57,7 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
 
-  const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
+  const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserNickname);
 
   return (
     <S.CommentContainer>
@@ -77,9 +77,7 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
             <S.CommentContent>{content}</S.CommentContent>
           )}
         </S.PublicCommentBox>
-        {isEditTargetComment && (
-          <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
-        )}
+        {isEditTargetComment && <EditRootCommentForm initialText={content} secret={secret} />}
         <S.CommentInfo>
           <S.SpecificInfo>
             <S.ChatSvg />
