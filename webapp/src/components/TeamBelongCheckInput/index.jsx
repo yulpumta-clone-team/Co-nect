@@ -25,13 +25,23 @@ export default function TeamBelongCheckInput({
       {label && <S.Label>{label}</S.Label>}
       <S.CheckBoxContainer>
         <S.CheckBox>
-          <S.CheckButton isActive={value} onClick={handleClickOption} buttonSize={buttonSize}>
+          <S.CheckButton
+            type="button"
+            isActive={value}
+            onClick={handleClickOption}
+            buttonSize={buttonSize}
+          >
             <S.CheckNormalSvg buttonSize={buttonSize} />
           </S.CheckButton>
           <span>소속 됨</span>
         </S.CheckBox>
         <S.CheckBox>
-          <S.CheckButton isActive={!value} onClick={handleClickOption} buttonSize={buttonSize}>
+          <S.CheckButton
+            type="button"
+            isActive={!value}
+            onClick={handleClickOption}
+            buttonSize={buttonSize}
+          >
             <S.CloseNormalSvg buttonSize={buttonSize} />
           </S.CheckButton>
           <span>소속 안 됨</span>
