@@ -7,6 +7,7 @@ import Divider from 'components/Common/Divider';
 import TechSkills from 'components/TechSkills';
 import MarkdownEditor from 'components/MarkdownEditor';
 import { userDetailType } from 'types/user.type';
+import LikeApi from 'components/Common/Like/LikeApi';
 import * as S from './UserPost.style';
 
 UserPostDetail.propTypes = {
@@ -87,6 +88,10 @@ export default function UserPostDetail({ targetUser }) {
           </S.SingleInfo>
         </S.UserInfoContainer>
         <Divider customStyle={S.CommentDivder} />
+        <S.PostInfo>
+          <LikeApi id={userId} />
+          {likeCnt}
+        </S.PostInfo>
         <CommentContainer postType={POST_TYPE.USER} postWriter={nickname} postId={userId} />
       </S.InfoContainer>
     </S.PostContainer>
