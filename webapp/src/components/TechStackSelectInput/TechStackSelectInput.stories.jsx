@@ -97,6 +97,17 @@ WtihMultiValue.args = {
   placeholder: 'selectedTechSkills',
 };
 
+export const WithErrorInSelectedOptionViewer = Template.bind({});
+WithErrorInSelectedOptionViewer.args = {
+  selectedTechSkills: [],
+  name: 'name',
+  label: 'label',
+  placeholder: 'Error',
+  isError: true,
+  helperText: '에러 입니다.',
+  showSelectedOption: true,
+};
+
 export const WithError = Template.bind({});
 WithError.args = {
   selectedTechSkills: [],
