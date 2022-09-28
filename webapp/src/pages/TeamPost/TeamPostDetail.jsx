@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CommentContainer from 'components/ComentContainer';
 import MarkdownEditor from 'components/MarkdownEditor';
 import { POST_TYPE } from 'constant';
@@ -7,10 +7,16 @@ import Divider from 'components/Common/Divider';
 import { teamDetailParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
 import Image from 'components/Common/Image';
+import Slogan from 'pages/EssentialInfo/SubPages/Slogan';
+import useAxios from 'hooks/useAxios';
+import teamApi from 'api/team.api';
+import Like from 'components/Common/Like/Like';
+import LikeApi from 'components/Common/Like/LikeApi';
 import * as S from './TeamPost.style';
 
 export default function TeamPostDetail({ targetTeam }) {
   const parsedTargetTeam = teamDetailParser(targetTeam);
+
   const {
     teamId,
     teamName,
@@ -64,7 +70,7 @@ export default function TeamPostDetail({ targetTeam }) {
           <div>
             <S.View />
           </div>
-          <S.Heart />
+          <LikeApi id={teamId} />
           {likeCnt}
           <S.Chat />
           {commentCnt}

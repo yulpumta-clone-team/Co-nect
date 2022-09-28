@@ -15,6 +15,7 @@ TeamCard.propTypes = {
 export default function TeamCard({ cardInfo, onClick }) {
   const parsedTeamCardInfo = teamCardParser(cardInfo);
   // * : teamCard 에 표시되는 정보
+
   const { teamName, teamImage, hopeSession, skills, commentCnt, readCnt, isRecruitng, writer } =
     parsedTeamCardInfo;
 

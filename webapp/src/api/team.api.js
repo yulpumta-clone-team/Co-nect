@@ -18,7 +18,7 @@ const teamApi = {
   },
   GET_TEAM_LIKES() {
     return publicApiInstance({
-      url: API.TEAM.LIKES,
+      url: API.TEAM.LIKE,
       method: 'get',
     });
   },
@@ -40,6 +40,18 @@ const teamApi = {
       url: `${API.TEAM.INDEX}/${id}`,
       method: 'patch',
       data,
+    });
+  },
+  ADD_TEAM_LIKE({ id }) {
+    return privateApiInstance({
+      url: `${API.TEAM.LIKE}/${id}`,
+      method: 'patch',
+    });
+  },
+  DELETE_TEAM_LIKE({ id }) {
+    return privateApiInstance({
+      url: `${API.TEAM.UNLIKE}/${id}`,
+      method: 'delete',
     });
   },
 };
