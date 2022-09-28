@@ -1,5 +1,5 @@
 import React from 'react';
-import Like from './index';
+import Like from './Like';
 
 export default {
   title: 'Common/Like',

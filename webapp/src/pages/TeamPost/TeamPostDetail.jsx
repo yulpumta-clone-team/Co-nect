@@ -10,7 +10,8 @@ import Image from 'components/Common/Image';
 import Slogan from 'pages/EssentialInfo/SubPages/Slogan';
 import useAxios from 'hooks/useAxios';
 import teamApi from 'api/team.api';
-import Like from 'components/Common/Like';
+import Like from 'components/Common/Like/Like';
+import LikeApi from 'components/Common/Like/LikeApi';
 import * as S from './TeamPost.style';
 
 export default function TeamPostDetail({ targetTeam }) {
@@ -69,7 +70,7 @@ export default function TeamPostDetail({ targetTeam }) {
           <div>
             <S.View />
           </div>
-          <Like id={teamId} />
+          <LikeApi id={teamId} />
           {likeCnt}
           <S.Chat />
           {commentCnt}

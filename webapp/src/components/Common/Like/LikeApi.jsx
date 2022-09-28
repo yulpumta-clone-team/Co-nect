@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 
-import BlueHeartIcon from 'assets/icons/blue-heart.svg';
-import FullHeartIcon from 'assets/icons/full-heart.svg';
-
 import PropTypes from 'prop-types';
 
 import teamApi from 'api/team.api';
 import useAxios from 'hooks/useAxios';
-import * as S from './style';
+import Like from './Like';
 
-Like.propTypes = {
+LikeApi.propTypes = {
   id: PropTypes.number.isRequired,
 };
 
-export default function Like({ id }) {
+function LikeApi({ id }) {
   const [like, setLike] = useState(false);
 
   const [, addteamlike] = useAxios({
@@ -34,5 +31,8 @@ export default function Like({ id }) {
       await deleteteamlike({ id });
     }
   };
-  return <S.Heart src={like ? FullHeartIcon : BlueHeartIcon} onClick={toggleLike} />;
+
+  return <Like like={like} toggleLike={toggleLike} />;
 }
+
+export default LikeApi;
