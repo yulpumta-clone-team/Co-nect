@@ -1,21 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import commentApi from 'api/comment.api';
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useCallback, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getUserInfo } from 'service/auth';
+import { setPostIdOnSubmitData } from 'utils';
 import useCommentApi from './useCommentApi';
 
 const DEFAULT_TARGET = -1;
 
 const useComments = () => {
   // 로그인 유저 정보
-  const userInfo = getUserInfo(); // {userId, name, profileImg}
+  const userInfo = getUserInfo(); // {userId, nickname, profileImg}
   const loggedInUserId = userInfo?.userId;
+  const loggedInUserNickname = userInfo?.nickname;
 
   // FIXME: 스토리북에서 url이 달라서 데이터 요청을 못하는 에러 수정해야합니다.
   // http://localhost:6006/?path=/story/category-createcommentform--default
   const location = useLocation();
   const [_, postType, postId] = location.pathname.split('/');
+
+  const notifyDispatch = useToastNotificationAction();
 
   // api관련 로직
   const { comments, setComments, isLoading, apiError, changeApi, forceRefetch } = useCommentApi(
@@ -47,6 +54,69 @@ const useComments = () => {
   const showCreateReplyFormOnTargetComment = (commentId) =>
     setCreateReplyTargetCommentId(commentId);
   const resetCreateReplyTargetCommentId = () => setCreateReplyTargetCommentId(DEFAULT_TARGET);
+
+  /**
+   * 생성, 수정, 삭제 로직을 실행하기 전 공통적으로 실행해야하는 로직(ex: 로그인 여부)
+   * @returns {boolean} submit로직을 실행할지 여부를 판단하는 로직
+   */
+  const checkExecuteSubmit = () => {
+    if (!userInfo) {
+      notifyNewMessage(notifyDispatch, '로그인을 먼저해주세요', TOAST_TYPE.Warning);
+      return false;
+    }
+    return true;
+  };
+
+  /**
+   * 댓글 작성 form에서 사용하는 submit handler
+   * @param {Object} sumbitData form에서 제출할 데이터
+   * @param {string} sumbitData.content 댓글 내용
+   * @param {boolean} sumbitData.isSecret 비밀댓글 여부
+   */
+  const createRootCommentSubmitCallback = async ({ content, isSecret }) => {
+    if (!checkExecuteSubmit) return;
+    const newCommentData = setPostIdOnSubmitData(postType, postId, {
+      writer: loggedInUserNickname,
+      secret: isSecret,
+      content,
+    });
+    await postCommentApi({ postType, data: newCommentData });
+  };
+
+  /**
+   * 대댓글 작성 form에서 사용하는 submit handler
+   * @param {Object} sumbitData form에서 제출할 데이터
+   * @param {string} sumbitData.content 댓글 내용
+   * @param {boolean} sumbitData.isSecret 비밀댓글 여부
+   */
+  const createReplyCommentSubmitCallback = async ({ content, isSecret }) => {
+    if (!checkExecuteSubmit) return;
+    const newCommentData = setPostIdOnSubmitData(postType, postId, {
+      writer: loggedInUserNickname,
+      secret: isSecret,
+      content,
+    });
+    await postReplyApi({ postType, data: newCommentData });
+  };
+
+  /**
+   * 댓글 수정 form에서 사용하는 submit handler
+   * @param {Object} sumbitData form에서 제출할 데이터
+   * @param {string} sumbitData.content 댓글 내용
+   * @param {boolean} sumbitData.isSecret 비밀댓글 여부
+   */
+  const editCommentSubmitCallback = async ({ content, isSecret }) => {
+    if (!checkExecuteSubmit) return;
+    const newCommentData = setPostIdOnSubmitData(postType, postId, {
+      writer: loggedInUserNickname,
+      secret: isSecret,
+      content,
+    });
+    await patchCommentApi({ postType, id: editTargetCommentId, data: newCommentData });
+    resetEditTargetCommentId();
+  };
+
+  console.log('editTargetCommentId :>> ', editTargetCommentId);
 
   const addLike = async (postType, idObj) => {
     const { id, loggedInUserId, parentId } = idObj;
@@ -127,8 +197,9 @@ const useComments = () => {
       selectEditTargetComment,
       resetEditTargetCommentId,
       resetCreateReplyTargetCommentId,
-      postCommentApi,
-      postReplyApi,
+      createRootCommentSubmitCallback,
+      createReplyCommentSubmitCallback,
+      editCommentSubmitCallback,
       patchCommentApi,
       pathReplyApi,
       deleteCommentApi,
@@ -145,8 +216,9 @@ const useComments = () => {
       deleteCommentApi,
       patchCommentApi,
       pathReplyApi,
-      postCommentApi,
-      postReplyApi,
+      createRootCommentSubmitCallback,
+      createReplyCommentSubmitCallback,
+      editCommentSubmitCallback,
       handleClickLikeThumb,
       isShowSecretComment,
       isLikesContainUserId,
