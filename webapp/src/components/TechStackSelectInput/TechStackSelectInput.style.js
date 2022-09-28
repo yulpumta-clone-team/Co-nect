@@ -72,15 +72,17 @@ export const SelectedStacks = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
-  gap: 4px;
+  gap: 10px;
 `;
 
 export const SingleStack = styled.div`
   ${({ theme: { mixin } }) => mixin.flexCenter({ direction: 'row' })};
-  padding: 2px 0 2px 6px;
-  background-color: ${({ theme: { colors } }) => colors.secondary.shadow};
-  &:hover {
-    background-color: ${({ theme: { colors } }) => colors.secondary.light};
+  > img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    /* Color/Primary/900 */
+    border: 1px solid #036eff;
   }
 `;
 
@@ -98,7 +100,12 @@ export const PlaceHolder = styled.label`
 `;
 
 export const Select = styled.div`
-  ${({ isDropdownOpen }) => {
+  ${({ isDropdownOpen, isDropdownType }) => {
+    if (isDropdownType) {
+      return css`
+        display: block;
+      `;
+    }
     if (isDropdownOpen) {
       return css`
         display: block;
@@ -109,15 +116,15 @@ export const Select = styled.div`
     `;
   }}
 
-  ${({ showSelectedOption }) => {
-    if (showSelectedOption) {
+  ${({ isDropdownType }) => {
+    if (isDropdownType) {
       return css`
-        position: absolute;
-        top: 105%;
+        position: relative;
       `;
     }
     return css`
-      position: relative;
+      position: absolute;
+      top: 105%;
     `;
   }};
 
@@ -126,6 +133,7 @@ export const Select = styled.div`
   max-height: 300px;
   overflow-y: auto;
   border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
+  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   border-radius: 5px;
   padding: 0 57px;
   padding-top: 24px;
@@ -213,7 +221,7 @@ export const CloseNormal = styled(CloseNormalIcon)`
 `;
 
 export const Error = styled.span`
-  margin: 1rem 0;
+  margin-bottom: 1rem;
   align-self: flex-start;
   padding-left: 1rem;
   color: ${({ theme }) => theme.colors.important.normal};

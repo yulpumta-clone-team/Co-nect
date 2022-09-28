@@ -14,7 +14,7 @@ TechStackSelectInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  showSelectedOption: PropTypes.bool,
+  isDropdownType: PropTypes.bool,
   label: PropTypes.string,
   isError: PropTypes.bool,
   helperText: PropTypes.string,
@@ -31,7 +31,7 @@ export default function TechStackSelectInput({
   placeholder,
   name,
   defaultOption,
-  showSelectedOption = false,
+  isDropdownType = true,
   isError = false,
   helperText,
   customStyle,
@@ -90,13 +90,14 @@ export default function TechStackSelectInput({
       {...rest}
     >
       {label && <S.Label>{label}</S.Label>}
-      {showSelectedOption && (
+      {isDropdownType && (
         <TechStackSelectedViewer
           isError={isError}
           parent={parent}
           isDropdownOpen={isDropdownOpen}
           isValues={isValues}
           isLoading={techStackOptionsApiState.isLoading}
+          helperText={helperText}
           selectedTechSkills={selectedTechSkills}
           handleClickTargetDelete={handleClickTargetDelete}
           placeholder={placeholder}
@@ -104,8 +105,8 @@ export default function TechStackSelectInput({
           closeDropdown={closeDropdown}
         />
       )}
-      {isError && <S.Error>{helperText}</S.Error>}
-      <S.Select isDropdownOpen showSelectedOption={showSelectedOption}>
+      {!isDropdownType && isError && <S.Error>{helperText}</S.Error>}
+      <S.Select isDropdownOpen={isDropdownOpen} isDropdownType={!isDropdownType}>
         <TechStackOptions
           techStackOptionsApiState={techStackOptionsApiState}
           selectedTechSkills={selectedTechSkills}
