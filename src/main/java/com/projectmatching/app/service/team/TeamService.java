@@ -155,33 +155,27 @@ public class TeamService {
 
     //팀 좋아요 누르기
     public void doTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException {
-        try {
-            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
-            com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(CoNectNotFoundException::new);
+        com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(CoNectNotFoundException::new);
 
-            TeamLiking teamLiking = TeamLiking.builder()
-                    .id(IdGenerator.number())
-                    .team(team)
-                    .user(user)
-                    .build();
-            teamLikingRepository.save(teamLiking);
+        TeamLiking teamLiking = TeamLiking.builder()
+                .id(IdGenerator.number())
+                .team(team)
+                .user(user)
+                .build();
+        teamLikingRepository.save(teamLiking);
 
-        }catch (NullPointerException e){
-            throw new ResponeException(TEAM_LIKE_ERROR);
-        }
     }
 
     //팀 좋아요 취소
     public void cancelTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException{
-        try{
-            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
-            com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
-            TeamLiking teamLiking = teamLikingRepository.findByUser_IdAndTeam_Id(user.getId(), team.getId()).orElseThrow(NullPointerException::new);
 
-            teamLikingRepository.delete(teamLiking);
-        }catch (NullPointerException e){
-            throw new ResponeException(LIKING_COMMENT_FAILED);
-        }
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(CoNectNotFoundException::new);
+        Team team = teamRepository.findById(teamId).orElseThrow(CoNectNotFoundException::new);
+        TeamLiking teamLiking = teamLikingRepository.findByUser_IdAndTeam_Id(user.getId(), team.getId()).orElseThrow(CoNectNotFoundException::new);
+
+        teamLikingRepository.delete(teamLiking);
+
     }
 
 //    //좋아요한 팀 게시글 목록 조회
