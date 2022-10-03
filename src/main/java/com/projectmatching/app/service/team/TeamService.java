@@ -74,17 +74,19 @@ public class TeamService {
      * @param team
      */
     private void addTeamTechByTeamRequest(TeamRequestDto teamRequestDto, Team team){
+
          techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
                 .stream()
                 .map(techCode -> {
                     TechStack techStack = TechStack.of(techCode);
                     return techStack;
                 })
-                .map(techStack -> {
-                    TeamTech teamTech = TeamTech.valueOf(techStack,team);
-                    return teamTech;
-                }
-                ).forEach(teamTech -> teamTechRepository.save(teamTech));
+                 .map(techStack -> {
+                             TeamTech teamTech = TeamTech.valueOf(techStack,team);
+                             return teamTech;
+                         }
+                 ).forEach(teamTech -> team.getTeamTeches().add(teamTech));
+
 
     }
 
@@ -134,6 +136,7 @@ public class TeamService {
         //이미 있는것들 비우고 다시 넣음
         team.getTeamTeches().clear();
         addTeamTechByTeamRequest(teamRequestDto, team);
+
     }
 
 
@@ -155,7 +158,7 @@ public class TeamService {
     //팀 좋아요 누르기
     public void doTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException {
         User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(CoNectNotFoundException::new);
-        com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(CoNectNotFoundException::new);
+        Team team = teamRepository.findById(teamId).orElseThrow(CoNectNotFoundException::new);
 
         TeamLiking teamLiking = TeamLiking.builder()
                 .id(IdGenerator.number())

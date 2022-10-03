@@ -26,7 +26,7 @@ public class TeamTech extends BaseTimeEntity {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.REMOVE,CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="tech_id")
     private TechStack techStack;
 

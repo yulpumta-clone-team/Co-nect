@@ -4,9 +4,7 @@ import com.projectmatching.app.constant.bean.TechStackCodeBean;
 import com.projectmatching.app.domain.team.dto.TeamRequestDto;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.team.entity.TeamTech;
-
 import com.projectmatching.app.domain.team.repository.TeamRepository;
-
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.techStack.provider.TechStackProviderImpl;
 import com.projectmatching.app.domain.user.UserRepository;
@@ -19,12 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -111,7 +104,7 @@ public class TeamUpdateTest{
                 .techName("react")
                 .build();
 
-       return TeamTech.valueOf(techStack,team);
+        return TeamTech.valueOf(techStack,team);
 
     }
 
