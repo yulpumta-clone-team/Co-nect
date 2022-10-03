@@ -58,6 +58,18 @@ const userApi = {
       data,
     });
   },
+  ADD_USER_LIKE({ id }) {
+    return privateApiInstance({
+      url: `${API.USER.LIKES}/${id}`,
+      method: 'patch',
+    });
+  },
+  DELETE_USER_LIKE({ id }) {
+    return privateApiInstance({
+      url: `${API.USER.UNLIKES}/${id}`,
+      method: 'delete',
+    });
+  },
 };
 
 export default userApi;

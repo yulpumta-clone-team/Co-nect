@@ -20,6 +20,7 @@ export const API = {
   USER: {
     INDEX: `/user`,
     LIKES: '/user/liking',
+    UNLIKES: '/team/unliking',
     READS: '/user/read',
     PROFILE: `/user/myprofile`,
     MYPOSTS: '/user/my-post',

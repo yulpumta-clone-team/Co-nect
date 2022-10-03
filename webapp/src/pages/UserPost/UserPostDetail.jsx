@@ -89,7 +89,7 @@ export default function UserPostDetail({ targetUser }) {
         </S.UserInfoContainer>
         <Divider customStyle={S.CommentDivder} />
         <S.PostInfo>
-          <LikeApi id={userId} />
+          <LikeApi id={userId} isUser="true" />
           {likeCnt}
         </S.PostInfo>
         <CommentContainer postType={POST_TYPE.USER} postWriter={nickname} postId={userId} />
