@@ -13,6 +13,7 @@ import com.projectmatching.app.domain.team.repository.TeamTechRepository;
 import com.projectmatching.app.domain.techStack.TechStackRepository;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
+import com.projectmatching.app.domain.techStack.provider.TechStackProviderImpl;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.UserTeamRepository;
 import com.projectmatching.app.domain.user.dto.UserInfo;
@@ -46,7 +47,7 @@ import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
 @Slf4j
 public class TeamService {
     private final TeamRepository teamRepository;
-    private final TechStackProvider techStackProvider;
+    private final TechStackProviderImpl techStackProvider;
     private final TeamTechRepository teamTechRepository;
     private final UserRepository userRepository;
     private final UserTeamRepository userTeamRepository;
@@ -73,17 +74,19 @@ public class TeamService {
      * @param team
      */
     private void addTeamTechByTeamRequest(TeamRequestDto teamRequestDto, Team team){
+
          techStackProvider.extractTechCodeByKeys(teamRequestDto.getSkills())
                 .stream()
                 .map(techCode -> {
                     TechStack techStack = TechStack.of(techCode);
                     return techStack;
                 })
-                .map(techStack -> {
-                    TeamTech teamTech = TeamTech.valueOf(techStack,team);
-                    return teamTech;
-                }
-                ).forEach(teamTech -> teamTechRepository.save(teamTech));
+                 .map(techStack -> {
+                             TeamTech teamTech = TeamTech.valueOf(techStack,team);
+                             return teamTech;
+                         }
+                 ).forEach(teamTech -> team.getTeamTeches().add(teamTech));
+
 
     }
 
@@ -116,7 +119,7 @@ public class TeamService {
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() -> new CoNectNotFoundException(NOT_EXIST_USER));
         Team team = teamRepository.findById(teamId).orElseThrow(() -> new CoNectNotFoundException(NOT_EXIST_TEAM));
 
-        if(checkTeamUser(team, user) == false) throw new CoNectLogicalException(PERMISSION_DENIED);
+        if(isTeamOfUser(team, user) == false) throw new CoNectLogicalException(PERMISSION_DENIED);
         teamRepository.deleteTeam(teamId);
 
     }
@@ -127,12 +130,11 @@ public class TeamService {
         Team team = teamRepository.findById(teamId).orElseThrow(() ->  new CoNectNotFoundException(NOT_EXIST_TEAM));
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(() ->  new CoNectNotFoundException(NOT_EXIST_USER));
 
-        if(checkTeamUser(team, user)==false) throw new CoNectLogicalException(PERMISSION_DENIED);
+        if(isTeamOfUser(team, user)==false) throw new CoNectLogicalException(PERMISSION_DENIED);
         team.updateWith(teamRequestDto);
 
         //이미 있는것들 비우고 다시 넣음
         team.getTeamTeches().clear();
-
         addTeamTechByTeamRequest(teamRequestDto, team);
 
     }
@@ -146,7 +148,7 @@ public class TeamService {
      * @param user
      * @return Boolean
      */
-    public boolean checkTeamUser(Team team, User user){
+    public boolean isTeamOfUser(Team team, User user){
         if(team.getOwnerId().equals(user.getId())) return true;
         else return false;
     }
@@ -155,33 +157,27 @@ public class TeamService {
 
     //팀 좋아요 누르기
     public void doTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException {
-        try {
-            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
-            com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(CoNectNotFoundException::new);
+        Team team = teamRepository.findById(teamId).orElseThrow(CoNectNotFoundException::new);
 
-            TeamLiking teamLiking = TeamLiking.builder()
-                    .id(IdGenerator.number())
-                    .team(team)
-                    .user(user)
-                    .build();
-            teamLikingRepository.save(teamLiking);
+        TeamLiking teamLiking = TeamLiking.builder()
+                .id(IdGenerator.number())
+                .team(team)
+                .user(user)
+                .build();
+        teamLikingRepository.save(teamLiking);
 
-        }catch (NullPointerException e){
-            throw new ResponeException(TEAM_LIKE_ERROR);
-        }
     }
 
     //팀 좋아요 취소
     public void cancelTeamLiking(UserDetailsImpl userDetails, Long teamId) throws ResponeException{
-        try{
-            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
-            com.projectmatching.app.domain.team.entity.Team team = teamRepository.findById(teamId).orElseThrow(RuntimeException::new);
-            TeamLiking teamLiking = teamLikingRepository.findByUser_IdAndTeam_Id(user.getId(), team.getId()).orElseThrow(NullPointerException::new);
 
-            teamLikingRepository.delete(teamLiking);
-        }catch (NullPointerException e){
-            throw new ResponeException(LIKING_COMMENT_FAILED);
-        }
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(CoNectNotFoundException::new);
+        Team team = teamRepository.findById(teamId).orElseThrow(CoNectNotFoundException::new);
+        TeamLiking teamLiking = teamLikingRepository.findByUser_IdAndTeam_Id(user.getId(), team.getId()).orElseThrow(CoNectNotFoundException::new);
+
+        teamLikingRepository.delete(teamLiking);
+
     }
 
 //    //좋아요한 팀 게시글 목록 조회
