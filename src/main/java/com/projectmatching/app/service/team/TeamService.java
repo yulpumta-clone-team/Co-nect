@@ -54,8 +54,6 @@ public class TeamService {
     private final TeamLikingRepository teamLikingRepository;
     private final TechStackRepository techStackRepository;
 
-    @PersistenceContext
-    private final EntityManager em;
 
 
     //팀 게시글 저장

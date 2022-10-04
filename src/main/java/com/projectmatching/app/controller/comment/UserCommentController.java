@@ -3,6 +3,7 @@ package com.projectmatching.app.controller.comment;
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
+import com.projectmatching.app.domain.comment.dto.UserCommentReqDto;
 import com.projectmatching.app.service.comment.CommentService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import io.swagger.annotations.Api;
@@ -27,31 +28,31 @@ public class UserCommentController {
 
     @ApiOperation(value = "유저 댓글 달기")
     @PostMapping("/comment")
-    public ResponseTemplate<UserCommentDto> addComment(@RequestBody UserCommentDto userCommentDto){
+    public ResponseTemplate<UserCommentDto> addComment(@RequestBody UserCommentReqDto userCommentReqDto){
 
-        return ResponseTemplate.valueOf(commentService.addUserComment(userCommentDto));
+        return ResponseTemplate.valueOf(commentService.addUserComment(userCommentReqDto));
 
     }
 
 
     @ApiOperation(value ="유저 대댓글 달기")
     @PostMapping("/nested_comment")
-    public ResponseTemplate<UserCommentDto> addNestedComment(@RequestBody UserCommentDto userCommentDto){
-        return ResponseTemplate.valueOf(commentService.addUserNestedComment(userCommentDto));
+    public ResponseTemplate<UserCommentDto> addNestedComment(@RequestBody UserCommentReqDto userCommentReqDto){
+        return ResponseTemplate.valueOf(commentService.addUserNestedComment(userCommentReqDto));
     }
 
 
     @ApiOperation(value = "유저 게시글 댓글 수정")
     @PatchMapping("/comment")
-    public ResponseTemplate<UserCommentDto> updateComment(@RequestBody UserCommentDto userCommentDto){
-        return ResponseTemplate.valueOf(commentService.updateUserComment(userCommentDto));
+    public ResponseTemplate<UserCommentDto> updateComment(@RequestBody UserCommentReqDto userCommentReqDto){
+        return ResponseTemplate.valueOf(commentService.updateUserComment(userCommentReqDto));
     }
 
 
     @ApiOperation(value = "유저 게시글 대댓글 수정")
     @PatchMapping("/nested_comment")
-    public ResponseTemplate<UserCommentDto> updateNestedComment(@RequestBody UserCommentDto userCommentDto){
-        return ResponseTemplate.valueOf(commentService.updateUserNestedComment(userCommentDto));
+    public ResponseTemplate<UserCommentDto> updateNestedComment(@RequestBody UserCommentReqDto userCommentReqDto){
+        return ResponseTemplate.valueOf(commentService.updateUserNestedComment(userCommentReqDto));
     }
 
 

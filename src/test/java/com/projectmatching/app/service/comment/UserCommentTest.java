@@ -1,6 +1,7 @@
 package com.projectmatching.app.service.comment;
 
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
+import com.projectmatching.app.domain.comment.dto.UserCommentReqDto;
 import com.projectmatching.app.domain.comment.entity.UserComment;
 import com.projectmatching.app.domain.comment.repository.UserCommentRepository;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
@@ -10,14 +11,8 @@ import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.service.ServiceTest;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.IdGenerator;
-import groovy.transform.Memoized;
 import org.junit.jupiter.api.*;
 import org.mockito.*;
-
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.MockBeans;
-import org.springframework.test.context.event.annotation.AfterTestClass;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
 
 
 import java.util.Optional;
@@ -50,15 +45,15 @@ public class UserCommentTest extends ServiceTest {
 
 
     @InjectMocks
-    private CommentServiceImpl commentService;
+    private CommentService commentService;
 
     //댓글달리는 대상
     private User user = User.builder().id(1234567890L).email("testing@user.com").content("testUser").build();
 
 
     //달 댓글
-    private UserCommentDto userCommentDto = UserCommentDto.builder()
-            .id(1234567890L).content("테스트 댓글")
+    private UserCommentReqDto userCommentDto = UserCommentReqDto.builder()
+            .content("테스트 댓글")
             .userId(user.getId())
             .build();
 
