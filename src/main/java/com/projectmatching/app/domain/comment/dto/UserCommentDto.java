@@ -33,8 +33,9 @@ public class UserCommentDto {
     private String content;
 
 
+    //대댓글
     @Builder.Default
-    private List<UserCommentDto> comments = new ArrayList<>();
+    private List<UserCommentDto> replies = new ArrayList<>();
     @Builder.Default
     private List<UserCommentLikingDto> feelings = new ArrayList<>();
 
@@ -52,7 +53,7 @@ public class UserCommentDto {
             userCommentDto.parentId = userComment.getParent().getId();
         }
         if(userComment.hasChildren()){
-            userCommentDto.comments = userComment.getComments()
+            userCommentDto.replies = userComment.getComments()
                     .stream().map(UserCommentDto::of).collect(Collectors.toList());
         }
 
@@ -69,7 +70,7 @@ public class UserCommentDto {
         userComment.setUserCommentLikings(mapToSet(this.feelings,UserCommentLikingDto::asEntity));
 
         return userComment;
-            /// CI용 테스트 주석2222dddd4444555
+
     }
 
 }
