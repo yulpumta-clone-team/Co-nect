@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as chatIcon } from 'assets/icons/chat.svg';
-import { ReactComponent as viewIcon } from 'assets/icons/view.svg';
+import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
+import EyeSvg from 'assets/icons/EyeSvg';
 
 export const Container = styled.div`
   position: relative;
@@ -131,11 +131,20 @@ export const TeamSkillSession = styled(SingleInfoTitle)`
   width: 3%;
 `;
 
-export const Chat = styled(chatIcon)`
+export const View = styled.div`
   width: 25px;
   height: 25px;
+  > path {
+    stroke: ${({ theme: { colors } }) => colors.primary.normal};
+    fill: ${({ theme: { colors } }) => colors.primary.normal};
+  }
 `;
-export const View = styled(viewIcon)`
+
+export const Chat = styled.div`
   width: 25px;
   height: 25px;
+  & path {
+    stroke: ${({ theme: { colors } }) => colors.primary.normal};
+    fill: ${({ theme: { colors } }) => colors.primary.normal};
+  }
 `;

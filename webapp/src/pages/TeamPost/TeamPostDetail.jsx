@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CommentContainer from 'components/ComentContainer';
 import MarkdownEditor from 'components/MarkdownEditor';
 import { POST_TYPE } from 'constant';
@@ -7,11 +7,9 @@ import Divider from 'components/Common/Divider';
 import { teamDetailParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
 import Image from 'components/Common/Image';
-import Slogan from 'pages/EssentialInfo/SubPages/Slogan';
-import useAxios from 'hooks/useAxios';
-import teamApi from 'api/team.api';
-import Like from 'components/Common/Like/Like';
-import LikeApi from 'components/Common/Like/LikeApi';
+import LikeApi from 'components/Common/Like';
+import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
+import EyeSvg from 'assets/icons/EyeSvg';
 import * as S from './TeamPost.style';
 
 export default function TeamPostDetail({ targetTeam }) {
@@ -67,13 +65,16 @@ export default function TeamPostDetail({ targetTeam }) {
         </S.SingleInfo>
         <Divider customStyle={S.CommentDivider} />
         <S.SingleInfo>
-          <div>
-            <S.View />
-          </div>
+          <S.View>
+            <EyeSvg />
+            000
+          </S.View>
           <LikeApi id={teamId} />
           {likeCnt}
-          <S.Chat />
-          {commentCnt}
+          <S.Chat>
+            <ChatBubbleOvalSvg />
+            {commentCnt}
+          </S.Chat>
         </S.SingleInfo>
         <CommentContainer postType={POST_TYPE.TEAM} postWriter={writerInfo.name} postId={teamId} />
       </S.TeamInfoContainer>
