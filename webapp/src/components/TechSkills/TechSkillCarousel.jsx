@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useSkillCarousel from 'hooks/useSkillCarousel';
+import ChevronLeftSvg from 'assets/icons/ChevronLeftSvg';
+import ChevronRightSvg from 'assets/icons/ChevronRightSvg';
 import * as S from './TechSkills.style';
 
 TechSkillCarousel.propTypes = {
@@ -17,7 +19,9 @@ export default function TechSkillCarousel({ skills, imageSize, gap }) {
 
   return (
     <>
-      <S.LeftAngle onClick={handleClickPrevSlide} />
+      <S.LeftAngle onClick={handleClickPrevSlide}>
+        <ChevronLeftSvg />
+      </S.LeftAngle>
       <S.SkillContainer isCarousel>
         <S.SkillSlide ref={slideRef} isCarousel gap={gap}>
           {skills.map(({ image, id }) => (
@@ -25,7 +29,9 @@ export default function TechSkillCarousel({ skills, imageSize, gap }) {
           ))}
         </S.SkillSlide>
       </S.SkillContainer>
-      <S.RightAngle onClick={handleClickNextSlide} />
+      <S.RightAngle onClick={handleClickNextSlide}>
+        <ChevronRightSvg />
+      </S.RightAngle>
     </>
   );
 }
