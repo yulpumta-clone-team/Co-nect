@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as alarm } from 'assets/icons/alarm.svg';
 
 // 상단 파란색 상자
 export const TopContainer = styled.div`
@@ -82,11 +81,11 @@ export const Link = styled.div`
   text-decoration: underline;
 `;
 
-export const Alarm = styled(alarm)`
-  overflow: hidden;
-  width: 15px;
-  height: 20px;
-  cursor: pointer;
+export const Alarm = styled.button`
+  > svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
 `;
 
 // user 이름
