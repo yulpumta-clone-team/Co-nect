@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import ArrowLeftSvg from 'assets/icons/ArrowLeftSvg';
 import * as S from './BackButton.style';
 
 BackButton.propTypes = {
@@ -16,7 +17,7 @@ export default function BackButton({ url }) {
   };
   return (
     <S.Container onClick={handleOnClickBack}>
-      <S.UpArrow />
+      <ArrowLeftSvg />
     </S.Container>
   );
 }
