@@ -1,8 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as CloseLargeIcon } from 'assets/icons/close-large.svg';
-import { ReactComponent as LeftAngleIcon } from 'assets/icons/left-angle.svg';
-import { ReactComponent as rightAngleIcon } from 'assets/icons/right-angle.svg';
-import { ReactComponent as plusSolidIcon } from 'assets/icons/plus-solid.svg';
 
 // 레이아웃
 export const Layout = styled.div`
@@ -94,12 +90,11 @@ export const CloseButton = css`
   height: 30px;
   right: 4%;
   top: 5%;
-`;
-
-export const CloseLarge = styled(CloseLargeIcon)`
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.border};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.border};
+  > svg {
+    & path {
+      fill: ${({ theme: { colors } }) => colors.greyScale.border};
+      stroke: ${({ theme: { colors } }) => colors.greyScale.border};
+    }
   }
 `;
 
@@ -113,31 +108,11 @@ export const AngleContainer = styled.div`
 export const AngleButton = css`
   width: 50px;
   height: 50px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const LeftAngle = styled(LeftAngleIcon)`
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.black};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
-  }
-`;
-
-export const RightAngle = styled(rightAngleIcon)`
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.black};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
-  }
-`;
-
-export const PlusSolid = styled(plusSolidIcon)`
-  width: 18px;
-  height: 18px;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.white};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+  > svg {
+    & path {
+      fill: ${({ theme: { colors } }) => colors.greyScale.black};
+      stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+    }
   }
 `;
 
@@ -184,4 +159,21 @@ export const InputTypeImageHandler = styled.label`
 
 export const HiddenInputHandler = styled.input`
   display: none;
+`;
+
+export const AddImage = styled.button`
+  pointer-events: none; // label 안에 있는 button은 htmlfor가 작동하지 않아 해당 이벤트를 꺼야함 https://dilshankelsen.com/button-inside-label-not-triggering-input/
+  background-color: ${({ theme: { colors } }) => colors.primary.normal};
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})};
+  > svg {
+    & path {
+      width: 50px;
+      height: 50px;
+      stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+      fill: ${({ theme: { colors } }) => colors.greyScale.white};
+    }
+  }
 `;

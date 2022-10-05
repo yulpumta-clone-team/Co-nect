@@ -3,6 +3,8 @@ import handlers from 'mocks/handlers';
 import PropTypes from 'prop-types';
 import Button from 'components/Common/Button';
 import EssentialFormProvider from 'contexts/EssentialForm/EssentialForm.Provider';
+import XMarkSvg from 'assets/icons/XMarkSvg';
+import ChevronLeftSvg from 'assets/icons/ChevronLeftSvg';
 import EssentialInfo from './index';
 import Nickname from './SubPages/Nickname';
 import ProfileImage from './SubPages/ProfileImage';
@@ -33,11 +35,11 @@ function Template({ children }) {
       <S.Layout>
         <S.DialogContainer>
           <Button theme="none" customStyle={S.CloseButton}>
-            <S.CloseLarge />
+            <XMarkSvg />
           </Button>
           <S.AngleContainer>
             <Button theme="none" customStyle={S.AngleButton}>
-              <S.LeftAngle />
+              <ChevronLeftSvg />
             </Button>
           </S.AngleContainer>
           {children}

@@ -5,6 +5,7 @@ import {
   useEssentialFormsAction,
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
+import PlusMarkSvg from 'assets/icons/PlusMarkSvg';
 import * as S from '../EssentialInfo.style';
 
 // TODO: 이미지 업로드 후 디자인
@@ -39,9 +40,9 @@ export default function ProfileImage() {
         <>
           <S.InputContainer>
             <S.InputTypeImageHandler htmlFor="profileImage">
-              <div>
-                <S.PlusSolid />
-              </div>
+              <S.AddImage type="button">
+                <PlusMarkSvg />
+              </S.AddImage>
             </S.InputTypeImageHandler>
           </S.InputContainer>
           <S.NextButtonContainer>
