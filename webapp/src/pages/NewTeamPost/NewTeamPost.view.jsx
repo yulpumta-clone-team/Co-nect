@@ -6,6 +6,8 @@ import Button from 'components/Common/Button';
 import TechStackSelectInput from 'components/TechStackSelectInput';
 import SelectInput from 'components/Common/SelectInput';
 import TextInput from 'components/Common/TextInput';
+import PlusMarkSvg from 'assets/icons/PlusMarkSvg';
+import EditImageSvg from 'assets/icons/EditImageSvg';
 import * as S from './NewTeamPost.style';
 
 NewTeamPostView.propTypes = {
@@ -49,13 +51,15 @@ export default function NewTeamPostView({
             {profileImageSrc ? (
               <S.InputTypeImageHandler htmlFor="profileImage">
                 <S.ViewingImage alt="upload" src={profileImageSrc} />
-                <S.ImageEditButton onClick={onUploadButtonClick} />
+                <S.ImageEditButton onClick={onUploadButtonClick}>
+                  <EditImageSvg />
+                </S.ImageEditButton>
               </S.InputTypeImageHandler>
             ) : (
               <S.InputTypeImageHandler htmlFor="profileImage">
-                <div>
-                  <S.AddImage />
-                </div>
+                <S.AddImage type="button">
+                  <PlusMarkSvg />
+                </S.AddImage>
               </S.InputTypeImageHandler>
             )}
             <S.HiddenInputHandler
