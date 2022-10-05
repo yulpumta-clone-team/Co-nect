@@ -57,26 +57,32 @@ public class UserCommentTest extends ServiceTest {
             .userId(user.getId())
             .build();
 
+
     private UserComment userComment = userCommentReqDto.asEntity();
 
-    @BeforeEach
-    public void beforeClass(){
-        UserCommentDtoStatic = mockStatic(UserCommentDto.class);
-        idGenerator = mockStatic(IdGenerator.class);
-        when(IdGenerator.number()).thenReturn(1234567890L);
-        when(UserCommentDto.of(any(UserComment.class))).then(I->{
-            return userCommentReqDto;
-        });
+    private UserCommentDto userCommentDto;
 
-
-    }
-
-    @AfterEach
-    public void afterClass(){
-        UserCommentDtoStatic.close();
-        idGenerator.close();
-        System.out.println("UserComment test Class ended");
-    }
+//    @BeforeEach
+//    public void beforeClass(){
+//        UserCommentDtoStatic = mockStatic(UserCommentDto.class);
+//        idGenerator = mockStatic(IdGenerator.class);
+//        userComment.setUser(user);
+//        userCommentDto = UserCommentDto.of(userComment);
+//
+//        when(IdGenerator.number()).thenReturn(1234567890L);
+//        when(UserCommentDto.of(any(UserComment.class))).then(I->{
+//            return userCommentDto;
+//        });
+//
+//
+//    }
+//
+//    @AfterEach
+//    public void afterClass(){
+//        UserCommentDtoStatic.close();
+//        idGenerator.close();
+//        System.out.println("UserComment test Class ended");
+//    }
 
 
 
@@ -91,10 +97,15 @@ public class UserCommentTest extends ServiceTest {
             return userComment;
         });
 
+        UserCommentReqDto userCommentReqDto = UserCommentReqDto.builder()
+                .content("테스트 댓글")
+                .userId(user.getId())
+                .build();
+
         UserCommentDto result = commentService.addUserComment(userCommentReqDto,userDetails);
 
         assertEquals(result.getUserId(),user.getId());
-        assertEquals(1234567890L,IdGenerator.number());
+
     }
 
 

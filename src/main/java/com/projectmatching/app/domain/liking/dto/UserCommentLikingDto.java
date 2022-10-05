@@ -6,6 +6,7 @@ import com.projectmatching.app.domain.comment.dto.UserCommentDto;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.util.IdGenerator;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 @Getter
@@ -24,6 +25,8 @@ public class UserCommentLikingDto {
     @JsonIgnore
     private Long id = IdGenerator.number();
 
+
+    @ApiModelProperty(name = "해당 댓글 좋아요한 유저 아이디")
     private Long userId;
 
 
