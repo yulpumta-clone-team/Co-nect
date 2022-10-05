@@ -5,8 +5,10 @@ import TextInput from 'components/Common/TextInput';
 import TechStackSelectInput from 'components/TechStackSelectInput';
 import SelectInput from 'components/Common/SelectInput';
 import MarkdownEditor from 'components/MarkdownEditor';
-import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
+import { hopeSessionOption, jobOptions } from 'constant';
 import TeamBelongCheckInput from 'components/TeamBelongCheckInput';
+import PlusMarkSvg from 'assets/icons/PlusMarkSvg';
+import EditImageSvg from 'assets/icons/EditImageSvg';
 import * as S from './EditUserProfile.style';
 
 EditUserProfileView.propTypes = {
@@ -72,20 +74,15 @@ export default function EditUserProfileView({
           {profileImageSrc ? (
             <S.InputTypeImageHandler htmlFor="profileImage">
               <S.ImageThunbnail alt="upload" src={profileImageSrc} />
-              <Button
-                type="button"
-                theme="secondary"
-                customStyle={S.ImageEditButton}
-                onClick={onUploadButtonClick}
-              >
-                수정
-              </Button>
+              <S.ImageEditButton onClick={onUploadButtonClick}>
+                <EditImageSvg />
+              </S.ImageEditButton>
             </S.InputTypeImageHandler>
           ) : (
             <S.InputTypeImageHandler htmlFor="profileImage">
-              <div>
-                <S.PlusSolid />
-              </div>
+              <S.AddImage type="button">
+                <PlusMarkSvg />
+              </S.AddImage>
             </S.InputTypeImageHandler>
           )}
           <S.HiddenInputHandler

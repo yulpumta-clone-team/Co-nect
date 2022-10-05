@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as plusSolidIcon } from 'assets/icons/plus-solid.svg';
 
 export const Container = styled.div`
   position: relative;
@@ -91,27 +90,13 @@ export const ImageThunbnail = styled.img`
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
 `;
 
-export const ImageEditButton = css`
-  position: absolute;
-  width: 80px;
-  height: 30px;
-  bottom: 50px;
-  right: 50px;
-`;
-
 export const InputTypeImageHandler = styled.label`
+  position: relative;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   width: 144px;
   height: 144px;
   border-radius: 50%;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
-  > div {
-    background-color: ${({ theme: { colors } }) => colors.primary.normal};
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    ${({ theme: { mixin } }) => mixin.flexCenter({})};
-  }
   &:hover {
     cursor: pointer;
   }
@@ -121,11 +106,35 @@ export const HiddenInputHandler = styled.input`
   display: none;
 `;
 
-export const PlusSolid = styled(plusSolidIcon)`
-  width: 18px;
-  height: 18px;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.white};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+export const ImageEditButton = styled.button`
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  bottom: 5%;
+  right: 5%;
+  border-radius: 50%;
+  background-color: ${({ theme: { colors } }) => colors.secondary.normal};
+  > svg {
+    & path {
+      stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+      fill: ${({ theme: { colors } }) => colors.greyScale.white};
+    }
+  }
+`;
+
+export const AddImage = styled.button`
+  pointer-events: none; // label 안에 있는 button은 htmlfor가 작동하지 않아 해당 이벤트를 꺼야함 https://dilshankelsen.com/button-inside-label-not-triggering-input/
+  background-color: ${({ theme: { colors } }) => colors.primary.normal};
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})};
+  > svg {
+    & path {
+      width: 50px;
+      height: 50px;
+      stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+      fill: ${({ theme: { colors } }) => colors.greyScale.white};
+    }
   }
 `;
