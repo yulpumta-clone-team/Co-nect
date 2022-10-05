@@ -28,31 +28,31 @@ public class UserCommentController {
 
     @ApiOperation(value = "유저 댓글 달기")
     @PostMapping("/comment")
-    public ResponseTemplate<UserCommentDto> addComment(@RequestBody UserCommentReqDto userCommentReqDto){
+    public ResponseTemplate<UserCommentDto> addComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
 
-        return ResponseTemplate.valueOf(commentService.addUserComment(userCommentReqDto));
+        return ResponseTemplate.valueOf(commentService.addUserComment(userCommentReqDto,userDetails));
 
     }
 
 
     @ApiOperation(value ="유저 대댓글 달기")
     @PostMapping("/nested_comment")
-    public ResponseTemplate<UserCommentDto> addNestedComment(@RequestBody UserCommentReqDto userCommentReqDto){
-        return ResponseTemplate.valueOf(commentService.addUserNestedComment(userCommentReqDto));
+    public ResponseTemplate<UserCommentDto> addNestedComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseTemplate.valueOf(commentService.addUserNestedComment(userCommentReqDto,userDetails));
     }
 
 
     @ApiOperation(value = "유저 게시글 댓글 수정")
     @PatchMapping("/comment")
-    public ResponseTemplate<UserCommentDto> updateComment(@RequestBody UserCommentReqDto userCommentReqDto){
-        return ResponseTemplate.valueOf(commentService.updateUserComment(userCommentReqDto));
+    public ResponseTemplate<UserCommentDto> updateComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseTemplate.valueOf(commentService.updateUserComment(userCommentReqDto,userDetails));
     }
 
 
     @ApiOperation(value = "유저 게시글 대댓글 수정")
     @PatchMapping("/nested_comment")
-    public ResponseTemplate<UserCommentDto> updateNestedComment(@RequestBody UserCommentReqDto userCommentReqDto){
-        return ResponseTemplate.valueOf(commentService.updateUserNestedComment(userCommentReqDto));
+    public ResponseTemplate<UserCommentDto> updateNestedComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseTemplate.valueOf(commentService.updateUserNestedComment(userCommentReqDto,userDetails));
     }
 
 

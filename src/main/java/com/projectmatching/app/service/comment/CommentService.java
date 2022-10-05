@@ -1,5 +1,6 @@
 package com.projectmatching.app.service.comment;
 
+import com.projectmatching.app.annotation.UserInfoContainedInReturnVal;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
@@ -20,6 +21,7 @@ import com.projectmatching.app.domain.team.repository.TeamRepository;
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.util.IdGenerator;
 
@@ -53,21 +55,30 @@ public class CommentService {
      * 댓글 추가 서비스
      */
     //유저 프로필에 댓글달기
-    @Transactional(rollbackFor = ResponeException.class)
-    public UserCommentDto addUserComment(UserCommentReqDto userCommentDto) {
+    @Transactional
+    @UserInfoContainedInReturnVal
+    public UserCommentDto addUserComment(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
+        User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
+        UserComment userComment = userCommentReqDto.asEntity();
+        userComment.setWriter(userDetails.getUserRealName()); //댓글 단 사람 입력
 
-        return UserCommentDto.of(addCommentToUser(userCommentDto));
+        return UserCommentDto.of(addCommentToUser(userComment,beingCommentedUser));
 
     }
 
     //유저 프로필에 대댓글 달기
 
-    @Transactional(rollbackFor = ResponeException.class)
-    public UserCommentDto addUserNestedComment(UserCommentReqDto userCommentReqDto) {
+    @Transactional
+    @UserInfoContainedInReturnVal
+    public UserCommentDto addUserNestedComment(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
         //부모 댓글 설정 안되어있으면 에러
         try {
             if (userCommentReqDto.getParentId() == null) throw new ResponeException(ADD_NESTED_FAILED);
-            UserComment userComment = addCommentToUser(userCommentReqDto);
+
+            User beingCommentedUser = userRepository.findById(userDetails.getId()).orElseThrow(CoNectNotFoundException::new);
+            UserComment userComment = userCommentReqDto.asEntity();
+            addCommentToUser(userComment, beingCommentedUser);
+
             userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(NullPointerException::new)); //부모 댓글 설정
             return UserCommentDto.of(userCommentRepository.save(userComment));
 
@@ -79,25 +90,23 @@ public class CommentService {
 
     }
 
-
     /**
      * 댓글 수정 서비스
      */
-
-    @Transactional(rollbackFor = ResponeException.class)
-    public UserCommentDto updateUserComment(UserCommentReqDto userCommentDto) {
+    @Transactional
+    @UserInfoContainedInReturnVal
+    public UserCommentDto updateUserComment(UserCommentReqDto userCommentDto ,UserDetailsImpl userDetails) {
 
         return UserCommentDto.of(updateCommentToUser(userCommentDto));
-
-
     }
 
     /**
      * 대댓글 수정
      */
 
-    @Transactional(rollbackFor = ResponeException.class)
-    public UserCommentDto updateUserNestedComment(UserCommentReqDto userCommentDto) {
+    @Transactional
+    @UserInfoContainedInReturnVal
+    public UserCommentDto updateUserNestedComment(UserCommentReqDto userCommentDto, UserDetailsImpl userDetails) {
         return UserCommentDto.of(updateCommentToUser(userCommentDto));
     }
 
@@ -106,12 +115,12 @@ public class CommentService {
      *  (대)댓글 삭제
      */
 
-    @Transactional(rollbackFor = ResponeException.class)
+    @Transactional
     public void deleteUserComment(UserDetailsImpl userDetails, Long commentId) {
 
         UserComment userComment = Optional.of(userCommentRepository.getById(commentId)).orElseThrow(NullPointerException::new);
         //작성자와 삭제자 일치하거나 유저프로필이 본인 것이거나 관리자 일경우에만 삭제
-        if(userComment.getUser().getName().equals(userDetails.getUserRealName()) || userComment.getWriter().equals(userDetails.getUserRealName()) || userDetails.getRole().equals(Role.ADMIN))
+        if(userComment.getUser().getName().equals(userDetails.getUserRealName()) || userComment.getUser().getName().equals(userDetails.getUserRealName()) || userDetails.getRole().equals(Role.ADMIN))
             userCommentRepository.delete(userComment);
 
         else throw new ResponeException(DELETE_COMMENT_FAILED);
@@ -186,18 +195,14 @@ public class CommentService {
     }
 
 
-    private UserComment addCommentToUser(UserCommentReqDto userCommentDto) {
-        try{
-            User user = userRepository.findById(userCommentDto.getUserId()).orElseThrow(NullPointerException::new);
-            UserComment userComment = userCommentDto.asEntity();
-            userComment.setUser(user);
-            userCommentRepository.save(userComment);
-            return userComment;
-        }
-        catch (NullPointerException e){
-            e.printStackTrace();
-            throw new ResponeException(ADD_COMMENT_FAILED);
-        }
+
+
+    @UserInfoContainedInReturnVal
+    private UserComment addCommentToUser(UserComment userComment, User user) {
+        userComment.setUser(user);
+        userCommentRepository.save(userComment);
+        return userComment;
+
     }
 
 

@@ -1,10 +1,11 @@
 package com.projectmatching.app.domain.comment.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.projectmatching.app.domain.comment.entity.UserComment;
 import com.projectmatching.app.domain.liking.dto.UserCommentLikingDto;
 import com.projectmatching.app.domain.user.dto.UserInfo;
+import com.projectmatching.app.domain.user.dto.UserInfoDto;
+import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.util.IdGenerator;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -22,14 +23,9 @@ import static com.projectmatching.app.util.StreamUtil.mapToSet;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL) //null 이면 생성되지 않음
-public class UserCommentDto {
-
+public class UserCommentDto extends UserInfoDto {
 
     private final Long id = IdGenerator.number();
-
-
-    @ApiModelProperty(value = "댓글 작성자 정보")
-    private UserInfo userInfo;
 
     @ApiModelProperty(value = "해당 댓글이 속한 유저 게시물의 id")
     private Long userId; //댓글이 속한 글의 id(유저)
@@ -58,7 +54,7 @@ public class UserCommentDto {
         UserCommentDto userCommentDto = createEmpty();
         BeanUtils.copyProperties(userComment,userCommentDto);
         userCommentDto.userId = userComment.getUser().getId();
-        userCommentDto.userInfo = UserInfo.of(userComment.getUser());
+
         //부모가 있다면, 즉 대댓글이라면
         if(userComment.hasParent()){
             userCommentDto.parentId = userComment.getParent().getId();
@@ -83,5 +79,8 @@ public class UserCommentDto {
         return userComment;
 
     }
+
+
+
 
 }

@@ -52,12 +52,12 @@ public class UserCommentTest extends ServiceTest {
 
 
     //달 댓글
-    private UserCommentReqDto userCommentDto = UserCommentReqDto.builder()
+    private UserCommentReqDto userCommentReqDto = UserCommentReqDto.builder()
             .content("테스트 댓글")
             .userId(user.getId())
             .build();
 
-    private UserComment userComment = userCommentDto.asEntity();
+    private UserComment userComment = userCommentReqDto.asEntity();
 
     @BeforeEach
     public void beforeClass(){
@@ -65,7 +65,7 @@ public class UserCommentTest extends ServiceTest {
         idGenerator = mockStatic(IdGenerator.class);
         when(IdGenerator.number()).thenReturn(1234567890L);
         when(UserCommentDto.of(any(UserComment.class))).then(I->{
-            return userCommentDto;
+            return userCommentReqDto;
         });
 
 
@@ -83,15 +83,15 @@ public class UserCommentTest extends ServiceTest {
     @DisplayName("유저 프로필에 댓글 달기 성공")
     @Test
     void addUserComment_Succeess(){
-        when(userRepository.findById(userCommentDto.getUserId())).then(I->{
+        when(userRepository.findById(userCommentReqDto.getUserId())).then(I->{
             return Optional.of(user);
         });
         when(userCommentRepository.save(any(UserComment.class))).then(I-> {
-            UserComment userComment = (UserComment) I.getArgument(0);
+            UserComment userComment =  I.getArgument(0);
             return userComment;
         });
 
-        UserCommentDto result = commentService.addUserComment(userCommentDto);
+        UserCommentDto result = commentService.addUserComment(userCommentReqDto,userDetails);
 
         assertEquals(result.getUserId(),user.getId());
         assertEquals(1234567890L,IdGenerator.number());
@@ -114,6 +114,8 @@ public class UserCommentTest extends ServiceTest {
         verify(userCommentLikingRepository).save(any(UserCommentLiking.class));
 
     }
+
+
 
 
 }

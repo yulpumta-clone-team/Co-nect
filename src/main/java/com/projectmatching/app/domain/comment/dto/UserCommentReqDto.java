@@ -3,6 +3,8 @@ package com.projectmatching.app.domain.comment.dto;
 import com.projectmatching.app.domain.comment.entity.UserComment;
 import com.projectmatching.app.domain.liking.dto.UserCommentLikingDto;
 import com.projectmatching.app.domain.user.dto.UserInfo;
+import com.projectmatching.app.domain.user.dto.UserInfoDto;
+import com.projectmatching.app.util.IdGenerator;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +15,7 @@ import static com.projectmatching.app.util.StreamUtil.mapToSet;
 
 @Builder
 @Getter
-public class UserCommentReqDto {
+public class UserCommentReqDto extends UserInfoDto {
 
 
     @ApiModelProperty(notes = "해당 댓글이 속한 유저 게시물의 id")
@@ -34,8 +36,10 @@ public class UserCommentReqDto {
     public UserComment asEntity(){
         UserComment userComment = new UserComment();
         BeanUtils.copyProperties(this, userComment);
-
+        userComment.setId(IdGenerator.number());
         return userComment;
 
     }
+
+
 }

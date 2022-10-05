@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserCommentRepository  extends JpaRepository< UserComment,Long> {
+public interface UserCommentRepository  extends JpaRepository<UserComment,Long> {
 
     @Query("SELECT u from UserComment u where u.user.id = :postId")
-    List<UserComment> getUserCommentByPostId(@Param(value = "postId")Long postId);
+    List<UserComment> getUserCommentByPostId(Long postId);
 
 }
