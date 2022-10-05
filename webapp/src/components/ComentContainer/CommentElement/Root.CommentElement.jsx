@@ -5,6 +5,10 @@ import { commentInfoType } from 'types/comment.type';
 import { getUserInfo } from 'service/auth';
 import Image from 'components/Common/Image';
 import { parsedNumberToThreeDigits } from 'utils';
+import CaretDownFillSvg from 'assets/icons/CaretDownFillSvg';
+import CaretUpFillSvg from 'assets/icons/CaretUpFillSvg';
+import HeartSvg from 'assets/icons/HeartSvg';
+import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
 import NestedCommentList from '../CommentList/Nested.CommentList';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
@@ -82,11 +86,15 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
         )}
         <S.CommentInfo>
           <S.SpecificInfo>
-            <S.ChatSvg />
+            <S.Chat>
+              <ChatBubbleOvalSvg />
+            </S.Chat>
             <span>{parsedNumberToThreeDigits(replies.length)}</span>
           </S.SpecificInfo>
           <S.SpecificInfo>
-            <S.HeartSvg isFill={isLikesContainUserId} onClick={handleClickThumbSvg} />
+            <S.HeartButton isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
+              <HeartSvg />
+            </S.HeartButton>
             <span>{parsedNumberToThreeDigits(likesCount)}</span>
           </S.SpecificInfo>
           <S.SpecificInfo>
@@ -96,18 +104,19 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
           </S.SpecificInfo>
         </S.CommentInfo>
         {replies && replies.length !== 0 && (
-          <S.ReplyButton>
-            {isShowReplies && (
-              <button onClick={handleClickHideReplyButton}>
-                <S.PolygonUpSvg />
+          <S.ReplyButton
+            onClick={isShowReplies ? handleClickHideReplyButton : handleClickShowReplyButton}
+          >
+            {isShowReplies ? (
+              <>
+                <CaretUpFillSvg />
                 <span>접기</span>
-              </button>
-            )}
-            {!isShowReplies && (
-              <button onClick={handleClickShowReplyButton}>
-                <S.PolygonDownSvg />
+              </>
+            ) : (
+              <>
+                <CaretDownFillSvg />
                 <span>{parsedNumberToThreeDigits(replies.length)}개의 답글 보기</span>
-              </button>
+              </>
             )}
           </S.ReplyButton>
         )}

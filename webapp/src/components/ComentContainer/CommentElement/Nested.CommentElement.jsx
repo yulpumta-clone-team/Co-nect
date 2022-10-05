@@ -4,9 +4,10 @@ import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { commentInfoType } from 'types/comment.type';
 import { parsedNumberToThreeDigits } from 'utils';
+import HeartSvg from 'assets/icons/HeartSvg';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
-import * as S from '../style';
 import SecretCommentElement from './Secret.CommentElement';
+import * as S from '../style';
 
 NestedCommentElement.propTypes = {
   commentId: PropTypes.number.isRequired,
@@ -56,7 +57,9 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
       </S.PublicCommentBox>
       <S.CommentInfo>
         <S.SpecificInfo isNested>
-          <S.HeartSvg isFill={isLikesContainUserId} onClick={handleClickThumbSvg} isNested />
+          <S.HeartButton isNested isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
+            <HeartSvg />
+          </S.HeartButton>
           <span>{parsedNumberToThreeDigits(likesCount)}</span>
         </S.SpecificInfo>
         {!isEditTargetComment && (
