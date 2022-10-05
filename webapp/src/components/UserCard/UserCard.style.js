@@ -1,11 +1,4 @@
 import styled from 'styled-components';
-import { ReactComponent as leftAngleIcon } from 'assets/icons/left-angle.svg';
-import { ReactComponent as rightAngleIcon } from 'assets/icons/right-angle.svg';
-import { ReactComponent as heartIcon } from 'assets/icons/heart.svg';
-import { ReactComponent as chatIcon } from 'assets/icons/chat.svg';
-import { ReactComponent as viewIcon } from 'assets/icons/view.svg';
-import { ReactComponent as closeNormalIcon } from 'assets/icons/close-normal.svg';
-import { ReactComponent as checkCircleIcon } from 'assets/icons/check-button.svg';
 
 // * : Card Container
 export const CardWrapper = styled.div`
@@ -138,61 +131,33 @@ export const CardInfoIndicator = styled.div`
 export const SingleIndicator = styled.div`
   ${({ theme: { mixin } }) => mixin.flexCenter({ direction: 'row' })};
   gap: 4px;
+  > svg {
+    & path {
+      stroke: ${({ theme: { colors } }) => colors.primary.normal};
+      fill: ${({ theme: { colors } }) => colors.primary.normal};
+    }
+  }
 `;
-
 // Icon
-export const Heart = styled(heartIcon)`
+export const Heart = styled.button`
   position: relative;
+  display: flex;
+  align-items: center;
   left: 14px;
   top: 6px;
   width: 20px;
   height: 20px;
 `;
 
-export const LeftAngle = styled(leftAngleIcon)`
-  width: 8%;
-  height: 60%;
-  cursor: pointer;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.normal};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
-  }
-`;
-
-export const RightAngle = styled(rightAngleIcon)`
-  width: 8%;
-  height: 60%;
-  cursor: pointer;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.normal};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
-  }
-`;
-
 // * : team 소속 여부 아이콘
 
-export const CloseNormal = styled(closeNormalIcon)`
-  height: 20px;
-  width: 20px;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.normal};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
+export const BelongStatus = styled.div`
+  > svg {
+    height: 20px;
+    width: 20px;
+    & path {
+      fill: ${({ theme: { colors } }) => colors.greyScale.normal};
+      stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
+    }
   }
-`;
-export const CheckCircle = styled(checkCircleIcon)`
-  height: 20px;
-  width: 20px;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.secondary.normal};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.normal};
-  }
-`;
-
-export const Chat = styled(chatIcon)`
-  width: 18px;
-  height: 18px;
-`;
-export const View = styled(viewIcon)`
-  width: 18px;
-  height: 18px;
 `;
