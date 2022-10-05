@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CheckSquareSvg from 'assets/icons/CheckSquareSvg';
+import SqaureSvg from 'assets/icons/SqaureSvg';
 
 import * as S from './CheckInput.style';
 
@@ -18,7 +20,7 @@ export default function CheckInput({ label, name, value, onChange, customStyle, 
   const handleClickCheck = () => {
     onChange({ name, value: !value });
   };
-  const InputBox = value ? S.CheckRectangeSvg : S.RectangeSvg;
+  const InputBox = value ? CheckSquareSvg : SqaureSvg;
   return (
     <S.Container customStyle={customStyle}>
       <InputBox onChange={handleClickCheck} />
