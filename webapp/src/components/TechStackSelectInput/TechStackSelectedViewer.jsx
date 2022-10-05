@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import XMarkSvg from 'assets/icons/XMarkSvg';
+import ChevronUpSvg from 'assets/icons/ChevronUpSvg';
+import ChevronDownSvg from 'assets/icons/ChevronDownSvg';
 import * as S from './TechStackSelectInput.style';
 
 TechStackSelectedViewer.propTypes = {
@@ -29,11 +32,11 @@ export default function TechStackSelectedViewer({
   handleClickReset,
   closeDropdown,
 }) {
-  const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
+  const AngleButton = isDropdownOpen ? ChevronUpSvg : ChevronDownSvg;
 
   const ClearButton = selectedTechSkills && (
     <S.ClearableButton type="button" onClick={handleClickReset}>
-      <S.CloseNormal />
+      <XMarkSvg />
     </S.ClearableButton>
   );
 
@@ -55,7 +58,9 @@ export default function TechStackSelectedViewer({
       <S.ButtonContainer>
         {showLoaderWithClearButton}
         <S.ButtonDivider isRow={false} />
-        <AngleButton onClick={closeDropdown} />
+        <S.ChevronButton onClick={closeDropdown}>
+          <AngleButton />
+        </S.ChevronButton>
       </S.ButtonContainer>
     </S.ValueViewer>
   );
