@@ -32,9 +32,6 @@ public class UserInfoInjectionAspect {
     private final UserRepository userRepository;
 
 
-//    @Around("@annotation(com.projectmatching.app.annotation.UserInfoContain)")
-//    @After("@annotation(com.projectmatching.app.annotation.UserInfoContain)")
-
     @AfterReturning(
             pointcut = "@annotation(com.projectmatching.app.annotation.UserInfoContainedInReturnVal)",
             returning = "results"

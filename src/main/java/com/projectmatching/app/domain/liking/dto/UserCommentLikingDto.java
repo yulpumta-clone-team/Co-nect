@@ -1,5 +1,6 @@
 package com.projectmatching.app.domain.liking.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
@@ -20,26 +21,23 @@ import lombok.*;
 public class UserCommentLikingDto {
 
 
+    @JsonIgnore
     private Long id = IdGenerator.number();
-//    private UserDto userDto;
+
     private Long userId;
-//    private UserCommentDto userCommentDto;
+
 
 
     public static UserCommentLikingDto of(UserCommentLiking userCommentLiking){
         UserCommentLikingDto userLikingDto = new UserCommentLikingDto();
-//        userLikingDto.userDto = UserDto.of(userCommentLiking.getUser());
-//        userLikingDto.userCommentDto =  UserCommentDto.of(userCommentLiking.getUserComment());
         userLikingDto.userId = userCommentLiking.getUser().getId();
-
 
         return userLikingDto;
     }
 
     public UserCommentLiking asEntity(){
         UserCommentLiking userCommentLiking = new UserCommentLiking();
-//        userCommentLiking.setUser(userDto.asEntity());
-//        userCommentLiking.setUserComment(userCommentDto.asEntity());
+
         return userCommentLiking;
     }
 }
