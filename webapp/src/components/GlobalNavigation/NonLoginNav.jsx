@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from 'assets/icons/nav-logo.svg';
+import LogoWithName from 'assets/images/logo-name.png';
 import Button from 'components/Common/Button';
 import { ROUTE } from 'constant/route.constant';
 
+import Image from 'components/Common/Image';
 import * as S from './style';
 
 export default function NonLoginNav() {
@@ -11,9 +12,7 @@ export default function NonLoginNav() {
     <S.Container>
       <S.TopContainer />
       <S.BoardList>
-        <S.Logo>
-          <img src={Logo} alt="conect-logo" />
-        </S.Logo>
+        <Image src={LogoWithName} alt="메인 로고" customStyle={S.Logo} />
         <S.LinkList>
           <S.Hover>
             <Link to={ROUTE.HOME}>Home</Link>

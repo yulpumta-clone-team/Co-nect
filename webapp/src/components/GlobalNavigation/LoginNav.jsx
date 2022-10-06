@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ROUTE } from 'constant/route.constant';
 import useDropdown from 'hooks/useDropdown';
 import { loggedUserType } from 'types/user.type';
-import Logo from 'assets/icons/nav-logo.svg';
+import LogoWithName from 'assets/images/logo-name.png';
 import Button from 'components/Common/Button';
 import Image from 'components/Common/Image';
 import BellSvg from 'assets/icons/BellSvg';
@@ -24,9 +24,7 @@ export default function LoginNav({ userInfo }) {
     <S.Container>
       <S.TopContainer />
       <S.BoardList>
-        <S.Logo>
-          <img src={Logo} alt="conect-logo" />
-        </S.Logo>
+        <Image src={LogoWithName} alt="메인 로고" customStyle={S.Logo} />
         <S.LinkList>
           <S.Hover>
             <Link to={ROUTE.HOME}>Home</Link>

@@ -33,10 +33,9 @@ export const BoardList = styled.ul`
 `;
 
 // 3개의 div 컨테이너.
-export const Logo = styled.div`
-  display: flex;
-  width: 5%;
-  height: 50%;
+export const Logo = css`
+  width: 157px;
+  height: 50px;
 `;
 
 export const LinkList = styled.ul`
