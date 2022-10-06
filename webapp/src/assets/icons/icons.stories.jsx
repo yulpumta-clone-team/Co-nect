@@ -40,6 +40,10 @@ import CaretDownSvg from './CaretDownSvg';
 import CaretUpFillSvg from './CaretUpFillSvg';
 import CaretUpSvg from './CaretUpSvg';
 import HeartFillSvg from './HeartFillSvg';
+import CheckCircleFillSvg from './CheckCircleFillSvg';
+import ExclamationCircleFillSvg from './ExclamationCircleFillSvg';
+import InfoCircleFillSvg from './InfoCircleFillSvg';
+import ExclamationTriangleFillSvg from './ExclamationTriangleFillSvg';
 
 export default {
   title: 'common/Icons',
@@ -142,6 +146,10 @@ function Template() {
         <CheckCircleSvg />
       </div>
       <div>
+        <span>CheckCircleFillSvg</span>
+        <CheckCircleFillSvg />
+      </div>
+      <div>
         <span>CheckMarkSvg</span>
         <CheckMarkSvg />
       </div>
@@ -176,14 +184,22 @@ function Template() {
       <div>
         <span>LockOpenedSvg</span>
         <LockOpenedSvg />
-      </div>{' '}
+      </div>
       <div>
         <span>CheckSquareSvg</span>
         <CheckSquareSvg />
-      </div>{' '}
+      </div>
       <div>
         <span>ExclamationOctagonSvg</span>
         <ExclamationOctagonSvg />
+      </div>
+      <div>
+        <span>ExclamationCircleFillSvg</span>
+        <ExclamationCircleFillSvg />
+      </div>
+      <div>
+        <span>ExclamationTriangleFillSvg</span>
+        <ExclamationTriangleFillSvg />
       </div>
       <div>
         <span>AddImageSvg</span>
@@ -208,6 +224,10 @@ function Template() {
       <div>
         <span>CaretUpSvg</span>
         <CaretUpSvg />
+      </div>
+      <div>
+        <span>InfoCircleFillSvg</span>
+        <InfoCircleFillSvg />
       </div>
     </Container>
   );
