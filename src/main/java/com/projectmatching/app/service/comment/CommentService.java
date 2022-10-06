@@ -65,17 +65,12 @@ public class CommentService {
         UserComment userComment = userCommentReqDto.asEntity();
         userComment.setWriter(userDetails.getUserRealName()); //댓글 단 사람 입력
 
-        UserCommentDto result = UserCommentDto.of(addCommentToUser(userComment,beingCommentedUser));
-        addUserInfo(result,userDetails); //작성자 정보 입력
+//        addUserInfo(result,userDetails); //작성자 정보 입력
 
-        return result;
-
-    }
-
-    private void addUserInfo(UserCommentDto result,UserDetailsImpl userDetails) {
-        userInfoAdderService.userInfoAdder(result, userDetails.getUserId());
+        return UserCommentDto.of(addCommentToUser(userComment,beingCommentedUser));
 
     }
+
 
     //유저 프로필에 대댓글 달기
 
@@ -86,11 +81,16 @@ public class CommentService {
         try {
             if (userCommentReqDto.getParentId() == null) throw new ResponeException(ADD_NESTED_FAILED);
 
-            User beingCommentedUser = userRepository.findById(userDetails.getId()).orElseThrow(CoNectNotFoundException::new);
+            User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
+            User subjectUser = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
+
             UserComment userComment = userCommentReqDto.asEntity();
+            userComment.setWriter(subjectUser.getName());
+
             addCommentToUser(userComment, beingCommentedUser);
 
             userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(NullPointerException::new)); //부모 댓글 설정
+
             return UserCommentDto.of(userCommentRepository.save(userComment));
 
         }catch (RuntimeException e){
@@ -155,6 +155,14 @@ public class CommentService {
         return userComments;
     }
 
+
+
+    private void addUserInfo(UserCommentDto result,UserDetailsImpl userDetails) {
+        userInfoAdderService.userInfoAdder(result, userDetails.getUserId());
+
+    }
+
+
     /**
      * 댓글 좋아요 하기
      */
@@ -211,8 +219,6 @@ public class CommentService {
 
 
 
-
-    @UserInfoContainedInReturnVal
     private UserComment addCommentToUser(UserComment userComment, User user) {
         userComment.setUser(user);
         userCommentRepository.save(userComment);
