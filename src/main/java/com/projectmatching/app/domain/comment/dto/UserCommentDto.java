@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
+import javax.persistence.JoinColumn;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +27,6 @@ import static com.projectmatching.app.util.StreamUtil.mapToSet;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL) //null 이면 생성되지 않음
-
 @ApiModel
 public class UserCommentDto extends UserInfoDto {
 
@@ -36,7 +36,7 @@ public class UserCommentDto extends UserInfoDto {
     @JsonIgnore
     private Long userId; //댓글이 속한 글의 id(유저)
 
-    @ApiModelProperty(value = "해당 댓글 작성자 이름")
+    @JsonIgnore
     private String writer;
 
     @ApiModelProperty(value = "해당 댓글이 속한 댓글 id, 즉 부모 아이디가 없으면 일반 댓글, 있으면 대댓글")

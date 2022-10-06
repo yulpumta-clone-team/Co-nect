@@ -21,8 +21,10 @@ import com.projectmatching.app.domain.team.repository.TeamRepository;
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.exception.CoNectLogicalException;
 import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
+import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
 import com.projectmatching.app.util.IdGenerator;
 
 import lombok.RequiredArgsConstructor;
@@ -51,6 +53,7 @@ public class CommentService {
     private final QUserCommentRepository qUserCommentRepository;
     private final TeamCommentLikingRepository teamCommentLikingRepository;
     private final UserRepository userRepository;
+    private final UserInfoAdderService userInfoAdderService;
     /**
      * 댓글 추가 서비스
      */
@@ -62,7 +65,15 @@ public class CommentService {
         UserComment userComment = userCommentReqDto.asEntity();
         userComment.setWriter(userDetails.getUserRealName()); //댓글 단 사람 입력
 
-        return UserCommentDto.of(addCommentToUser(userComment,beingCommentedUser));
+        UserCommentDto result = UserCommentDto.of(addCommentToUser(userComment,beingCommentedUser));
+        addUserInfo(result,userDetails); //작성자 정보 입력
+
+        return result;
+
+    }
+
+    private void addUserInfo(UserCommentDto result,UserDetailsImpl userDetails) {
+        userInfoAdderService.userInfoAdder(result, userDetails.getUserId());
 
     }
 
@@ -134,6 +145,12 @@ public class CommentService {
     public List<UserCommentDto> getUserComment(Long userPostId) {
         List<UserCommentDto> userComments = userCommentRepository.getUserCommentByPostId(userPostId).stream()
                 .map(UserCommentDto::of)
+                .map(dto->{
+                    User writer = userRepository.findByName(dto.getWriter()).orElseThrow(CoNectLogicalException::new);
+                    userInfoAdderService.userInfoAdder(dto, writer.getId());
+                    return dto;
+                    }
+                )
                 .collect(Collectors.toList());
         return userComments;
     }

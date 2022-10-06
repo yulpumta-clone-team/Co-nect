@@ -14,7 +14,6 @@ public abstract class UserInfoDto {
 
    public void setUserInfoWith(User user){
         this.userInfo = UserInfo.of(user);
-
     }
 
     public UserInfo getUserInfo(){

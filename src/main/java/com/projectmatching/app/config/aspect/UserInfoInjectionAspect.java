@@ -6,6 +6,7 @@ import com.projectmatching.app.domain.user.dto.UserInfoDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectLogicalException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
+import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -20,18 +21,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@RequiredArgsConstructor
-@Slf4j
-@Aspect
-@Component
 
 /**
  * @UserInfoContainedInReturnVal 가 붙은 메소드가 값을 return 할때 적용
  * userInfo에 이용자 자신의 정보가 들어갔을때만 사용
  */
+@RequiredArgsConstructor
+@Slf4j
+@Aspect
+@Component
 public class UserInfoInjectionAspect {
-    private final UserRepository userRepository;
 
+    private final UserRepository userRepository;
 
     @AfterReturning(
             pointcut = "@annotation(com.projectmatching.app.annotation.UserInfoContainedInReturnVal)",
