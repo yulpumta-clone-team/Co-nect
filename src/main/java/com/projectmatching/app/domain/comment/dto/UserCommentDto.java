@@ -1,5 +1,6 @@
 package com.projectmatching.app.domain.comment.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.projectmatching.app.domain.comment.entity.UserComment;
 import com.projectmatching.app.domain.liking.dto.UserCommentLikingDto;
@@ -7,7 +8,9 @@ import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.UserInfoDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.util.IdGenerator;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
@@ -23,12 +26,18 @@ import static com.projectmatching.app.util.StreamUtil.mapToSet;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL) //null 이면 생성되지 않음
+
+@ApiModel
 public class UserCommentDto extends UserInfoDto {
 
     private final Long id = IdGenerator.number();
 
     @ApiModelProperty(value = "해당 댓글이 속한 유저 게시물의 id")
+    @JsonIgnore
     private Long userId; //댓글이 속한 글의 id(유저)
+
+    @ApiModelProperty(value = "해당 댓글 작성자 이름")
+    private String writer;
 
     @ApiModelProperty(value = "해당 댓글이 속한 댓글 id, 즉 부모 아이디가 없으면 일반 댓글, 있으면 대댓글")
     private Long parentId;
@@ -41,8 +50,11 @@ public class UserCommentDto extends UserInfoDto {
 
 
     //대댓글
+    @ApiModelProperty(value = "대댓글")
     @Builder.Default
     private List<UserCommentDto> replies = new ArrayList<>();
+
+    @ApiModelProperty(value = "해당 댓글 좋아요한 유저 정보")
     @Builder.Default
     private List<UserCommentLikingDto> feelings = new ArrayList<>();
 

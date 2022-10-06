@@ -94,7 +94,6 @@ public class CommentService {
      * 댓글 수정 서비스
      */
     @Transactional
-    @UserInfoContainedInReturnVal
     public UserCommentDto updateUserComment(UserCommentReqDto userCommentDto ,UserDetailsImpl userDetails) {
 
         return UserCommentDto.of(updateCommentToUser(userCommentDto));
@@ -105,7 +104,6 @@ public class CommentService {
      */
 
     @Transactional
-    @UserInfoContainedInReturnVal
     public UserCommentDto updateUserNestedComment(UserCommentReqDto userCommentDto, UserDetailsImpl userDetails) {
         return UserCommentDto.of(updateCommentToUser(userCommentDto));
     }
@@ -184,7 +182,7 @@ public class CommentService {
             if(userCommentReqDto.getParentId() != userComment.getParent().getId()) throw new RuntimeException();
 
             userComment.setContent(userComment.getContent()); //댓글 수정
-            if(userCommentReqDto.getSecret() != userComment.getSecret()) userComment.setSecret(userCommentReqDto.getSecret()); //비밀댓글 여부 바뀌었다면
+            if(userCommentReqDto.getSecret().equals(true)) userComment.setSecret(userCommentReqDto.getSecret()); //비밀댓글 여부 바뀌었다면
             return userComment;
 
         }catch (RuntimeException e){

@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 
 /**
  * @UserInfoContainedInReturnVal 가 붙은 메소드가 값을 return 할때 적용
+ * userInfo에 이용자 자신의 정보가 들어갔을때만 사용
  */
 public class UserInfoInjectionAspect {
     private final UserRepository userRepository;
