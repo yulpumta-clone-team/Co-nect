@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as blueHeartIcon } from 'assets/icons/blue-heart.svg';
 import { ReactComponent as chatIcon } from 'assets/icons/chat.svg';
 import { ReactComponent as viewIcon } from 'assets/icons/view.svg';
 
@@ -131,11 +130,7 @@ export const TeamSkillSession = styled(SingleInfoTitle)`
   position: relative;
   width: 3%;
 `;
-export const Heart = styled(blueHeartIcon)`
-  color: ${({ theme: { colors } }) => colors.primary.normal};
-  width: 25px;
-  height: 25px;
-`;
+
 export const Chat = styled(chatIcon)`
   width: 25px;
   height: 25px;

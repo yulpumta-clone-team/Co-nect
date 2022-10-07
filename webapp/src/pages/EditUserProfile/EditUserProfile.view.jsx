@@ -6,6 +6,7 @@ import TechStackSelectInput from 'components/TechStackSelectInput';
 import SelectInput from 'components/Common/SelectInput';
 import MarkdownEditor from 'components/MarkdownEditor';
 import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
+import TeamBelongCheckInput from 'components/TeamBelongCheckInput';
 import * as S from './EditUserProfile.style';
 
 EditUserProfileView.propTypes = {
@@ -122,6 +123,15 @@ export default function EditUserProfileView({
               중복확인
             </Button>
           </S.DuplicateCheckInput>
+          <SelectInput
+            name="job"
+            label="직업"
+            placeHolder="직업"
+            defaultOption={jobOptions[0]}
+            options={jobOptions}
+            value={inputValues.job}
+            onChange={onChangeHandlerWithSelect}
+          />
           <TechStackSelectInput
             name="techSkills"
             placeholder="기술"
@@ -140,33 +150,23 @@ export default function EditUserProfileView({
             isError={isSloganValidateError}
             helperText={validateError.slogan}
           />
-          <SelectInput
-            name="hopeSession"
-            label="회망 기간"
-            placeHolder="회망 기간"
-            defaultOption={hopeSessionOption[0]}
-            options={hopeSessionOption}
-            value={inputValues.hopeSession}
-            onChange={onChangeHandlerWithSelect}
-          />
-          <SelectInput
-            name="job"
-            label="직업"
-            placeHolder="직업"
-            defaultOption={jobOptions[0]}
-            options={jobOptions}
-            value={inputValues.job}
-            onChange={onChangeHandlerWithSelect}
-          />
-          <SelectInput
-            name="belongTeam"
-            label="팀 소속 여부"
-            placeHolder="팀 소속 여부"
-            defaultOption={belongTeamOptions[0]}
-            options={belongTeamOptions}
-            value={inputValues.belongTeam}
-            onChange={onChangeHandlerWithSelect}
-          />
+          <S.InlineInputContainer>
+            <SelectInput
+              name="hopeSession"
+              label="회망 기간"
+              placeHolder="회망 기간"
+              defaultOption={hopeSessionOption[0]}
+              options={hopeSessionOption}
+              value={inputValues.hopeSession}
+              onChange={onChangeHandlerWithSelect}
+            />
+            <TeamBelongCheckInput
+              name="belongTeam"
+              label="팀 소속 여부"
+              value={inputValues.belongTeam}
+              onChange={onChangeHandlerWithSelect}
+            />
+          </S.InlineInputContainer>
           <MarkdownEditor
             name="introduction"
             onlyViewer={false}

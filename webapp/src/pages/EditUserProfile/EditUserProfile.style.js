@@ -34,6 +34,15 @@ export const InfoContainer = styled.div`
   gap: 1.5rem;
 `;
 
+export const InlineInputContainer = styled.div`
+  display: flex;
+  gap: 19px;
+  width: 100%;
+  > div {
+    width: 60%;
+  }
+`;
+
 export const ButtonContainer = styled.div`
   width: 800px;
   margin: 0 auto;
