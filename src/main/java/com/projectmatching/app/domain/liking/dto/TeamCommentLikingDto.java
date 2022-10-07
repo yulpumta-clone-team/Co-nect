@@ -28,7 +28,7 @@ public class TeamCommentLikingDto {
 
     public static TeamCommentLikingDto of(TeamCommentLiking teamCommentLiking){
         TeamCommentLikingDto teamLikingDto = new TeamCommentLikingDto();
-
+        teamLikingDto.userId = teamCommentLiking.getUser().getId();
         return teamLikingDto;
     }
 
