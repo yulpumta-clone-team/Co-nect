@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
+import ChevronUpSvg from 'assets/icons/ChevronUpSvg';
 import * as S from './UpperButton.style';
 
 UpperButton.propTypes = {
@@ -26,7 +27,7 @@ export default function UpperButton({ initShow = false }) {
   }, []);
   return (
     <S.Container isShow={isShow} onClick={moveToTop}>
-      <S.UpArrow />
+      <ChevronUpSvg />
     </S.Container>
   );
 }

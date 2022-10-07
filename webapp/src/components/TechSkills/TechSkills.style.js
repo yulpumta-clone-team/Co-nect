@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as leftAngleIcon } from 'assets/icons/left-angle.svg';
-import { ReactComponent as rightAngleIcon } from 'assets/icons/right-angle.svg';
 
 export const Container = styled.div``;
 
@@ -69,22 +67,28 @@ export const SkillImage = styled.img`
   }
 `;
 
-export const LeftAngle = styled(leftAngleIcon)`
+export const LeftAngle = styled.button`
   width: 8%;
   height: 60%;
-  cursor: pointer;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.black};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+  > svg {
+    width: 100%;
+    height: 100%;
+    & path {
+      fill: ${({ theme: { colors } }) => colors.greyScale.black};
+      stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+    }
   }
 `;
 
-export const RightAngle = styled(rightAngleIcon)`
+export const RightAngle = styled.button`
   width: 8%;
   height: 60%;
-  cursor: pointer;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.black};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+  > svg {
+    width: 100%;
+    height: 100%;
+    & path {
+      fill: ${({ theme: { colors } }) => colors.greyScale.black};
+      stroke: ${({ theme: { colors } }) => colors.greyScale.black};
+    }
   }
 `;

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
+import XMarkSvg from 'assets/icons/XMarkSvg';
+import ChevronUpSvg from 'assets/icons/ChevronUpSvg';
+import ChevronDownSvg from 'assets/icons/ChevronDownSvg';
 import SinglePlaceHolder from './PlaceHolder/SinglePlaceHolder';
 import MultiPlaceHolder from './PlaceHolder/MultiPlaceHolder';
 import * as S from './SelectInput.style';
@@ -47,7 +50,7 @@ export default function SelectInput({
   ...rest
 }) {
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
-  const AngleButton = isDropdownOpen ? S.UpAngle : S.DownAngle;
+  const AngleButton = isDropdownOpen ? ChevronUpSvg : ChevronDownSvg;
   const handleClickOption = (event) => {
     const targetValue = event.target.getAttribute('value');
     isMulti ? multiClickOption(targetValue) : singleClickOption(targetValue);
@@ -100,13 +103,15 @@ export default function SelectInput({
         <S.ButtonContainer>
           {value && (
             <>
-              <S.ClearableButton onClick={handleClickReset}>
-                <S.CloseNormal />
-              </S.ClearableButton>
+              <S.XMarkButton onClick={handleClickReset}>
+                <XMarkSvg />
+              </S.XMarkButton>
               <S.ButtonDivider isRow={false} />
             </>
           )}
-          <AngleButton onClick={closeDropdown} />
+          <S.ChevronButton onClick={closeDropdown}>
+            <AngleButton />
+          </S.ChevronButton>
         </S.ButtonContainer>
       </S.ValueViewer>
       {isError && <S.Error>{helperText}</S.Error>}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from 'styled-components';
 import TechSkills from './index';
 
 export default {

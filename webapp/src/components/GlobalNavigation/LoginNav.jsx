@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { ROUTE } from 'constant/route.constant';
 import useDropdown from 'hooks/useDropdown';
 import { loggedUserType } from 'types/user.type';
-import Logo from 'assets/icons/nav-logo.svg';
+import LogoWithName from 'assets/images/logo-name.png';
 import Button from 'components/Common/Button';
 import Image from 'components/Common/Image';
+import BellSvg from 'assets/icons/BellSvg';
 import UserInfoDropdown from './UserInfoDropdown';
 import * as S from './style';
 
@@ -23,9 +24,7 @@ export default function LoginNav({ userInfo }) {
     <S.Container>
       <S.TopContainer />
       <S.BoardList>
-        <S.Logo>
-          <img src={Logo} alt="conect-logo" />
-        </S.Logo>
+        <Image src={LogoWithName} alt="메인 로고" customStyle={S.Logo} />
         <S.LinkList>
           <S.Hover>
             <Link to={ROUTE.HOME}>Home</Link>
@@ -41,7 +40,9 @@ export default function LoginNav({ userInfo }) {
           <Button theme="primary" customStyle={S.AssignListButton}>
             <Link to={ROUTE.NEW_POST}>새글쓰기</Link>
           </Button>
-          <S.Alarm />
+          <S.Alarm>
+            <BellSvg />
+          </S.Alarm>
           <Image src={profileImg} alt="profile" ref={parent} onClick={openDropdown} />
           <S.UserName ref={parent} onClick={openDropdown}>
             <span>{nickname}</span>

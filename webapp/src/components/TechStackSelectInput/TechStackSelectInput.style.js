@@ -1,9 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable consistent-return */
 import styled, { css } from 'styled-components';
-import { ReactComponent as UpAngleIcon } from 'assets/icons/up-angle.svg';
-import { ReactComponent as DownAngleIcon } from 'assets/icons/down-angle.svg';
-import { ReactComponent as CloseNormalIcon } from 'assets/icons/close-normal.svg';
 import Divider from 'components/Common/Divider';
 
 export const Container = styled.div`
@@ -31,7 +28,7 @@ export const ValueViewer = styled.div`
     if (isDropdownOpen) {
       return css`
         border: 1px solid ${({ theme: { colors } }) => colors.primary.normal};
-        ${UpAngle}, ${DownAngle}, ${ClearableButton} {
+        ${ChevronButton}, ${XMarkButton}, ${ClearableButton} {
           & path {
             fill: ${({ theme: { colors } }) => colors.primary.normal};
             stroke: ${({ theme: { colors } }) => colors.primary.normal};
@@ -51,7 +48,7 @@ export const ValueViewer = styled.div`
         ${PlaceHolder} {
           color: ${({ theme: { colors } }) => colors.important.normal};
         }
-        ${UpAngle}, ${DownAngle}, ${ClearableButton} {
+        ${ChevronButton}, ${XMarkButton}, ${ClearableButton} {
           & path {
             fill: ${({ theme: { colors } }) => colors.important.normal};
             stroke: ${({ theme: { colors } }) => colors.important.normal};
@@ -202,23 +199,11 @@ export const ButtonDivider = styled(Divider)`
   height: 24px;
 `;
 
-const CommonButtonStyle = css`
-  cursor: pointer;
-`;
+export const XMarkButton = styled.button``;
+
+export const ChevronButton = styled.button``;
 
 export const ClearableButton = styled.button``;
-
-export const UpAngle = styled(UpAngleIcon)`
-  ${CommonButtonStyle}
-`;
-
-export const DownAngle = styled(DownAngleIcon)`
-  ${CommonButtonStyle}
-`;
-
-export const CloseNormal = styled(CloseNormalIcon)`
-  ${CommonButtonStyle}
-`;
 
 export const Error = styled.span`
   margin-bottom: 1rem;

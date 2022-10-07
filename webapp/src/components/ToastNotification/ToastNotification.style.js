@@ -64,7 +64,7 @@ export const Notification = styled.div`
 export const Image = styled.div`
   float: left;
   margin-right: 15px;
-  > img {
+  > svg {
     width: 30px;
     height: 30px;
   }

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { ReactComponent as UpArrowIcon } from 'assets/icons/up-arrow.svg';
 
 export const Container = styled.button`
   position: fixed;
@@ -15,11 +14,10 @@ export const Container = styled.button`
     transform: scale(1.1);
     cursor: pointer;
   }
-`;
-
-export const UpArrow = styled(UpArrowIcon)`
-  & path {
-    fill: ${({ theme: { colors } }) => colors.greyScale.white};
-    stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+  > svg {
+    & path {
+      fill: ${({ theme: { colors } }) => colors.greyScale.white};
+      stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+    }
   }
 `;

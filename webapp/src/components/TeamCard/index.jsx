@@ -5,6 +5,9 @@ import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 import ProfileImg from 'components/ProfileImg';
 import { teamCardParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
+import HeartSvg from 'assets/icons/HeartSvg';
+import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
+import EyeSvg from 'assets/icons/EyeSvg';
 import * as S from './TeamCard.style';
 
 TeamCard.propTypes = {
@@ -24,7 +27,9 @@ export default function TeamCard({ cardInfo, onClick }) {
   return (
     <S.CardWrapper onClick={onClick}>
       <S.CardTop>
-        <S.Heart alt="좋아요 아이콘" />
+        <S.Heart>
+          <HeartSvg />
+        </S.Heart>
       </S.CardTop>
       <S.BackgroundImg>
         <S.TeamStatus isRecruitng={isRecruitng}>{RecruitStatus}</S.TeamStatus>
@@ -41,11 +46,11 @@ export default function TeamCard({ cardInfo, onClick }) {
       <TechSkills skills={skills} isCarousel imageSize="35px" gap="11px" />
       <S.CardInfoIndicator>
         <S.SingleIndicator>
-          <S.Chat />
+          <ChatBubbleOvalSvg />
           {commentCnt}
         </S.SingleIndicator>
         <S.SingleIndicator>
-          <S.View />
+          <EyeSvg />
           {readCnt}
         </S.SingleIndicator>
       </S.CardInfoIndicator>

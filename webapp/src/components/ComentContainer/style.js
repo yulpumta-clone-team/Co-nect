@@ -1,10 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as HeartIcon } from 'assets/icons/heart.svg';
-import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
-import { ReactComponent as PolygonUpIcon } from 'assets/icons/polygon-up.svg';
-import { ReactComponent as PolygonDownIcon } from 'assets/icons/polygon-down.svg';
-import { ReactComponent as RecycleBinIcon } from 'assets/icons/recycle-bin.svg';
-import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 
 export const Container = styled.div`
   width: 100%;
@@ -142,7 +136,7 @@ export const CommentTitle = styled.div`
   }
 `;
 
-export const RecycleBinSvg = styled(RecycleBinIcon)`
+export const RecycleBinSvg = styled.div`
   width: 16px;
   height: 16px;
   & path {
@@ -189,66 +183,63 @@ export const EditButton = styled.button`
   color: ${({ isNested, theme: { COLORS } }) => (isNested ? COLORS.GRAY[700] : COLORS.GRAY[900])};
 `;
 
-export const HeartSvg = styled(HeartIcon)`
+export const HeartButton = styled.button`
   width: 15px;
   height: 15px;
-  & path {
-    fill: ${({ isNested, theme: { COLORS } }) => (isNested ? COLORS.GRAY[700] : COLORS.GRAY[900])};
-    stroke: ${({ isNested, theme: { COLORS } }) =>
-      isNested ? COLORS.GRAY[700] : COLORS.GRAY[900]};
-  }
-`;
-
-export const ChatSvg = styled(ChatIcon)`
-  width: 15px;
-  height: 15px;
-  & path {
-    fill: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
-    stroke: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
-  }
-`;
-
-export const ReplyButton = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  color: ${({ theme: { colors } }) => colors.primary.normal};
-  /* polygon button */
-  > button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    > span {
-      font-weight: 400;
-      font-size: 13px;
-      line-height: 24px;
+  > svg {
+    width: 100%;
+    height: 100%;
+    & path {
+      fill: ${({ isNested, theme: { COLORS } }) =>
+        isNested ? COLORS.GRAY[700] : COLORS.GRAY[900]};
+      stroke: ${({ isNested, theme: { COLORS } }) =>
+        isNested ? COLORS.GRAY[700] : COLORS.GRAY[900]};
     }
   }
 `;
 
-export const PolygonDownSvg = styled(PolygonDownIcon)`
-  width: 8px;
-  height: 8px;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.primary.normal};
-    stroke: ${({ theme: { colors } }) => colors.primary.normal};
+export const Chat = styled.div`
+  width: 15px;
+  height: 15px;
+  > svg {
+    width: 100%;
+    height: 100%;
+    & path {
+      fill: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+      stroke: ${({ theme: { COLORS } }) => COLORS.GRAY[900]};
+    }
   }
 `;
 
-export const PolygonUpSvg = styled(PolygonUpIcon)`
-  width: 8px;
-  height: 8px;
-  & path {
-    fill: ${({ theme: { colors } }) => colors.primary.normal};
-    stroke: ${({ theme: { colors } }) => colors.primary.normal};
+export const ReplyButton = styled.button`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: ${({ theme: { colors } }) => colors.primary.normal};
+  gap: 10px;
+  > svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    & path {
+      fill: ${({ theme: { colors } }) => colors.primary.normal};
+      stroke: ${({ theme: { colors } }) => colors.primary.normal};
+    }
+  }
+  > span {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 24px;
   }
 `;
 
-export const LockSvg = styled(LockIcon)`
-  & path {
-    fill: ${({ isNested, theme: { colors } }) =>
-      isNested ? colors.greyScale.subTitle : colors.primary.normal};
-    stroke: ${({ isNested, theme: { colors } }) =>
-      isNested ? colors.greyScale.subTitle : colors.primary.normal};
+export const Lock = styled.div`
+  > svg {
+    & path {
+      fill: ${({ isNested, theme: { colors } }) =>
+        isNested ? colors.greyScale.subTitle : colors.primary.normal};
+      stroke: ${({ isNested, theme: { colors } }) =>
+        isNested ? colors.greyScale.subTitle : colors.primary.normal};
+    }
   }
 `;

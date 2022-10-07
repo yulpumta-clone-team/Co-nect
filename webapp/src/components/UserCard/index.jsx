@@ -5,6 +5,11 @@ import ProfileImg from 'components/ProfileImg';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 import { userCardParser } from 'service/user/user.parser';
 import TechSkills from 'components/TechSkills';
+import HeartSvg from 'assets/icons/HeartSvg';
+import EyeSvg from 'assets/icons/EyeSvg';
+import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
+import CheckCircleSvg from 'assets/icons/CheckCircleSvg';
+import XMarkSvg from 'assets/icons/XMarkSvg';
 import * as S from './UserCard.style';
 
 UserCard.propTypes = {
@@ -16,12 +21,13 @@ export default function UserCard({ cardInfo, onClick }) {
   const parsedCardInfo = userCardParser(cardInfo);
   const { name, hopeSession, img, job, skills, commentCnt, likeCnt, status } = parsedCardInfo;
   const S3Img = S3_IMAGE_SERVER_URL + img;
-  const BelongStatus = status ? <S.CheckCircle /> : <S.CloseNormal />;
 
   return (
     <S.CardWrapper onClick={onClick}>
       <S.CardTop>
-        <S.Heart />
+        <S.Heart>
+          <HeartSvg />
+        </S.Heart>
       </S.CardTop>
       <S.BackgroundImg>
         <S.UserJob>{job}</S.UserJob>
@@ -31,7 +37,7 @@ export default function UserCard({ cardInfo, onClick }) {
         <S.UserName>{name}</S.UserName>
         <S.TeamBelongBoard>
           <span>현재 소속 여부</span>
-          {BelongStatus}
+          <S.BelongStatus>{status ? <CheckCircleSvg /> : <XMarkSvg />}</S.BelongStatus>
         </S.TeamBelongBoard>
         <S.HopeSession>
           희망 기간 &nbsp; <S.UserHopeSession>{hopeSession}</S.UserHopeSession>
@@ -41,11 +47,11 @@ export default function UserCard({ cardInfo, onClick }) {
       <TechSkills skills={skills} isCarousel imageSize="35px" gap="11px" />
       <S.CardInfoIndicator>
         <S.SingleIndicator>
-          <S.Chat />
+          <ChatBubbleOvalSvg />
           {commentCnt}
         </S.SingleIndicator>
         <S.SingleIndicator>
-          <S.View />
+          <EyeSvg />
           {likeCnt}
         </S.SingleIndicator>
       </S.CardInfoIndicator>

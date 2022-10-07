@@ -1,10 +1,13 @@
+import handlers from 'mocks/handlers';
 import React from 'react';
-import Like from './Like';
+import Like from './index';
 
 export default {
   title: 'Common/Like',
   component: Like,
-  args: {},
+  parameters: {
+    msw: handlers,
+  },
   layout: 'centered',
 };
 
@@ -14,5 +17,10 @@ function Template(args) {
 
 export const Default = Template.bind({});
 Default.args = {
-  like: false,
+  initValue: false,
+};
+
+export const Active = Template.bind({});
+Default.args = {
+  initValue: true,
 };

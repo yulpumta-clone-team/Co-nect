@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as MainLogoIcon } from 'assets/icons/conect-main.svg';
 
 export const Container = styled.div`
   width: 750px;
@@ -23,7 +22,7 @@ export const Header = styled.header`
   }
 `;
 
-export const MainLogo = styled(MainLogoIcon)`
+export const MainLogo = styled.img`
   width: 172px;
   height: 164px;
 `;

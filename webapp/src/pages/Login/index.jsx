@@ -16,6 +16,7 @@ import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
 import { loginParser } from 'service/auth/auth.parser';
 import useUserInfo from 'hooks/useUserInfo';
+import MainLogoImg from 'assets/images/main-logo.png';
 import * as S from './Login.style';
 
 export default function Login() {
@@ -64,7 +65,7 @@ export default function Login() {
     <S.Container>
       <BackButton url={ROUTE.HOME} />
       <S.Header>
-        <S.MainLogo />
+        <S.MainLogo src={MainLogoImg} alt="메인로고" />
         <h1>Co-nect</h1>
       </S.Header>
       <S.Form onSubmit={submitHandler} id="loginForm">
