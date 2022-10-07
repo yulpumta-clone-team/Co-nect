@@ -3,6 +3,7 @@ package com.projectmatching.app.domain.comment.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.projectmatching.app.domain.comment.entity.TeamComment;
 import com.projectmatching.app.domain.liking.dto.TeamCommentLikingDto;
+import com.projectmatching.app.domain.liking.dto.TeamLikingDto;
 import com.projectmatching.app.domain.liking.entity.TeamCommentLiking;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.user.dto.UserDto;
@@ -37,7 +38,7 @@ public class TeamCommentDto {
     @Builder.Default
     private List<TeamCommentDto> comments = new ArrayList<>();
     @Builder.Default
-    private List<Long> feelings = new ArrayList<>();
+    private List<TeamCommentLikingDto> feelings = new ArrayList<>();
 
     public static TeamCommentDto createEmpty() {
         return new TeamCommentDto();
@@ -57,7 +58,10 @@ public class TeamCommentDto {
                     .stream().map(TeamCommentDto::of).collect(Collectors.toList());
         }
 
-        teamCommentDto.feelings = teamComment.getTeamCommentLikings().stream().map(teamCommentLiking -> teamCommentLiking.getUser().getId()).collect(Collectors.toList());
+        teamCommentDto.feelings = teamComment.getTeamCommentLikings().stream().
+                map(teamCommentLiking -> TeamCommentLikingDto.of(teamCommentLiking)
+                ).
+                collect(Collectors.toList());
 
         return teamCommentDto;
     }
