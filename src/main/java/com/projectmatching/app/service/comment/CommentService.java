@@ -65,7 +65,6 @@ public class CommentService {
         UserComment userComment = userCommentReqDto.asEntity();
         userComment.setWriter(userDetails.getUserRealName()); //댓글 단 사람 입력
 
-//        addUserInfo(result,userDetails); //작성자 정보 입력
 
         return UserCommentDto.of(addCommentToUser(userComment,beingCommentedUser));
 
