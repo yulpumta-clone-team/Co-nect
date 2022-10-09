@@ -12,10 +12,9 @@ public abstract class UserInfoDto {
     protected UserInfo userInfo;
 
 
-   public void setUserInfoWith(User user){
-        this.userInfo = UserInfo.of(user);
+    public void setUserInfoWith(User user){
+       this.userInfo = UserInfo.of(user);
     }
-
     public UserInfo getUserInfo(){
        return this.userInfo;
     }

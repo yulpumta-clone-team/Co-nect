@@ -15,7 +15,7 @@ import org.springframework.beans.BeanUtils;
 
 @Builder
 @Getter
-public class UserCommentReqDto extends UserInfoDto {
+public class UserCommentReqDto {
 
 
     @ApiModelProperty(notes = "해당 댓글이 속한 유저 게시물의 id")
