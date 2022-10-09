@@ -4,6 +4,7 @@ import com.projectmatching.app.annotation.UserInfoContainedInReturnVal;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
+import com.projectmatching.app.domain.comment.dto.TeamCommentReqDto;
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
 import com.projectmatching.app.domain.comment.dto.UserCommentReqDto;
 import com.projectmatching.app.domain.comment.entity.TeamComment;
@@ -104,9 +105,9 @@ public class CommentService {
      * 댓글 수정 서비스
      */
     @Transactional
-    public UserCommentDto updateUserComment(UserCommentReqDto userCommentDto ,UserDetailsImpl userDetails) {
+    public UserCommentDto updateUserComment(UserCommentReqDto userCommentReqDto ,UserDetailsImpl userDetails,Long commentId) {
 
-        return UserCommentDto.of(updateCommentToUser(userCommentDto));
+        return UserCommentDto.of(updateCommentToUser(userCommentReqDto,userDetails,commentId));
     }
 
     /**
@@ -114,8 +115,8 @@ public class CommentService {
      */
 
     @Transactional
-    public UserCommentDto updateUserNestedComment(UserCommentReqDto userCommentDto, UserDetailsImpl userDetails) {
-        return UserCommentDto.of(updateCommentToUser(userCommentDto));
+    public UserCommentDto updateUserNestedComment(UserCommentReqDto userCommentDto, UserDetailsImpl userDetails,Long commentId) {
+        return UserCommentDto.of(updateCommentToUser(userCommentDto,userDetails,commentId));
     }
 
 
@@ -199,9 +200,9 @@ public class CommentService {
 
     }
 
-    private UserComment updateCommentToUser(UserCommentReqDto userCommentReqDto){
+    private UserComment updateCommentToUser(UserCommentReqDto userCommentReqDto,UserDetailsImpl userDetails,Long commentId){
         try {
-            UserComment userComment = userCommentRepository.findById(userCommentReqDto.getUserId()).orElseThrow(NullPointerException::new);
+            UserComment userComment = userCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
             //부모 댓글이 바뀌면 안됨
             if(userCommentReqDto.getParentId() != userComment.getParent().getId()) throw new RuntimeException();
 
@@ -229,13 +230,13 @@ public class CommentService {
     /**
      * team (대)댓글 추가
      */
-    @Transactional(rollbackFor = ResponeException.class)
-    public TeamCommentDto addTeamComment(TeamCommentDto teamCommentDto) {
+    @Transactional
+    public TeamCommentDto addTeamComment(TeamCommentReqDto teamCommentDto) {
         TeamComment teamComment = addCommentToTeam(teamCommentDto);
         if(teamCommentDto.getParentId()!=null){
             teamComment.setParent(teamCommentRepository.findById(teamCommentDto.getParentId()).orElseThrow(NullPointerException::new));
         }
-        return teamCommentDto.of(teamCommentRepository.save(teamComment));
+        return TeamCommentDto.of(teamCommentRepository.save(teamComment));
 
     }
 
@@ -243,11 +244,13 @@ public class CommentService {
 
     /**
      * team (대)댓글 수정
+     * @Param teamCommentReqDto 수정될 내용을 담은 dto
+     * @Param commentId 수정할 댓글 id
      */
-    @Transactional(rollbackFor = ResponeException.class)
-    public TeamCommentDto updateTeamComment(TeamCommentDto teamCommentDto) {
-        TeamComment teamComment = updateCommentToTeam(teamCommentDto);
-        return teamCommentDto.of(teamCommentRepository.save(teamComment));
+    @Transactional
+    public TeamCommentDto updateTeamComment(TeamCommentReqDto teamCommentReqDto,Long commentId) {
+        TeamComment teamComment = updateCommentToTeam(teamCommentReqDto,commentId);
+        return TeamCommentDto.of(teamCommentRepository.save(teamComment));
     }
 
 
@@ -255,7 +258,7 @@ public class CommentService {
     /**
      * team (대)댓글 삭제
      */
-    @Transactional(rollbackFor = ResponeException.class)
+    @Transactional
     public void deleteTeamComment(UserDetailsImpl userDetails, Long commentId) {
         TeamComment teamComment = Optional.of(teamCommentRepository.getById(commentId)).orElseThrow(NullPointerException::new);
         if(teamComment.getWriter().equals(userDetails.getUserRealName()) || userDetails.getRole().equals(Role.ADMIN))
@@ -309,13 +312,13 @@ public class CommentService {
     }
 
 
-    private TeamComment updateCommentToTeam(TeamCommentDto teamCommentDto){
+    private TeamComment updateCommentToTeam(TeamCommentReqDto teamCommentReqDto,Long commentId){
         try{
-            TeamComment teamComment = teamCommentRepository.findById(teamCommentDto.getId()).orElseThrow(NullPointerException::new);
-            if(teamCommentDto.getParentId() != teamComment.getParent().getId()) throw new RuntimeException();
+            TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
+            if(teamCommentReqDto.getParentId() != teamComment.getParent().getId()) throw new RuntimeException();
 
-            teamComment.setContent(teamCommentDto.getContent());
-            if(teamCommentDto.getSecret() != teamComment.getSecret()) teamComment.setSecret(teamCommentDto.getSecret());
+            teamComment.setContent(teamCommentReqDto.getContent());
+            if(teamCommentReqDto.getSecret() != teamComment.getSecret()) teamComment.setSecret(teamCommentReqDto.getSecret());
             return teamComment;
         }catch (RuntimeException e){
             e.printStackTrace();
@@ -324,10 +327,9 @@ public class CommentService {
     }
 
 
-    private TeamComment addCommentToTeam(TeamCommentDto teamCommentDto){
+    private TeamComment addCommentToTeam(TeamCommentReqDto teamCommentDto){
         try{
             Team team = Optional.ofNullable(teamRepository.getById(teamCommentDto.getTeamId())).orElseThrow(NullPointerException::new);
-            teamCommentDto.setId(IdGenerator.number());
             TeamComment teamComment = teamCommentDto.asEntity();
             teamComment.setTeam(team);
             return teamComment;

@@ -43,16 +43,16 @@ public class UserCommentController {
 
 
     @ApiOperation(value = "유저 게시글 댓글 수정")
-    @PatchMapping("/comment")
-    public ResponseTemplate<UserCommentDto> updateComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return ResponseTemplate.valueOf(commentService.updateUserComment(userCommentReqDto,userDetails));
+    @PatchMapping("/comment/{comment_id}")
+    public ResponseTemplate<UserCommentDto> updateComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId){
+        return ResponseTemplate.valueOf(commentService.updateUserComment(userCommentReqDto,userDetails,commentId));
     }
 
 
     @ApiOperation(value = "유저 게시글 대댓글 수정")
-    @PatchMapping("/nested_comment")
-    public ResponseTemplate<UserCommentDto> updateNestedComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return ResponseTemplate.valueOf(commentService.updateUserNestedComment(userCommentReqDto,userDetails));
+    @PatchMapping("/nested_comment/{comment_id}")
+    public ResponseTemplate<UserCommentDto> updateNestedComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId){
+        return ResponseTemplate.valueOf(commentService.updateUserNestedComment(userCommentReqDto,userDetails,commentId));
     }
 
 
