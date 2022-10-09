@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import checkIcon from 'assets/icons/check.svg';
-import errorIcon from 'assets/icons/error.svg';
-import infoIcon from 'assets/icons/info.svg';
-import warningIcon from 'assets/icons/warning.svg';
 import * as S from './ToastNotification.style';
+import MessageIcon from './MessageIcon';
 
 ToastNotification.propTypes = {
   toastList: PropTypes.arrayOf(
@@ -16,8 +13,8 @@ ToastNotification.propTypes = {
   ).isRequired,
   col: PropTypes.string.isRequired,
   row: PropTypes.string.isRequired,
-  autoDelete: PropTypes.bool.isRequired,
-  autoDeleteTime: PropTypes.number.isRequired,
+  autoDelete: PropTypes.bool,
+  autoDeleteTime: PropTypes.number,
   deleteCallback: PropTypes.func.isRequired,
 };
 
@@ -25,8 +22,8 @@ export default function ToastNotification({
   toastList,
   col,
   row,
-  autoDelete,
-  autoDeleteTime,
+  autoDelete = true,
+  autoDeleteTime = 2000,
   deleteCallback,
 }) {
   const timeId = useRef(null);
@@ -53,7 +50,7 @@ export default function ToastNotification({
       {list.map(({ id, type, description }) => (
         <S.Notification key={id} type={type} positionType={position} startPoint={row}>
           <S.Image>
-            <img src={MESSAGE_ICON[type]} alt="icon" />
+            <MessageIcon type={type} />
           </S.Image>
           <S.Info>
             <h3>{type}</h3>
@@ -67,10 +64,3 @@ export default function ToastNotification({
     </S.Container>
   );
 }
-
-const MESSAGE_ICON = {
-  Success: checkIcon,
-  Error: errorIcon,
-  Warning: warningIcon,
-  Info: infoIcon,
-};

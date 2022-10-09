@@ -1,6 +1,4 @@
-import styled, { css } from 'styled-components';
-import { ReactComponent as CheckNormalIcon } from 'assets/icons/check-normal.svg';
-import { ReactComponent as CloseNormalIcon } from 'assets/icons/close-normal.svg';
+import styled from 'styled-components';
 
 export const Container = styled.div``;
 
@@ -42,14 +40,20 @@ export const CheckButton = styled.button`
   background-color: ${({ isActive }) => isActive && '#FFEBC4'}; /* Color/Secondary/300 */
 `;
 
-export const CheckNormalSvg = styled(CheckNormalIcon)`
+export const CheckCircle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: ${({ buttonSize }) => buttonSize.replace(/[^0-9]/g, '') * 0.5}px;
   height: ${({ buttonSize }) => buttonSize.replace(/[^0-9]/g, '') * 0.5}px;
   border-radius: 50%;
   background-color: #ffbc39;
 `;
 
-export const CloseNormalSvg = styled(CloseNormalIcon)`
+export const CloseCircle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: ${({ buttonSize }) => buttonSize.replace(/[^0-9]/g, '') * 0.5}px;
   height: ${({ buttonSize }) => buttonSize.replace(/[^0-9]/g, '') * 0.5}px;
   border-radius: 50%;

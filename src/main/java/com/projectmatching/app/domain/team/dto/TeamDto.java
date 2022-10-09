@@ -1,17 +1,12 @@
 package com.projectmatching.app.domain.team.dto;
 
-import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
-import com.projectmatching.app.domain.comment.entity.TeamComment;
 import com.projectmatching.app.domain.liking.dto.TeamLikingDto;
-import com.projectmatching.app.domain.liking.dto.UserLikingDto;
-import com.projectmatching.app.domain.liking.entity.TeamLiking;
 import com.projectmatching.app.domain.team.entity.Team;
-import com.projectmatching.app.domain.team.entity.TeamTech;
 import com.projectmatching.app.domain.techStack.dto.TechStackDto;
+import com.projectmatching.app.domain.user.dto.UserInfoDto;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.users.UserTeamDto;
 import com.projectmatching.app.domain.user.entity.User;
-import com.projectmatching.app.domain.user.entity.UserTeam;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -25,10 +20,10 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class TeamDto {
+public class TeamDto extends UserInfoDto {
 
     private Long id;
-    private UserInfo userInfo;
+//    private UserInfo userInfo;
     private String image;
     private String slogan;
     private String name;
@@ -72,6 +67,8 @@ public class TeamDto {
 
         return teamDto;
     }
+
+
 
 
 

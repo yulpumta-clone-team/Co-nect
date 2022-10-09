@@ -111,6 +111,7 @@ public class User extends BaseTimeEntity  {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+    @Builder.Default
     private Set<UserTeam> userTeams = new HashSet<>();
 
 

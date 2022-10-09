@@ -32,6 +32,7 @@ public class UserComment extends BaseTimeEntity {
     @JoinColumn(name="parent_id")
     private UserComment parent;
 
+
     private String writer;
 
     //비밀글 여부
@@ -42,12 +43,12 @@ public class UserComment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @ToString.Exclude
-    private User user;
+    private User user; //댓글 주인
 
 
     //자식
     @ToString.Exclude
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", orphanRemoval = true)
     @Builder.Default
     private Set<UserComment> comments = new HashSet<>();
 

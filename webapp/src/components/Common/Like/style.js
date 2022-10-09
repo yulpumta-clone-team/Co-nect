@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-export const Heart = styled.img`
+export const Heart = styled.button`
   width: 25px;
   height: 25px;
-
-  cursor: pointer;
+  > svg {
+    & path {
+      stroke: ${({ theme: { colors } }) => colors.primary.normal};
+      fill: ${({ theme: { colors } }) => colors.primary.normal};
+    }
+  }
 `;

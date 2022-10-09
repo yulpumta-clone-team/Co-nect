@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import XMarkSvg from 'assets/icons/XMarkSvg';
 import * as S from '../SelectInput.style';
 
 MultiPlaceHolder.propTypes = {
@@ -16,7 +17,9 @@ export default function MultiPlaceHolder({ values, placeHolder, handleClickTarge
       {values.map((value) => (
         <S.DisplaySingleValue key={value}>
           <span>{value}</span>
-          <S.CloseNormal onClick={() => handleClickTargetDelete({ targetValue: value })} />
+          <S.XMarkButton onClick={() => handleClickTargetDelete({ targetValue: value })}>
+            <XMarkSvg />
+          </S.XMarkButton>
         </S.DisplaySingleValue>
       ))}
     </S.DisplayValues>

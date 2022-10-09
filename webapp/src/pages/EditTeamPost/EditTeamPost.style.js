@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as addImgIcon } from 'assets/icons/add-img.svg';
-import { ReactComponent as editIcon } from 'assets/icons/edit.svg';
 
 export const ImgContainer = styled.div`
   display: flex;
@@ -19,27 +17,28 @@ export const ViewingImage = styled.img`
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
 `;
 
-// 아직 NewTeamPost에 대한 editbutton css가 나오지 않아, 임의로 위치 지정함.
-export const ImageEditButton = styled(editIcon)`
+export const ImageEditButton = styled.button`
   position: absolute;
   width: 50px;
   height: 50px;
-  left: 63%;
-  top: 10%;
+  right: 5%;
+  bottom: 10%;
+  border-radius: 50%;
+  background-color: ${({ theme: { colors } }) => colors.secondary.normal};
+  > svg {
+    & path {
+      stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+      fill: ${({ theme: { colors } }) => colors.greyScale.white};
+    }
+  }
 `;
 export const InputTypeImageHandler = styled.label`
+  position: relative;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   width: 100%;
   height: 100%;
   border-radius: 20px 20px 0px 0px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
-  > div {
-    background-color: ${({ theme: { colors } }) => colors.primary.normal};
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    ${({ theme: { mixin } }) => mixin.flexCenter({})};
-  }
   &:hover {
     cursor: pointer;
   }
@@ -47,9 +46,21 @@ export const InputTypeImageHandler = styled.label`
 export const HiddenInputHandler = styled.input`
   display: none;
 `;
-export const AddImage = styled(addImgIcon)`
-  width: 50px;
-  height: 50px;
+export const AddImage = styled.button`
+  pointer-events: none; // label 안에 있는 button은 htmlfor가 작동하지 않아 해당 이벤트를 꺼야함 https://dilshankelsen.com/button-inside-label-not-triggering-input/
+  background-color: ${({ theme: { colors } }) => colors.primary.normal};
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})};
+  > svg {
+    & path {
+      width: 50px;
+      height: 50px;
+      stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+      fill: ${({ theme: { colors } }) => colors.greyScale.white};
+    }
+  }
 `;
 
 export const Container = styled.div`

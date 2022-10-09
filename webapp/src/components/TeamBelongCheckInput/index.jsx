@@ -1,5 +1,8 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
+import CheckMarkSvg from 'assets/icons/CheckMarkSvg';
+import XMarkSvg from 'assets/icons/XMarkSvg';
 import * as S from './TeamBelongCheckInput.style';
 
 TeamBelongCheckInput.propTypes = {
@@ -31,7 +34,9 @@ export default function TeamBelongCheckInput({
             onClick={handleClickOption}
             buttonSize={buttonSize}
           >
-            <S.CheckNormalSvg buttonSize={buttonSize} />
+            <S.CheckCircle buttonSize={buttonSize}>
+              <CheckMarkSvg />
+            </S.CheckCircle>
           </S.CheckButton>
           <span>소속 됨</span>
         </S.CheckBox>
@@ -42,7 +47,9 @@ export default function TeamBelongCheckInput({
             onClick={handleClickOption}
             buttonSize={buttonSize}
           >
-            <S.CloseNormalSvg buttonSize={buttonSize} />
+            <S.CloseCircle buttonSize={buttonSize}>
+              <XMarkSvg />
+            </S.CloseCircle>
           </S.CheckButton>
           <span>소속 안 됨</span>
         </S.CheckBox>

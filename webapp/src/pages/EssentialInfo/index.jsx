@@ -6,6 +6,8 @@ import EssentialFormProvider, {
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
 import { Outlet } from 'react-router-dom';
+import XMarkSvg from 'assets/icons/XMarkSvg';
+import ChevronLeftSvg from 'assets/icons/ChevronLeftSvg';
 import * as S from './EssentialInfo.style';
 
 export default WithProvider({ Providers: [EssentialFormProvider], Component: EssentialInfo });
@@ -18,11 +20,11 @@ function EssentialInfo() {
     <S.Layout ref={layoutRef} onClick={handleClickLayout}>
       <S.DialogContainer>
         <Button theme="none" customStyle={S.CloseButton} onClick={closeEssentialModal}>
-          <S.CloseLarge />
+          <XMarkSvg />
         </Button>
         <S.AngleContainer>
           <Button theme="none" customStyle={S.AngleButton} onClick={handleClickPrevButton}>
-            <S.LeftAngle />
+            <ChevronLeftSvg />
           </Button>
         </S.AngleContainer>
         {/* Outlet === subPage  */}
