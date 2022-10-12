@@ -32,14 +32,14 @@ const useComments = () => {
   );
   const postCommentApi = (config) => changeApi('postComments', commentApi.POST_COMMENT, config);
   const postReplyApi = (config) => changeApi('postReply', commentApi.POST_REPLY, config);
-  const patchCommentApi = (config) => changeApi('postComments', commentApi.PATCH_COMMENT, config);
+  const patchCommentApi = (config) => changeApi('patchComments', commentApi.PATCH_COMMENT, config);
   const pathReplyApi = (config) => changeApi('pathReply', commentApi.PATCH_REPLY, config);
   const deleteCommentApi = (config) =>
     changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
   const patchCommentLikeApi = (config) =>
-    changeApi('deleteComment', commentApi.PATCH_COMMENT_LIKE, config);
+    changeApi('patchCommentLikeApi', commentApi.PATCH_COMMENT_LIKE, config);
   const patchCommentUnLikeApi = (config) =>
-    changeApi('deleteComment', commentApi.DELETE_COMMENT, config); // : DELETE_COMMENT_UNLIKE가 아닌가요 ?
+    changeApi('patchCommentUnLikeApi', commentApi.DELETE_COMMENT, config); // : DELETE_COMMENT_UNLIKE가 아닌가요 ?
 
   // useState관련 로직
   const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_TARGET);
