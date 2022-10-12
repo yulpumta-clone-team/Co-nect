@@ -116,7 +116,16 @@ const useComments = () => {
     resetEditTargetCommentId();
   };
 
-  console.log('editTargetCommentId :>> ', editTargetCommentId);
+  /**
+   * (대)댓글 클릭하면 삭제하는 함수
+   * @param {Object} config postType, id
+   * @param {string} config.postType 현재 포스트의 타입(user || team)
+   * @param {numner} config.id 선택한 댓글의 id
+   */
+  const handleClickDeleteTargetComment = (config) => {
+    console.log('config', config);
+    deleteCommentApi(config);
+  };
 
   const addLike = async (postType, idObj) => {
     const { id, loggedInUserId, parentId } = idObj;
@@ -200,9 +209,7 @@ const useComments = () => {
       createRootCommentSubmitCallback,
       createReplyCommentSubmitCallback,
       editCommentSubmitCallback,
-      patchCommentApi,
-      pathReplyApi,
-      deleteCommentApi,
+      handleClickDeleteTargetComment,
       handleClickLikeThumb,
       isShowSecretComment,
       isLikesContainUserId,
@@ -213,9 +220,7 @@ const useComments = () => {
       resetShowReplyList,
       resetCreateReplyTargetCommentId,
       showCreateReplyFormOnTargetComment,
-      deleteCommentApi,
-      patchCommentApi,
-      pathReplyApi,
+      handleClickDeleteTargetComment,
       createRootCommentSubmitCallback,
       createReplyCommentSubmitCallback,
       editCommentSubmitCallback,

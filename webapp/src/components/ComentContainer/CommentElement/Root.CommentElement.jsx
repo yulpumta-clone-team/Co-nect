@@ -29,6 +29,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
     content,
     secret,
     userInfo: writerInfo,
+    img,
     writer: commenWriter,
     feelings: likedUserIds,
   } = commentInfo;
@@ -46,6 +47,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
     selectEditTargetComment,
     handleClickLikeThumb,
     isLikesContainUserId,
+    handleClickDeleteTargetComment,
   } = useCommentsAction();
 
   const isShowCreateReplyForm = createReplyTargetCommentId !== commentId;
@@ -54,7 +56,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
   const isEditTargetComment = commentId === editTargetCommentId;
   const handleClickShowReplyButton = () => showReplyList(commentId);
   const handleClickHideReplyButton = () => resetShowReplyList(commentId);
-  const handleClickShowCreateForm = () => showCreateReplyFormOnTargetComment(commentId);
+  // const handleClickShowCreateForm = () => showCreateReplyFormOnTargetComment(commentId);
   const handleClickTargetComment = () => selectEditTargetComment(commentId);
 
   const handleClickThumbSvg = () => {
@@ -96,11 +98,17 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
             </S.HeartButton>
             <span>{parsedNumberToThreeDigits(likesCount)}</span>
           </S.SpecificInfo>
-          <S.SpecificInfo>
-            {!isEditTargetComment && (
+          {!isEditTargetComment && (
+            <S.SpecificInfo>
               <S.EditButton onClick={handleClickTargetComment}>댓글수정</S.EditButton>
-            )}
-          </S.SpecificInfo>
+              <span>/</span>
+              <S.EditButton
+                onClick={() => handleClickDeleteTargetComment({ postType, id: commentId })}
+              >
+                삭제하기
+              </S.EditButton>
+            </S.SpecificInfo>
+          )}
         </S.CommentInfo>
         {replies && replies.length !== 0 && (
           <S.ReplyButton
