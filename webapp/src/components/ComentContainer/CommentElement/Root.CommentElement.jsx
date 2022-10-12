@@ -25,14 +25,15 @@ RootCommentElement.propTypes = {
 export default function RootCommentElement({ commentInfo, postWriter, replies }) {
   const {
     id: commentId,
-    img,
+    parentId,
+    content,
     secret,
+    userInfo: writerInfo,
     writer: commenWriter,
     feelings: likedUserIds,
-    content,
-    parentId,
   } = commentInfo;
   const userInfo = getUserInfo(); // {userId, nickname, profileImg}
+  const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
   const loggedInUserId = userInfo?.userId;
   const loggedInUserNickname = userInfo?.nickname;
   const { createReplyTargetCommentId, targetReplyListId, postType, editTargetCommentId } =
@@ -65,12 +66,12 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
 
   return (
     <S.CommentContainer>
-      <Image src={img} alt="유저 프로필" customStyle={S.UserProfileImage} />
+      <Image src={writerProfileImage} alt="작성자 프로필 이미지" customStyle={S.UserProfileImage} />
       <S.RootCommentBox>
         <S.PublicCommentBox>
           <S.CommentTitle>
-            <h3>{commenWriter}</h3>
-            <span>2022.12.31</span>
+            <h3>{writerName}</h3>
+            {/* <span>2022.12.31</span> */}
             <button>
               <S.RecycleBinSvg />
             </button>
