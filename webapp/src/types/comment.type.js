@@ -1,12 +1,17 @@
 import PropTypes, { shape } from 'prop-types';
 
 const commentInfoSchema = {
-  img: PropTypes.string.isRequired,
-  secret: PropTypes.bool.isRequired,
-  writer: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  feeling: PropTypes.array.isRequired,
-  parentId: PropTypes.number,
+  feelings: PropTypes.arrayOf(PropTypes.shape({ userId: PropTypes.number })),
+  id: PropTypes.number.isRequired,
+  parentId: PropTypes.number.isRequired,
+  replies: PropTypes.number.isRequired,
+  secret: PropTypes.number.isRequired,
+  userInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
 };
 
 const commentSchema = {
