@@ -11,8 +11,7 @@ RootCommentList.propTypes = {
 export default function RootCommentList({ postWriter, comments }) {
   return (
     <S.RootListContainer>
-      {/* FIXME: api명세가 replies에서 comments로 바뀌어서 임시로 수정해 놓음 */}
-      {comments.map(({ id, teamId, userId, comments: replies, ...commentInfo }) => (
+      {comments.map(({ id, teamId, userId, replies, ...commentInfo }) => (
         <RootCommentElement
           key={id}
           commentInfo={{ ...commentInfo, id }}
