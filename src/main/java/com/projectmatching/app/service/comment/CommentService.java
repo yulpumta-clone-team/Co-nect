@@ -55,8 +55,6 @@ public class CommentService {
     private final TeamRepository teamRepository;
 
     private final UserCommentLikingRepository userCommentLikingRepository;
-    private final QTeamCommentRepository qTeamCommentRepository;
-    private final QUserCommentRepository qUserCommentRepository;
     private final TeamCommentLikingRepository teamCommentLikingRepository;
     private final UserRepository userRepository;
     private final UserInfoAdderService userInfoAdderService;
@@ -87,28 +85,20 @@ public class CommentService {
     @Transactional
     @UserInfoContainedInReturnVal
     public UserCommentDto addUserNestedComment(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
+
         //부모 댓글 설정 안되어있으면 에러
-        try {
-            if (userCommentReqDto.getParentId() == null) throw new ResponeException(ADD_NESTED_FAILED);
+        if(userCommentReqDto.getParentId() == null) throw new CoNectRuntimeException(ADD_NESTED_FAILED);
 
-            User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
-            User subjectUser = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
+        User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
+        User subjectUser = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
 
-            UserComment userComment = userCommentReqDto.asEntity();
-            userComment.setWriter(subjectUser.getName());
+        UserComment userComment = userCommentReqDto.asEntity();
+        userComment.setWriter(subjectUser.getName());
 
-            addCommentToUser(userComment, beingCommentedUser);
+        addCommentToUser(userComment, beingCommentedUser);
+        userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(CoNectNotFoundException::new)); //부모 댓글 설정
 
-            userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(NullPointerException::new)); //부모 댓글 설정
-
-            return UserCommentDto.of(userCommentRepository.save(userComment));
-
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            throw new ResponeException(ADD_NESTED_FAILED);
-        }
-
-
+        return UserCommentDto.of(userCommentRepository.save(userComment));
     }
 
     /**
