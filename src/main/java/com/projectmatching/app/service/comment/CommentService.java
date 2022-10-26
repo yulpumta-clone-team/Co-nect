@@ -3,7 +3,9 @@ package com.projectmatching.app.service.comment;
 import com.projectmatching.app.annotation.UserInfoContainedInReturnVal;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
+import com.projectmatching.app.constant.ServiceConstant;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
+import com.projectmatching.app.domain.comment.dto.TeamCommentReqDto;
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
 import com.projectmatching.app.domain.comment.dto.UserCommentReqDto;
 import com.projectmatching.app.domain.comment.entity.TeamComment;
@@ -23,11 +25,13 @@ import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectLogicalException;
 import com.projectmatching.app.exception.CoNectNotFoundException;
+import com.projectmatching.app.exception.CoNectRuntimeException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
 import com.projectmatching.app.util.IdGenerator;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +41,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
+import static com.projectmatching.app.constant.ServiceConstant.ROOT_COMMENT;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -49,15 +55,13 @@ public class CommentService {
     private final TeamRepository teamRepository;
 
     private final UserCommentLikingRepository userCommentLikingRepository;
-    private final QTeamCommentRepository qTeamCommentRepository;
-    private final QUserCommentRepository qUserCommentRepository;
     private final TeamCommentLikingRepository teamCommentLikingRepository;
     private final UserRepository userRepository;
     private final UserInfoAdderService userInfoAdderService;
+
     /**
-     * 댓글 추가 서비스
+     * 유저 프로필에 댓글 달기
      */
-    //유저 프로필에 댓글달기
     @Transactional
     @UserInfoContainedInReturnVal
     public UserCommentDto addUserComment(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
@@ -71,51 +75,43 @@ public class CommentService {
     }
 
 
-    //유저 프로필에 대댓글 달기
 
+    /**
+     * 유저 프로필에 대댓글 달기
+     * @param userCommentReqDto
+     * @param userDetails
+     * @return
+     */
     @Transactional
     @UserInfoContainedInReturnVal
     public UserCommentDto addUserNestedComment(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
+
         //부모 댓글 설정 안되어있으면 에러
-        try {
-            if (userCommentReqDto.getParentId() == null) throw new ResponeException(ADD_NESTED_FAILED);
+        if(userCommentReqDto.getParentId() == null) throw new CoNectRuntimeException(ADD_NESTED_FAILED);
 
-            User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
-            User subjectUser = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
+        User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
+        User subjectUser = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
 
-            UserComment userComment = userCommentReqDto.asEntity();
-            userComment.setWriter(subjectUser.getName());
+        UserComment userComment = userCommentReqDto.asEntity();
+        userComment.setWriter(subjectUser.getName());
 
-            addCommentToUser(userComment, beingCommentedUser);
+        addCommentToUser(userComment, beingCommentedUser);
+        userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(CoNectNotFoundException::new)); //부모 댓글 설정
 
-            userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(NullPointerException::new)); //부모 댓글 설정
-
-            return UserCommentDto.of(userCommentRepository.save(userComment));
-
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            throw new ResponeException(ADD_NESTED_FAILED);
-        }
-
-
+        return UserCommentDto.of(userCommentRepository.save(userComment));
     }
 
     /**
-     * 댓글 수정 서비스
+     * (대)댓글 수정 서비스
      */
     @Transactional
-    public UserCommentDto updateUserComment(UserCommentReqDto userCommentDto ,UserDetailsImpl userDetails) {
+    public UserCommentDto updateUserComment(UserCommentReqDto userCommentReqDto ,UserDetailsImpl userDetails,Long commentId) {
+        UserComment userComment = userCommentRepository.findById(commentId).orElseThrow(CoNectNotFoundException::new);
 
-        return UserCommentDto.of(updateCommentToUser(userCommentDto));
-    }
+        //댓글 작성자 본인이 아니라면 수정 불가
+        if(userComment.isWriterSameWith(userDetails.getUserRealName()) == false)throw new CoNectRuntimeException(LOGICAL_ERROR,"본인의 댓글만 수정 가능합니다");
 
-    /**
-     * 대댓글 수정
-     */
-
-    @Transactional
-    public UserCommentDto updateUserNestedComment(UserCommentReqDto userCommentDto, UserDetailsImpl userDetails) {
-        return UserCommentDto.of(updateCommentToUser(userCommentDto));
+        return UserCommentDto.of(updateCommentToUser(userCommentReqDto,userComment));
     }
 
 
@@ -199,23 +195,30 @@ public class CommentService {
 
     }
 
-    private UserComment updateCommentToUser(UserCommentReqDto userCommentReqDto){
-        try {
-            UserComment userComment = userCommentRepository.findById(userCommentReqDto.getUserId()).orElseThrow(NullPointerException::new);
-            //부모 댓글이 바뀌면 안됨
-            if(userCommentReqDto.getParentId() != userComment.getParent().getId()) throw new RuntimeException();
+    private UserComment updateCommentToUser(UserCommentReqDto userCommentReqDto,UserComment userComment){
 
-            userComment.setContent(userComment.getContent()); //댓글 수정
-            if(userCommentReqDto.getSecret().equals(true)) userComment.setSecret(userCommentReqDto.getSecret()); //비밀댓글 여부 바뀌었다면
+            //부모 댓글은 바뀌면 안됨
+            if(isParentIdChanged(userCommentReqDto,userComment))
+                throw new CoNectLogicalException();
+
+            userComment.setContent(userCommentReqDto.getContent()); //댓글 수정
+            userComment.setSecret(userCommentReqDto.getSecret()); //비밀 여부
             return userComment;
 
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            throw new ResponeException(UPDATE_COMMENT_FAILED);
-        }
 
     }
 
+    //true인 경우 비정상적인 상황, 부모 댓글 대상은 수정될 수 없음
+    private boolean isParentIdChanged(UserCommentReqDto userCommentReqDto, UserComment userComment){
+
+        //부모 댓글이 없는 경우
+        if(userCommentReqDto.getParentId() == ROOT_COMMENT && userComment.isRoot()) return false;
+
+        //부모 댓글이 존재하고 해당 부모 댓글이 수정된 경우
+        if(userComment.hasParent() && userCommentReqDto.getParentId() != userComment.getParent().getId()) return true;
+
+        else return false;
+    }
 
 
     private UserComment addCommentToUser(UserComment userComment, User user) {
@@ -229,13 +232,13 @@ public class CommentService {
     /**
      * team (대)댓글 추가
      */
-    @Transactional(rollbackFor = ResponeException.class)
-    public TeamCommentDto addTeamComment(TeamCommentDto teamCommentDto) {
+    @Transactional
+    public TeamCommentDto addTeamComment(TeamCommentReqDto teamCommentDto) {
         TeamComment teamComment = addCommentToTeam(teamCommentDto);
         if(teamCommentDto.getParentId()!=null){
             teamComment.setParent(teamCommentRepository.findById(teamCommentDto.getParentId()).orElseThrow(NullPointerException::new));
         }
-        return teamCommentDto.of(teamCommentRepository.save(teamComment));
+        return TeamCommentDto.of(teamCommentRepository.save(teamComment));
 
     }
 
@@ -243,11 +246,13 @@ public class CommentService {
 
     /**
      * team (대)댓글 수정
+     * @Param teamCommentReqDto 수정될 내용을 담은 dto
+     * @Param commentId 수정할 댓글 id
      */
-    @Transactional(rollbackFor = ResponeException.class)
-    public TeamCommentDto updateTeamComment(TeamCommentDto teamCommentDto) {
-        TeamComment teamComment = updateCommentToTeam(teamCommentDto);
-        return teamCommentDto.of(teamCommentRepository.save(teamComment));
+    @Transactional
+    public TeamCommentDto updateTeamComment(TeamCommentReqDto teamCommentReqDto,Long commentId) {
+        TeamComment teamComment = updateCommentToTeam(teamCommentReqDto,commentId);
+        return TeamCommentDto.of(teamCommentRepository.save(teamComment));
     }
 
 
@@ -255,7 +260,7 @@ public class CommentService {
     /**
      * team (대)댓글 삭제
      */
-    @Transactional(rollbackFor = ResponeException.class)
+    @Transactional
     public void deleteTeamComment(UserDetailsImpl userDetails, Long commentId) {
         TeamComment teamComment = Optional.of(teamCommentRepository.getById(commentId)).orElseThrow(NullPointerException::new);
         if(teamComment.getWriter().equals(userDetails.getUserRealName()) || userDetails.getRole().equals(Role.ADMIN))
@@ -309,13 +314,13 @@ public class CommentService {
     }
 
 
-    private TeamComment updateCommentToTeam(TeamCommentDto teamCommentDto){
+    private TeamComment updateCommentToTeam(TeamCommentReqDto teamCommentReqDto,Long commentId){
         try{
-            TeamComment teamComment = teamCommentRepository.findById(teamCommentDto.getId()).orElseThrow(NullPointerException::new);
-            if(teamCommentDto.getParentId() != teamComment.getParent().getId()) throw new RuntimeException();
+            TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
+            if(teamCommentReqDto.getParentId() != teamComment.getParent().getId()) throw new RuntimeException();
 
-            teamComment.setContent(teamCommentDto.getContent());
-            if(teamCommentDto.getSecret() != teamComment.getSecret()) teamComment.setSecret(teamCommentDto.getSecret());
+            teamComment.setContent(teamCommentReqDto.getContent());
+            if(teamCommentReqDto.getSecret() != teamComment.getSecret()) teamComment.setSecret(teamCommentReqDto.getSecret());
             return teamComment;
         }catch (RuntimeException e){
             e.printStackTrace();
@@ -324,10 +329,9 @@ public class CommentService {
     }
 
 
-    private TeamComment addCommentToTeam(TeamCommentDto teamCommentDto){
+    private TeamComment addCommentToTeam(TeamCommentReqDto teamCommentDto){
         try{
             Team team = Optional.ofNullable(teamRepository.getById(teamCommentDto.getTeamId())).orElseThrow(NullPointerException::new);
-            teamCommentDto.setId(IdGenerator.number());
             TeamComment teamComment = teamCommentDto.asEntity();
             teamComment.setTeam(team);
             return teamComment;

@@ -3,6 +3,7 @@ package com.projectmatching.app.controller.comment;
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
+import com.projectmatching.app.domain.comment.dto.TeamCommentReqDto;
 import com.projectmatching.app.service.comment.CommentService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import io.swagger.annotations.Api;
@@ -25,17 +26,17 @@ public class TeamCommentController {
 
     @ApiOperation(value = "팀 (대)댓글 달기")
     @PostMapping("/comment")
-    public ResponseTemplate<TeamCommentDto> addTeamComment(@RequestBody TeamCommentDto teamCommentDto) {
+    public ResponseTemplate<TeamCommentDto> addTeamComment(@RequestBody TeamCommentReqDto teamCommentReqDto) {
 
-        return ResponseTemplate.valueOf(commentService.addTeamComment(teamCommentDto));
+        return ResponseTemplate.valueOf(commentService.addTeamComment(teamCommentReqDto));
     }
 
 
     @ApiOperation(value = "팀 게시글 (대)댓글 수정")
-    @PatchMapping("/comment")
-    public ResponseTemplate<TeamCommentDto> updateTeamComment(@RequestBody TeamCommentDto teamCommentDto) {
+    @PatchMapping("/comment/{comment_id}")
+    public ResponseTemplate<TeamCommentDto> updateTeamComment(@RequestBody TeamCommentReqDto teamCommentReqDto, @PathVariable(name = "comment_id") Long commentId) {
 
-        return ResponseTemplate.valueOf(commentService.updateTeamComment(teamCommentDto));
+        return ResponseTemplate.valueOf(commentService.updateTeamComment(teamCommentReqDto,commentId));
     }
 
 

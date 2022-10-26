@@ -8,8 +8,11 @@ public class CoNectLogicalException extends CoNectRuntimeException{
         super(ResponseTemplateStatus.LOGICAL_ERROR);
     }
 
+
     public CoNectLogicalException(ResponseTemplateStatus responseTemplateStatus){
         super(responseTemplateStatus);
     }
+
+
 
 }
