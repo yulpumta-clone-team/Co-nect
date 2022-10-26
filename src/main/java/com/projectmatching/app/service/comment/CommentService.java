@@ -3,6 +3,7 @@ package com.projectmatching.app.service.comment;
 import com.projectmatching.app.annotation.UserInfoContainedInReturnVal;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
+import com.projectmatching.app.constant.ServiceConstant;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
 import com.projectmatching.app.domain.comment.dto.TeamCommentReqDto;
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
@@ -38,6 +39,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
+import static com.projectmatching.app.constant.ServiceConstant.ROOT_COMMENT;
 
 @Service
 @RequiredArgsConstructor
@@ -204,7 +206,8 @@ public class CommentService {
         try {
             UserComment userComment = userCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
             //부모 댓글이 바뀌면 안됨
-            if(userCommentReqDto.getParentId() != userComment.getParent().getId()) throw new RuntimeException();
+            if(isParentIdChanged(userCommentReqDto,userComment))throw new CoNectLogicalException();
+
 
             userComment.setContent(userComment.getContent()); //댓글 수정
             if(userCommentReqDto.getSecret().equals(true)) userComment.setSecret(userCommentReqDto.getSecret()); //비밀댓글 여부 바뀌었다면
@@ -217,6 +220,14 @@ public class CommentService {
 
     }
 
+    private boolean isParentIdChanged(UserCommentReqDto userCommentReqDto, UserComment userComment){
+
+        //부모 댓글인 경우에 대한 처리
+        if(userCommentReqDto.getParentId() == ROOT_COMMENT && userComment.getParent()==null)return false;
+
+        if(userCommentReqDto.getParentId() != userComment.getParent().getId())return true;
+        else return false;
+    }
 
 
     private UserComment addCommentToUser(UserComment userComment, User user) {

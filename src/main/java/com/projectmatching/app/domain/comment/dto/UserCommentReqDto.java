@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 
 
 
-
 @Builder
 @Getter
 public class UserCommentReqDto {
