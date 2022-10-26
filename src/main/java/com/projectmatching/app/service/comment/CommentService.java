@@ -31,6 +31,7 @@ import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
 import com.projectmatching.app.util.IdGenerator;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +43,7 @@ import java.util.stream.Collectors;
 import static com.projectmatching.app.constant.ResponseTemplateStatus.*;
 import static com.projectmatching.app.constant.ServiceConstant.ROOT_COMMENT;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -216,12 +218,15 @@ public class CommentService {
 
     }
 
+    //true인 경우 비정상적인 상황, 부모 댓글 대상은 수정될 수 없음
     private boolean isParentIdChanged(UserCommentReqDto userCommentReqDto, UserComment userComment){
 
-        //부모 댓글인 경우에 대한 처리
-        if(userCommentReqDto.getParentId() == ROOT_COMMENT && userComment.getParent()==null)return false;
+        //부모 댓글이 없는 경우
+        if(userCommentReqDto.getParentId() == ROOT_COMMENT && userComment.isRoot()) return false;
 
-        if(userCommentReqDto.getParentId() != userComment.getParent().getId())return true;
+        //부모 댓글이 존재하고 해당 부모 댓글이 수정된 경우
+        if(userComment.hasParent() && userCommentReqDto.getParentId() != userComment.getParent().getId()) return true;
+
         else return false;
     }
 

@@ -27,8 +27,9 @@ public class UserComment extends BaseTimeEntity {
     @Id
     private Long id;
 
+
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="parent_id")
     private UserComment parent;
 

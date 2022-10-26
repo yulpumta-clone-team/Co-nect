@@ -10,6 +10,6 @@ public class ServiceConstant {
 
     public static final int MAX_USER_READ_CNT_SIZE = 10; //유저 조회수 업데이트 기준, MAX_USER_READ_CNT_SIZE 명의 유저 조회수 업데이트를 함
 
-    public static final int ROOT_COMMENT = 0;
+    public static final Long ROOT_COMMENT = 0L;
 
 }
