@@ -49,12 +49,6 @@ public class UserCommentController {
     }
 
 
-    @ApiOperation(value = "유저 게시글 대댓글 수정")
-    @PatchMapping("/nested_comment/{comment_id}")
-    public ResponseTemplate<UserCommentDto> updateNestedComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId){
-        return ResponseTemplate.valueOf(commentService.updateUserNestedComment(userCommentReqDto,userDetails,commentId));
-    }
-
 
     @ApiOperation(value = "유저 게시글 (대)댓글 삭제")
     @DeleteMapping("/comment/{comment_id}")

@@ -146,5 +146,14 @@ public class UserCommentTest extends ServiceTest {
 
 
 
+    @DisplayName("유저 댓글 수정 테스트: 부모 댓글인 경우")
+    @Test
+    void Given_Updated_CommentReq_With_ParentId_is_Root(){
+
+        when()
+
+    }
+
+
 
 }

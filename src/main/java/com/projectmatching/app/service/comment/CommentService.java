@@ -104,21 +104,12 @@ public class CommentService {
     }
 
     /**
-     * 댓글 수정 서비스
+     * (대)댓글 수정 서비스
      */
     @Transactional
     public UserCommentDto updateUserComment(UserCommentReqDto userCommentReqDto ,UserDetailsImpl userDetails,Long commentId) {
 
-        return UserCommentDto.of(updateCommentToUser(userCommentReqDto,userDetails,commentId));
-    }
-
-    /**
-     * 대댓글 수정
-     */
-
-    @Transactional
-    public UserCommentDto updateUserNestedComment(UserCommentReqDto userCommentDto, UserDetailsImpl userDetails,Long commentId) {
-        return UserCommentDto.of(updateCommentToUser(userCommentDto,userDetails,commentId));
+        return UserCommentDto.of(updateCommentToUser(userCommentReqDto,commentId));
     }
 
 
@@ -202,21 +193,17 @@ public class CommentService {
 
     }
 
-    private UserComment updateCommentToUser(UserCommentReqDto userCommentReqDto,UserDetailsImpl userDetails,Long commentId){
-        try {
-            UserComment userComment = userCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
-            //부모 댓글이 바뀌면 안됨
-            if(isParentIdChanged(userCommentReqDto,userComment))throw new CoNectLogicalException();
+    private UserComment updateCommentToUser(UserCommentReqDto userCommentReqDto,Long commentId){
 
+            UserComment userComment = userCommentRepository.findById(commentId).orElseThrow(CoNectNotFoundException::new);
+            //부모 댓글이 바뀌면 안됨
+            if(isParentIdChanged(userCommentReqDto,userComment))
+                throw new CoNectLogicalException();
 
             userComment.setContent(userComment.getContent()); //댓글 수정
             if(userCommentReqDto.getSecret().equals(true)) userComment.setSecret(userCommentReqDto.getSecret()); //비밀댓글 여부 바뀌었다면
             return userComment;
 
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            throw new ResponeException(UPDATE_COMMENT_FAILED);
-        }
 
     }
 
