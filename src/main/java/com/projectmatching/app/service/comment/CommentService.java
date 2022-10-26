@@ -25,6 +25,7 @@ import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectLogicalException;
 import com.projectmatching.app.exception.CoNectNotFoundException;
+import com.projectmatching.app.exception.CoNectRuntimeException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
 import com.projectmatching.app.util.IdGenerator;
@@ -57,10 +58,10 @@ public class CommentService {
     private final TeamCommentLikingRepository teamCommentLikingRepository;
     private final UserRepository userRepository;
     private final UserInfoAdderService userInfoAdderService;
+
     /**
-     * 댓글 추가 서비스
+     * 유저 프로필에 댓글 달기
      */
-    //유저 프로필에 댓글달기
     @Transactional
     @UserInfoContainedInReturnVal
     public UserCommentDto addUserComment(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
@@ -74,8 +75,13 @@ public class CommentService {
     }
 
 
-    //유저 프로필에 대댓글 달기
 
+    /**
+     * 유저 프로필에 대댓글 달기
+     * @param userCommentReqDto
+     * @param userDetails
+     * @return
+     */
     @Transactional
     @UserInfoContainedInReturnVal
     public UserCommentDto addUserNestedComment(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
@@ -108,8 +114,12 @@ public class CommentService {
      */
     @Transactional
     public UserCommentDto updateUserComment(UserCommentReqDto userCommentReqDto ,UserDetailsImpl userDetails,Long commentId) {
+        UserComment userComment = userCommentRepository.findById(commentId).orElseThrow(CoNectNotFoundException::new);
 
-        return UserCommentDto.of(updateCommentToUser(userCommentReqDto,commentId));
+        //댓글 작성자 본인이 아니라면 수정 불가
+        if(userComment.isWriterSameWith(userDetails.getUserRealName()) == false)throw new CoNectRuntimeException(LOGICAL_ERROR,"본인의 댓글만 수정 가능합니다");
+
+        return UserCommentDto.of(updateCommentToUser(userCommentReqDto,userComment));
     }
 
 
@@ -193,15 +203,14 @@ public class CommentService {
 
     }
 
-    private UserComment updateCommentToUser(UserCommentReqDto userCommentReqDto,Long commentId){
+    private UserComment updateCommentToUser(UserCommentReqDto userCommentReqDto,UserComment userComment){
 
-            UserComment userComment = userCommentRepository.findById(commentId).orElseThrow(CoNectNotFoundException::new);
-            //부모 댓글이 바뀌면 안됨
+            //부모 댓글은 바뀌면 안됨
             if(isParentIdChanged(userCommentReqDto,userComment))
                 throw new CoNectLogicalException();
 
-            userComment.setContent(userComment.getContent()); //댓글 수정
-            if(userCommentReqDto.getSecret().equals(true)) userComment.setSecret(userCommentReqDto.getSecret()); //비밀댓글 여부 바뀌었다면
+            userComment.setContent(userCommentReqDto.getContent()); //댓글 수정
+            userComment.setSecret(userCommentReqDto.getSecret()); //비밀 여부
             return userComment;
 
 
