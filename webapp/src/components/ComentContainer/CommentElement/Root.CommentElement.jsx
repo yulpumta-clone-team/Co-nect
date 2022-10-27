@@ -12,8 +12,9 @@ import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
 import NestedCommentList from '../CommentList/Nested.CommentList';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
-import * as S from '../style';
 import SecretCommentElement from './Secret.CommentElement';
+import * as S from '../style';
+import NestedCommentToggleButton from './NestedCommentToggleButton';
 
 RootCommentElement.propTypes = {
   commentInfo: commentInfoType.isRequired,
@@ -56,7 +57,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
   const isEditTargetComment = commentId === editTargetCommentId;
   const handleClickShowReplyButton = () => showReplyList(commentId);
   const handleClickHideReplyButton = () => resetShowReplyList(commentId);
-  // const handleClickShowCreateForm = () => showCreateReplyFormOnTargetComment(commentId);
+  const handleClickShowCreateForm = () => showCreateReplyFormOnTargetComment(commentId);
   const handleClickTargetComment = () => selectEditTargetComment(commentId);
 
   const handleClickThumbSvg = () => {
@@ -110,28 +111,11 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
             </S.SpecificInfo>
           )}
         </S.CommentInfo>
-        {replies && replies.length !== 0 && (
-          <S.ReplyButton
-            onClick={isShowReplies ? handleClickHideReplyButton : handleClickShowReplyButton}
-          >
-            {isShowReplies ? (
-              <>
-                <CaretUpFillSvg />
-                <span>접기</span>
-              </>
-            ) : (
-              <>
-                <CaretDownFillSvg />
-                <span>{parsedNumberToThreeDigits(replies.length)}개의 답글 보기</span>
-              </>
-            )}
-          </S.ReplyButton>
-        )}
-        {/* 답글 작성 form이 기본으로 보이는지 여부를 디자이너분께 질문해 놓은 상황 */}
-        {/* {isShowCreateReplyForm && (
-            <button onClick={handleClickShowCreateForm}>답글 작성하기</button>
-          )} */}
-        {!isShowCreateReplyForm && <CreateReplyCommentForm commentId={commentId} />}
+        <NestedCommentToggleButton
+          replies={replies}
+          isShowCreateReplyForm={isShowCreateReplyForm}
+          commentId={commentId}
+        />
         {replies && replies.length !== 0 && isShowReplies && (
           <>
             <NestedCommentList postWriter={postWriter} comments={replies} />
