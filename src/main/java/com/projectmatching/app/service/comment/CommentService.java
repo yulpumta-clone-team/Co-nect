@@ -80,7 +80,7 @@ public class CommentService {
      * 유저 프로필에 대댓글 달기
      * @param userCommentReqDto
      * @param userDetails
-     * @return
+     * @return UserCommentDto : 작성 완료된 댓글
      */
     @Transactional
     @UserInfoContainedInReturnVal
@@ -89,17 +89,32 @@ public class CommentService {
         //부모 댓글 설정 안되어있으면 에러
         if(userCommentReqDto.getParentId() == null) throw new CoNectRuntimeException(ADD_NESTED_FAILED);
 
+        UserComment userComment = userCommentValueOf(userCommentReqDto, userDetails);
+
         User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
-        User subjectUser = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
-
-        UserComment userComment = userCommentReqDto.asEntity();
-        userComment.setWriter(subjectUser.getName());
-
         addCommentToUser(userComment, beingCommentedUser);
         userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(CoNectNotFoundException::new)); //부모 댓글 설정
 
         return UserCommentDto.of(userCommentRepository.save(userComment));
     }
+
+
+
+    /***
+     *  유저 프로필에 달 댓글을 생성
+     * @Param UserCommentReqDto  : 유저 댓글 생성 요청 dto
+     * @Param UserDetails : 해당 댓글을 작성하는 작성자의 정보
+     *
+     * @Return : UserComment Entity
+     */
+    private UserComment userCommentValueOf(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
+        User subjectUser = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
+        UserComment userComment = userCommentReqDto.asEntity();
+        userComment.setWriter(subjectUser.getName());
+        return userComment;
+    }
+
+
 
     /**
      * (대)댓글 수정 서비스
