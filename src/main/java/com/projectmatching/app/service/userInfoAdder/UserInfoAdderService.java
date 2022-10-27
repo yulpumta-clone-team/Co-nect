@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 public interface UserInfoAdderService {
 
     <T extends UserInfoDto> T userInfoAdder(T userInfoAppendableDto, Long userId);
+
+    <T extends  UserInfoDto> T userInfoAdder(T userInfoAppendableDto, String userName);
 }
