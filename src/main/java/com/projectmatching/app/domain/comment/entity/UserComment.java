@@ -54,8 +54,7 @@ public class UserComment extends BaseTimeEntity {
     private Set<UserComment> comments = new HashSet<>();
 
 
-    @OneToMany
-    @JoinColumn(name="user_comment_liking")
+    @OneToMany(mappedBy = "userComment",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     @Builder.Default
     private Set<UserCommentLiking> userCommentLikings = new HashSet<>();
