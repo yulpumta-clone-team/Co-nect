@@ -42,9 +42,6 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
     useCommentsState();
   const {
     isShowSecretComment,
-    showCreateReplyFormOnTargetComment,
-    showReplyList,
-    resetShowReplyList,
     selectEditTargetComment,
     handleClickLikeThumb,
     isLikesContainUserId,
@@ -55,9 +52,6 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
   const isShowReplies = commentId === targetReplyListId;
   const likesCount = likedUserIds.length;
   const isEditTargetComment = commentId === editTargetCommentId;
-  const handleClickShowReplyButton = () => showReplyList(commentId);
-  const handleClickHideReplyButton = () => resetShowReplyList(commentId);
-  const handleClickShowCreateForm = () => showCreateReplyFormOnTargetComment(commentId);
   const handleClickTargetComment = () => selectEditTargetComment(commentId);
 
   const handleClickThumbSvg = () => {

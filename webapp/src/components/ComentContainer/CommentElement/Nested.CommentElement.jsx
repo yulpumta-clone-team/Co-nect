@@ -27,13 +27,15 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
   const loggedInUserId = userInfo?.userId;
   const loggedInUserName = userInfo?.name;
   const {
-    img,
-    secret,
-    writer: commenWriter,
-    feeling: likedUserIds,
-    content,
     parentId,
+    content,
+    secret,
+    userInfo: writerInfo,
+    img,
+    writer: commenWriter,
+    feelings: likedUserIds,
   } = commentInfo;
+  const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
   const likesCount = likedUserIds.length;
   const isEditTargetComment = commentId === editTargetCommentId;
 
@@ -46,7 +48,7 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
     <S.NestedCommentBox>
       <S.PublicCommentBox style={{ display: 'flex' }}>
         <S.CommentTitle isNested>
-          <h3>{commenWriter}</h3>
+          <h3>{writerName}</h3>
           <span>2022.12.31</span>
         </S.CommentTitle>
         {isSecret ? (
