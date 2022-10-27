@@ -80,7 +80,7 @@ public class CommentService {
      * 유저 프로필에 대댓글 달기
      * @param userCommentReqDto
      * @param userDetails
-     * @return
+     * @return UserCommentDto : 작성 완료된 댓글
      */
     @Transactional
     @UserInfoContainedInReturnVal
@@ -89,20 +89,36 @@ public class CommentService {
         //부모 댓글 설정 안되어있으면 에러
         if(userCommentReqDto.getParentId() == null) throw new CoNectRuntimeException(ADD_NESTED_FAILED);
 
-        User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
-        User subjectUser = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
+        UserComment userComment = createUserCommentValueOf(userCommentReqDto, userDetails);
 
-        UserComment userComment = userCommentReqDto.asEntity();
-        userComment.setWriter(subjectUser.getName());
+        //댓글 달리는 대상 유저
+        User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
+        userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(CoNectNotFoundException::new)); //부모 댓글 설정
 
         addCommentToUser(userComment, beingCommentedUser);
-        userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(CoNectNotFoundException::new)); //부모 댓글 설정
 
         return UserCommentDto.of(userCommentRepository.save(userComment));
     }
 
+
+
+    /***
+     *  유저 프로필에 달 댓글을 생성
+     * @Param UserCommentReqDto  : 유저 댓글 생성 요청 dto
+     * @Param UserDetails : 해당 댓글을 작성하는 작성자의 정보
+     *
+     * @Return : UserComment Entity
+     */
+    private UserComment createUserCommentValueOf(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
+        UserComment userComment = userCommentReqDto.asEntity();
+        userComment.setWriter(userDetails.getUserRealName());
+        return userComment;
+    }
+
+
+
     /**
-     * (대)댓글 수정 서비스
+     * 유저 (대)댓글 수정 서비스
      */
     @Transactional
     public UserCommentDto updateUserComment(UserCommentReqDto userCommentReqDto ,UserDetailsImpl userDetails,Long commentId) {
@@ -116,7 +132,7 @@ public class CommentService {
 
 
     /**
-     *  (대)댓글 삭제
+     *  유저 (대)댓글 삭제
      */
 
     @Transactional
@@ -124,7 +140,9 @@ public class CommentService {
 
         UserComment userComment = Optional.of(userCommentRepository.getById(commentId)).orElseThrow(NullPointerException::new);
         //작성자와 삭제자 일치하거나 유저프로필이 본인 것이거나 관리자 일경우에만 삭제
-        if(userComment.getUser().getName().equals(userDetails.getUserRealName()) || userComment.getUser().getName().equals(userDetails.getUserRealName()) || userDetails.getRole().equals(Role.ADMIN))
+        if(userComment.getWriter().equals(userDetails.getUserRealName())
+                || userComment.getUser().getName().equals(userDetails.getUserRealName())
+                || userDetails.getRole().equals(Role.ADMIN))
             userCommentRepository.delete(userComment);
 
         else throw new ResponeException(DELETE_COMMENT_FAILED);
@@ -230,19 +248,55 @@ public class CommentService {
 
 
     /**
-     * team (대)댓글 추가
+     * 팀 게시물 댓글 추가
      */
     @Transactional
-    public TeamCommentDto addTeamComment(TeamCommentReqDto teamCommentDto) {
-        TeamComment teamComment = addCommentToTeam(teamCommentDto);
-        if(teamCommentDto.getParentId()!=null){
-            teamComment.setParent(teamCommentRepository.findById(teamCommentDto.getParentId()).orElseThrow(NullPointerException::new));
-        }
-        return TeamCommentDto.of(teamCommentRepository.save(teamComment));
+    public TeamCommentDto addTeamComment(TeamCommentReqDto teamCommentReqDto, UserDetailsImpl userDetails) {
+
+        Team beingCommentedTeam = teamRepository.findById(teamCommentReqDto.getTeamId()).orElseThrow(CoNectNotFoundException::new);
+        TeamComment teamComment = teamCommentReqDto.asEntity();
+        teamComment.setWriter(userDetails.getUserRealName());
+
+        return TeamCommentDto.of(teamCommentRepository.save(addCommentToTeam(teamComment,beingCommentedTeam)));
 
     }
 
 
+    /**
+     * 팀 게시물 대댓글 추가
+     * @param teamCommentReqDto
+     * @param userDetails
+     *
+     * @Return teamCommentDto
+     */
+
+    @Transactional
+    public TeamCommentDto addTeamNestedComment(TeamCommentReqDto teamCommentReqDto, UserDetailsImpl userDetails) {
+        //부모 댓글 설정 안되어있으면 에러
+        if(teamCommentReqDto.getParentId() == null) throw new CoNectRuntimeException(ADD_NESTED_FAILED);
+        TeamComment teamComment = createTeamCommentValueOf(teamCommentReqDto,userDetails);
+
+        Team beginCommentedTeam = teamRepository.findById(teamCommentReqDto.getTeamId()).orElseThrow(CoNectNotFoundException::new);
+        teamComment.setParent(teamCommentRepository.findById(teamCommentReqDto.getParentId()).orElseThrow(CoNectNotFoundException::new));
+
+        addCommentToTeam(teamComment,beginCommentedTeam);
+
+
+        return TeamCommentDto.of(teamCommentRepository.save(teamComment));
+
+    }
+
+    private TeamComment addCommentToTeam(TeamComment teamComment, Team team){
+        teamComment.setTeam(team);
+        teamCommentRepository.save(teamComment);
+        return teamComment;
+    }
+
+    private TeamComment createTeamCommentValueOf(TeamCommentReqDto teamCommentReqDto, UserDetailsImpl userDetails){
+        TeamComment teamComment = teamCommentReqDto.asEntity();
+        teamComment.setWriter(userDetails.getUserRealName());
+        return teamComment;
+    }
 
     /**
      * team (대)댓글 수정
@@ -329,17 +383,6 @@ public class CommentService {
     }
 
 
-    private TeamComment addCommentToTeam(TeamCommentReqDto teamCommentDto){
-        try{
-            Team team = Optional.ofNullable(teamRepository.getById(teamCommentDto.getTeamId())).orElseThrow(NullPointerException::new);
-            TeamComment teamComment = teamCommentDto.asEntity();
-            teamComment.setTeam(team);
-            return teamComment;
-        }catch(NullPointerException e){
-            e.printStackTrace();
-            throw new ResponeException(ResponseTemplateStatus.ADD_COMMENT_FAILED);
-        }
-    }
 
 
 }
