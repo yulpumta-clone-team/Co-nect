@@ -118,7 +118,7 @@ public class CommentService {
 
 
     /**
-     * (대)댓글 수정 서비스
+     * 유저 (대)댓글 수정 서비스
      */
     @Transactional
     public UserCommentDto updateUserComment(UserCommentReqDto userCommentReqDto ,UserDetailsImpl userDetails,Long commentId) {
@@ -132,7 +132,7 @@ public class CommentService {
 
 
     /**
-     *  (대)댓글 삭제
+     *  유저 (대)댓글 삭제
      */
 
     @Transactional
@@ -140,7 +140,9 @@ public class CommentService {
 
         UserComment userComment = Optional.of(userCommentRepository.getById(commentId)).orElseThrow(NullPointerException::new);
         //작성자와 삭제자 일치하거나 유저프로필이 본인 것이거나 관리자 일경우에만 삭제
-        if(userComment.getUser().getName().equals(userDetails.getUserRealName()) || userComment.getUser().getName().equals(userDetails.getUserRealName()) || userDetails.getRole().equals(Role.ADMIN))
+        if(userComment.getWriter().equals(userDetails.getUserRealName())
+                || userComment.getUser().getName().equals(userDetails.getUserRealName())
+                || userDetails.getRole().equals(Role.ADMIN))
             userCommentRepository.delete(userComment);
 
         else throw new ResponeException(DELETE_COMMENT_FAILED);
