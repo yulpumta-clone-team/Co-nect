@@ -7,6 +7,7 @@ import com.projectmatching.app.domain.liking.dto.TeamLikingDto;
 import com.projectmatching.app.domain.liking.entity.TeamCommentLiking;
 import com.projectmatching.app.domain.team.entity.Team;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfoDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
@@ -27,7 +28,7 @@ import static com.projectmatching.app.util.StreamUtil.mapToSet;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TeamCommentDto {
+public class TeamCommentDto extends UserInfoDto {
     private Long id = IdGenerator.number();
     private Long teamId;
     private String writer;

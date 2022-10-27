@@ -30,7 +30,8 @@ import static com.projectmatching.app.util.StreamUtil.mapToSet;
 @ApiModel
 public class UserCommentDto extends UserInfoDto {
 
-    private final Long id = IdGenerator.number();
+    @Builder.Default
+    private Long id = IdGenerator.number();
 
     @ApiModelProperty(value = "해당 댓글이 속한 유저 게시물의 id")
     @JsonIgnore

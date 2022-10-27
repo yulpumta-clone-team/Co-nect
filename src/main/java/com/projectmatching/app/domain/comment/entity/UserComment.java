@@ -27,8 +27,9 @@ public class UserComment extends BaseTimeEntity {
     @Id
     private Long id;
 
+
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="parent_id")
     private UserComment parent;
 
@@ -101,5 +102,10 @@ public class UserComment extends BaseTimeEntity {
         this.setStatus("REMOVED");
     }
 
+    public boolean isWriterSameWith(String writer){
+        if(this.getWriter().equals(writer))return true;
+        else return false;
+
+    }
 
 }
