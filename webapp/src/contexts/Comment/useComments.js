@@ -76,6 +76,7 @@ const useComments = () => {
     if (!checkExecuteSubmit) return;
     const newCommentData = setPostIdOnSubmitData(postType, postId, {
       writer: loggedInUserNickname,
+      parentId: 0, // 원본 댓글일 경우 0으로 고정
       secret: isSecret,
       content,
     });
@@ -91,8 +92,8 @@ const useComments = () => {
   const createReplyCommentSubmitCallback = async ({ content, isSecret }) => {
     if (!checkExecuteSubmit) return;
     const newCommentData = setPostIdOnSubmitData(postType, postId, {
-      writer: loggedInUserNickname,
       secret: isSecret,
+      parentId: createReplyTargetCommentId,
       content,
     });
     await postReplyApi({ postType, data: newCommentData });

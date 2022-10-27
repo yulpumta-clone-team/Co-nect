@@ -17,11 +17,21 @@ NestedCommentToggleButton.propTypes = {
 // 답글이 있으면 답글 목록을 접을지 말지 선택하는 토글 버튼(답글 목럭을 열면 답글 작성 form이 답글 목록 맨 하단에 위치함)
 export default function NestedCommentToggleButton({ replies, isShowCreateReplyForm, commentId }) {
   const { targetReplyListId } = useCommentsState();
-  const { showCreateReplyFormOnTargetComment, showReplyList, resetShowReplyList } =
-    useCommentsAction();
+  const {
+    showCreateReplyFormOnTargetComment,
+    showReplyList,
+    resetShowReplyList,
+    resetCreateReplyTargetCommentId,
+  } = useCommentsAction();
   const isShowReplies = commentId === targetReplyListId;
-  const handleClickShowReplyButton = () => showReplyList(commentId);
-  const handleClickHideReplyButton = () => resetShowReplyList(commentId);
+  const handleClickShowReplyButton = () => {
+    showReplyList(commentId);
+    showCreateReplyFormOnTargetComment(commentId);
+  };
+  const handleClickHideReplyButton = () => {
+    resetShowReplyList(commentId);
+    resetCreateReplyTargetCommentId();
+  };
   const handleClickShowCreateForm = () => showCreateReplyFormOnTargetComment(commentId);
   if (replies.length === 0) {
     return (
