@@ -4,6 +4,8 @@ import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
 import com.projectmatching.app.domain.comment.dto.TeamCommentReqDto;
+import com.projectmatching.app.domain.comment.dto.UserCommentDto;
+import com.projectmatching.app.domain.comment.dto.UserCommentReqDto;
 import com.projectmatching.app.service.comment.CommentService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import io.swagger.annotations.Api;
@@ -24,12 +26,19 @@ public class TeamCommentController {
 
     private final CommentService commentService;
 
-    @ApiOperation(value = "팀 (대)댓글 달기")
+    @ApiOperation(value = "팀 댓글 달기")
     @PostMapping("/comment")
-    public ResponseTemplate<TeamCommentDto> addTeamComment(@RequestBody TeamCommentReqDto teamCommentReqDto) {
+    public ResponseTemplate<TeamCommentDto> addTeamComment(@RequestBody TeamCommentReqDto teamCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return ResponseTemplate.valueOf(commentService.addTeamComment(teamCommentReqDto));
+        return ResponseTemplate.valueOf(commentService.addTeamComment(teamCommentReqDto,userDetails));
     }
+
+    @ApiOperation(value = "팀 대댓글 달기")
+    @PostMapping("/nested_comment")
+    public ResponseTemplate<TeamCommentDto> addNestedComment(@RequestBody TeamCommentReqDto teamCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseTemplate.valueOf(commentService.addTeamNestedComment(teamCommentReqDto,userDetails));
+    }
+
 
 
     @ApiOperation(value = "팀 게시글 (대)댓글 수정")

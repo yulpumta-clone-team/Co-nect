@@ -89,11 +89,13 @@ public class CommentService {
         //부모 댓글 설정 안되어있으면 에러
         if(userCommentReqDto.getParentId() == null) throw new CoNectRuntimeException(ADD_NESTED_FAILED);
 
-        UserComment userComment = userCommentValueOf(userCommentReqDto, userDetails);
+        UserComment userComment = createUserCommentValueOf(userCommentReqDto, userDetails);
 
+        //댓글 달리는 대상 유저
         User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
-        addCommentToUser(userComment, beingCommentedUser);
         userComment.setParent(userCommentRepository.findById(userCommentReqDto.getParentId()).orElseThrow(CoNectNotFoundException::new)); //부모 댓글 설정
+
+        addCommentToUser(userComment, beingCommentedUser);
 
         return UserCommentDto.of(userCommentRepository.save(userComment));
     }
@@ -107,10 +109,9 @@ public class CommentService {
      *
      * @Return : UserComment Entity
      */
-    private UserComment userCommentValueOf(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
-        User subjectUser = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
+    private UserComment createUserCommentValueOf(UserCommentReqDto userCommentReqDto, UserDetailsImpl userDetails) {
         UserComment userComment = userCommentReqDto.asEntity();
-        userComment.setWriter(subjectUser.getName());
+        userComment.setWriter(userDetails.getUserRealName());
         return userComment;
     }
 
@@ -248,7 +249,7 @@ public class CommentService {
      * team (대)댓글 추가
      */
     @Transactional
-    public TeamCommentDto addTeamComment(TeamCommentReqDto teamCommentDto) {
+    public TeamCommentDto addTeamComment(TeamCommentReqDto teamCommentDto, UserDetailsImpl userDetails) {
         TeamComment teamComment = addCommentToTeam(teamCommentDto);
         if(teamCommentDto.getParentId()!=null){
             teamComment.setParent(teamCommentRepository.findById(teamCommentDto.getParentId()).orElseThrow(NullPointerException::new));
@@ -345,16 +346,41 @@ public class CommentService {
 
 
     private TeamComment addCommentToTeam(TeamCommentReqDto teamCommentDto){
-        try{
-            Team team = Optional.ofNullable(teamRepository.getById(teamCommentDto.getTeamId())).orElseThrow(NullPointerException::new);
-            TeamComment teamComment = teamCommentDto.asEntity();
-            teamComment.setTeam(team);
-            return teamComment;
-        }catch(NullPointerException e){
-            e.printStackTrace();
-            throw new ResponeException(ResponseTemplateStatus.ADD_COMMENT_FAILED);
-        }
+        Team team = Optional.ofNullable(teamRepository.getById(teamCommentDto.getTeamId())).orElseThrow(CoNectNotFoundException::new);
+        TeamComment teamComment = teamCommentDto.asEntity();
+        teamComment.setTeam(team);
+        return teamComment;
+
     }
 
 
+    @Transactional
+    public TeamCommentDto addTeamNestedComment(TeamCommentReqDto teamCommentReqDto, UserDetailsImpl userDetails) {
+
+
+        //부모 댓글 설정 안되어있으면 에러
+        if(teamCommentReqDto.getParentId() == null) throw new CoNectRuntimeException(ADD_NESTED_FAILED);
+        TeamComment teamComment = createTeamCommentValueOf(teamCommentReqDto,userDetails);
+
+        Team beginCommentedTeam = teamRepository.findById(teamCommentReqDto.getTeamId()).orElseThrow(CoNectNotFoundException::new);
+        teamComment.setParent(teamCommentRepository.findById(teamCommentReqDto.getParentId()).orElseThrow(CoNectNotFoundException::new));
+
+        addCommentToTeam(teamComment,beginCommentedTeam);
+
+
+        return TeamCommentDto.of(teamCommentRepository.save(teamComment));
+
+    }
+
+    private TeamComment addCommentToTeam(TeamComment teamComment, Team team){
+        teamComment.setTeam(team);
+        teamCommentRepository.save(teamComment);
+        return teamComment;
+    }
+
+    private TeamComment createTeamCommentValueOf(TeamCommentReqDto teamCommentReqDto, UserDetailsImpl userDetails){
+        TeamComment teamComment = teamCommentReqDto.asEntity();
+        teamComment.setWriter(userDetails.getUserRealName());
+        return teamComment;
+    }
 }
