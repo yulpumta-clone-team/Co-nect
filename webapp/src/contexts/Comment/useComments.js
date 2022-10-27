@@ -33,7 +33,6 @@ const useComments = () => {
   const postCommentApi = (config) => changeApi('postComments', commentApi.POST_COMMENT, config);
   const postReplyApi = (config) => changeApi('postReply', commentApi.POST_REPLY, config);
   const patchCommentApi = (config) => changeApi('patchComments', commentApi.PATCH_COMMENT, config);
-  const pathReplyApi = (config) => changeApi('pathReply', commentApi.PATCH_REPLY, config);
   const deleteCommentApi = (config) =>
     changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
   const patchCommentLikeApi = (config) =>

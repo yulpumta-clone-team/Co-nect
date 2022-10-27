@@ -16,6 +16,13 @@ const commentApi = {
       data,
     });
   },
+  POST_REPLY({ postType, data }) {
+    return privateApiInstance({
+      url: `/${postType + API.COMMENT.NESTED}`,
+      method: 'post',
+      data,
+    });
+  },
   DELETE_COMMENT({ postType, id }) {
     return privateApiInstance({
       url: `/${postType + API.COMMENT.ORIGIN}/${id}`,
@@ -25,26 +32,6 @@ const commentApi = {
   PATCH_COMMENT({ postType, id, data }) {
     return privateApiInstance({
       url: `/${postType + API.COMMENT.ORIGIN}/${id}`,
-      method: 'patch',
-      data,
-    });
-  },
-  POST_REPLY({ postType, data }) {
-    return privateApiInstance({
-      url: `/${postType + API.COMMENT.NESTED}`,
-      method: 'post',
-      data,
-    });
-  },
-  DELETE_REPLY({ postType, id }) {
-    return privateApiInstance({
-      url: `/${postType + API.COMMENT.NESTED}/${id}`,
-      method: 'delete',
-    });
-  },
-  PATCH_REPLY({ postType, id, data }) {
-    return privateApiInstance({
-      url: `/${postType + API.COMMENT.NESTED}/${id}`,
       method: 'patch',
       data,
     });
