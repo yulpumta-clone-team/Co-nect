@@ -153,14 +153,13 @@ public class CommentService {
     /**
      * 유저게시물에서 댓글 리스트 조회
      */
-
     @Transactional(readOnly = true)
     public List<UserCommentDto> getUserComment(Long userPostId) {
         List<UserCommentDto> userComments = userCommentRepository.getUserCommentByPostId(userPostId).stream()
                 .map(UserCommentDto::of)
+                .filter(dto->dto.getParentId() == null) //대댓글은 따로 조회하지 않음
                 .map(dto->{
-                    User writer = userRepository.findByName(dto.getWriter()).orElseThrow(CoNectLogicalException::new);
-                    userInfoAdderService.userInfoAdder(dto, writer.getId());
+                    userInfoAdderService.userInfoAdder(dto, dto.getWriter());
                     return dto;
                     }
                 )
