@@ -375,7 +375,11 @@ public class CommentService {
     private TeamComment updateCommentToTeam(TeamCommentReqDto teamCommentReqDto,Long commentId){
         try{
             TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
-            if(teamCommentReqDto.getParentId() != teamComment.getParent().getId()) throw new RuntimeException();
+
+            log.info("teamCommentPar id ={}",teamComment.getParent().getId());
+            log.info("Req id = {}",teamCommentReqDto.getParentId());
+
+            if(!teamCommentReqDto.getParentId().equals(teamComment.getParent().getId())) throw new RuntimeException();
 
             teamComment.setContent(teamCommentReqDto.getContent());
             if(teamCommentReqDto.getSecret() != teamComment.getSecret()) teamComment.setSecret(teamCommentReqDto.getSecret());

@@ -6,14 +6,18 @@ import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.UserInfoDto;
 import com.projectmatching.app.util.IdGenerator;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 
 
 @Builder
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserCommentReqDto {
 
 
