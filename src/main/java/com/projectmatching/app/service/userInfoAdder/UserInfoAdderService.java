@@ -10,4 +10,8 @@ public interface UserInfoAdderService {
     <T extends UserInfoDto> T userInfoAdder(T userInfoAppendableDto, Long userId);
 
     <T extends  UserInfoDto> T userInfoAdder(T userInfoAppendableDto, String userName);
+
+
+    <T extends  UserInfoDto> T nestedUserInfoAdder(T nestedUserInfoAppendableDto,String userName);
+
 }
