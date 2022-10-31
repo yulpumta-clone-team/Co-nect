@@ -30,11 +30,7 @@ export default function TeamPostDetail({ targetTeam }) {
   return (
     <S.PostContainer>
       <S.ImgContainer>
-        {teamImage ? (
-          <Image src={teamImage} alt="게시글" customStyle={S.ViewingImage} />
-        ) : (
-          <S.EmptyImage />
-        )}
+        <Image src={teamImage} alt="게시글" customStyle={S.ViewingImage} />
       </S.ImgContainer>
       <S.TeamInfoContainer>
         <S.UserName>
