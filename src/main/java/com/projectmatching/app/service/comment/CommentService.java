@@ -229,10 +229,10 @@ public class CommentService {
     private boolean isParentIdChanged(UserCommentReqDto userCommentReqDto, UserComment userComment){
 
         //부모 댓글이 없는 경우
-        if(userCommentReqDto.getParentId() == ROOT_COMMENT && userComment.isRoot()) return false;
+        if(userCommentReqDto.getParentId().equals(ROOT_COMMENT) && userComment.isRoot()) return false;
 
         //부모 댓글이 존재하고 해당 부모 댓글이 수정된 경우
-        if(userComment.hasParent() && userCommentReqDto.getParentId() != userComment.getParent().getId()) return true;
+        if(userComment.hasParent() && !userCommentReqDto.getParentId().equals(userComment.getParent().getId())) return true;
 
         else return false;
     }
@@ -375,9 +375,6 @@ public class CommentService {
     private TeamComment updateCommentToTeam(TeamCommentReqDto teamCommentReqDto,Long commentId){
         try{
             TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
-
-            log.info("teamCommentPar id ={}",teamComment.getParent().getId());
-            log.info("Req id = {}",teamCommentReqDto.getParentId());
 
             if(!teamCommentReqDto.getParentId().equals(teamComment.getParent().getId())) throw new RuntimeException();
 
