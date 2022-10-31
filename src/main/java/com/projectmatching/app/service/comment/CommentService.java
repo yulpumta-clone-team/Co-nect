@@ -359,23 +359,13 @@ public class CommentService {
      */
     @Transactional(readOnly = true)
     public List<TeamCommentDto> getTeamComment(Long teamPostId) {
-//        List<UserCommentDto> userComments = userCommentRepository.getUserCommentByPostId(userPostId).stream()
-//                .map(UserCommentDto::of)
-//                .filter(dto->dto.getParentId() == null) //대댓글은 따로 조회하지 않음
-//                .map(dto->
-//                        userInfoAdderService.userInfoAdder(dto, dto.getWriter())
-//                ).map(dto->
-//                        userInfoAdderService.nestedUserInfoAdder(dto,dto.getWriter())
-//                )
-//                .collect(Collectors.toList());
-//        return userComments;
 
 
         List<TeamCommentDto> teamCommentDtos = teamCommentRepository.findAllByTeam_Id(teamPostId).stream()
                 .map(TeamCommentDto::of)
                 .filter(dto-> dto.getParentId() == null)
                 .map(dto-> userInfoAdderService.userInfoAdder(dto,dto.getWriter()))
-                .map(dto-> userInfoAdderService.nestedUserInfoAdder(dto,dto.get))
+                .map(dto-> userInfoAdderService.nestedUserInfoAdder(dto,dto.getWriter()))
                 .collect(Collectors.toList());
 
         return teamCommentDtos;
