@@ -1,10 +1,14 @@
 package com.projectmatching.app.service.userInfoAdder;
 
+import com.projectmatching.app.constant.ResponseTemplateStatus;
+import com.projectmatching.app.constant.ServiceConstant;
+import com.projectmatching.app.domain.comment.dto.UserCommentDto;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserInfoDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectLogicalException;
 import com.projectmatching.app.exception.CoNectNotFoundException;
+import com.projectmatching.app.exception.CoNectRuntimeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +34,26 @@ public class UserInfoAdderServiceImpl implements UserInfoAdderService{
         userInfoAppendableDto.setUserInfoWith(user);
 
         return userInfoAppendableDto;
+
+    }
+
+    //대댓글에도 UserInfo 추가하기 위한 메소드
+    @Override
+    public <T extends UserInfoDto> T nestedUserInfoAdder(T nestedUserInfoAppendableDto, String userName) {
+        //대댓글에 userInfo추가
+        if(nestedUserInfoAppendableDto instanceof UserCommentDto){
+            UserCommentDto userCommentDto = (UserCommentDto) nestedUserInfoAppendableDto;
+            userCommentDto.getReplies().stream().forEach(
+                    dto-> {
+                        User user = userRepository.findByName(userName).orElseThrow(CoNectNotFoundException::new);
+                        dto.setUserInfoWith(user);
+                    }
+            );
+
+            return nestedUserInfoAppendableDto;
+        }
+        else throw new CoNectRuntimeException(ResponseTemplateStatus.ADD_NESTED_FAILED,"대댓글이 존재할 수 없는 dto 입니다.");
+
 
     }
 }

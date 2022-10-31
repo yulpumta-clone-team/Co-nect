@@ -158,10 +158,10 @@ public class CommentService {
         List<UserCommentDto> userComments = userCommentRepository.getUserCommentByPostId(userPostId).stream()
                 .map(UserCommentDto::of)
                 .filter(dto->dto.getParentId() == null) //대댓글은 따로 조회하지 않음
-                .map(dto->{
-                    userInfoAdderService.userInfoAdder(dto, dto.getWriter());
-                    return dto;
-                    }
+                .map(dto->
+                    userInfoAdderService.userInfoAdder(dto, dto.getWriter())
+                ).map(dto->
+                    userInfoAdderService.nestedUserInfoAdder(dto,dto.getWriter())
                 )
                 .collect(Collectors.toList());
         return userComments;
