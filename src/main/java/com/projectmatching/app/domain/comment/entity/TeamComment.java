@@ -46,7 +46,7 @@ public class TeamComment extends BaseTimeEntity {
 
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent",orphanRemoval = true, cascade = CascadeType.REMOVE)
     @Builder.Default
     private Set<TeamComment> comments = new HashSet<>();
 

@@ -32,6 +32,7 @@ import com.projectmatching.app.util.IdGenerator;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -316,9 +317,17 @@ public class CommentService {
     @Transactional
     public void deleteTeamComment(UserDetailsImpl userDetails, Long commentId) {
         TeamComment teamComment = Optional.of(teamCommentRepository.getById(commentId)).orElseThrow(NullPointerException::new);
-        if(teamComment.getWriter().equals(userDetails.getUserRealName()) || userDetails.getRole().equals(Role.ADMIN))
+
+        if(teamComment.getWriter().equals(userDetails.getUserRealName())
+                || isTeamOwner(userDetails,teamComment)
+                || userDetails.getRole().equals(Role.ADMIN))
             teamCommentRepository.delete(teamComment);
         else throw new ResponeException(ResponseTemplateStatus.DELETE_COMMENT_FAILED);
+    }
+
+    public boolean isTeamOwner(UserDetailsImpl userDetails, TeamComment teamComment){
+        if(userDetails.getUserId().equals(teamComment.getTeam().getOwnerId()))return true;
+        else return false;
     }
 
 
