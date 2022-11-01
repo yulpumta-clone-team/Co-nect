@@ -10,6 +10,7 @@ import { setPostIdOnSubmitData } from 'utils';
 import useCommentApi from './useCommentApi';
 
 const DEFAULT_TARGET = -1;
+const DEFAULT_PARENT_ID = 0; // 원본 댓글일 경우 0으로 고정
 
 const useComments = () => {
   // 로그인 유저 정보
@@ -41,7 +42,7 @@ const useComments = () => {
     changeApi('patchCommentUnLikeApi', commentApi.DELETE_COMMENT, config); // : DELETE_COMMENT_UNLIKE가 아닌가요 ?
 
   // useState관련 로직
-  const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_TARGET);
+  const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_PARENT_ID); // 답글을 보여주는 원본댓글의 id
   const [editTargetCommentId, setEditTargetCommentId] = useState(DEFAULT_TARGET);
   const [createReplyTargetCommentId, setCreateReplyTargetCommentId] = useState(DEFAULT_TARGET);
 
@@ -76,7 +77,7 @@ const useComments = () => {
     if (!checkExecuteSubmit) return;
     const newCommentData = setPostIdOnSubmitData(postType, postId, {
       writer: loggedInUserNickname,
-      parentId: 0, // 원본 댓글일 경우 0으로 고정
+      parentId: DEFAULT_PARENT_ID,
       secret: isSecret,
       content,
     });
@@ -111,6 +112,7 @@ const useComments = () => {
       writer: loggedInUserNickname,
       secret: isSecret,
       content,
+      parentId: targetReplyListId, // 원본 댓글일 경우 0으로 고정
     });
     await patchCommentApi({ postType, id: editTargetCommentId, data: newCommentData });
     resetEditTargetCommentId();
