@@ -42,7 +42,7 @@ public class UserCommentController {
     }
 
 
-    @ApiOperation(value = "유저 게시글 댓글 수정")
+    @ApiOperation(value = "유저 게시글 (대)댓글 수정")
     @PatchMapping("/comment/{comment_id}")
     public ResponseTemplate<UserCommentDto> updateComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId){
         return ResponseTemplate.valueOf(commentService.updateUserComment(userCommentReqDto,userDetails,commentId));

@@ -229,10 +229,10 @@ public class CommentService {
     private boolean isParentIdChanged(UserCommentReqDto userCommentReqDto, UserComment userComment){
 
         //부모 댓글이 없는 경우
-        if(userCommentReqDto.getParentId() == ROOT_COMMENT && userComment.isRoot()) return false;
+        if(userCommentReqDto.getParentId().equals(ROOT_COMMENT) && userComment.isRoot()) return false;
 
         //부모 댓글이 존재하고 해당 부모 댓글이 수정된 경우
-        if(userComment.hasParent() && userCommentReqDto.getParentId() != userComment.getParent().getId()) return true;
+        if(userComment.hasParent() && !userCommentReqDto.getParentId().equals(userComment.getParent().getId())) return true;
 
         else return false;
     }
@@ -359,8 +359,13 @@ public class CommentService {
      */
     @Transactional(readOnly = true)
     public List<TeamCommentDto> getTeamComment(Long teamPostId) {
+
+
         List<TeamCommentDto> teamCommentDtos = teamCommentRepository.findAllByTeam_Id(teamPostId).stream()
                 .map(TeamCommentDto::of)
+                .filter(dto-> dto.getParentId() == null)
+                .map(dto-> userInfoAdderService.userInfoAdder(dto,dto.getWriter()))
+                .map(dto-> userInfoAdderService.nestedUserInfoAdder(dto,dto.getWriter()))
                 .collect(Collectors.toList());
 
         return teamCommentDtos;
@@ -370,7 +375,8 @@ public class CommentService {
     private TeamComment updateCommentToTeam(TeamCommentReqDto teamCommentReqDto,Long commentId){
         try{
             TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
-            if(teamCommentReqDto.getParentId() != teamComment.getParent().getId()) throw new RuntimeException();
+
+            if(!teamCommentReqDto.getParentId().equals(teamComment.getParent().getId())) throw new RuntimeException();
 
             teamComment.setContent(teamCommentReqDto.getContent());
             if(teamCommentReqDto.getSecret() != teamComment.getSecret()) teamComment.setSecret(teamCommentReqDto.getSecret());

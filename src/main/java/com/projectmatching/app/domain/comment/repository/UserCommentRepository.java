@@ -12,6 +12,6 @@ import java.util.List;
 public interface UserCommentRepository  extends JpaRepository<UserComment,Long> {
 
     @Query("SELECT u from UserComment u where u.user.id = :postId")
-    List<UserComment> getUserCommentByPostId(Long postId);
+    List<UserComment> getUserCommentByPostId(@Param(value = "postId")Long postId);
 
 }
