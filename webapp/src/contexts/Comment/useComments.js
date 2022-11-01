@@ -125,7 +125,6 @@ const useComments = () => {
    * @param {numner} config.id 선택한 댓글의 id
    */
   const handleClickDeleteTargetComment = (config) => {
-    console.log('config', config);
     deleteCommentApi(config);
   };
 

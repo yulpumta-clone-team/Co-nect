@@ -59,6 +59,10 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
 
+  const handleClickDeleteButton = () => {
+    handleClickDeleteTargetComment({ postType, id: commentId });
+  };
+
   const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserNickname);
 
   return (
@@ -97,11 +101,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
             <S.SpecificInfo>
               <S.EditButton onClick={handleClickTargetComment}>댓글수정</S.EditButton>
               <span>/</span>
-              <S.EditButton
-                onClick={() => handleClickDeleteTargetComment({ postType, id: commentId })}
-              >
-                삭제하기
-              </S.EditButton>
+              <S.EditButton onClick={handleClickDeleteButton}>삭제하기</S.EditButton>
             </S.SpecificInfo>
           )}
         </S.CommentInfo>

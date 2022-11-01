@@ -20,6 +20,7 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
   const {
     isShowSecretComment,
     selectEditTargetComment,
+    handleClickDeleteTargetComment,
     handleClickLikeThumb,
     isLikesContainUserId,
   } = useCommentsAction();
@@ -43,10 +44,15 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
     const idObj = { commentId, loggedInUserId, parentId };
     handleClickLikeThumb(isLikesContainUserId, postType, idObj);
   };
+
+  const handleClickDeleteButton = () => {
+    handleClickDeleteTargetComment({ postType, id: commentId });
+  };
+
   const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
   return (
     <S.NestedCommentBox>
-      <S.PublicCommentBox style={{ display: 'flex' }}>
+      <S.PublicCommentBox>
         <S.CommentTitle isNested>
           <h3>{writerName}</h3>
           <span>2022.12.31</span>
@@ -70,7 +76,7 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
               댓글수정
             </S.EditButton>
             <span>/</span>
-            <S.EditButton isNested onClick={() => selectEditTargetComment(commentId)}>
+            <S.EditButton isNested onClick={handleClickDeleteButton}>
               삭제하기
             </S.EditButton>
           </S.SpecificInfo>
