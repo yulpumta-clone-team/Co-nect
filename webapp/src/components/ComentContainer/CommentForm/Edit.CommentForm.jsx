@@ -18,12 +18,18 @@ export default function EditCommentForm({ initialText, secret }) {
 
   const handleClickCancel = () => resetEditTargetCommentId();
 
-  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
-    useForm({
-      initialValues: { content: initialText, isSecret: false },
-      submitCallback: editCommentSubmitCallback,
-      validate: commentFormValidation,
-    });
+  const {
+    inputValues,
+    validateError,
+    onChangeHandler,
+    onChangeHandlerWithSelect,
+    submitHandler,
+    satisfyAllValidates,
+  } = useForm({
+    initialValues: { content: initialText, isSecret: false },
+    submitCallback: editCommentSubmitCallback,
+    validate: commentFormValidation,
+  });
 
   return (
     <S.FormBox id="editCommentForm" onSubmit={submitHandler}>
@@ -40,7 +46,7 @@ export default function EditCommentForm({ initialText, secret }) {
           label="비밀댓글"
           name="isSecret"
           value={inputValues.isSecret}
-          onChange={onChangeHandler}
+          onChange={onChangeHandlerWithSelect}
         />
         <Button
           form="editCommentForm"

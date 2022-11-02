@@ -10,12 +10,18 @@ import * as S from '../style';
 export default function CreateRootCommentForm() {
   const { createRootCommentSubmitCallback, forceRefetch } = useCommentsAction();
 
-  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
-    useForm({
-      initialValues: { content: '', isSecret: false },
-      submitCallback: createRootCommentSubmitCallback,
-      validate: commentFormValidation,
-    });
+  const {
+    inputValues,
+    validateError,
+    onChangeHandler,
+    onChangeHandlerWithSelect,
+    submitHandler,
+    satisfyAllValidates,
+  } = useForm({
+    initialValues: { content: '', isSecret: false },
+    submitCallback: createRootCommentSubmitCallback,
+    validate: commentFormValidation,
+  });
 
   return (
     <S.FormBox isNested={false} id="createRootCommentForm" onSubmit={submitHandler}>
@@ -32,7 +38,7 @@ export default function CreateRootCommentForm() {
           label="비밀댓글"
           name="isSecret"
           value={inputValues.isSecret}
-          onChange={onChangeHandler}
+          onChange={onChangeHandlerWithSelect}
         />
         <Button
           form="createRootCommentForm"

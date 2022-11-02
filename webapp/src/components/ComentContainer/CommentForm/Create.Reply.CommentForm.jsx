@@ -13,12 +13,18 @@ export default function CreateReplyCommentForm() {
 
   const handleClickCancel = () => resetCreateReplyTargetCommentId();
 
-  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
-    useForm({
-      initialValues: { content: '', isSecret: false },
-      submitCallback: createReplyCommentSubmitCallback,
-      validate: commentFormValidation,
-    });
+  const {
+    inputValues,
+    validateError,
+    onChangeHandler,
+    onChangeHandlerWithSelect,
+    submitHandler,
+    satisfyAllValidates,
+  } = useForm({
+    initialValues: { content: '', isSecret: false },
+    submitCallback: createReplyCommentSubmitCallback,
+    validate: commentFormValidation,
+  });
   return (
     <S.FormBox isNested id="createReplyCommentForm" onSubmit={submitHandler}>
       <TextArea
@@ -34,7 +40,7 @@ export default function CreateReplyCommentForm() {
           label="비밀댓글"
           name="isSecret"
           value={inputValues.isSecret}
-          onChange={onChangeHandler}
+          onChange={onChangeHandlerWithSelect}
         />
         <Button
           form="createReplyCommentForm"
