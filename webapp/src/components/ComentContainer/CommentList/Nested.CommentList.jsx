@@ -14,9 +14,8 @@ export default function NestedCommentList({ postWriter, comments }) {
       {comments.map(({ id, teamId, userId, replies, ...commentInfo }) => (
         <NestedCommentElement
           key={id}
-          commentId={id}
           postWriter={postWriter}
-          commentInfo={commentInfo}
+          commentInfo={{ ...commentInfo, id }}
         />
       ))}
     </S.NestedListContainer>

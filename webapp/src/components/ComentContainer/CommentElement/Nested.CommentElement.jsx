@@ -10,12 +10,11 @@ import SecretCommentElement from './Secret.CommentElement';
 import * as S from '../style';
 
 NestedCommentElement.propTypes = {
-  commentId: PropTypes.number.isRequired,
   commentInfo: replyCommentInfoType.isRequired,
   postWriter: PropTypes.string.isRequired,
 };
 
-export default function NestedCommentElement({ commentId, commentInfo, postWriter }) {
+export default function NestedCommentElement({ commentInfo, postWriter }) {
   const { editTargetCommentId, postType } = useCommentsState();
   const {
     isShowSecretComment,
@@ -25,9 +24,9 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
     isLikedUserIdsContainLoggnedInUserId,
   } = useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
-  const loggedInUserId = userInfo?.userId;
   const loggedInUserName = userInfo?.name;
   const {
+    id: commentId,
     parentId,
     content,
     secret,
