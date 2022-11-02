@@ -1,12 +1,28 @@
 import PropTypes, { shape } from 'prop-types';
 
-const commentInfoSchema = {
+const commonCommentSchema = {
   content: PropTypes.string.isRequired,
   feelings: PropTypes.arrayOf(PropTypes.shape({ userId: PropTypes.number })),
   id: PropTypes.number.isRequired,
+  secret: PropTypes.bool.isRequired,
+  userInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+};
+
+const commentInfoSchema = {
+  ...commonCommentSchema,
+  parentId: PropTypes.number,
+  replies: PropTypes.number,
+};
+
+const replycommentInfoSchema = {
+  ...commonCommentSchema,
   parentId: PropTypes.number.isRequired,
   replies: PropTypes.number.isRequired,
-  secret: PropTypes.number.isRequired,
+
   userInfo: PropTypes.shape({
     id: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
@@ -23,5 +39,7 @@ const commentSchema = {
 };
 
 export const commentInfoType = shape(commentInfoSchema);
+
+export const replyCommentInfoType = shape(replycommentInfoSchema);
 
 export const commentType = shape(commentSchema);
