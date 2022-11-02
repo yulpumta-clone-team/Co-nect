@@ -33,8 +33,7 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
   const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
   const { createReplyTargetCommentId, targetReplyListId, postType, editTargetCommentId } =
     useCommentsState();
-  const { isShowSecretComment, selectEditTargetComment, handleClickDeleteTargetComment } =
-    useCommentsAction();
+  const { selectEditTargetComment, handleClickDeleteTargetComment } = useCommentsAction();
 
   const isShowCreateReplyForm = createReplyTargetCommentId !== commentId;
   const isShowReplies = commentId === targetReplyListId;
@@ -46,8 +45,6 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
     handleClickDeleteTargetComment({ postType, id: commentId });
   };
 
-  const isShowSecret = isShowSecretComment(secret, postWriterId, writerId);
-
   return (
     <S.CommentContainer>
       <Image src={writerProfileImage} alt="작성자 프로필 이미지" customStyle={S.UserProfileImage} />
@@ -56,15 +53,13 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
           <S.CommentTitle>
             <h3>{writerName}</h3>
             {/* <span>2022.12.31</span> */}
-            <button>
-              <S.RecycleBinSvg />
-            </button>
           </S.CommentTitle>
-          {isShowSecret ? (
-            <S.CommentContent>{content}</S.CommentContent>
-          ) : (
-            <SecretCommentElement isNested={false} />
-          )}
+          <SecretCommentElement
+            content={content}
+            isSecret={secret}
+            postWriterId={postWriterId}
+            writerId={writerId}
+          />
         </S.PublicCommentBox>
         {isEditTargetComment && <EditRootCommentForm initialText={content} secret={secret} />}
         <S.CommentInfo>

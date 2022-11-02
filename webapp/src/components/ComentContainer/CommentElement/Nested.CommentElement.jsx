@@ -15,8 +15,7 @@ NestedCommentElement.propTypes = {
 
 export default function NestedCommentElement({ commentInfo, postWriterId }) {
   const { editTargetCommentId, postType } = useCommentsState();
-  const { isShowSecretComment, selectEditTargetComment, handleClickDeleteTargetComment } =
-    useCommentsAction();
+  const { selectEditTargetComment, handleClickDeleteTargetComment } = useCommentsAction();
   const {
     id: commentId,
     parentId,
@@ -34,8 +33,6 @@ export default function NestedCommentElement({ commentInfo, postWriterId }) {
     handleClickDeleteTargetComment({ postType, id: commentId });
   };
 
-  const isShowSecret = isShowSecretComment(secret, postWriterId, writerId);
-
   return (
     <S.NestedCommentBox>
       <S.PublicCommentBox>
@@ -43,11 +40,13 @@ export default function NestedCommentElement({ commentInfo, postWriterId }) {
           <h3>{writerName}</h3>
           <span>2022.12.31</span>
         </S.CommentTitle>
-        {isShowSecret ? (
-          <S.CommentContent isNested>{content}</S.CommentContent>
-        ) : (
-          <SecretCommentElement isNested />
-        )}
+        <SecretCommentElement
+          isNested
+          content={content}
+          isSecret={secret}
+          postWriterId={postWriterId}
+          writerId={writerId}
+        />
       </S.PublicCommentBox>
       <S.CommentInfo>
         <S.SpecificInfo isNested>
