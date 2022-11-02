@@ -45,7 +45,7 @@ const commentApi = {
   PATCH_COMMENT_UN_LIKE({ postType, id }) {
     return privateApiInstance({
       url: `/${postType + API.COMMENT.UNLIKE}/${id}`,
-      method: 'patch',
+      method: 'delete',
     });
   },
 };
