@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
+import { useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { commentInfoType } from 'types/comment.type';
 import Image from 'components/Common/Image';
 import { parsedNumberToThreeDigits } from 'utils';
@@ -10,8 +10,9 @@ import NestedCommentList from '../CommentList/Nested.CommentList';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import SecretCommentElement from './Secret.CommentElement';
 import NestedCommentToggleButton from './NestedCommentToggleButton';
-import * as S from '../style';
 import CommentLikeSvg from './CommentLikeSvg';
+import * as S from '../style';
+import CommentButtonContainer from './CommentButtonContainer';
 
 RootCommentElement.propTypes = {
   commentInfo: commentInfoType.isRequired,
@@ -31,19 +32,12 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
     feelings: likedUserIds,
   } = commentInfo;
   const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
-  const { createReplyTargetCommentId, targetReplyListId, postType, editTargetCommentId } =
-    useCommentsState();
-  const { selectEditTargetComment, handleClickDeleteTargetComment } = useCommentsAction();
+  const { createReplyTargetCommentId, targetReplyListId, editTargetCommentId } = useCommentsState();
 
   const isShowCreateReplyForm = createReplyTargetCommentId !== commentId;
   const isShowReplies = commentId === targetReplyListId;
   const likesCount = likedUserIds.length;
   const isEditTargetComment = commentId === editTargetCommentId;
-  const handleClickTargetComment = () => selectEditTargetComment(commentId);
-
-  const handleClickDeleteButton = () => {
-    handleClickDeleteTargetComment({ postType, id: commentId });
-  };
 
   return (
     <S.CommentContainer>
@@ -73,18 +67,17 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
             <CommentLikeSvg commentId={commentId} parentId={parentId} likedUserIds={likedUserIds} />
             <span>{parsedNumberToThreeDigits(likesCount)}</span>
           </S.SpecificInfo>
-          {!isEditTargetComment && (
-            <S.SpecificInfo>
-              <S.EditButton onClick={handleClickTargetComment}>댓글수정</S.EditButton>
-              <span>/</span>
-              <S.EditButton onClick={handleClickDeleteButton}>삭제하기</S.EditButton>
-            </S.SpecificInfo>
-          )}
+          <CommentButtonContainer
+            isNested={false}
+            isEditTargetComment={isEditTargetComment}
+            commentId={commentId}
+          />
         </S.CommentInfo>
         <NestedCommentToggleButton
           replies={replies}
           isShowCreateReplyForm={isShowCreateReplyForm}
           commentId={commentId}
+          writerId={writerId}
         />
         {replies && replies.length !== 0 && isShowReplies && (
           <>
