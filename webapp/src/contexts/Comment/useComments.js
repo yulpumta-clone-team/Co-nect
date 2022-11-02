@@ -3,7 +3,7 @@ import commentApi from 'api/comment.api';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getUserInfo } from 'service/auth';
 import { setPostIdOnSubmitData } from 'utils';
@@ -14,8 +14,8 @@ const DEFAULT_PARENT_ID = 0; // 원본 댓글일 경우 0으로 고정
 
 const useComments = () => {
   // 로그인 유저 정보
-  const userInfo = getUserInfo(); // {userId, nickname, profileImg}
-  const loggedInUserId = userInfo?.userId;
+  const userInfo = getUserInfo(); // {id, nickname, profileImg}
+  const loggedInUserId = userInfo?.id;
   const loggedInUserNickname = userInfo?.nickname;
 
   // FIXME: 스토리북에서 url이 달라서 데이터 요청을 못하는 에러 수정해야합니다.
@@ -39,7 +39,7 @@ const useComments = () => {
   const patchCommentLikeApi = (config) =>
     changeApi('patchCommentLikeApi', commentApi.PATCH_COMMENT_LIKE, config);
   const patchCommentUnLikeApi = (config) =>
-    changeApi('patchCommentUnLikeApi', commentApi.DELETE_COMMENT, config); // : DELETE_COMMENT_UNLIKE가 아닌가요 ?
+    changeApi('patchCommentUnLikeApi', commentApi.PATCH_COMMENT_UN_LIKE, config); // : DELETE_COMMENT_UNLIKE가 아닌가요 ?
 
   // useState관련 로직
   const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_PARENT_ID); // 답글을 보여주는 원본댓글의 id
@@ -128,43 +128,62 @@ const useComments = () => {
     deleteCommentApi(config);
   };
 
-  const addLike = async (postType, idObj) => {
-    const { id, loggedInUserId, parentId } = idObj;
+  const addLike = async (postType, commentId, parentId) => {
     await patchCommentLikeApi({
       postType,
-      id,
+      id: commentId,
     });
     if (parentId) {
-      const callbackParams = { id, loggedInUserId };
+      const callbackParams = { commentId, loggedInUserId };
       setComments((prev) =>
         findParentAndDoCallback(prev, parentId, addLikeToComment, callbackParams),
       );
     } else {
-      setComments((prevComments) => addLikeToComment({ prevComments, id, loggedInUserId }));
+      setComments((prevComments) => addLikeToComment({ prevComments, commentId, loggedInUserId }));
     }
   };
 
-  const removeLike = async (postType, idObj) => {
-    const { id, loggedInUserId, parentId } = idObj;
+  const removeLike = async (postType, commentId, parentId) => {
     await patchCommentUnLikeApi({
       postType,
-      id,
+      id: commentId,
     });
     if (parentId) {
-      const callbackParams = { id, loggedInUserId };
+      const callbackParams = { commentId, loggedInUserId };
       setComments((prev) =>
         findParentAndDoCallback(prev, parentId, removeLikeToComment, callbackParams),
       );
     } else {
-      setComments((prevComments) => removeLikeToComment({ prevComments, id, loggedInUserId }));
+      setComments((prevComments) =>
+        removeLikeToComment({ prevComments, commentId, loggedInUserId }),
+      );
     }
   };
 
-  const handleClickLikeThumb = async (isLikesContainUserId, postType, idObj) => {
-    if (isLikesContainUserId) {
-      removeLike(postType, idObj);
+  /**
+   * 특정 댓글의 좋아요 누른 유저Id배열에 로그인한 유저의 id가 포함되어있는지 확인하는 함수
+   * @typedef {Object} UserId
+   * @property {number} userId
+   *
+   * @param {UserId[]} likedUserIds 삭제하고자 하는 댓글의 종아요 누른 유저객체 배열
+   * @returns {boolean} 포함되어있으면 true 아니면 false
+   */
+  const isLikedUserIdsContainLoggnedInUserId = (likedUserIds) => {
+    const findUser = likedUserIds.find((user) => user.userId === loggedInUserId);
+    return !!findUser;
+  };
+
+  /**
+   * 좋아요 svg를 눌렀을 때 동작하는 함수(likedUserIds에 로그인한 유저의 id가 포함되어있으면 제거요청 아니면 등록요청)
+   * @param {Array} likedUserIds 삭제하고자 하는 댓글의 종아요 누른 유저id 배열
+   * @param {number} commentId 삭제하고자 하는 댓글의 id
+   * @param {number} parentId 삭제하고자 하는 댓글의 부모 id
+   */
+  const handleClickLikeThumb = async (likedUserIds, commentId, parentId) => {
+    if (isLikedUserIdsContainLoggnedInUserId(likedUserIds)) {
+      removeLike(postType, commentId, parentId);
     } else {
-      addLike(postType, idObj);
+      addLike(postType, commentId, parentId);
     }
   };
 
@@ -191,13 +210,6 @@ const useComments = () => {
     return false;
   };
 
-  const checkUserLikeTarget = useCallback((userId, targetLikesArray) => {
-    const findUser = targetLikesArray.find((id) => id === userId);
-    return !!findUser;
-  }, []);
-
-  const isLikesContainUserId = (likedUserIds) => checkUserLikeTarget(loggedInUserId, likedUserIds);
-
   const actions = useMemo(
     () => ({
       forceRefetch,
@@ -213,7 +225,7 @@ const useComments = () => {
       handleClickDeleteTargetComment,
       handleClickLikeThumb,
       isShowSecretComment,
-      isLikesContainUserId,
+      isLikedUserIdsContainLoggnedInUserId,
     }),
     [
       forceRefetch,
@@ -227,7 +239,7 @@ const useComments = () => {
       editCommentSubmitCallback,
       handleClickLikeThumb,
       isShowSecretComment,
-      isLikesContainUserId,
+      isLikedUserIdsContainLoggnedInUserId,
     ],
   );
   const states = useMemo(
@@ -272,22 +284,22 @@ const findParentAndDoCallback = (parents, parentId, callback, callbackParams) =>
   });
 };
 
-const addLikeToComment = ({ prevComments, id, loggedInUserId }) => {
+const addLikeToComment = ({ prevComments, commentId, loggedInUserId }) => {
   return prevComments.map((comment) => {
-    if (comment.id === id) {
+    if (comment.id === commentId) {
       const clone = deepClone(comment);
-      clone.feeling.push(loggedInUserId);
+      clone.feelings.push(loggedInUserId);
       return clone;
     }
     return comment;
   });
 };
 
-const removeLikeToComment = ({ prevComments, id, loggedInUserId }) => {
+const removeLikeToComment = ({ prevComments, commentId, loggedInUserId }) => {
   return prevComments.map((comment) => {
-    if (comment.id === id) {
+    if (comment.id === commentId) {
       const clone = deepClone(comment);
-      clone.feeling = [...clone.feeling].filter((userId) => userId !== loggedInUserId);
+      clone.feelings = [...clone.feelings].filter((userId) => userId !== loggedInUserId);
       return clone;
     }
     return comment;

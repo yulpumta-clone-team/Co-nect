@@ -22,7 +22,7 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
     selectEditTargetComment,
     handleClickDeleteTargetComment,
     handleClickLikeThumb,
-    isLikesContainUserId,
+    isLikedUserIdsContainLoggnedInUserId,
   } = useCommentsAction();
   const userInfo = getUserInfo(); // {userId, name, profileImg}
   const loggedInUserId = userInfo?.userId;
@@ -41,8 +41,7 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
   const isEditTargetComment = commentId === editTargetCommentId;
 
   const handleClickThumbSvg = () => {
-    const idObj = { commentId, loggedInUserId, parentId };
-    handleClickLikeThumb(isLikesContainUserId, postType, idObj);
+    handleClickLikeThumb(likedUserIds, commentId, parentId);
   };
 
   const handleClickDeleteButton = () => {
@@ -50,6 +49,8 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
   };
 
   const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
+  const isFillHeartSvg = isLikedUserIdsContainLoggnedInUserId(likedUserIds);
+
   return (
     <S.NestedCommentBox>
       <S.PublicCommentBox>
@@ -65,7 +66,7 @@ export default function NestedCommentElement({ commentId, commentInfo, postWrite
       </S.PublicCommentBox>
       <S.CommentInfo>
         <S.SpecificInfo isNested>
-          <S.HeartButton isNested isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
+          <S.HeartButton isNested isFill={isFillHeartSvg} onClick={handleClickThumbSvg}>
             <HeartSvg />
           </S.HeartButton>
           <span>{parsedNumberToThreeDigits(likesCount)}</span>

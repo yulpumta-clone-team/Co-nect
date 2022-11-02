@@ -5,8 +5,6 @@ import { commentInfoType } from 'types/comment.type';
 import { getUserInfo } from 'service/auth';
 import Image from 'components/Common/Image';
 import { parsedNumberToThreeDigits } from 'utils';
-import CaretDownFillSvg from 'assets/icons/CaretDownFillSvg';
-import CaretUpFillSvg from 'assets/icons/CaretUpFillSvg';
 import HeartSvg from 'assets/icons/HeartSvg';
 import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
@@ -36,7 +34,6 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
   } = commentInfo;
   const userInfo = getUserInfo(); // {userId, nickname, profileImg}
   const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
-  const loggedInUserId = userInfo?.userId;
   const loggedInUserNickname = userInfo?.nickname;
   const { createReplyTargetCommentId, targetReplyListId, postType, editTargetCommentId } =
     useCommentsState();
@@ -44,7 +41,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
     isShowSecretComment,
     selectEditTargetComment,
     handleClickLikeThumb,
-    isLikesContainUserId,
+    isLikedUserIdsContainLoggnedInUserId,
     handleClickDeleteTargetComment,
   } = useCommentsAction();
 
@@ -55,8 +52,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
   const handleClickTargetComment = () => selectEditTargetComment(commentId);
 
   const handleClickThumbSvg = () => {
-    const idObj = { commentId, loggedInUserId, parentId };
-    handleClickLikeThumb(isLikesContainUserId, postType, idObj);
+    handleClickLikeThumb(likedUserIds, commentId, parentId);
   };
 
   const handleClickDeleteButton = () => {
@@ -64,6 +60,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
   };
 
   const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserNickname);
+  const isFillHeartSvg = isLikedUserIdsContainLoggnedInUserId(likedUserIds);
 
   return (
     <S.CommentContainer>
@@ -92,7 +89,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
             <span>{parsedNumberToThreeDigits(replies.length)}</span>
           </S.SpecificInfo>
           <S.SpecificInfo>
-            <S.HeartButton isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
+            <S.HeartButton isFill={isFillHeartSvg} onClick={handleClickThumbSvg}>
               <HeartSvg />
             </S.HeartButton>
             <span>{parsedNumberToThreeDigits(likesCount)}</span>
