@@ -16,25 +16,22 @@ import NestedCommentToggleButton from './NestedCommentToggleButton';
 
 RootCommentElement.propTypes = {
   commentInfo: commentInfoType.isRequired,
-  postWriter: PropTypes.string.isRequired,
-  replies: PropTypes.array,
+  postWriterId: PropTypes.number.isRequired,
 };
 
 // 답글보여주기 상태에 따른 컴포넌트 렌더링
-export default function RootCommentElement({ commentInfo, postWriter, replies }) {
+export default function RootCommentElement({ commentInfo, postWriterId }) {
   const {
     id: commentId,
     parentId,
     content,
     secret,
     userInfo: writerInfo,
+    replies,
     img,
-    writer: commenWriter,
     feelings: likedUserIds,
   } = commentInfo;
-  const userInfo = getUserInfo(); // {userId, nickname, profileImg}
   const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
-  const loggedInUserNickname = userInfo?.nickname;
   const { createReplyTargetCommentId, targetReplyListId, postType, editTargetCommentId } =
     useCommentsState();
   const {
@@ -59,7 +56,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
     handleClickDeleteTargetComment({ postType, id: commentId });
   };
 
-  const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserNickname);
+  const isShowSecret = isShowSecretComment(secret, postWriterId, writerId);
   const isFillHeartSvg = isLikedUserIdsContainLoggnedInUserId(likedUserIds);
 
   return (
@@ -74,10 +71,10 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
               <S.RecycleBinSvg />
             </button>
           </S.CommentTitle>
-          {isSecret ? (
-            <SecretCommentElement isNested={false} />
-          ) : (
+          {isShowSecret ? (
             <S.CommentContent>{content}</S.CommentContent>
+          ) : (
+            <SecretCommentElement isNested={false} />
           )}
         </S.PublicCommentBox>
         {isEditTargetComment && <EditRootCommentForm initialText={content} secret={secret} />}
@@ -109,7 +106,7 @@ export default function RootCommentElement({ commentInfo, postWriter, replies })
         />
         {replies && replies.length !== 0 && isShowReplies && (
           <>
-            <NestedCommentList postWriter={postWriter} comments={replies} />
+            <NestedCommentList postWriterId={postWriterId} comments={replies} />
             <CreateReplyCommentForm />
           </>
         )}

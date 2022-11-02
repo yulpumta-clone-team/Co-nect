@@ -15,19 +15,13 @@ const commonCommentSchema = {
 const commentInfoSchema = {
   ...commonCommentSchema,
   parentId: PropTypes.number,
-  replies: PropTypes.number,
+  replies: PropTypes.array.isRequired,
 };
 
 const replycommentInfoSchema = {
   ...commonCommentSchema,
   parentId: PropTypes.number.isRequired,
-  replies: PropTypes.number.isRequired,
-
-  userInfo: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }),
+  replies: PropTypes.array,
 };
 
 const commentSchema = {

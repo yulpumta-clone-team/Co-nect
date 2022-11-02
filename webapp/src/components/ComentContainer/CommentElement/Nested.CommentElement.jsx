@@ -11,10 +11,10 @@ import * as S from '../style';
 
 NestedCommentElement.propTypes = {
   commentInfo: replyCommentInfoType.isRequired,
-  postWriter: PropTypes.string.isRequired,
+  postWriterId: PropTypes.number.isRequired,
 };
 
-export default function NestedCommentElement({ commentInfo, postWriter }) {
+export default function NestedCommentElement({ commentInfo, postWriterId }) {
   const { editTargetCommentId, postType } = useCommentsState();
   const {
     isShowSecretComment,
@@ -23,8 +23,6 @@ export default function NestedCommentElement({ commentInfo, postWriter }) {
     handleClickLikeThumb,
     isLikedUserIdsContainLoggnedInUserId,
   } = useCommentsAction();
-  const userInfo = getUserInfo(); // {userId, name, profileImg}
-  const loggedInUserName = userInfo?.name;
   const {
     id: commentId,
     parentId,
@@ -32,7 +30,6 @@ export default function NestedCommentElement({ commentInfo, postWriter }) {
     secret,
     userInfo: writerInfo,
     img,
-    writer: commenWriter,
     feelings: likedUserIds,
   } = commentInfo;
   const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
@@ -47,7 +44,7 @@ export default function NestedCommentElement({ commentInfo, postWriter }) {
     handleClickDeleteTargetComment({ postType, id: commentId });
   };
 
-  const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
+  const isShowSecret = isShowSecretComment(secret, postWriterId, writerId);
   const isFillHeartSvg = isLikedUserIdsContainLoggnedInUserId(likedUserIds);
 
   return (
@@ -57,10 +54,10 @@ export default function NestedCommentElement({ commentInfo, postWriter }) {
           <h3>{writerName}</h3>
           <span>2022.12.31</span>
         </S.CommentTitle>
-        {isSecret ? (
-          <SecretCommentElement isNested />
-        ) : (
+        {isShowSecret ? (
           <S.CommentContent isNested>{content}</S.CommentContent>
+        ) : (
+          <SecretCommentElement isNested />
         )}
       </S.PublicCommentBox>
       <S.CommentInfo>

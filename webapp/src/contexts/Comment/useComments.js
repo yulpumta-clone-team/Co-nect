@@ -187,27 +187,34 @@ const useComments = () => {
     }
   };
 
-  const checkSecretComment = (postWriterName, commentWriterName, loggedInUserName) => {
-    // true: 가리기 , false: 보여주기
-    if (!loggedInUserName) {
-      return true;
-    }
-    const isSameCommentWriter = postWriterName === loggedInUserName;
-    const isSamePostWriter = commentWriterName === loggedInUserName;
-    if (isSameCommentWriter || isSamePostWriter) {
-      return false;
-    }
-
-    return true;
+  /**
+   * 게시글 작성자, 댓글 작성자만 비밀댓글을 볼 수 있게 하는 함수
+   * @param {number} postWriterId 포스트 작성자의 id
+   * @param {number} commentWriterId 댓글 작성자의 id
+   * @param {number} loggedInUserId 로그인한 유저의 Id
+   * @returns {boolean} true = 비밀댓글 보이기, false = 비밀댓글 가리기
+   */
+  const checkCanShowSecretComment = (postWriterId, commentWriterId, loggedInUserId) => {
+    const isSameCommentWriter = commentWriterId === loggedInUserId;
+    const isSamePostWriter = postWriterId === loggedInUserId;
+    if (isSameCommentWriter || isSamePostWriter) return true;
+    return false;
   };
 
-  const isShowSecretComment = (secret, postWriterName, commentWriterName, loggedInUserName) => {
-    // secret ? 가리기 : 보여주기
-    if (secret) {
-      const isShow = checkSecretComment(postWriterName, commentWriterName, loggedInUserName);
+  /**
+   * 비밀댓글일 경우 특정 조건(checkCanShowSecretComment)에 의해서만 보여지게하는 함수
+   * @param {boolean} isSecret
+   * @param {number} postWriterId 포스트 작성자의 id
+   * @param {number} commentWriterId 댓글 작성자의 id
+   * @param {number} loggedInUserId 로그인한 유저의 Id
+   * @returns {boolean} true = 비밀댓글 보이기, false = 비밀댓글 가리기
+   */
+  const isShowSecretComment = (isSecret, postWriterId, commentWriterId) => {
+    if (isSecret) {
+      const isShow = checkCanShowSecretComment(postWriterId, commentWriterId, loggedInUserId);
       return isShow;
     }
-    return false;
+    return true;
   };
 
   const actions = useMemo(
