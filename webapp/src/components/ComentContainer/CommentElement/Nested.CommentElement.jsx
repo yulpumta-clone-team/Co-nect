@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getUserInfo } from 'service/auth';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { replyCommentInfoType } from 'types/comment.type';
 import { parsedNumberToThreeDigits } from 'utils';
-import HeartSvg from 'assets/icons/HeartSvg';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import SecretCommentElement from './Secret.CommentElement';
+import CommentLikeSvg from './CommentLikeSvg';
 import * as S from '../style';
 
 NestedCommentElement.propTypes = {
@@ -16,13 +15,8 @@ NestedCommentElement.propTypes = {
 
 export default function NestedCommentElement({ commentInfo, postWriterId }) {
   const { editTargetCommentId, postType } = useCommentsState();
-  const {
-    isShowSecretComment,
-    selectEditTargetComment,
-    handleClickDeleteTargetComment,
-    handleClickLikeThumb,
-    isLikedUserIdsContainLoggnedInUserId,
-  } = useCommentsAction();
+  const { isShowSecretComment, selectEditTargetComment, handleClickDeleteTargetComment } =
+    useCommentsAction();
   const {
     id: commentId,
     parentId,
@@ -36,16 +30,11 @@ export default function NestedCommentElement({ commentInfo, postWriterId }) {
   const likesCount = likedUserIds.length;
   const isEditTargetComment = commentId === editTargetCommentId;
 
-  const handleClickThumbSvg = () => {
-    handleClickLikeThumb(likedUserIds, commentId, parentId);
-  };
-
   const handleClickDeleteButton = () => {
     handleClickDeleteTargetComment({ postType, id: commentId });
   };
 
   const isShowSecret = isShowSecretComment(secret, postWriterId, writerId);
-  const isFillHeartSvg = isLikedUserIdsContainLoggnedInUserId(likedUserIds);
 
   return (
     <S.NestedCommentBox>
@@ -62,9 +51,7 @@ export default function NestedCommentElement({ commentInfo, postWriterId }) {
       </S.PublicCommentBox>
       <S.CommentInfo>
         <S.SpecificInfo isNested>
-          <S.HeartButton isNested isFill={isFillHeartSvg} onClick={handleClickThumbSvg}>
-            <HeartSvg />
-          </S.HeartButton>
+          <CommentLikeSvg commentId={commentId} parentId={parentId} likedUserIds={likedUserIds} />
           <span>{parsedNumberToThreeDigits(likesCount)}</span>
         </S.SpecificInfo>
         {!isEditTargetComment && (

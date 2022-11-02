@@ -2,17 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { commentInfoType } from 'types/comment.type';
-import { getUserInfo } from 'service/auth';
 import Image from 'components/Common/Image';
 import { parsedNumberToThreeDigits } from 'utils';
-import HeartSvg from 'assets/icons/HeartSvg';
 import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
 import NestedCommentList from '../CommentList/Nested.CommentList';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import SecretCommentElement from './Secret.CommentElement';
-import * as S from '../style';
 import NestedCommentToggleButton from './NestedCommentToggleButton';
+import * as S from '../style';
+import CommentLikeSvg from './CommentLikeSvg';
 
 RootCommentElement.propTypes = {
   commentInfo: commentInfoType.isRequired,
@@ -34,13 +33,8 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
   const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
   const { createReplyTargetCommentId, targetReplyListId, postType, editTargetCommentId } =
     useCommentsState();
-  const {
-    isShowSecretComment,
-    selectEditTargetComment,
-    handleClickLikeThumb,
-    isLikedUserIdsContainLoggnedInUserId,
-    handleClickDeleteTargetComment,
-  } = useCommentsAction();
+  const { isShowSecretComment, selectEditTargetComment, handleClickDeleteTargetComment } =
+    useCommentsAction();
 
   const isShowCreateReplyForm = createReplyTargetCommentId !== commentId;
   const isShowReplies = commentId === targetReplyListId;
@@ -48,16 +42,11 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
   const isEditTargetComment = commentId === editTargetCommentId;
   const handleClickTargetComment = () => selectEditTargetComment(commentId);
 
-  const handleClickThumbSvg = () => {
-    handleClickLikeThumb(likedUserIds, commentId, parentId);
-  };
-
   const handleClickDeleteButton = () => {
     handleClickDeleteTargetComment({ postType, id: commentId });
   };
 
   const isShowSecret = isShowSecretComment(secret, postWriterId, writerId);
-  const isFillHeartSvg = isLikedUserIdsContainLoggnedInUserId(likedUserIds);
 
   return (
     <S.CommentContainer>
@@ -86,9 +75,7 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
             <span>{parsedNumberToThreeDigits(replies.length)}</span>
           </S.SpecificInfo>
           <S.SpecificInfo>
-            <S.HeartButton isFill={isFillHeartSvg} onClick={handleClickThumbSvg}>
-              <HeartSvg />
-            </S.HeartButton>
+            <CommentLikeSvg commentId={commentId} parentId={parentId} likedUserIds={likedUserIds} />
             <span>{parsedNumberToThreeDigits(likesCount)}</span>
           </S.SpecificInfo>
           {!isEditTargetComment && (
