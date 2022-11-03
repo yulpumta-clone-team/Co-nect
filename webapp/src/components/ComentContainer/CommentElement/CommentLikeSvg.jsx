@@ -7,7 +7,7 @@ import * as S from '../style';
 
 CommentLikeSvg.propTypes = {
   commentId: PropTypes.number.isRequired,
-  parentId: PropTypes.number.isRequired,
+  parentId: PropTypes.number,
   likedUserIds: PropTypes.arrayOf(
     PropTypes.shape({
       userId: PropTypes.number.isRequired,

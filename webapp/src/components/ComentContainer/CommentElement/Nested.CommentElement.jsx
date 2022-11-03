@@ -22,7 +22,7 @@ export default function NestedCommentElement({ commentInfo, postWriterId }) {
     content,
     secret,
     userInfo: writerInfo,
-    img,
+    updatedAt,
     feelings: likedUserIds,
   } = commentInfo;
   const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;

@@ -28,7 +28,7 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
     secret,
     userInfo: writerInfo,
     replies,
-    img,
+    updatedAt,
     feelings: likedUserIds,
   } = commentInfo;
   const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
@@ -49,6 +49,7 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
             {/* <span>2022.12.31</span> */}
           </S.CommentTitle>
           <SecretCommentElement
+            isNested={false}
             content={content}
             isSecret={secret}
             postWriterId={postWriterId}
@@ -64,13 +65,14 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
             <span>{parsedNumberToThreeDigits(replies.length)}</span>
           </S.SpecificInfo>
           <S.SpecificInfo>
-            <CommentLikeSvg commentId={commentId} parentId={parentId} likedUserIds={likedUserIds} />
+            <CommentLikeSvg commentId={commentId} likedUserIds={likedUserIds} />
             <span>{parsedNumberToThreeDigits(likesCount)}</span>
           </S.SpecificInfo>
           <CommentButtonContainer
             isNested={false}
             isEditTargetComment={isEditTargetComment}
             commentId={commentId}
+            writerId={writerId}
           />
         </S.CommentInfo>
         <NestedCommentToggleButton
