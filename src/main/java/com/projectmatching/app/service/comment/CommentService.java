@@ -304,11 +304,40 @@ public class CommentService {
      * @Param commentId 수정할 댓글 id
      */
     @Transactional
-    public TeamCommentDto updateTeamComment(TeamCommentReqDto teamCommentReqDto,Long commentId) {
-        TeamComment teamComment = updateCommentToTeam(teamCommentReqDto,commentId);
-        return TeamCommentDto.of(teamCommentRepository.save(teamComment));
+    public TeamCommentDto updateTeamComment(TeamCommentReqDto teamCommentReqDto,UserDetailsImpl userDetails ,Long commentId) {
+        TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(CoNectNotFoundException::new);
+
+        //댓글 작성자 본인이 아니라면 수정 불가
+        if(teamComment.isWriterSameWith(userDetails.getUserRealName()) == false)throw new CoNectRuntimeException(LOGICAL_ERROR,"본인의 댓글만 수정 가능합니다");
+
+        return TeamCommentDto.of(updateCommentToTeam(teamCommentReqDto,teamComment));
     }
 
+
+
+    private TeamComment updateCommentToTeam(TeamCommentReqDto teamCommentReqDto,TeamComment teamComment){
+
+        if(isParentIdChanged(teamCommentReqDto,teamComment))
+            throw new CoNectLogicalException();
+
+        teamComment.setContent(teamCommentReqDto.getContent()); //댓글 수정
+        teamComment.setSecret(teamCommentReqDto.getSecret()); //비밀 여부
+        return teamComment;
+
+    }
+
+
+    //true인 경우 비정상적인 상황, 부모 댓글 대상은 수정될 수 없음
+    private boolean isParentIdChanged(TeamCommentReqDto teamCommentReqDto, TeamComment teamComment){
+
+        //부모 댓글이 없는 경우
+        if(teamCommentReqDto.getParentId().equals(ROOT_COMMENT) && teamComment.isRoot()) return false;
+
+        //부모 댓글이 존재하고 해당 부모 댓글이 수정된 경우
+        if(teamComment.hasParent() && !teamCommentReqDto.getParentId().equals(teamComment.getParent().getId())) return true;
+
+        else return false;
+    }
 
 
     /**
@@ -381,20 +410,6 @@ public class CommentService {
     }
 
 
-    private TeamComment updateCommentToTeam(TeamCommentReqDto teamCommentReqDto,Long commentId){
-        try{
-            TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(NullPointerException::new);
-
-            if(!teamCommentReqDto.getParentId().equals(teamComment.getParent().getId())) throw new RuntimeException();
-
-            teamComment.setContent(teamCommentReqDto.getContent());
-            if(teamCommentReqDto.getSecret() != teamComment.getSecret()) teamComment.setSecret(teamCommentReqDto.getSecret());
-            return teamComment;
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            throw new ResponeException(ResponseTemplateStatus.UPDATE_COMMENT_FAILED);
-        }
-    }
 
 
 

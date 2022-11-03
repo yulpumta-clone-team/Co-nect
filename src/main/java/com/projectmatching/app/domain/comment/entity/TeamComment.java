@@ -96,4 +96,10 @@ public class TeamComment extends BaseTimeEntity {
         this.setStatus("REMOVED");
     }
 
+
+    public boolean isWriterSameWith(String writer){
+        if(this.getWriter().equals(writer))return true;
+        else return false;
+
+    }
 }
