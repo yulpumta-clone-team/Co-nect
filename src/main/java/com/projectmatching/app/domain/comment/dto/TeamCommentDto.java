@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,6 +48,11 @@ public class TeamCommentDto extends UserInfoDto {
     @Builder.Default
     @ApiModelProperty(value = "해당 댓글 좋아요한 유저 정보")
     private List<TeamCommentLikingDto> feelings = new ArrayList<>();
+
+
+    @ApiModelProperty(value = "최종 업데이트 시간")
+    private LocalDateTime updatedAt;
+
 
     public static TeamCommentDto createEmpty() {
         return new TeamCommentDto();
