@@ -59,6 +59,7 @@ public class CommentService {
     private final UserRepository userRepository;
     private final UserInfoAdderService userInfoAdderService;
 
+
     /**
      * 유저 프로필에 댓글 달기
      */
@@ -68,7 +69,6 @@ public class CommentService {
         User beingCommentedUser = userRepository.findById(userCommentReqDto.getUserId()).orElseThrow(CoNectNotFoundException::new);
         UserComment userComment = userCommentReqDto.asEntity();
         userComment.setWriter(userDetails.getUserRealName()); //댓글 단 사람 입력
-
 
         return UserCommentDto.of(addCommentToUser(userComment,beingCommentedUser));
 
