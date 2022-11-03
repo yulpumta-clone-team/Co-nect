@@ -27,9 +27,9 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
-@DisplayName("유저 댓글 테스트")
+@DisplayName("유저 댓글 수정 테스트")
 @SpringBootTest
-public class UserCommentTest extends ServiceTest {
+public class UserCommentUpdateTest extends ServiceTest {
 
 
     private static MockedStatic<UserCommentDto> UserCommentDtoStatic;
@@ -50,98 +50,6 @@ public class UserCommentTest extends ServiceTest {
 
     private UserDetailsImpl userDetails;
 
-
-//    @BeforeEach
-//    public void beforeClass(){
-//        UserCommentDtoStatic = mockStatic(UserCommentDto.class);
-//        idGenerator = mockStatic(IdGenerator.class);
-//        userComment.setUser(user);
-//        userCommentDto = UserCommentDto.of(userComment);
-//
-//        when(IdGenerator.number()).thenReturn(1234567890L);
-//        when(UserCommentDto.of(any(UserComment.class))).then(I->{
-//            return userCommentDto;
-//        });
-//
-//
-//    }
-//
-//    @AfterEach
-//    public void afterClass(){
-//        UserCommentDtoStatic.close();
-//        idGenerator.close();
-//        System.out.println("UserComment test Class ended");
-//    }
-
-
-//
-//    @DisplayName("유저 프로필에 댓글 달기 성공")
-//    @Test
-//    void addUserComment_Succeess(){
-//        //댓글달리는 대상
-//        User user = User.builder().id(1234567890L).email("testing@user.com").content("testUser").build();
-//
-//
-//
-//        UserDetailsImpl userDetails = UserDetailsImpl.builder()
-//                .id(user.getId())
-//                .email(user.getEmail())
-//                .name(user.getName())
-//                .role(Role.USER)
-//                .build();
-//
-//        //달 댓글
-//       UserCommentReqDto userCommentReqDto = UserCommentReqDto.builder()
-//                .content("테스트 댓글")
-//                .userId(user.getId())
-//                .build();
-//
-//
-//        UserComment userComment = userCommentReqDto.asEntity();
-//
-//        UserCommentDto userCommentDto = UserCommentDto.of(userComment);
-//
-//        when(userRepository.findById(userCommentReqDto.getUserId())).then(I->{
-//            return Optional.of(user);
-//        });
-//        when(userCommentRepository.save(any(UserComment.class))).then(I-> {
-//            UserComment userComment =  I.getArgument(0);
-//            return userComment;
-//        });
-//        userComment.setUser(user);
-//
-//        when(userInfoAdderService.userInfoAdder(userCommentDto,user.getId())).thenAnswer(i->{
-//
-//            return i;
-//
-//        });
-//        UserCommentReqDto userCommentReqDto = UserCommentReqDto.builder()
-//                .content("테스트 댓글")
-//                .userId(user.getId())
-//                .build();
-//
-//        UserCommentDto result = commentService.addUserComment(userCommentReqDto,userDetails);
-//
-//        assertEquals(result.getUserId(),user.getId());
-//
-//    }
-//
-//
-//    @DisplayName("유저 프로필 댓글 좋아요 성공")
-//    @Test
-//    void When_Like_UserComment_Success(){
-//        when(userCommentRepository.findById(anyLong())).thenReturn(ofNullable(userComment));
-//        when(userRepository.findByName(anyString())).thenReturn(ofNullable(user));
-//        when(userCommentLikingRepository.save(any(UserCommentLiking.class))).then(I->{
-//            UserCommentLiking u = I.getArgument(0,UserCommentLiking.class);
-//            return u;
-//        });
-//
-//        commentService.doUserCommentLiking(userDetails,1L);
-//
-//        verify(userCommentLikingRepository).save(any(UserCommentLiking.class));
-//
-//    }
 
 
     @BeforeEach
