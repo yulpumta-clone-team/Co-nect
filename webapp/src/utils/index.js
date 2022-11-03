@@ -1,4 +1,4 @@
-import { DEFAULT_PROFILE_IMG, POST_TYPE } from 'constant';
+import { POST_TYPE } from 'constant';
 
 /**
  * 유저글인지 팀 공고글인지 확인하는 함수
@@ -31,3 +31,5 @@ export function setPostIdOnSubmitData(postType, postId, submitData) {
  */
 export const parsedNumberToThreeDigits = (number) =>
   number > 999 ? String(999) : String(number).padStart(3, '0');
+
+export const deepClone = (originalObject) => JSON.parse(JSON.stringify(originalObject));

@@ -6,7 +6,7 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getUserInfo } from 'service/auth';
-import { setPostIdOnSubmitData } from 'utils';
+import { deepClone, setPostIdOnSubmitData } from 'utils';
 import useCommentApi from './useCommentApi';
 
 const DEFAULT_TARGET = -1;
@@ -289,8 +289,6 @@ const useComments = () => {
 };
 
 export default useComments;
-
-const deepClone = (originalObject) => JSON.parse(JSON.stringify(originalObject));
 
 const findParentAndDoCallback = (parents, parentId, callback, callbackParams) => {
   return parents.map((comment) => {
