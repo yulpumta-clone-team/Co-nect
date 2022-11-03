@@ -13,8 +13,12 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.Column;
 import javax.persistence.JoinColumn;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +62,10 @@ public class UserCommentDto extends UserInfoDto {
     @ApiModelProperty(value = "해당 댓글 좋아요한 유저 정보")
     @Builder.Default
     private List<UserCommentLikingDto> feelings = new ArrayList<>();
+
+
+    @ApiModelProperty(value = "최종 업데이트 시간")
+    private LocalDateTime updatedAt;
 
 
     public static UserCommentDto createEmpty() { return new UserCommentDto();}

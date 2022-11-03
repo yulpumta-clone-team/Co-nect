@@ -2,6 +2,7 @@ package com.projectmatching.app.controller.comment;
 
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
+import com.projectmatching.app.constant.TechStackConstant;
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
 import com.projectmatching.app.domain.comment.dto.UserCommentReqDto;
 import com.projectmatching.app.service.comment.CommentService;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -29,7 +31,6 @@ public class UserCommentController {
     @ApiOperation(value = "유저 댓글 달기")
     @PostMapping("/comment")
     public ResponseTemplate<UserCommentDto> addComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-
         return ResponseTemplate.valueOf(commentService.addUserComment(userCommentReqDto,userDetails));
 
     }

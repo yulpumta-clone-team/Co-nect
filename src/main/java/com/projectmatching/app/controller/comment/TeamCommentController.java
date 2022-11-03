@@ -43,9 +43,9 @@ public class TeamCommentController {
 
     @ApiOperation(value = "팀 게시글 (대)댓글 수정")
     @PatchMapping("/comment/{comment_id}")
-    public ResponseTemplate<TeamCommentDto> updateTeamComment(@RequestBody TeamCommentReqDto teamCommentReqDto, @PathVariable(name = "comment_id") Long commentId) {
+    public ResponseTemplate<TeamCommentDto> updateTeamComment(@RequestBody TeamCommentReqDto teamCommentReqDto, @PathVariable(name = "comment_id") Long commentId,@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return ResponseTemplate.valueOf(commentService.updateTeamComment(teamCommentReqDto,commentId));
+        return ResponseTemplate.valueOf(commentService.updateTeamComment(teamCommentReqDto,userDetails,commentId));
     }
 
 
