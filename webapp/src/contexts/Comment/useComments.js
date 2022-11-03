@@ -6,7 +6,12 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getUserInfo } from 'service/auth';
-import { deepClone, setPostIdOnSubmitData } from 'utils';
+import {
+  addLikeToComment,
+  findParentAndDoCallback,
+  removeLikeToComment,
+} from 'service/etc/comment.util';
+import { setPostIdOnSubmitData } from 'utils';
 import useCommentApi from './useCommentApi';
 
 const DEFAULT_TARGET = -1;
@@ -289,36 +294,3 @@ const useComments = () => {
 };
 
 export default useComments;
-
-const findParentAndDoCallback = (parents, parentId, callback, callbackParams) => {
-  return parents.map((comment) => {
-    if (comment.id === parentId) {
-      const clone = deepClone(comment);
-      clone.replies = callback({ prevComments: clone.replies, ...callbackParams });
-      return clone;
-    }
-    return comment;
-  });
-};
-
-const addLikeToComment = ({ prevComments, commentId, loggedInUserId }) => {
-  return prevComments.map((comment) => {
-    if (comment.id === commentId) {
-      const clone = deepClone(comment);
-      clone.feelings.push(loggedInUserId);
-      return clone;
-    }
-    return comment;
-  });
-};
-
-const removeLikeToComment = ({ prevComments, commentId, loggedInUserId }) => {
-  return prevComments.map((comment) => {
-    if (comment.id === commentId) {
-      const clone = deepClone(comment);
-      clone.feelings = [...clone.feelings].filter((userId) => userId !== loggedInUserId);
-      return clone;
-    }
-    return comment;
-  });
-};
