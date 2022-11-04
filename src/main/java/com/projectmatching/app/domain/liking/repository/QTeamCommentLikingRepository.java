@@ -15,7 +15,7 @@ public class QTeamCommentLikingRepository {
 
     public boolean isExistWithUserIdAndCommentId(Long userId, Long commentId){
         return jpaQueryFactory.selectOne().from(teamCommentLiking)
-                .where(teamCommentLiking.user.id.eq(userId).and(teamCommentLiking.id.eq(commentId)))
+                .where(teamCommentLiking.user.id.eq(userId).and(teamCommentLiking.teamComment.id.eq(commentId)))
                 .fetchFirst() != null;
 
     }

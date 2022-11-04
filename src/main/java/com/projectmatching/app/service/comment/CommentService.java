@@ -187,7 +187,7 @@ public class CommentService {
         User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
 
         if(qUserCommentLikingRepository.isExistWithUserIdAndCommentId(user.getId(),userComment.getId())){
-            throw new CoNectRuntimeException(FORBIDDEN,"이미 한번 좋아요한 댓글입니다.");
+            throw new CoNectRuntimeException(LIKING_DUPLICATE_ERROR);
         }
 
 
@@ -339,11 +339,11 @@ public class CommentService {
     @Transactional
     public void doTeamCommentLiking(UserDetailsImpl userDetails, Long commentId) {
         TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(RuntimeException::new);
-        User user = userRepository.findByName(userDetails.getEmail()).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(RuntimeException::new);
 
 
         if(qTeamCommentLikingRepository.isExistWithUserIdAndCommentId(user.getId(),teamComment.getId())){
-            throw new CoNectRuntimeException(FORBIDDEN,"이미 한번 좋아요한 댓글입니다.");
+            throw new CoNectRuntimeException(LIKING_DUPLICATE_ERROR);
         }
 
         TeamCommentLiking teamCommentLiking = TeamCommentLiking.builder()

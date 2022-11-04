@@ -16,7 +16,7 @@ public class QUserCommentLikingRepository {
 
     public boolean isExistWithUserIdAndCommentId(Long userId, Long commentId){
         return jpaQueryFactory.selectOne().from(userCommentLiking)
-                .where(userCommentLiking.user.id.eq(userId).and(userCommentLiking.id.eq(commentId)))
+                .where(userCommentLiking.user.id.eq(userId).and(userCommentLiking.userComment.id.eq(commentId)))
                 .fetchFirst() != null;
 
     }

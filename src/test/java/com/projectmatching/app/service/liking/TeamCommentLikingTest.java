@@ -55,7 +55,7 @@ public class TeamCommentLikingTest extends ServiceTest {
     @Test
     void Given_UserDetails_And_CommentId_Then_Add_TeamCommentLiking_Success(){
         when(teamCommentRepository.findById(anyLong())).thenReturn(Optional.of(mock(TeamComment.class)));
-        when(userRepository.findByName(any())).thenReturn(Optional.of(mock(User.class)));
+        when(userRepository.findByEmail(any())).thenReturn(Optional.of(mock(User.class)));
 
         when(qTeamCommentLikingRepository.isExistWithUserIdAndCommentId(anyLong(),anyLong())).thenReturn(false);
 
@@ -69,7 +69,7 @@ public class TeamCommentLikingTest extends ServiceTest {
     @Test
     void Given_Meaningless_liking_Commemnt_Then_Throw_Forbidden_Exception(){
         when(teamCommentRepository.findById(anyLong())).thenReturn(Optional.of(mock(TeamComment.class)));
-        when(userRepository.findByName(any())).thenReturn(Optional.of(mock(User.class)));
+        when(userRepository.findByEmail(any())).thenReturn(Optional.of(mock(User.class)));
         when(qTeamCommentLikingRepository.isExistWithUserIdAndCommentId(anyLong(),anyLong())).thenReturn(true);
 
 

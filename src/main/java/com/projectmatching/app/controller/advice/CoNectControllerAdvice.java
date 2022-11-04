@@ -3,6 +3,7 @@ package com.projectmatching.app.controller.advice;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
+import com.projectmatching.app.exception.CoNectRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -24,6 +25,16 @@ public class CoNectControllerAdvice {
         return ResponseEntity.status(status.getHttpStatus()) //http code
                 .body(ResponseTemplate.of(status));
     }
+
+//    @ExceptionHandler(CoNectRuntimeException.class)
+//    public ResponseEntity<ResponseTemplate<ResponseTemplateStatus>> except(CoNectRuntimeException e){
+//        e.printStackTrace();
+//        ResponseTemplateStatus status = ResponseTemplateStatus.findByHttpStatus(e.getHttpStatus());
+//        log.info("Controller Advice , Exception : {}",e);
+//        return ResponseEntity.status(e.getHttpStatus())
+//                .body(ResponseTemplate.of(status));
+//
+//    }
 
 
     @ExceptionHandler(RuntimeException.class)

@@ -1,5 +1,6 @@
 package com.projectmatching.app.constant;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -77,7 +78,7 @@ public enum ResponseTemplateStatus {
     DELETE_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"본인 댓글만 삭제 가능합니다.",4003),
     LIKE_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"댓글 좋아요 실패",4003),
     LIKING_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"그러한 댓글 존재하지 않음",4004),
-
+    LIKING_DUPLICATE_ERROR(HttpStatus.BAD_REQUEST,"이미 한번 좋아요한 댓글입니다",4005),
 
 
     /**
@@ -101,11 +102,12 @@ public enum ResponseTemplateStatus {
     LOGICAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,"서버 내부 논리 에러",9000),
     NOT_FOUND(HttpStatus.NOT_FOUND,"리소스를 찾을 수 없습니다.",9001);
 
+
     private HttpStatus httpStatus;
     private final String message;
     private final int code;
 
-    private ResponseTemplateStatus(HttpStatus httpStatus, String message, int code) { //BaseResponseStatus 에서 각 해당하는 코드를 생성자로 맵핑
+    ResponseTemplateStatus(HttpStatus httpStatus, String message, int code) { //BaseResponseStatus 에서 각 해당하는 코드를 생성자로 맵핑
         this.httpStatus = httpStatus;
         this.code = code;
         this.message = message;

@@ -28,4 +28,6 @@ public class ErrorControllerImpl implements ErrorController {
                 .body(ResponseTemplate.error(ResponseTemplateStatus.LOGICAL_ERROR));
     }
 
+
+
 }
