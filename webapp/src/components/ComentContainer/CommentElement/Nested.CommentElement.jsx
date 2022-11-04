@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { replyCommentInfoType } from 'types/comment.type';
 import { parsedNumberToThreeDigits } from 'utils';
+import { ISOToyyyymmdd } from 'service/etc/time.util';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import SecretCommentElement from './Secret.CommentElement';
 import CommentLikeSvg from './CommentLikeSvg';
@@ -34,7 +35,7 @@ export default function NestedCommentElement({ commentInfo, postWriterId }) {
       <S.PublicCommentBox>
         <S.CommentTitle isNested>
           <h3>{writerName}</h3>
-          <span>2022.12.31</span>
+          <span>{ISOToyyyymmdd(updatedAt)}</span>
         </S.CommentTitle>
         <SecretCommentElement
           isNested

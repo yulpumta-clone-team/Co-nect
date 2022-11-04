@@ -5,6 +5,7 @@ import { commentInfoType } from 'types/comment.type';
 import Image from 'components/Common/Image';
 import { parsedNumberToThreeDigits } from 'utils';
 import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
+import { ISOToyyyymmdd } from 'service/etc/time.util';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
 import NestedCommentList from '../CommentList/Nested.CommentList';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
@@ -46,7 +47,7 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
         <S.PublicCommentBox>
           <S.CommentTitle>
             <h3>{writerName}</h3>
-            {/* <span>2022.12.31</span> */}
+            <span>{ISOToyyyymmdd(updatedAt)}</span>
           </S.CommentTitle>
           <SecretCommentElement
             isNested={false}
