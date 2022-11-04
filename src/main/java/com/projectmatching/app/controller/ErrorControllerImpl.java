@@ -12,22 +12,22 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
 
-@Controller
-@RequestMapping(value = "/error")
-@RequiredArgsConstructor
-@ApiIgnore
-public class ErrorControllerImpl implements ErrorController {
-
-    private final HttpServletResponse response;
-
-    @RequestMapping
-    public ResponseEntity<ResponseTemplate<Void>> handle(){
-        HttpStatus httpStatus = HttpStatus.valueOf(response.getStatus());
-        return ResponseEntity
-                .status(httpStatus)
-                .body(ResponseTemplate.error(ResponseTemplateStatus.LOGICAL_ERROR));
-    }
-
-
-
-}
+//@Controller
+//@RequestMapping(value = "/error")
+//@RequiredArgsConstructor
+//@ApiIgnore
+//public class ErrorControllerImpl implements ErrorController {
+//
+//    private final HttpServletResponse response;
+//
+//    @RequestMapping
+//    public ResponseEntity<ResponseTemplate<Void>> handle(){
+//        HttpStatus httpStatus = HttpStatus.valueOf(response.getStatus());
+//        return ResponseEntity
+//                .status(httpStatus)
+//                .body(ResponseTemplate.error(ResponseTemplateStatus.LOGICAL_ERROR));ㄴ
+//    }
+//
+//
+//
+//}

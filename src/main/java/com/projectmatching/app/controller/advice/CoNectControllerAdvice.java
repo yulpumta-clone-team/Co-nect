@@ -26,15 +26,16 @@ public class CoNectControllerAdvice {
                 .body(ResponseTemplate.of(status));
     }
 
-//    @ExceptionHandler(CoNectRuntimeException.class)
-//    public ResponseEntity<ResponseTemplate<ResponseTemplateStatus>> except(CoNectRuntimeException e){
-//        e.printStackTrace();
-//        ResponseTemplateStatus status = ResponseTemplateStatus.findByHttpStatus(e.getHttpStatus());
-//        log.info("Controller Advice , Exception : {}",e);
-//        return ResponseEntity.status(e.getHttpStatus())
-//                .body(ResponseTemplate.of(status));
-//
-//    }
+    @ExceptionHandler(CoNectRuntimeException.class)
+    public ResponseEntity<ResponseTemplate<ResponseTemplateStatus>> except(CoNectRuntimeException e){
+        e.printStackTrace();
+        ResponseTemplateStatus status = ResponseTemplateStatus.findByCode(e.getCode());
+        log.info("Controller Advice , Exception : {}",e);
+        log.info("status {}",status);
+        return ResponseEntity.status(e.getHttpStatus())
+                .body(ResponseTemplate.of(status));
+
+    }
 
 
     @ExceptionHandler(RuntimeException.class)

@@ -69,16 +69,16 @@ public enum ResponseTemplateStatus {
     ,
 
     /**
-     * 4000: 댓글 관련 오류
+     * 7000: 댓글 관련 오류
      */
 
-    ADD_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"부모 댓글인 경우에만 대댓글을 달 수 있습니다.",4000),
-    ADD_NESTED_FAILED(HttpStatus.BAD_REQUEST,"부모 댓글 ID가 NULL입니다.",4001),
-    UPDATE_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"댓글 수정 실패",4002),
-    DELETE_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"본인 댓글만 삭제 가능합니다.",4003),
-    LIKE_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"댓글 좋아요 실패",4003),
-    LIKING_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"그러한 댓글 존재하지 않음",4004),
-    LIKING_DUPLICATE_ERROR(HttpStatus.BAD_REQUEST,"이미 한번 좋아요한 댓글입니다",4005),
+    ADD_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"부모 댓글인 경우에만 대댓글을 달 수 있습니다.",7000),
+    ADD_NESTED_FAILED(HttpStatus.BAD_REQUEST,"부모 댓글 ID가 NULL입니다.",7001),
+    UPDATE_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"댓글 수정 실패",7002),
+    DELETE_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"본인 댓글만 삭제 가능합니다.",7003),
+    LIKE_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"댓글 좋아요 실패",7004),
+    LIKING_COMMENT_FAILED(HttpStatus.BAD_REQUEST,"그러한 댓글 존재하지 않음",7005),
+    LIKING_DUPLICATE_ERROR(HttpStatus.BAD_REQUEST,"이미 한번 좋아요한 댓글입니다",7006),
 
 
     /**
@@ -113,13 +113,19 @@ public enum ResponseTemplateStatus {
         this.message = message;
     }
 
-    public static ResponseTemplateStatus findByHttpStatus(HttpStatus httpStatus) {
+    public static ResponseTemplateStatus findByCode(int code) {
+        return Arrays.stream(values())
+                .filter(responseTemplateStatus -> responseTemplateStatus.getCode()==code)
+                .findFirst()
+                .orElse(ResponseTemplateStatus.LOGICAL_ERROR);
+    }
+
+    public static ResponseTemplateStatus findByHttpStatus(HttpStatus httpStatus){
         return Arrays.stream(values())
                 .filter(responseTemplateStatus -> responseTemplateStatus.getHttpStatus().equals(httpStatus))
                 .findFirst()
                 .orElse(ResponseTemplateStatus.LOGICAL_ERROR);
     }
-
 
 
 
