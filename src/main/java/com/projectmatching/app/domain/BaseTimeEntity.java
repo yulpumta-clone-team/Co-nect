@@ -1,5 +1,6 @@
 package com.projectmatching.app.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,14 +18,19 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseTimeEntity {
 
+
+    @Builder.Default
     @CreatedDate
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder.Default
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+
+    @Builder.Default
     @Column(columnDefinition = "varchar(10) default 'active' ")
-    private String status;
+    private String status = "Active";
 }

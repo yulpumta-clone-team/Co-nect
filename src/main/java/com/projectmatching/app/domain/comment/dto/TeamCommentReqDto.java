@@ -34,6 +34,7 @@ public class TeamCommentReqDto {
 
     public TeamComment asEntity(){
         TeamComment teamComment = new TeamComment();
+
         BeanUtils.copyProperties(this,teamComment);
         teamComment.setId(IdGenerator.number());
         return teamComment;
