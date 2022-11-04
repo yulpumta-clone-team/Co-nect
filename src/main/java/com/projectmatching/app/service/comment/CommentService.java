@@ -202,6 +202,11 @@ public class CommentService {
     }
 
 
+    /**
+     * 유저 댓글 좋아요 취소
+     * @param userDetails
+     * @param commentId
+     */
     @Transactional
     public void cancelUserCommentLiking(UserDetailsImpl userDetails, Long commentId) {
         try {
