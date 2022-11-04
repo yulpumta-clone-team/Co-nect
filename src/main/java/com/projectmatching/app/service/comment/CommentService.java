@@ -339,7 +339,7 @@ public class CommentService {
     @Transactional
     public void doTeamCommentLiking(UserDetailsImpl userDetails, Long commentId) {
         TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(RuntimeException::new);
-        User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByName(userDetails.getEmail()).orElseThrow(RuntimeException::new);
 
 
         if(qTeamCommentLikingRepository.isExistWithUserIdAndCommentId(user.getId(),teamComment.getId())){
@@ -361,8 +361,9 @@ public class CommentService {
     @Transactional
     public void cancelTeamCommentLiking(UserDetailsImpl userDetails, Long commentId) {
         try{
-            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
-            TeamCommentLiking teamCommentLiking = teamCommentLikingRepository.findByUserIdAndTeamCommentId(user.getId(), commentId).orElseThrow(NullPointerException::new);
+            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(CoNectNotFoundException::new);
+            TeamCommentLiking teamCommentLiking = teamCommentLikingRepository.findByUserIdAndTeamCommentId(user.getId(), commentId)
+                    .orElseThrow(CoNectNotFoundException::new);
 
             teamCommentLikingRepository.delete(teamCommentLiking);
         }catch (NullPointerException e){

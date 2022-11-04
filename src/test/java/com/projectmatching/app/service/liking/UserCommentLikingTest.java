@@ -1,5 +1,6 @@
 package com.projectmatching.app.service.liking;
 
+import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.domain.comment.entity.UserComment;
 import com.projectmatching.app.domain.comment.repository.UserCommentRepository;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
@@ -7,6 +8,7 @@ import com.projectmatching.app.domain.liking.repository.QUserCommentLikingReposi
 import com.projectmatching.app.domain.liking.repository.UserCommentLikingRepository;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.exception.CoNectRuntimeException;
 import com.projectmatching.app.service.ServiceTest;
 import com.projectmatching.app.service.comment.CommentService;
@@ -16,14 +18,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
 @DisplayName("유저 댓글 좋아요 테스트")
-public class UserCommentLikingAddTest extends ServiceTest {
+public class UserCommentLikingTest extends ServiceTest {
 
     @InjectMocks
     private CommentService commentService;
@@ -94,5 +95,14 @@ public class UserCommentLikingAddTest extends ServiceTest {
     }
 
 
+    @DisplayName("유저 댓글 좋아요 취소 실패 : 좋아요 누른적이 없음")
+    @Test
+    void Given_No_UserCommentLiking_Delete_Then_Fail(){
+        when(userCommentLikingRepository.findUserCommentLikingByUserNameAndUserCommentId(any(),anyLong())).thenThrow(CoNectNotFoundException.class);
 
+        Assertions.assertThrows(ResponeException.class,()->{
+
+            commentService.cancelUserCommentLiking(mock(UserDetailsImpl.class),commentIdForTest);
+        });
+    }
 }
