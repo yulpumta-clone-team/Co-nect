@@ -17,3 +17,8 @@ export const Default = Template.bind({});
 Default.args = {
   targetUser: userDetail,
 };
+
+export const NoTeamImage = Template.bind({});
+NoTeamImage.args = {
+  targetUser: { ...userDetail, profileImage: null },
+};
