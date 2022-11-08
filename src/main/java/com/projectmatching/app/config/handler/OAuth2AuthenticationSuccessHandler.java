@@ -45,7 +45,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         log.info("Oatuh 로그인후 토큰 생성  : {}");
 
 //        writeTokenCookie(response,token);
-//        resultRedirectStrategy(request, response, authentication);
+        resultRedirectStrategy(request, response, authentication);
 
     }
 

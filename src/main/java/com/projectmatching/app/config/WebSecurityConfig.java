@@ -48,7 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http)throws Exception {
 
-
         http.httpBasic().disable();
         http.csrf().disable().
                 cors().configurationSource(corsConfigurationSource())
@@ -131,7 +130,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.GET, "/team/{team_id:\\d+}");
         web.ignoring().antMatchers(HttpMethod.GET,"/team/comment/{team_id:\\d+}");
         web.ignoring().antMatchers(HttpMethod.GET, "/user/comment/{user_id:\\d+}");
-
+        web.ignoring().antMatchers(HttpMethod.GET,"/login/oauth2/**");
 
     }
 
