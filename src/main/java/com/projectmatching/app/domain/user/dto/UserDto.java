@@ -55,6 +55,7 @@ public class UserDto extends UserInfoDto {
         userDto.skills = user.getSkills().stream().map(UserTech::toTechStack)
                         .map(TechStackDto::of).collect(Collectors.toList());
 
+        userDto.userInfo = setUserInfoWith(user);
         return userDto;
     }
 

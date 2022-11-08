@@ -1,15 +1,10 @@
 package com.projectmatching.app.domain.user.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.Validatable;
-import com.projectmatching.app.domain.user.Role;
-import com.projectmatching.app.domain.user.UserRepository;
-import com.projectmatching.app.domain.user.entity.User;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
@@ -39,7 +34,7 @@ public class UserEssentialDto implements Validatable {
     @Override
     public void validate() {
         if(name.length() > NAME_SIZE_MAX){
-            throw new ResponeException(ResponseTemplateStatus.NAME_SIZE_INVALID);
+                throw new ResponeException(ResponseTemplateStatus.NAME_SIZE_INVALID);
         }
 
     }
