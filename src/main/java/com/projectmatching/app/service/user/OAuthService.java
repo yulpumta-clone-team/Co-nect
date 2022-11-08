@@ -26,6 +26,7 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        log.info("custom OauthService!!!");
         OAuth2UserService delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest); // OAuth 서비스(github, google, naver)에서 가져온 유저 정보를 담고있음
 
@@ -42,7 +43,7 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 
         User user = saveOrUpdate(userProfile); // DB에 저장
 
-        log.info("저장된 유저 : {}",user);
+
 
         //DefaultOAuth2User의 권한을 가진 User를 load합니다.
         return new DefaultOAuth2User(

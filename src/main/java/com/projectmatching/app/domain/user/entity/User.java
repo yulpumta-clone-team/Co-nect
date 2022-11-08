@@ -10,6 +10,7 @@ import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.techStack.provider.TechStackProvider;
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.dto.UserEssentialDto;
+import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
 
 import javax.persistence.*;
@@ -116,7 +117,7 @@ public class User extends BaseTimeEntity  {
 
 
     public User(String oauthId,String name, String email, Role role ){
-        this.id = null;
+        this.id = IdGenerator.number();
         this.oauthId = oauthId;
         this.email = email;
         this.name = name;

@@ -39,6 +39,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
 
         log.info("jwt 필터");
+        if(existsAuthentication()) filterChain.doFilter(request,response); //Oauth 로그인된 유저들은 필터 거치치 않음
+
         if(authTokenProvider.isTokenExist(request)){
             String token = authTokenProvider.resolveToken(request);
             if (authTokenProvider.isTokenValid(token) && !existsAuthentication()) {

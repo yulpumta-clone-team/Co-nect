@@ -1,6 +1,7 @@
 package com.projectmatching.app.service.userInfoAdder;
 
 
+import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserInfoDto;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +14,6 @@ public interface UserInfoAdderService {
 
 
     <T extends  UserInfoDto> T nestedUserInfoAdder(T nestedUserInfoAppendableDto,String userName);
+
 
 }

@@ -3,6 +3,7 @@ package com.projectmatching.app.config.handler;
 import com.projectmatching.app.config.YAMLConfig;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
 import com.projectmatching.app.util.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private final AuthTokenProvider authTokenProvider;
     private final UserRepository userRepository;
     private final YAMLConfig yamlConfig;
-
+    private final UserInfoAdderService userInfoAdderService;
     private RequestCache requestCache = new HttpSessionRequestCache();
     private RedirectStrategy redirectStratgy = new DefaultRedirectStrategy();
 
@@ -56,7 +57,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
             String targetUrl = savedRequest.getRedirectUrl();
             redirectStratgy.sendRedirect(request, response, targetUrl);
         } else {
-            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+ yamlConfig.getPORT()+ "/callback";
+            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+ yamlConfig.getFPORT()+ "/callback";
             redirectStratgy.sendRedirect(request, response, redirectUrl);
         }
 
@@ -78,9 +79,12 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
     private UserDto toDto(OAuth2User oAuth2User) {
        Map<String,Object> attributes = oAuth2User.getAttributes();
-        return UserDto.builder()
-                .email((String)attributes.get("email")).build();
-//                .userInfo.setName(((String)attributes.get("name"))).build();
+
+       UserDto userDto = UserDto.builder()
+               .email((String)attributes.get("email")).build();
+
+       return userInfoAdderService.userInfoAdder(userDto,(String)attributes.get("name"));
+
 
     }
 }

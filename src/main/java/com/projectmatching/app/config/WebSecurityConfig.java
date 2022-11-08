@@ -67,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**"
                     ).permitAll()
                 .antMatchers(FilterPatternConstant.pathArray).permitAll()
+                .antMatchers("/login","/oauth2/authorization").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //토큰 사용하므로 세션 사용 x
@@ -130,7 +131,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.GET, "/team/{team_id:\\d+}");
         web.ignoring().antMatchers(HttpMethod.GET,"/team/comment/{team_id:\\d+}");
         web.ignoring().antMatchers(HttpMethod.GET, "/user/comment/{user_id:\\d+}");
-        web.ignoring().antMatchers(HttpMethod.GET,"/login/oauth2/**");
+
+
 
     }
 

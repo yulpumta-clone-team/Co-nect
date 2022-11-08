@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL) //null 이면 생성되지 않음
-public class UserDto {
+public class UserDto extends UserInfoDto {
 
     private Long id;
 
-    private UserInfo userInfo;
+
     private String email;
     private String portfolio;
     private String slogan;
@@ -47,7 +47,6 @@ public class UserDto {
     public static UserDto of(User user){
         UserDto userDto = createEmpty();
         BeanUtils.copyProperties(user, userDto);
-        userDto.userInfo = UserInfo.of(user);
         userDto.commentCnt = user.getUserComments().size();
         userDto.likeCnt = user.getRespected();
         userDto.skills = user.getSkills().stream().map(UserTech::toTechStack)
