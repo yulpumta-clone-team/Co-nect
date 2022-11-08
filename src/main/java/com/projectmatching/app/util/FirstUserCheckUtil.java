@@ -2,10 +2,12 @@ package com.projectmatching.app.util;
 
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserEssentialDto;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 
-public class FirstUserCheckUtil {
+@Slf4j
+public final class FirstUserCheckUtil {
 
     /**
      *
@@ -16,6 +18,7 @@ public class FirstUserCheckUtil {
      */
     public static boolean isFirstLoginUser(UserDto userDto) throws IllegalAccessException {
         UserEssentialDto userEssentialDto = UserEssentialDto.extract(userDto);
+        log.info("userEssential Dto?? {}",userEssentialDto.toString());
         if(isEssentialPropertyNull(userEssentialDto))return true;
         else return false;
     }

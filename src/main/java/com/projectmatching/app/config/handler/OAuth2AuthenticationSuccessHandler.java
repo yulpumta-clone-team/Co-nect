@@ -5,6 +5,7 @@ import com.projectmatching.app.domain.user.UserProfile;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.exception.CoNectLogicalException;
 import com.projectmatching.app.service.user.Impl.UserSignInService;
 import com.projectmatching.app.service.user.OAuthService;
 import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
@@ -30,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -92,21 +94,9 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
     private UserDto toDto(OAuth2User oAuth2User) {
        Map<String,Object> attributes = oAuth2User.getAttributes();
-
-       UserDto userDto = UserDto.builder()
-               .email((String)attributes.get("email")).build();
-
+       User user = userRepository.findByEmail((String)attributes.get("email")).orElseThrow(CoNectLogicalException::new);
+       UserDto userDto = UserDto.of(user);
        return userInfoAdderService.userInfoAdder(userDto,(String)attributes.get("name"));
-
-
     }
 
-
-    private User saveOrUpdate(UserProfile userProfile) {
-        User user = userRepository.findByOauthId(userProfile.getOauthId())
-                .map(m-> m.update(userProfile.getName(), userProfile.getEmail()))
-                .orElse(userProfile.toUser());
-
-        return userRepository.save(user);
-    }
 }
