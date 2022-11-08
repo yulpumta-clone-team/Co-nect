@@ -40,13 +40,12 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private RequestCache requestCache = new HttpSessionRequestCache();
     private RedirectStrategy redirectStratgy = new DefaultRedirectStrategy();
 
-    private final OAuthService oAuthService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         log.info("OAuth 로그인 SuccessHandler --- ");
         OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
-        log.info("Oauth Authen :: {}",oAuth2User.toString());
+
 
         UserDto user = toDto(oAuth2User);
         AuthToken authToken = authTokenProvider.createTokens(user);

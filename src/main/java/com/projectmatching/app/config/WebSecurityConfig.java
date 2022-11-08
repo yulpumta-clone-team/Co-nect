@@ -93,8 +93,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .successHandler(oAuth2AuthenticationSuccessHandler);
 
-
-
     }
 
     //패스워드 인코더 설정

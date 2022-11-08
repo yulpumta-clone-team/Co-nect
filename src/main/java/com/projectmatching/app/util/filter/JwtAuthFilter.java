@@ -38,11 +38,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        log.info("jwt 필터 : ===req :  {}",request.getRequestURL());
-
-        if(shouldNotFilter(request)) filterChain.doFilter(request,response);
-
-
         if(authTokenProvider.isTokenExist(request)){
             String token = authTokenProvider.resolveToken(request);
             if (authTokenProvider.isTokenValid(token) && !existsAuthentication()) {
@@ -102,13 +97,5 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 
-        String url = request.getRequestURL().toString();
-        log.info("req url : {}", url);
-        if(url.contains("login/oauth2/code"))return true;
-        else return false;
-
-    }
 }
