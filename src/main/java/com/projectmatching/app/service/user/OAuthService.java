@@ -46,7 +46,6 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
         User user = saveOrUpdate(userProfile); // DB에 저장
 
 
-
         //DefaultOAuth2User의 권한을 가진 User를 load합니다.
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRolekey())),

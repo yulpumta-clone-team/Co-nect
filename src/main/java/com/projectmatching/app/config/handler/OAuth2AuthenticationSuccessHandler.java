@@ -5,11 +5,14 @@ import com.projectmatching.app.domain.user.UserProfile;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.service.user.Impl.UserSignInService;
 import com.projectmatching.app.service.user.OAuthService;
 import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
 import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
+import com.projectmatching.app.util.FirstUserCheckUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -41,29 +44,33 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private RedirectStrategy redirectStratgy = new DefaultRedirectStrategy();
 
 
+    @SneakyThrows //isFirstgLoginUser 때문에 사용
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         log.info("OAuth 로그인 SuccessHandler --- ");
         OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
 
-
         UserDto user = toDto(oAuth2User);
         AuthToken authToken = authTokenProvider.createTokens(user);
+        StringBuilder isFirstLoginUser = new StringBuilder("?isFirst=");
+        if(FirstUserCheckUtil.isFirstLoginUser(user)){
+            isFirstLoginUser.append("true");
+        }
+        else  isFirstLoginUser.append("false");
 
 
-
-        resultRedirectStrategy(request, response,authToken);
+        resultRedirectStrategy(request, response,authToken,isFirstLoginUser.toString());
 
     }
 
     protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
-                                         AuthToken authToken) throws IOException, ServletException {
+                                         AuthToken authToken,String isFirst) throws IOException, ServletException {
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if(savedRequest!=null) {
             String targetUrl = savedRequest.getRedirectUrl();
             redirectStratgy.sendRedirect(request, response, targetUrl);
         } else {
-            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+ yamlConfig.getFPORT()+ "/callback?" + authToken.toString();
+            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+ yamlConfig.getFPORT()+ "/callback?" + authToken.toString() + isFirst;
             redirectStratgy.sendRedirect(request, response, redirectUrl);
         }
 

@@ -44,4 +44,10 @@ public class UserEssentialDto implements Validatable {
         }
 
     }
+
+    public static UserEssentialDto extract(UserDto userDto){
+        UserEssentialDto userEssentialDto = new UserEssentialDto();
+        BeanUtils.copyProperties(userDto,userEssentialDto);
+        return userEssentialDto;
+    }
 }
