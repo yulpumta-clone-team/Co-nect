@@ -4,6 +4,7 @@ import com.projectmatching.app.config.YAMLConfig;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
+import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,25 +40,25 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-
+        log.info("OAuth 로그인 SuccessHandler --- ");
         OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
         UserDto user = toDto(oAuth2User);
-        authTokenProvider.createTokens(user);
-        log.info("Oatuh 로그인후 토큰 생성  : {}");
+        AuthToken authToken = authTokenProvider.createTokens(user);
 
-//        writeTokenCookie(response,token);
-        resultRedirectStrategy(request, response, authentication);
+
+
+        resultRedirectStrategy(request, response,authToken);
 
     }
 
     protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
-                                          Authentication authentication) throws IOException, ServletException {
+                                         AuthToken authToken) throws IOException, ServletException {
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if(savedRequest!=null) {
             String targetUrl = savedRequest.getRedirectUrl();
             redirectStratgy.sendRedirect(request, response, targetUrl);
         } else {
-            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+ yamlConfig.getFPORT()+ "/callback";
+            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+ yamlConfig.getFPORT()+ "/callback?" + authToken.toString();
             redirectStratgy.sendRedirect(request, response, redirectUrl);
         }
 

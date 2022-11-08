@@ -41,4 +41,8 @@ public class AuthToken {
     //헤더에 토큰 추가
     public HttpHeaders asHeaders() {return new HttpHeaders(asMultiValueMap());}
 
+
+    public String toString(){
+        return "accessToken="+ this.token + "&" +"refreshToken=" + this.refreshToken;
+    }
 }
