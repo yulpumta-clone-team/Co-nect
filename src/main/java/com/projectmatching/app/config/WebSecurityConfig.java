@@ -12,6 +12,7 @@ import com.projectmatching.app.util.AuthTokenProvider;
 import com.projectmatching.app.util.filter.JwtAuthFilter;
 import com.projectmatching.app.util.filter.JwtExceptionFilter;
 import lombok.RequiredArgsConstructor;
+import org.graalvm.compiler.lir.CompositeValue;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,14 +25,23 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.EnumSet;
 
 @Configuration
@@ -48,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http)throws Exception {
 
-        http.httpBasic().disable();
+        http.httpBasic();
         http.csrf().disable().
                 cors().configurationSource(corsConfigurationSource())
                 .and()
@@ -67,7 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**"
                     ).permitAll()
                 .antMatchers(FilterPatternConstant.pathArray).permitAll()
-                .antMatchers("/login","/oauth2/authorization").permitAll()
+                .antMatchers("/login/**","login/oauth2/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //토큰 사용하므로 세션 사용 x
@@ -78,10 +88,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .and()
                 .oauth2Login()
-                    .userInfoEndpoint()
-                        .userService(oAuthService)
-                        .and()
+                .userInfoEndpoint()
+                .userService(oAuthService)
+                .and()
                 .successHandler(oAuth2AuthenticationSuccessHandler);
+
 
 
     }

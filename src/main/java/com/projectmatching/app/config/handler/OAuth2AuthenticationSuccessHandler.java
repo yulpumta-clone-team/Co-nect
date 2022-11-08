@@ -1,8 +1,11 @@
 package com.projectmatching.app.config.handler;
 
 import com.projectmatching.app.config.YAMLConfig;
+import com.projectmatching.app.domain.user.UserProfile;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.service.user.OAuthService;
 import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
 import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
@@ -37,11 +40,14 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private RequestCache requestCache = new HttpSessionRequestCache();
     private RedirectStrategy redirectStratgy = new DefaultRedirectStrategy();
 
+    private final OAuthService oAuthService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         log.info("OAuth 로그인 SuccessHandler --- ");
         OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+        log.info("Oauth Authen :: {}",oAuth2User.toString());
+
         UserDto user = toDto(oAuth2User);
         AuthToken authToken = authTokenProvider.createTokens(user);
 
@@ -87,5 +93,14 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
        return userInfoAdderService.userInfoAdder(userDto,(String)attributes.get("name"));
 
 
+    }
+
+
+    private User saveOrUpdate(UserProfile userProfile) {
+        User user = userRepository.findByOauthId(userProfile.getOauthId())
+                .map(m-> m.update(userProfile.getName(), userProfile.getEmail()))
+                .orElse(userProfile.toUser());
+
+        return userRepository.save(user);
     }
 }

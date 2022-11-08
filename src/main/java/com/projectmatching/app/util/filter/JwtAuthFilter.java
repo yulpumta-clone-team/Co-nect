@@ -24,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import static java.util.Objects.nonNull;
 
@@ -37,9 +38,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        log.info("jwt 필터 : ===req :  {}",request.getRequestURL());
 
-        log.info("jwt 필터");
-        if(existsAuthentication()) filterChain.doFilter(request,response); //Oauth 로그인된 유저들은 필터 거치치 않음
+        if(shouldNotFilter(request)) filterChain.doFilter(request,response);
+
 
         if(authTokenProvider.isTokenExist(request)){
             String token = authTokenProvider.resolveToken(request);
@@ -100,4 +102,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+
+        String url = request.getRequestURL().toString();
+        log.info("req url : {}", url);
+        if(url.contains("login/oauth2/code"))return true;
+        else return false;
+
+    }
 }
