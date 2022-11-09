@@ -56,17 +56,21 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         UserDto user = toDto(oAuth2User);
         AuthToken authToken = authTokenProvider.createTokens(user);
 
+        resultRedirectStrategy(request, response,authToken,isFirstLoginUserResult(user));
 
+    }
+
+    private String isFirstLoginUserResult(UserDto user) throws IllegalAccessException {
         StringBuilder isFirstLoginUser = new StringBuilder("&isFirst=");
         if(FirstUserCheckUtil.isFirstLoginUser(user)){
             isFirstLoginUser.append("true");
+        } else {
+            isFirstLoginUser.append("false");
         }
-        else  isFirstLoginUser.append("false");
 
-
-        resultRedirectStrategy(request, response,authToken,isFirstLoginUser.toString());
-
+        return isFirstLoginUser.toString();
     }
+
 
     protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
                                          AuthToken authToken,String isFirst) throws IOException, ServletException {

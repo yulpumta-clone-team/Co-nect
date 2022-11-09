@@ -129,11 +129,11 @@ public class User extends BaseTimeEntity  {
     }
 
 
-    public User update(String name, String email){
-        this.name = name;
+    public User update(String email){
         this.email = email;
         return this;
     }
+
 
 
     public void updateEssentialInfo(UserEssentialDto userEssentialDto){

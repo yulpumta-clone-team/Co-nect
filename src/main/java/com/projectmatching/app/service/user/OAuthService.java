@@ -43,9 +43,7 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 
         Map<String, Object> attributes = oAuth2User.getAttributes(); // OAuth 서비스의 유저 정보들
 
-
         UserProfile userProfile = OAuthAttributes.extract(registrationId, attributes); // registrationId에 따라 유저 정보를 통해 공통된 UserProfile 객체로 만들어 줌
-
 
 
         User user = saveOrUpdate(userProfile); // DB에 저장
@@ -60,8 +58,10 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
     }
 
     private User saveOrUpdate(UserProfile userProfile) {
+        if(userRepository.existsByEmail(userProfile.getEmail())) throw new OAuth2AuthenticationException("Duplicate Email");
+
         User user = userRepository.findByOauthId(userProfile.getOauthId())
-                .map(m-> m.update(userProfile.getName(), userProfile.getEmail()))
+                .map(m-> m.update(userProfile.getEmail()))
                 .orElse(userProfile.toUser());
 
         return userRepository.save(user);
