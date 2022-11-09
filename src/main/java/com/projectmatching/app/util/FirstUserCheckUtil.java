@@ -18,7 +18,6 @@ public final class FirstUserCheckUtil {
      */
     public static boolean isFirstLoginUser(UserDto userDto) throws IllegalAccessException {
         UserEssentialDto userEssentialDto = UserEssentialDto.extract(userDto);
-        log.info("userEssential Dto?? {}",userEssentialDto.toString());
         if(isEssentialPropertyNull(userEssentialDto))return true;
         else return false;
     }

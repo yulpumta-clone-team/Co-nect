@@ -57,7 +57,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         AuthToken authToken = authTokenProvider.createTokens(user);
 
 
-        StringBuilder isFirstLoginUser = new StringBuilder("?isFirst=");
+        StringBuilder isFirstLoginUser = new StringBuilder("&isFirst=");
         if(FirstUserCheckUtil.isFirstLoginUser(user)){
             isFirstLoginUser.append("true");
         }
