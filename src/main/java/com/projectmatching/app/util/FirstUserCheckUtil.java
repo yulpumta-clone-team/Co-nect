@@ -26,7 +26,7 @@ public final class FirstUserCheckUtil {
     /** reflection으로 property null check
      * */
     private static boolean isEssentialPropertyNull(UserEssentialDto userEssentialDto) throws IllegalAccessException {
-        for (Field f : userEssentialDto.getClass().getFields()) {
+        for (Field f : userEssentialDto.getClass().getDeclaredFields()) {
             f.setAccessible(true);
             if (f.get(userEssentialDto) == null) return true;
         }
