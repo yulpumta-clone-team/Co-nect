@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
-
+//
 //@Controller
 //@RequestMapping(value = "/error")
 //@RequiredArgsConstructor
@@ -25,9 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 //        HttpStatus httpStatus = HttpStatus.valueOf(response.getStatus());
 //        return ResponseEntity
 //                .status(httpStatus)
-//                .body(ResponseTemplate.error(ResponseTemplateStatus.LOGICAL_ERROR));ㄴ
+//                .body(ResponseTemplate.error(ResponseTemplateStatus.LOGICAL_ERROR));
 //    }
-//
 //
 //
 //}

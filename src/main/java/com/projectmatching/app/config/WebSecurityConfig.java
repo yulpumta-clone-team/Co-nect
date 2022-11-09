@@ -2,47 +2,35 @@ package com.projectmatching.app.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectmatching.app.config.handler.JwtAuthenticationEntryPoint;
+import com.projectmatching.app.config.handler.OAuth2AuthenticationFailureHandler;
 import com.projectmatching.app.config.handler.OAuth2AuthenticationSuccessHandler;
 import com.projectmatching.app.constant.FilterPatternConstant;
 import com.projectmatching.app.constant.JwtConstant;
-import com.projectmatching.app.domain.user.Role;
+
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.service.user.OAuthService;
 import com.projectmatching.app.util.AuthTokenProvider;
 import com.projectmatching.app.util.filter.JwtAuthFilter;
 import com.projectmatching.app.util.filter.JwtExceptionFilter;
 import lombok.RequiredArgsConstructor;
-import org.graalvm.compiler.lir.CompositeValue;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity.RequestMatcherConfigurer;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
-import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.stereotype.Component;
+
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.EnumSet;
 
 @Configuration
 @EnableWebSecurity
@@ -51,6 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final OAuthService oAuthService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
     private final AuthTokenProvider authTokenProvider;
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
@@ -88,10 +77,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .and()
                 .oauth2Login()
+                .failureUrl("/oauthFail")
                 .userInfoEndpoint()
                 .userService(oAuthService)
                 .and()
-                .successHandler(oAuth2AuthenticationSuccessHandler);
+                .successHandler(oAuth2AuthenticationSuccessHandler)
+                .failureHandler(oAuth2AuthenticationFailureHandler);
 
     }
 
