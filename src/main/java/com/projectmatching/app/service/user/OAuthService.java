@@ -1,5 +1,6 @@
 package com.projectmatching.app.service.user;
 
+import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.UserProfile;
 import com.projectmatching.app.domain.user.UserRepository;
@@ -58,8 +59,9 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
     }
 
     private User saveOrUpdate(UserProfile userProfile) {
-        if(userRepository.existsByEmail(userProfile.getEmail())) throw new OAuth2AuthenticationException("Duplicate Email");
-
+        if(userRepository.existsByEmail(userProfile.getEmail())) {
+            throw new OAuth2AuthenticationException(String.valueOf(ResponseTemplateStatus.EMAIL_DUPLICATE.getMessage()));
+        }
         User user = userRepository.findByOauthId(userProfile.getOauthId())
                 .map(m-> m.update(userProfile.getEmail()))
                 .orElse(userProfile.toUser());
