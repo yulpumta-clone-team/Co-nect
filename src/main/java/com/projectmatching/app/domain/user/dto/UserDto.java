@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import com.projectmatching.app.annotation.Generated;
 
+import com.projectmatching.app.domain.comment.entity.UserComment;
 import com.projectmatching.app.domain.techStack.dto.TechStackDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTech;
@@ -11,6 +12,7 @@ import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -38,7 +40,8 @@ public class UserDto extends UserInfoDto {
     private int commentCnt;
     private int readCnt;
 
-    private List<TechStackDto> skills;
+    @Builder.Default
+    private List<TechStackDto> skills = new ArrayList<>();
 
 
     public static UserDto createEmpty() { return new UserDto();}

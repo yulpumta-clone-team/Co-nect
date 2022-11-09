@@ -24,6 +24,7 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +55,8 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
         UserDto user = toDto(oAuth2User);
         AuthToken authToken = authTokenProvider.createTokens(user);
+
+
         StringBuilder isFirstLoginUser = new StringBuilder("?isFirst=");
         if(FirstUserCheckUtil.isFirstLoginUser(user)){
             isFirstLoginUser.append("true");
@@ -89,7 +92,6 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
 
     }
-
 
 
     private UserDto toDto(OAuth2User oAuth2User) {
