@@ -12,7 +12,7 @@ export const userDetail = {
   readCnt: 3,
   userInfo: {
     id: 1,
-    image: '',
+    image: null,
     name: 'kmorrieson0',
   },
   skills: [

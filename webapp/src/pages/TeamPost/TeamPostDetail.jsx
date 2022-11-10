@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import CommentContainer from 'components/ComentContainer';
 import MarkdownEditor from 'components/MarkdownEditor';
@@ -7,10 +6,16 @@ import Divider from 'components/Common/Divider';
 import { teamDetailParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
 import Image from 'components/Common/Image';
-import LikeApi from 'components/Common/Like';
+import Like from 'components/Common/Like';
 import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
 import EyeSvg from 'assets/icons/EyeSvg';
+import { teamDetailType } from 'types/team.type';
+import ProfileImg from 'components/ProfileImg';
 import * as S from './TeamPost.style';
+
+TeamPostDetail.propTypes = {
+  targetTeam: teamDetailType,
+};
 
 export default function TeamPostDetail({ targetTeam }) {
   const parsedTargetTeam = teamDetailParser(targetTeam);
@@ -33,46 +38,37 @@ export default function TeamPostDetail({ targetTeam }) {
         <Image src={teamImage} alt="게시글" customStyle={S.ViewingImage} />
       </S.ImgContainer>
       <S.TeamInfoContainer>
-        <S.UserName>
-          <Image src={teamImage} alt="프로필 이미지" customStyle={S.UserImg} />
-          {writerInfo.name}
-        </S.UserName>
-        <S.SingleInfo>
-          <S.TeamName>{teamName}</S.TeamName>
-        </S.SingleInfo>
+        <S.TeamName>{teamName}</S.TeamName>
         <Divider />
-        <S.Skill>
-          <S.TeamSkillSession>기술 스택</S.TeamSkillSession>
+        <S.SingleInfo>
+          <S.SingleInfoTitle>기술 스택</S.SingleInfoTitle>
           <TechSkills skills={techSkills} imageSize="40px" />
-        </S.Skill>
-        <S.HopeSession>
-          <S.TeamSkillSession> 희망 작업 기간</S.TeamSkillSession>
-          <div>
-            <span>{hopeSession}</span>
-          </div>
-        </S.HopeSession>
-
+        </S.SingleInfo>
+        <S.SingleInfo>
+          <S.SingleInfoTitle>희망 작업 기간</S.SingleInfoTitle>
+          <span>{hopeSession}</span>
+        </S.SingleInfo>
         <Divider />
-        <S.SingleInfo>
-          <S.Slogan>{slogan}</S.Slogan>
-        </S.SingleInfo>
-        <S.SingleInfo>
-          <MarkdownEditor onlyViewer content={content} />
-        </S.SingleInfo>
+        <S.Slogan>{slogan}</S.Slogan>
+        <MarkdownEditor onlyViewer content={content} />
         <Divider customStyle={S.CommentDivider} />
-        <S.SingleInfo>
-          <S.View>
+        <S.PostInfo>
+          <S.SinglePostInfo>
             <EyeSvg />
-            000
-          </S.View>
-          <LikeApi id={teamId} />
-          {likeCnt}
-          <S.Chat>
-            <ChatBubbleOvalSvg />
-            {commentCnt}
-          </S.Chat>
-        </S.SingleInfo>
-        <CommentContainer postType={POST_TYPE.TEAM} postWriterId={writerInfo.id} postId={teamId} />
+            <span>000</span>
+          </S.SinglePostInfo>
+          <S.SinglePostInfo>
+            <S.SinglePostInfo>
+              <Like id={teamId} />
+              <span>{likeCnt}</span>
+            </S.SinglePostInfo>
+            <S.SinglePostInfo>
+              <ChatBubbleOvalSvg />
+              <span>{commentCnt}</span>
+            </S.SinglePostInfo>
+          </S.SinglePostInfo>
+        </S.PostInfo>
+        <CommentContainer postType={POST_TYPE.TEAM} postWriter={writerInfo.name} postId={teamId} />
       </S.TeamInfoContainer>
     </S.PostContainer>
   );

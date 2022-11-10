@@ -8,13 +8,24 @@ export const Container = styled.div`
 
 export const PostContainer = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 57px;
+  flex-wrap: wrap;
+  width: 1250px;
+  height: 1300px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  ${({ theme: { fonts } }) => fonts.korean.emphasis};
 `;
 
 export const ImgContainer = styled.div`
-  width: 200px;
-  height: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 300px;
+  border-radius: 20px 20px 0px 0px;
+  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
+  position: relative;
 `;
 
 export const ViewingImage = styled.img`
@@ -25,12 +36,40 @@ export const ViewingImage = styled.img`
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
 `;
 
-export const TeamInfoContainer = styled.div`
-  width: 610px;
+export const EmptyImage = styled.div`
+  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
+  width: 100%;
+  height: 100%;
+  border-radius: 20px 20px 0px 0px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
-  border: 3px solid ${({ theme: { colors } }) => colors.primary.normal};
-  border-radius: 20px;
-  padding: 35px;
+`;
+
+export const WriterInfo = styled.div`
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  position: absolute; // ImgContainer 기준
+  bottom: 18px;
+  left: 36px;
+`;
+
+export const WriterName = styled.span`
+  ${({ theme: { fonts } }) => fonts.korean.emphasis};
+  font-weight: 700;
+`;
+
+export const WriterProfileImage = css`
+  width: 30px;
+  height: 30px;
+`;
+
+export const TeamInfoContainer = styled.div`
+  padding: 33px 36px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 `;
 
 export const CommentDivider = css`
@@ -41,74 +80,23 @@ export const SingleInfo = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 2%;
-  margin-bottom: 20px;
-  > span {
-    width: 30%;
-  }
+  gap: 20px;
   > div {
-    width: 87%;
+    width: 70%;
   }
 `;
+
 export const SingleInfoTitle = styled.span`
   color: ${({ theme: { colors } }) => colors.primary.normal};
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
-  ${({ customStyle }) => customStyle}
-`;
-export const UserName = styled.div`
-  position: absolute;
-  top: 100px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  ${({ theme: { fonts } }) => fonts.korean.emphasis};
   font-weight: 700;
 `;
-export const Skill = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  > span {
-    width: 10%;
-    ${({ theme: { fonts } }) => fonts.korean.emphasis};
-    font-weight: 700;
-  }
-  > div {
-    width: 70%;
-  }
-`;
-export const HopeSession = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
-  > span {
-    width: 10%;
-    ${({ theme: { fonts } }) => fonts.korean.emphasis};
-    font-weight: 700;
-  }
-  > div {
-    width: 70%;
-  }
-`;
-export const EmptyImage = styled.div`
-  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
-  width: 100%;
-  height: 100%;
-  border-radius: 20px 20px 0px 0px;
-  ${({ theme: { mixin } }) => mixin.flexCenter({})};
-`;
-export const UserImg = css`
-  position: relative;
-  width: 3%;
-  height: 100%;
-`;
+
 export const TeamName = styled(SingleInfoTitle)`
   ${({ theme: { fonts } }) => fonts.korean.title};
   color: #3c3c3c;
 `;
+
 export const Slogan = styled(SingleInfoTitle)`
   ${({ theme: { fonts } }) => fonts.korean.subTitle};
   font-weight: 700;
@@ -120,20 +108,23 @@ export const TeamSkillSession = styled(SingleInfoTitle)`
   width: 3%;
 `;
 
-export const View = styled.div`
-  width: 25px;
-  height: 25px;
-  > path {
-    stroke: ${({ theme: { colors } }) => colors.primary.normal};
-    fill: ${({ theme: { colors } }) => colors.primary.normal};
-  }
+export const PostInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
 `;
 
-export const Chat = styled.div`
-  width: 25px;
-  height: 25px;
-  & path {
-    stroke: ${({ theme: { colors } }) => colors.primary.normal};
-    fill: ${({ theme: { colors } }) => colors.primary.normal};
+export const SinglePostInfo = styled.div`
+  display: flex;
+  gap: 10px;
+  svg {
+    width: 25px;
+    height: 25px;
+    & path {
+      stroke: ${({ theme: { colors } }) => colors.primary.normal};
+      fill: ${({ theme: { colors } }) => colors.primary.normal};
+    }
   }
 `;

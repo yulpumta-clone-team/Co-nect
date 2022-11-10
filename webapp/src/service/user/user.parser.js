@@ -64,9 +64,9 @@ export const userCardParser = (userCardInfo) => {
 export const userDetailParser = (targetUserInfo) => {
   const userId = targetUserInfo.userInfo.id;
   const nickname = targetUserInfo.userInfo.name;
-  const profileImage = targetUserInfo.userInfo.image || '';
+  const profileImage = targetUserInfo.userInfo.image || null;
   const { email } = targetUserInfo;
-  const techSkills = targetUserInfo.skills || [];
+  const techSkills = targetUserInfo.skills;
   const slogan = targetUserInfo.slogan || '입력된 슬로건이 없네요.';
   const hopeSession = targetUserInfo.hopeSession || hopeSessionOption[0].value;
   const job = targetUserInfo.job || jobOptions[0].value;

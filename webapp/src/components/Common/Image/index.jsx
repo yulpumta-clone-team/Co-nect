@@ -4,7 +4,7 @@ import MainLogoImage from 'assets/images/main-logo.png';
 
 import * as S from './style';
 
-const Image = forwardRef(({ src = '', alt, customStyle }, ref) => {
+const Image = forwardRef(({ src = null, alt, customStyle }, ref) => {
   const handleError = (event) => {
     event.target.onerror = null;
     event.target.src = MainLogoImage;

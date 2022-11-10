@@ -4,16 +4,27 @@ import DefaultProfileImage from 'assets/images/default-profile.png';
 
 import * as S from './style';
 
-const ProfileImg = forwardRef(({ src }, ref) => {
+const ProfileImg = forwardRef(({ src, alt, customStyle }, ref) => {
   const handleError = (event) => {
     event.target.onerror = null;
     event.target.src = DefaultProfileImage;
   };
-  return <S.ProfileImg ref={ref} src={src} onError={handleError} />;
+  const defaultSrc = src || DefaultProfileImage;
+  return (
+    <S.ProfileImg
+      ref={ref}
+      src={defaultSrc}
+      alt={alt}
+      customStyle={customStyle}
+      onError={handleError}
+    />
+  );
 });
 
 ProfileImg.propTypes = {
-  src: PropTypes.string.isRequired,
+  src: PropTypes.string,
+  alt: PropTypes.string.isRequired,
+  customStyle: PropTypes.array,
 };
 
 export default ProfileImg;

@@ -7,6 +7,7 @@ import Divider from 'components/Common/Divider';
 import TechSkills from 'components/TechSkills';
 import MarkdownEditor from 'components/MarkdownEditor';
 import { userDetailType } from 'types/user.type';
+import ProfileImg from 'components/ProfileImg';
 import * as S from './UserPost.style';
 
 UserPostDetail.propTypes = {
@@ -35,7 +36,7 @@ export default function UserPostDetail({ targetUser }) {
   return (
     <S.PostContainer>
       <S.ProfileImageContainer>
-        <Image src={profileImage} alt="프로필 이미지" />
+        <ProfileImg src={profileImage} alt="프로필 이미지" />
       </S.ProfileImageContainer>
       <S.InfoContainer>
         <S.UserInfoContainer>
