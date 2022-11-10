@@ -24,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import static java.util.Objects.nonNull;
 
@@ -37,8 +38,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-
-        log.info("jwt 필터");
         if(authTokenProvider.isTokenExist(request)){
             String token = authTokenProvider.resolveToken(request);
             if (authTokenProvider.isTokenValid(token) && !existsAuthentication()) {
@@ -97,5 +96,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 .build();
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
+
 
 }

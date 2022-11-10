@@ -34,6 +34,8 @@ public class UserInfo {
 
     }
 
-
+    public UserInfo getUserInfo(){
+        return this;
+    }
 
 }

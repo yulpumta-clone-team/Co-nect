@@ -5,6 +5,7 @@ import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserEssentialDto;
 import com.projectmatching.app.domain.user.dto.UserIsFirstDto;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
 import com.projectmatching.app.domain.user.entity.User;
@@ -16,6 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
 
 import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGIN_USER_ERROR;
 
@@ -61,11 +65,15 @@ public class UserSignInService {
     public UserIsFirstDto isFirstLoginUserCheck(String userEmail){
         User user = userRepository.findByEmail(userEmail).orElseThrow(CoNectNotFoundException::new);
 
+
         if(isUserNameNull(user)) return UserIsFirstDto.builder().isFirst(true).build();
 
         return UserIsFirstDto.builder().isFirst(false).build();
 
     }
+
+
+
 
     private boolean isUserNameNull(User user){
         if(user.getName() == null)return true;

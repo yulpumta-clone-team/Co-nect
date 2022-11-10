@@ -20,8 +20,7 @@ import static com.projectmatching.app.constant.ServiceConstant.NAME_SIZE_MAX;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL) //null 이면 생성되지 않음
-
+@ToString
 /**
  * 유저 필수 정보를 담은 dto;
  */
@@ -43,5 +42,12 @@ public class UserEssentialDto implements Validatable {
             throw new ResponeException(ResponseTemplateStatus.NAME_SIZE_INVALID);
         }
 
+    }
+
+    // userDto로부터 Essential 정보만 추출
+    public static UserEssentialDto extract(UserDto userDto){
+        UserEssentialDto userEssentialDto = new UserEssentialDto();
+        BeanUtils.copyProperties(userDto,userEssentialDto);
+        return userEssentialDto;
     }
 }
