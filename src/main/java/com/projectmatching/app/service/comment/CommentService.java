@@ -3,19 +3,18 @@ package com.projectmatching.app.service.comment;
 import com.projectmatching.app.annotation.UserInfoContainedInReturnVal;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
-import com.projectmatching.app.constant.ServiceConstant;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
 import com.projectmatching.app.domain.comment.dto.TeamCommentReqDto;
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
 import com.projectmatching.app.domain.comment.dto.UserCommentReqDto;
 import com.projectmatching.app.domain.comment.entity.TeamComment;
 import com.projectmatching.app.domain.comment.entity.UserComment;
-import com.projectmatching.app.domain.comment.repository.QTeamCommentRepository;
-import com.projectmatching.app.domain.comment.repository.QUserCommentRepository;
 import com.projectmatching.app.domain.comment.repository.TeamCommentRepository;
 import com.projectmatching.app.domain.comment.repository.UserCommentRepository;
 import com.projectmatching.app.domain.liking.entity.TeamCommentLiking;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
+import com.projectmatching.app.domain.liking.repository.QTeamCommentLikingRepository;
+import com.projectmatching.app.domain.liking.repository.QUserCommentLikingRepository;
 import com.projectmatching.app.domain.liking.repository.TeamCommentLikingRepository;
 import com.projectmatching.app.domain.liking.repository.UserCommentLikingRepository;
 import com.projectmatching.app.domain.team.entity.Team;
@@ -59,6 +58,9 @@ public class CommentService {
     private final TeamCommentLikingRepository teamCommentLikingRepository;
     private final UserRepository userRepository;
     private final UserInfoAdderService userInfoAdderService;
+
+    private final QTeamCommentLikingRepository qTeamCommentLikingRepository;
+    private final QUserCommentLikingRepository qUserCommentLikingRepository;
 
 
     /**
@@ -177,14 +179,18 @@ public class CommentService {
 
 
     /**
-     * 댓글 좋아요 하기
+     * 유저 댓글 좋아요 하기
      */
-
     @Transactional
     public void doUserCommentLiking(UserDetailsImpl userDetails, Long commentId) {
 
         UserComment userComment = userCommentRepository.findById(commentId).orElseThrow(RuntimeException::new);
         User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+
+        if(qUserCommentLikingRepository.isExistWithUserIdAndCommentId(user.getId(),userComment.getId())){
+            throw new CoNectRuntimeException(LIKING_DUPLICATE_ERROR);
+        }
+
 
         UserCommentLiking userCommentLiking = UserCommentLiking.builder()
                 .id(IdGenerator.number())
@@ -197,6 +203,11 @@ public class CommentService {
     }
 
 
+    /**
+     * 유저 댓글 좋아요 취소
+     * @param userDetails
+     * @param commentId
+     */
     @Transactional
     public void cancelUserCommentLiking(UserDetailsImpl userDetails, Long commentId) {
         try {
@@ -366,7 +377,12 @@ public class CommentService {
     @Transactional
     public void doTeamCommentLiking(UserDetailsImpl userDetails, Long commentId) {
         TeamComment teamComment = teamCommentRepository.findById(commentId).orElseThrow(RuntimeException::new);
-        User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(RuntimeException::new);
+
+
+        if(qTeamCommentLikingRepository.isExistWithUserIdAndCommentId(user.getId(),teamComment.getId())){
+            throw new CoNectRuntimeException(LIKING_DUPLICATE_ERROR);
+        }
 
         TeamCommentLiking teamCommentLiking = TeamCommentLiking.builder()
                 .id(IdGenerator.number())
@@ -383,8 +399,9 @@ public class CommentService {
     @Transactional
     public void cancelTeamCommentLiking(UserDetailsImpl userDetails, Long commentId) {
         try{
-            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(RuntimeException::new);
-            TeamCommentLiking teamCommentLiking = teamCommentLikingRepository.findByUser_IdAndTeamComment_Id(user.getId(), commentId).orElseThrow(NullPointerException::new);
+            User user = userRepository.findByEmail(userDetails.getEmail()).orElseThrow(CoNectNotFoundException::new);
+            TeamCommentLiking teamCommentLiking = teamCommentLikingRepository.findByUserIdAndTeamCommentId(user.getId(), commentId)
+                    .orElseThrow(CoNectNotFoundException::new);
 
             teamCommentLikingRepository.delete(teamCommentLiking);
         }catch (NullPointerException e){

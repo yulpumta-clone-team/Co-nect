@@ -16,6 +16,13 @@ const commentApi = {
       data,
     });
   },
+  POST_REPLY({ postType, data }) {
+    return privateApiInstance({
+      url: `/${postType + API.COMMENT.NESTED}`,
+      method: 'post',
+      data,
+    });
+  },
   DELETE_COMMENT({ postType, id }) {
     return privateApiInstance({
       url: `/${postType + API.COMMENT.ORIGIN}/${id}`,
@@ -29,26 +36,6 @@ const commentApi = {
       data,
     });
   },
-  POST_REPLY({ postType, data }) {
-    return privateApiInstance({
-      url: `/${postType + API.COMMENT.NESTED}`,
-      method: 'post',
-      data,
-    });
-  },
-  DELETE_REPLY({ postType, id }) {
-    return privateApiInstance({
-      url: `/${postType + API.COMMENT.NESTED}/${id}`,
-      method: 'delete',
-    });
-  },
-  PATCH_REPLY({ postType, id, data }) {
-    return privateApiInstance({
-      url: `/${postType + API.COMMENT.NESTED}/${id}`,
-      method: 'patch',
-      data,
-    });
-  },
   PATCH_COMMENT_LIKE({ postType, id }) {
     return privateApiInstance({
       url: `/${postType + API.COMMENT.LIKE}/${id}`,
@@ -58,7 +45,7 @@ const commentApi = {
   PATCH_COMMENT_UN_LIKE({ postType, id }) {
     return privateApiInstance({
       url: `/${postType + API.COMMENT.UNLIKE}/${id}`,
-      method: 'patch',
+      method: 'delete',
     });
   },
 };

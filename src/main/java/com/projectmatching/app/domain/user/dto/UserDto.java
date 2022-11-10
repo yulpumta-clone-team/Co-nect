@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import com.projectmatching.app.annotation.Generated;
 
+import com.projectmatching.app.domain.comment.entity.UserComment;
 import com.projectmatching.app.domain.techStack.dto.TechStackDto;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.entity.UserTech;
@@ -11,6 +12,7 @@ import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -22,11 +24,11 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL) //null 이면 생성되지 않음
-public class UserDto {
+public class UserDto extends UserInfoDto {
 
     private Long id;
 
-    private UserInfo userInfo;
+
     private String email;
     private String portfolio;
     private String slogan;
@@ -38,7 +40,8 @@ public class UserDto {
     private int commentCnt;
     private int readCnt;
 
-    private List<TechStackDto> skills;
+    @Builder.Default
+    private List<TechStackDto> skills = new ArrayList<>();
 
 
     public static UserDto createEmpty() { return new UserDto();}
@@ -47,7 +50,6 @@ public class UserDto {
     public static UserDto of(User user){
         UserDto userDto = createEmpty();
         BeanUtils.copyProperties(user, userDto);
-        userDto.userInfo = UserInfo.of(user);
         userDto.commentCnt = user.getUserComments().size();
         userDto.likeCnt = user.getRespected();
         userDto.skills = user.getSkills().stream().map(UserTech::toTechStack)

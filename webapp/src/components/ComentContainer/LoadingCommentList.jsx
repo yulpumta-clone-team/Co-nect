@@ -4,10 +4,10 @@ import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Pr
 import RootCommentList from './CommentList/Root.CommentList';
 
 HocLoadingCommentList.propTypes = {
-  postWriter: PropTypes.string.isRequired,
+  postWriterId: PropTypes.number.isRequired,
 };
 
-export default function HocLoadingCommentList({ postWriter }) {
+export default function HocLoadingCommentList({ postWriterId }) {
   const { comments, isLoading, apiError } = useCommentsState();
   const { forceRefetch } = useCommentsAction();
 
@@ -21,5 +21,5 @@ export default function HocLoadingCommentList({ postWriter }) {
       </div>
     );
   if (!comments && comments.length !== 0) return <div>댓글이 없어요.</div>;
-  return <RootCommentList postWriter={postWriter} comments={comments} />;
+  return <RootCommentList postWriterId={postWriterId} comments={comments} />;
 }

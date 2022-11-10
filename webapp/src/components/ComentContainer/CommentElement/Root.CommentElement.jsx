@@ -1,89 +1,63 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
+import { useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { commentInfoType } from 'types/comment.type';
-import { getUserInfo } from 'service/auth';
 import Image from 'components/Common/Image';
 import { parsedNumberToThreeDigits } from 'utils';
-import CaretDownFillSvg from 'assets/icons/CaretDownFillSvg';
-import CaretUpFillSvg from 'assets/icons/CaretUpFillSvg';
-import HeartSvg from 'assets/icons/HeartSvg';
 import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
+import { ISOToyyyymmdd } from 'service/etc/time.util';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
 import NestedCommentList from '../CommentList/Nested.CommentList';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
-import * as S from '../style';
 import SecretCommentElement from './Secret.CommentElement';
+import NestedCommentToggleButton from './NestedCommentToggleButton';
+import CommentLikeSvg from './CommentLikeSvg';
+import * as S from '../style';
+import CommentButtonContainer from './CommentButtonContainer';
 
-HocNestedComment.propTypes = {
+RootCommentElement.propTypes = {
   commentInfo: commentInfoType.isRequired,
-  postWriter: PropTypes.string.isRequired,
-  replies: PropTypes.array,
+  postWriterId: PropTypes.number.isRequired,
 };
 
 // 답글보여주기 상태에 따른 컴포넌트 렌더링
-export default function HocNestedComment({ commentInfo, postWriter, replies }) {
+export default function RootCommentElement({ commentInfo, postWriterId }) {
   const {
     id: commentId,
-    img,
-    secret,
-    writer: commenWriter,
-    feeling: likedUserIds,
-    content,
     parentId,
+    content,
+    secret,
+    userInfo: writerInfo,
+    replies,
+    updatedAt,
+    feelings: likedUserIds,
   } = commentInfo;
-  const userInfo = getUserInfo(); // {userId, name, profileImg}
-  const loggedInUserId = userInfo?.userId;
-  const loggedInUserName = userInfo?.name;
-  const { createReplyTargetCommentId, targetReplyListId, postType, editTargetCommentId } =
-    useCommentsState();
-  const {
-    isShowSecretComment,
-    showCreateReplyFormOnTargetComment,
-    showReplyList,
-    resetShowReplyList,
-    selectEditTargetComment,
-    handleClickLikeThumb,
-    isLikesContainUserId,
-  } = useCommentsAction();
+  const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
+  const { createReplyTargetCommentId, targetReplyListId, editTargetCommentId } = useCommentsState();
 
   const isShowCreateReplyForm = createReplyTargetCommentId !== commentId;
   const isShowReplies = commentId === targetReplyListId;
   const likesCount = likedUserIds.length;
   const isEditTargetComment = commentId === editTargetCommentId;
-  const handleClickShowReplyButton = () => showReplyList(commentId);
-  const handleClickHideReplyButton = () => resetShowReplyList(commentId);
-  const handleClickShowCreateForm = () => showCreateReplyFormOnTargetComment(commentId);
-  const handleClickTargetComment = () => selectEditTargetComment(commentId);
-
-  const handleClickThumbSvg = () => {
-    const idObj = { commentId, loggedInUserId, parentId };
-    handleClickLikeThumb(isLikesContainUserId, postType, idObj);
-  };
-
-  const isSecret = isShowSecretComment(secret, postWriter, commenWriter, loggedInUserName);
 
   return (
     <S.CommentContainer>
-      <Image src={img} alt="유저 프로필" customStyle={S.UserProfileImage} />
+      <Image src={writerProfileImage} alt="작성자 프로필 이미지" customStyle={S.UserProfileImage} />
       <S.RootCommentBox>
         <S.PublicCommentBox>
           <S.CommentTitle>
-            <h3>{commenWriter}</h3>
-            <span>2022.12.31</span>
-            <button>
-              <S.RecycleBinSvg />
-            </button>
+            <h3>{writerName}</h3>
+            <span>{ISOToyyyymmdd(updatedAt)}</span>
           </S.CommentTitle>
-          {isSecret ? (
-            <SecretCommentElement isNested={false} />
-          ) : (
-            <S.CommentContent>{content}</S.CommentContent>
-          )}
+          <SecretCommentElement
+            isNested={false}
+            content={content}
+            isSecret={secret}
+            postWriterId={postWriterId}
+            writerId={writerId}
+          />
         </S.PublicCommentBox>
-        {isEditTargetComment && (
-          <EditRootCommentForm initialText={content} secret={secret} commentId={commentId} />
-        )}
+        {isEditTargetComment && <EditRootCommentForm initialText={content} secret={secret} />}
         <S.CommentInfo>
           <S.SpecificInfo>
             <S.Chat>
@@ -92,42 +66,25 @@ export default function HocNestedComment({ commentInfo, postWriter, replies }) {
             <span>{parsedNumberToThreeDigits(replies.length)}</span>
           </S.SpecificInfo>
           <S.SpecificInfo>
-            <S.HeartButton isFill={isLikesContainUserId} onClick={handleClickThumbSvg}>
-              <HeartSvg />
-            </S.HeartButton>
+            <CommentLikeSvg commentId={commentId} likedUserIds={likedUserIds} />
             <span>{parsedNumberToThreeDigits(likesCount)}</span>
           </S.SpecificInfo>
-          <S.SpecificInfo>
-            {!isEditTargetComment && (
-              <S.EditButton onClick={handleClickTargetComment}>댓글수정</S.EditButton>
-            )}
-          </S.SpecificInfo>
+          <CommentButtonContainer
+            isNested={false}
+            isEditTargetComment={isEditTargetComment}
+            commentId={commentId}
+            writerId={writerId}
+          />
         </S.CommentInfo>
-        {replies && replies.length !== 0 && (
-          <S.ReplyButton
-            onClick={isShowReplies ? handleClickHideReplyButton : handleClickShowReplyButton}
-          >
-            {isShowReplies ? (
-              <>
-                <CaretUpFillSvg />
-                <span>접기</span>
-              </>
-            ) : (
-              <>
-                <CaretDownFillSvg />
-                <span>{parsedNumberToThreeDigits(replies.length)}개의 답글 보기</span>
-              </>
-            )}
-          </S.ReplyButton>
-        )}
-        {/* 답글 작성 form이 기본으로 보이는지 여부를 디자이너분께 질문해 놓은 상황 */}
-        {/* {isShowCreateReplyForm && (
-            <button onClick={handleClickShowCreateForm}>답글 작성하기</button>
-          )} */}
-        {!isShowCreateReplyForm && <CreateReplyCommentForm commentId={commentId} />}
+        <NestedCommentToggleButton
+          replies={replies}
+          isShowCreateReplyForm={isShowCreateReplyForm}
+          commentId={commentId}
+          writerId={writerId}
+        />
         {replies && replies.length !== 0 && isShowReplies && (
           <>
-            <NestedCommentList postWriter={postWriter} comments={replies} />
+            <NestedCommentList postWriterId={postWriterId} comments={replies} />
             <CreateReplyCommentForm />
           </>
         )}

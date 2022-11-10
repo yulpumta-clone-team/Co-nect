@@ -4,19 +4,18 @@ import NestedCommentElement from '../CommentElement/Nested.CommentElement';
 import * as S from '../style';
 
 NestedCommentList.propTypes = {
-  postWriter: PropTypes.string.isRequired,
+  postWriterId: PropTypes.number.isRequired,
   comments: PropTypes.array.isRequired,
 };
 
-export default function NestedCommentList({ postWriter, comments }) {
+export default function NestedCommentList({ postWriterId, comments }) {
   return (
     <S.NestedListContainer>
-      {comments.map(({ id, teamId, userId, replies, ...commentInfo }) => (
+      {comments.map(({ id, teamId, userId, ...commentInfo }) => (
         <NestedCommentElement
           key={id}
-          commentId={id}
-          postWriter={postWriter}
-          commentInfo={commentInfo}
+          postWriterId={postWriterId}
+          commentInfo={{ ...commentInfo, id }}
         />
       ))}
     </S.NestedListContainer>

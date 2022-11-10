@@ -36,14 +36,6 @@ export default function TeamPostDetail({ targetTeam }) {
     <S.PostContainer>
       <S.ImgContainer>
         <Image src={teamImage} alt="게시글" customStyle={S.ViewingImage} />
-        <S.WriterInfo>
-          <ProfileImg
-            src={writerInfo.image}
-            alt="프로필 이미지"
-            customStyle={S.WriterProfileImage}
-          />
-          <S.WriterName>{writerInfo.name}</S.WriterName>
-        </S.WriterInfo>
       </S.ImgContainer>
       <S.TeamInfoContainer>
         <S.TeamName>{teamName}</S.TeamName>

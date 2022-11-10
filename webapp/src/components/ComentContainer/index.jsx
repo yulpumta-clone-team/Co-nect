@@ -9,13 +9,13 @@ import * as S from './style';
 export default WithProvider({ Providers: [CommentProvider], Component: CommentContainer });
 
 CommentContainer.propTypes = {
-  postWriter: PropTypes.string.isRequired,
+  postWriterId: PropTypes.number.isRequired,
 };
 
-function CommentContainer({ postWriter }) {
+function CommentContainer({ postWriterId }) {
   return (
     <S.Container>
-      <HocLoadingCommentList postWriter={postWriter} />
+      <HocLoadingCommentList postWriterId={postWriterId} />
       <CreateRootCommentForm />
     </S.Container>
   );

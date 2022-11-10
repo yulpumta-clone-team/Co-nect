@@ -23,7 +23,9 @@ export default function CheckInput({ label, name, value, onChange, customStyle, 
   const InputBox = value ? CheckSquareSvg : SqaureSvg;
   return (
     <S.Container customStyle={customStyle}>
-      <InputBox onChange={handleClickCheck} />
+      <S.Checker onClick={handleClickCheck}>
+        <InputBox />
+      </S.Checker>
       <span>{label}</span>
     </S.Container>
   );
