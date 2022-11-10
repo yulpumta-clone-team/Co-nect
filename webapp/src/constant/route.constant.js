@@ -10,6 +10,8 @@ export const ROUTE = {
   NEW_POST: '/new-post',
   MY_POST: '/my-post',
   CALLBACK: '/callback',
+  OAUTH_CALLBACK: '/oauthCallback',
+  OAUTH_FAIL: '/OauthFail',
   NOTFOUND: '*',
   ESSENTIAL_INFO: {
     INDEX: '/login/essential-info',

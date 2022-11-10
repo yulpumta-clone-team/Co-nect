@@ -29,6 +29,8 @@ import BelongTeam from 'pages/EssentialInfo/SubPages/BelongTeam';
 import Introduction from 'pages/EssentialInfo/SubPages/Introduction';
 import Portfolio from 'pages/EssentialInfo/SubPages/Portfolio';
 import EssentialCallback from 'pages/EssentialInfo/SubPages/EssentialCallback';
+import OAuthCallback from 'pages/OAuthCallback';
+import OAuthFail from 'pages/OAuthFail';
 
 function App() {
   return (
@@ -121,6 +123,8 @@ function App() {
             path={`${ROUTE.TEAM_EDIT}/:teamId`}
             element={<PrivateRoute Component={EditTeamProfile} />}
           />
+          <Route path={ROUTE.OAUTH_CALLBACK} element={<OAuthCallback />} />
+          <Route path={ROUTE.OAUTH_FAIL} element={<OAuthFail />} />
           <Route path={ROUTE.CALLBACK} element={<Callback />} />
           <Route path={ROUTE.NOTFOUND} element={<NotFound />} />
         </Route>
