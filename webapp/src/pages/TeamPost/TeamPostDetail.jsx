@@ -30,11 +30,7 @@ export default function TeamPostDetail({ targetTeam }) {
   return (
     <S.PostContainer>
       <S.ImgContainer>
-        {teamImage ? (
-          <Image src={teamImage} alt="게시글" customStyle={S.ViewingImage} />
-        ) : (
-          <S.EmptyImage />
-        )}
+        <Image src={teamImage} alt="게시글" customStyle={S.ViewingImage} />
       </S.ImgContainer>
       <S.TeamInfoContainer>
         <S.UserName>
@@ -76,7 +72,7 @@ export default function TeamPostDetail({ targetTeam }) {
             {commentCnt}
           </S.Chat>
         </S.SingleInfo>
-        <CommentContainer postType={POST_TYPE.TEAM} postWriter={writerInfo.name} postId={teamId} />
+        <CommentContainer postType={POST_TYPE.TEAM} postWriterId={writerInfo.id} postId={teamId} />
       </S.TeamInfoContainer>
     </S.PostContainer>
   );

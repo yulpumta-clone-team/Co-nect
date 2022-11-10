@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components';
-import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
-import EyeSvg from 'assets/icons/EyeSvg';
 
 export const Container = styled.div`
   position: relative;
@@ -10,24 +8,15 @@ export const Container = styled.div`
 
 export const PostContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  width: 1250px;
-  height: 1300px;
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  ${({ theme: { fonts } }) => fonts.korean.emphasis};
+  justify-content: center;
+  gap: 57px;
 `;
 
 export const ImgContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 12%;
-  border-radius: 20px 20px 0px 0px;
-  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
+  width: 200px;
+  height: 200px;
 `;
+
 export const ViewingImage = styled.img`
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   width: 100%;
@@ -35,13 +24,13 @@ export const ViewingImage = styled.img`
   border-radius: 20px 20px 0px 0px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
 `;
+
 export const TeamInfoContainer = styled.div`
-  padding: 20px 55px 50px 55px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  width: 610px;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})};
+  border: 3px solid ${({ theme: { colors } }) => colors.primary.normal};
+  border-radius: 20px;
+  padding: 35px;
 `;
 
 export const CommentDivider = css`

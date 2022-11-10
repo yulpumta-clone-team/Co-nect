@@ -1,5 +1,6 @@
 import React from 'react';
 import CommentProvider from 'contexts/Comment/Comment.Provider';
+import { userComment } from 'mocks/commentHandler.mock/userComments';
 import NestedCommentElement from './Nested.CommentElement';
 import * as S from '../style';
 
@@ -24,15 +25,6 @@ function Template(args) {
 
 export const Default = Template.bind({});
 Default.args = {
-  commentId: 10,
-  postWriter: 'front_temp',
-  commentInfo: {
-    img: '',
-    userId: 12512512,
-    writer: 'front_temp',
-    parentId: 999,
-    secret: false,
-    content: '연습용',
-    feeling: [901092146501],
-  },
+  postWriterId: 9021279491,
+  commentInfo: userComment,
 };

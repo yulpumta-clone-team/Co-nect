@@ -12,3 +12,7 @@ export const Container = styled.div`
     ${({ customStyle }) => customStyle}
   }
 `;
+
+export const Checker = styled.div`
+  cursor: pointer;
+`;
