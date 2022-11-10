@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
@@ -12,21 +12,15 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import SocailLoginButtons from 'components/SocialLoginButtons';
 import { TOKEN } from 'constant/api.constant';
 import { ROUTE } from 'constant/route.constant';
-import { handleToken } from 'service/auth';
 import BackButton from 'components/Common/BackButton';
 import { loginParser } from 'service/auth/auth.parser';
-import useUserInfo from 'hooks/useUserInfo';
 import MainLogoImg from 'assets/images/main-logo.png';
+import useHandleLogin from 'hooks/useHandleLogin';
 import * as S from './Login.style';
 
 export default function Login() {
-  const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
-  const { handleUpdateUserInfo } = useUserInfo();
-
-  const handleShowEssesntialModal = (isFirstLogin) => {
-    navigate(ROUTE.ESSENTIAL_INFO.NICKNAME, { state: { isFirstLogin } });
-  };
+  const { handleLogin } = useHandleLogin();
 
   const submitCallback = async (submitData) => {
     const parsedSubmitData = loginParser(submitData);
@@ -38,16 +32,11 @@ export default function Login() {
         headers,
         data: { isFirst: isFirstLogin },
       } = response;
-      handleToken.saveAccessToken(headers[TOKEN.ACCESS]);
-      handleToken.saveRefreshToken(headers[TOKEN.REFRESH]);
-      notifyNewMessage(notifyDispatch, '로그인이 성공적으로 완료되었습니다.', TOAST_TYPE.Success);
-      setTimeout(() => {
-        if (isFirstLogin) {
-          handleShowEssesntialModal(isFirstLogin);
-        } else {
-          handleUpdateUserInfo();
-        }
-      }, 1000);
+      handleLogin({
+        accessToken: headers[TOKEN.ACCESS],
+        refreshToken: headers[TOKEN.REFRESH],
+        isFirstLogin,
+      });
     } catch (error) {
       console.error(error);
       notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
