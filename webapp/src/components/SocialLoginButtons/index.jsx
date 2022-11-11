@@ -1,24 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import googleLogo from 'assets/images/google-logo.png';
-import appleLogo from 'assets/images/apple-logo.png';
-
+import githubLogo from 'assets/images/github-logo.png';
+import { OAUTH_URL } from 'constant/route.constant';
+import Image from 'components/Common/Image';
 import * as S from './SocialLoginButtons.style';
 
-SocialLoginButtons.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default function SocialLoginButtons({ children }) {
+export default function SocialLoginButtons() {
+  const handleClickSocialLogin = (type) => {
+    window.location.href = OAUTH_URL[type];
+  };
   return (
     <S.Container>
-      <span>{children}</span>
+      <span>소셜계정으로 로그인</span>
       <S.Buttons>
-        <S.Button>
-          <img src={googleLogo} alt="googleLogo" />
+        <S.Button onClick={() => handleClickSocialLogin('GOOGLE')}>
+          <Image src={googleLogo} alt="googleLogo" />
         </S.Button>
-        <S.Button>
-          <img src={appleLogo} alt="appleLogo" />
+        <S.Button onClick={() => handleClickSocialLogin('GITHUB')}>
+          <Image src={githubLogo} alt="github logo" />
         </S.Button>
       </S.Buttons>
     </S.Container>

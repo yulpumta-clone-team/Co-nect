@@ -10,6 +10,8 @@ export const ROUTE = {
   NEW_POST: '/new-post',
   MY_POST: '/my-post',
   CALLBACK: '/callback',
+  OAUTH_CALLBACK: '/oauthCallback',
+  OAUTH_FAIL: '/OauthFail',
   NOTFOUND: '*',
   ESSENTIAL_INFO: {
     INDEX: '/login/essential-info',
@@ -26,6 +28,6 @@ export const ROUTE = {
 };
 
 export const OAUTH_URL = {
-  GITHUB: `${process.env.REACT_APP_SERVER_API}oauth2/authorization/github`,
-  GOOGLE: `${process.env.REACT_APP_SERVER_API}oauth2/authorization/google`,
+  GOOGLE: `http://localhost:8081/api/oauth2/authorization/google?client_id=${process.env.GOOGLE_OAUTH_CLIENT_ID}`,
+  GITHUB: `http://localhost:8081/api/oauth2/authorization/github?client_id=${process.env.GITHUB_OAUTH_CLIENT_ID}`,
 };
