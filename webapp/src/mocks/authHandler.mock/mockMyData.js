@@ -1,5 +1,5 @@
 export const mockLoginData = {
-  isFirst: false,
+  isFirst: true,
 };
 export const mockSignUpData = {
   email: '92719@naver.com',
