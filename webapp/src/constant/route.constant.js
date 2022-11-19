@@ -12,7 +12,7 @@ export const ROUTE = {
   CALLBACK: '/callback',
   OAUTH_CALLBACK: '/oauthCallback',
   OAUTH_FAIL: '/OauthFail',
-  NOTFOUND: '*',
+  ALL: '/*',
   ESSENTIAL_INFO: {
     INDEX: '/essential-info',
     NICKNAME: '/nickname',
