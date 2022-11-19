@@ -6,7 +6,7 @@ import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import useForm from 'hooks/useForm';
 import authApi from 'api/auth.api';
 
-import { ROUTE } from 'constant/route.constant';
+import { ESSENTIAL_INFO_LINKS, ROUTE } from 'constant/route.constant';
 
 import { essentialInfoParser } from 'service/user/user.parser';
 import useUserInfo from 'hooks/useUserInfo';
@@ -27,15 +27,15 @@ const initialValues = {
 };
 
 const essentailSubPagesRouteOrder = [
-  ROUTE.ESSENTIAL_INFO.NICKNAME,
-  ROUTE.ESSENTIAL_INFO.SKILL,
-  ROUTE.ESSENTIAL_INFO.PROFILE_IMAGE,
-  ROUTE.ESSENTIAL_INFO.SESSION_JOB,
-  ROUTE.ESSENTIAL_INFO.SLOGAN,
-  ROUTE.ESSENTIAL_INFO.BELONG_TEAM,
-  ROUTE.ESSENTIAL_INFO.CONTENT,
-  ROUTE.ESSENTIAL_INFO.PROTFOLIO,
-  ROUTE.ESSENTIAL_INFO.CALLBACK,
+  ESSENTIAL_INFO_LINKS.NICKNAME,
+  ESSENTIAL_INFO_LINKS.SKILL,
+  ESSENTIAL_INFO_LINKS.PROFILE_IMAGE,
+  ESSENTIAL_INFO_LINKS.SESSION_JOB,
+  ESSENTIAL_INFO_LINKS.SLOGAN,
+  ESSENTIAL_INFO_LINKS.BELONG_TEAM,
+  ESSENTIAL_INFO_LINKS.CONTENT,
+  ESSENTIAL_INFO_LINKS.PROTFOLIO,
+  ESSENTIAL_INFO_LINKS.CALLBACK,
 ];
 
 const useEssentialForm = () => {

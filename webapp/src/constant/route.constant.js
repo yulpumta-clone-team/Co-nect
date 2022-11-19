@@ -27,6 +27,14 @@ export const ROUTE = {
   },
 };
 
+export const ESSENTIAL_INFO_LINKS = Object.entries(ROUTE.ESSENTIAL_INFO).reduce(
+  (acc, [key, value]) => {
+    acc[key] = ROUTE.LOGIN + ROUTE.ESSENTIAL_INFO.INDEX + value;
+    return acc;
+  },
+  {},
+);
+
 export const OAUTH_URL = {
   GOOGLE: `http://localhost:8081/api/oauth2/authorization/google?client_id=${process.env.GOOGLE_OAUTH_CLIENT_ID}`,
   GITHUB: `http://localhost:8081/api/oauth2/authorization/github?client_id=${process.env.GITHUB_OAUTH_CLIENT_ID}`,
