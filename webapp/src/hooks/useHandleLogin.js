@@ -1,4 +1,4 @@
-import { ROUTE } from 'constant/route.constant';
+import { ESSENTIAL_INFO_LINKS } from 'constant/route.constant';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
@@ -12,7 +12,7 @@ const useHandleLogin = () => {
   const { handleUpdateUserInfo } = useUserInfo();
 
   const handleShowEssesntialModal = (isFirstLogin) => {
-    navigate(ROUTE.ESSENTIAL_INFO.NICKNAME, { state: { isFirstLogin } });
+    navigate(ESSENTIAL_INFO_LINKS.NICKNAME, { state: { isFirstLogin } });
   };
 
   const handleLogin = ({ accessToken, refreshToken, isFirstLogin }) => {

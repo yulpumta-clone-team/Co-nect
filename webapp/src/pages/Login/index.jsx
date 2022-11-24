@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
@@ -18,7 +18,11 @@ import MainLogoImg from 'assets/images/main-logo.png';
 import useHandleLogin from 'hooks/useHandleLogin';
 import * as S from './Login.style';
 
-export default function Login() {
+Login.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+
+export default function Login({ children }) {
   const notifyDispatch = useToastNotificationAction();
   const { handleLogin } = useHandleLogin();
 
@@ -88,7 +92,7 @@ export default function Login() {
       </Button>
       <Divider width="500px" marginTop="67px" marginBottom="38px" />
       <SocailLoginButtons />
-      <Outlet />
+      {children}
     </S.Container>
   );
 }
