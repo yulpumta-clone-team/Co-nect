@@ -12,7 +12,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @EnableJpaAuditing
-@EnableSwagger2
 @EnableCaching
 @EnableAsync
 @EnableAspectJAutoProxy

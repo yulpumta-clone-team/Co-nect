@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -58,6 +59,27 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 
     }
 
+
+    /**
+     * OAuth 로그인 유저 로그인 로직 유효성 검사
+     *
+     * 1. 처음 oauth로 로그인 한 경우 -> 정상적으로 User db에 저장
+     * 2. 두번째 로그인한 경우 -> 정상적으로 로그인
+     * 3. 처음 로그인하는데 동일한 이메일을 갖고있는 유저가 이미 있는 경우 -> exception 발생
+     *
+     * oauth 아이디와 email이 같은 경우 동일한 oauth 로그인 유저로 판단
+     *
+     *
+     */
+    private void oAuthUserValidationCheck(UserProfile userProfile){
+        if(userRepository.existsByEmail(userProfile.getEmail())){
+            User user = userRepository.findByEmail(userProfile.getEmail()).get();
+            if(Optional.of(user.getOauthId()).equals(userProfile.getOauthId()) == false)
+                throw new OAuth2AuthenticationException(String.valueOf(ResponseTemplateStatus.EMAIL_DUPLICATE.getMessage()));
+
+        }
+
+    }
     private User saveOrUpdate(UserProfile userProfile) {
         if(userRepository.existsByEmail(userProfile.getEmail())) {
             throw new OAuth2AuthenticationException(String.valueOf(ResponseTemplateStatus.EMAIL_DUPLICATE.getMessage()));

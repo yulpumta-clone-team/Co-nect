@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.List;
 
 @Configuration
-@EnableSwagger2
 public class SwaggerConfiguration {
 
     @Bean
