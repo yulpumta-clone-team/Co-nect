@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Loader from 'components/Common/Loader';
 import { useNavigate } from 'react-router-dom';
-import * as S from './style';
+import * as S from './CardsGrid.style';
 
 CardsGrid.propTypes = {
   CardComponent: PropTypes.func.isRequired,
@@ -18,7 +17,7 @@ export default function CardsGrid({ CardComponent, cards, clickLink }) {
   return (
     <S.Cards>
       {cards.length === 0 ? (
-        <Loader />
+        <div>Emtpy</div>
       ) : (
         cards.map(({ id, ...cardInfo }) => (
           <CardComponent

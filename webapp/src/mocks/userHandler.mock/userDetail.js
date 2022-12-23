@@ -14,7 +14,7 @@ export const userDetail = {
   readCnt: 3,
   userInfo: {
     id: 1,
-    image: null,
+    image: '',
     name: 'kmorrieson0',
   },
   skills: getRandomTechSkills(),
