@@ -20,12 +20,15 @@ export const FONT = {
     MEDIUM: '2.4rem',
     LARGE: '3.6rem',
     X_LARGE: '4rem',
+    TX_LARGE: '6.4rem',
   },
   HEIGHT: {
     // html {line-height: 10px}
     BASE: '1.6rem',
     MEDIUM: '2.4rem',
     LARGE: '3.2rem',
+    X_LARGE: '4rem',
+    TX_LARGE: '7.5rem',
   },
 };
 
@@ -61,6 +64,20 @@ const COLORS = {
 
 const fonts = {
   korean: {
+    main: css`
+      font-family: ${FONT.FAMILY.KOREAN};
+      font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.BOLD};
+      font-size: ${FONT.SIZE.TX_LARGE};
+      line-height: ${FONT.HEIGHT.TX_LARGE};
+    `,
+    subMain: css`
+      font-family: ${FONT.FAMILY.KOREAN};
+      font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.BOLD};
+      font-size: ${FONT.SIZE.X_LARGE};
+      line-height: ${FONT.HEIGHT.X_LARGE};
+    `,
     title: css`
       font-family: ${FONT.FAMILY.KOREAN};
       font-style: ${FONT.STYLE.BASE};
@@ -91,6 +108,13 @@ const fonts = {
     `,
   },
   english: {
+    main: css`
+      font-family: ${FONT.FAMILY.ENGLISH};
+      font-style: ${FONT.STYLE.BASE};
+      font-weight: ${FONT.WEIGHT.BOLD};
+      font-size: ${FONT.SIZE.TX_LARGE};
+      line-height: ${FONT.HEIGHT.TX_LARGE};
+    `,
     title: css`
       font-family: ${FONT.FAMILY.ENGLISH};
       font-style: ${FONT.STYLE.BASE};
