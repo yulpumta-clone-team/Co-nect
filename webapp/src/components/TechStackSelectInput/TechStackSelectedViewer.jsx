@@ -7,7 +7,6 @@ import * as S from './TechStackSelectInput.style';
 
 TechStackSelectedViewer.propTypes = {
   isError: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired,
   isDropdownOpen: PropTypes.bool.isRequired,
   isValues: PropTypes.bool.isRequired,
   helperText: PropTypes.string,
@@ -21,7 +20,6 @@ TechStackSelectedViewer.propTypes = {
 
 export default function TechStackSelectedViewer({
   isError,
-  isLoading,
   parent,
   isDropdownOpen,
   isValues,
@@ -39,9 +37,6 @@ export default function TechStackSelectedViewer({
       <XMarkSvg />
     </S.ClearableButton>
   );
-
-  const showLoaderWithClearButton = isLoading ? <div>....</div> : ClearButton;
-
   return (
     <S.ValueViewer isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
       {isValues ? (
@@ -56,7 +51,7 @@ export default function TechStackSelectedViewer({
         <S.PlaceHolder>{isError ? <S.Error>{helperText}</S.Error> : placeholder}</S.PlaceHolder>
       )}
       <S.ButtonContainer>
-        {showLoaderWithClearButton}
+        {ClearButton}
         <S.ButtonDivider isRow={false} />
         <S.ChevronButton onClick={closeDropdown}>
           <AngleButton />
