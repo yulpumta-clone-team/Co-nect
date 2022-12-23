@@ -21,24 +21,30 @@ export const MainContainer = styled.div`
 export const Card = styled.div`
   position: absolute;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 50%;
-  height: 50%;
+  width: 1000px;
+  height: 450px;
   background-color: #414141;
   border-radius: 2%;
+  top: 10%;
 `;
 export const CardText = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
   color: white;
-  width: 50%;
+  width: 55%;
+  height: 50%;
   left: 40%;
-  gap: 10%;
+  gap: 30%;
+  top: 25%;
+
+  ${({ theme: { fonts } }) => fonts.main.default};
   & span {
-    height: 50%;
-    ${({ theme: { fonts } }) => fonts.korean.title};
+    height: 20%;
+    top: 90%;
+    ${({ theme: { fonts } }) => fonts.main.subTitle};
   }
 `;
 export const Section1 = styled.div`
@@ -59,44 +65,59 @@ export const Section2 = styled.div`
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
-export const section3Circle1 = styled.div`
-  position: absolute;
+export const Section2BG = styled.div`
+  background-image: url(${BackGround2});
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: 100vh;
+  ${({ theme: { fonts } }) => fonts.main.title};
+  & span {
+    top: 1000px;
+    color: ${({ theme: { colors } }) => colors.primary.normal};
+  }
+`;
+export const section3Circle1 = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 330px;
+  height: 330px;
   border-radius: 50%;
-  top: -200px;
-  left: 50px;
+  top: -120px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
-  ${({ theme: { fonts } }) => fonts.korean.title};
+  ${({ theme: { fonts } }) => fonts.main.emphasis};
 `;
 export const section3Circle2 = styled.div`
   position: absolute;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 250px;
-  height: 250px;
+  width: 330px;
+  height: 330px;
   border-radius: 50%;
-  top: -200px;
-  left: 350px;
+  top: -120px;
+  left: 35%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
-  ${({ theme: { fonts } }) => fonts.korean.subTitle};
+  ${({ theme: { fonts } }) => fonts.main.emphasis};
 `;
 export const section3Circle3 = styled.div`
   position: absolute;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 250px;
-  height: 250px;
+  width: 330px;
+  height: 330px;
   border-radius: 50%;
-  top: -200px;
-  left: 650px;
+  top: -120px;
+  left: 70%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
-  ${({ theme: { fonts } }) => fonts.korean.subTitle};
+  ${({ theme: { fonts } }) => fonts.main.emphasis};
 `;
 export const CircleGroup = styled.div`
   position: absolute;
@@ -126,9 +147,24 @@ export const Section4 = styled.div`
 export const Section4Text = styled.div`
   position: absolute;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 30%;
+  justify-content: center;
+  width: 100%;
+  top: 37%;
+  gap: 1%;
+  ${({ theme: { fonts } }) => fonts.korean.title};
+  color: ${({ theme: { colors } }) => colors.greyScale.white};
+  & span {
+    top: 1000px;
+    color: ${({ theme: { colors } }) => colors.primary.normal};
+  }
+`;
+export const Section4Text2 = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: 50%;
+  gap: 1%;
   ${({ theme: { fonts } }) => fonts.korean.title};
   color: ${({ theme: { colors } }) => colors.greyScale.white};
   & span {
@@ -142,7 +178,7 @@ export const Section5 = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 120vh;
+  height: 180vh;
   background-color: black;
   top: 380%;
 `;
@@ -152,7 +188,7 @@ export const Section6 = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 120vh;
+  height: 180vh;
   background-color: black;
   top: 480%;
 `;
@@ -162,7 +198,7 @@ export const Section7 = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 120vh;
+  height: 180vh;
   background-color: black;
   top: 580%;
 `;
@@ -171,10 +207,10 @@ export const Section8 = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 120vh;
+  height: 100vh;
   background-color: #434343;
   color: white;
-  top: 680%;
+  top: 700%;
   ${({ theme: { fonts } }) => fonts.korean.title};
   & span {
     position: absolute;
@@ -217,9 +253,9 @@ export const MainGradient = styled.div`
 export const MainText = styled.div`
   position: relative;
   letter-spacing: 0.01em;
-  width: 50%;
+  width: 100%;
   height: 15%;
-  left: 50px;
+  left: 30%;
   color: ${({ theme: { colors } }) => colors.greyScale.white};
 
   font-weight: 800;
@@ -231,10 +267,11 @@ export const SubText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 45%;
+  width: 100%;
   height: 15%;
+  gap: 20%;
   color: white;
-  ${({ theme: { fonts } }) => fonts.korean.emphasis};
+  ${({ theme: { fonts } }) => fonts.main.default2};
 `;
 export const Logo = styled.img.attrs({ src: `${MainLogo}` })`
   position: absolute;
@@ -243,63 +280,50 @@ export const Logo = styled.img.attrs({ src: `${MainLogo}` })`
   width: 100px;
   height: 100px;
 `;
-export const Section2BG = styled.div`
-  background-image: url(${BackGround2});
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  & span {
-    top: 1000px;
-    color: ${({ theme: { colors } }) => colors.primary.normal};
-  }
-`;
 
 export const FirstCardIcon1 = styled.img.attrs({ src: `${GhostIcon}` })`
   position: absolute;
   display: flex;
-  left: 12%;
-  width: 150px;
-  height: 150px;
+  left: 10%;
+  width: 300px;
+  height: 300px;
 `;
 export const FirstCardIcon2 = styled.img.attrs({ src: `${CloudIcon}` })`
   position: absolute;
   display: flex;
-  left: 3%;
-  top: 20%;
-  width: 150px;
-  height: 150px;
+  top: 8%;
+  width: 300px;
+  height: 300px;
 `;
 export const SecondCardIcon1 = styled.img.attrs({ src: `${EarthIcon}` })`
   position: absolute;
   display: flex;
-  left: 12%;
-  width: 120px;
-  height: 150px;
+  left: 10%;
+  width: 240px;
+  height: 300px;
 `;
 export const SecondCardIcon2 = styled.img.attrs({ src: `${HeartIcon}` })`
   position: absolute;
   display: flex;
-  left: 6%;
-  top: 20%;
-  width: 110px;
-  height: 110px;
+  left: 4%;
+  top: 10%;
+  width: 183px;
+  height: 188px;
 `;
 export const ThirdCardIcon1 = styled.img.attrs({ src: `${CellPhoneIcon}` })`
   position: absolute;
   display: flex;
-  left: 12%;
-  width: 120px;
-  height: 250px;
+  left: 14%;
+  width: 170px;
+  height: 300px;
 `;
 export const ThirdCardIcon2 = styled.img.attrs({ src: `${MessageIcon}` })`
   position: absolute;
   display: flex;
-  left: 3%;
+  left: 5%;
   top: 25%;
-  width: 120px;
-  height: 120px;
+  width: 170px;
+  height: 170px;
 `;
 export const LinkGroup = styled.div`
   position: absolute;
@@ -311,26 +335,26 @@ export const LinkGroup = styled.div`
 export const SignUpLink = styled.img.attrs({ src: `${SignUpIcon}` })`
   position: absolute;
   display: flex;
-  width: 200px;
-  height: 200px;
-  left: 100px;
+  width: 250px;
+  height: 270px;
+  left: 10%;
   cursor: pointer;
 `;
 export const BoardLink = styled.img.attrs({ src: `${BoardIcon}` })`
   position: absolute;
   display: flex;
-  left: 400px;
+  width: 250px;
+  height: 270px;
+  left: 40%;
   top: 25%;
-  width: 200px;
-  height: 200px;
   cursor: pointer;
 `;
 export const PostLink = styled.img.attrs({ src: `${PostIcon}` })`
   position: absolute;
   display: flex;
-  left: 700px;
+  width: 250px;
+  height: 270px;
+  left: 70%;
   top: 25%;
-  width: 200px;
-  height: 200px;
   cursor: pointer;
 `;

@@ -22,16 +22,27 @@ export default function Main() {
       </S.Section2>
       <S.Section3>
         <S.CircleGroup>
-          <S.section3Circle1>팀원들을 한 페이지에서 간단하게 만날 수 있습니다.</S.section3Circle1>
-          <S.section3Circle2>프로젝트를 여러 사람에게 소개할 수 있습니다.</S.section3Circle2>
-          <S.section3Circle3>같은 목표를 가진 사람들을 만날 수 있습니다.</S.section3Circle3>
+          <S.section3Circle1>
+            <span>팀원들을 한 페이지에서</span>
+            <span>간단하게 만날 수 있습니다.</span>
+          </S.section3Circle1>
+          <S.section3Circle2>
+            <span>프로젝트를 여러 사람에게</span>
+            <span> 소개할 수 있습니다.</span>
+          </S.section3Circle2>
+          <S.section3Circle3>
+            <span>같은 목표를 가진</span>
+            <span>사람들을 만날 수 있습니다.</span>
+          </S.section3Circle3>
         </S.CircleGroup>
       </S.Section3>
       <S.Section4>
         <S.Section4Text>
-          우리는 이런 <span>연결이 필요한 사람들</span>,<br /> 세상의 모든 <span>“코넥티”</span>들을
-          위한 사이트를 만들기로 했습니다.
+          우리는 이런 <span> 연결이 필요한 사람들</span>,
         </S.Section4Text>
+        <S.Section4Text2>
+          세상의 모든 <span>“코넥티”</span>들을 위한 사이트를 만들기로 했습니다.
+        </S.Section4Text2>
       </S.Section4>
       <S.Section5>
         <S.Card>
@@ -44,7 +55,8 @@ export default function Main() {
               이런 어플입니다.
             </span>
             <br />한 페이지에서 나와 같은 목표를 가진 팀원을 만나보세요! 다양한 사람들과 함께 팀을
-            구성해보세요. 목표가 같은 코넥티를 찾아 프로젝트를 진행해봐요!
+            구성해보세요.
+            <br /> 목표가 같은 코넥티를 찾아 프로젝트를 진행해봐요!
           </S.CardText>
         </S.Card>
       </S.Section5>
@@ -69,7 +81,10 @@ export default function Main() {
           <S.ThirdCardIcon1 />
           <S.ThirdCardIcon2 />
           <S.CardText>
-            <span>페이지에서 카드를 통해 빠르게</span>
+            <span>
+              한 페이지에서 <br />
+              카드를 통해 빠르게
+            </span>
             <br />
             프로젝트에 필수적인 정보만 보고 싶다! 모집분야, 기술스택 진행기간 등의 프로젝트 정보를
             심플한 카드 형식에 담아 한눈에 볼 수 있습니다.
