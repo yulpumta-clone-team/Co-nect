@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import CheckMarkSvg from 'assets/icons/CheckMarkSvg';
 import XMarkSvg from 'assets/icons/XMarkSvg';
