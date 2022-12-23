@@ -70,7 +70,7 @@ export const section3Circle1 = styled.div`
   top: -200px;
   left: 50px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
-  ${({ theme: { fonts } }) => fonts.korean.subTitle};
+  ${({ theme: { fonts } }) => fonts.korean.title};
 `;
 export const section3Circle2 = styled.div`
   position: absolute;
