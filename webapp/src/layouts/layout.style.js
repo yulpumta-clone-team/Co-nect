@@ -19,3 +19,9 @@ export const Main = styled.main`
   ${({ theme: { mixin } }) => mixin.flexCenter({})}
   margin: 0 auto;
 `;
+
+export const Full = styled.main`
+  max-width: 1180px;
+  height: 100vh;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})}
+`;

@@ -2,15 +2,8 @@ import React, { useEffect } from 'react';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import useHandleLogin from 'hooks/useHandleLogin';
-import ToastNotificationProvider from 'contexts/ToastNotification';
-import WithProvider from 'hoc/withProvider';
 
-export default WithProvider({
-  Providers: [ToastNotificationProvider],
-  Component: OAuthCallback,
-});
-
-function OAuthCallback() {
+export default function OAuthCallback() {
   const { search } = useLocation();
   const { accessToken, refreshToken, isFirst: isFirstLogin } = queryString.parse(search);
   const { handleLogin } = useHandleLogin();

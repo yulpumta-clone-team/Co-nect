@@ -1,5 +1,4 @@
 import React from 'react';
-import GlobalNavigation from 'components/GlobalNavigation';
 import { Outlet } from 'react-router-dom';
 import ToastNotificationProvider, {
   useToastNotificationAction,
@@ -8,14 +7,14 @@ import ToastNotificationProvider, {
 import WithProvider from 'hoc/withProvider';
 import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
-import * as S from './style';
+import * as S from './layout.style';
 
 export default WithProvider({
   Providers: [ToastNotificationProvider],
-  Component: Layout,
+  Component: LayoutFullPage,
 });
 
-function Layout() {
+function LayoutFullPage() {
   const { toastList } = useToastNotificationState();
   const notifyDispatch = useToastNotificationAction();
   const deleteToastCallback = (id) => {
@@ -23,12 +22,9 @@ function Layout() {
   };
   return (
     <S.AppContainer>
-      <S.Header>
-        <GlobalNavigation />
-      </S.Header>
-      <S.Main>
+      <S.Full>
         <Outlet />
-      </S.Main>
+      </S.Full>
       <ToastNotification
         toastList={toastList}
         col="top"
