@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import etcApi from 'api/etc.api';
 import useDropdown from 'hooks/useDropdown';
 import { parsedTechStackType } from 'types/techSkill.type';
-import useAxios from 'hooks/useAxios';
 import { skillStackParser } from 'service/etc/skillStack.parser';
+import { TECH_SKILLS } from 'constant/techskill.constant';
 import TechStackSelectedViewer from './TechStackSelectedViewer';
 import TechStackOptions from './TechStackOptions';
 import * as S from './TechStackSelectInput.style';
@@ -39,15 +38,9 @@ export default function TechStackSelectInput({
   width,
   ...rest
 }) {
-  const [techStackOptionsApiState, execution, forceRefetchTeckStackOptions] = useAxios({
-    axiosInstance: etcApi.getTechStackAll,
-  });
-
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
 
-  const techSkillOptions = techStackOptionsApiState.responseData
-    ? skillStackParser(techStackOptionsApiState.responseData)
-    : [];
+  const techSkillOptions = skillStackParser(TECH_SKILLS);
 
   const isValues = selectedTechSkills.length !== 0;
 
@@ -96,7 +89,6 @@ export default function TechStackSelectInput({
           parent={parent}
           isDropdownOpen={isDropdownOpen}
           isValues={isValues}
-          isLoading={techStackOptionsApiState.isLoading}
           helperText={helperText}
           selectedTechSkills={selectedTechSkills}
           handleClickTargetDelete={handleClickTargetDelete}
@@ -108,11 +100,9 @@ export default function TechStackSelectInput({
       {!isDropdownType && isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen} isDropdownType={!isDropdownType}>
         <TechStackOptions
-          techStackOptionsApiState={techStackOptionsApiState}
           selectedTechSkills={selectedTechSkills}
           techSkillOptions={techSkillOptions}
           handleClickOption={handleClickOption}
-          forceRefetchTeckStackOptions={forceRefetchTeckStackOptions}
         />
       </S.Select>
     </S.Container>

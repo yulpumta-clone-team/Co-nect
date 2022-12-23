@@ -6,38 +6,16 @@ import Callback from 'pages/Callback';
 import * as S from './TechStackSelectInput.style';
 
 TechStackOptions.propTypes = {
-  techStackOptionsApiState: PropTypes.shape({
-    isLoading: PropTypes.bool.isRequired,
-    responseData: PropTypes.array,
-    error: PropTypes.object,
-  }).isRequired,
   techSkillOptions: PropTypes.array.isRequired,
   selectedTechSkills: PropTypes.array.isRequired,
   handleClickOption: PropTypes.func.isRequired,
-  forceRefetchTeckStackOptions: PropTypes.func.isRequired,
 };
 
 export default function TechStackOptions({
-  techStackOptionsApiState,
   selectedTechSkills,
   techSkillOptions,
   handleClickOption,
-  forceRefetchTeckStackOptions,
 }) {
-  if (techStackOptionsApiState.isLoading) return <S.OptionCategory>...</S.OptionCategory>;
-  if (techStackOptionsApiState.error) {
-    const { error } = techStackOptionsApiState;
-    return (
-      <S.OptionCategory>
-        <Callback
-          errorStatus={error.httpStatus}
-          errorMessage={error.message}
-          forceRefetch={forceRefetchTeckStackOptions}
-        />
-      </S.OptionCategory>
-    );
-  }
-
   const isSelected = (targetId) => !!selectedTechSkills.find((option) => option.id === targetId);
 
   const techSkillOptionsWithCategory = skillStackParserWithCategory(techSkillOptions);
