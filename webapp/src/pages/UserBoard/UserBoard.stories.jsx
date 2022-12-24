@@ -1,10 +1,10 @@
 import handlers from 'mocks/handlers';
 import React from 'react';
-import TeamBoard from './index';
+import UserBoard from './index';
 
 export default {
-  title: 'pages/TeamBoard',
-  component: TeamBoard,
+  title: 'pages/UserBoard',
+  component: UserBoard,
   parameters: {
     layout: 'fullscreen',
     msw: handlers,
@@ -12,7 +12,7 @@ export default {
 };
 
 function Template(args) {
-  return <TeamBoard {...args} />;
+  return <UserBoard {...args} />;
 }
 
 export const Default = Template.bind({});

@@ -7,7 +7,6 @@ import {
   randomResponse,
   successResponseWithEmptyData,
 } from 'mocks/mockUtils';
-
 import { userList } from './usersList';
 import { myPosts } from './myPosts';
 import { userDetail } from './userDetail';

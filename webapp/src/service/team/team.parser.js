@@ -1,6 +1,6 @@
 import { hopeSessionOption } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
-import { skillStackParser, skillStackParserToIds } from '../etc/skillStack.parser';
+import { skillStackParserToIds } from '../etc/skillStack.parser';
 
 /**
  * teamCardParser 반환값
@@ -26,11 +26,12 @@ export const teamCardParser = (teamCardInfo) => {
   const teamImage = teamCardInfo.image;
   const hopeSession = teamCardInfo.session || hopeSessionOption[0].value;
   const skills = teamCardInfo?.skills || [];
-  const isRecruitng = teamCardInfo.status || true;
+  const isRecruitng = teamCardInfo.status;
   const commentCnt = parsedNumberToThreeDigits(teamCardInfo.commentCnt);
   const readCnt = parsedNumberToThreeDigits(teamCardInfo.readCnt);
   const likeCnt = parsedNumberToThreeDigits(teamCardInfo.likeCnt);
   const writer = teamCardInfo.userInfo;
+  const slogan = teamCardInfo?.slogan || '';
   return {
     teamName,
     teamImage,
@@ -41,6 +42,7 @@ export const teamCardParser = (teamCardInfo) => {
     likeCnt,
     isRecruitng,
     writer,
+    slogan,
   };
 };
 

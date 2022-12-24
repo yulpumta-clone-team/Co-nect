@@ -10,7 +10,6 @@ import Like from 'components/Common/Like';
 import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
 import EyeSvg from 'assets/icons/EyeSvg';
 import { teamDetailType } from 'types/team.type';
-import ProfileImg from 'components/ProfileImg';
 import * as S from './TeamPost.style';
 
 TeamPostDetail.propTypes = {
