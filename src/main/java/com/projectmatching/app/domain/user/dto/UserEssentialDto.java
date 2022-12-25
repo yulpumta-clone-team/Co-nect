@@ -4,7 +4,6 @@ import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.Validatable;
 import lombok.*;
-import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,9 +43,9 @@ public class UserEssentialDto implements Validatable {
     // userDto로부터 Essential 정보만 추출
     public static UserEssentialDto extract(UserDto userDto) {
         UserEssentialDto userEssentialDto = new UserEssentialDto();
-        userEssentialDto.name = userDto.userInfo.getName();
+        userEssentialDto.name = userDto.getName();
         userEssentialDto.slogan = userDto.getSlogan();
-        userEssentialDto.image = userDto.userInfo.getImage();
+        userEssentialDto.image = userDto.getImage();
         userEssentialDto.content = userDto.getContent();
         userEssentialDto.portfolio = userDto.getPortfolio();
         userEssentialDto.skills = userDto.getSkills()

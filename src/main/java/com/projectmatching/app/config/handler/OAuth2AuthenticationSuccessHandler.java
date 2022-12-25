@@ -3,6 +3,7 @@ package com.projectmatching.app.config.handler;
 import com.projectmatching.app.config.YAMLConfig;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectLogicalException;
 import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
@@ -43,7 +44,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
     @SneakyThrows //isFirstgLoginUser 때문에 사용
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         log.info("OAuth 로그인 SuccessHandler --- ");
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
@@ -67,7 +68,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
 
     protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
-                                          AuthToken authToken, String isFirst) throws IOException, ServletException {
+                                          AuthToken authToken, String isFirst) throws IOException{
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if (savedRequest != null) {
             String targetUrl = savedRequest.getRedirectUrl();

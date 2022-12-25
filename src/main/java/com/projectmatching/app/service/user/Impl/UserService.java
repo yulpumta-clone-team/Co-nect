@@ -1,6 +1,5 @@
 package com.projectmatching.app.service.user.Impl;
 
-import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.domain.liking.dto.UserLikingDto;
 import com.projectmatching.app.domain.liking.entity.UserLiking;
 import com.projectmatching.app.domain.liking.repository.UserLikingRepository;
@@ -8,7 +7,6 @@ import com.projectmatching.app.domain.team.dto.TeamSimpleDto;
 import com.projectmatching.app.domain.team.repository.TeamRepository;
 import com.projectmatching.app.domain.user.QUserRepository;
 import com.projectmatching.app.domain.user.UserRepository;
-import com.projectmatching.app.domain.user.dto.PostUserProfileDto;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.dto.UserProfileDto;
@@ -17,7 +15,6 @@ import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,10 +22,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGICAL_ERROR;
 import static com.projectmatching.app.domain.user.dto.UserInfo.of;
 
 @Service
@@ -54,9 +49,10 @@ public class UserService  {
      */
     @Transactional(readOnly = true)
     public UserInfo getUserEssentialInfo(UserDetailsImpl userDetails){
+        log.info("userEmail {}",userDetails.getEmail());
         User user = userRepository.findByEmail(userDetails.getEmail())
                 .orElseThrow(CoNectNotFoundException::new);
-        return of(user);
+        return UserInfo.of(user);
 
     }
 
