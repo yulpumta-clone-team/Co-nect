@@ -5,25 +5,24 @@ import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import useForm from 'hooks/useForm';
 import authApi from 'api/auth.api';
-
 import { ESSENTIAL_INFO_LINKS, ROUTE } from 'constant/route.constant';
-
 import { essentialInfoParser } from 'service/user/user.parser';
 import useUserInfo from 'hooks/useUserInfo';
 import useFileUploader from 'hooks/useFileUploader';
 import userApi from 'api/user.api';
 import { essentialValidation } from 'service/user/user.validation';
+import { hopeSessionOption, jobOptions } from 'constant';
 
 const initialValues = {
-  nickname: '',
-  profileImage: '',
+  nickname: '', // 입력하지 않으면 서브 페이지가 넘어가지 않습니다.
+  profileImage: 'init', // TODO: 뭐라도 넣어야 하는데
   techSkills: [],
-  slogan: '',
-  hopeSession: '',
-  job: '',
+  slogan: '', // 입력하지 않으면 서브 페이지가 넘어가지 않습니다.
+  hopeSession: hopeSessionOption[0].value,
+  job: jobOptions[0].value,
   belongTeam: false,
-  introduction: '',
-  portfolio: '',
+  introduction: '자기소개를 입력해주세요.',
+  portfolio: '포트폴리오 링크를 입력해주세요.',
 };
 
 const essentailSubPagesRouteOrder = [
