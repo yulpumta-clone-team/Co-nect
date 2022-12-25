@@ -1,58 +1,18 @@
+import { getRandomTechSkills } from 'utils';
+
 export const teamsList = [
   {
     id: 1,
     name: 'Lotstring',
     commentCnt: 74,
     likeCnt: 51,
-    read: 22,
+    readCnt: 22,
     session: '6개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
-    status: false,
+    skills: getRandomTechSkills(),
+    status: true,
     userInfo: { id: 1, image: 'http://dummyimage.com/131x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
   {
@@ -60,54 +20,12 @@ export const teamsList = [
     name: 'Alpha',
     commentCnt: 16,
     likeCnt: 42,
-    read: 3,
+    readCnt: 3,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: {
       id: 2,
@@ -120,55 +38,13 @@ export const teamsList = [
     name: 'Bamity',
     commentCnt: 37,
     likeCnt: 18,
-    read: 87,
+    readCnt: 87,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
-    status: false,
+    skills: getRandomTechSkills(),
+    status: true,
     userInfo: { id: 3, image: 'http://dummyimage.com/146x100.png/cc0000/ffffff', name: 'NYSE' },
   },
   {
@@ -176,54 +52,12 @@ export const teamsList = [
     name: 'Pannier',
     commentCnt: 99,
     likeCnt: 23,
-    read: 7,
+    readCnt: 7,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: {
       id: 4,
@@ -236,54 +70,12 @@ export const teamsList = [
     name: 'Zathin',
     commentCnt: 77,
     likeCnt: 17,
-    read: 67,
+    readCnt: 67,
     session: '6개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 5, image: 'http://dummyimage.com/132x100.png/ff4444/ffffff', name: 'NYSE' },
   },
@@ -292,54 +84,12 @@ export const teamsList = [
     name: 'Duobam',
     commentCnt: 16,
     likeCnt: 10,
-    read: 2,
+    readCnt: 2,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: { id: 6, image: 'http://dummyimage.com/111x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
@@ -348,54 +98,12 @@ export const teamsList = [
     name: 'Tres-Zap',
     commentCnt: 70,
     likeCnt: 29,
-    read: 88,
+    readCnt: 88,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 7, image: 'http://dummyimage.com/200x100.png/ff4444/ffffff', name: 'NYSE' },
   },
@@ -404,54 +112,12 @@ export const teamsList = [
     name: 'Fix San',
     commentCnt: 99,
     likeCnt: 32,
-    read: 64,
+    readCnt: 64,
     session: '6개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: { id: 8, image: 'http://dummyimage.com/179x100.png/ff4444/ffffff', name: 'NYSE' },
   },
@@ -460,54 +126,12 @@ export const teamsList = [
     name: 'Voltsillam',
     commentCnt: 95,
     likeCnt: 66,
-    read: 2,
+    readCnt: 2,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: {
       id: 9,
@@ -520,54 +144,12 @@ export const teamsList = [
     name: 'Alpha',
     commentCnt: 94,
     likeCnt: 90,
-    read: 86,
+    readCnt: 86,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: {
       id: 10,
@@ -580,54 +162,12 @@ export const teamsList = [
     name: 'Solarbreeze',
     commentCnt: 93,
     likeCnt: 28,
-    read: 33,
+    readCnt: 33,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: {
       id: 11,
@@ -640,54 +180,12 @@ export const teamsList = [
     name: 'Voyatouch',
     commentCnt: 21,
     likeCnt: 77,
-    read: 43,
+    readCnt: 43,
     session: '6개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 12, image: 'http://dummyimage.com/177x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
@@ -696,54 +194,12 @@ export const teamsList = [
     name: 'Lotstring',
     commentCnt: 20,
     likeCnt: 60,
-    read: 8,
+    readCnt: 8,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: { id: 13, image: 'http://dummyimage.com/224x100.png/ff4444/ffffff', name: 'NYSE' },
   },
@@ -752,54 +208,12 @@ export const teamsList = [
     name: 'Flowdesk',
     commentCnt: 7,
     likeCnt: 62,
-    read: 45,
+    readCnt: 45,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 14, image: 'http://dummyimage.com/145x100.png/dddddd/000000', name: 'NYSE' },
   },
@@ -808,54 +222,12 @@ export const teamsList = [
     name: 'Konklab',
     commentCnt: 69,
     likeCnt: 7,
-    read: 15,
+    readCnt: 15,
     session: '6개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 15, image: 'http://dummyimage.com/177x100.png/cc0000/ffffff', name: 'NYSE' },
   },
@@ -864,54 +236,12 @@ export const teamsList = [
     name: 'Rank',
     commentCnt: 14,
     likeCnt: 83,
-    read: 44,
+    readCnt: 44,
     session: '6개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: { id: 16, image: 'http://dummyimage.com/127x100.png/dddddd/000000', name: 'NYSE' },
   },
@@ -920,54 +250,12 @@ export const teamsList = [
     name: 'Span',
     commentCnt: 73,
     likeCnt: 24,
-    read: 3,
+    readCnt: 3,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: {
       id: 17,
@@ -980,54 +268,12 @@ export const teamsList = [
     name: 'Pannier',
     commentCnt: 17,
     likeCnt: 65,
-    read: 69,
+    readCnt: 69,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: {
       id: 18,
@@ -1040,54 +286,12 @@ export const teamsList = [
     name: 'Sonsing',
     commentCnt: 12,
     likeCnt: 7,
-    read: 67,
+    readCnt: 67,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 19, image: 'http://dummyimage.com/130x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
@@ -1096,54 +300,12 @@ export const teamsList = [
     name: 'Toughjoyfax',
     commentCnt: 74,
     likeCnt: 16,
-    read: 76,
+    readCnt: 76,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: {
       id: 20,
@@ -1156,54 +318,12 @@ export const teamsList = [
     name: 'Bitchip',
     commentCnt: 71,
     likeCnt: 60,
-    read: 64,
+    readCnt: 64,
     session: '6개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: {
       id: 21,
@@ -1216,54 +336,12 @@ export const teamsList = [
     name: 'Veribet',
     commentCnt: 91,
     likeCnt: 41,
-    read: 97,
+    readCnt: 97,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 22, image: 'http://dummyimage.com/143x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
@@ -1272,54 +350,12 @@ export const teamsList = [
     name: 'Span',
     commentCnt: 3,
     likeCnt: 97,
-    read: 27,
+    readCnt: 27,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: {
       id: 23,
@@ -1332,54 +368,12 @@ export const teamsList = [
     name: 'Flexidy',
     commentCnt: 49,
     likeCnt: 76,
-    read: 26,
+    readCnt: 26,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 24, image: 'http://dummyimage.com/201x100.png/cc0000/ffffff', name: 'NYSE' },
   },
@@ -1388,54 +382,12 @@ export const teamsList = [
     name: 'Solarbreeze',
     commentCnt: 62,
     likeCnt: 14,
-    read: 37,
+    readCnt: 37,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: { id: 25, image: 'http://dummyimage.com/194x100.png/dddddd/000000', name: 'NYSE' },
   },
@@ -1444,54 +396,12 @@ export const teamsList = [
     name: 'Domainer',
     commentCnt: 83,
     likeCnt: 41,
-    read: 9,
+    readCnt: 9,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 26, image: 'http://dummyimage.com/186x100.png/cc0000/ffffff', name: 'NYSE' },
   },
@@ -1500,54 +410,12 @@ export const teamsList = [
     name: 'Lotstring',
     commentCnt: 85,
     likeCnt: 23,
-    read: 100,
+    readCnt: 100,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: { id: 27, image: 'http://dummyimage.com/204x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },
@@ -1556,54 +424,12 @@ export const teamsList = [
     name: 'Tin',
     commentCnt: 14,
     likeCnt: 8,
-    read: 24,
+    readCnt: 24,
     session: '3개월',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 28, image: 'http://dummyimage.com/174x100.png/ff4444/ffffff', name: 'NYSE' },
   },
@@ -1612,54 +438,12 @@ export const teamsList = [
     name: 'Span',
     commentCnt: 44,
     likeCnt: 13,
-    read: 61,
+    readCnt: 61,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: false,
     userInfo: { id: 29, image: 'http://dummyimage.com/185x100.png/ff4444/ffffff', name: 'NYSE' },
   },
@@ -1668,54 +452,13 @@ export const teamsList = [
     name: 'Cardify',
     commentCnt: 65,
     likeCnt: 61,
-    read: 27,
+    readCnt: 61,
+    readCnt: 27,
     session: '무관',
+    slogan: '좋은 팀원들과 좋은 프로젝트를 해봅시다.',
     image:
       'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     status: true,
     userInfo: { id: 30, image: 'http://dummyimage.com/118x100.png/5fa2dd/ffffff', name: 'NYSE' },
   },

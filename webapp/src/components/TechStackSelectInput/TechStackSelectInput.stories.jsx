@@ -1,100 +1,62 @@
-import handlers from 'mocks/handlers';
+import { TECH_SKILLS } from 'constant/techskill.constant';
 import React, { useState } from 'react';
+import { skillStackParser } from 'service/etc/skillStack.parser';
 import TechStackSelectInput from './index';
 
 export default {
   title: 'Component/TechStackSelectInput',
   component: TechStackSelectInput,
-  parameters: {
-    msw: handlers,
-  },
   layout: 'fullscreen',
 };
 
+const techSkillOptions = skillStackParser(TECH_SKILLS);
+
 function Template(args) {
+  // eslint-disable-next-line react/destructuring-assignment
   const [selectedTechSkills, setSelectedTechSkills] = useState([]);
   const onChange = ({ name, value }) => {
     setSelectedTechSkills(value);
   };
   return (
-    <TechStackSelectInput {...args} selectedTechSkills={selectedTechSkills} onChange={onChange} />
+    <TechStackSelectInput
+      {...args}
+      // eslint-disable-next-line react/destructuring-assignment
+      selectedTechSkills={args.selectedTechSkills || selectedTechSkills}
+      onChange={onChange}
+    />
   );
 }
 
 export const Default = Template.bind({});
 Default.args = {
-  selectedTechSkills: [],
   name: 'techSkills',
   label: '기술스택선택하기',
-  placeholder: 'selectedTechSkills',
+  placeholder: '기술스택을 선택해주세요.',
 };
 
 export const WtihValue = Template.bind({});
 WtihValue.args = {
-  selectedTechSkills: [
-    {
-      id: 500,
-      category: 'arichitecture',
-      label: 'git',
-      value: 'git',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-  ],
+  selectedTechSkills: [techSkillOptions[1]],
   name: 'techSkills',
   label: '기술스택선택하기',
-  placeholder: 'selectedTechSkills',
+  placeholder: '기술스택을 선택해주세요.',
 };
 
 export const WtihSelectedOptionViewer = Template.bind({});
 WtihSelectedOptionViewer.args = {
   isDropdownType: true,
-  selectedTechSkills: [
-    {
-      id: 500,
-      category: 'arichitecture',
-      label: 'git',
-      value: 'git',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-  ],
+  selectedTechSkills: [techSkillOptions[20]],
   name: 'techSkills',
   label: '기술스택선택하기',
-  placeholder: 'selectedTechSkills',
+  placeholder: '기술스택을 선택해주세요.',
 };
 
 export const WtihMultiValue = Template.bind({});
 WtihMultiValue.args = {
-  selectedTechSkills: [
-    {
-      id: 500,
-      category: 'arichitecture',
-      label: 'git',
-      value: 'git',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-    {
-      id: 202,
-      category: 'back',
-      label: 'express',
-      value: 'express',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-    {
-      id: 203,
-      category: 'back',
-      label: 'java',
-      value: 'java',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-  ],
+  selectedTechSkills: techSkillOptions,
   name: 'techSkills',
   label: '기술스택선택하기',
-  placeholder: 'selectedTechSkills',
+  placeholder: '기술스택을 선택해주세요.',
 };
 
 export const WithErrorInSelectedOptionViewer = Template.bind({});

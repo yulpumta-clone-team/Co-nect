@@ -32,7 +32,7 @@ export default function UserCard({ cardInfo, onClick }) {
       <S.BackgroundImg>
         <S.UserJob>{job}</S.UserJob>
       </S.BackgroundImg>
-      <ProfileImg src={S3Img} />
+      <ProfileImg src={S3Img} alt={`${name}의 프로필 이미지`} customStyle={S.ProfileImg} />
       <S.UserInfo>
         <S.UserName>{name}</S.UserName>
         <S.TeamBelongBoard>
@@ -44,7 +44,13 @@ export default function UserCard({ cardInfo, onClick }) {
         </S.HopeSession>
       </S.UserInfo>
       <S.Divider />
-      <TechSkills skills={skills} isCarousel imageSize="35px" gap="11px" />
+      <TechSkills
+        skills={skills}
+        isCarousel
+        imageSize="50px"
+        gap="10px"
+        customStyle={S.TechSkills}
+      />
       <S.CardInfoIndicator>
         <S.SingleIndicator>
           <ChatBubbleOvalSvg />

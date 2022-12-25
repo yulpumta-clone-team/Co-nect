@@ -1,3 +1,5 @@
+import { getRandomTechSkills } from 'utils';
+
 export const teamDetail = {
   id: 13132,
   userInfo: {
@@ -22,62 +24,5 @@ export const teamDetail = {
   readCnt: 12,
   commentCnt: 12,
   likeCnt: 11,
-  skills: [
-    {
-      key: 502,
-      category: 'arichitecture',
-      techName: 'kubernetes',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-    {
-      key: 503,
-      category: 'arichitecture',
-      techName: 'aws',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-    {
-      key: 504,
-      category: 'arichitecture',
-      techName: 'jest',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-    {
-      key: 505,
-      category: 'arichitecture',
-      techName: 'cypress',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-    {
-      key: 200,
-      category: 'back',
-      techName: 'nodeJs',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-    {
-      key: 100,
-      category: 'front',
-      techName: 'javascript',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-    {
-      key: 101,
-      category: 'front',
-      techName: 'react',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-    {
-      key: 102,
-      category: 'front',
-      techName: 'vue',
-      image:
-        'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-    },
-  ],
+  skills: getRandomTechSkills(),
 };

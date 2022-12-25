@@ -21,7 +21,7 @@ const initialValues = {
   slogan: '',
   hopeSession: '',
   job: '',
-  belongTeam: '',
+  belongTeam: false,
   introduction: '',
   portfolio: '',
 };

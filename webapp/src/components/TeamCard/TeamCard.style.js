@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // * : Card Container
 export const CardWrapper = styled.li`
   cursor: pointer;
   position: relative;
-  width: 260px;
-  height: 300px;
+  width: 350px;
+  height: 400px;
   justify-content: center;
   background: ${({ theme: { colors } }) => colors.greyScale.white};
 
@@ -19,9 +19,20 @@ export const CardTop = styled.div`
   display: flex;
 
   height: 30px;
-  width: 260px;
-  background-color: #036eff;
+  width: 100%;
+  background-color: ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 10px 10px 0px 0px;
+`;
+
+export const ProfileImg = css`
+  position: absolute; // * : 각 div 상자에 걸쳐있는 프로필 이미지 때문에 absolute로 위치를 설정해 줌.
+  display: flex;
+
+  width: 100px;
+  height: 100px;
+  right: 12px;
+  top: 60px;
+  border-radius: 50%;
 `;
 
 // * : 지금은 Figma color 참고하여 div 태그로 구성하여 줬지만, 추후 img로 수정 필요.
@@ -33,7 +44,7 @@ export const BackgroundImg = styled.div`
   width: 100%;
   height: 20%;
   background-color: #eaeaea;
-  padding: 1rem;
+  padding: 1.2rem;
 `;
 
 // * : Team 모집중 / 모집 안함 상태 나타내는 버튼
@@ -83,16 +94,18 @@ export const TeamName = styled.div`
   font-weight: 700;
 `;
 
+export const TeamSlogan = styled.div``;
+
 export const HopeSession = styled.div`
   position: relative;
   display: flex;
   align-items: center;
 
   width: 80%;
-  height: 70%;
   ${({ theme: { fonts } }) => fonts.korean.default}
   font-weight: 700;
 `;
+
 // * : Team이 선택한 기간
 export const TeamHopeSession = styled.div`
   position: relative;
@@ -109,10 +122,12 @@ export const Divider = styled.div`
   background-color: ${({ theme: { colors } }) => colors.greyScale.nonActive};
 `;
 
+export const TechSkills = css`
+  padding: 12px 0;
+`;
+
 // * : 조회수와 댓글수가 보여지는 부분
 export const CardInfoIndicator = styled.div`
-  position: absolute;
-  bottom: 1.2rem;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
