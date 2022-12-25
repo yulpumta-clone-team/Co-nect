@@ -28,7 +28,6 @@ public class UserDto extends UserInfoDto {
 
     private Long id;
 
-
     private String email;
     private String portfolio;
     private String slogan;
