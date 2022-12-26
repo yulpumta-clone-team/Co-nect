@@ -154,7 +154,8 @@ export const section3Circle3 = styled.div`
   ${({ theme: { fonts } }) => fonts.main.emphasis};
 `;
 
-// =========================================
+// ========================================= Section4
+
 export const Section4 = styled.div`
   position: absolute;
   display: flex;
@@ -192,6 +193,8 @@ export const Section4Text2 = styled.div`
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
+
+// =========================================
 export const Section5 = styled.div`
   position: absolute;
   display: flex;
