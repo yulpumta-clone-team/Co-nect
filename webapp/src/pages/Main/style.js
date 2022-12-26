@@ -26,6 +26,7 @@ export const Section1 = styled.div`
   display: flex;
   width: 100%;
   height: 120vh;
+  top: 50%;
   background-color: black;
 `;
 export const MainGradient = styled.div`
@@ -72,7 +73,7 @@ export const SubText = styled.div`
 export const Section2 = styled.div`
   position: absolute;
   width: 100%;
-  top: 100%;
+  top: 150%;
   background-color: #262c41;
   ${({ theme: { fonts } }) => fonts.korean.main};
   color: ${({ theme: { colors } }) => colors.greyScale.white};
@@ -104,13 +105,13 @@ export const Section3 = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #262c41;
-  top: 200%;
+  top: 250%;
 `;
 export const CircleGroup = styled.div`
   position: absolute;
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 90%;
 `;
 export const section3Circle1 = styled.div`
   position: absolute;
@@ -118,8 +119,8 @@ export const section3Circle1 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 330px;
-  height: 330px;
+  width: 370px;
+  height: 370px;
   border-radius: 50%;
   top: -120px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
@@ -131,8 +132,8 @@ export const section3Circle2 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 330px;
-  height: 330px;
+  width: 370px;
+  height: 370px;
   border-radius: 50%;
   top: -120px;
   left: 35%;
@@ -145,8 +146,8 @@ export const section3Circle3 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 330px;
-  height: 330px;
+  width: 370px;
+  height: 370px;
   border-radius: 50%;
   top: -120px;
   left: 70%;
@@ -163,7 +164,7 @@ export const Section4 = styled.div`
   width: 100%;
   height: 80vh;
   background-color: #262c41;
-  top: 300%;
+  top: 350%;
 `;
 export const Section4Text = styled.div`
   position: absolute;
@@ -204,7 +205,7 @@ export const Section5 = styled.div`
   width: 100%;
   height: 180vh;
   background-color: black;
-  top: 380%;
+  top: 430%;
 `;
 
 // ========================================= Section6
@@ -216,7 +217,7 @@ export const Section6 = styled.div`
   width: 100%;
   height: 180vh;
   background-color: black;
-  top: 480%;
+  top: 530%;
 `;
 // ========================================= Section7
 export const Section7 = styled.div`
@@ -227,7 +228,7 @@ export const Section7 = styled.div`
   width: 100%;
   height: 180vh;
   background-color: black;
-  top: 580%;
+  top: 630%;
 `;
 
 // ========================================= Section5,6,7 Card와 CardText
@@ -318,7 +319,7 @@ export const Section8 = styled.div`
   height: 100vh;
   background-color: #434343;
   color: white;
-  top: 700%;
+  top: 750%;
   ${({ theme: { fonts } }) => fonts.korean.title};
   & span {
     position: absolute;
@@ -368,7 +369,7 @@ export const BottomBox = styled.div`
   align-items: center;
   width: 100%;
   height: 30vh;
-  top: 800%;
+  top: 850%;
   background-color: #676767;
 `;
 export const TextBox = styled.div`
