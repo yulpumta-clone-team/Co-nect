@@ -1,10 +1,7 @@
 package com.projectmatching.app.controller.user;
 
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
-import com.projectmatching.app.domain.user.dto.PostUserProfileDto;
-import com.projectmatching.app.domain.user.dto.UserDto;
-import com.projectmatching.app.domain.user.dto.UserEssentialDto;
-import com.projectmatching.app.domain.user.dto.UserInfo;
+import com.projectmatching.app.domain.user.dto.*;
 import com.projectmatching.app.service.user.Impl.UserService;
 import com.projectmatching.app.service.user.Impl.UserSignUpService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
@@ -32,19 +29,14 @@ public class UserEditController {
      */
     @ApiOperation(value = "유저 필수정보 업데이트 ")
     @PostMapping("/essential_info")
-    public ResponseTemplate<Void> updateEssential(@RequestBody UserEssentialDto userEssentialDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        userSignUpService.updateUserEssentialInfo(userEssentialDto,userDetails);
+    public ResponseTemplate<Void> updateEssential(@RequestBody UserEssentialDto userEssentialDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        userSignUpService.updateUserEssentialInfo(userEssentialDto, userDetails);
         return ResponseTemplate.of(SUCCESS);
     }
 
     @ApiOperation(value = "유저 프로필을 띄우기 위한 최소 필수정보들을 조회")
     @GetMapping("/essential_info")
-    public ResponseTemplate<UserInfo> getEssential(@AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ResponseTemplate<UserInfo> getEssential(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return ResponseTemplate.valueOf(userService.getUserEssentialInfo(userDetails));
     }
-
-
-
-
-
 }

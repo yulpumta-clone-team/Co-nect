@@ -15,16 +15,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserInfoAdderServiceImpl implements UserInfoAdderService{
+public class UserInfoAdderServiceImpl implements UserInfoAdderService {
 
     private final UserRepository userRepository;
 
     @Override
-    public <T extends UserInfoDto> T userInfoAdder(T userInfoAppendalbeDto, Long userId){
-       User user = userRepository.findById(userId).orElseThrow(CoNectLogicalException::new);
+    public <T extends UserInfoDto> T userInfoAdder(T userInfoAppendalbeDto, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(CoNectLogicalException::new);
 
-       userInfoAppendalbeDto.setUserInfoWith(user);
-       return userInfoAppendalbeDto;
+        userInfoAppendalbeDto.setUserInfoWith(user);
+        return userInfoAppendalbeDto;
     }
 
     @Override
@@ -43,12 +43,11 @@ public class UserInfoAdderServiceImpl implements UserInfoAdderService{
     public <T extends UserInfoDto> T nestedUserInfoAdder(T nestedUserInfoAppendableDto, String userName) {
 
 
-
         //유저 대댓글에 userInfo추가
-        if(nestedUserInfoAppendableDto instanceof UserCommentDto){
+        if (nestedUserInfoAppendableDto instanceof UserCommentDto) {
             UserCommentDto userCommentDto = (UserCommentDto) nestedUserInfoAppendableDto;
-            userCommentDto.getReplies().stream().forEach(
-                    dto-> {
+            userCommentDto.getReplies().forEach(
+                    dto -> {
                         User user = userRepository.findByName(userName).orElseThrow(CoNectNotFoundException::new);
                         dto.setUserInfoWith(user);
                     }
@@ -57,18 +56,17 @@ public class UserInfoAdderServiceImpl implements UserInfoAdderService{
             return nestedUserInfoAppendableDto;
         }
         //팀 대댓글에 userInfo 추가
-        else if(nestedUserInfoAppendableDto instanceof TeamCommentDto){
+        else if (nestedUserInfoAppendableDto instanceof TeamCommentDto) {
             TeamCommentDto teamCommentDto = (TeamCommentDto) nestedUserInfoAppendableDto;
-            teamCommentDto.getReplies().stream().forEach(
-                    dto-> {
+            teamCommentDto.getReplies().forEach(
+                    dto -> {
                         User user = userRepository.findByName(userName).orElseThrow(CoNectNotFoundException::new);
                         dto.setUserInfoWith(user);
                     }
             );
 
             return nestedUserInfoAppendableDto;
-        }
-        else throw new CoNectRuntimeException(ResponseTemplateStatus.ADD_NESTED_FAILED,"대댓글이 존재할 수 없는 dto 입니다.");
+        } else throw new CoNectRuntimeException(ResponseTemplateStatus.ADD_NESTED_FAILED, "대댓글이 존재할 수 없는 dto 입니다.");
 
 
     }

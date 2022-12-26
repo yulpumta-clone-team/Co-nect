@@ -6,6 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { handleToken } from 'service/auth';
 import useUserInfo from './useUserInfo';
 
+/**
+ * handleLogin이 동작하기 위해 외부에서 주입해야하는 params
+ * @typedef {Object} userFormParams
+ * @property {string} accessToken
+ * @property {string} refreshToken
+ * @property {boolean} isFirstLogin 최초로그인인지 여부
+ */
+
 const useHandleLogin = () => {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
@@ -15,6 +23,11 @@ const useHandleLogin = () => {
     navigate(ESSENTIAL_INFO_LINKS.NICKNAME, { state: { isFirstLogin } });
   };
 
+  // TODO: 토큰저장과 최초로그인 판단 여부를 분리하기
+  /**
+   * access token과 refresh token을 저장하고, 최초로그인인지 여부를 판단한하는 로그인 함수
+   * @param {Object} userFormParams
+   */
   const handleLogin = ({ accessToken, refreshToken, isFirstLogin }) => {
     handleToken.saveAccessToken(accessToken);
     handleToken.saveRefreshToken(refreshToken);

@@ -1,13 +1,11 @@
 package com.projectmatching.app.config.handler;
 
 import com.projectmatching.app.config.YAMLConfig;
-import com.projectmatching.app.domain.user.UserProfile;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
 import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.exception.CoNectLogicalException;
-import com.projectmatching.app.service.user.Impl.UserSignInService;
-import com.projectmatching.app.service.user.OAuthService;
 import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
 import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
@@ -24,15 +22,12 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
-import java.util.Optional;
 
 @Component
 @Slf4j
@@ -49,20 +44,20 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
     @SneakyThrows //isFirstgLoginUser 때문에 사용
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         log.info("OAuth 로그인 SuccessHandler --- ");
-        OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
         UserDto user = toDto(oAuth2User);
         AuthToken authToken = authTokenProvider.createTokens(user);
 
-        resultRedirectStrategy(request, response,authToken,isFirstLoginUserResult(user));
+        resultRedirectStrategy(request, response, authToken, isFirstLoginUserResult(user));
 
     }
 
     private String isFirstLoginUserResult(UserDto user) throws IllegalAccessException {
         StringBuilder isFirstLoginUser = new StringBuilder("&isFirst=");
-        if(FirstUserCheckUtil.isFirstLoginUser(user)){
+        if (FirstUserCheckUtil.isFirstLoginUser(user)) {
             isFirstLoginUser.append("true");
         } else {
             isFirstLoginUser.append("false");
@@ -73,36 +68,22 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
 
     protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
-                                         AuthToken authToken,String isFirst) throws IOException, ServletException {
+                                          AuthToken authToken, String isFirst) throws IOException{
         SavedRequest savedRequest = requestCache.getRequest(request, response);
-        if(savedRequest!=null) {
+        if (savedRequest != null) {
             String targetUrl = savedRequest.getRedirectUrl();
             redirectStratgy.sendRedirect(request, response, targetUrl);
         } else {
-            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+ yamlConfig.getFPORT()+ "/oauthCallback?" + authToken.toString() + isFirst;
+            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":" + yamlConfig.getFPORT() + "/oauthCallback?" + authToken.toString() + isFirst;
             redirectStratgy.sendRedirect(request, response, redirectUrl);
         }
 
     }
 
-
-
-
-    private void writeTokenResponse(HttpServletResponse response, String token) throws IOException {
-
-        response.setContentType("text/html;charset=UTF-8");
-        response.addHeader("Authorization",token);
-        response.setContentType("application/json;charset=UTF-8");
-
-
-    }
-
-
     private UserDto toDto(OAuth2User oAuth2User) {
-       Map<String,Object> attributes = oAuth2User.getAttributes();
-       User user = userRepository.findByEmail((String)attributes.get("email")).orElseThrow(CoNectLogicalException::new);
-       UserDto userDto = UserDto.of(user);
-       return userInfoAdderService.userInfoAdder(userDto,(String)attributes.get("name"));
+        Map<String, Object> attributes = oAuth2User.getAttributes();
+        User user = userRepository.findByEmail((String) attributes.get("email")).orElseThrow(CoNectLogicalException::new);
+        UserDto userDto = UserDto.of(user);
+        return userDto;
     }
-
 }

@@ -5,8 +5,9 @@ import useHandleLogin from 'hooks/useHandleLogin';
 
 export default function OAuthCallback() {
   const { search } = useLocation();
-  const { accessToken, refreshToken, isFirst: isFirstLogin } = queryString.parse(search);
+  const { accessToken, refreshToken, isFirst } = queryString.parse(search);
   const { handleLogin } = useHandleLogin();
+  const isFirstLogin = isFirst !== 'false';
 
   useEffect(() => {
     handleLogin({ accessToken, refreshToken, isFirstLogin });

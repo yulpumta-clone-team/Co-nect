@@ -36,61 +36,52 @@ public class UserSignInService {
     /**
      * 해당 유저 존재하면
      * 토큰을 만듦
+     *
      * @param userLoginDto
      * @return AuthToken
-     *
      */
     @Transactional(readOnly = true)
     @Validation
-    public AuthToken userLogin(UserLoginDto userLoginDto){
+    public AuthToken userLogin(UserLoginDto userLoginDto) {
         try {
             User user = userRepository.findByEmail(userLoginDto.getEmail()).orElseThrow(CoNectNotFoundException::new);
 
-            if(passwordEncoder.matches(userLoginDto.getPwd(),user.getPwd())){
+            if (passwordEncoder.matches(userLoginDto.getPwd(), user.getPwd())) {
                 return jwtTokenProvider.createTokens(UserDto.of(user));
 
             }
 
             throw new ResponeException(LOGIN_USER_ERROR);
 
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
             throw new ResponeException(LOGIN_USER_ERROR);
         }
     }
 
 
-
     @Transactional(readOnly = true)
-    public UserIsFirstDto isFirstLoginUserCheck(String userEmail){
+    public UserIsFirstDto isFirstLoginUserCheck(String userEmail) {
         User user = userRepository.findByEmail(userEmail).orElseThrow(CoNectNotFoundException::new);
 
 
-        if(isUserNameNull(user)) return UserIsFirstDto.builder().isFirst(true).build();
+        if (isUserNameNull(user)) return UserIsFirstDto.builder().isFirst(true).build();
 
         return UserIsFirstDto.builder().isFirst(false).build();
 
     }
 
 
-
-
-    private boolean isUserNameNull(User user){
-        if(user.getName() == null)return true;
+    private boolean isUserNameNull(User user) {
+        if (user.getName() == null) return true;
         else return false;
 
     }
 
 
     @Transactional
-    public void userDelete(String userEamil){
+    public void userDelete(String userEamil) {
         qUserRepository.deleteUser(userEamil);
-        log.info("유저 삭제됨 user email = {}",userEamil);
+        log.info("유저 삭제됨 user email = {}", userEamil);
     }
-
-
-
-
-
-
 }
