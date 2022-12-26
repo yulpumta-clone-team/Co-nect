@@ -1,23 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import Button from 'components/Common/Button';
 import * as S from './CardsGrid.style';
 
 CardsGrid.propTypes = {
   CardComponent: PropTypes.func.isRequired,
   cards: PropTypes.array.isRequired,
   clickLink: PropTypes.string,
+  emptyTrigger: PropTypes.shape({
+    emptyMessage: PropTypes.string.isRequired,
+    triggerLink: PropTypes.string.isRequired,
+    triggerMessage: PropTypes.string.isRequired,
+  }),
 };
 
-export default function CardsGrid({ CardComponent, cards, clickLink }) {
+export default function CardsGrid({ CardComponent, cards, clickLink, emptyTrigger }) {
+  const { emptyMessage, triggerLink, triggerMessage } = emptyTrigger;
   const navaigate = useNavigate();
   const handleClickCardComponent = (cardId) => {
     clickLink && navaigate(clickLink + cardId);
   };
+  const handleClickTriggerLink = () => navaigate(triggerLink);
   return (
     <S.Cards>
       {cards.length === 0 ? (
-        <div>Emtpy</div>
+        <S.Empty>
+          <h3>{emptyMessage}</h3>
+          <Button theme="primary" onClick={handleClickTriggerLink} customStyle={S.Button}>
+            {triggerMessage}
+          </Button>
+        </S.Empty>
       ) : (
         cards.map(({ id, ...cardInfo }) => (
           <CardComponent
