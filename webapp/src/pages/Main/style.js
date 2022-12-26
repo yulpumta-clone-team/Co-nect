@@ -206,20 +206,32 @@ export const Section5 = styled.div`
   background-color: black;
   top: 380%;
 `;
-export const FirstCardIcon1 = styled.img.attrs({ src: `${GhostIcon}` })`
+
+// ========================================= Section6
+export const Section6 = styled.div`
   position: absolute;
   display: flex;
-  left: 10%;
-  width: 300px;
-  height: 300px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 180vh;
+  background-color: black;
+  top: 480%;
 `;
-export const FirstCardIcon2 = styled.img.attrs({ src: `${CloudIcon}` })`
+// ========================================= Section7
+export const Section7 = styled.div`
   position: absolute;
   display: flex;
-  top: 8%;
-  width: 300px;
-  height: 300px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 180vh;
+  background-color: black;
+  top: 580%;
 `;
+
+// ========================================= Section5,6,7 Card와 CardText
+
 export const Card = styled.div`
   position: absolute;
   display: flex;
@@ -249,28 +261,54 @@ export const CardText = styled.div`
     ${({ theme: { fonts } }) => fonts.main.subTitle};
   }
 `;
+// ========================================= Section5,6,7 Icon 집합
+
+export const FirstCardIcon1 = styled.img.attrs({ src: `${GhostIcon}` })`
+  position: absolute;
+  display: flex;
+  left: 10%;
+  width: 300px;
+  height: 300px;
+`;
+export const FirstCardIcon2 = styled.img.attrs({ src: `${CloudIcon}` })`
+  position: absolute;
+  display: flex;
+  top: 8%;
+  width: 300px;
+  height: 300px;
+`;
+export const SecondCardIcon1 = styled.img.attrs({ src: `${EarthIcon}` })`
+  position: absolute;
+  display: flex;
+  left: 10%;
+  width: 240px;
+  height: 300px;
+`;
+export const SecondCardIcon2 = styled.img.attrs({ src: `${HeartIcon}` })`
+  position: absolute;
+  display: flex;
+  left: 4%;
+  top: 10%;
+  width: 183px;
+  height: 188px;
+`;
+export const ThirdCardIcon1 = styled.img.attrs({ src: `${CellPhoneIcon}` })`
+  position: absolute;
+  display: flex;
+  left: 14%;
+  width: 170px;
+  height: 300px;
+`;
+export const ThirdCardIcon2 = styled.img.attrs({ src: `${MessageIcon}` })`
+  position: absolute;
+  display: flex;
+  left: 5%;
+  top: 25%;
+  width: 170px;
+  height: 170px;
+`;
 
 // =========================================
-export const Section6 = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 180vh;
-  background-color: black;
-  top: 480%;
-`;
-export const Section7 = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 180vh;
-  background-color: black;
-  top: 580%;
-`;
 export const Section8 = styled.div`
   position: absolute;
   display: flex;
@@ -309,37 +347,6 @@ export const TextBox = styled.div`
   &span {
     ${({ theme: { fonts } }) => fonts.korean.emphasis};
   }
-`;
-
-export const SecondCardIcon1 = styled.img.attrs({ src: `${EarthIcon}` })`
-  position: absolute;
-  display: flex;
-  left: 10%;
-  width: 240px;
-  height: 300px;
-`;
-export const SecondCardIcon2 = styled.img.attrs({ src: `${HeartIcon}` })`
-  position: absolute;
-  display: flex;
-  left: 4%;
-  top: 10%;
-  width: 183px;
-  height: 188px;
-`;
-export const ThirdCardIcon1 = styled.img.attrs({ src: `${CellPhoneIcon}` })`
-  position: absolute;
-  display: flex;
-  left: 14%;
-  width: 170px;
-  height: 300px;
-`;
-export const ThirdCardIcon2 = styled.img.attrs({ src: `${MessageIcon}` })`
-  position: absolute;
-  display: flex;
-  left: 5%;
-  top: 25%;
-  width: 170px;
-  height: 170px;
 `;
 export const LinkGroup = styled.div`
   position: absolute;
