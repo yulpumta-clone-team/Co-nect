@@ -6,9 +6,9 @@ import Callback from 'pages/Callback';
 import CardsGrid from 'components/CardsGrid';
 
 WithInfiniteScroll.propTypes = {
-  CardComponent: PropTypes.element.isRequired,
-  clickLink: PropTypes.func.isRequired,
-  axiosInstance: PropTypes.object.isRequired,
+  CardComponent: PropTypes.func.isRequired,
+  clickLink: PropTypes.string.isRequired,
+  axiosInstance: PropTypes.func.isRequired,
   emptyTrigger: PropTypes.shape({
     emptyMessage: PropTypes.string.isRequired,
     triggerLink: PropTypes.string.isRequired,
@@ -36,11 +36,13 @@ export default function WithInfiniteScroll({
   const fetcher = async (signal) => {
     setIsLoading(true);
     try {
+      if (isLoading) return;
       const { data: responseCardList } = await axiosInstance({
         params: { lastPage: page.current },
         signal,
       });
       setCardList((prev) => [...prev, ...responseCardList]);
+      page.current += 1;
     } catch (error) {
       // src/api/errorHandler가 올바르게 작동하지 않은 경우 if문 실행
       if (typeof error !== 'string') {
@@ -56,7 +58,6 @@ export default function WithInfiniteScroll({
       }
     } finally {
       setIsLoading(false);
-      page.current += 1;
     }
   };
 
@@ -68,20 +69,24 @@ export default function WithInfiniteScroll({
   };
 
   const [loadMoreRef] = useIntersect(fetcher);
-  if (error.isError)
-    return (
-      <Callback errorStatus={error.httpStatus} errorMessage={error.msg} forceRefetch={refetcher} />
-    );
 
   return (
     <>
-      <CardsGrid
-        CardComponent={CardComponent}
-        cards={cardList}
-        clickLink={clickLink}
-        emptyTrigger={emptyTrigger}
-      />
-      <div ref={loadMoreRef}>{isLoading && <div>Loading...</div>}</div>
+      {error.isError ? (
+        <Callback
+          errorStatus={error.httpStatus}
+          errorMessage={error.msg}
+          forceRefetch={refetcher}
+        />
+      ) : (
+        <CardsGrid
+          CardComponent={CardComponent}
+          cards={cardList}
+          clickLink={clickLink}
+          emptyTrigger={emptyTrigger}
+        />
+      )}
+      <div ref={loadMoreRef}>{isLoading && !error.isError && <div>Loading...</div>}</div>
       <UpperButton />
     </>
   );
