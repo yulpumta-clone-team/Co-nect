@@ -12,41 +12,15 @@ import SignUpIcon from 'assets/images/signup-link.png';
 import BoardIcon from 'assets/images/board-link.png';
 import PostIcon from 'assets/images/post-link.png';
 
+// ========================================= MainContainer
 export const MainContainer = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
   padding-top: 24px;
 `;
-export const Card = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 1000px;
-  height: 450px;
-  background-color: #414141;
-  border-radius: 2%;
-  top: 10%;
-`;
-export const CardText = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  width: 55%;
-  height: 50%;
-  left: 40%;
-  gap: 30%;
-  top: 25%;
 
-  ${({ theme: { fonts } }) => fonts.main.default};
-  & span {
-    height: 20%;
-    top: 90%;
-    ${({ theme: { fonts } }) => fonts.main.subTitle};
-  }
-`;
+// ========================================= Section1
 export const Section1 = styled.div`
   position: absolute;
   display: flex;
@@ -54,6 +28,47 @@ export const Section1 = styled.div`
   height: 120vh;
   background-color: black;
 `;
+export const MainGradient = styled.div`
+  background-image: url(${Gradient});
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+`;
+export const Logo = styled.img.attrs({ src: `${MainLogo}` })`
+  position: absolute;
+  display: flex;
+  top: 90px;
+  width: 100px;
+  height: 100px;
+`;
+export const MainText = styled.div`
+  position: relative;
+  letter-spacing: 0.01em;
+  width: 100%;
+  height: 15%;
+  left: 30%;
+  color: ${({ theme: { colors } }) => colors.greyScale.white};
+
+  font-weight: 800;
+  ${({ theme: { fonts } }) => fonts.english.main};
+`;
+export const SubText = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 15%;
+  gap: 20%;
+  color: white;
+  ${({ theme: { fonts } }) => fonts.main.default2};
+`;
+
+// =========================================
 export const Section2 = styled.div`
   position: absolute;
   width: 100%;
@@ -182,6 +197,35 @@ export const Section5 = styled.div`
   background-color: black;
   top: 380%;
 `;
+export const Card = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1000px;
+  height: 450px;
+  background-color: #414141;
+  border-radius: 2%;
+  top: 10%;
+`;
+export const CardText = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: 55%;
+  height: 50%;
+  left: 40%;
+  gap: 30%;
+  top: 25%;
+
+  ${({ theme: { fonts } }) => fonts.main.default};
+  & span {
+    height: 20%;
+    top: 90%;
+    ${({ theme: { fonts } }) => fonts.main.subTitle};
+  }
+`;
 export const Section6 = styled.div`
   position: absolute;
   display: flex;
@@ -240,45 +284,6 @@ export const TextBox = styled.div`
   &span {
     ${({ theme: { fonts } }) => fonts.korean.emphasis};
   }
-`;
-export const MainGradient = styled.div`
-  background-image: url(${Gradient});
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-`;
-export const MainText = styled.div`
-  position: relative;
-  letter-spacing: 0.01em;
-  width: 100%;
-  height: 15%;
-  left: 30%;
-  color: ${({ theme: { colors } }) => colors.greyScale.white};
-
-  font-weight: 800;
-  ${({ theme: { fonts } }) => fonts.english.main};
-`;
-export const SubText = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 15%;
-  gap: 20%;
-  color: white;
-  ${({ theme: { fonts } }) => fonts.main.default2};
-`;
-export const Logo = styled.img.attrs({ src: `${MainLogo}` })`
-  position: absolute;
-  display: flex;
-  top: 90px;
-  width: 100px;
-  height: 100px;
 `;
 
 export const FirstCardIcon1 = styled.img.attrs({ src: `${GhostIcon}` })`
