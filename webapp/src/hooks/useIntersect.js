@@ -19,20 +19,16 @@ const defaultOption = {
 
 /**
  * IntersectionObserver를 사용하기 위한 custom hoooks
+ * @param {callback} callback 바라보고 있는 요소가 교차할 때(isIntersecting) 실행할 callback함수
  * @param {Object} customOption  IntersectionObserver인스턴스를 생성하기 위한 option (root, rootMargin,threshold)  https://developer.mozilla.org/ko/docs/Web/API/IntersectionObserver/IntersectionObserver
  * @returns {useIntersectReturns}  useIntersect를 사용하는 곳에서 사용할 method 및 state
  */
-export default function useIntersect(customOption) {
-  const [page, setPage] = useState(0);
+export default function useIntersect(callback, customOption) {
   const loadMoreRef = useRef(null);
-
-  const resetPage = () => {
-    setPage(0);
-  };
 
   const handleObsever = ([entry]) => {
     if (entry.isIntersecting) {
-      setPage((prev) => prev + 1);
+      callback();
     }
   };
 
@@ -44,5 +40,5 @@ export default function useIntersect(customOption) {
     }
     return () => observer && observer.current && observer.disconnect();
   }, [customOption, loadMoreRef]);
-  return [loadMoreRef, page, resetPage];
+  return [loadMoreRef];
 }
