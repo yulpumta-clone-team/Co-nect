@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 
 // 상단 파란색 상자
 export const TopContainer = styled.div`

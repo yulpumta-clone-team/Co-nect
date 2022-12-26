@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import CalendarSvg from './CalendarSvg';
 import ChatBubbleOvalSvg from './ChatBubbleOvalSvg';
 import EditPencilSvg from './EditPencilSvg';
