@@ -308,7 +308,8 @@ export const ThirdCardIcon2 = styled.img.attrs({ src: `${MessageIcon}` })`
   height: 170px;
 `;
 
-// =========================================
+// ========================================= Section8
+
 export const Section8 = styled.div`
   position: absolute;
   display: flex;
@@ -323,29 +324,6 @@ export const Section8 = styled.div`
     position: absolute;
     height: 20%;
     top: 20%;
-  }
-`;
-export const BottomBox = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 30vh;
-  top: 800%;
-  background-color: #676767;
-`;
-export const TextBox = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 50%;
-  height: 70%;
-  left: 10%;
-  color: white;
-  ${({ theme: { fonts } }) => fonts.korean.default};
-  &span {
-    ${({ theme: { fonts } }) => fonts.korean.emphasis};
   }
 `;
 export const LinkGroup = styled.div`
@@ -380,4 +358,29 @@ export const PostLink = styled.img.attrs({ src: `${PostIcon}` })`
   left: 70%;
   top: 25%;
   cursor: pointer;
+`;
+
+// =========================================
+export const BottomBox = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 30vh;
+  top: 800%;
+  background-color: #676767;
+`;
+export const TextBox = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  height: 70%;
+  left: 10%;
+  color: white;
+  ${({ theme: { fonts } }) => fonts.korean.default};
+  &span {
+    ${({ theme: { fonts } }) => fonts.korean.emphasis};
+  }
 `;
