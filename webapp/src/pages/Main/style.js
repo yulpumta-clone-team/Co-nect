@@ -360,7 +360,8 @@ export const PostLink = styled.img.attrs({ src: `${PostIcon}` })`
   cursor: pointer;
 `;
 
-// =========================================
+// ========================================= 하단 box
+
 export const BottomBox = styled.div`
   position: absolute;
   display: flex;
@@ -384,3 +385,4 @@ export const TextBox = styled.div`
     ${({ theme: { fonts } }) => fonts.korean.emphasis};
   }
 `;
+// =========================================
