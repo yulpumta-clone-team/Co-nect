@@ -68,7 +68,7 @@ export const SubText = styled.div`
   ${({ theme: { fonts } }) => fonts.main.default2};
 `;
 
-// =========================================
+// ========================================= Section2
 export const Section2 = styled.div`
   position: absolute;
   width: 100%;
@@ -93,6 +93,8 @@ export const Section2BG = styled.div`
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
+
+// =========================================
 export const section3Circle1 = styled.div`
   position: absolute;
   display: flex;
