@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components/macro';
 
 import NotoSansKR_Bold from './NotoSansKR-Bold.otf';
 import NotoSansKR_Regular from './NotoSansKR-Regular.otf';

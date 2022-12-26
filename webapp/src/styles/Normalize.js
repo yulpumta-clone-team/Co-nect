@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components/macro';
 
 const Normalize = css`
   /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

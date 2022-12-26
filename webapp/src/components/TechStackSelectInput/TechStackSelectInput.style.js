@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable consistent-return */
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 import Divider from 'components/Common/Divider';
 
 export const Container = styled.div`
