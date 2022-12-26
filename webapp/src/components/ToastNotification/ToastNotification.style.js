@@ -1,5 +1,5 @@
 // ref: https://github.com/uzochukwueddie/react-toast/blob/master/src/components/toast/Toast.css
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 
 export const Container = styled.div`
   font-size: 14px;

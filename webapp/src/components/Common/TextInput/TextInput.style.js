@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 
 export const Container = styled.div`
   position: relative;

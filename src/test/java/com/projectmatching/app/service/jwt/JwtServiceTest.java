@@ -52,7 +52,7 @@ public class JwtServiceTest extends ServiceTest {
                     .id(1212121212L).build();
 
     private UserDto userDto = UserDto.builder()
-            .userInfo(userInfo).email("test@email.com")
+            .email("test@email.com")
             .build();
 
     private Claims claims = Jwts.claims();
@@ -95,7 +95,7 @@ public class JwtServiceTest extends ServiceTest {
         //given
         claims.put(CLAIM_ROLE,Role.USER); // 정보는 key / value 쌍으로 저장된다.
         claims.put(CLAIM_EMAIL,userDto.getEmail());
-        claims.put(CLAIM_NAME,userDto.getUserInfo().getName());
+        claims.put(CLAIM_NAME,userDto.getName());
 
         Date now = new Date();
         String jwts =Jwts.builder()

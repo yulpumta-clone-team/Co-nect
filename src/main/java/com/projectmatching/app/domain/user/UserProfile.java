@@ -18,6 +18,4 @@ public class UserProfile {
     public User toUser() {
         return new User(this.oauthId, this.name, this.email, Role.USER);
     }
-
-
 }

@@ -21,7 +21,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
-
 import static com.projectmatching.app.constant.ResponseTemplateStatus.SUCCESS;
 
 @RestController
@@ -32,6 +31,7 @@ public class UserSignController {
     private final UserService userService;
     private final UserSignUpService userSignUpService;
     private final UserSignInService userSignInService;
+
     /**
      * 일반 회원가입
      * 가입 성공시 유저 id반환
@@ -40,7 +40,6 @@ public class UserSignController {
     @PostMapping("/join")
     public ResponseTemplate<Long> join(@RequestBody UserJoinDto userJoinDto) throws ResponeException {
         return ResponseTemplate.valueOf(userSignUpService.join(userJoinDto));
-
     }
 
     /**
@@ -58,14 +57,12 @@ public class UserSignController {
     }
 
 
-
-
     /**
      * 회원탈퇴
      */
     @ApiOperation(value = "회원 탈퇴, 해당 유저의 Status 칼럼을 NA(Not Avaliable)로 바꿈")
     @DeleteMapping("/withdrawal")
-    public ResponseTemplate<String> withDrawal(@AuthenticationPrincipal UserDetails userDetails){
+    public ResponseTemplate<String> withDrawal(@AuthenticationPrincipal UserDetails userDetails) {
         userSignInService.userDelete(userDetails.getUsername());
         return ResponseTemplate.of(SUCCESS);
 
@@ -73,13 +70,13 @@ public class UserSignController {
 
     @ApiOperation(value = "회원 가입시 사용할 Email 중복여부 체크")
     @PatchMapping("/checkDuplicate/email")
-    public ResponseTemplate<Boolean> checkDuplicateEmail(@RequestParam(name = "email")String email){
+    public ResponseTemplate<Boolean> checkDuplicateEmail(@RequestParam(name = "email") String email) {
         return ResponseTemplate.valueOf(userService.isDuplicateEmail(email));
     }
 
     @ApiOperation(value = "회원 가입시 사용할 NickName 중복여부 체크")
     @PatchMapping("/checkDuplicate/name")
-    public ResponseTemplate<Boolean> checkDuplicateName(@RequestParam(name = "name")String name){
+    public ResponseTemplate<Boolean> checkDuplicateName(@RequestParam(name = "name") String name) {
         return ResponseTemplate.valueOf(userService.isDuplicateName(name));
     }
 }
