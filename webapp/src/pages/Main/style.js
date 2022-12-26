@@ -94,7 +94,24 @@ export const Section2BG = styled.div`
   }
 `;
 
-// =========================================
+// ========================================= Section3
+
+export const Section3 = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #262c41;
+  top: 200%;
+`;
+export const CircleGroup = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+`;
 export const section3Circle1 = styled.div`
   position: absolute;
   display: flex;
@@ -136,22 +153,8 @@ export const section3Circle3 = styled.div`
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   ${({ theme: { fonts } }) => fonts.main.emphasis};
 `;
-export const CircleGroup = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-`;
-export const Section3 = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: #262c41;
-  top: 200%;
-`;
+
+// =========================================
 export const Section4 = styled.div`
   position: absolute;
   display: flex;
