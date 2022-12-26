@@ -194,7 +194,8 @@ export const Section4Text2 = styled.div`
   }
 `;
 
-// =========================================
+// ========================================= Section5
+
 export const Section5 = styled.div`
   position: absolute;
   display: flex;
@@ -204,6 +205,20 @@ export const Section5 = styled.div`
   height: 180vh;
   background-color: black;
   top: 380%;
+`;
+export const FirstCardIcon1 = styled.img.attrs({ src: `${GhostIcon}` })`
+  position: absolute;
+  display: flex;
+  left: 10%;
+  width: 300px;
+  height: 300px;
+`;
+export const FirstCardIcon2 = styled.img.attrs({ src: `${CloudIcon}` })`
+  position: absolute;
+  display: flex;
+  top: 8%;
+  width: 300px;
+  height: 300px;
 `;
 export const Card = styled.div`
   position: absolute;
@@ -234,6 +249,8 @@ export const CardText = styled.div`
     ${({ theme: { fonts } }) => fonts.main.subTitle};
   }
 `;
+
+// =========================================
 export const Section6 = styled.div`
   position: absolute;
   display: flex;
@@ -294,20 +311,6 @@ export const TextBox = styled.div`
   }
 `;
 
-export const FirstCardIcon1 = styled.img.attrs({ src: `${GhostIcon}` })`
-  position: absolute;
-  display: flex;
-  left: 10%;
-  width: 300px;
-  height: 300px;
-`;
-export const FirstCardIcon2 = styled.img.attrs({ src: `${CloudIcon}` })`
-  position: absolute;
-  display: flex;
-  top: 8%;
-  width: 300px;
-  height: 300px;
-`;
 export const SecondCardIcon1 = styled.img.attrs({ src: `${EarthIcon}` })`
   position: absolute;
   display: flex;
