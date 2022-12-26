@@ -1,55 +1,15 @@
+import { getRandomTechSkills, getTechSkillsWithCategory } from 'utils';
+import defaultProfileImage from 'assets/images/default-profile.png';
+
 export const userList = [
   {
     description: 'Beahan, Larkin and Dickinson',
     hopeSession: '3개월',
     id: 1,
-    img: 'http://dummyimage.com/104x100.png/cc0000/ffffff',
+    image: defaultProfileImage,
     name: 'Bytecard',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getTechSkillsWithCategory(100),
     slogan: 'Polygonaceae',
     job: '학생',
     commentCnt: 62,
@@ -59,53 +19,10 @@ export const userList = [
     description: 'Lakin-Kirlin',
     hopeSession: '무관',
     id: 2,
-    img: 'http://dummyimage.com/182x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Tres-Zap',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Fabaceae',
     job: '학생',
     commentCnt: 86,
@@ -115,53 +32,10 @@ export const userList = [
     description: 'Smith Inc',
     hopeSession: '무관',
     id: 3,
-    img: 'http://dummyimage.com/122x100.png/dddddd/000000',
+    image: defaultProfileImage,
     name: 'Tempsoft',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Rutaceae',
     job: '학생',
     commentCnt: 35,
@@ -171,53 +45,10 @@ export const userList = [
     description: 'Marvin, Rippin and Harber',
     hopeSession: '무관',
     id: 4,
-    img: 'http://dummyimage.com/131x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Veribet',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Fabaceae',
     job: '학생',
     commentCnt: 96,
@@ -227,53 +58,10 @@ export const userList = [
     description: 'Hahn Inc',
     hopeSession: '6개월',
     id: 5,
-    img: 'http://dummyimage.com/198x100.png/dddddd/000000',
+    image: defaultProfileImage,
     name: 'Overhold',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Arecaceae',
     job: '휴직',
     commentCnt: 56,
@@ -283,53 +71,10 @@ export const userList = [
     description: 'Hintz LLC',
     hopeSession: '무관',
     id: 6,
-    img: 'http://dummyimage.com/122x100.png/dddddd/000000',
+    image: defaultProfileImage,
     name: 'Transcof',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Empetraceae',
     job: '학생',
     commentCnt: 52,
@@ -339,53 +84,10 @@ export const userList = [
     description: 'Wintheiser, Davis and Rowe',
     hopeSession: '무관',
     id: 7,
-    img: 'http://dummyimage.com/201x100.png/ff4444/ffffff',
+    image: defaultProfileImage,
     name: 'Fixflex',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Asteraceae',
     job: '휴직',
     commentCnt: 22,
@@ -395,53 +97,10 @@ export const userList = [
     description: 'Emard and Sons',
     hopeSession: '3개월',
     id: 8,
-    img: 'http://dummyimage.com/161x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Transcof',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Thelotremataceae',
     job: '학생',
     commentCnt: 77,
@@ -451,53 +110,10 @@ export const userList = [
     description: 'Sauer-Harber',
     hopeSession: '3개월',
     id: 9,
-    img: 'http://dummyimage.com/169x100.png/cc0000/ffffff',
+    image: defaultProfileImage,
     name: 'Zamit',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Apiaceae',
     job: '휴직',
     commentCnt: 3,
@@ -507,53 +123,10 @@ export const userList = [
     description: 'Pfannerstill-Moore',
     hopeSession: '6개월',
     id: 10,
-    img: 'http://dummyimage.com/191x100.png/ff4444/ffffff',
+    image: defaultProfileImage,
     name: 'Overhold',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Cyperaceae',
     job: '실무자',
     commentCnt: 69,
@@ -563,53 +136,10 @@ export const userList = [
     description: 'Metz-Kilback',
     hopeSession: '무관',
     id: 11,
-    img: 'http://dummyimage.com/230x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Mat Lam Tam',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Vitaceae',
     job: '학생',
     commentCnt: 51,
@@ -619,53 +149,10 @@ export const userList = [
     description: 'Schulist, Johns and Marvin',
     hopeSession: '3개월',
     id: 12,
-    img: 'http://dummyimage.com/214x100.png/dddddd/000000',
+    image: defaultProfileImage,
     name: 'Namfix',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Cyperaceae',
     job: '학생',
     commentCnt: 28,
@@ -675,53 +162,10 @@ export const userList = [
     description: 'McDermott Inc',
     hopeSession: '6개월',
     id: 13,
-    img: 'http://dummyimage.com/104x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Domainer',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Orchidaceae',
     job: '실무자',
     commentCnt: 67,
@@ -731,53 +175,10 @@ export const userList = [
     description: 'Lang-Pouros',
     hopeSession: '6개월',
     id: 14,
-    img: 'http://dummyimage.com/209x100.png/ff4444/ffffff',
+    image: defaultProfileImage,
     name: 'Lotlux',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Asteraceae',
     job: '실무자',
     commentCnt: 88,
@@ -787,53 +188,10 @@ export const userList = [
     description: 'Moore Inc',
     hopeSession: '3개월',
     id: 15,
-    img: 'http://dummyimage.com/211x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Alpha',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Styracaceae',
     job: '실무자',
     commentCnt: 86,
@@ -843,53 +201,10 @@ export const userList = [
     description: 'Wehner Inc',
     hopeSession: '6개월',
     id: 16,
-    img: 'http://dummyimage.com/184x100.png/ff4444/ffffff',
+    image: defaultProfileImage,
     name: 'Gembucket',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Juncaceae',
     job: '실무자',
     commentCnt: 18,
@@ -899,53 +214,10 @@ export const userList = [
     description: 'Steuber Inc',
     hopeSession: '6개월',
     id: 17,
-    img: 'http://dummyimage.com/191x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Bigtax',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 104,
-        category: 'front',
-        techName: 'svelte',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Lichinaceae',
     job: '휴직',
     commentCnt: 60,
@@ -955,46 +227,10 @@ export const userList = [
     description: 'Parker Inc',
     hopeSession: '3개월',
     id: 18,
-    img: 'http://dummyimage.com/230x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Home Ing',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 303,
-        category: 'mobile',
-        techName: 'swift',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Polygonaceae',
     job: '실무자',
     commentCnt: 25,
@@ -1004,39 +240,10 @@ export const userList = [
     description: 'Bogan, Cremin and Stracke',
     hopeSession: '6개월',
     id: 19,
-    img: 'http://dummyimage.com/104x100.png/cc0000/ffffff',
+    image: defaultProfileImage,
     name: 'Konklux',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Rosaceae',
     job: '휴직',
     commentCnt: 70,
@@ -1046,39 +253,10 @@ export const userList = [
     description: 'McClure-Feest',
     hopeSession: '6개월',
     id: 20,
-    img: 'http://dummyimage.com/120x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Konklux',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Cyperaceae',
     job: '실무자',
     commentCnt: 22,
@@ -1088,39 +266,10 @@ export const userList = [
     description: 'Larson-Hand',
     hopeSession: '6개월',
     id: 21,
-    img: 'http://dummyimage.com/216x100.png/cc0000/ffffff',
+    image: defaultProfileImage,
     name: 'Prodder',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Poaceae',
     job: '학생',
     commentCnt: 34,
@@ -1130,39 +279,10 @@ export const userList = [
     description: 'Parisian, Grady and Zboncak',
     hopeSession: '무관',
     id: 22,
-    img: 'http://dummyimage.com/103x100.png/dddddd/000000',
+    image: defaultProfileImage,
     name: 'Latlux',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Ericaceae',
     job: '휴직',
     commentCnt: 26,
@@ -1172,39 +292,10 @@ export const userList = [
     description: 'Quigley-Skiles',
     hopeSession: '3개월',
     id: 23,
-    img: 'http://dummyimage.com/104x100.png/cc0000/ffffff',
+    image: defaultProfileImage,
     name: 'Aerified',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Poaceae',
     job: '실무자',
     commentCnt: 82,
@@ -1214,39 +305,10 @@ export const userList = [
     description: 'Greenholt Group',
     hopeSession: '3개월',
     id: 24,
-    img: 'http://dummyimage.com/145x100.png/cc0000/ffffff',
+    image: defaultProfileImage,
     name: 'Mat Lam Tam',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Asteraceae',
     job: '휴직',
     commentCnt: 40,
@@ -1256,39 +318,10 @@ export const userList = [
     description: 'Witting and Sons',
     hopeSession: '무관',
     id: 25,
-    img: 'http://dummyimage.com/214x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Tempsoft',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Pteridaceae',
     job: '학생',
     commentCnt: 56,
@@ -1298,39 +331,10 @@ export const userList = [
     description: 'Schmitt-VonRueden',
     hopeSession: '3개월',
     id: 26,
-    img: 'http://dummyimage.com/147x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Pannier',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Asteraceae',
     job: '휴직',
     commentCnt: 29,
@@ -1340,39 +344,10 @@ export const userList = [
     description: 'Kunde, Hammes and Hand',
     hopeSession: '무관',
     id: 27,
-    img: 'http://dummyimage.com/138x100.png/dddddd/000000',
+    image: defaultProfileImage,
     name: 'Cookley',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Hypnaceae',
     job: '휴직',
     commentCnt: 1,
@@ -1382,39 +357,10 @@ export const userList = [
     description: 'Stokes, Rippin and Raynor',
     hopeSession: '무관',
     id: 28,
-    img: 'http://dummyimage.com/237x100.png/dddddd/000000',
+    image: defaultProfileImage,
     name: 'Cardify',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Marantaceae',
     job: '학생',
     commentCnt: 34,
@@ -1424,39 +370,10 @@ export const userList = [
     description: 'Hoppe, Volkman and Lynch',
     hopeSession: '무관',
     id: 29,
-    img: 'http://dummyimage.com/138x100.png/5fa2dd/ffffff',
+    image: defaultProfileImage,
     name: 'Matsoft',
     status: true,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Polygonaceae',
     job: '실무자',
     commentCnt: 15,
@@ -1466,39 +383,10 @@ export const userList = [
     description: 'Stoltenberg-Hegmann',
     hopeSession: '무관',
     id: 30,
-    img: 'http://dummyimage.com/145x100.png/dddddd/000000',
+    image: defaultProfileImage,
     name: 'Redhold',
     status: false,
-    skills: [
-      {
-        key: 500,
-        category: 'arichitecture',
-        techName: 'git',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 501,
-        category: 'arichitecture',
-        techName: 'docker',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 502,
-        category: 'arichitecture',
-        techName: 'kubernetes',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-      {
-        key: 503,
-        category: 'arichitecture',
-        techName: 'aws',
-        image:
-          'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-      },
-    ],
+    skills: getRandomTechSkills(),
     slogan: 'Arecaceae',
     job: '휴직',
     commentCnt: 42,

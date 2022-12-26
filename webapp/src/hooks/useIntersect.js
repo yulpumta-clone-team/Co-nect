@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const defaultOption = {
   root: null,
@@ -22,7 +22,7 @@ const defaultOption = {
  * @param {Object} customOption  IntersectionObserver인스턴스를 생성하기 위한 option (root, rootMargin,threshold)  https://developer.mozilla.org/ko/docs/Web/API/IntersectionObserver/IntersectionObserver
  * @returns {useIntersectReturns}  useIntersect를 사용하는 곳에서 사용할 method 및 state
  */
-function useIntersect(customOption) {
+export default function useIntersect(customOption) {
   const [page, setPage] = useState(0);
   const loadMoreRef = useRef(null);
 
@@ -30,11 +30,11 @@ function useIntersect(customOption) {
     setPage(0);
   };
 
-  const handleObsever = useCallback(async ([entry]) => {
+  const handleObsever = ([entry]) => {
     if (entry.isIntersecting) {
       setPage((prev) => prev + 1);
     }
-  }, []);
+  };
 
   useEffect(() => {
     let observer;
@@ -42,13 +42,7 @@ function useIntersect(customOption) {
       observer = new IntersectionObserver(handleObsever, { ...defaultOption, ...customOption });
       observer.observe(loadMoreRef.current);
     }
-    return () => {
-      if (observer) {
-        observer.current && observer.disconnect();
-      }
-    };
-  }, [customOption, handleObsever, loadMoreRef]);
+    return () => observer && observer.current && observer.disconnect();
+  }, [customOption, loadMoreRef]);
   return [loadMoreRef, page, resetPage];
 }
-
-export default useIntersect;

@@ -28,7 +28,7 @@ export const ImgContainer = styled.div`
   position: relative;
 `;
 
-export const ViewingImage = styled.img`
+export const ViewingImage = css`
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   width: 100%;
   height: 100%;

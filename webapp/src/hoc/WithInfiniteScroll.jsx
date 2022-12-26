@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useIntersect from 'hooks/useIntersect';
 import UpperButton from 'components/Common/UpperButton';
-
-/* eslint-disable react/no-unstable-nested-components */
+import Callback from 'pages/Callback';
 
 export default function WithInfiniteScroll({ Component, responseDataKey, axiosInstance }) {
   return function Wrapper(props) {
@@ -10,7 +9,7 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState({ isError: false, msg: '' });
     const [cardList, setCardList] = useState([]);
-    const IsShowLoadRef = isLoading && error.isError ? 'block' : 'none'; // isLoading이 true이거나 isError가 true이면 ref엘리먼트를 보여주지 않음.
+    // const IsShowLoadRef = isLoading || error.isError ? 'block' : 'none'; // isLoading이 true이거나 isError가 true이면 ref엘리먼트를 보여주지 않음.
     const [trigger, setTrigger] = useState(Date.now());
 
     const resetError = () => {
@@ -60,20 +59,18 @@ export default function WithInfiniteScroll({ Component, responseDataKey, axiosIn
 
     if (error.isError)
       return (
-        <div>
-          <h1>{error.msg}</h1>
-          <button onClick={refetcher}>데이터 다시 요청</button>
-        </div>
+        <Callback
+          errorStatus={error.httpStatus}
+          errorMessage={error.msg}
+          forceRefetch={refetcher}
+        />
       );
 
     const propsWithResponseData = { ...props, [responseDataKey]: cardList };
     return (
       <>
-        <Component {...propsWithResponseData} />
-        <div
-          ref={loadMoreRef}
-          style={{ display: IsShowLoadRef, height: '100px', backgroundColor: 'tomato' }}
-        >
+        {!isLoading && <Component {...propsWithResponseData} />}
+        <div ref={loadMoreRef} style={{ height: '100px', width: '100px' }}>
           {isLoading && <div>Loading...</div>}
         </div>
         <UpperButton />

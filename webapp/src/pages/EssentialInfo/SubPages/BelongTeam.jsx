@@ -1,11 +1,10 @@
 import React from 'react';
-import SelectInput from 'components/Common/SelectInput';
 import Button from 'components/Common/Button';
+import TeamBelongCheckInput from 'components/TeamBelongCheckInput';
 import {
   useEssentialFormsAction,
   useEssentialFormsState,
 } from 'contexts/EssentialForm/EssentialForm.Provider';
-import { belongTeamOptions } from 'constant';
 import * as S from '../EssentialInfo.style';
 
 export default function BelongTeam() {
@@ -15,11 +14,8 @@ export default function BelongTeam() {
     <S.Content>
       <h2>팀 소속 여부를 알려주세요.</h2>
       <S.InputContainer>
-        <SelectInput
+        <TeamBelongCheckInput
           name="belongTeam"
-          placeHolder="팀 소속 여부"
-          defaultOption={belongTeamOptions[0]}
-          options={belongTeamOptions}
           value={inputValues.belongTeam}
           onChange={onChangeHandlerWithSelect}
         />

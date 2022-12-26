@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { themePropTypesChecker } from 'utils/customProptypes';
 import * as S from './Button.style';
 

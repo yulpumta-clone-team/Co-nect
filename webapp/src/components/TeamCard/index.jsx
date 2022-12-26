@@ -19,8 +19,17 @@ export default function TeamCard({ cardInfo, onClick }) {
   const parsedTeamCardInfo = teamCardParser(cardInfo);
   // * : teamCard 에 표시되는 정보
 
-  const { teamName, teamImage, hopeSession, skills, commentCnt, readCnt, isRecruitng, writer } =
-    parsedTeamCardInfo;
+  const {
+    teamName,
+    teamImage,
+    hopeSession,
+    skills,
+    commentCnt,
+    readCnt,
+    isRecruitng,
+    writer,
+    slogan,
+  } = parsedTeamCardInfo;
 
   const S3Img = S3_IMAGE_SERVER_URL + teamImage;
   const RecruitStatus = isRecruitng ? '모집중' : '모집완료';
@@ -34,16 +43,24 @@ export default function TeamCard({ cardInfo, onClick }) {
       <S.BackgroundImg>
         <S.TeamStatus isRecruitng={isRecruitng}>{RecruitStatus}</S.TeamStatus>
       </S.BackgroundImg>
-      <ProfileImg src={S3Img} />
+      <ProfileImg src={S3Img} alt={`${teamName}의 프로필 이미지`} customStyle={S.ProfileImg} />
       <S.TeamInfo>
         <S.UserName>{writer.name}님의 모집</S.UserName>
         <S.TeamName>{teamName}</S.TeamName>
+        <S.TeamSlogan>{slogan}</S.TeamSlogan>
         <S.HopeSession>
-          예상 기간 &nbsp; <S.TeamHopeSession>{hopeSession}</S.TeamHopeSession>
+          <span>예상 기간</span>
+          <S.TeamHopeSession>{hopeSession}</S.TeamHopeSession>
         </S.HopeSession>
       </S.TeamInfo>
       <S.Divider />
-      <TechSkills skills={skills} isCarousel imageSize="35px" gap="11px" />
+      <TechSkills
+        skills={skills}
+        isCarousel
+        imageSize="50px"
+        gap="10px"
+        customStyle={S.TechSkills}
+      />
       <S.CardInfoIndicator>
         <S.SingleIndicator>
           <ChatBubbleOvalSvg />
