@@ -1,80 +1,88 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import useIntersect from 'hooks/useIntersect';
 import UpperButton from 'components/Common/UpperButton';
 import Callback from 'pages/Callback';
+import CardsGrid from 'components/CardsGrid';
 
-export default function WithInfiniteScroll({ Component, responseDataKey, axiosInstance }) {
-  return function Wrapper(props) {
-    const [loadMoreRef, page, resetPage] = useIntersect();
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState({ isError: false, msg: '' });
-    const [cardList, setCardList] = useState([]);
-    // const IsShowLoadRef = isLoading || error.isError ? 'block' : 'none'; // isLoading이 true이거나 isError가 true이면 ref엘리먼트를 보여주지 않음.
-    const [trigger, setTrigger] = useState(Date.now());
+WithInfiniteScroll.propTypes = {
+  CardComponent: PropTypes.element.isRequired,
+  clickLink: PropTypes.func.isRequired,
+  axiosInstance: PropTypes.object.isRequired,
+  emptyTrigger: PropTypes.shape({
+    emptyMessage: PropTypes.string.isRequired,
+    triggerLink: PropTypes.string.isRequired,
+    triggerMessage: PropTypes.string.isRequired,
+  }),
+};
 
-    const resetError = () => {
-      setError({ isError: false, msg: '' });
-      setCardList([]);
-      setIsLoading(false);
-    };
+export default function WithInfiniteScroll({
+  CardComponent,
+  clickLink,
+  axiosInstance,
+  emptyTrigger,
+}) {
+  const page = useRef(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({ isError: false, msg: '' });
+  const [cardList, setCardList] = useState([]);
 
-    const refetcher = () => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      resetError();
-      resetPage();
-      setTrigger(Date.now());
-    };
-
-    const fetcher = async (lastPage, signal) => {
-      setIsLoading(true);
-      try {
-        const { data: responseCardList } = await axiosInstance({ params: { lastPage }, signal });
-        setCardList((prev) => [...prev, ...responseCardList]);
-      } catch (error) {
-        // src/api/errorHandler가 올바르게 작동하지 않은 경우 if문 실행
-        if (typeof error !== 'string') {
-          setError({
-            isError: true,
-            msg: '데이터를 가져오는 도중 에러가 발생했습니다. ',
-          });
-        } else {
-          setError({
-            isError: true,
-            msg: error.message,
-          });
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    useEffect(() => {
-      const controller = new AbortController();
-      const { signal } = controller;
-      fetcher(page, signal);
-      return () => {
-        controller.abort();
-      };
-    }, [page, trigger]);
-
-    if (error.isError)
-      return (
-        <Callback
-          errorStatus={error.httpStatus}
-          errorMessage={error.msg}
-          forceRefetch={refetcher}
-        />
-      );
-
-    const propsWithResponseData = { ...props, [responseDataKey]: cardList };
-    return (
-      <>
-        {!isLoading && <Component {...propsWithResponseData} />}
-        <div ref={loadMoreRef} style={{ height: '100px', width: '100px' }}>
-          {isLoading && <div>Loading...</div>}
-        </div>
-        <UpperButton />
-      </>
-    );
+  const resetError = () => {
+    setError({ isError: false, msg: '' });
+    setCardList([]);
+    setIsLoading(false);
   };
+
+  const fetcher = async (signal) => {
+    setIsLoading(true);
+    try {
+      const { data: responseCardList } = await axiosInstance({
+        params: { lastPage: page.current },
+        signal,
+      });
+      setCardList((prev) => [...prev, ...responseCardList]);
+    } catch (error) {
+      // src/api/errorHandler가 올바르게 작동하지 않은 경우 if문 실행
+      if (typeof error !== 'string') {
+        setError({
+          isError: true,
+          msg: '데이터를 가져오는 도중 에러가 발생했습니다. ',
+        });
+      } else {
+        setError({
+          isError: true,
+          msg: error.message,
+        });
+      }
+    } finally {
+      setIsLoading(false);
+      page.current += 1;
+    }
+  };
+
+  const refetcher = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    resetError();
+    page.current = 0;
+    fetcher();
+  };
+
+  const [loadMoreRef] = useIntersect(fetcher);
+  if (error.isError)
+    return (
+      <Callback errorStatus={error.httpStatus} errorMessage={error.msg} forceRefetch={refetcher} />
+    );
+
+  return (
+    <>
+      <CardsGrid
+        CardComponent={CardComponent}
+        cards={cardList}
+        clickLink={clickLink}
+        emptyTrigger={emptyTrigger}
+      />
+      <div ref={loadMoreRef}>{isLoading && <div>Loading...</div>}</div>
+      <UpperButton />
+    </>
+  );
 }
