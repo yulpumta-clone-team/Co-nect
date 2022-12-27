@@ -49,6 +49,7 @@ export const InfoContainer = styled.div`
   border: 3px solid ${({ theme: { colors } }) => colors.primary.normal};
   border-radius: 20px;
   padding: 35px;
+  gap: 1.5rem;
 `;
 
 export const UserInfoContainer = styled.div`

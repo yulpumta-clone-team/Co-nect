@@ -8,6 +8,7 @@ import MarkdownEditor from 'components/MarkdownEditor';
 import { userDetailType } from 'types/user.type';
 import ProfileImg from 'components/ProfileImg';
 import TeamBelongCheckInput from 'components/TeamBelongCheckInput';
+import PostInfo from 'components/PostInfo';
 import * as S from './UserPost.style';
 
 UserPostDetail.propTypes = {
@@ -79,7 +80,7 @@ export default function UserPostDetail({ targetUser }) {
           </S.SingleInfo>
         </S.UserInfoContainer>
         <Divider customStyle={S.CommentDivder} />
-        <S.PostInfo>{likeCnt}</S.PostInfo>
+        <PostInfo postId={userId} readCnt={readCnt} likeCnt={likeCnt} commentCnt={commentCnt} />
         <CommentContainer postType={POST_TYPE.USER} postWriterId={userId} postId={userId} />
       </S.InfoContainer>
     </S.PostContainer>
