@@ -30,6 +30,7 @@ export const CheckBox = styled.div`
 `;
 
 export const CheckButton = styled.button`
+  cursor: ${({ onlyDisplay }) => (onlyDisplay ? 'default' : 'pointer')};
   width: ${({ buttonSize }) => buttonSize || '39px'};
   height: ${({ buttonSize }) => buttonSize || '39px'};
   border-radius: 50%;

@@ -6,10 +6,11 @@ import * as S from './TeamBelongCheckInput.style';
 
 TeamBelongCheckInput.propTypes = {
   value: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  name: PropTypes.string,
   label: PropTypes.string,
   buttonSize: PropTypes.string,
+  onlyDisplay: PropTypes.bool,
 };
 
 export default function TeamBelongCheckInput({
@@ -18,9 +19,10 @@ export default function TeamBelongCheckInput({
   label,
   name,
   buttonSize = '39px',
+  onlyDisplay = false,
 }) {
   const handleClickOption = () => {
-    onChange({ name, value: !value });
+    !onlyDisplay && onChange({ name, value: !value });
   };
   return (
     <S.Container>
@@ -32,6 +34,7 @@ export default function TeamBelongCheckInput({
             isActive={value}
             onClick={handleClickOption}
             buttonSize={buttonSize}
+            onlyDisplay={onlyDisplay}
           >
             <S.CheckCircle buttonSize={buttonSize}>
               <CheckMarkSvg />
@@ -45,6 +48,7 @@ export default function TeamBelongCheckInput({
             isActive={!value}
             onClick={handleClickOption}
             buttonSize={buttonSize}
+            onlyDisplay={onlyDisplay}
           >
             <S.CloseCircle buttonSize={buttonSize}>
               <XMarkSvg />
