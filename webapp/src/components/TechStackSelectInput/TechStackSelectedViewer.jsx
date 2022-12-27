@@ -53,7 +53,7 @@ export default function TechStackSelectedViewer({
       <S.ButtonContainer>
         {ClearButton}
         <S.ButtonDivider isRow={false} />
-        <S.ChevronButton onClick={closeDropdown}>
+        <S.ChevronButton onClick={closeDropdown} type="button">
           <AngleButton />
         </S.ChevronButton>
       </S.ButtonContainer>

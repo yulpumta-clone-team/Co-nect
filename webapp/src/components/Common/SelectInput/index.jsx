@@ -49,7 +49,8 @@ export default function SelectInput({
   width,
   ...rest
 }) {
-  const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
+  const { parent, isDropdownOpen, openDropdown, closeDropdown, handleClickdropdownTrigger } =
+    useDropdown();
   const AngleButton = isDropdownOpen ? ChevronUpSvg : ChevronDownSvg;
   const handleClickOption = (event) => {
     const targetValue = event.target.getAttribute('value');
@@ -80,7 +81,6 @@ export default function SelectInput({
   const multiClickReset = () => {
     onChange({ name, value: [] });
   };
-
   return (
     <S.Container
       width={width}
@@ -103,13 +103,13 @@ export default function SelectInput({
         <S.ButtonContainer>
           {value && (
             <>
-              <S.XMarkButton onClick={handleClickReset}>
+              <S.XMarkButton onClick={handleClickReset} type="button">
                 <XMarkSvg />
               </S.XMarkButton>
               <S.ButtonDivider isRow={false} />
             </>
           )}
-          <S.ChevronButton onClick={closeDropdown}>
+          <S.ChevronButton onClick={handleClickdropdownTrigger} type="button">
             <AngleButton />
           </S.ChevronButton>
         </S.ButtonContainer>
