@@ -46,7 +46,7 @@ const useUserInfo = () => {
         `유저정보를 가져오지 못했습니다. \n다시 로그인해주세요.`,
         TOAST_TYPE.Error,
       );
-      navigate(ROUTE.LOGIN);
+      setTimeout(() => navigate(ROUTE.LOGIN), 2000);
     }
   };
 

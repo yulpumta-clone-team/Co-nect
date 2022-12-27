@@ -1,10 +1,9 @@
 package com.projectmatching.app.service.user;
 
 import com.projectmatching.app.constant.ResponseTemplateStatus;
-import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.domain.user.UserProfile;
 import com.projectmatching.app.domain.user.UserRepository;
-import com.projectmatching.app.exception.CoNectLogicalException;
+import com.projectmatching.app.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -29,7 +27,6 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
     private final UserRepository userRepository;
 
     @Override
-    @Transactional
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
         log.info("custom OauthService----");
@@ -47,7 +44,7 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 
         UserProfile userProfile = OAuthAttributes.extract(registrationId, attributes); // registrationId에 따라 유저 정보를 통해 공통된 UserProfile 객체로 만들어 줌
 
-
+        oAuthUserValidationCheck(userProfile);
         User user = saveOrUpdate(userProfile); // DB에 저장
 
 
@@ -58,7 +55,6 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
                 userNameAttributeName);
 
     }
-
 
     /**
      * OAuth 로그인 유저 로그인 로직 유효성 검사
@@ -71,19 +67,20 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
      *
      *
      */
-    private void oAuthUserValidationCheck(UserProfile userProfile){
+    @Transactional
+    public void oAuthUserValidationCheck(UserProfile userProfile){
         if(userRepository.existsByEmail(userProfile.getEmail())){
             User user = userRepository.findByEmail(userProfile.getEmail()).get();
-            if(Optional.of(user.getOauthId()).equals(userProfile.getOauthId()) == false)
+            log.info("userProfile.getEmail {}",userProfile.getEmail());
+            log.info("user oAuth {}",user.getOauthId());
+            if(!user.getOauthId().equals(userProfile.getOauthId()))
                 throw new OAuth2AuthenticationException(String.valueOf(ResponseTemplateStatus.EMAIL_DUPLICATE.getMessage()));
 
         }
 
     }
-    private User saveOrUpdate(UserProfile userProfile) {
-        if(userRepository.existsByEmail(userProfile.getEmail())) {
-            throw new OAuth2AuthenticationException(String.valueOf(ResponseTemplateStatus.EMAIL_DUPLICATE.getMessage()));
-        }
+    @Transactional
+    public User saveOrUpdate(UserProfile userProfile) {
         User user = userRepository.findByOauthId(userProfile.getOauthId())
                 .map(m-> m.update(userProfile.getEmail()))
                 .orElse(userProfile.toUser());

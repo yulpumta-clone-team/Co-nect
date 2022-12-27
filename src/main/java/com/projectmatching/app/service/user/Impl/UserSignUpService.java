@@ -34,12 +34,6 @@ public class UserSignUpService {
     private final UserRepository userRepository;
     private final TechStackProviderImpl techStackProvider;
     private final UserTechRepository userTechRepository;
-    private final TechStackRepository techStackRepository;
-
-
-    @PersistenceContext
-    private final EntityManager em;
-
 
     @Transactional
     @Validation
@@ -68,11 +62,7 @@ public class UserSignUpService {
         //이미 있는것들 비우고 다시 넣음
         user.getSkills().clear();
 
-
         addUsersTechStackByUserEssentialDto(userEssentialDto, user);
-
-
-
     }
 
     //유저 기술스택 저장을 위해 차례로 db에 insert

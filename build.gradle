@@ -66,7 +66,7 @@ test {
     finalizedBy jacocoTestReport // report is always generated after tests run
     jacoco {
         excludes=["**/Q*.class"]
-     }
+    }
 
 }
 jacocoTestReport {
@@ -85,7 +85,7 @@ jacocoTestReport {
                     "**/Q*.class"
             ])
         }))
-}
+    }
 
 }
 

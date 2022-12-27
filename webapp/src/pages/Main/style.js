@@ -11,6 +11,7 @@ import MessageIcon from 'assets/images/feedback-message.png';
 import SignUpIcon from 'assets/images/signup-link.png';
 import BoardIcon from 'assets/images/board-link.png';
 import PostIcon from 'assets/images/post-link.png';
+import styled from 'styled-components/macro';
 
 export const MainContainer = styled.div`
   width: 100%;
