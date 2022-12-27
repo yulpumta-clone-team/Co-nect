@@ -105,6 +105,7 @@ export const teamDetailParser = (teamDetailInfo) => {
 
   const commentCnt = parsedNumberToThreeDigits(teamDetailInfo.commentCnt);
   const likeCnt = parsedNumberToThreeDigits(teamDetailInfo.likeCnt);
+  const readCnt = parsedNumberToThreeDigits(teamDetailInfo.readCnt);
 
   return {
     teamId,
@@ -117,6 +118,7 @@ export const teamDetailParser = (teamDetailInfo) => {
     writerInfo,
     commentCnt,
     likeCnt,
+    readCnt,
   };
 };
 
