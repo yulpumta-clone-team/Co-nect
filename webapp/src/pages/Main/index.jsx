@@ -5,7 +5,7 @@ import * as S from './style';
 
 export default function Main() {
   const navigate = useNavigate();
-  const names = [
+  const benefits = [
     { first: '팀원들을 한 페이지에서', second: '간단하게 만날 수 있습니다.' },
     { first: '프로젝트를 여러 사람에게', second: '소개할 수 있습니다.' },
     { first: '같은 목표를 가진', second: '사람들을 만날 수 있습니다.' },
@@ -41,7 +41,12 @@ export default function Main() {
       iconBehind: <S.ThirdCardIcon2 />,
     },
   ];
-
+  const developers = [
+    { name: '김윤호', field: '프론트', email: 'abc@naver.com' },
+    { name: '김윤호', field: '프론트', email: 'abc@naver.com' },
+    { name: '김윤호', field: '프론트', email: 'abc@naver.com' },
+    { name: '김윤호', field: '프론트', email: 'abc@naver.com' },
+  ];
   return (
     <S.MainContainer>
       <S.MainSection>
@@ -62,10 +67,10 @@ export default function Main() {
         </S.StartQuestion>
         <S.Benefit>
           <S.CircleGroup>
-            {names.map((name, index) => (
+            {benefits.map((benefit, index) => (
               <S.Circle>
-                <p>{name.first}</p>
-                {name.second}
+                <p>{benefit.first}</p>
+                {benefit.second}
               </S.Circle>
             ))}
           </S.CircleGroup>
@@ -107,14 +112,14 @@ export default function Main() {
       <S.BottomBox>
         <S.InformationBox>
           <span>커넥트 프로젝트</span>
-          <br />
-          김윤호 프론트 abcd@gmail.com
-          <br />
-          김윤호 프론트 abcd@gmail.com
-          <br />
-          김윤호 프론트 abcd@gmail.com
-          <br />
-          김윤호 프론트 abcd@gmail.com
+          {developers.map((developer, index) => (
+            <div>
+              <br />
+              {developer.name}
+              {developer.field}
+              {developer.email}
+            </div>
+          ))}
         </S.InformationBox>
       </S.BottomBox>
     </S.MainContainer>
