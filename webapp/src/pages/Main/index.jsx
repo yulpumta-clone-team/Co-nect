@@ -100,7 +100,7 @@ export default function Main() {
         <span>코넥티들을 위한 도전은 계속됩니다.</span>
         <S.LinkGroup>
           {links.map((link, index) => (
-            <S.GotoLink onClick={navigate(link.route)}>{link.icon}</S.GotoLink>
+            <S.GotoLink onClick={() => navigate(link.route)}>{link.icon}</S.GotoLink>
           ))}
         </S.LinkGroup>
       </S.FinishSection>
