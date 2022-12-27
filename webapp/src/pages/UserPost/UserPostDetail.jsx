@@ -2,12 +2,12 @@ import React from 'react';
 import CommentContainer from 'components/ComentContainer';
 import { POST_TYPE } from 'constant';
 import { userDetailParser } from 'service/user/user.parser';
-import Image from 'components/Common/Image';
 import Divider from 'components/Common/Divider';
 import TechSkills from 'components/TechSkills';
 import MarkdownEditor from 'components/MarkdownEditor';
 import { userDetailType } from 'types/user.type';
 import ProfileImg from 'components/ProfileImg';
+import TeamBelongCheckInput from 'components/TeamBelongCheckInput';
 import * as S from './UserPost.style';
 
 UserPostDetail.propTypes = {
@@ -37,15 +37,11 @@ export default function UserPostDetail({ targetUser }) {
     <S.PostContainer>
       <S.ProfileImageContainer>
         <ProfileImg src={profileImage} alt="프로필 이미지" />
+        <S.UserName>{nickname}</S.UserName>
+        <S.UserJob>{job}</S.UserJob>
       </S.ProfileImageContainer>
       <S.InfoContainer>
         <S.UserInfoContainer>
-          <S.SingleInfo>
-            <S.SingleInfoTitle>닉네임</S.SingleInfoTitle>
-            <div>
-              <span>{nickname}</span>
-            </div>
-          </S.SingleInfo>
           <S.SingleInfo>
             <S.SingleInfoTitle>포트폴리오</S.SingleInfoTitle>
             <div>
@@ -65,14 +61,9 @@ export default function UserPostDetail({ targetUser }) {
             </div>
           </S.SingleInfo>
           <S.SingleInfo>
-            <S.SingleInfoTitle>직업</S.SingleInfoTitle>
-            <div>
-              <span>{job}</span>
-            </div>
-          </S.SingleInfo>
-          <S.SingleInfo>
             <S.SingleInfoTitle>현재 상태</S.SingleInfoTitle>
             <div>
+              <TeamBelongCheckInput value={belongTeam} onlyDisplay />
               <span>{belongTeam}</span>
             </div>
           </S.SingleInfo>

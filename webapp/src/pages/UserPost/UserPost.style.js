@@ -13,8 +13,34 @@ export const PostContainer = styled.div`
 `;
 
 export const ProfileImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 200px;
   height: 200px;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const UserName = styled.span`
+  ${({ theme: { fonts } }) => fonts.korean.subTitle}
+  margin: 20px 0 12px 0;
+`;
+
+export const UserJob = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 78px;
+  height: 36px;
+  border-radius: 50px;
+
+  color: ${({ theme: { colors } }) => colors.greyScale.white};
+  background-color: ${({ theme: { colors } }) => colors.secondary.normal};
+  ${({ theme: { fonts } }) => fonts.korean.default}
 `;
 
 export const InfoContainer = styled.div`
