@@ -36,7 +36,6 @@ export default function WithInfiniteScroll({
   const fetcher = async (signal) => {
     setIsLoading(true);
     try {
-      if (isLoading) return;
       const { data: responseCardList } = await axiosInstance({
         params: { lastPage: page.current },
         signal,
@@ -70,6 +69,15 @@ export default function WithInfiniteScroll({
 
   const [loadMoreRef] = useIntersect(fetcher);
 
+  /**
+   * 타겟 요소의 display속성을 설정하는 함수: 에러 상황일 때 추가요청 방지 용도
+   * @returns "none" : "block" 타겟요소의 display 속성
+   */
+  const observerRefDisplay = () => {
+    if (error.isError) return 'none';
+    return isLoading ? 'none' : 'block';
+  };
+
   return (
     <>
       {error.isError ? (
@@ -86,7 +94,9 @@ export default function WithInfiniteScroll({
           emptyTrigger={emptyTrigger}
         />
       )}
-      <div ref={loadMoreRef}>{isLoading && !error.isError && <div>Loading...</div>}</div>
+      <div style={{ display: observerRefDisplay() }} ref={loadMoreRef}>
+        {isLoading && !error.isError && <div>Loading...</div>}
+      </div>
       <UpperButton />
     </>
   );
