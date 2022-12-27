@@ -1,9 +1,6 @@
 import { ROUTE } from 'constant/route.constant';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignUpIcon from 'assets/images/signup-link.png';
-import BoardIcon from 'assets/images/board-link.png';
-import PostIcon from 'assets/images/post-link.png';
 import * as S from './style';
 
 export default function Main() {
