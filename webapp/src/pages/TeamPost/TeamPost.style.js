@@ -36,14 +36,6 @@ export const ViewingImage = css`
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
 `;
 
-export const EmptyImage = styled.div`
-  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
-  width: 100%;
-  height: 100%;
-  border-radius: 20px 20px 0px 0px;
-  ${({ theme: { mixin } }) => mixin.flexCenter({})};
-`;
-
 export const WriterInfo = styled.div`
   display: flex;
   gap: 15px;
@@ -106,25 +98,4 @@ export const Slogan = styled(SingleInfoTitle)`
 export const TeamSkillSession = styled(SingleInfoTitle)`
   position: relative;
   width: 3%;
-`;
-
-export const PostInfo = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: 12px;
-`;
-
-export const SinglePostInfo = styled.div`
-  display: flex;
-  gap: 10px;
-  svg {
-    width: 25px;
-    height: 25px;
-    & path {
-      stroke: ${({ theme: { colors } }) => colors.primary.normal};
-      fill: ${({ theme: { colors } }) => colors.primary.normal};
-    }
-  }
 `;
