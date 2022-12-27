@@ -18,7 +18,7 @@ export const FONT = {
     // html {font-size: 10px}
     BASE: '1.6rem',
     MEDIUM: '2.4rem',
-    MEDIUM2: '3rem',
+    MEDIUM_LARGE: '3rem',
     LARGE: '3.6rem',
     X_LARGE: '4.8rem',
     TX_LARGE: '6.4rem',
@@ -28,11 +28,11 @@ export const FONT = {
     BASE: '1.6rem',
     MEDIUM: '2.4rem',
     LARGE: '3.2rem',
-    LARGE2: '3.5rem',
+    LARGE_X_LARGE: '3.5rem',
     X_LARGE: '4rem',
-    X_LARGE2: '4.8rem',
+    X_LARGE_TX_LARGE: '4.8rem',
     TX_LARGE: '6.5rem',
-    TX_LARGE2: '7.5rem',
+    TTX_LARGE: '7.5rem',
   },
 };
 
@@ -103,7 +103,7 @@ const fonts = {
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
       font-size: ${FONT.SIZE.TX_LARGE};
-      line-height: ${FONT.HEIGHT.TX_LARGE2};
+      line-height: ${FONT.HEIGHT.TTX_LARGE};
     `,
     title: css`
       font-family: ${FONT.FAMILY.ENGLISH};
@@ -126,7 +126,7 @@ const fonts = {
       font-size: ${FONT.SIZE.BASE};
       line-height: ${FONT.HEIGHT.MEDIUM};
     `,
-    default2: css`
+    default_no_bold: css`
       font-family: ${FONT.FAMILY.ENGLISH};
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.REGULAR};
@@ -140,7 +140,7 @@ const fonts = {
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
       font-size: ${FONT.SIZE.TX_LARGE};
-      line-height: ${FONT.HEIGHT.TX_LARGE2};
+      line-height: ${FONT.HEIGHT.TTX_LARGE};
     `,
     subTitle: css`
       font-family: ${FONT.FAMILY.KOREAN};
@@ -153,7 +153,7 @@ const fonts = {
       font-family: ${FONT.FAMILY.ENGLISH};
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
-      font-size: ${FONT.SIZE.MEDIUM2};
+      font-size: ${FONT.SIZE.MEDIUM_LARGE};
       line-height: ${FONT.HEIGHT.X_LARGE};
     `,
     default: css`
@@ -161,7 +161,7 @@ const fonts = {
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
       font-size: ${FONT.SIZE.MEDIUM};
-      line-height: ${FONT.HEIGHT.LARGE2};
+      line-height: ${FONT.HEIGHT.LARGE_X_LARGE};
     `,
   },
 };
