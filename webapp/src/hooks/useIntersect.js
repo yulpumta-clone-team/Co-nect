@@ -26,9 +26,11 @@ const defaultOption = {
 export default function useIntersect(callback, customOption) {
   const loadMoreRef = useRef(null);
 
-  const handleObsever = ([entry]) => {
+  const handleObsever = async ([entry], observer) => {
     if (entry.isIntersecting) {
-      callback();
+      observer.unobserve(entry.target);
+      await callback();
+      observer.observe(entry.target);
     }
   };
 
