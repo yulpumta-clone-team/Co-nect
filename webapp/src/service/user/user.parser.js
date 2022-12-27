@@ -62,17 +62,15 @@ export const userCardParser = (userCardInfo) => {
  * @returns {parsedUserDetailInfo} parsing된 userDetail 객체
  */
 export const userDetailParser = (targetUserInfo) => {
-  const userId = targetUserInfo.userInfo.id;
-  const nickname = targetUserInfo.userInfo.name;
-  const profileImage = targetUserInfo.userInfo.image || null;
+  const userId = targetUserInfo.id;
+  const nickname = targetUserInfo.name;
+  const profileImage = targetUserInfo.image || null;
   const { email } = targetUserInfo;
   const techSkills = targetUserInfo.skills;
   const slogan = targetUserInfo.slogan || '입력된 슬로건이 없네요.';
   const hopeSession = targetUserInfo.hopeSession || hopeSessionOption[0].value;
   const job = targetUserInfo.job || jobOptions[0].value;
-  const belongTeam = targetUserInfo.status
-    ? belongTeamOptions[0].value
-    : belongTeamOptions[1].value;
+  const belongTeam = targetUserInfo.status === 'Active';
   const introduction = targetUserInfo.content || '입력된 자기소개가 없네요.';
   const portfolio = targetUserInfo.portfolio || '';
   const commentCnt = parsedNumberToThreeDigits(targetUserInfo.commentCnt);

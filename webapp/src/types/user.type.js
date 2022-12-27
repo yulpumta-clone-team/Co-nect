@@ -34,7 +34,7 @@ const userDetailTypeSchema = {
   id: PropTypes.number.isRequired,
   skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,
   slogan: PropTypes.string.isRequired,
-  status: PropTypes.bool.isRequired,
+  status: PropTypes.string.isRequired,
   commentCnt: PropTypes.number.isRequired,
   content: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,

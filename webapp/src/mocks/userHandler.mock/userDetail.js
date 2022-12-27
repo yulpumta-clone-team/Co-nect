@@ -12,10 +12,7 @@ export const userDetail = {
   commentCnt: 12,
   likeCnt: 12,
   readCnt: 3,
-  userInfo: {
-    id: 1,
-    image: '',
-    name: 'kmorrieson0',
-  },
+  image: '',
+  name: 'kmorrieson0',
   skills: getRandomTechSkills(),
 };
