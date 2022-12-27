@@ -62,7 +62,7 @@ export const SubText = styled.div`
   height: 15%;
   gap: 20%;
   color: white;
-  ${({ theme: { fonts } }) => fonts.main.default2};
+  ${({ theme: { fonts } }) => fonts.main.default_noBold};
 `;
 
 export const PurposeSection = styled.div`
@@ -197,28 +197,28 @@ export const CardText = styled.div`
   }
 `;
 
-export const FirstCardIcon1 = styled.img.attrs({ src: `${GhostIcon}` })`
+export const Ghost = styled.img.attrs({ src: `${GhostIcon}` })`
   position: absolute;
   display: flex;
   left: 10%;
   width: 300px;
   height: 300px;
 `;
-export const FirstCardIcon2 = styled.img.attrs({ src: `${CloudIcon}` })`
+export const Cloud = styled.img.attrs({ src: `${CloudIcon}` })`
   position: absolute;
   display: flex;
   top: 8%;
   width: 300px;
   height: 300px;
 `;
-export const SecondCardIcon1 = styled.img.attrs({ src: `${EarthIcon}` })`
+export const Earth = styled.img.attrs({ src: `${EarthIcon}` })`
   position: absolute;
   display: flex;
   left: 10%;
   width: 240px;
   height: 300px;
 `;
-export const SecondCardIcon2 = styled.img.attrs({ src: `${HeartIcon}` })`
+export const HeartPoint = styled.img.attrs({ src: `${HeartIcon}` })`
   position: absolute;
   display: flex;
   left: 4%;
@@ -226,14 +226,14 @@ export const SecondCardIcon2 = styled.img.attrs({ src: `${HeartIcon}` })`
   width: 183px;
   height: 188px;
 `;
-export const ThirdCardIcon1 = styled.img.attrs({ src: `${CellPhoneIcon}` })`
+export const CellPhone = styled.img.attrs({ src: `${CellPhoneIcon}` })`
   position: absolute;
   display: flex;
   left: 14%;
   width: 170px;
   height: 300px;
 `;
-export const ThirdCardIcon2 = styled.img.attrs({ src: `${MessageIcon}` })`
+export const Message = styled.img.attrs({ src: `${MessageIcon}` })`
   position: absolute;
   display: flex;
   left: 5%;
@@ -285,21 +285,25 @@ export const GotoLink = styled.div`
 export const BottomBox = styled.div`
   position: relative;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   height: 30vh;
-  top: 850%;
+
+  color: white;
   background-color: #676767;
+  &span {
+    left: 10%;
+  }
+  ${({ theme: { fonts } }) => fonts.korean.emphasis};
 `;
 export const InformationBox = styled.div`
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
-  height: 70%;
-  left: 10%;
   color: white;
+  left: 10%;
   ${({ theme: { fonts } }) => fonts.korean.default};
   &span {
     ${({ theme: { fonts } }) => fonts.korean.emphasis};

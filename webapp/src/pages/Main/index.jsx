@@ -21,24 +21,24 @@ export default function Main() {
       spanSecond: '이런 어플입니다.',
       default:
         '한 페이지에서 나와 같은 목표를 가진 팀원을 만나보세요! 다양한 사람들과 함께 팀을 구성해보세요.목표가 같은 코넥티를 찾아 프로젝트를 진행해봐요!',
-      iconFront: <S.FirstCardIcon2 />,
-      iconBehind: <S.FirstCardIcon1 />,
+      iconFront: <S.Cloud />,
+      iconBehind: <S.Ghost />,
     },
     {
       spanFirst: ' 내가 원하는',
       spanSecond: '코넥티만을 골라서',
       default:
         ' 수많은 코넥티 중 기술, 직업, 희망 작업 기간 등을 필터링해 내 프로젝트에 딱 맞는 코넥티를 빠르고 쉽게 서치할 수 있습니다.',
-      iconFront: <S.SecondCardIcon1 />,
-      iconBehind: <S.SecondCardIcon2 />,
+      iconFront: <S.Earth />,
+      iconBehind: <S.HeartPoint />,
     },
     {
       spanFirst: '한 페이지에서',
       spanSecond: '카드를 통해 빠르게',
       default:
         '프로젝트에 필수적인 정보만 보고 싶다! 모집분야, 기술스택 진행기간 등의 프로젝트 정보를 심플한 카드 형식에 담아 한눈에 볼 수 있습니다.',
-      iconFront: <S.ThirdCardIcon1 />,
-      iconBehind: <S.ThirdCardIcon2 />,
+      iconFront: <S.CellPhone />,
+      iconBehind: <S.Message />,
     },
   ];
   const developers = [
@@ -110,17 +110,11 @@ export default function Main() {
         </S.LinkGroup>
       </S.FinishSection>
       <S.BottomBox>
-        <S.InformationBox>
-          <span>커넥트 프로젝트</span>
-          {developers.map((developer, index) => (
-            <div>
-              <br />
-              {developer.name}
-              {developer.field}
-              {developer.email}
-            </div>
-          ))}
-        </S.InformationBox>
+        {developers.map((developer, index) => (
+          <S.InformationBox>
+            {developer.name} {developer.field} {developer.email}
+          </S.InformationBox>
+        ))}
       </S.BottomBox>
     </S.MainContainer>
   );
