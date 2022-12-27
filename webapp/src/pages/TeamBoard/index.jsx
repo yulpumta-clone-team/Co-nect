@@ -3,18 +3,18 @@ import teamApi from 'api/team.api';
 import TeamCard from 'components/TeamCard';
 import { ROUTE } from 'constant/route.constant';
 import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
-import CardsGrid from 'components/CardsGrid';
+import { emptyTrigger } from 'constant/service.constant';
 import * as S from './style';
 
 export default function TeamBoard() {
-  const UserCardsGridWithInfiniteScroll = WithInfiniteScroll({
-    Component: CardsGrid,
-    responseDataKey: 'cards',
-    axiosInstance: teamApi.GET_TEAM_ARR,
-  });
   return (
     <S.BoardWrapper>
-      <UserCardsGridWithInfiniteScroll CardComponent={TeamCard} clickLink={`${ROUTE.TEAM}/`} />
+      <WithInfiniteScroll
+        CardComponent={TeamCard}
+        clickLink={`${ROUTE.TEAM}/`}
+        axiosInstance={teamApi.GET_TEAM_ARR}
+        emptyTrigger={emptyTrigger.team}
+      />
     </S.BoardWrapper>
   );
 }
