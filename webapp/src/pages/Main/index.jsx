@@ -1,3 +1,4 @@
+import { benefits, developers } from 'constant/main.constant';
 import { ROUTE } from 'constant/route.constant';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -5,11 +6,6 @@ import * as S from './style';
 
 export default function Main() {
   const navigate = useNavigate();
-  const benefits = [
-    { first: '팀원들을 한 페이지에서', second: '간단하게 만날 수 있습니다.' },
-    { first: '프로젝트를 여러 사람에게', second: '소개할 수 있습니다.' },
-    { first: '같은 목표를 가진', second: '사람들을 만날 수 있습니다.' },
-  ];
   const links = [
     { icon: <S.SignUp />, route: ROUTE.SIGN_UP },
     { icon: <S.Board />, route: ROUTE.TEAM },
@@ -41,12 +37,7 @@ export default function Main() {
       iconBehind: <S.Message />,
     },
   ];
-  const developers = [
-    { name: '김윤호', field: '프론트', email: 'abc@naver.com' },
-    { name: '김윤호', field: '프론트', email: 'abc@naver.com' },
-    { name: '김윤호', field: '프론트', email: 'abc@naver.com' },
-    { name: '김윤호', field: '프론트', email: 'abc@naver.com' },
-  ];
+
   return (
     <S.MainContainer>
       <S.MainSection>
