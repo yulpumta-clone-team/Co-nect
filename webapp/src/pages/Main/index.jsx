@@ -1,11 +1,53 @@
 import { ROUTE } from 'constant/route.constant';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import SignUpIcon from 'assets/images/signup-link.png';
+import BoardIcon from 'assets/images/board-link.png';
+import PostIcon from 'assets/images/post-link.png';
 import * as S from './style';
 
 export default function Main() {
+  const navigate = useNavigate();
+  const names = [
+    { first: '팀원들을 한 페이지에서', second: '간단하게 만날 수 있습니다.' },
+    { first: '프로젝트를 여러 사람에게', second: '소개할 수 있습니다.' },
+    { first: '같은 목표를 가진', second: '사람들을 만날 수 있습니다.' },
+  ];
+  const links = [
+    { icon: <S.SignUp />, route: ROUTE.SIGN_UP },
+    { icon: <S.Board />, route: ROUTE.TEAM },
+    { icon: <S.Post />, route: ROUTE.NEW_POST },
+  ];
+  const cardText = [
+    {
+      spanFirst: '코넥트는',
+      spanSecond: '이런 어플입니다.',
+      default:
+        '한 페이지에서 나와 같은 목표를 가진 팀원을 만나보세요! 다양한 사람들과 함께 팀을 구성해보세요.목표가 같은 코넥티를 찾아 프로젝트를 진행해봐요!',
+      iconFront: <S.FirstCardIcon2 />,
+      iconBehind: <S.FirstCardIcon1 />,
+    },
+    {
+      spanFirst: ' 내가 원하는',
+      spanSecond: '코넥티만을 골라서',
+      default:
+        ' 수많은 코넥티 중 기술, 직업, 희망 작업 기간 등을 필터링해 내 프로젝트에 딱 맞는 코넥티를 빠르고 쉽게 서치할 수 있습니다.',
+      iconFront: <S.SecondCardIcon1 />,
+      iconBehind: <S.SecondCardIcon2 />,
+    },
+    {
+      spanFirst: '한 페이지에서',
+      spanSecond: '카드를 통해 빠르게',
+      default:
+        '프로젝트에 필수적인 정보만 보고 싶다! 모집분야, 기술스택 진행기간 등의 프로젝트 정보를 심플한 카드 형식에 담아 한눈에 볼 수 있습니다.',
+      iconFront: <S.ThirdCardIcon1 />,
+      iconBehind: <S.ThirdCardIcon2 />,
+    },
+  ];
+
   return (
     <S.MainContainer>
-      <S.Section1>
+      <S.MainSection>
         <S.MainGradient>
           <S.Logo />
           <S.MainText>What is Co-nect</S.MainText>
@@ -14,93 +56,59 @@ export default function Main() {
             맞잡은 손을 이용해 코넥트가 표현하고자 하는 연결의 의미를 나타내었습니다.
           </S.SubText>
         </S.MainGradient>
-      </S.Section1>
-      <S.Section2>
-        <S.Section2BG>
-          <span>코넥트</span>는 무엇을 위해 만들어졌을까요?
-        </S.Section2BG>
-      </S.Section2>
-      <S.Section3>
-        <S.CircleGroup>
-          <S.section3Circle1>
-            <span>팀원들을 한 페이지에서</span>
-            <span>간단하게 만날 수 있습니다.</span>
-          </S.section3Circle1>
-          <S.section3Circle2>
-            <span>프로젝트를 여러 사람에게</span>
-            <span> 소개할 수 있습니다.</span>
-          </S.section3Circle2>
-          <S.section3Circle3>
-            <span>같은 목표를 가진</span>
-            <span>사람들을 만날 수 있습니다.</span>
-          </S.section3Circle3>
-        </S.CircleGroup>
-      </S.Section3>
-      <S.Section4>
-        <S.Section4Text>
-          우리는 이런 <span> 연결이 필요한 사람들</span>,
-        </S.Section4Text>
-        <S.Section4Text2>
-          세상의 모든 <span>“코넥티”</span>들을 위한 사이트를 만들기로 했습니다.
-        </S.Section4Text2>
-      </S.Section4>
-      <S.Section5>
-        <S.Card>
-          <S.FirstCardIcon2 />
-          <S.FirstCardIcon1 />
-          <S.CardText>
-            <span>
-              코넥트는
+      </S.MainSection>
+      <S.PurposeSection>
+        <S.StartQuestion>
+          <S.Image3D>
+            <span>코넥트</span>는 무엇을 위해 만들어졌을까요?
+          </S.Image3D>
+        </S.StartQuestion>
+        <S.Benefit>
+          <S.CircleGroup>
+            {names.map((name, index) => (
+              <S.Circle>
+                <p>{name.first}</p>
+                {name.second}
+              </S.Circle>
+            ))}
+          </S.CircleGroup>
+        </S.Benefit>
+        <S.Subject>
+          <S.TextFirstLine>
+            우리는 이런 <span> 연결이 필요한 사람들</span>,
+          </S.TextFirstLine>
+          <S.TextSecondLine>
+            세상의 모든 <span>“코넥티”</span>들을 위한 사이트를 만들기로 했습니다.
+          </S.TextSecondLine>
+        </S.Subject>
+      </S.PurposeSection>
+      <S.FunctionSection>
+        {cardText.map((text, index) => (
+          <S.Card>
+            {text.iconFront}
+            {text.iconBehind}
+            <S.CardText>
+              <span>
+                {text.spanFirst}
+                <br />
+                {text.spanSecond}
+              </span>
               <br />
-              이런 어플입니다.
-            </span>
-            <br />한 페이지에서 나와 같은 목표를 가진 팀원을 만나보세요! 다양한 사람들과 함께 팀을
-            구성해보세요.
-            <br /> 목표가 같은 코넥티를 찾아 프로젝트를 진행해봐요!
-          </S.CardText>
-        </S.Card>
-      </S.Section5>
-      <S.Section6>
-        <S.Card>
-          <S.SecondCardIcon1 />
-          <S.SecondCardIcon2 />
-          <S.CardText>
-            <span>
-              내가 원하는
-              <br />
-              코넥티만을 골라서
-            </span>
-            <br />
-            수많은 코넥티 중 기술, 직업, 희망 작업 기간 등을 필터링해 내 프로젝트에 딱 맞는 코넥티를
-            빠르고 쉽게 서치할 수 있습니다.
-          </S.CardText>
-        </S.Card>
-      </S.Section6>
-      <S.Section7>
-        <S.Card>
-          <S.ThirdCardIcon1 />
-          <S.ThirdCardIcon2 />
-          <S.CardText>
-            <span>
-              한 페이지에서 <br />
-              카드를 통해 빠르게
-            </span>
-            <br />
-            프로젝트에 필수적인 정보만 보고 싶다! 모집분야, 기술스택 진행기간 등의 프로젝트 정보를
-            심플한 카드 형식에 담아 한눈에 볼 수 있습니다.
-          </S.CardText>
-        </S.Card>
-      </S.Section7>
-      <S.Section8>
+              {text.default}
+            </S.CardText>
+          </S.Card>
+        ))}
+      </S.FunctionSection>
+      <S.FinishSection>
         <span>코넥티들을 위한 도전은 계속됩니다.</span>
         <S.LinkGroup>
-          <S.SignUpLink onClick={ROUTE.SIGN_UP} />
-          <S.BoardLink onClick={ROUTE.TEAM} />
-          <S.PostLink onClick={ROUTE.NEW_POST} />
+          {links.map((link, index) => (
+            <S.GotoLink onClick={navigate(link.route)}>{link.icon}</S.GotoLink>
+          ))}
         </S.LinkGroup>
-      </S.Section8>
+      </S.FinishSection>
       <S.BottomBox>
-        <S.TextBox>
+        <S.InformationBox>
           <span>커넥트 프로젝트</span>
           <br />
           김윤호 프론트 abcd@gmail.com
@@ -110,7 +118,7 @@ export default function Main() {
           김윤호 프론트 abcd@gmail.com
           <br />
           김윤호 프론트 abcd@gmail.com
-        </S.TextBox>
+        </S.InformationBox>
       </S.BottomBox>
     </S.MainContainer>
   );

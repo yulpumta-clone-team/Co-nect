@@ -12,13 +12,11 @@ import SignUpIcon from 'assets/images/signup-link.png';
 import BoardIcon from 'assets/images/board-link.png';
 import PostIcon from 'assets/images/post-link.png';
 
-// ========================================= MainContainer
 export const MainContainer = styled.div`
   width: 100%;
 `;
 
-// ========================================= Section1
-export const Section1 = styled.div`
+export const MainSection = styled.div`
   position: relative;
   display: flex;
   width: 100%;
@@ -27,6 +25,7 @@ export const Section1 = styled.div`
 `;
 export const MainGradient = styled.div`
   background-image: url(${Gradient});
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,34 +64,35 @@ export const SubText = styled.div`
   ${({ theme: { fonts } }) => fonts.main.default2};
 `;
 
-// ========================================= Section2
-export const Section2 = styled.div`
+export const PurposeSection = styled.div`
+  height: 260vh;
+  background-color: #262c41;
+`;
+export const StartQuestion = styled.div`
   position: relative;
   width: 100%;
-  background-color: #262c41;
+  height: 80vh;
   ${({ theme: { fonts } }) => fonts.korean.main};
   color: ${({ theme: { colors } }) => colors.greyScale.white};
   & span {
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
-export const Section2BG = styled.div`
+export const Image3D = styled.div`
   background-image: url(${BackGround2});
+  background-size: 100% 100%;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 110vh;
   ${({ theme: { fonts } }) => fonts.main.title};
   & span {
-    top: 1000px;
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
 
-// ========================================= Section3
-
-export const Section3 = styled.div`
+export const Benefit = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
@@ -106,114 +106,66 @@ export const CircleGroup = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-`;
-export const section3Circle1 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 370px;
-  height: 370px;
-  border-radius: 50%;
-  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
-  ${({ theme: { fonts } }) => fonts.main.emphasis};
+  height: 100vh;
 `;
-export const section3Circle2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 370px;
-  height: 370px;
-  border-radius: 50%;
-  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
-  ${({ theme: { fonts } }) => fonts.main.emphasis};
-`;
-export const section3Circle3 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 370px;
-  height: 370px;
-  border-radius: 50%;
-  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
-  ${({ theme: { fonts } }) => fonts.main.emphasis};
-`;
-
-// ========================================= Section4
-
-export const Section4 = styled.div`
+export const Circle = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 370px;
+  height: 370px;
+  border-radius: 50%;
+  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
+  ${({ theme: { fonts } }) => fonts.main.emphasis};
+`;
+
+export const Subject = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   height: 80vh;
+  gap: 10%;
   background-color: #262c41;
 `;
-export const Section4Text = styled.div`
-  position: absolute;
+export const TextFirstLine = styled.div`
+  position: relative;
   display: flex;
+  align-items: column;
   justify-content: center;
   width: 100%;
-  top: 37%;
-  gap: 1%;
   ${({ theme: { fonts } }) => fonts.korean.title};
   color: ${({ theme: { colors } }) => colors.greyScale.white};
   & span {
-    top: 1000px;
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
-export const Section4Text2 = styled.div`
-  position: absolute;
+export const TextSecondLine = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
-  top: 50%;
-  gap: 1%;
   ${({ theme: { fonts } }) => fonts.korean.title};
   color: ${({ theme: { colors } }) => colors.greyScale.white};
   & span {
-    top: 1000px;
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
 
-// ========================================= Section5
-
-export const Section5 = styled.div`
+export const FunctionSection = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 300vh;
   background-color: black;
 `;
-
-// ========================================= Section6
-export const Section6 = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: black;
-`;
-// ========================================= Section7
-export const Section7 = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: black;
-`;
-
-// ========================================= Section5,6,7 Card와 CardText
 
 export const Card = styled.div`
   position: relative;
@@ -243,7 +195,6 @@ export const CardText = styled.div`
     ${({ theme: { fonts } }) => fonts.main.subTitle};
   }
 `;
-// ========================================= Section5,6,7 Icon 집합
 
 export const FirstCardIcon1 = styled.img.attrs({ src: `${GhostIcon}` })`
   position: absolute;
@@ -290,9 +241,7 @@ export const ThirdCardIcon2 = styled.img.attrs({ src: `${MessageIcon}` })`
   height: 170px;
 `;
 
-// ========================================= Section8
-
-export const Section8 = styled.div`
+export const FinishSection = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
@@ -310,38 +259,27 @@ export const Section8 = styled.div`
 export const LinkGroup = styled.div`
   position: absolute;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   top: 45%;
   width: 80%;
 `;
-export const SignUpLink = styled.img.attrs({ src: `${SignUpIcon}` })`
-  position: absolute;
-  display: flex;
+export const SignUp = styled.img.attrs({ src: `${SignUpIcon}` })`
   width: 250px;
   height: 270px;
-  left: 10%;
-  cursor: pointer;
 `;
-export const BoardLink = styled.img.attrs({ src: `${BoardIcon}` })`
-  position: absolute;
-  display: flex;
+export const Board = styled.img.attrs({ src: `${BoardIcon}` })`
   width: 250px;
   height: 270px;
-  left: 40%;
-  top: 25%;
-  cursor: pointer;
 `;
-export const PostLink = styled.img.attrs({ src: `${PostIcon}` })`
-  position: absolute;
-  display: flex;
+export const Post = styled.img.attrs({ src: `${PostIcon}` })`
   width: 250px;
   height: 270px;
-  left: 70%;
-  top: 25%;
+`;
+export const GotoLink = styled.div`
+  position: relative;
+  display: flex;
   cursor: pointer;
 `;
-
-// ========================================= 하단 box
 
 export const BottomBox = styled.div`
   position: relative;
@@ -352,7 +290,7 @@ export const BottomBox = styled.div`
   top: 850%;
   background-color: #676767;
 `;
-export const TextBox = styled.div`
+export const InformationBox = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -366,4 +304,3 @@ export const TextBox = styled.div`
     ${({ theme: { fonts } }) => fonts.korean.emphasis};
   }
 `;
-// =========================================
