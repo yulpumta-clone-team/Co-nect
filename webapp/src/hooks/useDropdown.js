@@ -23,28 +23,28 @@ const useDropdown = (initialMode = false) => {
 
   const shouldCloseDropdown = (event) => {
     const isParentExistInComposedPath = event.composedPath().includes(parent.current);
-    if (isParentExistInComposedPath) {
-      console.log(parent);
-    } else {
-      closeDropdown();
+    if (!isParentExistInComposedPath) {
+      setIsDropdownOpen(false);
     }
   };
 
   const handleClickOutside = (event) => {
-    if (parent.current && !parent.current.contains(event.target)) {
+    const isParentExistInComposedPath = event.composedPath().includes(parent.current);
+    if (!isParentExistInComposedPath) {
       setIsDropdownOpen(false);
     }
   };
 
   const closeDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
+    setIsDropdownOpen(false);
   };
 
-  const openDropdown = (event) => {
-    // if (parent.current && parent.current.contains(event.target)) {
-    //   setIsDropdownOpen(true);
-    // }
+  const openDropdown = () => {
     setIsDropdownOpen(true);
+  };
+
+  const handleClickdropdownTrigger = () => {
+    isDropdownOpen ? closeDropdown() : openDropdown();
   };
 
   useEffect(() => {
@@ -54,6 +54,7 @@ const useDropdown = (initialMode = false) => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, [parent]);
+
   return {
     parent,
     isDropdownOpen,
@@ -61,6 +62,7 @@ const useDropdown = (initialMode = false) => {
     shouldCloseDropdown,
     openDropdown,
     closeDropdown,
+    handleClickdropdownTrigger,
   };
 };
 
