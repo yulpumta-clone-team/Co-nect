@@ -16,6 +16,11 @@ WithInfiniteScroll.propTypes = {
   }),
 };
 
+const DISPLAY = {
+  block: 'block',
+  none: 'none',
+};
+
 export default function WithInfiniteScroll({
   CardComponent,
   clickLink,
@@ -26,6 +31,7 @@ export default function WithInfiniteScroll({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ isError: false, msg: '' });
   const [cardList, setCardList] = useState([]);
+  const [refDisplay, setRefDisplay] = useState(DISPLAY.block);
 
   const resetError = () => {
     setError({ isError: false, msg: '' });
@@ -35,15 +41,23 @@ export default function WithInfiniteScroll({
 
   const fetcher = async (signal) => {
     setIsLoading(true);
+    setRefDisplay(DISPLAY.none);
     try {
       const { data: responseCardList } = await axiosInstance({
         params: { lastPage: page.current },
         signal,
       });
+      // api요청으로 받은 배열의 길이가 0이면 추가요청하지 못하게 ref를 숨기기
+      if (responseCardList.length === 0) {
+        setRefDisplay(DISPLAY.none);
+        return;
+      }
       setCardList((prev) => [...prev, ...responseCardList]);
       page.current += 1;
+      setRefDisplay(DISPLAY.block);
     } catch (error) {
       // src/api/errorHandler가 올바르게 작동하지 않은 경우 if문 실행
+      setRefDisplay(DISPLAY.none);
       if (typeof error !== 'string') {
         setError({
           isError: true,
@@ -68,16 +82,6 @@ export default function WithInfiniteScroll({
   };
 
   const [loadMoreRef] = useIntersect(fetcher);
-
-  /**
-   * 타겟 요소의 display속성을 설정하는 함수: 에러 상황일 때 추가요청 방지 용도
-   * @returns "none" : "block" 타겟요소의 display 속성
-   */
-  const observerRefDisplay = () => {
-    if (error.isError) return 'none';
-    return isLoading ? 'none' : 'block';
-  };
-
   return (
     <>
       {error.isError ? (
@@ -94,7 +98,7 @@ export default function WithInfiniteScroll({
           emptyTrigger={emptyTrigger}
         />
       )}
-      <div style={{ display: observerRefDisplay() }} ref={loadMoreRef}>
+      <div style={{ display: refDisplay }} ref={loadMoreRef}>
         {isLoading && !error.isError && <div>Loading...</div>}
       </div>
       <UpperButton />
