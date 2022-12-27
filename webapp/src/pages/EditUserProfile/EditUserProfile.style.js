@@ -82,7 +82,7 @@ export const ProfileImageContainer = styled.div`
   height: 200px;
 `;
 
-export const ImageThunbnail = styled.img`
+export const ImageThunbnail = css`
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   width: 144px;
   height: 144px;

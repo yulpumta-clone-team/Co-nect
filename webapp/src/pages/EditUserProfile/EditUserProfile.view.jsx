@@ -9,6 +9,7 @@ import { hopeSessionOption, jobOptions } from 'constant';
 import TeamBelongCheckInput from 'components/TeamBelongCheckInput';
 import PlusMarkSvg from 'assets/icons/PlusMarkSvg';
 import EditImageSvg from 'assets/icons/EditImageSvg';
+import Image from 'components/Common/Image';
 import * as S from './EditUserProfile.style';
 
 EditUserProfileView.propTypes = {
@@ -73,8 +74,8 @@ export default function EditUserProfileView({
         <S.ProfileImageContainer>
           {profileImageSrc ? (
             <S.InputTypeImageHandler htmlFor="profileImage">
-              <S.ImageThunbnail alt="upload" src={profileImageSrc} />
-              <S.ImageEditButton onClick={onUploadButtonClick}>
+              <Image alt="upload" src={profileImageSrc} customStyle={S.ImageThunbnail} />
+              <S.ImageEditButton onClick={onUploadButtonClick} type="button">
                 <EditImageSvg />
               </S.ImageEditButton>
             </S.InputTypeImageHandler>
