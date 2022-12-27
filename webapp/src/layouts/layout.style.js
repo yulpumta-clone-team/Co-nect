@@ -15,7 +15,7 @@ export const Header = styled.header`
 
 export const Main = styled.main`
   max-width: 1180px;
-  padding-top: 70px;
+  padding-top: 106px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})}
   margin: 0 auto;
 `;
