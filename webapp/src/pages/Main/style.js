@@ -35,18 +35,20 @@ export const MainGradient = styled.div`
   height: 100vh;
 `;
 export const Logo = styled.img.attrs({ src: `${MainLogo}` })`
-  position: absolute;
+  position: relative;
   display: flex;
-  top: 90px;
+  top: -10px;
   width: 100px;
   height: 100px;
 `;
 export const MainText = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   letter-spacing: 0.01em;
-  width: 100%;
+  width: 1180px;
   height: 15%;
-  left: 30%;
   color: ${({ theme: { colors } }) => colors.greyScale.white};
 
   font-weight: 800;
@@ -58,7 +60,7 @@ export const SubText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 1180px;
   height: 15%;
   gap: 20%;
   color: white;
@@ -86,6 +88,7 @@ export const Image3D = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 1180px;
   height: 110vh;
   ${({ theme: { fonts } }) => fonts.main.title};
   & span {
@@ -106,7 +109,7 @@ export const CircleGroup = styled.div`
   position: relative;
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  width: 1180px;
   align-items: center;
   height: 100vh;
 `;
@@ -136,9 +139,8 @@ export const Subject = styled.div`
 export const TextFirstLine = styled.div`
   position: relative;
   display: flex;
-  align-items: column;
   justify-content: center;
-  width: 100%;
+  width: 1180px;
   ${({ theme: { fonts } }) => fonts.korean.title};
   color: ${({ theme: { colors } }) => colors.greyScale.white};
   & span {
@@ -149,14 +151,13 @@ export const TextSecondLine = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 1180px;
   ${({ theme: { fonts } }) => fonts.korean.title};
   color: ${({ theme: { colors } }) => colors.greyScale.white};
   & span {
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
-
 export const FunctionSection = styled.div`
   position: relative;
   display: flex;
@@ -246,7 +247,7 @@ export const FinishSection = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 1180px;
   height: 100vh;
   background-color: #434343;
   color: white;
@@ -287,15 +288,16 @@ export const BottomBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  width: 1180px;
   height: 30vh;
 
   color: white;
   background-color: #676767;
   &span {
+    position: relative;
     left: 10%;
+    ${({ theme: { fonts } }) => fonts.korean.emphasis};
   }
-  ${({ theme: { fonts } }) => fonts.korean.emphasis};
 `;
 export const InformationBox = styled.div`
   position: relative;

@@ -43,24 +43,30 @@ export default function Main() {
       <S.MainSection>
         <S.MainGradient>
           <S.Logo />
-          <S.MainText>What is Co-nect</S.MainText>
+          <S.MainText>
+            <p>What is Co-nect</p>
+          </S.MainText>
           <S.SubText>
-            <span>코넥트는 사람과 사람의 연결을 의미합니다.</span>
-            맞잡은 손을 이용해 코넥트가 표현하고자 하는 연결의 의미를 나타내었습니다.
+            <p>
+              <span>코넥트는 사람과 사람의 연결을 의미합니다.</span>
+              맞잡은 손을 이용해 코넥트가 표현하고자 하는 연결의 의미를 나타내었습니다.
+            </p>
           </S.SubText>
         </S.MainGradient>
       </S.MainSection>
       <S.PurposeSection>
         <S.StartQuestion>
           <S.Image3D>
-            <span>코넥트</span>는 무엇을 위해 만들어졌을까요?
+            <p>
+              <span>코넥트</span>는 무엇을 위해 만들어졌을까요?
+            </p>
           </S.Image3D>
         </S.StartQuestion>
         <S.Benefit>
           <S.CircleGroup>
             {benefits.map((benefit, index) => (
               <S.Circle>
-                <p>{benefit.first}</p>
+                <span>{benefit.first}</span>
                 {benefit.second}
               </S.Circle>
             ))}
@@ -68,10 +74,14 @@ export default function Main() {
         </S.Benefit>
         <S.Subject>
           <S.TextFirstLine>
-            우리는 이런 <span> 연결이 필요한 사람들</span>,
+            <p>
+              우리는 이런 <span> 연결이 필요한 사람들</span>,
+            </p>
           </S.TextFirstLine>
           <S.TextSecondLine>
-            세상의 모든 <span>“코넥티”</span>들을 위한 사이트를 만들기로 했습니다.
+            <p>
+              세상의 모든 <span>“코넥티”</span>들을 위한 사이트를 만들기로 했습니다.
+            </p>
           </S.TextSecondLine>
         </S.Subject>
       </S.PurposeSection>
@@ -81,13 +91,15 @@ export default function Main() {
             {text.iconFront}
             {text.iconBehind}
             <S.CardText>
-              <span>
-                {text.spanFirst}
+              <p>
+                <span>
+                  {text.spanFirst}
+                  <br />
+                  {text.spanSecond}
+                </span>
                 <br />
-                {text.spanSecond}
-              </span>
-              <br />
-              {text.default}
+                {text.default}
+              </p>
             </S.CardText>
           </S.Card>
         ))}
@@ -103,7 +115,9 @@ export default function Main() {
       <S.BottomBox>
         {developers.map((developer, index) => (
           <S.InformationBox>
-            {developer.name} {developer.field} {developer.email}
+            <p>
+              <span>{developer.name}</span> {developer.field} {developer.email}
+            </p>
           </S.InformationBox>
         ))}
       </S.BottomBox>
