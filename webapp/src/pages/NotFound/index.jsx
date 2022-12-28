@@ -1,5 +1,7 @@
 import React from 'react';
+import styled, { css } from 'styled-components/macro';
 import { useNavigate } from 'react-router-dom';
+import Button from 'components/Common/Button';
 
 export default function NotFound() {
   const navigate = useNavigate();
@@ -7,11 +9,28 @@ export default function NotFound() {
     navigate('/');
   };
   return (
-    <div>
-      NotFound
-      <button variant="contained" onClick={backToMain}>
+    <S.Container>
+      <h1>NotFound</h1>
+      <Button theme="primary" onClick={backToMain} customStyle={S.SButton}>
         홈으로 돌아가기
-      </button>
-    </div>
+      </Button>
+    </S.Container>
   );
 }
+
+const Container = styled.div`
+  max-width: 1180px;
+  height: 100vh;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})}
+  gap: 24px;
+`;
+
+const SButton = css`
+  width: 200px;
+  height: 35px;
+`;
+
+const S = {
+  Container,
+  SButton,
+};
