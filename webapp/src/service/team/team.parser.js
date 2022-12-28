@@ -99,7 +99,7 @@ export const teamDetailParser = (teamDetailInfo) => {
   const teamImage = teamDetailInfo.image;
   const hopeSession = teamDetailInfo.hopeSession || hopeSessionOption[0].value;
   const techSkills = teamDetailInfo.skills;
-  const content = teamDetailInfo.content || '입력한 자기소개가 없습니다.';
+  const content = teamDetailInfo.content || '입력한 컨텐츠 없습니다.';
   const slogan = teamDetailInfo.slogan || '입력한 슬로건이 없습니다.';
   const writerInfo = teamDetailInfo.userInfo;
 

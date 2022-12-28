@@ -1,23 +1,22 @@
 import styled, { css } from 'styled-components/macro';
 
 export const Container = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
+  margin: 0 auto;
+  padding-bottom: 10px; // postContainer아래 border가 짤려서 어쩔 수 없이 pading속성 추가
 `;
 
 export const PostContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 1250px;
-  height: 1300px;
-  background: #ffffff;
+  width: 1100px;
+  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
 `;
 
 export const ImgContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -25,7 +24,6 @@ export const ImgContainer = styled.div`
   height: 300px;
   border-radius: 20px 20px 0px 0px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
-  position: relative;
 `;
 
 export const ViewingImage = css`
