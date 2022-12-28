@@ -4,8 +4,8 @@ import CardsGrid from 'components/CardsGrid';
 import TeamCard from 'components/TeamCard';
 import { ROUTE } from 'constant/route.constant';
 import WithLoading from 'hoc/WithLoading';
-
-import * as S from './style';
+import { emptyTrigger } from 'constant/service.constant';
+import * as S from './MyPost.style';
 
 export default function MyPost() {
   const CardsView = WithLoading({
@@ -17,9 +17,12 @@ export default function MyPost() {
 
   return (
     <S.Container>
-      <S.BoardContainer>
-        <CardsView isUserList={false} CardComponent={TeamCard} clickLink={`${ROUTE.TEAM_EDIT}/`} />
-      </S.BoardContainer>
+      <CardsView
+        isUserList={false}
+        CardComponent={TeamCard}
+        clickLink={`${ROUTE.TEAM_EDIT}/`}
+        emptyTrigger={emptyTrigger.team}
+      />
     </S.Container>
   );
 }
