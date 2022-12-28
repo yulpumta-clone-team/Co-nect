@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
+import styled from 'styled-components/macro';
 import { ROUTE } from 'constant/route.constant';
 import useSetInterval from 'hooks/useSetInterval';
 import useSetTimeout from 'hooks/useSetTimeout';
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const COUNT = 5;
@@ -17,9 +18,26 @@ export default function OAuthFail() {
   useSetTimeout(setTimeoutCallback, 5000);
   useSetInterval(setUseIntervalCallback, 1000);
   return (
-    <div>
-      <span>로그인에 실패하였습니다. 다른 로그인 방법을 선택해주세요.</span>
-      {count}
-    </div>
+    <S.Container>
+      <h1>로그인에 실패하였습니다.😅 </h1>
+      <h1>다른 로그인 방법을 선택해주세요.</h1>
+      <p>
+        {count}
+        <span>초 후에 로그인페이지로 이동합니다</span>
+      </p>
+    </S.Container>
   );
 }
+
+const Container = styled.div`
+  max-width: 1180px;
+  height: 100vh;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})}
+  gap: 24px;
+  h1 {
+    ${({ theme: { fonts } }) => fonts.korean.title}
+  }
+`;
+const S = {
+  Container,
+};
