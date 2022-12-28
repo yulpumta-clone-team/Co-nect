@@ -1,6 +1,14 @@
 import React from 'react';
 import { benefits, cardText, developers, links } from 'constant/main.constant';
 import { useNavigate } from 'react-router-dom';
+import GlobalNavigation from 'components/GlobalNavigation';
+import WithProvider from 'hoc/withProvider';
+import ToastNotificationProvider, {
+  useToastNotificationAction,
+  useToastNotificationState,
+} from 'contexts/ToastNotification';
+import { deleteMessage } from 'contexts/ToastNotification/action';
+import ToastNotification from 'components/ToastNotification';
 import * as S from './style';
 
 const IconMap = {
@@ -14,11 +22,23 @@ const IconMap = {
   cellPhone: <S.CellPhone />,
   message: <S.Message />,
 };
-
-export default function Main() {
+export default WithProvider({
+  Providers: [ToastNotificationProvider],
+  Component: Main,
+});
+function Main() {
   const navigate = useNavigate();
+
+  const { toastList } = useToastNotificationState();
+  const notifyDispatch = useToastNotificationAction();
+  const deleteToastCallback = (id) => {
+    deleteMessage(notifyDispatch, id);
+  };
   return (
     <S.MainContainer>
+      <S.Header>
+        <GlobalNavigation />
+      </S.Header>
       <S.MainSection>
         <S.MainGradient>
           <S.Logo />
@@ -102,6 +122,14 @@ export default function Main() {
           </S.InformationBox>
         ))}
       </S.BottomBox>
+      <ToastNotification
+        toastList={toastList}
+        col="top"
+        row="right"
+        autoDelete
+        autoDeleteTime={2000}
+        deleteCallback={deleteToastCallback}
+      />
     </S.MainContainer>
   );
 }

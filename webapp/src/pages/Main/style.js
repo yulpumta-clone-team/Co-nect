@@ -16,6 +16,14 @@ import PostIcon from 'assets/images/post-link.png';
 export const MainContainer = styled.div`
   width: 100%;
 `;
+export const Header = styled.header`
+  width: 100%;
+  position: relative;
+  > div {
+    width: 100vw;
+    margin: 0 auto;
+  }
+`;
 
 export const MainSection = styled.div`
   position: relative;
@@ -87,10 +95,15 @@ export const Image3D = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 1180px;
-  height: 110vh;
+  height: 120vh;
   ${({ theme: { fonts } }) => fonts.main.title};
+  & p {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 1180px;
+    top: 25%;
+  }
   & span {
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
@@ -131,6 +144,7 @@ export const Subject = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 80vh;
   gap: 10%;
@@ -247,13 +261,16 @@ export const FinishSection = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  width: 1180px;
+  width: 100%;
   height: 100vh;
   background-color: #434343;
   color: white;
   ${({ theme: { fonts } }) => fonts.korean.title};
   & span {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 1180px;
     height: 20%;
     top: 20%;
   }
@@ -288,7 +305,7 @@ export const BottomBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 1180px;
+  width: 100%;
   height: 30vh;
 
   color: white;

@@ -26,7 +26,7 @@ export default function ToastNotificationProvider({ children }) {
 export function useToastNotificationState() {
   const value = useContext(ToastNotificationStateContext);
   if (value === undefined) {
-    throw new Error('useCommentsState should be used within CommentProvider');
+    throw new Error('useToastNotification must be used within ToastNotificationContext');
   }
   return value;
 }
