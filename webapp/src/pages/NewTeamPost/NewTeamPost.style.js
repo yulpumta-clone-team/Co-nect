@@ -1,5 +1,17 @@
 import styled, { css } from 'styled-components/macro';
 
+export const Container = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+export const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  margin: 0 auto;
+`;
+
 export const ImgContainer = styled.div`
   display: flex;
   align-items: center;
@@ -71,25 +83,12 @@ export const AddImage = styled.button`
   }
 `;
 
-export const Container = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-`;
-
-export const PostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-`;
-
 export const Form = styled.form`
   display: flex;
-  width: 800px;
   justify-content: space-between;
   margin: 0 auto;
 `;
+
 export const InfoContainer = styled.div`
   width: 650px;
   ${({ theme: { mixin } }) => mixin.flexCenter({})};
@@ -101,11 +100,12 @@ export const InfoContainer = styled.div`
   justify-content: flex-start;
 `;
 export const ButtonContainer = styled.div`
-  width: 500px;
+  width: 650px;
   margin: 0 auto;
   display: flex;
   justify-content: flex-end;
 `;
+
 export const SubmitButton = css`
   width: 270px;
   height: 56px;

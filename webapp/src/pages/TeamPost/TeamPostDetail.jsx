@@ -6,10 +6,8 @@ import Divider from 'components/Common/Divider';
 import { teamDetailParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
 import Image from 'components/Common/Image';
-import Like from 'components/Common/Like';
-import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
-import EyeSvg from 'assets/icons/EyeSvg';
 import { teamDetailType } from 'types/team.type';
+import PostInfo from 'components/PostInfo';
 import * as S from './TeamPost.style';
 
 TeamPostDetail.propTypes = {
@@ -30,11 +28,20 @@ export default function TeamPostDetail({ targetTeam }) {
     slogan,
     commentCnt,
     likeCnt,
+    readCnt,
   } = parsedTargetTeam;
   return (
     <S.PostContainer>
       <S.ImgContainer>
         <Image src={teamImage} alt="게시글" customStyle={S.ViewingImage} />
+        <S.WriterInfo>
+          <Image
+            alt="writer profile image"
+            src={writerInfo.image}
+            customStyle={S.WriterProfileImage}
+          />
+          <S.WriterName>{writerInfo.name}</S.WriterName>
+        </S.WriterInfo>
       </S.ImgContainer>
       <S.TeamInfoContainer>
         <S.TeamName>{teamName}</S.TeamName>
@@ -51,22 +58,7 @@ export default function TeamPostDetail({ targetTeam }) {
         <S.Slogan>{slogan}</S.Slogan>
         <MarkdownEditor onlyViewer content={content} />
         <Divider customStyle={S.CommentDivider} />
-        <S.PostInfo>
-          <S.SinglePostInfo>
-            <EyeSvg />
-            <span>000</span>
-          </S.SinglePostInfo>
-          <S.SinglePostInfo>
-            <S.SinglePostInfo>
-              <Like id={teamId} />
-              <span>{likeCnt}</span>
-            </S.SinglePostInfo>
-            <S.SinglePostInfo>
-              <ChatBubbleOvalSvg />
-              <span>{commentCnt}</span>
-            </S.SinglePostInfo>
-          </S.SinglePostInfo>
-        </S.PostInfo>
+        <PostInfo postId={teamId} readCnt={readCnt} likeCnt={likeCnt} commentCnt={commentCnt} />
         <CommentContainer postType={POST_TYPE.TEAM} postWriter={writerInfo.name} postId={teamId} />
       </S.TeamInfoContainer>
     </S.PostContainer>

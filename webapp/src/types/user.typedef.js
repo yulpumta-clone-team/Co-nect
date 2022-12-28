@@ -37,7 +37,7 @@
  * @property {string} name
  * @property {array} skills
  * @property {string} slogan
- * @property {boolean} status
+ * @property {string} status
  *
  * @property {number} commentCnt
  * @property {string} content

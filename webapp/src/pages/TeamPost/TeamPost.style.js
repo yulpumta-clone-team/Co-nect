@@ -1,23 +1,22 @@
 import styled, { css } from 'styled-components/macro';
 
 export const Container = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
+  margin: 0 auto;
+  padding-bottom: 10px; // postContainer아래 border가 짤려서 어쩔 수 없이 pading속성 추가
 `;
 
 export const PostContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 1250px;
-  height: 1300px;
-  background: #ffffff;
+  width: 1100px;
+  background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
 `;
 
 export const ImgContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -25,18 +24,9 @@ export const ImgContainer = styled.div`
   height: 300px;
   border-radius: 20px 20px 0px 0px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
-  position: relative;
 `;
 
 export const ViewingImage = css`
-  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
-  width: 100%;
-  height: 100%;
-  border-radius: 20px 20px 0px 0px;
-  ${({ theme: { mixin } }) => mixin.flexCenter({})};
-`;
-
-export const EmptyImage = styled.div`
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   width: 100%;
   height: 100%;
@@ -106,25 +96,4 @@ export const Slogan = styled(SingleInfoTitle)`
 export const TeamSkillSession = styled(SingleInfoTitle)`
   position: relative;
   width: 3%;
-`;
-
-export const PostInfo = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: 12px;
-`;
-
-export const SinglePostInfo = styled.div`
-  display: flex;
-  gap: 10px;
-  svg {
-    width: 25px;
-    height: 25px;
-    & path {
-      stroke: ${({ theme: { colors } }) => colors.primary.normal};
-      fill: ${({ theme: { colors } }) => colors.primary.normal};
-    }
-  }
 `;
