@@ -1,7 +1,6 @@
 import React from 'react';
 import SignUp from 'pages/SignUp';
 import { ROUTE } from 'constant/route.constant';
-import Main from 'pages/Main';
 import UserBoard from 'pages/UserBoard';
 import TeamBoard from 'pages/TeamBoard';
 import UserPost from 'pages/UserPost';
@@ -19,11 +18,6 @@ const routes = [
     path: ROUTE.LOGIN + ROUTE.ALL,
     element: LoginRoute,
     restricted: true,
-  },
-  {
-    path: ROUTE.HOME,
-    element: Main,
-    restricted: false,
   },
   {
     path: ROUTE.USER,
