@@ -40,6 +40,8 @@
 <br/>
 <br/>
 
+## 팀원 소개
+
 <table align="center">
   <tr>
     <td>
@@ -90,47 +92,30 @@
       </a>
     </td>
     <td align="center">
-      <div>
+      <a>
         DESIGNER_정영혜
-      </div>
+      </a>
     </td>
   </tr>
 </table>
 <table align="center">
-<table align="center">
-  <tr>
-    <td><span>기술 스택</span></td>
-    <td>
-      <div>
-        <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=white"/>
-        <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=white"/>
-        <img src="https://img.shields.io/badge/WebRTC-333333?style=flat-square&logo=webrtc&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Socket.io-010101?style=flat-square&logo=socket.io&logoColor=white"/>
-        <img src="https://img.shields.io/badge/StyledComponents-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Passport-34E27A?style=flat-square&logo=passport&logoColor=white"/>
-        <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white"/>
-        <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=nginx&logoColor=white"/>
-        <img src="https://img.shields.io/badge/nCloud-03C75A?style=flat-square&logo=naver&logoColor=white"/>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>배포 페이지</td>
-    <td>
-      <a>
-        👉 배포 페이지 바로가기
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>노션</td>
-    <td>
-      <a href="https://dear-phosphorus-929.notion.site/Matching-Project-bfe35250f60d4386a5e5cbc684366edf">
-        👉 Notion Project 바로가기
-      </a>
-    </td>
-  </tr>
-<table>
+ 
+  ## 🛠 기술 스택
 
+<div align="center">
+  
+| Front | Back | Infra |
+| :---: | :---: | :---: |
+| <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Recoil-764ABC?style=flat-square&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/styled--components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/geolocation--api-4285F4?style=flat-square&logo=google-maps&logoColor=white"/> <img src="https://img.shields.io/badge/Naver/Kakao--map-00ACC1?style=flat-square&logo=OpenStreetMap&logoColor=white"/> <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=ESLint&logoColor=white"/> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=Prettier&logoColor=white"/> <img src="https://img.shields.io/badge/jest-23C213?style=flat-square&logo=jest&logoColor=white"/> | <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/> <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=Express&logoColor=white"/> <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white"/> <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=ESLint&logoColor=white"/> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=Prettier&logoColor=white"/> <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=postman&logoColor=white"/> | <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/> <img src="https://img.shields.io/badge/PM2-2B037A?style=flat-square&logo=PM2&logoColor=white"/> <img src="https://img.shields.io/badge/Naver Cloud-03C75A?style=flat-square&logo=Naver&logoColor=white"/> <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/> <img src="https://img.shields.io/badge/Github Actions-2088FF?style=flat-square&logo=Github Actions&logoColor=white"/> |
+
+</div>
+<br/>
+  
+<div>
+  
+| 배포 페이지 | 노션 페이지 |
+| :---: | :---: |
+| <a>배포 페이지</a> | <a href="https://dear-phosphorus-929.notion.site/Matching-Project-bfe35250f60d4386a5e5cbc684366edf">👉 Notion Project 바로가기</a> |
+
+ </div>
 <br/>
