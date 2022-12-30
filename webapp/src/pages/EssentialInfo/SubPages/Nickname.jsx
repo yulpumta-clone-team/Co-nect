@@ -34,7 +34,7 @@ export default function Nickname() {
             theme="secondary"
             customStyle={S.DuplicateCheckButton}
             disabled={isNicknameValidateError}
-            onClick={onClickCheckDuplicateNickname}
+            onClick={() => onClickCheckDuplicateNickname(inputValues.nickname)}
           >
             중복확인
           </Button>

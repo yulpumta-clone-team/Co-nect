@@ -91,6 +91,7 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
         ...newConfig,
         signal: ctrl.signal,
       });
+      // const message = response?.message;
       notifyNewMessage(notifyDispatch, successMessage, TOAST_TYPE.Success);
       return response;
     } catch (error) {

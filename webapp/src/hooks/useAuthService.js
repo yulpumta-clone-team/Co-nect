@@ -30,15 +30,18 @@ const useAuthService = () => {
   };
 
   const requestSignUp = async (submitData) => {
-    await signUpExecution({ newConfig: submitData, successMessage: '회원가입 성공!' });
+    const response = await signUpExecution({
+      newConfig: { submitData },
+      successMessage: '회원가입 성공!',
+    });
     setTimeout(() => {
-      navigate('/login');
+      response && navigate('/login');
     }, 1000);
   };
 
   const requestLogin = async (submitData) => {
     const response = await loginExecution({
-      newConfig: submitData,
+      newConfig: { submitData },
       successMessage: '로그인 성공!',
     });
     const {

@@ -7,7 +7,7 @@ import { userDetailType } from 'types/user.type';
 import useAxios from 'hooks/useAxios';
 import userApi from 'api/user.api';
 import useFileUploader from 'hooks/useFileUploader';
-import useCheckNicknameDuplicate from 'hooks/useCheckNicknameDuplicate';
+import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
 import EditUserProfileView from './EditUserProfile.view';
 
 EditUserProfileDetail.propTypes = {
@@ -30,12 +30,8 @@ export default function EditUserProfileDetail({ targetUser }) {
   } = parsedTargerUserInfo;
   const parsedSkillStack = skillStackParser(techSkills);
 
-  const {
-    isNicknameDuplicate,
-    isNickNameSameWithOrigin,
-    onChangeCheckNicknameDuplicate,
-    onClickCheckDuplicateNickname,
-  } = useCheckNicknameDuplicate(nickname);
+  const { isNicknameDuplicate, isNickNameSameWithOrigin, onClickCheckDuplicateNickname } =
+    useCheckUserDuplicate(nickname);
 
   // 수정 요청 api hooks
   const { notGetExecution } = useAxios({
@@ -59,7 +55,7 @@ export default function EditUserProfileDetail({ targetUser }) {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = userPostEditParser(changedProfileImageSubmitData);
-    await notGetExecution({ newConfig: parsedSubmitData, successMessage: '수정 완료!' });
+    await notGetExecution({ newConfig: { data: parsedSubmitData }, successMessage: '수정 완료!' });
     // TODO: 성공시 이동할 페이지 정해서 이동시키기
   };
 
@@ -100,7 +96,6 @@ export default function EditUserProfileDetail({ targetUser }) {
       isTargetSatisfyValidate={isTargetSatisfyValidate}
       isNicknameDuplicate={isNicknameDuplicate}
       isNickNameSameWithOrigin={isNickNameSameWithOrigin}
-      onChangeCheckNicknameDuplicate={onChangeCheckNicknameDuplicate}
       onClickCheckDuplicateNickname={onClickCheckDuplicateNickname}
       profileImageSrc={profileImageSrc}
       onChangeFile={onChangeFile}

@@ -12,6 +12,7 @@ import useFileUploader from 'hooks/useFileUploader';
 import userApi from 'api/user.api';
 import { essentialValidation } from 'service/user/user.validation';
 import { hopeSessionOption, jobOptions } from 'constant';
+import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
 
 const initialValues = {
   nickname: '', // 입력하지 않으면 서브 페이지가 넘어가지 않습니다.
@@ -41,6 +42,7 @@ const useEssentialForm = () => {
   const layoutRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const notifyDispatch = useToastNotificationAction();
 
   const handleProtectedUrl = (locationState) => {
     if (!locationState) {
@@ -52,9 +54,9 @@ const useEssentialForm = () => {
     }
   };
 
-  const notifyDispatch = useToastNotificationAction();
   const { handleUpdateUserInfo } = useUserInfo();
-  const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
+
+  const { isNicknameDuplicate, onClickCheckDuplicateNickname } = useCheckUserDuplicate('');
   const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();
 
   const uploadImageFileBeforeSubmit = async (submitData) => {
@@ -145,25 +147,25 @@ const useEssentialForm = () => {
     });
   }, [location.pathname, navigate]);
 
-  const onClickCheckDuplicateNickname = useCallback(async () => {
-    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
-    try {
-      const response = await authApi.checkDuplicateNickName({ name: inputValues.nickname });
-      const isDuplicated = response.data;
-      if (isDuplicated) {
-        notifyNewMessage(notifyDispatch, '이미 사용중인 닉네임입니다!', TOAST_TYPE.Warning);
-        setIsNicknameDuplicate(true);
-      } else {
-        notifyNewMessage(notifyDispatch, '사용가능한 닉네임입니다!', TOAST_TYPE.Success);
-        setIsNicknameDuplicate(false);
-      }
-    } catch (error) {
-      console.error(error);
-      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
-      setIsNicknameDuplicate(true);
-    }
-  }, [inputValues.nickname, notifyDispatch]);
+  // const onClickCheckDuplicateNickname = useCallback(async () => {
+  //   // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
+  //   notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
+  //   try {
+  //     const response = await authApi.checkDuplicateNickName({ name: inputValues.nickname });
+  //     const isDuplicated = response.data;
+  //     if (isDuplicated) {
+  //       notifyNewMessage(notifyDispatch, '이미 사용중인 닉네임입니다!', TOAST_TYPE.Warning);
+  //       setIsNicknameDuplicate(true);
+  //     } else {
+  //       notifyNewMessage(notifyDispatch, '사용가능한 닉네임입니다!', TOAST_TYPE.Success);
+  //       setIsNicknameDuplicate(false);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
+  //     setIsNicknameDuplicate(true);
+  //   }
+  // }, [inputValues.nickname, notifyDispatch]);
 
   useEffect(() => {
     handleProtectedUrl(location.state);

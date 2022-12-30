@@ -40,7 +40,7 @@ export default function NewTeamPostDetail() {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = newTeamPostParser(changedProfileImageSubmitData);
     await notGetExecution({
-      newConfig: parsedSubmitData,
+      newConfig: { data: parsedSubmitData },
       successMessage: '팀 등록이 완료되었습니다.',
     });
     navigate(ROUTE.HOME);

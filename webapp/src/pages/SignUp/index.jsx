@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
-import authApi from 'api/auth.api';
-import { notifyNewMessage } from 'contexts/ToastNotification/action';
-import { useToastNotificationAction } from 'contexts/ToastNotification';
-import { signUpValidate } from 'service/auth/auth.validation';
+import React from 'react';
 import useForm from 'hooks/useForm';
 import TextInput from 'components/Common/TextInput';
 import Divider from 'components/Common/Divider';
 import Button from 'components/Common/Button';
 import SocailLoginButtons from 'components/SocialLoginButtons';
-import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import BackButton from 'components/Common/BackButton';
 import { signUpParser } from 'service/auth/auth.parser';
 import { ROUTE } from 'constant/route.constant';
 import useAuthService from 'hooks/useAuthService';
+import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
+import { signUpValidate } from 'service/auth/auth.validation';
 import * as S from './SignUp.style';
 
 export default function SignUp() {
-  const notifyDispatch = useToastNotificationAction();
-  const [isEmailDuplicate, setIsEmailDuplicate] = useState(true);
   const { requestSignUp } = useAuthService();
+  const { isEmailDuplicate, onClickCheckDuplicateEmail } = useCheckUserDuplicate();
 
   const submitCallback = async (submitData) => {
     const parsedSubmitData = signUpParser(submitData);
@@ -31,25 +27,6 @@ export default function SignUp() {
       submitCallback,
       validate: signUpValidate,
     });
-
-  const onClickCheckDuplicateEmail = async () => {
-    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
-    try {
-      const response = await authApi.checkDuplicateEmail({ email: inputValues.email });
-      const isDuplicated = response.data;
-      if (isDuplicated) {
-        notifyNewMessage(notifyDispatch, '이미 사용중인 이메일니다!', TOAST_TYPE.Warning);
-        setIsEmailDuplicate(true);
-      } else {
-        notifyNewMessage(notifyDispatch, '사용가능한 이메일니다!', TOAST_TYPE.Success);
-        setIsEmailDuplicate(false);
-      }
-    } catch (error) {
-      console.error(error);
-      notifyNewMessage(notifyDispatch, error.message, 'Error');
-    }
-  };
 
   const canActiveSingupButton = !satisfyAllValidates || isEmailDuplicate;
 
@@ -75,7 +52,7 @@ export default function SignUp() {
             type="button"
             theme="secondary"
             customStyle={S.DuplicateCheckButton}
-            onClick={onClickCheckDuplicateEmail}
+            onClick={() => onClickCheckDuplicateEmail(inputValues.email)}
           >
             중복확인
           </Button>
