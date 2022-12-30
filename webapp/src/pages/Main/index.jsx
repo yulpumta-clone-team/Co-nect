@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useEffect, useRef, useMemo, useState } from 'react';
 import { benefits, cardText, developers, links } from 'constant/main.constant';
 import { useNavigate } from 'react-router-dom';
 import GlobalNavigation from 'components/GlobalNavigation';
@@ -9,6 +9,7 @@ import ToastNotificationProvider, {
 } from 'contexts/ToastNotification';
 import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
+import { throttle } from 'lodash';
 import * as S from './style';
 
 const IconMap = {
@@ -26,7 +27,9 @@ export default WithProvider({
   Providers: [ToastNotificationProvider],
   Component: Main,
 });
+
 function Main() {
+  const mainText = 'What is Conect';
   const navigate = useNavigate();
 
   const { toastList } = useToastNotificationState();
@@ -34,24 +37,41 @@ function Main() {
   const deleteToastCallback = (id) => {
     deleteMessage(notifyDispatch, id);
   };
+
   return (
     <S.MainContainer>
       <S.Header>
         <GlobalNavigation />
       </S.Header>
       <S.MainSection>
-        <S.MainGradient>
-          <S.Logo />
-          <S.MainText>
-            <p>What is Co-nect</p>
-          </S.MainText>
-          <S.SubText>
-            <p>
+        <S.Section>
+          <S.Wave>
+            <S.Curve />
+            <S.Curve />
+            <S.Curve />
+            <S.Curve />
+          </S.Wave>
+          <S.Contents>
+            <S.Logo />
+            <S.MainText>
+              {mainText.split('').map((t, i) => (
+                <S.GhostEffects key={t} index={i}>
+                  {t}
+                </S.GhostEffects>
+              ))}
+            </S.MainText>
+            <S.SubText>
               <span>코넥트는 사람과 사람의 연결을 의미합니다.</span>
-              맞잡은 손을 이용해 코넥트가 표현하고자 하는 연결의 의미를 나타내었습니다.
-            </p>
-          </S.SubText>
-        </S.MainGradient>
+              <br />
+              <span>맞잡은 손을 이용해 코넥트가 표현하고자 하는 연결의 의미를 나타내었습니다.</span>
+            </S.SubText>
+          </S.Contents>
+        </S.Section>
+        <S.ScrollDown>
+          <S.Indicator />
+          <S.Indicator />
+          <S.Indicator />
+        </S.ScrollDown>
       </S.MainSection>
       <S.PurposeSection>
         <S.StartQuestion>
