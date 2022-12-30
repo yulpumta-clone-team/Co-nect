@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/Common/Button';
-import CardLoader from 'components/Loader/CardLoader';
+import CardLoader from 'components/Common/Loader/CardLoader';
 import * as S from './CardsGrid.style';
 
 CardsGrid.propTypes = {

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import useHandleLogin from 'hooks/useHandleLogin';
+import Spinner from 'components/Common/Loader/Spinner';
 
 export default function OAuthCallback() {
   const { search } = useLocation();
@@ -13,5 +14,5 @@ export default function OAuthCallback() {
     handleLogin({ accessToken, refreshToken, isFirstLogin });
   }, []);
 
-  return <div>임시</div>;
+  return <Spinner withLogo isFullPage />;
 }

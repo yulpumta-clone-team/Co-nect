@@ -4,7 +4,7 @@ import useIntersect from 'hooks/useIntersect';
 import UpperButton from 'components/Common/UpperButton';
 import Callback from 'pages/Callback';
 import CardsGrid from 'components/CardsGrid';
-import CardLoader from 'components/Loader/CardLoader';
+import CardLoader from 'components/Common/Loader/CardLoader';
 
 WithInfiniteScroll.propTypes = {
   CardComponent: PropTypes.func.isRequired,
