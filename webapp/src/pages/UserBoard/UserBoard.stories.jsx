@@ -3,6 +3,7 @@ import UserCard from 'components/UserCard';
 import { ROUTE } from 'constant/route.constant';
 import { emptyTrigger } from 'constant/service.constant';
 import handlers from 'mocks/handlers';
+import { userList } from 'mocks/userHandler.mock/usersList';
 import React from 'react';
 import UserBoard from './index';
 
@@ -19,11 +20,11 @@ function Template(args) {
   return <UserBoard {...args} />;
 }
 
-function EmptyTemplate() {
+function EmptyTemplate(args) {
   return (
     <CardsGrid
+      {...args}
       CardComponent={UserCard}
-      cards={[]}
       clickLink={`${ROUTE.USER}/`}
       emptyTrigger={emptyTrigger.user}
     />
@@ -34,4 +35,13 @@ export const Default = Template.bind({});
 Default.args = {};
 
 export const Empty = EmptyTemplate.bind({});
-Empty.args = {};
+Empty.args = {
+  cards: [],
+  isLoading: false,
+};
+
+export const LoadingWithSkeleton = EmptyTemplate.bind({});
+LoadingWithSkeleton.args = {
+  cards: userList,
+  isLoading: true,
+};
