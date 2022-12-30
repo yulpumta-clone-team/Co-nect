@@ -1,5 +1,5 @@
-import React from 'react';
-import { benefits, cardText, developers, links } from 'constant/main.constant';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import { benefits, cardText, conect, developers, links, mainText } from 'constant/main.constant';
 import { useNavigate } from 'react-router-dom';
 import GlobalNavigation from 'components/GlobalNavigation';
 import WithProvider from 'hoc/withProvider';
@@ -9,6 +9,7 @@ import ToastNotificationProvider, {
 } from 'contexts/ToastNotification';
 import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
+import { throttle } from 'lodash';
 import * as S from './style';
 
 const IconMap = {
@@ -26,6 +27,7 @@ export default WithProvider({
   Providers: [ToastNotificationProvider],
   Component: Main,
 });
+
 function Main() {
   const navigate = useNavigate();
 
@@ -34,30 +36,83 @@ function Main() {
   const deleteToastCallback = (id) => {
     deleteMessage(notifyDispatch, id);
   };
+
+  const ref = useRef(HTMLElement);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+
+  const handleScroll = useMemo(
+    () =>
+      throttle(() => {
+        if (typeof window === 'undefined') {
+          return;
+        }
+        if (ref === null || ref.current === null) {
+          return;
+        }
+
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+          ref.current.style.top = '-80px';
+        } else {
+          ref.current.style.top = '0';
+        }
+        setLastScrollTop(scrollTop);
+      }, 1000),
+    [lastScrollTop],
+  );
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    window.addEventListener('scroll', handleScroll);
+  }, [handleScroll]);
   return (
     <S.MainContainer>
-      <S.Header>
+      <S.Header ref={ref}>
         <GlobalNavigation />
       </S.Header>
       <S.MainSection>
-        <S.MainGradient>
-          <S.Logo />
-          <S.MainText>
-            <p>What is Co-nect</p>
-          </S.MainText>
-          <S.SubText>
-            <p>
+        <S.Section>
+          <S.Wave>
+            {Array(4)
+              .fill(0)
+              .map((_, idx) => (
+                <S.Curve />
+              ))}
+          </S.Wave>
+          <S.Contents>
+            <S.Logo />
+            <S.MainText>
+              {mainText.split('').map((t, i) => (
+                <S.GhostEffects key={t} index={i}>
+                  {t}
+                </S.GhostEffects>
+              ))}
+            </S.MainText>
+            <S.SubText>
               <span>코넥트는 사람과 사람의 연결을 의미합니다.</span>
-              맞잡은 손을 이용해 코넥트가 표현하고자 하는 연결의 의미를 나타내었습니다.
-            </p>
-          </S.SubText>
-        </S.MainGradient>
+              <br />
+              <span>맞잡은 손을 이용해 코넥트가 표현하고자 하는 연결의 의미를 나타내었습니다.</span>
+            </S.SubText>
+          </S.Contents>
+        </S.Section>
+        <S.ScrollDown>
+          <S.Indicator />
+          <S.Indicator />
+          <S.Indicator />
+        </S.ScrollDown>
       </S.MainSection>
       <S.PurposeSection>
         <S.StartQuestion>
           <S.Image3D>
             <p>
-              <span>코넥트</span>는 무엇을 위해 만들어졌을까요?
+              {conect.split('').map((s, i) => (
+                <S.MoveText key={s} index={i}>
+                  {s}
+                </S.MoveText>
+              ))}
+              는 무엇을 위해 만들어졌을까요?
             </p>
           </S.Image3D>
         </S.StartQuestion>
@@ -114,13 +169,15 @@ function Main() {
         </S.LinkGroup>
       </S.FinishSection>
       <S.BottomBox>
-        {developers.map(({ name, field, email }) => (
-          <S.InformationBox key={name}>
-            <p>
+        <S.InformationBox>
+          <span>커넥트 프로젝트</span>
+          <br />
+          {developers.map(({ name, field, email }) => (
+            <p key={name}>
               <span>{name}</span> {field} {email}
             </p>
-          </S.InformationBox>
-        ))}
+          ))}
+        </S.InformationBox>
       </S.BottomBox>
       <ToastNotification
         toastList={toastList}

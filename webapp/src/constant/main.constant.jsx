@@ -6,10 +6,11 @@ export const benefits = [
   { first: '같은 목표를 가진', second: '사람들을 만날 수 있습니다.' },
 ];
 export const developers = [
-  { name: '김윤호1', field: '프론트', email: 'abc@naver.com' },
-  { name: '김윤호2', field: '프론트', email: 'abc@naver.com' },
-  { name: '김윤호3', field: '프론트', email: 'abc@naver.com' },
-  { name: '김윤호4', field: '프론트', email: 'abc@naver.com' },
+  { name: '김윤호', field: 'FRONTEND', email: '/github.com/kimyouknow' },
+  { name: '왕호은', field: 'FRONTEND', email: '/github.com/hoeun0723' },
+  { name: '오현석', field: 'BACKEND', email: '/github.com/philos1234' },
+  { name: '윤효정', field: 'BACKEND', email: '/github.com/hyojeongyun' },
+  { name: '정영혜', field: 'DESIGNER', email: 'younghye.hello@gmail.com' },
 ];
 
 export const links = [
@@ -44,3 +45,5 @@ export const cardText = [
     iconBehind: 'message',
   },
 ];
+export const mainText = 'What is Conect';
+export const conect = '코넥트';
