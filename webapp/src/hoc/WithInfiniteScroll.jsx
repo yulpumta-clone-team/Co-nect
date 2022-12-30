@@ -4,6 +4,7 @@ import useIntersect from 'hooks/useIntersect';
 import UpperButton from 'components/Common/UpperButton';
 import Callback from 'pages/Callback';
 import CardsGrid from 'components/CardsGrid';
+import CardLoader from 'components/Loader/CardLoader';
 
 WithInfiniteScroll.propTypes = {
   CardComponent: PropTypes.func.isRequired,
@@ -96,10 +97,11 @@ export default function WithInfiniteScroll({
           cards={cardList}
           clickLink={clickLink}
           emptyTrigger={emptyTrigger}
+          isLoading={isLoading}
         />
       )}
       <div style={{ display: refDisplay }} ref={loadMoreRef}>
-        {isLoading && !error.isError && <div>Loading...</div>}
+        {isLoading && !error.isError && <CardLoader />}
       </div>
       <UpperButton />
     </>

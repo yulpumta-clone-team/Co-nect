@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/Common/Button';
+import CardLoader from 'components/Loader/CardLoader';
 import * as S from './CardsGrid.style';
 
 CardsGrid.propTypes = {
   CardComponent: PropTypes.func.isRequired,
   cards: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   clickLink: PropTypes.string,
   emptyTrigger: PropTypes.shape({
     emptyMessage: PropTypes.string.isRequired,
@@ -15,13 +17,25 @@ CardsGrid.propTypes = {
   }),
 };
 
-export default function CardsGrid({ CardComponent, cards, clickLink, emptyTrigger }) {
+export default function CardsGrid({ CardComponent, cards, isLoading, clickLink, emptyTrigger }) {
   const { emptyMessage, triggerLink, triggerMessage } = emptyTrigger;
   const navaigate = useNavigate();
   const handleClickCardComponent = (cardId) => {
     clickLink && navaigate(clickLink + cardId);
   };
   const handleClickTriggerLink = () => navaigate(triggerLink);
+
+  if (isLoading)
+    return (
+      <S.Cards>
+        {Array(3)
+          .fill(0)
+          .map(() => (
+            <CardLoader />
+          ))}
+      </S.Cards>
+    );
+
   return (
     <S.Cards>
       {cards.length === 0 ? (
