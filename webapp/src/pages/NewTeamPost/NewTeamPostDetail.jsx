@@ -15,7 +15,7 @@ export default function NewTeamPostDetail() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
 
-  const [state, execution] = useAxios({
+  const { notGetExecution } = useAxios({
     axiosInstance: teamApi.POST_TEAM_POST,
     immediate: false,
   });
@@ -39,7 +39,10 @@ export default function NewTeamPostDetail() {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = newTeamPostParser(changedProfileImageSubmitData);
-    await execution({ data: parsedSubmitData });
+    await notGetExecution({
+      newConfig: parsedSubmitData,
+      successMessage: '팀 등록이 완료되었습니다.',
+    });
     navigate(ROUTE.HOME);
   };
   const {

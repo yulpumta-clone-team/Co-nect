@@ -54,7 +54,7 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
    * 새로운 axios config와 함께 api호출을 실행하는 함수
    * @param {Object} newConfig axios instance에 넘겨줄 새로운 axios config
    */
-  const execution = async (newConfig) => {
+  const getExecution = async (newConfig) => {
     dispatch({ type: LOADING_TYPE });
     try {
       const ctrl = new AbortController();
@@ -64,12 +64,10 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
         ...newConfig,
         signal: ctrl.signal,
       });
-      !immediate && notifyNewMessage(notifyDispatch, '요청 성공!', TOAST_TYPE.Success);
       dispatch({ type: SUCCESS_TYPE, responseData });
     } catch (error) {
       console.error(error);
       handleExiredToken(error.httpStatus);
-      !immediate && notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
       dispatch({
         type: ERROR_TYPE,
         error: {
@@ -80,7 +78,7 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
     }
   };
 
-  const notGetExecution = async (apiCallback, apiParam, seconds = 1500) => {
+  const notGetExecution = async ({ newConfig, successMessage = '요청 성공!', seconds = 1500 }) => {
     let isOverStandard = true;
     setTimeout(() => {
       if (isOverStandard) notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
@@ -88,26 +86,30 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
     try {
       const ctrl = new AbortController();
       setController(ctrl);
-      await apiCallback(apiParam);
-      notifyNewMessage(notifyDispatch, '요청 성공!', TOAST_TYPE.Success);
+      const response = await axiosInstance({
+        ...axiosConfig,
+        ...newConfig,
+        signal: ctrl.signal,
+      });
+      notifyNewMessage(notifyDispatch, successMessage, TOAST_TYPE.Success);
+      return response;
     } catch (error) {
       handleExiredToken(error.httpStatus);
       !immediate && notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
     } finally {
       isOverStandard = false;
     }
+    return null;
   };
 
   useEffect(() => {
-    // resetState 내부의 dispatch 때문에 두 번 execution이 발생함.
-    // resetState();
     if (immediate) {
-      execution();
+      getExecution();
     }
     return () => controller && controller.abort();
   }, [trigger]);
 
-  return [state, execution, forceRefetch, notGetExecution];
+  return { state, getExecution, notGetExecution, forceRefetch, resetState };
 };
 
 export default useAxios;

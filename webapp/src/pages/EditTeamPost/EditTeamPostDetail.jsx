@@ -22,7 +22,7 @@ export default function EditTeamPostDetail({ targetTeam }) {
     teamDetailParser(targetTeam);
 
   // 수정 요청 api hooks
-  const [state, execution, foreceRefetch] = useAxios({
+  const { notGetExecution } = useAxios({
     axiosInstance: teamApi.EDIT_TEAM_POST,
     immediate: false,
     axiosConfig: { id: teamId },
@@ -44,7 +44,7 @@ export default function EditTeamPostDetail({ targetTeam }) {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = teamEditRequestParser(changedProfileImageSubmitData);
-    await execution({ data: parsedSubmitData });
+    await notGetExecution({ data: parsedSubmitData });
     notifyNewMessage(notifyDispatch, '수정 완료!', TOAST_TYPE.Success);
   };
 

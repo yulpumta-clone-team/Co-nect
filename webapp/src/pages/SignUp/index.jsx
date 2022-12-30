@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import authApi from 'api/auth.api';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
@@ -13,19 +12,17 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import BackButton from 'components/Common/BackButton';
 import { signUpParser } from 'service/auth/auth.parser';
 import { ROUTE } from 'constant/route.constant';
-import useAxios from 'hooks/useAxios';
 import useAuthService from 'hooks/useAuthService';
 import * as S from './SignUp.style';
 
 export default function SignUp() {
   const notifyDispatch = useToastNotificationAction();
   const [isEmailDuplicate, setIsEmailDuplicate] = useState(true);
-  const [, , , notGetExecution] = useAxios({ immediate: false });
   const { requestSignUp } = useAuthService();
 
   const submitCallback = async (submitData) => {
     const parsedSubmitData = signUpParser(submitData);
-    notGetExecution(requestSignUp, parsedSubmitData);
+    await requestSignUp(parsedSubmitData);
   };
 
   const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =

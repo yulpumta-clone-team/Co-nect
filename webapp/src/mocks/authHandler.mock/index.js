@@ -1,12 +1,17 @@
 import { API, ROOT_API_URL, TOKEN } from 'constant/api.constant';
-import { getResonseWithData, successResponseWithEmptyData } from 'mocks/mockUtils';
+import {
+  getResonseWithData,
+  successResponseWithEmptyData,
+  errorResponse,
+  randomResponse,
+} from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { mockLoginData, mockSignUpData } from './mockMyData';
 
 const authHandler = [
   // 이메일 중복체크 요청
   rest.patch(ROOT_API_URL + API.AUTH.CHECK_DUPLICATE_EMAIL, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResonseWithData(true)));
+    return res(ctx.status(200), ctx.json(getResonseWithData(false)));
   }),
   // 닉네임 중복체크 요청
   rest.patch(ROOT_API_URL + API.AUTH.CHECK_DUPLICATE_NICKNAME, (req, res, ctx) => {
@@ -27,7 +32,8 @@ const authHandler = [
   }),
   // 회원가입 요청
   rest.post(ROOT_API_URL + API.AUTH.SIGNUP, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResonseWithData(mockSignUpData)));
+    // return res(ctx.status(200), ctx.json(getResonseWithData(mockSignUpData)));
+    return res(ctx.status(500), ctx.json(errorResponse));
   }),
   // 로그아웃 요청
   rest.get(ROOT_API_URL + API.AUTH.LOGOUT, (req, res, ctx) => {

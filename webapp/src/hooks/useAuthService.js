@@ -3,6 +3,7 @@ import { TOKEN } from 'constant/api.constant';
 import { ESSENTIAL_INFO_LINKS } from 'constant/route.constant';
 import { useNavigate } from 'react-router-dom';
 import { handleToken } from 'service/auth';
+import useAxios from './useAxios';
 import useUserInfo from './useUserInfo';
 
 /**
@@ -15,20 +16,31 @@ import useUserInfo from './useUserInfo';
 const useAuthService = () => {
   const navigate = useNavigate();
   const { handleUpdateUserInfo } = useUserInfo();
+  const { notGetExecution: signUpExecution } = useAxios({
+    axiosInstance: authApi.signUp,
+    immediate: false,
+  });
+  const { notGetExecution: loginExecution } = useAxios({
+    axiosInstance: authApi.login,
+    immediate: false,
+  });
 
   const handleShowEssesntialModal = (isFirstLogin) => {
     navigate(ESSENTIAL_INFO_LINKS.NICKNAME, { state: { isFirstLogin } });
   };
 
   const requestSignUp = async (submitData) => {
-    await authApi.signUp({ submitData });
+    await signUpExecution({ newConfig: submitData, successMessage: '회원가입 성공!' });
     setTimeout(() => {
       navigate('/login');
     }, 1000);
   };
 
   const requestLogin = async (submitData) => {
-    const response = await authApi.login({ submitData });
+    const response = await loginExecution({
+      newConfig: submitData,
+      successMessage: '로그인 성공!',
+    });
     const {
       headers,
       data: { isFirst: isFirstLogin },

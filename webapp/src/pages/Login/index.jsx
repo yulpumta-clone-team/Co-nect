@@ -11,7 +11,6 @@ import BackButton from 'components/Common/BackButton';
 import { loginParser } from 'service/auth/auth.parser';
 import MainLogoImg from 'assets/images/main-logo.png';
 import useAuthService from 'hooks/useAuthService';
-import useAxios from 'hooks/useAxios';
 import * as S from './Login.style';
 
 Login.propTypes = {
@@ -20,11 +19,10 @@ Login.propTypes = {
 
 export default function Login({ children }) {
   const { requestLogin } = useAuthService();
-  const [, , , notGetExecution] = useAxios({ immediate: false });
 
   const submitCallback = async (submitData) => {
     const parsedSubmitData = loginParser(submitData);
-    notGetExecution(requestLogin, parsedSubmitData);
+    requestLogin(parsedSubmitData);
   };
 
   const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
