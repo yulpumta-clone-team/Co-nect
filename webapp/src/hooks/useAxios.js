@@ -80,6 +80,24 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
     }
   };
 
+  const notGetExecution = async (apiCallback, apiParam, seconds = 1500) => {
+    let isOverStandard = true;
+    setTimeout(() => {
+      if (isOverStandard) notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
+    }, seconds);
+    try {
+      const ctrl = new AbortController();
+      setController(ctrl);
+      await apiCallback(apiParam);
+      notifyNewMessage(notifyDispatch, '요청 성공!', TOAST_TYPE.Success);
+    } catch (error) {
+      handleExiredToken(error.httpStatus);
+      !immediate && notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
+    } finally {
+      isOverStandard = false;
+    }
+  };
+
   useEffect(() => {
     // resetState 내부의 dispatch 때문에 두 번 execution이 발생함.
     // resetState();
@@ -89,7 +107,7 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
     return () => controller && controller.abort();
   }, [trigger]);
 
-  return [state, execution, forceRefetch];
+  return [state, execution, forceRefetch, notGetExecution];
 };
 
 export default useAxios;
