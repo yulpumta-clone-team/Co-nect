@@ -1,21 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import authApi from 'api/auth.api';
-import { notifyNewMessage } from 'contexts/ToastNotification/action';
-import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { loginValidate } from 'service/auth/auth.validation';
 import useForm from 'hooks/useForm';
 import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
 import Divider from 'components/Common/Divider';
-import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import SocailLoginButtons from 'components/SocialLoginButtons';
-import { TOKEN } from 'constant/api.constant';
 import { ROUTE } from 'constant/route.constant';
 import BackButton from 'components/Common/BackButton';
 import { loginParser } from 'service/auth/auth.parser';
 import MainLogoImg from 'assets/images/main-logo.png';
-import useHandleLogin from 'hooks/useHandleLogin';
+import useAuthService from 'hooks/useAuthService';
+import useAxios from 'hooks/useAxios';
 import * as S from './Login.style';
 
 Login.propTypes = {
@@ -23,28 +19,12 @@ Login.propTypes = {
 };
 
 export default function Login({ children }) {
-  const notifyDispatch = useToastNotificationAction();
-  const { handleLogin } = useHandleLogin();
+  const { requestLogin } = useAuthService();
+  const [, , , notGetExecution] = useAxios({ immediate: false });
 
   const submitCallback = async (submitData) => {
     const parsedSubmitData = loginParser(submitData);
-    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
-    try {
-      const response = await authApi.login({ submitData: parsedSubmitData });
-      const {
-        headers,
-        data: { isFirst: isFirstLogin },
-      } = response;
-      handleLogin({
-        accessToken: headers[TOKEN.ACCESS],
-        refreshToken: headers[TOKEN.REFRESH],
-        isFirstLogin,
-      });
-    } catch (error) {
-      console.error(error);
-      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
-    }
+    notGetExecution(requestLogin, parsedSubmitData);
   };
 
   const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =

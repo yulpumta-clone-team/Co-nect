@@ -13,27 +13,19 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import BackButton from 'components/Common/BackButton';
 import { signUpParser } from 'service/auth/auth.parser';
 import { ROUTE } from 'constant/route.constant';
+import useAxios from 'hooks/useAxios';
+import useAuthService from 'hooks/useAuthService';
 import * as S from './SignUp.style';
 
 export default function SignUp() {
-  const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
   const [isEmailDuplicate, setIsEmailDuplicate] = useState(true);
+  const [, , , notGetExecution] = useAxios({ immediate: false });
+  const { requestSignUp } = useAuthService();
+
   const submitCallback = async (submitData) => {
     const parsedSubmitData = signUpParser(submitData);
-    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
-    try {
-      const response = await authApi.signUp({ submitData: parsedSubmitData });
-      const { message } = response;
-      notifyNewMessage(notifyDispatch, message, TOAST_TYPE.Success);
-      setTimeout(() => {
-        navigate('/login');
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
-    }
+    notGetExecution(requestSignUp, parsedSubmitData);
   };
 
   const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
