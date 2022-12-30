@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useMemo, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { benefits, cardText, developers, links } from 'constant/main.constant';
 import { useNavigate } from 'react-router-dom';
 import GlobalNavigation from 'components/GlobalNavigation';
@@ -38,9 +38,39 @@ function Main() {
     deleteMessage(notifyDispatch, id);
   };
 
+  const ref = useRef(HTMLElement);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+
+  const handleScroll = useMemo(
+    () =>
+      throttle(() => {
+        if (window === 'undefined') {
+          return;
+        }
+        if (ref === null || ref.current === null) {
+          return;
+        }
+
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+          ref.current.style.top = '-80px';
+        } else {
+          ref.current.style.top = '0';
+        }
+        setLastScrollTop(scrollTop);
+      }, 1000),
+    [lastScrollTop],
+  );
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    window.addEventListener('scroll', handleScroll);
+  }, [handleScroll]);
   return (
     <S.MainContainer>
-      <S.Header>
+      <S.Header ref={ref}>
         <GlobalNavigation />
       </S.Header>
       <S.MainSection>

@@ -140,24 +140,19 @@ export const Indicator = styled.span`
   }
 `;
 
-export const MainContainer = styled.div`
-  width: 100%;
-`;
+export const MainContainer = styled.div``;
 export const Header = styled.header`
-  > div {
-    width: 100vw;
-    margin: 0 auto;
-  }
   position: fixed;
-  top: 0;
+  top: 0%;
+  z-index: 1;
   width: 100%;
   height: 80px;
-  padding: 0 48px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: 0.5s;
+  position: fixed;
 `;
 
 export const MainSection = styled.div`
