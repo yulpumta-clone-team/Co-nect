@@ -45,3 +45,5 @@ export const cardText = [
     iconBehind: 'message',
   },
 ];
+export const mainText = 'What is Conect';
+export const conect = '코넥트';

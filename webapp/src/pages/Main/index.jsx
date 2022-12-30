@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import { benefits, cardText, developers, links } from 'constant/main.constant';
+import { benefits, cardText, conect, developers, links, mainText } from 'constant/main.constant';
 import { useNavigate } from 'react-router-dom';
 import GlobalNavigation from 'components/GlobalNavigation';
 import WithProvider from 'hoc/withProvider';
@@ -29,8 +29,6 @@ export default WithProvider({
 });
 
 function Main() {
-  const mainText = 'What is Conect';
-  const conect = '코넥트';
   const navigate = useNavigate();
 
   const { toastList } = useToastNotificationState();
@@ -45,7 +43,7 @@ function Main() {
   const handleScroll = useMemo(
     () =>
       throttle(() => {
-        if (window === 'undefined') {
+        if (typeof window === 'undefined') {
           return;
         }
         if (ref === null || ref.current === null) {
@@ -77,10 +75,11 @@ function Main() {
       <S.MainSection>
         <S.Section>
           <S.Wave>
-            <S.Curve />
-            <S.Curve />
-            <S.Curve />
-            <S.Curve />
+            {Array(4)
+              .fill(0)
+              .map((_, idx) => (
+                <S.Curve />
+              ))}
           </S.Wave>
           <S.Contents>
             <S.Logo />
