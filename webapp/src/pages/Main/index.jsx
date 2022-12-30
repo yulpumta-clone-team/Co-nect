@@ -30,6 +30,7 @@ export default WithProvider({
 
 function Main() {
   const mainText = 'What is Conect';
+  const conect = '코넥트';
   const navigate = useNavigate();
 
   const { toastList } = useToastNotificationState();
@@ -107,7 +108,12 @@ function Main() {
         <S.StartQuestion>
           <S.Image3D>
             <p>
-              <span>코넥트</span>는 무엇을 위해 만들어졌을까요?
+              {conect.split('').map((s, i) => (
+                <S.MoveText key={s} index={i}>
+                  {s}
+                </S.MoveText>
+              ))}
+              는 무엇을 위해 만들어졌을까요?
             </p>
           </S.Image3D>
         </S.StartQuestion>
@@ -164,13 +170,15 @@ function Main() {
         </S.LinkGroup>
       </S.FinishSection>
       <S.BottomBox>
-        {developers.map(({ name, field, email }) => (
-          <S.InformationBox key={name}>
-            <p>
+        <S.InformationBox>
+          <span>커넥트 프로젝트</span>
+          <br />
+          {developers.map(({ name, field, email }) => (
+            <p key={name}>
               <span>{name}</span> {field} {email}
             </p>
-          </S.InformationBox>
-        ))}
+          ))}
+        </S.InformationBox>
       </S.BottomBox>
       <ToastNotification
         toastList={toastList}

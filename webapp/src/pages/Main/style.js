@@ -13,7 +13,25 @@ import BoardIcon from 'assets/images/board-link.png';
 import PostIcon from 'assets/images/post-link.png';
 
 // import styled from 'styled-components/macro';
-
+export const MainContainer = styled.div``;
+export const Header = styled.header`
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.5s;
+  position: fixed;
+`;
+export const MainSection = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+`;
 export const Section = styled.section`
   position: relative;
   width: 100%;
@@ -88,6 +106,47 @@ export const Contents = styled.div`
   z-index: 1;
   letter-spacing: 0.01em;
 `;
+export const Logo = styled.img.attrs({ src: `${MainLogo}` })`
+  position: relative;
+  display: flex;
+  top: -30px;
+  width: 100px;
+  height: 100px;
+`;
+export const GhostEffects = styled.span`
+  transition: 1s;
+  &:nth-child(${(props) => props.index + 1}) {
+    transition-delay: ${(props) => props.index * 0.1}s;
+  }
+`;
+
+export const MainText = styled.h2`
+  position: relative;
+  text-transform: uppercase;
+  display: flex;
+  text-align: center;
+  color: ${({ theme: { colors } }) => colors.greyScale.white};
+  font-weight: 800;
+  ${({ theme: { fonts } }) => fonts.english.main};
+  white-space: pre;
+  &:hover {
+    ${GhostEffects} {
+      filter: blur(20px);
+      opacity: 0;
+      transform: scale(2);
+    }
+  }
+`;
+export const SubText = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1180px;
+  color: white;
+  ${({ theme: { fonts } }) => fonts.main.default_noBold};
+`;
 export const ScrollDown = styled.div`
   position: absolute;
   bottom: 20px;
@@ -140,101 +199,6 @@ export const Indicator = styled.span`
   }
 `;
 
-export const MainContainer = styled.div``;
-export const Header = styled.header`
-  position: fixed;
-  top: 0%;
-  z-index: 1;
-  width: 100%;
-  height: 80px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: 0.5s;
-  position: fixed;
-`;
-
-export const MainSection = styled.div`
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  background-color: black;
-`;
-// export const MainGradient = styled.div`
-//   background-image: url(${Gradient});
-//   background-size: 100% 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   height: 100vh;
-// `;
-export const Logo = styled.img.attrs({ src: `${MainLogo}` })`
-  position: relative;
-  display: flex;
-  top: -30px;
-  width: 100px;
-  height: 100px;
-`;
-export const GhostEffects = styled.span`
-  transition: 1s;
-  &:nth-child(${(props) => props.index + 1}) {
-    transition-delay: ${(props) => props.index * 0.1}s;
-  }
-`;
-
-export const MainText = styled.h2`
-  position: relative;
-  text-transform: uppercase;
-  display: flex;
-  text-align: center;
-  color: ${({ theme: { colors } }) => colors.greyScale.white};
-  font-weight: 800;
-  ${({ theme: { fonts } }) => fonts.english.main};
-  white-space: pre;
-  &:hover {
-    ${GhostEffects} {
-      filter: blur(20px);
-      opacity: 0;
-      transform: scale(2);
-    }
-  }
-`;
-// export const MainText = styled.div`
-//   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   letter-spacing: 0.01em;
-//   width: 1180px;
-//   height: 15%;
-//   color: ${({ theme: { colors } }) => colors.greyScale.white};
-//   font-weight: 800;
-//   ${({ theme: { fonts } }) => fonts.english.main};
-//   text-transform: uppercase;
-//   white-space: pre;
-//   &:hover {
-//     ${GhostEffects} {
-//       filter: blur(20px);
-//       opacity: 0;
-//       transform: scale(2);
-//     }
-//   }
-// `;
-export const SubText = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 1180px;
-  color: white;
-  ${({ theme: { fonts } }) => fonts.main.default_noBold};
-`;
-
 export const PurposeSection = styled.div`
   height: 260vh;
   background-color: #262c41;
@@ -268,7 +232,40 @@ export const Image3D = styled.div`
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
+export const animateTextMoving = keyframes`
+    0%, 40%, 100% 
+    {
+        transform: translateY(0);
+    }
+    20% {
+      transform: translateY(-50px);
+    }
+`;
+export const animatePulse = keyframes`
+   0% {
+    transform:scale(1);
+  }
+  25% {
+    transform:scale(0.9);
+  }
+  50% {
+    transform:scale(1);
+  }
+  75% {
+    transform:scale(0.9);
+  }
+  100% {
+    transform:scale(1);
+  }
+`;
 
+export const MoveText = styled.span`
+  position: relative;
+  text-transform: uppercase;
+  display: inline-block;
+  animation: ${animateTextMoving} 2s ease-in-out infinite;
+  animation-delay: ${(props) => `${props.delay * 0.1}s`};
+`;
 export const Benefit = styled.div`
   position: relative;
   display: flex;
@@ -299,6 +296,21 @@ export const Circle = styled.div`
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
 
   ${({ theme: { fonts } }) => fonts.main.emphasis};
+  animation: ${animatePulse} 2s linear infinite;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -99px;
+    width: 370px;
+    height: 270px;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    left: -99px;
+    width: 270px;
+    height: 370px;
+  }
 `;
 
 export const Subject = styled.div`
@@ -352,8 +364,34 @@ export const Card = styled.div`
   align-items: center;
   width: 1000px;
   height: 450px;
-  background-color: #414141;
+  background-color: black;
   border-radius: 2%;
+
+  overflow: hidden;
+  box-sizing: border-box;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: calc(-100% + 4px);
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    transition: 0.5s ease-in-out;
+  }
+
+  &:hover::before {
+    bottom: 0;
+  }
+  &:nth-child(1)::before {
+    background-color: #414141;
+  }
+  &:nth-child(2)::before {
+    background-color: #414141;
+  }
+  &:nth-child(3)::before {
+    background-color: #414141;
+  }
 `;
 export const CardText = styled.div`
   position: absolute;
@@ -431,8 +469,8 @@ export const FinishSection = styled.div`
   & span {
     position: absolute;
     display: flex;
-    justify-content: center;
     width: 1180px;
+    justify-content: center;
     height: 20%;
     top: 20%;
   }
@@ -468,11 +506,11 @@ export const BottomBox = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: 30vh;
+  height: 35vh;
 
   color: white;
   background-color: #676767;
-  &span {
+  &p {
     position: relative;
     left: 10%;
     ${({ theme: { fonts } }) => fonts.korean.emphasis};
@@ -484,7 +522,7 @@ export const InformationBox = styled.div`
   flex-direction: column;
   justify-content: center;
   color: white;
-  left: 10%;
+  left: 5%;
   ${({ theme: { fonts } }) => fonts.korean.default};
   &span {
     ${({ theme: { fonts } }) => fonts.korean.emphasis};
