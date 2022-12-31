@@ -10,6 +10,7 @@ import React from 'react';
 import { teamDetailParser, teamEditRequestParser } from 'service/team/team.parser';
 import { newTeamPostValidation } from 'service/team/team.validation';
 import { teamDetailType } from 'types/team.type';
+import { S3IMAGE_URL } from 'utils';
 import EditTeamPostView from './EditTeamPost.view';
 
 EditTeamPostDetail.propTypes = {
@@ -70,7 +71,7 @@ export default function EditTeamPostDetail({ targetTeam }) {
     validate: newTeamPostValidation,
   });
 
-  const profileImageSrc = inputValues.teamImage || (imageFile && URL.createObjectURL(imageFile));
+  const profileImageSrc = (imageFile && URL.createObjectURL(imageFile)) || inputValues.teamImage;
 
   return (
     <EditTeamPostView

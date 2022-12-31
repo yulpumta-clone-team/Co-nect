@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { teamCardType } from 'types/team.type';
-import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
-import ProfileImg from 'components/ProfileImg';
+import ProfileImg from 'components/Common/ProfileImg';
 import { teamCardParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
 import HeartSvg from 'assets/icons/HeartSvg';
@@ -31,7 +30,6 @@ export default function TeamCard({ cardInfo, onClick }) {
     slogan,
   } = parsedTeamCardInfo;
 
-  const S3Img = S3_IMAGE_SERVER_URL + teamImage;
   const RecruitStatus = isRecruitng ? '모집중' : '모집완료';
   return (
     <S.CardWrapper onClick={onClick}>
@@ -43,7 +41,7 @@ export default function TeamCard({ cardInfo, onClick }) {
       <S.BackgroundImg>
         <S.TeamStatus isRecruitng={isRecruitng}>{RecruitStatus}</S.TeamStatus>
       </S.BackgroundImg>
-      <ProfileImg src={S3Img} alt={`${teamName}의 프로필 이미지`} customStyle={S.ProfileImg} />
+      <ProfileImg src={teamImage} alt={`${teamName}의 프로필 이미지`} customStyle={S.ProfileImg} />
       <S.TeamInfo>
         <S.UserName>{writer.name}님의 모집</S.UserName>
         <S.TeamName>{teamName}</S.TeamName>

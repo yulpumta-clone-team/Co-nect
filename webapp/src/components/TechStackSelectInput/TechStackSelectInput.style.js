@@ -137,6 +137,12 @@ export const Select = styled.div`
   z-index: ${({ theme: { zIndex } }) => zIndex.modalContent};
 `;
 
+export const SpinnerContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+`;
+
 export const OptionCategory = styled.div`
   &:not(:first-child) {
     padding-top: 24px;

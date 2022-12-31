@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import XMarkSvg from 'assets/icons/XMarkSvg';
 import ChevronUpSvg from 'assets/icons/ChevronUpSvg';
 import ChevronDownSvg from 'assets/icons/ChevronDownSvg';
+import Spinner from 'components/Common/Loader/Spinner';
 import * as S from './TechStackSelectInput.style';
 
 TechStackSelectedViewer.propTypes = {
   isError: PropTypes.bool.isRequired,
   isDropdownOpen: PropTypes.bool.isRequired,
   isValues: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   helperText: PropTypes.string,
   parent: PropTypes.object.isRequired,
   selectedTechSkills: PropTypes.array.isRequired,
@@ -23,6 +25,7 @@ export default function TechStackSelectedViewer({
   parent,
   isDropdownOpen,
   isValues,
+  isLoading,
   helperText,
   selectedTechSkills,
   handleClickTargetDelete,
@@ -31,12 +34,14 @@ export default function TechStackSelectedViewer({
   closeDropdown,
 }) {
   const AngleButton = isDropdownOpen ? ChevronUpSvg : ChevronDownSvg;
-
   const ClearButton = selectedTechSkills && (
     <S.ClearableButton type="button" onClick={handleClickReset}>
       <XMarkSvg />
     </S.ClearableButton>
   );
+
+  const showLoaderWithClearButton = isLoading ? <div>...</div> : ClearButton;
+
   return (
     <S.ValueViewer isError={isError} ref={parent} isDropdownOpen={isDropdownOpen}>
       {isValues ? (
@@ -51,7 +56,7 @@ export default function TechStackSelectedViewer({
         <S.PlaceHolder>{isError ? <S.Error>{helperText}</S.Error> : placeholder}</S.PlaceHolder>
       )}
       <S.ButtonContainer>
-        {ClearButton}
+        {showLoaderWithClearButton}
         <S.ButtonDivider isRow={false} />
         <S.ChevronButton onClick={closeDropdown} type="button">
           <AngleButton />

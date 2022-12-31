@@ -1,14 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
-import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import useForm from 'hooks/useForm';
 import { ESSENTIAL_INFO_LINKS, ROUTE } from 'constant/route.constant';
 import { essentialInfoParser } from 'service/user/user.parser';
 import useAuthService from 'hooks/useAuthService';
 import useFileUploader from 'hooks/useFileUploader';
-import userApi from 'api/user.api';
 import { essentialValidation } from 'service/user/user.validation';
 import { hopeSessionOption, jobOptions } from 'constant';
 import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
@@ -41,7 +38,6 @@ const useEssentialForm = () => {
   const layoutRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const notifyDispatch = useToastNotificationAction();
 
   const handleProtectedUrl = (locationState) => {
     if (!locationState) {
@@ -53,7 +49,7 @@ const useEssentialForm = () => {
     }
   };
 
-  const { handleUpdateUserInfo } = useAuthService();
+  const { requestUpdateUserProfile } = useAuthService();
 
   const { isNicknameDuplicate, onClickCheckDuplicateNickname } = useCheckUserDuplicate('');
   const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();
@@ -70,17 +66,7 @@ const useEssentialForm = () => {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = essentialInfoParser(changedProfileImageSubmitData);
-    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
-    try {
-      const response = await userApi.POST_ESSENTIAL_INFO({ submitData: parsedSubmitData });
-      // // const { message } = response;
-      notifyNewMessage(notifyDispatch, '유저정보가 성공적으로 저장되었습니다!', TOAST_TYPE.Success);
-      handleUpdateUserInfo();
-    } catch (error) {
-      console.error(error);
-      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
-    }
+    requestUpdateUserProfile(parsedSubmitData);
   };
 
   const {
@@ -145,26 +131,6 @@ const useEssentialForm = () => {
       state: { isFirstLogin: true },
     });
   }, [location.pathname, navigate]);
-
-  // const onClickCheckDuplicateNickname = useCallback(async () => {
-  //   // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-  //   notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
-  //   try {
-  //     const response = await authApi.checkDuplicateNickName({ name: inputValues.nickname });
-  //     const isDuplicated = response.data;
-  //     if (isDuplicated) {
-  //       notifyNewMessage(notifyDispatch, '이미 사용중인 닉네임입니다!', TOAST_TYPE.Warning);
-  //       setIsNicknameDuplicate(true);
-  //     } else {
-  //       notifyNewMessage(notifyDispatch, '사용가능한 닉네임입니다!', TOAST_TYPE.Success);
-  //       setIsNicknameDuplicate(false);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
-  //     setIsNicknameDuplicate(true);
-  //   }
-  // }, [inputValues.nickname, notifyDispatch]);
 
   useEffect(() => {
     handleProtectedUrl(location.state);

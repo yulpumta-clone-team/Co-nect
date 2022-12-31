@@ -46,6 +46,11 @@ const useAuthService = () => {
     immediate: false,
   });
 
+  const { notGetExecution: updateUserProfileExecution } = useAxios({
+    axiosInstance: userApi.POST_ESSENTIAL_INFO,
+    immediate: false,
+  });
+
   const handleShowEssesntialModal = (isFirstLogin) => {
     navigate(ESSENTIAL_INFO_LINKS.NICKNAME, { state: { isFirstLogin } });
   };
@@ -65,7 +70,9 @@ const useAuthService = () => {
         image,
         name,
       });
-      navigate('/');
+      setTimeout(() => {
+        navigate(ROUTE.HOME);
+      }, 1000);
     } catch (apiError) {
       console.error(apiError);
       notifyNewMessage(notifyDispatch, API_MESSAGE.ERROR_USER_INFO, TOAST_TYPE.Error);
@@ -117,6 +124,7 @@ const useAuthService = () => {
       newConfig: { submitData },
       successMessage: API_MESSAGE.LOGIN,
     });
+    if (!response) return;
     const {
       headers,
       data: { isFirst: isFirstLogin },
@@ -161,10 +169,19 @@ const useAuthService = () => {
     }, 1000);
   };
 
+  const requestUpdateUserProfile = async (submitData) => {
+    await updateUserProfileExecution({
+      newConfig: { data: submitData },
+      successMessage: API_MESSAGE.SUCCESS_SAVE_USER_INFO,
+    });
+    handleUpdateUserInfo();
+  };
+
   return {
     requestSignUp,
     requestLogin,
     requestLogout,
+    requestUpdateUserProfile,
     handleUpdateUserInfo,
     handleDeleteUserInfo,
     handleExiredToken,

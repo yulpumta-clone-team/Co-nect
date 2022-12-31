@@ -6,7 +6,7 @@ import Divider from 'components/Common/Divider';
 import TechSkills from 'components/TechSkills';
 import MarkdownEditor from 'components/MarkdownEditor';
 import { userDetailType } from 'types/user.type';
-import ProfileImg from 'components/ProfileImg';
+import ProfileImg from 'components/Common/ProfileImg';
 import TeamBelongCheckInput from 'components/TeamBelongCheckInput';
 import PostInfo from 'components/PostInfo';
 import * as S from './UserPost.style';

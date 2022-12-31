@@ -1,233 +1,200 @@
 export const mockSkills = [
   {
-    key: 500,
-    category: 'arichitecture',
-    techName: 'git',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 501,
-    category: 'arichitecture',
-    techName: 'docker',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 502,
-    category: 'arichitecture',
-    techName: 'kubernetes',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 503,
-    category: 'arichitecture',
-    techName: 'aws',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 504,
-    category: 'arichitecture',
-    techName: 'jest',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 505,
-    category: 'arichitecture',
-    techName: 'cypress',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 200,
-    category: 'back',
-    techName: 'nodeJs',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 201,
-    category: 'back',
-    techName: 'nestJs',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 202,
-    category: 'back',
-    techName: 'express',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 203,
-    category: 'back',
-    techName: 'java',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 204,
-    category: 'back',
-    techName: 'spring',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 205,
-    category: 'back',
-    techName: 'C',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 206,
-    category: 'back',
-    techName: 'C++',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 207,
-    category: 'back',
-    techName: 'C#',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 208,
-    category: 'back',
-    techName: 'python',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 209,
-    category: 'back',
-    techName: 'django',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 210,
-    category: 'back',
-    techName: 'go',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 211,
-    category: 'back',
-    techName: 'php',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 400,
-    category: 'DB',
-    techName: 'mysql',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 401,
-    category: 'DB',
-    techName: 'h2',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 402,
-    category: 'DB',
-    techName: 'mongodb',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
-    key: 403,
-    category: 'DB',
-    techName: 'oracle',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
-  },
-  {
     key: 100,
-    category: 'front',
     techName: 'javascript',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    category: 'front',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/100-js.png',
   },
   {
     key: 101,
-    category: 'front',
     techName: 'react',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    category: 'front',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/101-react.png',
   },
   {
     key: 102,
-    category: 'front',
     techName: 'vue',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    category: 'front',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/102-vue.png',
   },
   {
     key: 103,
-    category: 'front',
     techName: 'angular',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    category: 'front',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/103-angular.png',
   },
   {
     key: 104,
-    category: 'front',
     techName: 'svelte',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    category: 'front',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/104-svelte.png',
   },
   {
     key: 105,
-    category: 'front',
     techName: 'typescript',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    category: 'front',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/105-ts.png',
   },
   {
     key: 106,
+    techName: 'nextjs',
     category: 'front',
-    techName: 'nextJs',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/106-nextjs.png',
+  },
+  {
+    key: 200,
+    techName: 'nodejs',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/200-nodejs.png',
+  },
+  {
+    key: 201,
+    techName: 'nestjs',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/201-nestjs.png',
+  },
+  {
+    key: 202,
+    techName: 'express',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/202-express.png',
+  },
+  {
+    key: 203,
+    techName: 'java',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/203-java.png',
+  },
+  {
+    key: 204,
+    techName: 'spring',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/204-spring.png',
+  },
+  {
+    key: 205,
+    techName: 'c',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/205-c.png',
+  },
+  {
+    key: 206,
+    techName: 'cpp',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/206-cpp.png',
+  },
+  {
+    key: 207,
+    techName: 'cs',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/207-cs.png',
+  },
+  {
+    key: 208,
+    techName: 'python',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/208-python.png',
+  },
+  {
+    key: 209,
+    techName: 'django',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/209-django.png',
+  },
+  {
+    key: 210,
+    techName: 'php',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/210-php.png',
+  },
+  {
+    key: 211,
+    techName: 'go',
+    category: 'back',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/211-go.png',
   },
   {
     key: 300,
-    category: 'mobile',
     techName: 'flutter',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    category: 'mobile',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/300-flutter.png',
   },
   {
     key: 301,
+    techName: 'reactnative',
     category: 'mobile',
-    techName: 'reactNative',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/301-reactnative.png',
   },
   {
     key: 302,
-    category: 'mobile',
     techName: 'kotlin',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    category: 'mobile',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/302-kotlin.png',
   },
   {
     key: 303,
-    category: 'mobile',
     techName: 'swift',
-    image:
-      'https://user-images.githubusercontent.com/71386219/186051220-a77fa08e-b501-4baa-af3c-47ae602d25e1.png',
+    category: 'mobile',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/303-swift.png',
+  },
+  {
+    key: 400,
+    techName: 'mysql',
+    category: 'db',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/400-mysql.png',
+  },
+  {
+    key: 401,
+    techName: 'h2',
+    category: 'db',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/401-h2.png',
+  },
+  {
+    key: 402,
+    techName: 'mongodb',
+    category: 'db',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/402-mongodb.png',
+  },
+  {
+    key: 403,
+    techName: 'oracle',
+    category: 'db',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/403-oracle.png',
+  },
+  {
+    key: 500,
+    techName: 'git',
+    category: 'architechture',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/500-git.png',
+  },
+  {
+    key: 501,
+    techName: 'docker',
+    category: 'architechture',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/501-docker.png',
+  },
+  {
+    key: 502,
+    techName: 'kubernetes',
+    category: 'architechture',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/502-kubernetes.png',
+  },
+  {
+    key: 503,
+    techName: 'aws',
+    category: 'architechture',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/503-aws.png',
+  },
+  {
+    key: 504,
+    techName: 'jest',
+    category: 'architechture',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/504-jest.png',
+  },
+  {
+    key: 505,
+    techName: 'cypress',
+    category: 'architechture',
+    image: 'https://mp-static-file.s3.ap-northeast-2.amazonaws.com/techSkills/505-cypress.png',
   },
 ];
