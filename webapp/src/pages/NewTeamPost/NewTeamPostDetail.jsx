@@ -9,6 +9,7 @@ import teamApi from 'api/team.api';
 import useFileUploader from 'hooks/useFileUploader';
 import { ROUTE } from 'constant/route.constant';
 import { useNavigate } from 'react-router-dom';
+import { API_MESSAGE } from 'constant/api.constant';
 import NewTeamPostView from './NewTeamPost.view';
 
 export default function NewTeamPostDetail() {
@@ -41,9 +42,11 @@ export default function NewTeamPostDetail() {
     const parsedSubmitData = newTeamPostParser(changedProfileImageSubmitData);
     await notGetExecution({
       newConfig: { data: parsedSubmitData },
-      successMessage: '팀 등록이 완료되었습니다.',
+      successMessage: API_MESSAGE.SUCCESS_NEW_TEAM,
     });
-    navigate(ROUTE.HOME);
+    setTimeout(() => {
+      navigate(ROUTE.HOME);
+    }, 2000);
   };
   const {
     inputValues,

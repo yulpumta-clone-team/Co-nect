@@ -1,4 +1,5 @@
 import teamApi from 'api/team.api';
+import { API_MESSAGE } from 'constant/api.constant';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
@@ -45,7 +46,7 @@ export default function EditTeamPostDetail({ targetTeam }) {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = teamEditRequestParser(changedProfileImageSubmitData);
     await notGetExecution({ data: parsedSubmitData });
-    notifyNewMessage(notifyDispatch, '수정 완료!', TOAST_TYPE.Success);
+    notifyNewMessage(notifyDispatch, API_MESSAGE.SUCCESS_EDIT_TEAM, TOAST_TYPE.Success);
   };
 
   const {

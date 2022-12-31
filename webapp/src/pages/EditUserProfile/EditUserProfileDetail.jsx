@@ -8,6 +8,7 @@ import useAxios from 'hooks/useAxios';
 import userApi from 'api/user.api';
 import useFileUploader from 'hooks/useFileUploader';
 import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
+import { API_MESSAGE } from 'constant/api.constant';
 import EditUserProfileView from './EditUserProfile.view';
 
 EditUserProfileDetail.propTypes = {
@@ -55,7 +56,10 @@ export default function EditUserProfileDetail({ targetUser }) {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = userPostEditParser(changedProfileImageSubmitData);
-    await notGetExecution({ newConfig: { data: parsedSubmitData }, successMessage: '수정 완료!' });
+    await notGetExecution({
+      newConfig: { data: parsedSubmitData },
+      successMessage: API_MESSAGE.SUCCESS_EDIT_USER,
+    });
     // TODO: 성공시 이동할 페이지 정해서 이동시키기
   };
 
