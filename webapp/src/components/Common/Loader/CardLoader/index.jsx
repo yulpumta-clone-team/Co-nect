@@ -2,6 +2,7 @@ import React from 'react';
 import HeartSvg from 'assets/icons/HeartSvg';
 import ChevronLeftSvg from 'assets/icons/ChevronLeftSvg';
 import ChevronRightSvg from 'assets/icons/ChevronRightSvg';
+import SimpleListComponent from 'hoc/SimpleListComponent';
 import * as S from './CardLoader.style';
 
 export default function CardLoader() {
@@ -29,26 +30,24 @@ export default function CardLoader() {
           <ChevronLeftSvg />
         </S.LeftAngle>
         <S.SkillSlide>
-          {Array(5)
-            .fill(0)
-            .map(() => (
-              <S.SkillImage />
-            ))}
+          <SimpleListComponent Component={S.SkillImage} idx={5} />
         </S.SkillSlide>
         <S.RightAngle>
           <ChevronRightSvg />
         </S.RightAngle>
       </S.SkillContainer>
       <S.CardInfoIndicator>
-        {Array(2)
-          .fill(0)
-          .map(() => (
-            <S.SingleIndicator>
-              <div />
-              <div />
-            </S.SingleIndicator>
-          ))}
+        <SimpleListComponent Component={SingleIndicator} idx={2} />
       </S.CardInfoIndicator>
     </S.CardWrapper>
+  );
+}
+
+function SingleIndicator() {
+  return (
+    <S.SingleIndicator>
+      <div />
+      <div />
+    </S.SingleIndicator>
   );
 }

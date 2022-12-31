@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { benefits, cardText, conect, developers, links, mainText } from 'constant/main.constant';
 import { useNavigate } from 'react-router-dom';
 import GlobalNavigation from 'components/GlobalNavigation';
@@ -10,7 +10,8 @@ import ToastNotificationProvider, {
 import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
 import { throttle } from 'lodash';
-import * as S from './style';
+import SimpleListComponent from 'hoc/SimpleListComponent';
+import * as S from './Main.style';
 
 const IconMap = {
   signup: <S.SignUp />,
@@ -30,7 +31,6 @@ export default WithProvider({
 
 function Main() {
   const navigate = useNavigate();
-
   const { toastList } = useToastNotificationState();
   const notifyDispatch = useToastNotificationAction();
   const deleteToastCallback = (id) => {
@@ -75,11 +75,7 @@ function Main() {
       <S.MainSection>
         <S.Section>
           <S.Wave>
-            {Array(4)
-              .fill(0)
-              .map((_, idx) => (
-                <S.Curve />
-              ))}
+            <SimpleListComponent Component={S.Curve} idx={4} />
           </S.Wave>
           <S.Contents>
             <S.Logo />

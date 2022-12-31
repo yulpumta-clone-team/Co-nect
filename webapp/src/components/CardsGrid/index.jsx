@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/Common/Button';
 import CardLoader from 'components/Common/Loader/CardLoader';
+import SimpleListComponent from 'hoc/SimpleListComponent';
 import * as S from './CardsGrid.style';
 
 CardsGrid.propTypes = {
@@ -28,12 +29,7 @@ export default function CardsGrid({ CardComponent, cards, isLoading, clickLink, 
   if (isLoading)
     return (
       <S.Cards>
-        {Array(3)
-          .fill(0)
-          .map((_, idx) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <CardLoader key={idx} />
-          ))}
+        <SimpleListComponent Component={CardLoader} idx={3} />
       </S.Cards>
     );
 
