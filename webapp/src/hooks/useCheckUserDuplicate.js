@@ -1,8 +1,8 @@
-const { default: authApi } = require('api/auth.api');
-const { useToastNotificationAction } = require('contexts/ToastNotification');
-const { notifyNewMessage } = require('contexts/ToastNotification/action');
-const { TOAST_TYPE } = require('contexts/ToastNotification/type');
-const { useState } = require('react');
+import { useState } from 'react';
+import authApi from 'api/auth.api';
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 
 /**
  * useCheckNicknameDuplicate을 사용하는 곳에서 사용할 method 및 state
