@@ -42,7 +42,6 @@ export default function EditUserProfileDetail({ targetUser }) {
 
   // s3 이미지 업로더 api hooks
   const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();
-
   const uploadImageFileBeforeSubmit = async (submitData) => {
     const response = await uploadFileOnS3();
     if (response) {
@@ -87,7 +86,7 @@ export default function EditUserProfileDetail({ targetUser }) {
     validate: editUserValidation,
   });
 
-  const profileImageSrc = inputValues.profileImage || (imageFile && URL.createObjectURL(imageFile));
+  const profileImageSrc = (imageFile && URL.createObjectURL(imageFile)) || inputValues.profileImage;
 
   return (
     <EditUserProfileView
