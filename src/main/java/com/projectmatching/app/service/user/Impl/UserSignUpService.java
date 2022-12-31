@@ -3,7 +3,6 @@ package com.projectmatching.app.service.user.Impl;
 import com.projectmatching.app.annotation.Validation;
 import com.projectmatching.app.config.resTemplate.ResponeException;
 import com.projectmatching.app.constant.ResponseTemplateStatus;
-import com.projectmatching.app.domain.techStack.TechStackRepository;
 import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.techStack.provider.TechStackProviderImpl;
 import com.projectmatching.app.domain.user.Role;
@@ -18,12 +17,8 @@ import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 
 @RequiredArgsConstructor
@@ -91,7 +86,7 @@ public class UserSignUpService {
      * 유저 필수정보에 담긴 닉네임을 한번 더 체크함
      */
     private void checkDuplicateName(String name) throws ResponeException {
-        if (userRepository.findByName(name).isPresent()) {
+        if (userRepository.findByUserName(name).isPresent()) {
             throw new ResponeException(ResponseTemplateStatus.NAME_DUPLICATE);
         }
 

@@ -23,7 +23,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 
     @Override
     public Long savedUserHistory(UserDetailsImpl userDetails,Long visitedUserId) {
-        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByUserName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
         UserHistory userHistory = UserHistory.builder()
                 .id(IdGenerator.number())
                 .visited(visitedUserId)
@@ -34,7 +34,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 
     @Override
     public List<UserProfileDto> getUserHistory(UserDetailsImpl userDetails) {
-        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByUserName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
         List<UserHistory> userHistories = userHisotryRepository.findUserHistoryByUser(user);
         List<UserProfileDto> userProfileDtoList =  userHistories.stream().map(h-> userRepository.findById(h.getVisited()).orElseThrow(NullPointerException::new))
                 .map(u->UserProfileDto.of(u)).collect(Collectors.toList());

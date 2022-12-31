@@ -19,14 +19,13 @@ import javax.persistence.*;
 public class UserCommentLiking extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="user")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="user_comment")
     private UserComment userComment;
 }

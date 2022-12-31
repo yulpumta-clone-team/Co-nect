@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class TeamHistoryServiceImpl implements TeamHistoryService {
 
     @Override
     public Long savedTeamHistory(UserDetailsImpl userDetails, Long visitedTeamId) {
-        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
+        User user = userRepository.findByUserName(userDetails.getUserRealName()).orElseThrow(RuntimeException::new);
         TeamHistory teamHistory = TeamHistory.builder()
                 .id(IdGenerator.number())
                 .visited(visitedTeamId)

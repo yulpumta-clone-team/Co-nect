@@ -1,9 +1,6 @@
 package com.projectmatching.app.domain.user;
 
-import com.projectmatching.app.domain.techStack.entity.QTechStack;
-import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
-import com.projectmatching.app.domain.user.entity.QUserTech;
 import com.projectmatching.app.domain.user.entity.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -14,23 +11,27 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static com.projectmatching.app.domain.techStack.entity.QTechStack.techStack;
 import static com.projectmatching.app.domain.user.entity.QUser.user;
-import static com.projectmatching.app.domain.user.entity.QUserTech.userTech;
 
 
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class QUserRepository {
+public class UserRepositoryImpl implements UserRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 
+    @Override
+    public Optional<User> findByUserName(String name) {
+        return Optional.ofNullable(jpaQueryFactory.selectFrom(user)
+                .where(user.name.eq(name))
+                .fetchFirst());
+    }
 
     /**
      * 유저 로그인
      */
-    public User login(UserLoginDto userLoginDto){
+    public User login(UserLoginDto userLoginDto) {
 
         return jpaQueryFactory.selectFrom(user)
                 .where(
@@ -40,16 +41,15 @@ public class QUserRepository {
     }
 
 
-
     /**
      * 유저 탈퇴
      * 완전히 삭제하지는 않고 임시로 상태를 바꾸기
      */
 
-    public long deleteUser(String email){
+    public long deleteUser(String email) {
 
-       return jpaQueryFactory.update(user)
-               .set(user.status, "NA")
+        return jpaQueryFactory.update(user)
+                .set(user.status, "NA")
                 .where(
                         user.email.eq(email)
                 ).execute();
@@ -58,7 +58,7 @@ public class QUserRepository {
     /**
      * 유저 카드 (리스트) 표시
      */
-    public List<User> find(Pageable pageable){
+    public List<User> find(Pageable pageable) {
         return jpaQueryFactory.selectFrom(user)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -70,20 +70,18 @@ public class QUserRepository {
     /**
      * 유저 상세 표시
      */
-    public Optional<User> find(Long id){
+    public Optional<User> find(Long id) {
         return Optional.ofNullable(jpaQueryFactory
                 .selectFrom(user).leftJoin(user.skills).fetchJoin()
-                        .leftJoin(user.userTeams).fetchJoin()
-                        .leftJoin(user.userComments).fetchJoin()
-                        .leftJoin(user.userHistories).fetchJoin()
-                        .leftJoin(user.userCommentLikings).fetchJoin()
+                .leftJoin(user.userTeams).fetchJoin()
+                .leftJoin(user.userComments).fetchJoin()
+                .leftJoin(user.userHistories).fetchJoin()
+                .leftJoin(user.userCommentLikings).fetchJoin()
                 .where(user.id.eq(id))
                 .fetchOne()
         );
 
     }
-
-
 
 
 }

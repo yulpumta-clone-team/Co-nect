@@ -1,7 +1,6 @@
 package com.projectmatching.app.service.userInfoAdder;
 
 import com.projectmatching.app.constant.ResponseTemplateStatus;
-import com.projectmatching.app.constant.ServiceConstant;
 import com.projectmatching.app.domain.comment.dto.TeamCommentDto;
 import com.projectmatching.app.domain.comment.dto.UserCommentDto;
 import com.projectmatching.app.domain.user.UserRepository;
@@ -12,6 +11,7 @@ import com.projectmatching.app.exception.CoNectNotFoundException;
 import com.projectmatching.app.exception.CoNectRuntimeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +27,11 @@ public class UserInfoAdderServiceImpl implements UserInfoAdderService {
         return userInfoAppendalbeDto;
     }
 
+    @Transactional
     @Override
     public <T extends UserInfoDto> T userInfoAdder(T userInfoAppendableDto, String userName) {
 
-        User user = userRepository.findByName(userName).orElseThrow(CoNectNotFoundException::new);
+        User user = userRepository.findByUserName(userName).orElseThrow(CoNectNotFoundException::new);
 
         userInfoAppendableDto.setUserInfoWith(user);
 
@@ -48,7 +49,7 @@ public class UserInfoAdderServiceImpl implements UserInfoAdderService {
             UserCommentDto userCommentDto = (UserCommentDto) nestedUserInfoAppendableDto;
             userCommentDto.getReplies().forEach(
                     dto -> {
-                        User user = userRepository.findByName(userName).orElseThrow(CoNectNotFoundException::new);
+                        User user = userRepository.findByUserName(userName).orElseThrow(CoNectNotFoundException::new);
                         dto.setUserInfoWith(user);
                     }
             );
@@ -60,14 +61,12 @@ public class UserInfoAdderServiceImpl implements UserInfoAdderService {
             TeamCommentDto teamCommentDto = (TeamCommentDto) nestedUserInfoAppendableDto;
             teamCommentDto.getReplies().forEach(
                     dto -> {
-                        User user = userRepository.findByName(userName).orElseThrow(CoNectNotFoundException::new);
+                        User user = userRepository.findByUserName(userName).orElseThrow(CoNectNotFoundException::new);
                         dto.setUserInfoWith(user);
                     }
             );
 
             return nestedUserInfoAppendableDto;
         } else throw new CoNectRuntimeException(ResponseTemplateStatus.ADD_NESTED_FAILED, "대댓글이 존재할 수 없는 dto 입니다.");
-
-
     }
 }

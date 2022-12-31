@@ -2,10 +2,9 @@ package com.projectmatching.app.service.user.Impl;
 
 import com.projectmatching.app.annotation.Validation;
 import com.projectmatching.app.config.resTemplate.ResponeException;
-import com.projectmatching.app.domain.user.QUserRepository;
+import com.projectmatching.app.domain.user.UserRepositoryImpl;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
-import com.projectmatching.app.domain.user.dto.UserEssentialDto;
 import com.projectmatching.app.domain.user.dto.UserIsFirstDto;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
 import com.projectmatching.app.domain.user.entity.User;
@@ -18,9 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-
 import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGIN_USER_ERROR;
 
 @Service
@@ -29,7 +25,7 @@ import static com.projectmatching.app.constant.ResponseTemplateStatus.LOGIN_USER
 public class UserSignInService {
 
     private final UserRepository userRepository;
-    private final QUserRepository qUserRepository;
+    private final UserRepositoryImpl userRepositoryImpl;
     private final AuthTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
@@ -81,7 +77,7 @@ public class UserSignInService {
 
     @Transactional
     public void userDelete(String userEamil) {
-        qUserRepository.deleteUser(userEamil);
+        userRepositoryImpl.deleteUser(userEamil);
         log.info("유저 삭제됨 user email = {}", userEamil);
     }
 }

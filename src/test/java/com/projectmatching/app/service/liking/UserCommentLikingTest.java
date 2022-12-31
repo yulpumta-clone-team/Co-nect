@@ -49,7 +49,7 @@ public class UserCommentLikingTest extends ServiceTest {
 
         when(userCommentRepository.findById(any(Long.class))).thenReturn(Optional.of(mock(UserComment.class)));
 
-        when(userRepository.findByName(any())).thenReturn(Optional.of(mock(User.class)));
+        when(userRepository.findByUserName(any())).thenReturn(Optional.of(mock(User.class)));
 
         when(qUserCommentLikingRepository.isExistWithUserIdAndCommentId(anyLong(),anyLong())).thenReturn(false);
 
@@ -65,7 +65,7 @@ public class UserCommentLikingTest extends ServiceTest {
     void Given_Meaningless_liking_Commemnt_Then_Throw_Forbidden_Exception(){
         when(userCommentRepository.findById(any(Long.class))).thenReturn(Optional.of(mock(UserComment.class)));
 
-        when(userRepository.findByName(any())).thenReturn(Optional.of(mock(User.class)));
+        when(userRepository.findByUserName(any())).thenReturn(Optional.of(mock(User.class)));
 
         when(qUserCommentLikingRepository.isExistWithUserIdAndCommentId(anyLong(),anyLong())).thenReturn(true);
 

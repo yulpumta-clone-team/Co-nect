@@ -10,8 +10,6 @@ import com.projectmatching.app.domain.user.entity.User;
 import com.projectmatching.app.service.ServiceTest;
 import com.projectmatching.app.service.user.Impl.UserSignUpService;
 import com.projectmatching.app.service.user.userdetail.UserDetailsImpl;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -122,7 +120,7 @@ public class UserSignUpServiceTest extends ServiceTest {
                 .build();
 
         User user = mock(User.class);
-        when(userRepository.findByName(anyString())).thenReturn(Optional.of(user)); //중복되는 이름을 갖는 유저
+        when(userRepository.findByUserName(anyString())).thenReturn(Optional.of(user)); //중복되는 이름을 갖는 유저
         assertThrows(ResponeException.class,()->{
             userSignUpService.updateUserEssentialInfo(userEssentialDto,userDetails);
         });

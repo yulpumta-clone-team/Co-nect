@@ -15,7 +15,6 @@ import javax.persistence.*;
 @Table(name="user_history")
 public class UserHistory {
     @Id
-    @GeneratedValue
     private Long id;
 
 

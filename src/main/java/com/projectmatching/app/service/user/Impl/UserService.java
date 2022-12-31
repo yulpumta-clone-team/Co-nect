@@ -5,7 +5,7 @@ import com.projectmatching.app.domain.liking.entity.UserLiking;
 import com.projectmatching.app.domain.liking.repository.UserLikingRepository;
 import com.projectmatching.app.domain.team.dto.TeamSimpleDto;
 import com.projectmatching.app.domain.team.repository.TeamRepository;
-import com.projectmatching.app.domain.user.QUserRepository;
+import com.projectmatching.app.domain.user.UserRepositoryImpl;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
 import com.projectmatching.app.domain.user.dto.UserInfo;
@@ -24,15 +24,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.projectmatching.app.domain.user.dto.UserInfo.of;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UserService  {
 
 
-    private final QUserRepository qUserRepository;
+    private final UserRepositoryImpl userRepositoryImpl;
     private final UserRepository userRepository;
     private final UserLikingRepository userLikingRepository;
     private final UserDetails userDetails;
@@ -60,7 +58,7 @@ public class UserService  {
     //유저 상세 조회
     @Transactional(readOnly = true)
     public UserDto getUserDetail(Long id){
-        User user = qUserRepository.find(id).orElseThrow(CoNectNotFoundException::new);
+        User user = userRepositoryImpl.find(id).orElseThrow(CoNectNotFoundException::new);
         applicationEventPublisher.publishEvent(user); //조회수 증가
         return UserDto.of(user);
 
@@ -71,7 +69,7 @@ public class UserService  {
     //유저 게시물 조회
     @Transactional(readOnly = true)
     public List<UserProfileDto> getUserList(PageRequest pageRequest){
-        return qUserRepository.find(pageRequest)
+        return userRepositoryImpl.find(pageRequest)
                 .stream().map(UserProfileDto::of)
                 .collect(Collectors.toList());
     }
@@ -103,7 +101,7 @@ public class UserService  {
     // 내가 좋아요한 유저 목록 가져오기
     @Transactional(readOnly = true)
     public List<UserProfileDto> getUserLikingList(UserDetailsImpl userDetails) {
-        User user = userRepository.findByName(userDetails.getUserRealName()).orElseThrow(CoNectNotFoundException::new);
+        User user = userRepository.findByUserName(userDetails.getUserRealName()).orElseThrow(CoNectNotFoundException::new);
         List<UserLiking> userLikings = userLikingRepository.findUserLikingByFromUser(user);
 
         return userLikings.stream().map(u-> u.getToUser()).map(UserProfileDto::of).collect(Collectors.toList());

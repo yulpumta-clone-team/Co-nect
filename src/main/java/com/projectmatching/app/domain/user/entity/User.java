@@ -88,13 +88,13 @@ public class User extends BaseTimeEntity {
     private Set<UserCommentLiking> userCommentLikings = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserComment> userComments = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     @Builder.Default
     private Set<UserTech> skills = new HashSet<>();
