@@ -12,7 +12,7 @@ export default function NonLoginNav() {
     <S.Container>
       <S.TopContainer />
       <S.BoardList>
-        <Image src={LogoWithName} alt="메인 로고" customStyle={S.Logo} />
+        <Image src={LogoWithName} alt="메인 로고" customStyle={S.Logo} isAssets />
         <S.LinkList>
           <S.Hover>
             <Link to={ROUTE.HOME}>Home</Link>
