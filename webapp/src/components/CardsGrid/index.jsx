@@ -30,8 +30,9 @@ export default function CardsGrid({ CardComponent, cards, isLoading, clickLink, 
       <S.Cards>
         {Array(3)
           .fill(0)
-          .map(() => (
-            <CardLoader />
+          .map((_, idx) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <CardLoader key={idx} />
           ))}
       </S.Cards>
     );
