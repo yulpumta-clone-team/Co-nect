@@ -21,6 +21,11 @@ import useAxios from './useAxios';
  * @typedef {Object} useUserInfoReturns
  * @property {() => Promise<void>} handleUpdateUserInfo 유저정보를 새롭게 요청하고 updateUserInfo service함수 실행
  * @property {() => Promise<void>} handleDeleteUserInfo deleteUserInfo service함수를 실행
+ * @property {() => Promise<void>} requestSignUp 회원가입 api 실행
+ * @property {() => Promise<void>} requestLogin 로그인 api 실행
+ * @property {() => Promise<void>} requestLogout 로그아웃 api 실행
+ * @property {() => Promise<void>} saveJwtToken jwt토근을 프론트에 저장
+ * @property {() => Promise<void>} checkIsFirstLogin 첫 로그인인지 확인하는 함수
  * @property {(httpStatus: number) => void} handleExiredToken httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
  */
 
@@ -63,13 +68,22 @@ const useAuthService = () => {
       navigate('/');
     } catch (apiError) {
       console.error(apiError);
-      notifyNewMessage(
-        notifyDispatch,
-        `유저정보를 가져오지 못했습니다. \n다시 로그인해주세요.`,
-        TOAST_TYPE.Error,
-      );
+      notifyNewMessage(notifyDispatch, API_MESSAGE.ERROR_USER_INFO, TOAST_TYPE.Error);
       setTimeout(() => navigate(ROUTE.LOGIN), 2000);
     }
+  };
+
+  /**
+   * deleteUserInfo service함수를 실행
+   * @returns {Promise<void>}
+   */
+  const handleDeleteUserInfo = () => {
+    deleteUserInfo();
+    notifyNewMessage(notifyDispatch, API_MESSAGE.LOGOUT, TOAST_TYPE.Info);
+    setTimeout(() => {
+      navigate(ROUTE.HOME);
+      window.location.reload();
+    }, 1000);
   };
 
   /**
@@ -82,11 +96,7 @@ const useAuthService = () => {
       return;
     }
     deleteUserInfo();
-    notifyNewMessage(
-      notifyDispatch,
-      '토큰이 만료되었습니다. \n다시 로그인해주세요.',
-      TOAST_TYPE.Info,
-    );
+    notifyNewMessage(notifyDispatch, API_MESSAGE.EXPIRE_TOKEN, TOAST_TYPE.Info);
     setTimeout(() => {
       navigate(ROUTE.LOGIN);
     }, 2000);
@@ -98,7 +108,7 @@ const useAuthService = () => {
       successMessage: API_MESSAGE.SIGNUP,
     });
     setTimeout(() => {
-      response && navigate('/login');
+      response && navigate(ROUTE.LOGIN);
     }, 1000);
   };
 
@@ -156,6 +166,7 @@ const useAuthService = () => {
     requestLogin,
     requestLogout,
     handleUpdateUserInfo,
+    handleDeleteUserInfo,
     handleExiredToken,
     saveJwtToken,
     checkIsFirstLogin,

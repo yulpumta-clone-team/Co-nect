@@ -17,6 +17,7 @@ export const API_MESSAGE = {
   SUCCESS_EDIT_USER: '수정 완료!',
   SUCCESS_EDIT_TEAM: '수정 완료!',
   LOADING: '처리중입니다...',
+  ERROR_USER_INFO: `유저정보를 가져오지 못했습니다. \n다시 로그인해주세요.`,
 };
 
 export const API = {
