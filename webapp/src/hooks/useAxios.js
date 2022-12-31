@@ -1,8 +1,11 @@
+import { API_MESSAGE } from 'constant/api.constant';
+import { ROUTE } from 'constant/route.constant';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useEffect, useReducer, useState } from 'react';
-import useUserInfo from './useUserInfo';
+import { useNavigate } from 'react-router-dom';
+import { deleteUserInfo } from 'service/auth';
 
 /**
  * useAxios가 동작하기 위해 외부에서 주입해야하는 params
@@ -12,12 +15,16 @@ import useUserInfo from './useUserInfo';
  * @property {boolean} immediate 컴포넌트가 렌더링되자마자 요청 보내는지 여부 (get요청일 때만 true)
  */
 
+// return { state, getExecution, notGetExecution, handleExiredToken, forceRefetch, resetState };
+
 /**
  * useAxios를 사용하는 곳에서 사용할 method 및 state
  * @typedef {Object} useAxiosReturns
  * @property {boolean} state isLoading, responseData, error로 구성
- * @property {boolean} execution 새로운 axios config와 함께 api호출을 실행하는 함수
+ * @property {boolean} getExecution GET API 새로운 axios config와 함께 api호출을 실행하는 함수
+ * @property {boolean} notGetExecution GET API 이외의 새로운 axios config와 함께 api호출을 실행하는 함수
  * @property {boolean} forceRefetch 기존 axios config로 같은 api호출을 실행하는 함수
+ * @property {boolean} resetState 새로운 axios config와 함께 api호출을 실행하는 함수
  */
 
 /**
@@ -27,7 +34,7 @@ import useUserInfo from './useUserInfo';
  */
 const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
   const notifyDispatch = useToastNotificationAction();
-  const { handleExiredToken } = useUserInfo();
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     responseData: null,
@@ -48,6 +55,22 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
    */
   const resetState = () => {
     dispatch({ type: RESET_TYPE });
+  };
+
+  /**
+   * httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
+   * @param {number} httpStatus
+   * @returns {Promise<void>}
+   */
+  const handleExiredToken = (httpStatus) => {
+    if (httpStatus !== 403 && httpStatus !== 401) {
+      return;
+    }
+    deleteUserInfo();
+    notifyNewMessage(notifyDispatch, API_MESSAGE.EXPIRE_TOKEN, TOAST_TYPE.Info);
+    setTimeout(() => {
+      navigate(ROUTE.LOGIN);
+    }, 2000);
   };
 
   /**
@@ -81,7 +104,7 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
   const notGetExecution = async ({ newConfig, successMessage = '요청 성공!', seconds = 1500 }) => {
     let isOverStandard = true;
     setTimeout(() => {
-      if (isOverStandard) notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
+      if (isOverStandard) notifyNewMessage(notifyDispatch, API_MESSAGE.LOADING, TOAST_TYPE.Info);
     }, seconds);
     try {
       const ctrl = new AbortController();
@@ -96,7 +119,7 @@ const useAxios = ({ axiosInstance, axiosConfig, immediate = true }) => {
       return response;
     } catch (error) {
       handleExiredToken(error.httpStatus);
-      !immediate && notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
+      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
     } finally {
       isOverStandard = false;
     }
