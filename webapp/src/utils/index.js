@@ -1,4 +1,5 @@
 import { POST_TYPE } from 'constant';
+import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 import { TECH_SKILLS } from 'constant/techskill.constant';
 
 /**
@@ -51,3 +52,5 @@ export const getRandomTechSkills = () =>
   TECH_SKILLS.map((techSkill) => (Math.random() > 0.4 ? techSkill : undefined)).filter(
     (v) => v !== undefined,
   );
+
+export const S3IMAGE_URL = (src) => S3_IMAGE_SERVER_URL + src;
