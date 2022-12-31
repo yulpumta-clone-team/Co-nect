@@ -1,12 +1,12 @@
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
-import useUserInfo from 'hooks/useUserInfo';
+import useAuthService from 'hooks/useAuthService';
 import { useEffect, useState } from 'react';
 
 const useCommentApi = (initKey, initInstance, initConfig) => {
   const notifyDispatch = useToastNotificationAction();
-  const { handleExiredToken } = useUserInfo();
+  const { handleExiredToken } = useAuthService();
   const getInstance = {
     key: initKey,
     instance: initInstance,

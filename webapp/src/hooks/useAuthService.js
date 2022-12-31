@@ -1,10 +1,13 @@
 import authApi from 'api/auth.api';
-import { TOKEN } from 'constant/api.constant';
-import { ESSENTIAL_INFO_LINKS } from 'constant/route.constant';
+import userApi from 'api/user.api';
+import { API_MESSAGE, TOKEN } from 'constant/api.constant';
+import { ESSENTIAL_INFO_LINKS, ROUTE } from 'constant/route.constant';
+import { useToastNotificationAction } from 'contexts/ToastNotification';
+import { notifyNewMessage } from 'contexts/ToastNotification/action';
+import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useNavigate } from 'react-router-dom';
-import { handleToken } from 'service/auth';
+import { deleteUserInfo, handleToken, updateUserInfo } from 'service/auth';
 import useAxios from './useAxios';
-import useUserInfo from './useUserInfo';
 
 /**
  * handleLogin이 동작하기 위해 외부에서 주입해야하는 params
@@ -13,9 +16,22 @@ import useUserInfo from './useUserInfo';
  * @property {string} refreshToken
  */
 
+/**
+ * useUserInfo를 사용하는 곳에서 사용할 method 및 state
+ * @typedef {Object} useUserInfoReturns
+ * @property {() => Promise<void>} handleUpdateUserInfo 유저정보를 새롭게 요청하고 updateUserInfo service함수 실행
+ * @property {() => Promise<void>} handleDeleteUserInfo deleteUserInfo service함수를 실행
+ * @property {(httpStatus: number) => void} handleExiredToken httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
+ */
+
+/**
+ * 전역적으로 사용하는 유저정보를 관리하기 위한 custom hooks
+ * @param {useUserInfoParams} useUserInfoParams useUserInfo가 동작하기 위해 외부에서 주입해야하는 params
+ * @returns {useUserInfoReturns} useUserInfo를 사용하는 곳에서 사용할 method 및 state
+ */
 const useAuthService = () => {
   const navigate = useNavigate();
-  const { handleUpdateUserInfo } = useUserInfo();
+  const notifyDispatch = useToastNotificationAction();
   const { notGetExecution: signUpExecution } = useAxios({
     axiosInstance: authApi.signUp,
     immediate: false,
@@ -29,10 +45,57 @@ const useAuthService = () => {
     navigate(ESSENTIAL_INFO_LINKS.NICKNAME, { state: { isFirstLogin } });
   };
 
+  /**
+   * 유저정보를 새롭게 요청하고 updateUserInfo service함수 실행
+   * @returns {Promise<void>}
+   */
+  const handleUpdateUserInfo = async () => {
+    try {
+      const response = await userApi.GET_ESSENTIAL_INFO();
+      const {
+        data: { id, image, name },
+      } = response;
+      updateUserInfo({
+        id,
+        image,
+        name,
+      });
+      navigate('/');
+    } catch (apiError) {
+      console.error(apiError);
+      notifyNewMessage(
+        notifyDispatch,
+        `유저정보를 가져오지 못했습니다. \n다시 로그인해주세요.`,
+        TOAST_TYPE.Error,
+      );
+      setTimeout(() => navigate(ROUTE.LOGIN), 2000);
+    }
+  };
+
+  /**
+   * httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
+   * @param {number} httpStatus
+   * @returns {Promise<void>}
+   */
+  const handleExiredToken = (httpStatus) => {
+    if (httpStatus !== 403 && httpStatus !== 401) {
+      return;
+    }
+    deleteUserInfo();
+    notifyNewMessage(
+      notifyDispatch,
+      '토큰이 만료되었습니다. \n다시 로그인해주세요.',
+      TOAST_TYPE.Info,
+    );
+    setTimeout(() => {
+      navigate(ROUTE.LOGIN);
+    }, 2000);
+  };
+
   const requestSignUp = async (submitData) => {
     const response = await signUpExecution({
       newConfig: { submitData },
-      successMessage: '회원가입 성공!',
+      successMessage: API_MESSAGE.SIGNUP,
     });
     setTimeout(() => {
       response && navigate('/login');
@@ -42,7 +105,7 @@ const useAuthService = () => {
   const requestLogin = async (submitData) => {
     const response = await loginExecution({
       newConfig: { submitData },
-      successMessage: '로그인 성공!',
+      successMessage: API_MESSAGE.LOGIN,
     });
     const {
       headers,
@@ -75,7 +138,28 @@ const useAuthService = () => {
     }, 1000);
   };
 
-  return { requestSignUp, requestLogin, saveJwtToken, checkIsFirstLogin };
+  /**
+   * deleteUserInfo service함수를 실행
+   * @returns {Promise<void>}
+   */
+  const requestLogout = () => {
+    deleteUserInfo();
+    notifyNewMessage(notifyDispatch, API_MESSAGE.LOGOUT, TOAST_TYPE.Info);
+    setTimeout(() => {
+      navigate(ROUTE.HOME);
+      window.location.reload();
+    }, 1000);
+  };
+
+  return {
+    requestSignUp,
+    requestLogin,
+    requestLogout,
+    handleUpdateUserInfo,
+    handleExiredToken,
+    saveJwtToken,
+    checkIsFirstLogin,
+  };
 };
 
 export default useAuthService;

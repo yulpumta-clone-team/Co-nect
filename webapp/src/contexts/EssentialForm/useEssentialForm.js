@@ -4,10 +4,9 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import useForm from 'hooks/useForm';
-import authApi from 'api/auth.api';
 import { ESSENTIAL_INFO_LINKS, ROUTE } from 'constant/route.constant';
 import { essentialInfoParser } from 'service/user/user.parser';
-import useUserInfo from 'hooks/useUserInfo';
+import useAuthService from 'hooks/useAuthService';
 import useFileUploader from 'hooks/useFileUploader';
 import userApi from 'api/user.api';
 import { essentialValidation } from 'service/user/user.validation';
@@ -54,7 +53,7 @@ const useEssentialForm = () => {
     }
   };
 
-  const { handleUpdateUserInfo } = useUserInfo();
+  const { handleUpdateUserInfo } = useAuthService();
 
   const { isNicknameDuplicate, onClickCheckDuplicateNickname } = useCheckUserDuplicate('');
   const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();

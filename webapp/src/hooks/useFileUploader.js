@@ -5,7 +5,7 @@ import etcApi from 'api/etc.api';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from 'constant/route.constant';
-import useUserInfo from './useUserInfo';
+import useAuthService from './useAuthService';
 
 /**
  * useFileUploader를 사용하는 곳에서 사용할 method 및 state
@@ -25,7 +25,7 @@ import useUserInfo from './useUserInfo';
 const useFileUploader = () => {
   const notifyDispatch = useToastNotificationAction();
   const navigate = useNavigate();
-  const { handleExiredToken } = useUserInfo();
+  const { handleExiredToken } = useAuthService();
   const [s3ImageId, setS3ImageId] = useState(null);
   const [s3ImageObj, setS3ImageObj] = useState(null);
   const [imageFile, setImageFile] = useState(null);
