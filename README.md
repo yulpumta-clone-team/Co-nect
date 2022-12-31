@@ -135,9 +135,9 @@
 
 | 화면                                                                                                  | 기능                                                                    |
 | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| https://user-images.githubusercontent.com/71386219/210137242-4c9c4d03-4454-44ff-a965-b1e383c906e9.mov | <b>회원가입 및 로그인 기능</b> 일반 회원가입 및 로그인                  |
-| https://user-images.githubusercontent.com/71386219/210137236-22387322-2da6-4d40-9e29-718bdfdccdb7.mov | <b>소셜 로그인 기능</b> 깃허브 및 구글 소셜 로그인                      |
-| https://user-images.githubusercontent.com/71386219/210137240-2b879a48-9a40-4a03-a271-9af08cd65ecd.mov | <b>필수정보입력페이지</b> 첫 로그인 시 유저의 기본 정보를 입력하는 기능 |
+| <img src="https://user-images.githubusercontent.com/38005874/210138421-7d6ff29c-ffe9-4f2d-8d77-c37b58db240b.gif" width="500px"/> | <b>회원가입 및 로그인 기능</b> 일반 회원가입 및 로그인                  |
+| <img src="https://user-images.githubusercontent.com/38005874/210138366-a1e2be78-8047-4bcf-8512-caaeb05a659c.gif" width="500px"/>| <b>소셜 로그인 기능</b> 깃허브 및 구글 소셜 로그인                      |
+| <img src="https://user-images.githubusercontent.com/38005874/210138431-1250598b-d781-45c0-94d7-94cb14042513.gif" width="500px"/> | <b>필수정보입력페이지</b> 첫 로그인 시 유저의 기본 정보를 입력하는 기능 |
 |                                                                                                       | <b>유저 목록 확인</b> 가입된 유저의 프로필 목록을 확인하는 기능         |
 |                                                                                                       | <b>팀 공고글 목록 확인</b> 등록된 팀 공고글 목록을 확인하는 기능        |
 
