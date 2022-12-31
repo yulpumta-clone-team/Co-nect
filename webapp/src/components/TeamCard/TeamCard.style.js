@@ -43,7 +43,7 @@ export const BackgroundImg = styled.div`
 
   width: 100%;
   height: 20%;
-  background-color: #eaeaea;
+  background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   padding: 1.2rem;
 `;
 
@@ -156,4 +156,10 @@ export const Heart = styled.button`
   top: 6px;
   width: 20px;
   height: 20px;
+  > svg {
+    & path {
+      stroke: ${({ theme: { colors } }) => colors.greyScale.white};
+      fill: ${({ theme: { colors } }) => colors.greyScale.white};
+    }
+  }
 `;

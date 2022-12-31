@@ -21,8 +21,7 @@ EditUserProfileView.propTypes = {
   satisfyAllValidates: PropTypes.bool.isRequired,
   isTargetSatisfyValidate: PropTypes.func.isRequired,
   isNicknameDuplicate: PropTypes.bool.isRequired,
-  isNickNameSameWithOrigin: PropTypes.bool.isRequired,
-  onChangeCheckNicknameDuplicate: PropTypes.func.isRequired,
+  isNickNameSameWithOrigin: PropTypes.func.isRequired,
   onClickCheckDuplicateNickname: PropTypes.func.isRequired,
   profileImageSrc: PropTypes.string,
   onChangeFile: PropTypes.func.isRequired,
@@ -38,7 +37,6 @@ export default function EditUserProfileView({
   isTargetSatisfyValidate,
   isNicknameDuplicate,
   isNickNameSameWithOrigin,
-  onChangeCheckNicknameDuplicate,
   onClickCheckDuplicateNickname,
   profileImageSrc,
   onChangeFile,
@@ -53,12 +51,12 @@ export default function EditUserProfileView({
   const isNicknameValidateError = isTargetSatisfyValidate('nickname');
   const isSloganValidateError = isTargetSatisfyValidate('slogan');
 
-  const canActivateNicknameDuplicateButton = isNickNameSameWithOrigin;
+  const canActivateNicknameDuplicateButton = isNickNameSameWithOrigin();
 
   //  원래 닉네임과 닉네임 인풋 값이 다른데 중복도 아닐 때,모든 인풋값에 대한 validation 만족,
   const canActiveSubmitButton = () => {
     // 원래 닉네임과 닉네임 인풋 값이 같을 때는 모든 인풋값에 대한 validation만 체크
-    if (isNickNameSameWithOrigin) {
+    if (isNickNameSameWithOrigin(inputValues.nickname)) {
       return !satisfyAllValidates;
     }
     // 원랙 닉네임과 닉네임 인풋이 다를 때는 중복 체크 및 모든 인풋값에 대한 validation만 체크
@@ -103,10 +101,7 @@ export default function EditUserProfileView({
               label="닉네임"
               placeholder="닉네임"
               value={inputValues.nickname}
-              onChange={(event) => {
-                onChangeCheckNicknameDuplicate(event);
-                onChangeHandler(event);
-              }}
+              onChange={onChangeHandler}
               isError={isNicknameValidateError}
               helperText={validateError.nickname}
             />
@@ -116,7 +111,7 @@ export default function EditUserProfileView({
               theme="secondary"
               customStyle={S.DuplicateCheckButton}
               disabled={canActivateNicknameDuplicateButton}
-              onClick={onClickCheckDuplicateNickname}
+              onClick={() => onClickCheckDuplicateNickname(inputValues.nickname)}
             >
               중복확인
             </Button>

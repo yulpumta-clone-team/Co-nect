@@ -15,6 +15,7 @@ import Introduction from './SubPages/Introduction';
 import Skills from './SubPages/Skills';
 import Portfolio from './SubPages/Portfolio';
 import * as S from './EssentialInfo.style';
+import EssentailCallback from './SubPages/EssentialCallback';
 
 export default {
   title: 'pages/EssentialInfo',
@@ -87,4 +88,9 @@ SkillsModal.args = {
 export const PortfolioModal = Template.bind({});
 PortfolioModal.args = {
   children: <Portfolio />,
+};
+
+export const EssentialCallback = Template.bind({});
+EssentialCallback.args = {
+  children: <EssentailCallback />,
 };

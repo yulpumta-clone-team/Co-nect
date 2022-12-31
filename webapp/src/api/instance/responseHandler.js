@@ -1,5 +1,4 @@
 /* eslint-disable no-prototype-builtins */
-
 import { response } from 'msw';
 import { HttpError } from 'utils/customError';
 

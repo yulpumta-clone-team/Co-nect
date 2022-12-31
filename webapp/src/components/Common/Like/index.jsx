@@ -14,11 +14,11 @@ Like.propTypes = {
 export default function Like({ id, initValue }) {
   const [isActive, setIsActive] = useState(initValue);
 
-  const [, addteamlike] = useAxios({
+  const { notGetExecution: addteamlike } = useAxios({
     axiosInstance: teamApi.ADD_TEAM_LIKE,
     immediate: false,
   });
-  const [, deleteteamlike] = useAxios({
+  const { notGetExecution: deleteteamlike } = useAxios({
     axiosInstance: teamApi.DELETE_TEAM_LIKE,
     immediate: false,
   });
@@ -26,10 +26,10 @@ export default function Like({ id, initValue }) {
   const toggleLike = async () => {
     // [POST] 사용자가 좋아요를 누름 -> DB 갱신
     if (isActive) {
-      await deleteteamlike({ id });
+      await deleteteamlike({ newConfig: id });
       setIsActive(false);
     } else {
-      await addteamlike({ id });
+      await addteamlike({ newConfig: id });
       setIsActive(true);
     }
   };

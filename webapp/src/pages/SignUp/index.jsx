@@ -1,39 +1,24 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import authApi from 'api/auth.api';
-import { notifyNewMessage } from 'contexts/ToastNotification/action';
-import { useToastNotificationAction } from 'contexts/ToastNotification';
-import { signUpValidate } from 'service/auth/auth.validation';
+import React from 'react';
 import useForm from 'hooks/useForm';
 import TextInput from 'components/Common/TextInput';
 import Divider from 'components/Common/Divider';
 import Button from 'components/Common/Button';
 import SocailLoginButtons from 'components/SocialLoginButtons';
-import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 import BackButton from 'components/Common/BackButton';
 import { signUpParser } from 'service/auth/auth.parser';
 import { ROUTE } from 'constant/route.constant';
+import useAuthService from 'hooks/useAuthService';
+import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
+import { signUpValidate } from 'service/auth/auth.validation';
 import * as S from './SignUp.style';
 
 export default function SignUp() {
-  const navigate = useNavigate();
-  const notifyDispatch = useToastNotificationAction();
-  const [isEmailDuplicate, setIsEmailDuplicate] = useState(true);
+  const { requestSignUp } = useAuthService();
+  const { isEmailDuplicate, onClickCheckDuplicateEmail } = useCheckUserDuplicate();
+
   const submitCallback = async (submitData) => {
     const parsedSubmitData = signUpParser(submitData);
-    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
-    try {
-      const response = await authApi.signUp({ submitData: parsedSubmitData });
-      const { message } = response;
-      notifyNewMessage(notifyDispatch, message, TOAST_TYPE.Success);
-      setTimeout(() => {
-        navigate('/login');
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-      notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
-    }
+    await requestSignUp(parsedSubmitData);
   };
 
   const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
@@ -42,25 +27,6 @@ export default function SignUp() {
       submitCallback,
       validate: signUpValidate,
     });
-
-  const onClickCheckDuplicateEmail = async () => {
-    // TODO: 1초가 넘으면 처리중입니다 메세지 보여지게 수정
-    notifyNewMessage(notifyDispatch, '처리 중입니다...', 'Info');
-    try {
-      const response = await authApi.checkDuplicateEmail({ email: inputValues.email });
-      const isDuplicated = response.data;
-      if (isDuplicated) {
-        notifyNewMessage(notifyDispatch, '이미 사용중인 이메일니다!', TOAST_TYPE.Warning);
-        setIsEmailDuplicate(true);
-      } else {
-        notifyNewMessage(notifyDispatch, '사용가능한 이메일니다!', TOAST_TYPE.Success);
-        setIsEmailDuplicate(false);
-      }
-    } catch (error) {
-      console.error(error);
-      notifyNewMessage(notifyDispatch, error.message, 'Error');
-    }
-  };
 
   const canActiveSingupButton = !satisfyAllValidates || isEmailDuplicate;
 
@@ -86,7 +52,7 @@ export default function SignUp() {
             type="button"
             theme="secondary"
             customStyle={S.DuplicateCheckButton}
-            onClick={onClickCheckDuplicateEmail}
+            onClick={() => onClickCheckDuplicateEmail(inputValues.email)}
           >
             중복확인
           </Button>

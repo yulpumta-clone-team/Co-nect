@@ -1,12 +1,13 @@
+import { API_MESSAGE } from 'constant/api.constant';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
-import useUserInfo from 'hooks/useUserInfo';
+import useAuthService from 'hooks/useAuthService';
 import { useEffect, useState } from 'react';
 
 const useCommentApi = (initKey, initInstance, initConfig) => {
   const notifyDispatch = useToastNotificationAction();
-  const { handleExiredToken } = useUserInfo();
+  const { handleExiredToken } = useAuthService();
   const getInstance = {
     key: initKey,
     instance: initInstance,
@@ -39,7 +40,10 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
   };
 
   const execution = async () => {
-    notifyNewMessage(notifyDispatch, '요청 중...', TOAST_TYPE.Info);
+    let isOverStandard = true;
+    setTimeout(() => {
+      if (isOverStandard) notifyNewMessage(notifyDispatch, API_MESSAGE.LOADING, TOAST_TYPE.Info);
+    }, 1500);
     try {
       const ctrl = new AbortController();
       setController(ctrl);
@@ -52,6 +56,8 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       console.error(error);
       handleExiredToken(error.httpStatus);
       notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
+    } finally {
+      isOverStandard = false;
     }
   };
 

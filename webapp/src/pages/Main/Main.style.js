@@ -1,5 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-import Gradient from 'assets/images/main-gradient.png';
+import styled, { keyframes } from 'styled-components/macro';
 import MainLogo from 'assets/images/conect-mainpage.png';
 import BackGround2 from 'assets/images/section2-bg.png';
 import GhostIcon from 'assets/images/ghost.png';
@@ -12,7 +11,6 @@ import SignUpIcon from 'assets/images/signup-link.png';
 import BoardIcon from 'assets/images/board-link.png';
 import PostIcon from 'assets/images/post-link.png';
 
-// import styled from 'styled-components/macro';
 export const MainContainer = styled.div``;
 export const Header = styled.header`
   position: fixed;
