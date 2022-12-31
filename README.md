@@ -40,13 +40,13 @@
 
 <br/>
 
-<div align="center"> 
+<div align="center">
 
 ### 코넥트는 사람과 사람의 연결을 의미합니다.
+
 ### 로고 속 맞잡은 손을 통해 코넥트에서의 만남을 나타내었습니다.
 
 </div>
-
 
 <br/>
 <br/>
@@ -117,7 +117,7 @@
   
 | Front | Back | Infra |
 | :---: | :---: | :---: |
-| <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Recoil-764ABC?style=flat-square&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/ReactRouter-CA4245?style=flat-square&logo=reactrouter&logoColor=white"/> <img src="https://img.shields.io/badge/styled--components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=ESLint&logoColor=white"/> <img src="https://img.shields.io/badge/jest-23C213?style=flat-square&logo=jest&logoColor=white"/> | <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=SpringBoot&logoColor=white"/> | <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-Aws&logoColor=white"/> <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/> 
+| <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Recoil-764ABC?style=flat-square&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/ReactRouter-CA4245?style=flat-square&logo=reactrouter&logoColor=white"/> <img src="https://img.shields.io/badge/styled--components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=ESLint&logoColor=white"/> <img src="https://img.shields.io/badge/jest-23C213?style=flat-square&logo=jest&logoColor=white"/> | <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=SpringBoot&logoColor=white"/> | <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-Aws&logoColor=white"/> <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/>
 
 </div>
 <br/>
@@ -133,21 +133,22 @@
   
 ## 👀 프로젝트 주요 기능
 
-| 화면 | 기능 |
-| --- | --- |
-|  | <b>회원가입 및 로그인 기능</b> 일반 회원가입 및 로그인  |
-|  | <b>소셜 로그인 기능</b> 깃허브 및 구글 소셜 로그인 |
-|  | <b>필수정보입력페이지</b> 첫 로그인 시 유저의 기본 정보를 입력하는 기능 |
-|  | <b>유저 목록 확인</b> 가입된 유저의 프로필 목록을 확인하는 기능 |
-|  | <b>팀 공고글 목록 확인</b> 등록된 팀 공고글 목록을 확인하는 기능 |
-<br/>  
+| 화면                                                                                                  | 기능                                                                    |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| https://user-images.githubusercontent.com/71386219/210137242-4c9c4d03-4454-44ff-a965-b1e383c906e9.mov | <b>회원가입 및 로그인 기능</b> 일반 회원가입 및 로그인                  |
+| https://user-images.githubusercontent.com/71386219/210137236-22387322-2da6-4d40-9e29-718bdfdccdb7.mov | <b>소셜 로그인 기능</b> 깃허브 및 구글 소셜 로그인                      |
+| https://user-images.githubusercontent.com/71386219/210137240-2b879a48-9a40-4a03-a271-9af08cd65ecd.mov | <b>필수정보입력페이지</b> 첫 로그인 시 유저의 기본 정보를 입력하는 기능 |
+|                                                                                                       | <b>유저 목록 확인</b> 가입된 유저의 프로필 목록을 확인하는 기능         |
+|                                                                                                       | <b>팀 공고글 목록 확인</b> 등록된 팀 공고글 목록을 확인하는 기능        |
+
+<br/>
 
 ## 📚 위키
 
 <div align="center">
 
-| 🤝 프로젝트  | 📝 컨벤션 및 폴더구조 및 파일구조  | 🗂 사용한 프레임워크 및 라이브러리 | 🏃‍♂️ 트러블 슈팅 Notion 모음집  |
-| :---- | :---- | :---- | :---- |
+| 🤝 프로젝트                                                                                                                   | 📝 컨벤션 및 폴더구조 및 파일구조                       | 🗂 사용한 프레임워크 및 라이브러리                        | 🏃‍♂️ 트러블 슈팅 Notion 모음집                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :---------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <ul><li><a>프로젝트 주요기능(자세하게)</a></li><li><a>프로젝트 진행시 주안 점</a></li><li><a>한계점 및 개선사항</a></li></ul> | <ul><li><a>컨벤션 및 폴더구조 및 파일구조</a></li></ul> | <ul><li><a>사용한 프레임워크 및 라이브러리</a></li></ul> | <ul><li><a href="https://dear-phosphorus-929.notion.site/3ba6cab1e0564bf9bb63a448df748207">라우팅 관리</a></li><li><a href="https://dear-phosphorus-929.notion.site/CORS-fc65c88ca0034cc08326b99cb688bef8">CORS문제해결</a></li><li><a href="https://dear-phosphorus-929.notion.site/feat-a265861df42648e2a5c8d54f98aceb48">선언적프로그래밍</a></li><li><a href="https://dear-phosphorus-929.notion.site/api-2659a43fe8eb40fcb7cfc3e4a6637b97">파일 업로드 및 유저정보 입력 api연결</a></li><li><a href="https://dear-phosphorus-929.notion.site/storybook-0c72ef20776040079a72509cfcfba0be">storybook 사용하며 불편했던 점</a></li><li><a href="https://dear-phosphorus-929.notion.site/css-api-0014ac3cf6c84f9db2d0bbd4737beaf9">기술스택 css+api로 받아오기</a></li><li><a href="https://dear-phosphorus-929.notion.site/userDetail-techskill-88275929f8db4195a33dd84336d35f2f">기술스택 carousel component로 분리</a></li><li><a href="https://dear-phosphorus-929.notion.site/Spring-React-cf41d255011e484ab810a66041763060">spring이랑 react 연동</a></li><li><a href="https://dear-phosphorus-929.notion.site/Commnet-UI-eaee90dedb63431a8443c49800423d64">UI와 로직분리</a></li><li><a href="https://dear-phosphorus-929.notion.site/token-b07961ffd85841c6aa427b539b84630c">해더에 토큰 넣는 방법</a></li><li><a href="https://dear-phosphorus-929.notion.site/dropdown-modal-hooks-9a1a3237a5e148dc851395a01d813f3d">dropdown modal hooks 추가</a></li><li><a href="https://dear-phosphorus-929.notion.site/891b092dd6f34313b0a0f9d313e89e57">로그인 방식 정리</a></li></li><li><a href="https://dear-phosphorus-929.notion.site/css-react-hooks-form-9c62853aae834ad481497c1f7cde70d2">필수정보입력페이지 css + reack-hooks-form 제거</a></li></ul> |
 
 </div>
