@@ -22,11 +22,11 @@ public class UserTech {
     @Id
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.REMOVE,CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="tech_stack")
     private TechStack techStack;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="user")
     private User user;
 

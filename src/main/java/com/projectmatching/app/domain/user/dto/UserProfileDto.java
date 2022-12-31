@@ -1,11 +1,14 @@
 package com.projectmatching.app.domain.user.dto;
 
+import com.projectmatching.app.domain.techStack.dto.TechStackDto;
 import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.domain.user.entity.UserTech;
 import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -33,6 +36,8 @@ public class UserProfileDto {
     public static UserProfileDto of(User user){
         UserProfileDto userProfileDto = createEmpty();
         BeanUtils.copyProperties(user, userProfileDto);
+        userProfileDto.skills = user.getSkills().stream().map(UserTech::toTechStack)
+                .map(TechStackDto::of).map(techStackDto -> techStackDto.getTechName()).collect(Collectors.toList());
 
         userProfileDto.commentCnt = user.getUserComments().size();
         userProfileDto.likeCnt = user.getUserLikings().size();

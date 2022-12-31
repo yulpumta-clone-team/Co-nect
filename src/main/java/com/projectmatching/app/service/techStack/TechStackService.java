@@ -33,9 +33,4 @@ public class TechStackService {
         return techStackProvider.extractAnyTechCodeDto();
 
     }
-
-
-
-
-
 }

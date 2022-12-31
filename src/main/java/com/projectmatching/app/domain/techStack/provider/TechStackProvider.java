@@ -13,10 +13,4 @@ public interface TechStackProvider {
     List<TechCodeDto> extractTechCodeDtoByCategory(String category);
 
     List<TechCodeDto> extractAnyTechCodeDto();
-
-
-
-
-
-
 }
