@@ -21,7 +21,8 @@
 <br/>
 
 <div align="center"> 
-<h2>어렵기만 하던 팀 빌딩을 이제는 코넥트에서 간편하게</h2>
+<h1>What is Conect</h1>
+<h2>어렵기만 하던 팀 빌딩을 이제는 코넥트에서 간편하게👐😆</h2>
 </div>
 
 <br/>
@@ -38,9 +39,19 @@
 </div>
 
 <br/>
+
+<div align="center"> 
+
+### 코넥트는 사람과 사람의 연결을 의미합니다.
+### 로고 속 맞잡은 손을 통해 코넥트에서의 만남을 나타내었습니다.
+
+</div>
+
+
+<br/>
 <br/>
 
-## 팀원 소개
+## 👨‍👩‍👧‍👦 팀원 소개
 
 <table align="center">
   <tr>
@@ -106,7 +117,7 @@
   
 | Front | Back | Infra |
 | :---: | :---: | :---: |
-| <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Recoil-764ABC?style=flat-square&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/styled--components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/geolocation--api-4285F4?style=flat-square&logo=google-maps&logoColor=white"/> <img src="https://img.shields.io/badge/Naver/Kakao--map-00ACC1?style=flat-square&logo=OpenStreetMap&logoColor=white"/> <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=ESLint&logoColor=white"/> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=Prettier&logoColor=white"/> <img src="https://img.shields.io/badge/jest-23C213?style=flat-square&logo=jest&logoColor=white"/> | <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/> <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=Express&logoColor=white"/> <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white"/> <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=ESLint&logoColor=white"/> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=Prettier&logoColor=white"/> <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=postman&logoColor=white"/> | <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/> <img src="https://img.shields.io/badge/PM2-2B037A?style=flat-square&logo=PM2&logoColor=white"/> <img src="https://img.shields.io/badge/Naver Cloud-03C75A?style=flat-square&logo=Naver&logoColor=white"/> <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/> <img src="https://img.shields.io/badge/Github Actions-2088FF?style=flat-square&logo=Github Actions&logoColor=white"/> |
+| <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Recoil-764ABC?style=flat-square&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/ReactRouter-CA4245?style=flat-square&logo=reactrouter&logoColor=white"/> <img src="https://img.shields.io/badge/styled--components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=ESLint&logoColor=white"/> <img src="https://img.shields.io/badge/jest-23C213?style=flat-square&logo=jest&logoColor=white"/> | <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=SpringBoot&logoColor=white"/> | <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-Aws&logoColor=white"/> <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/> 
 
 </div>
 <br/>
