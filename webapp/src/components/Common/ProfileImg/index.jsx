@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import DefaultProfileImage from 'assets/images/default-profile.png';
 import { S3IMAGE_URL } from 'utils';
-import * as S from './style';
+import * as S from './ProfileImg.style';
 
 const ProfileImg = forwardRef(({ src, alt, customStyle, isAssets = false }, ref) => {
   const handleError = (event) => {

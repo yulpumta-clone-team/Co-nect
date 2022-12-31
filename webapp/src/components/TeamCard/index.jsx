@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { teamCardType } from 'types/team.type';
-import ProfileImg from 'components/ProfileImg';
+import ProfileImg from 'components/Common/ProfileImg';
 import { teamCardParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
 import HeartSvg from 'assets/icons/HeartSvg';
