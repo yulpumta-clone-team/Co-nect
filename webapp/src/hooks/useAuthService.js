@@ -124,6 +124,7 @@ const useAuthService = () => {
       newConfig: { submitData },
       successMessage: API_MESSAGE.LOGIN,
     });
+    if (!response) return;
     const {
       headers,
       data: { isFirst: isFirstLogin },
