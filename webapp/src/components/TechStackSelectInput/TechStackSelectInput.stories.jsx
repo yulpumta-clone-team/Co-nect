@@ -1,4 +1,5 @@
 import { TECH_SKILLS } from 'constant/techskill.constant';
+import handlers from 'mocks/handlers';
 import React, { useState } from 'react';
 import { skillStackParser } from 'service/etc/skillStack.parser';
 import TechStackSelectInput from './index';
@@ -6,6 +7,9 @@ import TechStackSelectInput from './index';
 export default {
   title: 'Component/TechStackSelectInput',
   component: TechStackSelectInput,
+  parameters: {
+    msw: handlers,
+  },
   layout: 'fullscreen',
 };
 
