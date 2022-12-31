@@ -43,10 +43,10 @@ public class UserSignUpService {
             checkDuplicateEmail(userJoinDto.getEmail());
             User user = userJoinDto.asEntity(Role.USER);
 
-            log.info("유저 info : {}",user);
+            log.info("유저 info : {}", user);
             userRepository.save(user);
             return user.getId();
-        }catch (ResponeException e){
+        } catch (ResponeException e) {
             throw e;
         }
     }
@@ -54,14 +54,13 @@ public class UserSignUpService {
 
     @Transactional
     @Validation
-    public void updateUserEssentialInfo(UserEssentialDto userEssentialDto, UserDetailsImpl userDetails){
+    public void updateUserEssentialInfo(UserEssentialDto userEssentialDto, UserDetailsImpl userDetails) {
         checkDuplicateName(userEssentialDto.getName());
         User user = userRepository.findById(userDetails.getUserId()).orElseThrow(CoNectNotFoundException::new);
         user.updateEssentialInfo(userEssentialDto);
 
         //이미 있는것들 비우고 다시 넣음
         user.getSkills().clear();
-
         addUsersTechStackByUserEssentialDto(userEssentialDto, user);
     }
 
@@ -70,20 +69,11 @@ public class UserSignUpService {
     // 2. make UserTech Entity by user and TechStack
     // 3. save UserTech entity to Repository
     private void addUsersTechStackByUserEssentialDto(UserEssentialDto userEssentialDto, User user) {
-
-
         techStackProvider.extractTechCodeByKeys(userEssentialDto.getSkills())
                 .stream()
-                .map(techCode -> {
-                    TechStack techStack =  TechStack.of(techCode);
-                    return techStack;
-                })
-                .map(techStack ->{
-                            UserTech userTech = UserTech.of(techStack,user);
-                            return userTech;
-                        }
-                ).forEach(userTech -> userTechRepository.save(userTech));
-
+                .map(TechStack::of)
+                .map(techStack -> UserTech.of(techStack, user))
+                .forEach(userTech -> userTechRepository.save(userTech));
 
     }
 
@@ -92,7 +82,7 @@ public class UserSignUpService {
      * 유저 회원 가입에 담긴 이메일을 한번 더 체크함
      */
     private void checkDuplicateEmail(String email) throws ResponeException {
-        if(userRepository.findByEmail(email).isPresent()){
+        if (userRepository.findByEmail(email).isPresent()) {
             throw new ResponeException(ResponseTemplateStatus.EMAIL_DUPLICATE);
         }
     }
@@ -101,16 +91,9 @@ public class UserSignUpService {
      * 유저 필수정보에 담긴 닉네임을 한번 더 체크함
      */
     private void checkDuplicateName(String name) throws ResponeException {
-        if(userRepository.findByName(name).isPresent()){
+        if (userRepository.findByName(name).isPresent()) {
             throw new ResponeException(ResponseTemplateStatus.NAME_DUPLICATE);
         }
 
     }
-
-
-
-
-
-
-
 }

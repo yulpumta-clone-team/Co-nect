@@ -4,6 +4,8 @@ import useDropdown from 'hooks/useDropdown';
 import { parsedTechStackType } from 'types/techSkill.type';
 import { skillStackParser } from 'service/etc/skillStack.parser';
 import { TECH_SKILLS } from 'constant/techskill.constant';
+import useAxios from 'hooks/useAxios';
+import etcApi from 'api/etc.api';
 import TechStackSelectedViewer from './TechStackSelectedViewer';
 import TechStackOptions from './TechStackOptions';
 import * as S from './TechStackSelectInput.style';
@@ -40,7 +42,19 @@ export default function TechStackSelectInput({
 }) {
   const { parent, isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
 
-  const techSkillOptions = skillStackParser(TECH_SKILLS);
+  const {
+    state: techStackOptionsApiState,
+    getExecution,
+    forceRefetch: forceRefetchTeckStackOptions,
+  } = useAxios({
+    axiosInstance: etcApi.getTechStackAll,
+  });
+
+  const techSkillOptions = techStackOptionsApiState.responseData
+    ? skillStackParser(techStackOptionsApiState.responseData)
+    : [];
+
+  // const techSkillOptions = skillStackParser(TECH_SKILLS);
 
   const isValues = selectedTechSkills.length !== 0;
 
@@ -89,6 +103,7 @@ export default function TechStackSelectInput({
           parent={parent}
           isDropdownOpen={isDropdownOpen}
           isValues={isValues}
+          isLoading={techStackOptionsApiState.isLoading}
           helperText={helperText}
           selectedTechSkills={selectedTechSkills}
           handleClickTargetDelete={handleClickTargetDelete}
@@ -100,6 +115,8 @@ export default function TechStackSelectInput({
       {!isDropdownType && isError && <S.Error>{helperText}</S.Error>}
       <S.Select isDropdownOpen={isDropdownOpen} isDropdownType={!isDropdownType}>
         <TechStackOptions
+          techStackOptionsApiState={techStackOptionsApiState}
+          forceRefetchTeckStackOptions={forceRefetchTeckStackOptions}
           selectedTechSkills={selectedTechSkills}
           techSkillOptions={techSkillOptions}
           handleClickOption={handleClickOption}

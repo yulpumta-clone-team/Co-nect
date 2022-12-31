@@ -1,4 +1,4 @@
-import { belongTeamOptions, hopeSessionOption, jobOptions } from 'constant';
+import { hopeSessionOption, jobOptions } from 'constant';
 import { parsedNumberToThreeDigits } from 'utils';
 import { skillStackParserToIds } from '../etc/skillStack.parser';
 

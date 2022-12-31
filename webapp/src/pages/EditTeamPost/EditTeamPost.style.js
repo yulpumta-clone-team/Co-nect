@@ -9,7 +9,7 @@ export const ImgContainer = styled.div`
   border-radius: 20px 20px 0px 0px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
 `;
-export const ViewingImage = styled.img`
+export const ViewingImage = css`
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   width: 100%;
   height: 100%;

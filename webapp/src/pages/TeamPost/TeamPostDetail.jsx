@@ -59,7 +59,7 @@ export default function TeamPostDetail({ targetTeam }) {
         <MarkdownEditor onlyViewer content={content} />
         <Divider customStyle={S.CommentDivider} />
         <PostInfo postId={teamId} readCnt={readCnt} likeCnt={likeCnt} commentCnt={commentCnt} />
-        <CommentContainer postType={POST_TYPE.TEAM} postWriter={writerInfo.name} postId={teamId} />
+        <CommentContainer postType={POST_TYPE.TEAM} postWriterId={writerInfo.id} postId={teamId} />
       </S.TeamInfoContainer>
     </S.PostContainer>
   );

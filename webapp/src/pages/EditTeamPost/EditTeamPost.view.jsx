@@ -7,8 +7,8 @@ import TechStackSelectInput from 'components/TechStackSelectInput';
 import SelectInput from 'components/Common/SelectInput';
 import TextInput from 'components/Common/TextInput';
 import EditImageSvg from 'assets/icons/EditImageSvg';
-import AddImageSvg from 'assets/icons/AddImageSvg';
 import PlusMarkSvg from 'assets/icons/PlusMarkSvg';
+import Image from 'components/Common/Image';
 import * as S from './EditTeamPost.style';
 
 EditTeamPostView.propTypes = {
@@ -52,7 +52,7 @@ export default function EditTeamPostView({
           <S.ImgContainer>
             {profileImageSrc ? (
               <S.InputTypeImageHandler htmlFor="profileImage">
-                <S.ViewingImage alt="upload" src={profileImageSrc} />
+                <Image alt="upload" src={profileImageSrc} customStyle={S.ViewingImage} />
                 <S.ImageEditButton onClick={onUploadButtonClick}>
                   <EditImageSvg />
                 </S.ImageEditButton>

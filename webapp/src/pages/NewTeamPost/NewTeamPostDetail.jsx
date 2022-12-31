@@ -9,13 +9,14 @@ import teamApi from 'api/team.api';
 import useFileUploader from 'hooks/useFileUploader';
 import { ROUTE } from 'constant/route.constant';
 import { useNavigate } from 'react-router-dom';
+import { API_MESSAGE } from 'constant/api.constant';
 import NewTeamPostView from './NewTeamPost.view';
 
 export default function NewTeamPostDetail() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
 
-  const [state, execution] = useAxios({
+  const { notGetExecution } = useAxios({
     axiosInstance: teamApi.POST_TEAM_POST,
     immediate: false,
   });
@@ -39,8 +40,13 @@ export default function NewTeamPostDetail() {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = newTeamPostParser(changedProfileImageSubmitData);
-    await execution({ data: parsedSubmitData });
-    navigate(ROUTE.HOME);
+    await notGetExecution({
+      newConfig: { data: parsedSubmitData },
+      successMessage: API_MESSAGE.SUCCESS_NEW_TEAM,
+    });
+    setTimeout(() => {
+      navigate(ROUTE.HOME);
+    }, 2000);
   };
   const {
     inputValues,

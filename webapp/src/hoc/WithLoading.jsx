@@ -15,7 +15,7 @@ WithLoading.propTypes = {
 // TODO: 사용하는 곳마다 LoadingFallback, ErrorFallback 컴포넌트 넘겨받기
 export default function WithLoading({ Component, responseDataKey, axiosInstance, axiosConfig }) {
   return function Wrapper(props) {
-    const [state, _, forceRefetch] = useAxios({
+    const { state, forceRefetch } = useAxios({
       axiosInstance,
       axiosConfig,
     });

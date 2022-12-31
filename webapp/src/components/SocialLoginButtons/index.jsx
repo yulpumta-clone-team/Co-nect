@@ -14,10 +14,10 @@ export default function SocialLoginButtons() {
       <span>소셜계정으로 로그인</span>
       <S.Buttons>
         <S.Button onClick={() => handleClickSocialLogin('GOOGLE')}>
-          <Image src={googleLogo} alt="googleLogo" />
+          <Image src={googleLogo} alt="googleLogo" isAssets />
         </S.Button>
         <S.Button onClick={() => handleClickSocialLogin('GITHUB')}>
-          <Image src={githubLogo} alt="github logo" />
+          <Image src={githubLogo} alt="github logo" isAssets />
         </S.Button>
       </S.Buttons>
     </S.Container>

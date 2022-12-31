@@ -1,4 +1,5 @@
 import teamApi from 'api/team.api';
+import { API_MESSAGE } from 'constant/api.constant';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
@@ -9,6 +10,7 @@ import React from 'react';
 import { teamDetailParser, teamEditRequestParser } from 'service/team/team.parser';
 import { newTeamPostValidation } from 'service/team/team.validation';
 import { teamDetailType } from 'types/team.type';
+import { S3IMAGE_URL } from 'utils';
 import EditTeamPostView from './EditTeamPost.view';
 
 EditTeamPostDetail.propTypes = {
@@ -22,7 +24,7 @@ export default function EditTeamPostDetail({ targetTeam }) {
     teamDetailParser(targetTeam);
 
   // 수정 요청 api hooks
-  const [state, execution, foreceRefetch] = useAxios({
+  const { notGetExecution } = useAxios({
     axiosInstance: teamApi.EDIT_TEAM_POST,
     immediate: false,
     axiosConfig: { id: teamId },
@@ -44,8 +46,8 @@ export default function EditTeamPostDetail({ targetTeam }) {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = teamEditRequestParser(changedProfileImageSubmitData);
-    await execution({ data: parsedSubmitData });
-    notifyNewMessage(notifyDispatch, '수정 완료!', TOAST_TYPE.Success);
+    await notGetExecution({ data: parsedSubmitData });
+    notifyNewMessage(notifyDispatch, API_MESSAGE.SUCCESS_EDIT_TEAM, TOAST_TYPE.Success);
   };
 
   const {
@@ -69,7 +71,7 @@ export default function EditTeamPostDetail({ targetTeam }) {
     validate: newTeamPostValidation,
   });
 
-  const profileImageSrc = inputValues.teamImage || (imageFile && URL.createObjectURL(imageFile));
+  const profileImageSrc = (imageFile && URL.createObjectURL(imageFile)) || inputValues.teamImage;
 
   return (
     <EditTeamPostView

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from 'components/Common/Dropdown';
 import { ROUTE } from 'constant/route.constant';
-import useUserInfo from 'hooks/useUserInfo';
+import useAuthService from 'hooks/useAuthService';
 import * as S from './style';
 
 UserInfoDropdown.propTypes = {
@@ -13,7 +13,7 @@ UserInfoDropdown.propTypes = {
 };
 export default function UserInfoDropdown({ isDropdownOpen, shouldCloseDropdown, closeDropdown }) {
   const navigate = useNavigate();
-  const { handleDeleteUserInfo } = useUserInfo();
+  const { handleDeleteUserInfo } = useAuthService();
   const onClickLogout = async () => {
     handleDeleteUserInfo();
   };
