@@ -3,11 +3,11 @@ import privateApiInstance from './instance/privateApiInstance';
 import publicApiInstance from './instance/publicApiInstance';
 
 const userApi = {
-  POST_ESSENTIAL_INFO({ submitData }) {
+  POST_ESSENTIAL_INFO({ data }) {
     return privateApiInstance({
       url: API.USER.ESSENTIAL_INFO,
       method: 'post',
-      data: submitData,
+      data,
     });
   },
   GET_ESSENTIAL_INFO() {
