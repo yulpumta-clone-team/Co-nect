@@ -144,7 +144,7 @@
 
 <br/>
 
-## 📚 위키
+## [📚 위키](https://github.com/yulpumta-clone-team/Co-nect/wiki)
 
 <div>
 
