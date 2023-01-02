@@ -1,20 +1,17 @@
-import React, { useEffect } from 'react';
-import Loader from 'pages/Loader';
-import { useNavigate } from 'react-router-dom';
-import { getAuthCookie } from 'utils/cookie';
+import React from 'react';
+import PropTypes from 'prop-types';
+import AuthErrorCallback from './AuthErrorCallback';
+import ApiErrorCallback from './ApiErrorCallback';
 
-function Callback() {
-  const navigate = useNavigate();
-  const authCookie = getAuthCookie();
-  useEffect(() => {
-    function getToken() {
-      authCookie ? navigate('/') : navigate('/login');
-      window.location.reload();
-    }
+Callback.propTypes = {
+  errorStatus: PropTypes.number,
+  errorMessage: PropTypes.string,
+  forceRefetch: PropTypes.func,
+};
 
-    getToken();
-  }, [authCookie, navigate]);
-  return <Loader />;
+export default function Callback({ errorStatus, errorMessage, forceRefetch }) {
+  if (errorStatus === 401 || errorStatus === 403) {
+    return <AuthErrorCallback errorMessage={errorMessage} />;
+  }
+  return <ApiErrorCallback errorMessage={errorMessage} forceRefetch={forceRefetch} />;
 }
-
-export default Callback;

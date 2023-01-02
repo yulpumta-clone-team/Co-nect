@@ -1,15 +1,13 @@
 package com.projectmatching.app.controller.upload;
 
 import com.projectmatching.app.config.resTemplate.ResponseTemplate;
+import com.projectmatching.app.constant.ResponseTemplateStatus;
 import com.projectmatching.app.domain.file.dto.FileDetail;
 import com.projectmatching.app.service.file.FileUploadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -25,5 +23,13 @@ public class UploadController {
     public ResponseTemplate<FileDetail> posting(@RequestPart("file")MultipartFile multipartFile){
         return ResponseTemplate.valueOf(fileUploadService.save(multipartFile));
     }
+
+    @GetMapping("/cancel")
+    @ApiOperation(value = "이미지 삭제")
+    public ResponseTemplate<Void> removing(@RequestParam("imgUrl")String url){
+        fileUploadService.remove(url);
+        return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
+    }
+
 
 }

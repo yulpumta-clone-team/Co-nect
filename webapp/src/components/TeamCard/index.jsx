@@ -1,42 +1,74 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { TEAM_BOARD } from 'constant/route';
-import { CardTitle, CardWrapper, ImgContainer, SessionContainer } from './style';
-
-function TeamCard({ teamInfo }) {
-  const { user_id, team_id, name, skills, session, img, read, comment_cnt, like_cnt } = teamInfo;
-  return (
-    <CardWrapper>
-      <h2>좋아요: {like_cnt}</h2>
-      <Link to={`${TEAM_BOARD}/${team_id}`}>{name}</Link>
-      <CardTitle>{name}</CardTitle>
-      <ImgContainer>
-        <img src={img} alt="임시" />
-      </ImgContainer>
-      <SessionContainer>{session}</SessionContainer>
-      <ul>
-        {skills.map((skill, idx) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <li key={idx}>{skill}</li>
-        ))}
-      </ul>
-    </CardWrapper>
-  );
-}
+import { teamCardType } from 'types/team.type';
+import ProfileImg from 'components/Common/ProfileImg';
+import { teamCardParser } from 'service/team/team.parser';
+import TechSkills from 'components/TechSkills';
+import HeartSvg from 'assets/icons/HeartSvg';
+import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
+import EyeSvg from 'assets/icons/EyeSvg';
+import * as S from './TeamCard.style';
 
 TeamCard.propTypes = {
-  teamInfo: PropTypes.shape({
-    user_id: PropTypes.number.isRequired,
-    team_id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    skills: PropTypes.array.isRequired,
-    session: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    read: PropTypes.number.isRequired,
-    comment_cnt: PropTypes.number.isRequired,
-    like_cnt: PropTypes.number.isRequired,
-  }).isRequired,
+  cardInfo: teamCardType.isRequired,
+  onClick: PropTypes.func,
 };
 
-export default TeamCard;
+export default function TeamCard({ cardInfo, onClick }) {
+  const parsedTeamCardInfo = teamCardParser(cardInfo);
+  // * : teamCard 에 표시되는 정보
+
+  const {
+    teamName,
+    teamImage,
+    hopeSession,
+    skills,
+    commentCnt,
+    readCnt,
+    isRecruitng,
+    writer,
+    slogan,
+  } = parsedTeamCardInfo;
+
+  const RecruitStatus = isRecruitng ? '모집중' : '모집완료';
+  return (
+    <S.CardWrapper onClick={onClick}>
+      <S.CardTop>
+        <S.Heart>
+          <HeartSvg />
+        </S.Heart>
+      </S.CardTop>
+      <S.BackgroundImg>
+        <S.TeamStatus isRecruitng={isRecruitng}>{RecruitStatus}</S.TeamStatus>
+      </S.BackgroundImg>
+      <ProfileImg src={teamImage} alt={`${teamName}의 프로필 이미지`} customStyle={S.ProfileImg} />
+      <S.TeamInfo>
+        <S.UserName>{writer.name}님의 모집</S.UserName>
+        <S.TeamName>{teamName}</S.TeamName>
+        <S.TeamSlogan>{slogan}</S.TeamSlogan>
+        <S.HopeSession>
+          <span>예상 기간</span>
+          <S.TeamHopeSession>{hopeSession}</S.TeamHopeSession>
+        </S.HopeSession>
+      </S.TeamInfo>
+      <S.Divider />
+      <TechSkills
+        skills={skills}
+        isCarousel
+        imageSize="50px"
+        gap="10px"
+        customStyle={S.TechSkills}
+      />
+      <S.CardInfoIndicator>
+        <S.SingleIndicator>
+          <ChatBubbleOvalSvg />
+          {commentCnt}
+        </S.SingleIndicator>
+        <S.SingleIndicator>
+          <EyeSvg />
+          {readCnt}
+        </S.SingleIndicator>
+      </S.CardInfoIndicator>
+    </S.CardWrapper>
+  );
+}

@@ -16,4 +16,9 @@ public class FileUploadService {
         resourceStorage.store(fileDetail.getPath(),multipartFile);
         return fileDetail;
     }
+
+    public void remove(String filePath){
+        resourceStorage.remove(filePath);
+
+    }
 }

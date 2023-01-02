@@ -15,14 +15,12 @@ import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @Configuration
-@EnableSwagger2
 public class SwaggerConfiguration {
 
     @Bean
@@ -30,7 +28,7 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
                 .pathMapping("/")
-                .securitySchemes(Arrays.asList(createTokenParameter()))
+                .securitySchemes(Arrays.asList(createTokenParameter(),createRefreshTokenParameter()))
                 .securityContexts(Collections.singletonList(securityContext()))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.projectmatching.app.controller"))
@@ -54,11 +52,16 @@ public class SwaggerConfiguration {
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         return Lists.newArrayList(
-                new SecurityReference(JwtConstant.HEADER_NAME, authorizationScopes));
+                new SecurityReference(JwtConstant.HEADER_NAME, authorizationScopes)
+        ,       new SecurityReference(JwtConstant.REFRESH_TOKEN_HEADER_NAME,authorizationScopes));
     }
 
     private SecurityScheme createTokenParameter() {
         return new ApiKey(JwtConstant.HEADER_NAME, JwtConstant.HEADER_NAME, "header");
+    }
+
+    private SecurityScheme createRefreshTokenParameter() {
+        return new ApiKey(JwtConstant.REFRESH_TOKEN_HEADER_NAME, JwtConstant.REFRESH_TOKEN_HEADER_NAME, "header");
     }
 
 }

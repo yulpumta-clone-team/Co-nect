@@ -1,28 +1,18 @@
-import App from 'layouts/App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { CookiesProvider } from 'react-cookie';
-import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import promiseMiddleware from 'redux-promise';
-import ReduxThunk from 'redux-thunk';
-import Reducer from './_reducers';
+import worker from 'mocks/browser';
+import Styles from 'styles';
+import App from './App';
 
-const createStoreWithMiddileware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
+if (process.env.REACT_APP_MOCK_TOOL === 'msw') {
+  worker.start();
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <CookiesProvider>
-      <Provider
-        store={createStoreWithMiddileware(
-          Reducer,
-          // eslint-disable-next-line no-underscore-dangle
-          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-        )}
-      >
-        <App />
-      </Provider>
-    </CookiesProvider>
+    <Styles>
+      <App />
+    </Styles>
   </React.StrictMode>,
   document.getElementById('root'),
 );

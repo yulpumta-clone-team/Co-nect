@@ -3,8 +3,15 @@ package com.projectmatching.app.config.handler;
 import com.projectmatching.app.config.YAMLConfig;
 import com.projectmatching.app.domain.user.UserRepository;
 import com.projectmatching.app.domain.user.dto.UserDto;
+import com.projectmatching.app.domain.user.dto.UserInfo;
+import com.projectmatching.app.domain.user.entity.User;
+import com.projectmatching.app.exception.CoNectLogicalException;
+import com.projectmatching.app.service.userInfoAdder.UserInfoAdderService;
+import com.projectmatching.app.util.AuthToken;
 import com.projectmatching.app.util.AuthTokenProvider;
+import com.projectmatching.app.util.FirstUserCheckUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -30,62 +37,53 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     private final AuthTokenProvider authTokenProvider;
     private final UserRepository userRepository;
     private final YAMLConfig yamlConfig;
-
+    private final UserInfoAdderService userInfoAdderService;
     private RequestCache requestCache = new HttpSessionRequestCache();
     private RedirectStrategy redirectStratgy = new DefaultRedirectStrategy();
 
 
+    @SneakyThrows //isFirstgLoginUser 때문에 사용
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        log.info("OAuth 로그인 SuccessHandler --- ");
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
-        OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
         UserDto user = toDto(oAuth2User);
-        String token = authTokenProvider.createToken(user);
-        log.info("Oatuh 로그인후 토큰 생성  : {}",token);
+        AuthToken authToken = authTokenProvider.createTokens(user);
 
-        writeTokenCookie(response,token);
-        resultRedirectStrategy(request, response, authentication);
+        resultRedirectStrategy(request, response, authToken, isFirstLoginUserResult(user));
 
     }
 
+    private String isFirstLoginUserResult(UserDto user) throws IllegalAccessException {
+        StringBuilder isFirstLoginUser = new StringBuilder("&isFirst=");
+        if (FirstUserCheckUtil.isFirstLoginUser(user)) {
+            isFirstLoginUser.append("true");
+        } else {
+            isFirstLoginUser.append("false");
+        }
+
+        return isFirstLoginUser.toString();
+    }
+
+
     protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
-                                          Authentication authentication) throws IOException, ServletException {
+                                          AuthToken authToken, String isFirst) throws IOException{
         SavedRequest savedRequest = requestCache.getRequest(request, response);
-        if(savedRequest!=null) {
+        if (savedRequest != null) {
             String targetUrl = savedRequest.getRedirectUrl();
             redirectStratgy.sendRedirect(request, response, targetUrl);
         } else {
-            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":"+yamlConfig.getPORT()+ "/callback";
+            String redirectUrl = request.getScheme() + "://" + request.getServerName() + ":" + yamlConfig.getFPORT() + "/oauthCallback?" + authToken.toString() + isFirst;
             redirectStratgy.sendRedirect(request, response, redirectUrl);
         }
 
     }
 
-
-
-
-    private void writeTokenResponse(HttpServletResponse response, String token) throws IOException {
-
-        response.setContentType("text/html;charset=UTF-8");
-        response.addHeader("Authorization",token);
-        response.setContentType("application/json;charset=UTF-8");
-
-
-    }
-
-    private void writeTokenCookie(HttpServletResponse response, String token){
-
-        authTokenProvider.createCookie(response,token);
-
-    }
-
-
-
     private UserDto toDto(OAuth2User oAuth2User) {
-       Map<String,Object> attributes = oAuth2User.getAttributes();
-        return UserDto.builder()
-                .email((String)attributes.get("email"))
-                .name((String)attributes.get("name")).build();
-
+        Map<String, Object> attributes = oAuth2User.getAttributes();
+        User user = userRepository.findByEmail((String) attributes.get("email")).orElseThrow(CoNectLogicalException::new);
+        UserDto userDto = UserDto.of(user);
+        return userDto;
     }
 }

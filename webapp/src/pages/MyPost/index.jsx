@@ -1,34 +1,28 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import { CardTitle, CardWrapper, ImgContainer } from './style';
+import userApi from 'api/user.api';
+import CardsGrid from 'components/CardsGrid';
+import TeamCard from 'components/TeamCard';
+import { ROUTE } from 'constant/route.constant';
+import WithLoading from 'hoc/WithLoading';
+import { emptyTrigger } from 'constant/service.constant';
+import * as S from './MyPost.style';
 
-function MyPost() {
-  const my_posting = [
-    {
-      team_id: 1,
-      name: '코넥트',
-      like_cnt: 0,
-    },
-    {
-      team_id: 2,
-      name: '애플팀플',
-      like_cnt: 1,
-    },
-  ];
+export default function MyPost() {
+  const CardsView = WithLoading({
+    Component: CardsGrid,
+    responseDataKey: 'cards',
+    axiosInstance: userApi.GET_MY_POSTS,
+    axiosConfig: {},
+  });
+
   return (
-    <div>
-      {my_posting.map((posting) => (
-        <CardWrapper>
-          <h1>{posting.team_id}</h1>
-          <CardTitle>{posting.name}</CardTitle>
-          <ImgContainer>
-            <img alt="팀 사진" />
-          </ImgContainer>
-          <span>{posting.like_cnt}</span>
-        </CardWrapper>
-      ))}
-    </div>
+    <S.Container>
+      <CardsView
+        isUserList={false}
+        CardComponent={TeamCard}
+        clickLink={`${ROUTE.TEAM_EDIT}/`}
+        emptyTrigger={emptyTrigger.team}
+      />
+    </S.Container>
   );
 }
-
-export default MyPost;

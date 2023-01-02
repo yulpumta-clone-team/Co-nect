@@ -16,8 +16,6 @@ public class UserProfile {
     private final String email;
 
     public User toUser() {
-        return new User(oauthId, name, email, Role.USER);
+        return new User(this.oauthId, this.name, this.email, Role.USER);
     }
-
-
 }

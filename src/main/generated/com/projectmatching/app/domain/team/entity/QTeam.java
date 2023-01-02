@@ -27,20 +27,26 @@ public class QTeam extends EntityPathBase<Team> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
-    public final StringPath img = createString("img");
+    public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final StringPath image = createString("image");
 
     public final StringPath name = createString("name");
 
-    public final NumberPath<Long> read = createNumber("read", Long.class);
+    public final NumberPath<Long> ownerId = createNumber("ownerId", Long.class);
+
+    public final NumberPath<Long> readCnt = createNumber("readCnt", Long.class);
 
     public final StringPath session = createString("session");
+
+    public final StringPath slogan = createString("slogan");
 
     //inherited
     public final StringPath status = _super.status;
 
-    public final NumberPath<Long> team_id = createNumber("team_id", Long.class);
-
     public final SetPath<com.projectmatching.app.domain.comment.entity.TeamComment, com.projectmatching.app.domain.comment.entity.QTeamComment> teamComments = this.<com.projectmatching.app.domain.comment.entity.TeamComment, com.projectmatching.app.domain.comment.entity.QTeamComment>createSet("teamComments", com.projectmatching.app.domain.comment.entity.TeamComment.class, com.projectmatching.app.domain.comment.entity.QTeamComment.class, PathInits.DIRECT2);
+
+    public final SetPath<com.projectmatching.app.domain.liking.entity.TeamLiking, com.projectmatching.app.domain.liking.entity.QTeamLiking> teamLikings = this.<com.projectmatching.app.domain.liking.entity.TeamLiking, com.projectmatching.app.domain.liking.entity.QTeamLiking>createSet("teamLikings", com.projectmatching.app.domain.liking.entity.TeamLiking.class, com.projectmatching.app.domain.liking.entity.QTeamLiking.class, PathInits.DIRECT2);
 
     public final SetPath<TeamTech, QTeamTech> teamTeches = this.<TeamTech, QTeamTech>createSet("teamTeches", TeamTech.class, QTeamTech.class, PathInits.DIRECT2);
 

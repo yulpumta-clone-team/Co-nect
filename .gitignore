@@ -30,6 +30,6 @@ out/
 **/src/main/resources/application-oauth.properties
 **/src/main/resources/application-key.properties
 
-src/main/webapp/matching-front/
 src/main/resources/static/
 .vscode/launch.json
+.DS_Store

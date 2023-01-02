@@ -1,71 +1,76 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { OAUTH_URL } from 'constant/route';
-import { isStatusOk } from 'constant/serverStatus';
-import { handleLogin } from 'apiAction/auth';
+import PropTypes from 'prop-types';
+import { loginValidate } from 'service/auth/auth.validation';
+import useForm from 'hooks/useForm';
+import TextInput from 'components/Common/TextInput';
+import Button from 'components/Common/Button';
+import Divider from 'components/Common/Divider';
+import SocailLoginButtons from 'components/SocialLoginButtons';
+import { ROUTE } from 'constant/route.constant';
+import BackButton from 'components/Common/BackButton';
+import { loginParser } from 'service/auth/auth.parser';
+import MainLogoImg from 'assets/images/main-logo.png';
+import useAuthService from 'hooks/useAuthService';
+import * as S from './Login.style';
 
-function Login() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-    // watch,
-  } = useForm({
-    defaultValues: {},
-  });
-  const onValid = async (submitData) => {
-    const { password, verifiedPassword } = submitData;
-    if (password !== verifiedPassword) {
-      setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
-    }
-    const {
-      payload: { status, code, data, message },
-    } = await dispatch(handleLogin(submitData));
-    console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (isStatusOk(status)) {
-      navigate('/callback');
-    }
+Login.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+
+export default function Login({ children }) {
+  const { requestLogin } = useAuthService();
+
+  const submitCallback = async (submitData) => {
+    const parsedSubmitData = loginParser(submitData);
+    requestLogin(parsedSubmitData);
   };
+
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
+    useForm({
+      initialValues: { email: '', password: '' },
+      submitCallback,
+      validate: loginValidate,
+    });
+
   return (
-    <div>
-      <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onValid)}>
-        <input
-          {...register('email', {
-            required: 'Email is required',
-            pattern: {
-              value: /^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\w+\.)+\w+$/i,
-              message: '이메일 형식으로 입력해주세요.',
-            },
-          })}
-          placeholder="email"
+    <S.Container>
+      <BackButton url={ROUTE.HOME} />
+      <S.Header>
+        <S.MainLogo src={MainLogoImg} alt="메인로고" />
+        <h1>Co-nect</h1>
+      </S.Header>
+      <S.Form onSubmit={submitHandler} id="loginForm">
+        <TextInput
+          name="email"
+          type="email"
+          placeholder="이메일"
+          value={inputValues.email}
+          onChange={onChangeHandler}
+          isError={!!validateError.email}
+          helperText={validateError.email}
         />
-        <span>{errors?.email?.message}</span>
-        <input
-          {...register('password', {
-            required: '4자리 이상 비밀번호를 입력해주세요.',
-            minLength: 4,
-            pattern: {
-              value: /(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}/,
-              message:
-                '8자 이상 20자 이하, 숫자 한개이상 특수문자 한개이상 영어 한개이상 포함 공백 불가',
-            },
-          })}
-          placeholder="password"
+        <TextInput
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+          value={inputValues.password}
+          onChange={onChangeHandler}
+          isError={!!validateError.password}
+          helperText={validateError.password}
         />
-        <span>{errors?.password?.message}</span>
-        <button>로그인</button>
-        <span>{errors?.extraError?.message}</span>
-      </form>
-      <a href={OAUTH_URL.GITHUB}>Github</a>
-      <br />
-      <a href={OAUTH_URL.GOOGLE}>Google</a>
-    </div>
+      </S.Form>
+      <Button
+        theme="primary"
+        type="submit"
+        form="loginForm"
+        disabled={!satisfyAllValidates}
+        customStyle={S.SubmitButton}
+      >
+        Login
+      </Button>
+      <Divider width="500px" marginTop="67px" marginBottom="38px" />
+      <SocailLoginButtons />
+      {children}
+    </S.Container>
   );
 }
-
-export default Login;

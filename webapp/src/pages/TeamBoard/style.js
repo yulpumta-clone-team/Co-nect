@@ -1,11 +1,8 @@
-import styled from 'styled-components';
+/* eslint-disable import/prefer-default-export */
+import styled from 'styled-components/macro';
 
-export const temp = styled.div``;
-
-export const BoardWrapper = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-  width: 720px;
+export const BoardWrapper = styled.div`
+  width: 100%;
   margin: 0 auto;
+  padding-top: 30px;
 `;

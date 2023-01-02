@@ -8,4 +8,8 @@ public class ServiceConstant {
     public static final Pattern REGEX_PWD = Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,20}"); //8자 이상 20자 이하, 숫자 한개이상 특수문자 한개이상 포함 공백 불가
     public static final int NAME_SIZE_MAX = 20;
 
+    public static final int MAX_USER_READ_CNT_SIZE = 10; //유저 조회수 업데이트 기준, MAX_USER_READ_CNT_SIZE 명의 유저 조회수 업데이트를 함
+
+    public static final Long ROOT_COMMENT = 0L;
+
 }

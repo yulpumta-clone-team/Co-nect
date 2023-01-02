@@ -27,19 +27,12 @@ public class UserJoinDto implements Validatable {
 
     @JsonIgnore
     private Long id = IdGenerator.number();
-    private String email;
 
-    private String name;
+    private String email;
 
     private String pwd;
 
-    private String portfolio;
-    private String slogan;
-    private String img;
-    private String content;//자기소개
-    private List<String> skills;
-    private String hope_session; //원하는 작업기간
-    private String job; //직업
+
 
     public static UserJoinDto createEmpty() { return new UserJoinDto();}
 

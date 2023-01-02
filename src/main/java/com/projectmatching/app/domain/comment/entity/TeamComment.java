@@ -26,7 +26,6 @@ import static java.util.Objects.nonNull;
 public class TeamComment extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @ToString.Exclude
@@ -47,7 +46,7 @@ public class TeamComment extends BaseTimeEntity {
 
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent",orphanRemoval = true, cascade = CascadeType.REMOVE)
     @Builder.Default
     private Set<TeamComment> comments = new HashSet<>();
 
@@ -97,4 +96,10 @@ public class TeamComment extends BaseTimeEntity {
         this.setStatus("REMOVED");
     }
 
+
+    public boolean isWriterSameWith(String writer){
+        if(this.getWriter().equals(writer))return true;
+        else return false;
+
+    }
 }

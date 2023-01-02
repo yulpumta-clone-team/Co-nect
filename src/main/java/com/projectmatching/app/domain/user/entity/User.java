@@ -1,26 +1,28 @@
 package com.projectmatching.app.domain.user.entity;
 
 import com.projectmatching.app.domain.BaseTimeEntity;
-import com.projectmatching.app.domain.comment.entity.TeamComment;
 import com.projectmatching.app.domain.comment.entity.UserComment;
+import com.projectmatching.app.domain.history.entity.UserHistory;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
 import com.projectmatching.app.domain.liking.entity.UserLiking;
+import com.projectmatching.app.domain.techStack.dto.TechStackDto;
 import com.projectmatching.app.domain.user.Role;
+import com.projectmatching.app.domain.user.dto.UserEssentialDto;
+import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter @Setter
-@ToString
 @Entity
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Builder
 @Table(name="user")
-public class User extends BaseTimeEntity  {
+public class User extends BaseTimeEntity {
 
     @Id
     private Long id;
@@ -38,7 +40,7 @@ public class User extends BaseTimeEntity  {
 
     private String pwd;
 
-    private String img;
+    private String image;
 
     private String portfolio;
 
@@ -48,7 +50,8 @@ public class User extends BaseTimeEntity  {
     private String content;
 
 
-    private String hope_session;
+    @Column(name = "hope_session")
+    private String hopeSession;
 
 
     private String job;
@@ -56,11 +59,15 @@ public class User extends BaseTimeEntity  {
     @Column(columnDefinition = "INT")
     private int respected;
 
+    @Column(name = "read_cnt", columnDefinition = "BIGINT")
+    private int readCnt;
 
+    @Column(name = "team_exist", columnDefinition = "TINYINT")
+    private boolean isTeamExist;
     /**
      * 내가 좋아요한 유저 목록
      */
-    @OneToMany(mappedBy = "fromUser")
+    @OneToMany(mappedBy = "fromUser", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserLiking> userLikings = new HashSet<>();
@@ -68,59 +75,78 @@ public class User extends BaseTimeEntity  {
 
     /**
      * 나를 좋아요한 유저 목록
-     *
      */
-    @OneToMany(mappedBy = "toUser")
+    @OneToMany(mappedBy = "toUser", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserLiking> whoLikedMe = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private Set<UserCommentLiking> userCommentLikings = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ToString.Exclude
     @Builder.Default
     private Set<UserComment> userComments = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @ToString.Exclude
     @Builder.Default
     private Set<UserTech> skills = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @Builder.Default
+    private Set<UserHistory> userHistories = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private Set<UserTeam> userTeams = new HashSet<>();
 
 
-    public User(String oauthId,String name, String email, Role role ){
-        this.id = null;
+    public User(String oauthId, String name, String email, Role role) {
+        this.id = IdGenerator.number();
         this.oauthId = oauthId;
         this.email = email;
         this.name = name;
         this.role = role;
     }
 
-    public String getRolekey(){
+    public String getRolekey() {
         return this.role.getKey();
     }
 
 
-    public User update(String name, String email){
-        this.name = name;
+    public User update(String email) {
         this.email = email;
         return this;
     }
 
 
+    public void updateEssentialInfo(UserEssentialDto userEssentialDto) {
+        this.name = userEssentialDto.getName();
+        this.slogan = userEssentialDto.getSlogan();
+        this.job = userEssentialDto.getJob();
+        this.image = userEssentialDto.getImage();
+        this.content = userEssentialDto.getContent();
+        this.portfolio = userEssentialDto.getPortfolio();
+        this.hopeSession = userEssentialDto.getHope_session();
+    }
 
+    /**
+     * plusCount 만큼 조회수 증가
+     *
+     * @Param plusCount : 증가할 조회수
+     */
+    public void updatingReadCnt(int plusCount) {
+        this.readCnt += plusCount;
 
-
-
-
+    }
 }

@@ -1,87 +1,92 @@
-import { handleSignUp } from 'apiAction/auth';
-import { isStatusOk } from 'constant/serverStatus';
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import useForm from 'hooks/useForm';
+import TextInput from 'components/Common/TextInput';
+import Divider from 'components/Common/Divider';
+import Button from 'components/Common/Button';
+import SocailLoginButtons from 'components/SocialLoginButtons';
+import BackButton from 'components/Common/BackButton';
+import { signUpParser } from 'service/auth/auth.parser';
+import { ROUTE } from 'constant/route.constant';
+import useAuthService from 'hooks/useAuthService';
+import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
+import { signUpValidate } from 'service/auth/auth.validation';
+import * as S from './SignUp.style';
 
-function SignUp() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-    // watch,
-  } = useForm({
-    defaultValues: {},
-  });
-  const onValid = async (submitData) => {
-    const { password, verifiedPassword } = submitData;
-    if (password !== verifiedPassword) {
-      setError('verifiedPassword', { message: 'Password is not same' }, { shouldFocus: true });
-    }
-    const {
-      payload: { status, code, data, message },
-    } = await dispatch(handleSignUp(submitData));
-    console.log('\nstatus: ', status, '\ncode: ', code, '\ndata: ', data, '\nmessage: ', message);
-    if (isStatusOk(status)) {
-      navigate('/login');
-    }
+export default function SignUp() {
+  const { requestSignUp } = useAuthService();
+  const { isEmailDuplicate, onClickCheckDuplicateEmail } = useCheckUserDuplicate();
+
+  const submitCallback = async (submitData) => {
+    const parsedSubmitData = signUpParser(submitData);
+    await requestSignUp(parsedSubmitData);
   };
+
+  const { inputValues, validateError, onChangeHandler, submitHandler, satisfyAllValidates } =
+    useForm({
+      initialValues: { email: '', password: '', verifiedPassword: '' },
+      submitCallback,
+      validate: signUpValidate,
+    });
+
+  const canActiveSingupButton = !satisfyAllValidates || isEmailDuplicate;
+
   return (
-    <div>
-      <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onValid)}>
-        <input
-          {...register('email', {
-            required: 'Email is required',
-            pattern: {
-              value: /^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\w+\.)+\w+$/i,
-              message: '이메일 형식으로 입력해주세요.',
-            },
-          })}
-          placeholder="email"
+    <S.Container>
+      <BackButton url={ROUTE.HOME} />
+      <S.Header>
+        <h2>환영합니다!</h2>
+        <span>회원 가입을 통해 팀에게 꼭 맞는 팀원을 만나보세요!</span>
+      </S.Header>
+      <S.Form onSubmit={submitHandler} id="signupForm">
+        <S.DuplicateCheckInput>
+          <TextInput
+            name="email"
+            type="email"
+            placeholder="이메일"
+            value={inputValues.email}
+            onChange={onChangeHandler}
+            isError={!!validateError.email}
+            helperText={validateError.email}
+          />
+          <Button
+            type="button"
+            theme="secondary"
+            customStyle={S.DuplicateCheckButton}
+            onClick={() => onClickCheckDuplicateEmail(inputValues.email)}
+          >
+            중복확인
+          </Button>
+        </S.DuplicateCheckInput>
+        <TextInput
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+          value={inputValues.password}
+          onChange={onChangeHandler}
+          isError={!!validateError.password}
+          helperText={validateError.password}
         />
-        <span>{errors?.email?.message}</span>
-        <input
-          {...register('nickname', {
-            required: '2자리 이상 닉네임을 입력해주세요.',
-            minLength: 2,
-            validate: {
-              // async로 만들어서  비동기로 서버에서 요청받을 수도 있음
-              // noYun: (value) => (value.includes('yun') ? 'no yun allowed' : true),
-              // noHo: (value) => (value.includes('ho') ? 'no ho allowed' : true),
-            },
-          })}
-          placeholder="nickname"
+        <TextInput
+          name="verifiedPassword"
+          type="password"
+          placeholder="비밀번호 확인"
+          value={inputValues.verifiedPassword}
+          onChange={onChangeHandler}
+          isError={!!validateError.verifiedPassword}
+          helperText={validateError.verifiedPassword}
         />
-        <span>{errors?.nickname?.message}</span>
-        <input
-          {...register('password', {
-            required: '4자리 이상 비밀번호를 입력해주세요.',
-            minLength: 4,
-            pattern: {
-              value: /(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&+=])(?=\S+$).{8,20}/,
-              message:
-                '8자 이상 20자 이하, 숫자 한개이상 특수문자 한개이상 영어 한개이상 포함 공백 불가',
-            },
-          })}
-          placeholder="password"
-        />
-        <span>{errors?.password?.message}</span>
-        <input
-          {...register('verifiedPassword', {
-            required: '비밀번호가 일치하지 않습니다.',
-          })}
-          placeholder="verifiedPassword"
-        />
-        <span>{errors?.verifiedPassword?.message}</span>
-        <button>가입</button>
-        <span>{errors?.extraError?.message}</span>
-      </form>
-    </div>
+      </S.Form>
+      <Button
+        theme="primary"
+        form="signupForm"
+        type="submit"
+        disabled={canActiveSingupButton}
+        customStyle={S.SubmitButton}
+      >
+        Sign up
+      </Button>
+      <Divider width="500px" marginTop="73px" marginBottom="38px" />
+      <SocailLoginButtons>소셜계정으로 회원가입</SocailLoginButtons>
+    </S.Container>
   );
 }
-
-export default SignUp;

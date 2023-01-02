@@ -1,6 +1,9 @@
 package com.projectmatching.app.domain.user;
 
+import com.projectmatching.app.domain.techStack.entity.QTechStack;
+import com.projectmatching.app.domain.techStack.entity.TechStack;
 import com.projectmatching.app.domain.user.dto.UserLoginDto;
+import com.projectmatching.app.domain.user.entity.QUserTech;
 import com.projectmatching.app.domain.user.entity.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +14,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import static com.projectmatching.app.domain.techStack.entity.QTechStack.techStack;
 import static com.projectmatching.app.domain.user.entity.QUser.user;
+import static com.projectmatching.app.domain.user.entity.QUserTech.userTech;
 
 
 @Repository
@@ -67,17 +72,16 @@ public class QUserRepository {
      */
     public Optional<User> find(Long id){
         return Optional.ofNullable(jpaQueryFactory
-                .selectFrom(user)
+                .selectFrom(user).leftJoin(user.skills).fetchJoin()
+                        .leftJoin(user.userTeams).fetchJoin()
+                        .leftJoin(user.userComments).fetchJoin()
+                        .leftJoin(user.userHistories).fetchJoin()
+                        .leftJoin(user.userCommentLikings).fetchJoin()
                 .where(user.id.eq(id))
                 .fetchOne()
         );
 
     }
-
-
-    /**
-     * 유저 좋아요 누르기
-     */
 
 
 

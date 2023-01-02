@@ -8,4 +8,9 @@ public class CoNectNotFoundException extends ResponeException {
     public CoNectNotFoundException(ResponseTemplateStatus status) {
         super(status);
     }
+
+    public CoNectNotFoundException(){super(ResponseTemplateStatus.NOT_FOUND);}
+
+
+
 }

@@ -2,14 +2,14 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  profiles:
-    include: oauth,key
 
-  #  datasource:
-#    url: jdbc:h2:tcp://localhost/~/datajpa
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
+  datasource:
+    url: ${MP_DB_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MP_DB_USERNAME}
+    password: ${MP_DB_PASSWORD}
+
+
   jpa:
     hibernate:
       ddl-auto: none
@@ -24,6 +24,24 @@ spring:
 
   jackson:
     default-property-inclusion: non_null # null 인경우 필드 생성하지않음
+
+  springfox:
+    documentation:
+      swagger-ui:
+        base-url: /api
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_ID}
+            client-secret: ${GITHUB_SECRET}
+            scope: name,email
+          google:
+            client-id: ${GOOGLE_ID}
+            client-secret: ${GOOGLE_SECRET}
+            scope: email,profile
 
 
 
@@ -55,10 +73,11 @@ logging:
 
 
 
+
 server:
   port: 8081
 
 
 env:
   port: 8081
-
+  fport: 3000
