@@ -135,11 +135,11 @@
 
 | 화면                                                                                                  | 기능                                                                    |
 | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| <img src="https://user-images.githubusercontent.com/38005874/210138421-7d6ff29c-ffe9-4f2d-8d77-c37b58db240b.gif" width="500px"/> | <b>회원가입 및 로그인 기능</b> 일반 회원가입 및 로그인                  |
-| <img src="https://user-images.githubusercontent.com/38005874/210138366-a1e2be78-8047-4bcf-8512-caaeb05a659c.gif" width="500px"/>| <b>소셜 로그인 기능</b> 깃허브 및 구글 소셜 로그인                      |
-| <img src="https://user-images.githubusercontent.com/38005874/210138431-1250598b-d781-45c0-94d7-94cb14042513.gif" width="500px"/> | <b>필수정보입력페이지</b> 첫 로그인 시 유저의 기본 정보를 입력하는 기능 |
-|<img src="https://user-images.githubusercontent.com/38005874/210139324-840e5c39-b505-41d0-a3db-bfad87dd5a72.gif" width="500px"/> | <b>유저 목록 확인</b> 가입된 유저의 프로필 목록을 확인하는 기능         |
-| <img src="https://user-images.githubusercontent.com/38005874/210139340-fc697187-1c88-4ce4-ae24-d971d65df2f9.gif" width="500px"/> | <b>팀 공고글 목록 확인</b> 등록된 팀 공고글 목록을 확인하는 기능        |
+| <img src="https://user-images.githubusercontent.com/38005874/210138421-7d6ff29c-ffe9-4f2d-8d77-c37b58db240b.gif" width="500px"/> | <b>회원가입 및 로그인 기능</b> <br> 일반 회원가입 및 로그인                  |
+| <img src="https://user-images.githubusercontent.com/38005874/210138366-a1e2be78-8047-4bcf-8512-caaeb05a659c.gif" width="500px"/>| <b>소셜 로그인 기능</b> <br> 깃허브 및 구글 소셜 로그인                      |
+| <img src="https://user-images.githubusercontent.com/38005874/210138431-1250598b-d781-45c0-94d7-94cb14042513.gif" width="500px"/> | <b>필수정보입력페이지</b> <br> 첫 로그인 시 유저의 기본 정보를 입력하는 기능 |
+|<img src="https://user-images.githubusercontent.com/38005874/210211965-0f07c7ef-a60e-42af-bc37-9410e7b88100.gif"/> | <b>유저 목록 확인</b> <br> 가입된 유저의 프로필 목록을 확인하는 기능         |
+| <img src="https://user-images.githubusercontent.com/38005874/210212022-3cfcdd50-99e4-4167-a5b6-5f66ab717fe9.gif" width="500px"/> | <b>팀 공고글 목록 확인</b> <br> 등록된 팀 공고글 목록을 확인하는 기능        |
 
 
 <br/>
