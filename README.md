@@ -142,7 +142,6 @@
 | <img src="https://user-images.githubusercontent.com/38005874/210212643-f564cef5-8e88-4cde-9d9c-330e36730e52.gif" width="500px"/> | <b>팀 공고글 목록 확인</b> <br> 등록된 팀 공고글 목록을 확인하는 기능        |
 
 
-
 <br/>
 
 ## [📚 위키](https://github.com/yulpumta-clone-team/Co-nect/wiki)
