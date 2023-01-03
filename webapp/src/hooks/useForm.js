@@ -51,7 +51,7 @@ const useForm = ({ initialValues, submitCallback, validate, mode = FORM_MODE.onC
   };
 
   const resetValidateErros = () => {
-    setValidateError(validate(initialValues));
+    setValidateError({});
   };
 
   /**
@@ -131,7 +131,7 @@ const useForm = ({ initialValues, submitCallback, validate, mode = FORM_MODE.onC
       resetInputValues();
       resetValidateErros();
     },
-    [inputValues, notifyDispatch, satisfyAllValidates, submitCallback, validateError],
+    [inputValues, resetInputValues, resetValidateErros, satisfyAllValidates, submitCallback],
   );
   return {
     inputValues,
