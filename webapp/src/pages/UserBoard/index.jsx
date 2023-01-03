@@ -5,7 +5,7 @@ import { ROUTE } from 'constant/route.constant';
 import UpperButton from 'components/Common/UpperButton';
 import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
 import { emptyTrigger } from 'constant/service.constant';
-import * as S from './style';
+import * as S from './UserBoard.style';
 
 export default function UserBoard() {
   return (
