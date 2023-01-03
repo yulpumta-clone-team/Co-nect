@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentContainer from 'components/ComentContainer';
-import { POST_TYPE } from 'constant';
+import { DOMAIN_TYPE } from 'constant';
 import { userDetailParser } from 'service/user/user.parser';
 import Divider from 'components/Common/Divider';
 import TechSkills from 'components/TechSkills';
@@ -81,7 +81,7 @@ export default function UserPostDetail({ targetUser }) {
         </S.UserInfoContainer>
         <Divider customStyle={S.CommentDivder} />
         <PostInfo postId={userId} readCnt={readCnt} likeCnt={likeCnt} commentCnt={commentCnt} />
-        <CommentContainer postType={POST_TYPE.USER} postWriterId={userId} postId={userId} />
+        <CommentContainer postType={DOMAIN_TYPE.USER} postWriterId={userId} postId={userId} />
       </S.InfoContainer>
     </S.PostContainer>
   );
