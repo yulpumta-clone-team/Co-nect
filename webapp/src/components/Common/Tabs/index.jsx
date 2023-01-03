@@ -1,19 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import * as S from './style';
+import * as S from './Tabs.style';
 
 Tabs.propTypes = {
-  tabs: PropTypes.array.isRequired,
-  activeTabId: PropTypes.string.isRequired,
-  setActiveTab: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  activeId: PropTypes.string.isRequired,
+  onClickTab: PropTypes.func.isRequired,
 };
 
-export default function Tabs({ tabs, activeTabId, setActiveTab }) {
+export default function Tabs({ type, tabs, activeId, onClickTab }) {
   return (
     <S.Tabs>
       {tabs.map(({ id, title }) => (
-        <S.Tab key={id} isActive={id === activeTabId} onClick={() => setActiveTab(id)}>
+        <S.Tab key={id} isActive={id === activeId} onClick={() => onClickTab(type, id)}>
           {title}
         </S.Tab>
       ))}
