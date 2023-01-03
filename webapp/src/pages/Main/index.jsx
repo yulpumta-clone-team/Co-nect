@@ -81,7 +81,8 @@ function Main() {
             <S.Logo />
             <S.MainText>
               {mainText.split('').map((t, i) => (
-                <S.GhostEffects key={t} index={i}>
+                // eslint-disable-next-line react/no-array-index-key
+                <S.GhostEffects key={i} index={i}>
                   {t}
                 </S.GhostEffects>
               ))}
