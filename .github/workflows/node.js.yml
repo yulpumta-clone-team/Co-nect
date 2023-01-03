@@ -30,11 +30,16 @@ jobs:
     - name: mv dir
       run: cd webapp
       shell: bash
+    
+    - name: Setting .env
+      run : |
+        echo "REACT_APP_SERVER_API=${{secrets.REACT_APP_SERVER_API}}" >> .env
+        cat .env
       
     - name: npm Install
       run: 
            npm install
-           npm build
+           npm run build
     - name: zip create
       run: zip -qq -r ./build-fe.zip .
       shell: bash
