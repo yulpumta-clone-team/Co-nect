@@ -1,5 +1,5 @@
 import { API, ROOT_API_URL } from 'constant/api.constant';
-import { getRandomStatusErrorCode, getResonseWithData, randomResponse } from 'mocks/mockUtils';
+import { getResonseWithData, randomResponse } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { editTeamDetail } from './editTeamDetail';
 import { teamDetail } from './teamDetail';
@@ -14,22 +14,12 @@ const teamHandler = [
     return res(ctx.status(200), ctx.delay(1500), ctx.json(getResonseWithData(newTeamList)));
   }),
   // GET_TEAM_LIKES
-  rest.get(`${ROOT_API_URL + API.TEAM.LIKES}`, (req, res, ctx) => {
-    const randomStatusErrorCode = getRandomStatusErrorCode();
-    return res(
-      ctx.status(randomStatusErrorCode),
-      ctx.delay(1500),
-      ctx.json(getResonseWithData(teamsList)),
-    );
+  rest.get(`${ROOT_API_URL + API.TEAM.LIKE}`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.delay(1500), ctx.json(getResonseWithData(teamsList)));
   }),
   // GET_TEAM_READS
   rest.get(`${ROOT_API_URL + API.TEAM.READS}`, (req, res, ctx) => {
-    const randomStatusErrorCode = getRandomStatusErrorCode();
-    return res(
-      ctx.status(randomStatusErrorCode),
-      ctx.delay(1500),
-      ctx.json(getResonseWithData(teamsList)),
-    );
+    return res(ctx.status(200), ctx.delay(1500), ctx.json(getResonseWithData(teamsList)));
   }),
   // GET_TEAM_DETAIL
   rest.get(`${ROOT_API_URL + API.TEAM.INDEX}/:id`, (req, res, ctx) => {
