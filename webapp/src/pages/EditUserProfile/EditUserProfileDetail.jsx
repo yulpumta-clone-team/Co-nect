@@ -9,6 +9,8 @@ import userApi from 'api/user.api';
 import useFileUploader from 'hooks/useFileUploader';
 import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
 import { API_MESSAGE } from 'constant/api.constant';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from 'constant/route.constant';
 import EditUserProfileView from './EditUserProfile.view';
 
 EditUserProfileDetail.propTypes = {
@@ -16,6 +18,7 @@ EditUserProfileDetail.propTypes = {
 };
 
 export default function EditUserProfileDetail({ targetUser }) {
+  const naviate = useNavigate();
   const parsedTargerUserInfo = userDetailParser(targetUser);
   const {
     userId,
@@ -59,7 +62,9 @@ export default function EditUserProfileDetail({ targetUser }) {
       newConfig: { data: parsedSubmitData },
       successMessage: API_MESSAGE.SUCCESS_EDIT_USER,
     });
-    // TODO: 성공시 이동할 페이지 정해서 이동시키기
+    setTimeout(() => {
+      naviate(ROUTE.USER);
+    }, 1000);
   };
 
   const {
