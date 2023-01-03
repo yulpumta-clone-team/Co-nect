@@ -1,16 +1,14 @@
 import teamApi from 'api/team.api';
 import { API_MESSAGE } from 'constant/api.constant';
-import { useToastNotificationAction } from 'contexts/ToastNotification';
-import { notifyNewMessage } from 'contexts/ToastNotification/action';
-import { TOAST_TYPE } from 'contexts/ToastNotification/type';
+import { ROUTE } from 'constant/route.constant';
 import useAxios from 'hooks/useAxios';
 import useFileUploader from 'hooks/useFileUploader';
 import useForm from 'hooks/useForm';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { teamDetailParser, teamEditRequestParser } from 'service/team/team.parser';
 import { newTeamPostValidation } from 'service/team/team.validation';
 import { teamDetailType } from 'types/team.type';
-import { S3IMAGE_URL } from 'utils';
 import EditTeamPostView from './EditTeamPost.view';
 
 EditTeamPostDetail.propTypes = {
@@ -18,8 +16,7 @@ EditTeamPostDetail.propTypes = {
 };
 
 export default function EditTeamPostDetail({ targetTeam }) {
-  const notifyDispatch = useToastNotificationAction();
-
+  const naviate = useNavigate();
   const { teamId, teamName, teamImage, techSkills, hopeSession, content, slogan, writerInfo } =
     teamDetailParser(targetTeam);
 
@@ -46,8 +43,13 @@ export default function EditTeamPostDetail({ targetTeam }) {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = teamEditRequestParser(changedProfileImageSubmitData);
-    await notGetExecution({ data: parsedSubmitData });
-    notifyNewMessage(notifyDispatch, API_MESSAGE.SUCCESS_EDIT_TEAM, TOAST_TYPE.Success);
+    await notGetExecution({
+      newConfig: { data: parsedSubmitData },
+      successMessage: API_MESSAGE.SUCCESS_EDIT_TEAM,
+    });
+    setTimeout(() => {
+      naviate(ROUTE.TEAM);
+    }, 1000);
   };
 
   const {

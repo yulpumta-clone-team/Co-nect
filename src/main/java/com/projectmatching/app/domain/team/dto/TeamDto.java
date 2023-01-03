@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class TeamDto extends UserInfoDto {
 
     private Long id;
-//    private UserInfo userInfo;
+
     private String image;
     private String slogan;
     private String name;

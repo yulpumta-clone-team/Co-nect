@@ -91,7 +91,6 @@ public class Team extends BaseTimeEntity {
         team.image = teamRequestDto.getImage();
         team.slogan = teamRequestDto.getSlogan();
         team.session = teamRequestDto.getSession();
-
         return team;
     }
 
