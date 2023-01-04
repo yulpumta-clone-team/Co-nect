@@ -99,15 +99,12 @@ public class TeamController {
      * team 좋아요 취소
      */
     @ApiOperation(value ="팀 게시물 좋아요 취소")
-    @DeleteMapping("/team/unliking/{team_id}")
+    @DeleteMapping("/team/liking/{team_id}")
     public ResponseTemplate<Boolean> cancelTeamLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "team_id") Long teamId){
         teamService.cancelTeamLiking(userDetails, teamId);
         return ResponseTemplate.of(SUCCESS);
     }
-
-    /**
-     * 내가 좋아요 한 팀 목록
-     */
+    
 //    @ApiOperation(value = "내가 좋아요한 팀 목록")
 //    @GetMapping("team/favorite")
 //    public ResponseTemplate<List<Team>> getMyFavoriteTeam(@AuthenticationPrincipal UserDetailsImpl userDetails){
