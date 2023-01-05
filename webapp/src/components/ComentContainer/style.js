@@ -243,3 +243,19 @@ export const Lock = styled.div`
     }
   }
 `;
+
+export const ErrorContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+  gap: 12px;
+  > h4 {
+  }
+  > button {
+    width: 200px;
+    height: 39px;
+  }
+`;

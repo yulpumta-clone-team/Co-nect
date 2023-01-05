@@ -18,7 +18,6 @@ import javax.persistence.*;
 public class TeamCommentLiking extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
     private Long id;
 
 

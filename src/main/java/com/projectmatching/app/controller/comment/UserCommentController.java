@@ -30,38 +30,37 @@ public class UserCommentController {
 
     @ApiOperation(value = "유저 댓글 달기")
     @PostMapping("/comment")
-    public ResponseTemplate<UserCommentDto> addComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return ResponseTemplate.valueOf(commentService.addUserComment(userCommentReqDto,userDetails));
+    public ResponseTemplate<UserCommentDto> addComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return ResponseTemplate.valueOf(commentService.addUserComment(userCommentReqDto, userDetails));
 
     }
 
 
-    @ApiOperation(value ="유저 대댓글 달기")
+    @ApiOperation(value = "유저 대댓글 달기")
     @PostMapping("/nested_comment")
-    public ResponseTemplate<UserCommentDto> addNestedComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return ResponseTemplate.valueOf(commentService.addUserNestedComment(userCommentReqDto,userDetails));
+    public ResponseTemplate<UserCommentDto> addNestedComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return ResponseTemplate.valueOf(commentService.addUserNestedComment(userCommentReqDto, userDetails));
     }
 
 
     @ApiOperation(value = "유저 게시글 (대)댓글 수정")
     @PatchMapping("/comment/{comment_id}")
-    public ResponseTemplate<UserCommentDto> updateComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId){
-        return ResponseTemplate.valueOf(commentService.updateUserComment(userCommentReqDto,userDetails,commentId));
+    public ResponseTemplate<UserCommentDto> updateComment(@RequestBody UserCommentReqDto userCommentReqDto, @AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId) {
+        return ResponseTemplate.valueOf(commentService.updateUserComment(userCommentReqDto, userDetails, commentId));
     }
-
 
 
     @ApiOperation(value = "유저 게시글 (대)댓글 삭제")
     @DeleteMapping("/comment/{comment_id}")
-    public ResponseTemplate<Void> delComment(@PathVariable(name = "comment_id") Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        commentService.deleteUserComment(userDetails,commentId);
+    public ResponseTemplate<Void> delComment(@PathVariable(name = "comment_id") Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        commentService.deleteUserComment(userDetails, commentId);
         return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
     }
 
 
     @ApiOperation(value = "댓글 리스트 조회")
     @GetMapping("/comment/{user_id}")
-    public ResponseTemplate<List<UserCommentDto>> getUserCommentList(@PathVariable(name="user_id") Long postId){
+    public ResponseTemplate<List<UserCommentDto>> getUserCommentList(@PathVariable(name = "user_id") Long postId) {
         return ResponseTemplate.valueOf(commentService.getUserComment(postId));
 
     }
@@ -69,15 +68,15 @@ public class UserCommentController {
 
     @ApiOperation(value = "유저 댓글 좋아요하기")
     @PatchMapping("/comment/liking/{comment_id}")
-    public ResponseTemplate<Void> doUserCommentLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId){
-        commentService.doUserCommentLiking(userDetails,commentId);
+    public ResponseTemplate<Void> doUserCommentLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId) {
+        commentService.doUserCommentLiking(userDetails, commentId);
         return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
     }
 
-    @ApiOperation(value ="유저 댓글 좋아요 취소")
+    @ApiOperation(value = "유저 댓글 좋아요 취소")
     @DeleteMapping("/comment/unliking/{comment_id}")
-    public ResponseTemplate<Void> cancelUserCommentLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id")Long commentId){
-        commentService.cancelUserCommentLiking(userDetails,commentId);
+    public ResponseTemplate<Void> cancelUserCommentLiking(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable(name = "comment_id") Long commentId) {
+        commentService.cancelUserCommentLiking(userDetails, commentId);
         return ResponseTemplate.of(ResponseTemplateStatus.SUCCESS);
     }
 

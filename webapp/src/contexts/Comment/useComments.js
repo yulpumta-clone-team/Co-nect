@@ -197,10 +197,8 @@ const useComments = () => {
    * @param {number} commentWriterId 댓글 작성자의 id
    * @returns 유저가 로그인을 했고 로그인한 유저가 작성자면 true반환
    */
-  const isCommentLoginUserWrote = (commentWriterId) => {
-    if (loggedInUserId) return false;
-    return commentWriterId === loggedInUserId;
-  };
+  const isCommentLoginUserWrote = (commentWriterId) =>
+    loggedInUserId || commentWriterId === loggedInUserId;
 
   /**
    * 게시글 작성자, 댓글 작성자만 비밀댓글을 볼 수 있게 하는 함수
@@ -209,7 +207,7 @@ const useComments = () => {
    * @param {number} loggedInUserId 로그인한 유저의 Id
    * @returns {boolean} true = 비밀댓글 보이기, false = 비밀댓글 가리기
    */
-  const checkCanShowSecretComment = (postWriterId, commentWriterId, loggedInUserId) => {
+  const checkCanShowSecretComment = (postWriterId, commentWriterId) => {
     const isSameCommentWriter = isCommentLoginUserWrote(commentWriterId);
     const isSamePostWriter = postWriterId === loggedInUserId;
     if (isSameCommentWriter || isSamePostWriter) return true;
@@ -226,7 +224,7 @@ const useComments = () => {
    */
   const isShowSecretComment = (isSecret, postWriterId, commentWriterId) => {
     if (isSecret) {
-      const isShow = checkCanShowSecretComment(postWriterId, commentWriterId, loggedInUserId);
+      const isShow = checkCanShowSecretComment(postWriterId, commentWriterId);
       return isShow;
     }
     return true;

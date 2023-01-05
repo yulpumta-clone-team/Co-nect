@@ -20,7 +20,7 @@ export default function CommentButtonContainer({
   const { selectEditTargetComment, handleClickDeleteTargetComment, isCommentLoginUserWrote } =
     useCommentsAction();
 
-  if (isEditTargetComment || isCommentLoginUserWrote(writerId)) return null;
+  if (!isCommentLoginUserWrote(writerId) || isEditTargetComment) return null;
 
   const handleClickTargetComment = () => selectEditTargetComment(commentId);
 

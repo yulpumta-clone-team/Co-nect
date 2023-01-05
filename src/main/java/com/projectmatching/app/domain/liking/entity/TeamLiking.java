@@ -17,7 +17,6 @@ import javax.persistence.*;
 public class TeamLiking {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

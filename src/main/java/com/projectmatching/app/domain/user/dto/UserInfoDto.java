@@ -11,7 +11,7 @@ public class UserInfoDto {
     public UserInfo userInfo;
 
 
-    public UserInfo setUserInfoWith(User user) {
-        return UserInfo.of(user);
+    public void setUserInfoWith(User user) {
+        userInfo = UserInfo.of(user);
     }
 }
