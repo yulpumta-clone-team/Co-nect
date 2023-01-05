@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import styled from 'styled-components/macro';
 import PropTypes from 'prop-types';
 import useIntersect from 'hooks/useIntersect';
 import UpperButton from 'components/Common/UpperButton';
@@ -42,7 +43,7 @@ export default function WithInfiniteScroll({
 
   const fetcher = async (signal) => {
     setIsLoading(true);
-    setRefDisplay(DISPLAY.none);
+    // setRefDisplay(DISPLAY.none);
     try {
       const { data: responseCardList } = await axiosInstance({
         params: { lastPage: page.current },
@@ -100,10 +101,15 @@ export default function WithInfiniteScroll({
           isLoading={isLoading}
         />
       )}
-      <div style={{ display: refDisplay }} ref={loadMoreRef}>
+      <RefContainer isShow={refDisplay} ref={loadMoreRef}>
         {isLoading && !error.isError && <CardLoader />}
-      </div>
+      </RefContainer>
       <UpperButton />
     </>
   );
 }
+
+const RefContainer = styled.div`
+  display: ${({ isShow }) => isShow};
+  padding: 12px 0;
+`;
