@@ -3,12 +3,16 @@ import styled, { css } from 'styled-components/macro';
 export const Container = styled.div`
   margin: 0 auto;
   padding-bottom: 10px; // postContainer아래 border가 짤려서 어쩔 수 없이 pading속성 추가
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 export const PostContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 1100px;
+  width: 800px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
@@ -84,6 +88,8 @@ export const SingleInfoTitle = styled.span`
 
 export const TeamName = styled(SingleInfoTitle)`
   ${({ theme: { fonts } }) => fonts.korean.title};
+  font-size: 4rem;
+  font-weight: 400;
   color: #3c3c3c;
 `;
 
