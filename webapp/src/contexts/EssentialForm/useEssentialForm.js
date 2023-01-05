@@ -1,25 +1,23 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useToastNotificationAction } from 'contexts/ToastNotification';
 import useForm from 'hooks/useForm';
 import { ESSENTIAL_INFO_LINKS, ROUTE } from 'constant/route.constant';
 import { essentialInfoParser } from 'service/user/user.parser';
 import useAuthService from 'hooks/useAuthService';
 import useFileUploader from 'hooks/useFileUploader';
 import { essentialValidation } from 'service/user/user.validation';
-import { hopeSessionOption, jobOptions } from 'constant';
 import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
 
 const initialValues = {
   nickname: '', // 입력하지 않으면 서브 페이지가 넘어가지 않습니다.
-  profileImage: 'init', // TODO: 뭐라도 넣어야 하는데
-  techSkills: [],
+  profileImage: '',
+  techSkills: [], // 입력하지 않으면 서브 페이지가 넘어가지 않습니다.
   slogan: '', // 입력하지 않으면 서브 페이지가 넘어가지 않습니다.
-  hopeSession: hopeSessionOption[0].value,
-  job: jobOptions[0].value,
+  hopeSession: '',
+  job: '',
   belongTeam: false,
-  introduction: '자기소개를 입력해주세요.',
-  portfolio: '포트폴리오 링크를 입력해주세요.',
+  introduction: '',
+  portfolio: '',
 };
 
 const essentailSubPagesRouteOrder = [

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import useDropdown from 'hooks/useDropdown';
 import { parsedTechStackType } from 'types/techSkill.type';
 import { skillStackParser } from 'service/etc/skillStack.parser';
-import { TECH_SKILLS } from 'constant/techskill.constant';
 import useAxios from 'hooks/useAxios';
 import etcApi from 'api/etc.api';
 import TechStackSelectedViewer from './TechStackSelectedViewer';

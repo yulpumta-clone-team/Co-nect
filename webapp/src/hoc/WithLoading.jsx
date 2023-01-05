@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useAxios from 'hooks/useAxios';
 import Callback from 'pages/Callback';
+import Spinner from 'components/Common/Loader/Spinner';
 
 // ! propTypes가 적용이 안 됨.
 WithLoading.propTypes = {
@@ -12,7 +13,6 @@ WithLoading.propTypes = {
   axiosConfig: PropTypes.object.isRequired,
 };
 
-// TODO: 사용하는 곳마다 LoadingFallback, ErrorFallback 컴포넌트 넘겨받기
 export default function WithLoading({ Component, responseDataKey, axiosInstance, axiosConfig }) {
   return function Wrapper(props) {
     const { state, forceRefetch } = useAxios({
@@ -21,7 +21,7 @@ export default function WithLoading({ Component, responseDataKey, axiosInstance,
     });
     const { responseData, isLoading, error } = state;
 
-    if (isLoading) return <div>Loading....</div>;
+    if (isLoading) return <Spinner withLogo isFullPage />;
 
     if (error) {
       return (

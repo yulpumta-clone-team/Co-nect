@@ -1,7 +1,7 @@
 import React from 'react';
 import CommentContainer from 'components/ComentContainer';
 import MarkdownEditor from 'components/MarkdownEditor';
-import { POST_TYPE } from 'constant';
+import { DOMAIN_TYPE } from 'constant';
 import Divider from 'components/Common/Divider';
 import { teamDetailParser } from 'service/team/team.parser';
 import TechSkills from 'components/TechSkills';
@@ -59,7 +59,11 @@ export default function TeamPostDetail({ targetTeam }) {
         <MarkdownEditor onlyViewer content={content} />
         <Divider customStyle={S.CommentDivider} />
         <PostInfo postId={teamId} readCnt={readCnt} likeCnt={likeCnt} commentCnt={commentCnt} />
-        <CommentContainer postType={POST_TYPE.TEAM} postWriterId={writerInfo.id} postId={teamId} />
+        <CommentContainer
+          postType={DOMAIN_TYPE.TEAM}
+          postWriterId={writerInfo.id}
+          postId={teamId}
+        />
       </S.TeamInfoContainer>
     </S.PostContainer>
   );

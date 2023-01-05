@@ -67,6 +67,7 @@ export const signUpValidate = ({ email, password, verifiedPassword }) => {
   const validateErrors = {
     email: '',
     password: '',
+    verifiedPassword: '',
   };
   if (!email) {
     validateErrors.email = '이메일이 입력되지 않았습니다. ';

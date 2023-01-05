@@ -152,7 +152,7 @@ export const userPostEditParser = (userInfoRawData) => {
  */
 
 /**
- * 유저 필수정보 입력 요청 parser: key값을 서버에서 사용하는 키값으로 변경
+ * 유저 필수정보 입력 요청 parser: key값을 서버에서 사용하는 키값으로 변경하면서 기본값 세팅
  * @param {UserInfoInputSchema} essentialInfoRawData src/types/user.typedef.js
  * @returns {parsedEssentialInfo} parsing된 유저의 필수정보 객체
  */
@@ -171,12 +171,12 @@ export const essentialInfoParser = (essentialInfoRawData) => {
   } = essentialInfoRawData;
   const paresedTechSkills = skillStackParserToIds(techSkills);
   return {
-    content: introduction,
-    hope_session: hopeSession,
-    image: profileImage,
-    job,
+    content: introduction || '자기소개를 입력하지 않았네요!',
+    hope_session: hopeSession || hopeSessionOption[0].value,
+    image: profileImage || '',
+    job: job || jobOptions[0].value,
     name: nickname,
-    portfolio,
+    portfolio: portfolio || 'EMPTY',
     slogan,
     skills: paresedTechSkills,
   };

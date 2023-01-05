@@ -4,7 +4,7 @@ import TeamCard from 'components/TeamCard';
 import { ROUTE } from 'constant/route.constant';
 import WithInfiniteScroll from 'hoc/WithInfiniteScroll';
 import { emptyTrigger } from 'constant/service.constant';
-import * as S from './style';
+import * as S from './TeamBoard.style';
 
 export default function TeamBoard() {
   return (
