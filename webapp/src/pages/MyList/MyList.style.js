@@ -11,7 +11,7 @@ export const SessionContainer = styled.div`
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 0 16px 16px 16px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
   margin-bottom: 24px;
 `;
