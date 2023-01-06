@@ -11,7 +11,9 @@ export default function Footer(props) {
           <li key={name}>
             <S.Name>{name}</S.Name>
             <span>{field}</span>
-            <span>{contact}</span>
+            <a href={contact} target="_blank" rel="noreferrer">
+              {contact}
+            </a>
           </li>
         ))}
       </S.InformationBox>

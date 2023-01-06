@@ -25,6 +25,11 @@ export const InformationBox = styled.ul`
       display: inline-flex;
       width: 98px;
     }
+    > a {
+      &:hover {
+        color: ${({ theme: { colors } }) => colors.primary.light};
+      }
+    }
   }
 `;
 
