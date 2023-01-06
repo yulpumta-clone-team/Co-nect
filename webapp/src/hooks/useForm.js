@@ -63,7 +63,7 @@ const useForm = ({ initialValues, submitCallback, validate, mode = FORM_MODE.onC
   /**
    * validation을 체크하고 싶은 input의 키 값을 넣으면 boolean을 반환
    * @param {string} target validation을 체크하고 싶은 input의 키 값
-   * @returns {boolean}
+   * @returns {boolean} 에러 메시지가 없으면 false 있으면 true
    */
   const isTargetSatisfyValidate = (target) => !!validateError[target];
 
