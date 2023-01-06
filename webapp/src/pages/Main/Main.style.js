@@ -26,13 +26,13 @@ export const Header = styled.header`
   transition: 0.5s;
   position: fixed;
 `;
+
 export const MainSection = styled.div`
-  position: relative;
-  display: flex;
   width: 100%;
   height: 100vh;
   background-color: black;
 `;
+
 export const Section = styled.section`
   position: relative;
   width: 100%;
@@ -224,7 +224,7 @@ export const Image3D = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  height: 120vh;
+  height: 100vh;
   ${({ theme: { fonts } }) => fonts.main.title};
   & p {
     position: absolute;
@@ -271,13 +271,14 @@ export const MoveText = styled.span`
   animation: ${animateTextMoving} 2s ease-in-out infinite;
   animation-delay: ${(props) => `${props.delay * 0.1}s`};
 `;
+
 export const Benefit = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   background-color: #262c41;
 `;
 
@@ -285,10 +286,11 @@ export const CircleGroup = styled.div`
   position: relative;
   display: flex;
   justify-content: space-around;
-  width: 100%;
   align-items: center;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 `;
+
 export const Circle = styled.div`
   position: relative;
   display: flex;
@@ -329,6 +331,7 @@ export const Subject = styled.div`
   gap: 10%;
   background-color: #262c41;
 `;
+
 export const TextFirstLine = styled.div`
   position: relative;
   display: flex;
@@ -340,6 +343,7 @@ export const TextFirstLine = styled.div`
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
+
 export const TextSecondLine = styled.div`
   position: relative;
   display: flex;
@@ -351,6 +355,7 @@ export const TextSecondLine = styled.div`
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
+
 export const FunctionSection = styled.div`
   position: relative;
   display: flex;
@@ -367,7 +372,7 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 70%;
   height: 450px;
   background-color: black;
   border-radius: 2%;
@@ -400,20 +405,24 @@ export const Card = styled.div`
 `;
 export const CardText = styled.div`
   position: absolute;
-  display: flex;
-  flex-direction: column;
   color: white;
   width: 55%;
   height: 50%;
   left: 40%;
-  gap: 30%;
   top: 25%;
 
-  ${({ theme: { fonts } }) => fonts.main.default};
-  & span {
-    height: 20%;
-    top: 90%;
+  > span {
+    display: block;
     ${({ theme: { fonts } }) => fonts.main.subTitle};
+  }
+
+  > p {
+    ${({ theme: { fonts } }) => fonts.main.default};
+  }
+
+  > p:nth-of-type(1) {
+    display: block;
+    margin-top: 22px;
   }
 `;
 
