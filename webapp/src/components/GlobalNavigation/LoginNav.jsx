@@ -8,7 +8,7 @@ import Button from 'components/Common/Button';
 import Image from 'components/Common/Image';
 import BellSvg from 'assets/icons/BellSvg';
 import UserInfoDropdown from './UserInfoDropdown';
-import * as S from './style';
+import * as S from './GlobalNavigation.style';
 
 // userInfo {id, profileImg, nickname}
 LoginNav.propTypes = {

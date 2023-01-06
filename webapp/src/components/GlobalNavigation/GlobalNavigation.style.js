@@ -40,10 +40,10 @@ export const Logo = css`
 
 export const LinkList = styled.ul`
   display: flex;
-  flex-direction: ${(props) => (props.IsflexDirectionColumn ? 'column' : 'row')};
   width: 20%;
   height: 100%;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 12px;
   align-items: center;
 
   ${({ theme: { fonts } }) => fonts.english.title};

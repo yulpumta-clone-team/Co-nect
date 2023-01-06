@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Dropdown from 'components/Common/Dropdown';
 import { ROUTE } from 'constant/route.constant';
 import useAuthService from 'hooks/useAuthService';
-import * as S from './style';
+import * as S from './GlobalNavigation.style';
 
 UserInfoDropdown.propTypes = {
   isDropdownOpen: PropTypes.bool.isRequired,

@@ -5,7 +5,7 @@ import Button from 'components/Common/Button';
 import { ROUTE } from 'constant/route.constant';
 
 import Image from 'components/Common/Image';
-import * as S from './style';
+import * as S from './GlobalNavigation.style';
 
 export default function NonLoginNav() {
   return (
