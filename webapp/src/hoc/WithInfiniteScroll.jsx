@@ -76,7 +76,7 @@ export default function WithInfiniteScroll({
     }
   };
 
-  const refetcher = () => {
+  const reFetcher = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     resetError();
     page.current = 0;
@@ -90,7 +90,7 @@ export default function WithInfiniteScroll({
         <Callback
           errorStatus={error.httpStatus}
           errorMessage={error.msg}
-          forceRefetch={refetcher}
+          forceRefetch={reFetcher}
         />
       ) : (
         <CardsGrid
