@@ -23,12 +23,16 @@ export default function NonLoginNav() {
         </S.Hover>
       </S.LinkList>
       <S.AssignList isLogin={false}>
-        <Button theme="primary" customStyle={S.AssignListButton}>
-          <Link to={ROUTE.LOGIN}>로그인</Link>
-        </Button>
-        <Button theme="gray" customStyle={S.AssignListButton}>
-          <Link to={ROUTE.SIGN_UP}>회원가입</Link>
-        </Button>
+        <Link to={ROUTE.LOGIN}>
+          <Button theme="primary" customStyle={S.AssignListButton}>
+            로그인
+          </Button>
+        </Link>
+        <Link to={ROUTE.SIGN_UP}>
+          <Button theme="gray" customStyle={S.AssignListButton}>
+            회원가입
+          </Button>
+        </Link>
       </S.AssignList>
     </S.BoardList>
   );
