@@ -29,7 +29,7 @@ export default function MyList() {
   };
 
   return (
-    <S.Container>
+    <>
       <S.SessionContainer>
         <Tabs
           type={TAB_TYPE.domain}
@@ -45,14 +45,16 @@ export default function MyList() {
           onClickTab={onClickTab}
         />
       </S.SessionContainer>
-      <WithInfiniteScroll
-        key={`${domainType}-${postType}`} // 자식컴포넌트의 상태를 강제로 reset하기 위한 조치
-        CardComponent={CardComponent}
-        clickLink={`${clickLink}/`}
-        axiosInstance={fetcherObj[domainType][postType]}
-        emptyTrigger={emtpyTriggerType}
-      />
-    </S.Container>
+      <S.Container>
+        <WithInfiniteScroll
+          key={`${domainType}-${postType}`} // 자식컴포넌트의 상태를 강제로 reset하기 위한 조치
+          CardComponent={CardComponent}
+          clickLink={`${clickLink}/`}
+          axiosInstance={fetcherObj[domainType][postType]}
+          emptyTrigger={emtpyTriggerType}
+        />
+      </S.Container>
+    </>
   );
 }
 
