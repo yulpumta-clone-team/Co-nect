@@ -26,7 +26,9 @@ export default function CardsGrid({ CardComponent, cards, isLoading, clickLink, 
   };
   const handleClickTriggerLink = () => navaigate(triggerLink);
 
-  if (isLoading)
+  // 기존 카드 길이도 없고 로딩인 상황 : 초기 렌더링 -> 이 때만 전체 페이지 로딩 표시
+  // 기존 카드는 있고 로딩인 상황 : 기존 카드는 그대로 보여지고 맨 아래 로딩 처리만
+  if (cards.length === 0 && isLoading)
     return (
       <S.Cards>
         <SimpleListComponent Component={CardLoader} idx={3} />

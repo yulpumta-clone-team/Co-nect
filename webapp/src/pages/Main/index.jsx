@@ -167,7 +167,7 @@ function Main() {
       </S.FinishSection>
       <S.BottomBox>
         <S.InformationBox>
-          <span>커넥트 프로젝트</span>
+          <span>코넥트 프로젝트</span>
           <br />
           {developers.map(({ name, field, email }) => (
             <p key={name}>
