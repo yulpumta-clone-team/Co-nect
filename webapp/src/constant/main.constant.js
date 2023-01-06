@@ -6,11 +6,11 @@ export const benefits = [
   { first: '같은 목표를 가진', second: '사람들을 만날 수 있습니다.' },
 ];
 export const developers = [
-  { name: '김윤호', field: 'FRONTEND', email: '/github.com/kimyouknow' },
-  { name: '왕호은', field: 'FRONTEND', email: '/github.com/hoeun0723' },
-  { name: '오현석', field: 'BACKEND', email: '/github.com/philos1234' },
-  { name: '윤효정', field: 'BACKEND', email: '/github.com/hyojeongyun' },
-  { name: '정영혜', field: 'DESIGNER', email: 'younghye.hello@gmail.com' },
+  { name: '김윤호', field: 'FRONTEND', contact: 'https://github.com/kimyouknow' },
+  { name: '왕호은', field: 'FRONTEND', contact: 'https://github.com/hoeun0723' },
+  { name: '오현석', field: 'BACKEND', contact: 'https://github.com/philos1234' },
+  { name: '윤효정', field: 'BACKEND', contact: 'https://github.com/hyojeongyun' },
+  { name: '정영혜', field: 'DESIGNER', contact: 'younghye.hello@gmail.com' },
 ];
 
 export const links = [
