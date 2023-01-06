@@ -1,24 +1,24 @@
 import styled, { css } from 'styled-components/macro';
 
-// 상단 파란색 상자
-export const TopContainer = styled.div`
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 10%;
-  background-color: ${({ theme: { colors } }) => colors.primary.normal};
-`;
-
 // nav bar 전체 Container
 export const Container = styled.nav`
+  position: relative;
   display: flex;
-  flex-direction: column;
-  align-content: space-around;
-  justify-content: space-around;
+  align-items: center;
   width: 100%;
   height: 70px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  padding-top: 7px; //상단 파란색 상자 높이
+`;
+
+// 상단 파란색 상자
+export const TopContainer = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 7px;
+  background-color: ${({ theme: { colors } }) => colors.primary.normal};
 `;
 
 // 3개의 컨테이너를 담는 전체 컨테이너
