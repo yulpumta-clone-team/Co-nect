@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { benefits, cardText, conect, developers, links, mainText } from 'constant/main.constant';
+import { benefits, cardText, conect, links, mainText } from 'constant/main.constant';
 import { useNavigate } from 'react-router-dom';
 import GlobalNavigation from 'components/GlobalNavigation';
 import WithProvider from 'hoc/withProvider';
@@ -11,6 +11,7 @@ import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
 import { throttle } from 'lodash';
 import SimpleListComponent from 'hoc/SimpleListComponent';
+import Footer from 'components/Footer';
 import * as S from './Main.style';
 
 const IconMap = {
@@ -165,17 +166,7 @@ function Main() {
           ))}
         </S.LinkGroup>
       </S.FinishSection>
-      <S.BottomBox>
-        <S.InformationBox>
-          <span>코넥트 프로젝트</span>
-          <br />
-          {developers.map(({ name, field, email }) => (
-            <p key={name}>
-              <span>{name}</span> {field} {email}
-            </p>
-          ))}
-        </S.InformationBox>
-      </S.BottomBox>
+      <Footer />
       <ToastNotification
         toastList={toastList}
         col="top"
