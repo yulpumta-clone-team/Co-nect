@@ -35,9 +35,7 @@ const routes = [
   },
 ];
 
-const privateRoutes = routes.map(({ path, element, restricted }) => ({
+export const privateRoutesWithHeader = routes.map(({ path, element, restricted }) => ({
   path,
   element: <PrivateRoute Component={element} restricted={restricted} />,
 }));
-
-export default privateRoutes;

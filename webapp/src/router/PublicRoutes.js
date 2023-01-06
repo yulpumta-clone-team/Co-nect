@@ -8,17 +8,7 @@ import TeamPost from 'pages/TeamPost';
 import PublicRoute from 'hoc/PublicRoute';
 import LoginRoute from './LoginRoute';
 
-const routes = [
-  {
-    path: ROUTE.SIGN_UP,
-    element: SignUp,
-    restricted: true,
-  },
-  {
-    path: ROUTE.LOGIN + ROUTE.ALL,
-    element: LoginRoute,
-    restricted: true,
-  },
+const routesWithHeader = [
   {
     path: ROUTE.USER,
     element: UserBoard,
@@ -41,9 +31,25 @@ const routes = [
   },
 ];
 
-const publicRoutes = routes.map(({ path, element, restricted }) => ({
+const routesWithFullPage = [
+  {
+    path: ROUTE.SIGN_UP,
+    element: SignUp,
+    restricted: true,
+  },
+  {
+    path: ROUTE.LOGIN + ROUTE.ALL,
+    element: LoginRoute,
+    restricted: true,
+  },
+];
+
+export const publicRoutesWithHeader = routesWithHeader.map(({ path, element, restricted }) => ({
   path,
   element: <PublicRoute Component={element} restricted={restricted} />,
 }));
 
-export default publicRoutes;
+export const publicRoutesWithFullPage = routesWithFullPage.map(({ path, element, restricted }) => ({
+  path,
+  element: <PublicRoute Component={element} restricted={restricted} />,
+}));

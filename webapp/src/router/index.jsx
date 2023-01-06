@@ -4,8 +4,8 @@ import LayoutWithHeader from 'layouts/LayoutWithHeader';
 import LayoutFullPage from 'layouts/LayoutFullPage';
 import { ROUTE } from 'constant/route.constant';
 import Main from 'pages/Main';
-import publicRoutes from './PublicRoutes';
-import privateRoutes from './PrivateRoutes';
+import { publicRoutesWithHeader, publicRoutesWithFullPage } from './PublicRoutes';
+import { privateRoutesWithHeader } from './PrivateRoutes';
 import etcRoutes from './EtcRoutes';
 
 export default function Router() {
@@ -17,11 +17,11 @@ export default function Router() {
     },
     {
       element: <LayoutWithHeader />,
-      children: [...publicRoutes, ...privateRoutes],
+      children: [...publicRoutesWithHeader, ...privateRoutesWithHeader],
     },
     {
       element: <LayoutFullPage />,
-      children: [...etcRoutes],
+      children: [...publicRoutesWithFullPage, ...etcRoutes],
     },
   ];
   return useRoutes(element);
