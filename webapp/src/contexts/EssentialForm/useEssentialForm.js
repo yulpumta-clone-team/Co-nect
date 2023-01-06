@@ -20,7 +20,7 @@ const initialValues = {
   portfolio: '',
 };
 
-const essentailSubPagesRouteOrder = [
+const essentialSubPagesRouteOrder = [
   ESSENTIAL_INFO_LINKS.NICKNAME,
   ESSENTIAL_INFO_LINKS.SKILL,
   ESSENTIAL_INFO_LINKS.PROFILE_IMAGE,
@@ -49,7 +49,9 @@ const useEssentialForm = () => {
 
   const { requestUpdateUserProfile } = useAuthService();
 
-  const { isNicknameDuplicate, onClickCheckDuplicateNickname } = useCheckUserDuplicate('');
+  const { isNicknameDuplicate, onClickCheckDuplicateNickname } = useCheckUserDuplicate(
+    initialValues.nickname,
+  );
   const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();
 
   const uploadImageFileBeforeSubmit = async (submitData) => {
@@ -101,9 +103,9 @@ const useEssentialForm = () => {
 
   const handleClickNextButton = useCallback(() => {
     const currentPathname = location.pathname;
-    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
-    const isCurrentSubPageInLast = currentSubPageIndex === essentailSubPagesRouteOrder.length - 2;
-    const isCurrentSubPageOverLast = currentSubPageIndex > essentailSubPagesRouteOrder.length - 2;
+    const currentSubPageIndex = essentialSubPagesRouteOrder.indexOf(currentPathname);
+    const isCurrentSubPageInLast = currentSubPageIndex === essentialSubPagesRouteOrder.length - 2;
+    const isCurrentSubPageOverLast = currentSubPageIndex > essentialSubPagesRouteOrder.length - 2;
 
     if (isCurrentSubPageInLast) {
       handleApiRequestInLastSubPage();
@@ -111,21 +113,21 @@ const useEssentialForm = () => {
 
     if (isCurrentSubPageOverLast) return;
 
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1], {
+    navigate(essentialSubPagesRouteOrder[currentSubPageIndex + 1], {
       state: { isFirstLogin: true },
     });
   }, [location.pathname, navigate]);
 
   const handleClickPrevButton = useCallback(() => {
     const currentPathname = location.pathname;
-    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
+    const currentSubPageIndex = essentialSubPagesRouteOrder.indexOf(currentPathname);
     const isCurrentSubPageUnderInit = currentSubPageIndex <= 0;
 
     if (isCurrentSubPageUnderInit) {
       navigate(ROUTE.LOGIN);
       return;
     }
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1], {
+    navigate(essentialSubPagesRouteOrder[currentSubPageIndex - 1], {
       state: { isFirstLogin: true },
     });
   }, [location.pathname, navigate]);
