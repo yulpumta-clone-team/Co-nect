@@ -30,7 +30,7 @@ export default function WithInfiniteScroll({
   emptyTrigger,
 }) {
   const page = useRef(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({ isError: false, msg: '' });
   const [cardList, setCardList] = useState([]);
   const [refDisplay, setRefDisplay] = useState(DISPLAY.block);
@@ -43,7 +43,6 @@ export default function WithInfiniteScroll({
 
   const fetcher = async (signal) => {
     setIsLoading(true);
-    // setRefDisplay(DISPLAY.none);
     try {
       const { data: responseCardList } = await axiosInstance({
         params: { lastPage: page.current },
