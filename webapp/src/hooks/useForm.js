@@ -50,15 +50,15 @@ const useForm = ({ initialValues, submitCallback, validate, mode = FORM_MODE.onC
     setInputValues(initialValues);
   };
 
-  const resetValidateErros = () => {
+  const resetValidateErrors = () => {
     setValidateError({});
   };
 
   /**
-   * validateError 객체에 있는 모든 데이터의 value가 ""이거나 null이면 true를 반환
+   * inputValues를 동시에 검사해서 모든 input에 에러가 없으면 true변환
    * @type {boolean}
    */
-  const satisfyAllValidates = Object.values(validateError).every((value) => !value);
+  const satisfyAllValidates = Object.values(validate(inputValues)).every((value) => !value);
 
   /**
    * validation을 체크하고 싶은 input의 키 값을 넣으면 boolean을 반환
@@ -105,7 +105,7 @@ const useForm = ({ initialValues, submitCallback, validate, mode = FORM_MODE.onC
     // setValidateError(validate({ ...validateError, [name]: value }));
   };
 
-  const showEntrieError = () => {
+  const showEntireError = () => {
     setValidateError(validate({ ...inputValues }));
     Object.values(validateError)
       .filter((error) => error)
@@ -124,14 +124,14 @@ const useForm = ({ initialValues, submitCallback, validate, mode = FORM_MODE.onC
       event && event.preventDefault();
 
       if (!satisfyAllValidates) {
-        showEntrieError();
+        showEntireError();
         return;
       }
       await submitCallback(inputValues);
       resetInputValues();
-      resetValidateErros();
+      resetValidateErrors();
     },
-    [inputValues, resetInputValues, resetValidateErros, satisfyAllValidates, submitCallback],
+    [inputValues, resetInputValues, resetValidateErrors, satisfyAllValidates, submitCallback],
   );
   return {
     inputValues,
