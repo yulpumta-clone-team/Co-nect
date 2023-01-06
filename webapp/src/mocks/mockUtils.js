@@ -15,7 +15,7 @@ export const getRandomStatusErrorCode = () => (Math.random() > 0.4 ? 200 : 500);
 
 export const errorResponse = {
   code: 1000,
-  message: 'mock api 임시 에러 메세지',
+  message: 'mock API 임시 에러 메세지',
   status: 'Denied',
 };
 
