@@ -6,7 +6,7 @@ export const successResponseWithEmptyData = {
   data: {},
 };
 
-export const getResonseWithData = (data) => ({
+export const getResponseWithData = (data) => ({
   ...successResponseWithEmptyData,
   data,
 });
@@ -19,7 +19,7 @@ export const errorResponse = {
   status: 'Denied',
 };
 
-export const randomResponse = (res, ctx, sucessData) => {
+export const randomResponse = (res, ctx, successData) => {
   const randomStatusErrorCode = getRandomStatusErrorCode();
 
   if (randomStatusErrorCode === 500) {
@@ -29,6 +29,6 @@ export const randomResponse = (res, ctx, sucessData) => {
   return res(
     ctx.status(randomStatusErrorCode),
     ctx.delay(1500),
-    ctx.json(getResonseWithData(sucessData)),
+    ctx.json(getResponseWithData(successData)),
   );
 };
