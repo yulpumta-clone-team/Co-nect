@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro';
 
 // * : Card Container
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.li`
   position: relative;
   width: 350px;
   height: 400px;
