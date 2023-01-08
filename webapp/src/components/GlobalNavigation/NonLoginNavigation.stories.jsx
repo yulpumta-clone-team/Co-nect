@@ -1,7 +1,7 @@
 import React from 'react';
 import NonLoginNavigation from './NonLoginNav';
 
-import * as S from './style';
+import * as S from './GlobalNavigation.style';
 
 export default {
   title: 'Component/NonLoginNavigation',

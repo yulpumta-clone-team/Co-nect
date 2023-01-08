@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { benefits, cardText, conect, developers, links, mainText } from 'constant/main.constant';
+import {
+  MAIN_SERVICE_FEATURES,
+  CARD_TEXTS,
+  KOR_TITLE_CONECT,
+  MAIN_SERVICE_LINKS,
+  MAIN_TEXT,
+} from 'constant/main.constant';
 import { useNavigate } from 'react-router-dom';
 import GlobalNavigation from 'components/GlobalNavigation';
 import WithProvider from 'hoc/withProvider';
@@ -11,10 +17,11 @@ import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
 import { throttle } from 'lodash';
 import SimpleListComponent from 'hoc/SimpleListComponent';
+import Footer from 'components/Footer';
 import * as S from './Main.style';
 
 const IconMap = {
-  signup: <S.SignUp />,
+  signUp: <S.SignUp />,
   board: <S.Board />,
   post: <S.Post />,
   cloud: <S.Cloud />,
@@ -80,7 +87,7 @@ function Main() {
           <S.Contents>
             <S.Logo />
             <S.MainText>
-              {mainText.split('').map((t, i) => (
+              {MAIN_TEXT.split('').map((t, i) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <S.GhostEffects key={i} index={i}>
                   {t}
@@ -104,7 +111,7 @@ function Main() {
         <S.StartQuestion>
           <S.Image3D>
             <p>
-              {conect.split('').map((s, i) => (
+              {KOR_TITLE_CONECT.split('').map((s, i) => (
                 <S.MoveText key={s} index={i}>
                   {s}
                 </S.MoveText>
@@ -115,7 +122,7 @@ function Main() {
         </S.StartQuestion>
         <S.Benefit>
           <S.CircleGroup>
-            {benefits.map(({ first, second }) => (
+            {MAIN_SERVICE_FEATURES.map(({ first, second }) => (
               <S.Circle key={first}>
                 <span>{first}</span>
                 {second}
@@ -137,20 +144,17 @@ function Main() {
         </S.Subject>
       </S.PurposeSection>
       <S.FunctionSection>
-        {cardText.map(({ spanFirst, spanSecond, iconFront, iconBehind, defaults }) => (
-          <S.Card key={spanFirst}>
+        {CARD_TEXTS.map(({ title, description, iconFront, iconBehind }) => (
+          <S.Card key={title}>
             {IconMap[iconFront]}
             {IconMap[iconBehind]}
             <S.CardText>
-              <p>
-                <span>
-                  {spanFirst}
-                  <br />
-                  {spanSecond}
-                </span>
-                <br />
-                {defaults}
-              </p>
+              {title.split('\n').map((w) => (
+                <span>{w}</span>
+              ))}
+              {description.split('\n').map((w) => (
+                <p>{w}</p>
+              ))}
             </S.CardText>
           </S.Card>
         ))}
@@ -158,24 +162,14 @@ function Main() {
       <S.FinishSection>
         <span>코넥티들을 위한 도전은 계속됩니다.</span>
         <S.LinkGroup>
-          {links.map(({ icon, route }) => (
+          {MAIN_SERVICE_LINKS.map(({ icon, route }) => (
             <S.GotoLink key={icon} onClick={() => navigate(route)}>
               {IconMap[icon]}
             </S.GotoLink>
           ))}
         </S.LinkGroup>
       </S.FinishSection>
-      <S.BottomBox>
-        <S.InformationBox>
-          <span>코넥트 프로젝트</span>
-          <br />
-          {developers.map(({ name, field, email }) => (
-            <p key={name}>
-              <span>{name}</span> {field} {email}
-            </p>
-          ))}
-        </S.InformationBox>
-      </S.BottomBox>
+      <Footer />
       <ToastNotification
         toastList={toastList}
         col="top"

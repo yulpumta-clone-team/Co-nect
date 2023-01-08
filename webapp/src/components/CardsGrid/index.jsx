@@ -20,11 +20,11 @@ CardsGrid.propTypes = {
 
 export default function CardsGrid({ CardComponent, cards, isLoading, clickLink, emptyTrigger }) {
   const { emptyMessage, triggerLink, triggerMessage } = emptyTrigger;
-  const navaigate = useNavigate();
+  const navigate = useNavigate();
   const handleClickCardComponent = (cardId) => {
-    clickLink && navaigate(clickLink + cardId);
+    clickLink && navigate(clickLink + cardId);
   };
-  const handleClickTriggerLink = () => navaigate(triggerLink);
+  const handleClickTriggerLink = () => navigate(triggerLink);
 
   // 기존 카드 길이도 없고 로딩인 상황 : 초기 렌더링 -> 이 때만 전체 페이지 로딩 표시
   // 기존 카드는 있고 로딩인 상황 : 기존 카드는 그대로 보여지고 맨 아래 로딩 처리만

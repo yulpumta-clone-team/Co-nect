@@ -11,7 +11,10 @@ import SignUpIcon from 'assets/images/signup-link.png';
 import BoardIcon from 'assets/images/board-link.png';
 import PostIcon from 'assets/images/post-link.png';
 
-export const MainContainer = styled.div``;
+export const MainContainer = styled.div`
+  width: 100vw;
+`;
+
 export const Header = styled.header`
   position: fixed;
   z-index: 2;
@@ -23,13 +26,13 @@ export const Header = styled.header`
   transition: 0.5s;
   position: fixed;
 `;
+
 export const MainSection = styled.div`
-  position: relative;
-  display: flex;
   width: 100%;
   height: 100vh;
   background-color: black;
 `;
+
 export const Section = styled.section`
   position: relative;
   width: 100%;
@@ -46,7 +49,7 @@ export const Wave = styled.div`
   width: 100%;
   height: 100%;
   top: -180%;
-  background: black;
+  background-color: #000;
 `;
 
 export const animateGradation = keyframes`
@@ -58,7 +61,7 @@ export const animateGradation = keyframes`
   }
 `;
 
-export const Curve = styled.span`
+export const Curve = styled.div`
   position: absolute;
   width: 750vh;
   height: 725vh;
@@ -101,9 +104,10 @@ export const Contents = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  gap: 24px;
   letter-spacing: 0.01em;
 `;
+
 export const Logo = styled.img.attrs({ src: `${MainLogo}` })`
   position: relative;
   display: flex;
@@ -111,6 +115,7 @@ export const Logo = styled.img.attrs({ src: `${MainLogo}` })`
   width: 100px;
   height: 100px;
 `;
+
 export const GhostEffects = styled.span`
   transition: 1s;
   &:nth-child(${(props) => props.index + 1}) {
@@ -141,10 +146,11 @@ export const SubText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1180px;
+  width: 100%;
   color: white;
   ${({ theme: { fonts } }) => fonts.main.default_noBold};
 `;
+
 export const ScrollDown = styled.div`
   position: absolute;
   bottom: 20px;
@@ -199,6 +205,7 @@ export const Indicator = styled.span`
 
 export const PurposeSection = styled.div`
   height: 260vh;
+  width: 100%;
   background-color: #262c41;
 `;
 export const StartQuestion = styled.div`
@@ -217,7 +224,7 @@ export const Image3D = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  height: 120vh;
+  height: 100vh;
   ${({ theme: { fonts } }) => fonts.main.title};
   & p {
     position: absolute;
@@ -264,13 +271,14 @@ export const MoveText = styled.span`
   animation: ${animateTextMoving} 2s ease-in-out infinite;
   animation-delay: ${(props) => `${props.delay * 0.1}s`};
 `;
+
 export const Benefit = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   background-color: #262c41;
 `;
 
@@ -278,10 +286,11 @@ export const CircleGroup = styled.div`
   position: relative;
   display: flex;
   justify-content: space-around;
-  width: 1180px;
   align-items: center;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 `;
+
 export const Circle = styled.div`
   position: relative;
   display: flex;
@@ -322,6 +331,7 @@ export const Subject = styled.div`
   gap: 10%;
   background-color: #262c41;
 `;
+
 export const TextFirstLine = styled.div`
   position: relative;
   display: flex;
@@ -333,6 +343,7 @@ export const TextFirstLine = styled.div`
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
+
 export const TextSecondLine = styled.div`
   position: relative;
   display: flex;
@@ -344,6 +355,7 @@ export const TextSecondLine = styled.div`
     color: ${({ theme: { colors } }) => colors.primary.normal};
   }
 `;
+
 export const FunctionSection = styled.div`
   position: relative;
   display: flex;
@@ -360,7 +372,7 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1000px;
+  width: 70%;
   height: 450px;
   background-color: black;
   border-radius: 2%;
@@ -393,20 +405,24 @@ export const Card = styled.div`
 `;
 export const CardText = styled.div`
   position: absolute;
-  display: flex;
-  flex-direction: column;
   color: white;
   width: 55%;
   height: 50%;
   left: 40%;
-  gap: 30%;
   top: 25%;
 
-  ${({ theme: { fonts } }) => fonts.main.default};
-  & span {
-    height: 20%;
-    top: 90%;
+  > span {
+    display: block;
     ${({ theme: { fonts } }) => fonts.main.subTitle};
+  }
+
+  > p {
+    ${({ theme: { fonts } }) => fonts.main.default};
+  }
+
+  > p:nth-of-type(1) {
+    display: block;
+    margin-top: 22px;
   }
 `;
 
@@ -496,33 +512,4 @@ export const GotoLink = styled.div`
   position: relative;
   display: flex;
   cursor: pointer;
-`;
-
-export const BottomBox = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 35vh;
-
-  color: white;
-  background-color: #676767;
-  &p {
-    position: relative;
-    left: 10%;
-    ${({ theme: { fonts } }) => fonts.korean.emphasis};
-  }
-`;
-export const InformationBox = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: white;
-  left: 5%;
-  ${({ theme: { fonts } }) => fonts.korean.default};
-  &span {
-    ${({ theme: { fonts } }) => fonts.korean.emphasis};
-  }
 `;

@@ -34,7 +34,7 @@ export const ProfileImg = styled.div`
   border-radius: 50%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.nonActive};
   z-index: 5;
-  ${({ theme: { animation } }) => animation.SKELETON_ANIMATION};
+  ${({ theme: { animation } }) => animation.skeletonAnimation};
 `;
 
 export const BackgroundImg = styled.div`
@@ -46,7 +46,7 @@ export const BackgroundImg = styled.div`
   height: 96px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   padding: 1.2rem;
-  ${({ theme: { animation } }) => animation.SKELETON_ANIMATION};
+  ${({ theme: { animation } }) => animation.skeletonAnimation};
 `;
 
 export const TeamStatus = styled.div`
@@ -81,7 +81,7 @@ export const SingleInfo = styled.div`
   width: ${({ width = 50 }) => width}%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
   margin-bottom: 8px;
-  ${({ theme: { animation } }) => animation.SKELETON_ANIMATION};
+  ${({ theme: { animation } }) => animation.skeletonAnimation};
 `;
 
 // * : 구분선
@@ -115,7 +115,7 @@ export const SkillImage = styled.div`
   height: 50px;
   border-radius: 50%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};
-  ${({ theme: { animation } }) => animation.SKELETON_ANIMATION};
+  ${({ theme: { animation } }) => animation.skeletonAnimation};
 `;
 
 export const LeftAngle = styled.button`
@@ -157,7 +157,7 @@ export const SingleIndicator = styled.div`
   ${({ theme: { mixin } }) => mixin.flexCenter({ direction: 'row' })};
   gap: 4px;
   > div {
-    ${({ theme: { animation } }) => animation.SKELETON_ANIMATION};
+    ${({ theme: { animation } }) => animation.skeletonAnimation};
   }
   > div:first-child {
     width: 20px;

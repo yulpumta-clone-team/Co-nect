@@ -11,7 +11,8 @@ export default function Slogan() {
   const { inputValues, validateError } = useEssentialFormsState();
   const { onChangeHandler, isTargetSatisfyValidate, handleClickNextButton } =
     useEssentialFormsAction();
-  const isSloganValidateError = isTargetSatisfyValidate('slogan');
+  const isSloganValidateError = isTargetSatisfyValidate('slogan'); // 에러가 있으면 true
+  const canActiveNextButton = Boolean(!inputValues.slogan) || isSloganValidateError;
   return (
     <S.Content>
       <h2>슬로건을 입력해주세요.</h2>
@@ -28,7 +29,7 @@ export default function Slogan() {
       <S.NextButtonContainer>
         <Button
           theme="primary"
-          disabled={isSloganValidateError}
+          disabled={canActiveNextButton}
           customStyle={S.NextButton}
           onClick={handleClickNextButton}
         >

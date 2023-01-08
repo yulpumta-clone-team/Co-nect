@@ -1,6 +1,6 @@
 import { css, keyframes } from 'styled-components/macro';
 
-const skeletionAnimationKeyFrames = keyframes`
+const skeletonAnimationKeyFrames = keyframes`
    0% {
     transform: translateX(-40%);
   }
@@ -9,14 +9,14 @@ const skeletionAnimationKeyFrames = keyframes`
   }
 `;
 
-export const SKELETON_ANIMATION = css`
+const skeletonAnimation = css`
   &::before {
     content: '';
     position: absolute;
     transform: translateX(-80px);
     height: inherit;
     width: inherit;
-    animation: ${skeletionAnimationKeyFrames} 1s infinite;
+    animation: ${skeletonAnimationKeyFrames} 1s infinite;
     z-index: inherit;
     background-image: linear-gradient(
       to left,
@@ -30,7 +30,7 @@ export const SKELETON_ANIMATION = css`
 `;
 
 const animation = {
-  SKELETON_ANIMATION,
+  skeletonAnimation,
 };
 
 export default animation;

@@ -3,7 +3,7 @@ import useForm from 'hooks/useForm';
 import TextInput from 'components/Common/TextInput';
 import Divider from 'components/Common/Divider';
 import Button from 'components/Common/Button';
-import SocailLoginButtons from 'components/SocialLoginButtons';
+import SocialLoginButtons from 'components/SocialLoginButtons';
 import BackButton from 'components/Common/BackButton';
 import { signUpParser } from 'service/auth/auth.parser';
 import { ROUTE } from 'constant/route.constant';
@@ -28,7 +28,7 @@ export default function SignUp() {
       validate: signUpValidate,
     });
 
-  const canActiveSingupButton = !satisfyAllValidates || isEmailDuplicate;
+  const canActiveSignUpButton = !satisfyAllValidates || isEmailDuplicate;
 
   return (
     <S.Container>
@@ -37,7 +37,7 @@ export default function SignUp() {
         <h2>환영합니다!</h2>
         <span>회원 가입을 통해 팀에게 꼭 맞는 팀원을 만나보세요!</span>
       </S.Header>
-      <S.Form onSubmit={submitHandler} id="signupForm">
+      <S.Form onSubmit={submitHandler} id="signUpForm">
         <S.DuplicateCheckInput>
           <TextInput
             name="email"
@@ -78,15 +78,15 @@ export default function SignUp() {
       </S.Form>
       <Button
         theme="primary"
-        form="signupForm"
+        form="signUpForm"
         type="submit"
-        disabled={canActiveSingupButton}
+        disabled={canActiveSignUpButton}
         customStyle={S.SubmitButton}
       >
         Sign up
       </Button>
       <Divider width="500px" marginTop="73px" marginBottom="38px" />
-      <SocailLoginButtons>소셜계정으로 회원가입</SocailLoginButtons>
+      <SocialLoginButtons>소셜계정으로 회원가입</SocialLoginButtons>
     </S.Container>
   );
 }
