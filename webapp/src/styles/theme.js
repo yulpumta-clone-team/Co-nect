@@ -1,6 +1,7 @@
 import { css } from 'styled-components/macro';
 import mixin from './mixin';
 import animation from './animation';
+import media from './media';
 
 export const FONT = {
   FAMILY: {
@@ -218,6 +219,6 @@ export const device = {
   pc: `screen and (max-width: ${deviceSizes.pc})`,
 };
 
-const theme = { fonts, colors, COLORS, device, zIndex, mixin, animation };
+const theme = { fonts, colors, COLORS, device, zIndex, mixin, animation, media };
 
 export default theme;
