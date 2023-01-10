@@ -16,7 +16,7 @@ EditTeamPostDetail.propTypes = {
 };
 
 export default function EditTeamPostDetail({ targetTeam }) {
-  const naviate = useNavigate();
+  const navigate = useNavigate();
   const { teamId, teamName, teamImage, techSkills, hopeSession, content, slogan, writerInfo } =
     teamDetailParser(targetTeam);
 
@@ -48,7 +48,7 @@ export default function EditTeamPostDetail({ targetTeam }) {
       successMessage: API_MESSAGE.SUCCESS_EDIT_TEAM,
     });
     setTimeout(() => {
-      naviate(ROUTE.TEAM);
+      navigate(ROUTE.TEAM);
     }, 1000);
   };
 

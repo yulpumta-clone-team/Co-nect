@@ -13,7 +13,8 @@ import { mockEssentialInfo } from './essentialInfo';
 const userHandler = [
   // 유저 필수 정보 생성
   rest.post(ROOT_API_URL + API.USER.ESSENTIAL_INFO, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
+    return randomResponse(res, ctx, successResponseWithEmptyData);
+    // return res(ctx.status(200), ctx.delay(2000), ctx.json(successResponseWithEmptyData));
   }),
   // 유저 필수 정보 조회
   rest.get(ROOT_API_URL + API.USER.ESSENTIAL_INFO, (req, res, ctx) => {
@@ -52,7 +53,7 @@ const userHandler = [
   }),
   // 유저 정보 수정 요청
   rest.post(`${ROOT_API_URL + API.USER.ESSENTIAL_INFO}/:id`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResponseWithData(userDetail)));
+    return res(ctx.status(200), ctx.delay(3000), ctx.json(getResponseWithData(userDetail)));
     // return res(ctx.status(403), ctx.json(errorResponse));
   }),
 ];

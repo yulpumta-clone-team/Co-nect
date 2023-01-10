@@ -170,11 +170,11 @@ const useAuthService = () => {
   };
 
   const requestUpdateUserProfile = async (submitData) => {
-    await updateUserProfileExecution({
+    const response = await updateUserProfileExecution({
       newConfig: { data: submitData },
       successMessage: API_MESSAGE.SUCCESS_SAVE_USER_INFO,
     });
-    handleUpdateUserInfo();
+    if (response) handleUpdateUserInfo();
   };
 
   return {

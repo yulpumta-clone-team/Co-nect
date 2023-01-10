@@ -11,12 +11,13 @@ export const getResponseWithData = (data) => ({
   data,
 });
 
-export const getRandomStatusErrorCode = () => (Math.random() > 0.4 ? 200 : 500);
+export const getRandomStatusErrorCode = () => (Math.random() > 0.7 ? 200 : 500);
 
 export const errorResponse = {
   code: 1000,
   message: 'mock API 임시 에러 메세지',
   status: 'Denied',
+  isSuccess: false,
 };
 
 export const randomResponse = (res, ctx, successData) => {
@@ -28,7 +29,7 @@ export const randomResponse = (res, ctx, successData) => {
 
   return res(
     ctx.status(randomStatusErrorCode),
-    ctx.delay(1500),
+    ctx.delay(2000),
     ctx.json(getResponseWithData(successData)),
   );
 };

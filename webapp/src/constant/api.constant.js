@@ -26,7 +26,7 @@ export const API = {
     LOGIN: '/user/login',
     SIGNUP: '/user/join',
     LOGOUT: '/user/logout',
-    WITHDRAWAL: '/user/widthdrawal',
+    WITHDRAWAL: '/user/withdrawal',
     CHECK_DUPLICATE_EMAIL: '/user/checkDuplicate/email',
     CHECK_DUPLICATE_NICKNAME: '/user/checkDuplicate/name',
   },
