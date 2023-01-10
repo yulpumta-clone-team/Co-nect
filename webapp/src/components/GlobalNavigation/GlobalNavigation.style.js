@@ -23,6 +23,7 @@ export const TopContainer = styled.div`
 
 // 3개의 컨테이너를 담는 전체 컨테이너
 export const BoardList = styled.ul`
+  position: relative;
   display: flex;
   flex-direction: center;
   align-items: center;
@@ -43,10 +44,16 @@ export const LinkList = styled.ul`
   width: 20%;
   height: 100%;
   justify-content: center;
-  gap: 12px;
   align-items: center;
-
+  gap: 12px;
   ${({ theme: { fonts } }) => fonts.english.title};
+  ${({ theme: { media } }) =>
+    media.mobile(css`
+      display: none;
+      position: absolute;
+      flex-direction: column;
+      justify-content: flex-start;
+    `)}
 `;
 
 export const AssignList = styled.ul`
