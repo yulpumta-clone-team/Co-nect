@@ -8,15 +8,15 @@ import { emailRegex, passwordRegex } from 'constant/service.constant';
  */
 
 /**
- * 로그인: Erros Object - input들의 key, value로 이뤄진 객체
+ * 로그인: Errors Object - input들의 key, value로 이뤄진 객체
  * @typedef {Object} validateObj
  * @property {string} email  email
  * @property {string} password  password
  */
 
 /**
- * login vaidation
- * @param {validateObj} validtionObj input들의 key, value로 이뤄진 객체
+ * login validation
+ * @param {validateObj} validationObj input들의 key, value로 이뤄진 객체
  * @returns {validateErrors} input들의 key, value로 이뤄진 에러 객체
  */
 export const loginValidate = ({ email, password }) => {
@@ -51,7 +51,7 @@ export const loginValidate = ({ email, password }) => {
  */
 
 /**
- * 회원가입: Erros Object - input들의 key, value로 이뤄진 객체
+ * 회원가입: Errors Object - input들의 key, value로 이뤄진 객체
  * @typedef {Object} validateObj
  * @property {string} email  email
  * @property {string} password  password
@@ -59,14 +59,15 @@ export const loginValidate = ({ email, password }) => {
  */
 
 /**
- * signup vaidation
- * @param {validateObj} validtionObj input들의 key, value로 이뤄진 객체
+ * signup validation
+ * @param {validateObj} validationObj input들의 key, value로 이뤄진 객체
  * @returns {validateErrors} input들의 key, value로 이뤄진 에러 객체
  */
 export const signUpValidate = ({ email, password, verifiedPassword }) => {
   const validateErrors = {
     email: '',
     password: '',
+    verifiedPassword: '',
   };
   if (!email) {
     validateErrors.email = '이메일이 입력되지 않았습니다. ';

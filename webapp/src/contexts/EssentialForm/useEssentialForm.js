@@ -1,28 +1,26 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useToastNotificationAction } from 'contexts/ToastNotification';
 import useForm from 'hooks/useForm';
 import { ESSENTIAL_INFO_LINKS, ROUTE } from 'constant/route.constant';
 import { essentialInfoParser } from 'service/user/user.parser';
 import useAuthService from 'hooks/useAuthService';
 import useFileUploader from 'hooks/useFileUploader';
 import { essentialValidation } from 'service/user/user.validation';
-import { hopeSessionOption, jobOptions } from 'constant';
 import useCheckUserDuplicate from 'hooks/useCheckUserDuplicate';
 
 const initialValues = {
   nickname: '', // 입력하지 않으면 서브 페이지가 넘어가지 않습니다.
-  profileImage: 'init', // TODO: 뭐라도 넣어야 하는데
-  techSkills: [],
+  profileImage: '',
+  techSkills: [], // 입력하지 않으면 서브 페이지가 넘어가지 않습니다.
   slogan: '', // 입력하지 않으면 서브 페이지가 넘어가지 않습니다.
-  hopeSession: hopeSessionOption[0].value,
-  job: jobOptions[0].value,
+  hopeSession: '',
+  job: '',
   belongTeam: false,
-  introduction: '자기소개를 입력해주세요.',
-  portfolio: '포트폴리오 링크를 입력해주세요.',
+  introduction: '',
+  portfolio: '',
 };
 
-const essentailSubPagesRouteOrder = [
+const essentialSubPagesRouteOrder = [
   ESSENTIAL_INFO_LINKS.NICKNAME,
   ESSENTIAL_INFO_LINKS.SKILL,
   ESSENTIAL_INFO_LINKS.PROFILE_IMAGE,
@@ -51,7 +49,9 @@ const useEssentialForm = () => {
 
   const { requestUpdateUserProfile } = useAuthService();
 
-  const { isNicknameDuplicate, onClickCheckDuplicateNickname } = useCheckUserDuplicate('');
+  const { isNicknameDuplicate, onClickCheckDuplicateNickname } = useCheckUserDuplicate(
+    initialValues.nickname,
+  );
   const { uploadFileOnS3, imageFile, onChangeFile } = useFileUploader();
 
   const uploadImageFileBeforeSubmit = async (submitData) => {
@@ -103,9 +103,9 @@ const useEssentialForm = () => {
 
   const handleClickNextButton = useCallback(() => {
     const currentPathname = location.pathname;
-    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
-    const isCurrentSubPageInLast = currentSubPageIndex === essentailSubPagesRouteOrder.length - 2;
-    const isCurrentSubPageOverLast = currentSubPageIndex > essentailSubPagesRouteOrder.length - 2;
+    const currentSubPageIndex = essentialSubPagesRouteOrder.indexOf(currentPathname);
+    const isCurrentSubPageInLast = currentSubPageIndex === essentialSubPagesRouteOrder.length - 2;
+    const isCurrentSubPageOverLast = currentSubPageIndex > essentialSubPagesRouteOrder.length - 2;
 
     if (isCurrentSubPageInLast) {
       handleApiRequestInLastSubPage();
@@ -113,21 +113,21 @@ const useEssentialForm = () => {
 
     if (isCurrentSubPageOverLast) return;
 
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex + 1], {
+    navigate(essentialSubPagesRouteOrder[currentSubPageIndex + 1], {
       state: { isFirstLogin: true },
     });
   }, [location.pathname, navigate]);
 
   const handleClickPrevButton = useCallback(() => {
     const currentPathname = location.pathname;
-    const currentSubPageIndex = essentailSubPagesRouteOrder.indexOf(currentPathname);
+    const currentSubPageIndex = essentialSubPagesRouteOrder.indexOf(currentPathname);
     const isCurrentSubPageUnderInit = currentSubPageIndex <= 0;
 
     if (isCurrentSubPageUnderInit) {
       navigate(ROUTE.LOGIN);
       return;
     }
-    navigate(essentailSubPagesRouteOrder[currentSubPageIndex - 1], {
+    navigate(essentialSubPagesRouteOrder[currentSubPageIndex - 1], {
       state: { isFirstLogin: true },
     });
   }, [location.pathname, navigate]);

@@ -20,32 +20,32 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
  */
 const useCheckUserDuplicate = (initValue) => {
   const [isEmailDuplicate, setIsEmailDuplicate] = useState(true);
-  const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(!!initValue); // 초기 값이 있으면 중복이 아니라는 뜻
+  const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(true);
   const notifyDispatch = useToastNotificationAction();
 
   /**
    * 초기값과 새로 입력 받은 값이 같은지 다른지
    */
-  const isNickNameSameWithOrigin = (newnickName) => newnickName === initValue;
+  const isNickNameSameWithOrigin = (newNickname) => newNickname === initValue;
 
   /**
    * 입력받은 닉네임이 중복되는지 확인 요청보내는 함수
    * @param {string} 새로 입력한 닉네임
    * @returns {Promise}
    */
-  const onClickCheckDuplicateNickname = async (newnickName) => {
+  const onClickCheckDuplicateNickname = async (newNickname) => {
     let isOverStandard = true;
     setTimeout(() => {
       if (isOverStandard) notifyNewMessage(notifyDispatch, '처리 중입니다...', TOAST_TYPE.Info);
     }, 1500);
     // 원래 사용하던 닉네임과 같으면 확인하지 않음.
-    if (newnickName === initValue) {
+    if (newNickname === initValue) {
       notifyNewMessage(notifyDispatch, '원래 닉네임이어서 사용가능합니다!', TOAST_TYPE.Info);
       isOverStandard = false;
       return;
     }
     try {
-      const response = await authApi.checkDuplicateNickName({ name: newnickName });
+      const response = await authApi.checkDuplicateNickName({ name: newNickname });
       const isDuplicated = response.data;
       if (isDuplicated) {
         notifyNewMessage(notifyDispatch, '이미 사용중인 닉네임입니다!', TOAST_TYPE.Warning);

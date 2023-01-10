@@ -1,4 +1,4 @@
-import { POST_TYPE } from 'constant';
+import { DOMAIN_TYPE } from 'constant';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 import { TECH_SKILLS } from 'constant/techskill.constant';
 
@@ -8,7 +8,7 @@ import { TECH_SKILLS } from 'constant/techskill.constant';
  * @returns {Boolean}
  */
 export function checkIsUserPost(postType) {
-  return postType === POST_TYPE.USER;
+  return postType === DOMAIN_TYPE.USER;
 }
 
 /**

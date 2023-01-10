@@ -1,7 +1,7 @@
 import { API, ROOT_API_URL } from 'constant/api.constant';
 import {
   errorResponse,
-  getResonseWithData,
+  getResponseWithData,
   randomResponse,
   successResponseWithEmptyData,
 } from 'mocks/mockUtils';
@@ -14,7 +14,7 @@ const commentHandler = [
   // GET_USER_COMMENT
   rest.get(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
     // return randomResponse(res, ctx, userComments);
-    return res(ctx.status(200), ctx.delay(1500), ctx.json(getResonseWithData(userComments)));
+    return res(ctx.status(200), ctx.delay(1500), ctx.json(getResponseWithData(userComments)));
   }),
   // POST_USER_COMMENT
   rest.post(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}`, (req, res, ctx) => {
@@ -55,7 +55,7 @@ const commentHandler = [
   // ------------ TEAM ------------
   // GET_TEAM_COMMENT
   rest.get(`${ROOT_API_URL + API.TEAM.INDEX + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResonseWithData(teamComments)));
+    return res(ctx.status(200), ctx.json(getResponseWithData(teamComments)));
   }),
   // POST_TEAM_COMMENT
   rest.post(`${ROOT_API_URL + API.TEAM.INDEX + API.COMMENT.ORIGIN}`, (req, res, ctx) => {

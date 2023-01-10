@@ -27,4 +27,5 @@ export const Button = styled.button`
   background: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
+  padding: 8px;
 `;

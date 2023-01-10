@@ -29,7 +29,12 @@ export const categoryList = [
   { id: 1, value: '팀 소속 X', label: '팀 소속 X' },
 ];
 
-export const POST_TYPE = {
+export const DOMAIN_TYPE = {
   USER: 'user',
   TEAM: 'team',
+};
+
+export const POST_TYPE = {
+  LIKE: 'like',
+  READ: 'read',
 };

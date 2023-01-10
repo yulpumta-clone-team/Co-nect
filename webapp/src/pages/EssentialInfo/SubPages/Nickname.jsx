@@ -15,8 +15,9 @@ export default function Nickname() {
     isTargetSatisfyValidate,
     handleClickNextButton,
   } = useEssentialFormsAction();
-  const isNicknameValidateError = isTargetSatisfyValidate('nickname');
-  const canActiveNextButton = isNicknameValidateError || isNicknameDuplicate;
+  const isNicknameValidateError = isTargetSatisfyValidate('nickname'); // 에러가 있으면 true
+  const canActiveNextButton =
+    Boolean(!inputValues.nickname) || isNicknameValidateError || isNicknameDuplicate; // true -> disable
   return (
     <S.Content>
       <h2>닉네임을 입력해주세요.</h2>

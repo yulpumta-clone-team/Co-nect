@@ -2,7 +2,7 @@ import React from 'react';
 import { loggedUserType } from 'types/user.type';
 import LoginNavigation from './LoginNav';
 
-import * as S from './style';
+import * as S from './GlobalNavigation.style';
 
 export default {
   title: 'Component/LoginNavigation',

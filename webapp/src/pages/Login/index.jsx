@@ -5,7 +5,7 @@ import useForm from 'hooks/useForm';
 import TextInput from 'components/Common/TextInput';
 import Button from 'components/Common/Button';
 import Divider from 'components/Common/Divider';
-import SocailLoginButtons from 'components/SocialLoginButtons';
+import SocialLoginButtons from 'components/SocialLoginButtons';
 import { ROUTE } from 'constant/route.constant';
 import BackButton from 'components/Common/BackButton';
 import { loginParser } from 'service/auth/auth.parser';
@@ -69,7 +69,7 @@ export default function Login({ children }) {
         Login
       </Button>
       <Divider width="500px" marginTop="67px" marginBottom="38px" />
-      <SocailLoginButtons />
+      <SocialLoginButtons />
       {children}
     </S.Container>
   );
