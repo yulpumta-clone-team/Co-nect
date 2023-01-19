@@ -34,7 +34,7 @@ export const createRandomUser = () => ({
   skills: getRandomTechSkills(),
 });
 
-const createRandomUserCard = () => ({
+export const createRandomUserCard = () => ({
   id: faker.datatype.uuid(),
   image: faker.image.avatar,
   name: faker.name.fullName(),

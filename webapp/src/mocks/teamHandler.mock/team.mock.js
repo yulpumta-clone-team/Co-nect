@@ -18,7 +18,7 @@ export const createRandomTeamPost = () => ({
   skills: getRandomTechSkills(),
 });
 
-const createRandomTeamCard = () => ({
+export const createRandomTeamCard = () => ({
   id: faker.datatype.uuid(),
   name: faker.address.cityName(),
   userInfo: createRandomUserInfo(),

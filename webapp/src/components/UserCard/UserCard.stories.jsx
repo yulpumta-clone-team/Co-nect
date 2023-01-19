@@ -1,4 +1,4 @@
-import { userList } from 'mocks/userHandler.mock/usersList';
+import { createRandomUserCard } from 'mocks/userHandler.mock/user.mock';
 import React from 'react';
 import UserCard from './index';
 
@@ -24,5 +24,5 @@ function Template(args) {
 
 export const Default = Template.bind({});
 Default.args = {
-  cardInfo: userList[1],
+  cardInfo: createRandomUserCard(),
 };

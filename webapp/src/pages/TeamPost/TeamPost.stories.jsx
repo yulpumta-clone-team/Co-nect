@@ -1,4 +1,4 @@
-import { teamDetail } from 'mocks/teamHandler.mock/teamDetail';
+import { createRandomTeamPost } from 'mocks/teamHandler.mock/team.mock';
 import React from 'react';
 import TeamPost from './TeamPostDetail';
 
@@ -12,6 +12,8 @@ export default {
 function Template(args) {
   return <TeamPost {...args} />;
 }
+
+const teamDetail = createRandomTeamPost();
 
 export const Default = Template.bind({});
 Default.args = {

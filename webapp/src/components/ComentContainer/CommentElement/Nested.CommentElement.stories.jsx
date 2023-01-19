@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentProvider from 'contexts/Comment/Comment.Provider';
-import { userComment } from 'mocks/commentHandler.mock/userComments';
+import { createComment } from 'mocks/commentHandler.mock/comment.mock';
 import NestedCommentElement from './Nested.CommentElement';
 import * as S from '../Comment.style';
 
@@ -23,8 +23,10 @@ function Template(args) {
   );
 }
 
+const comment = createComment();
+
 export const Default = Template.bind({});
 Default.args = {
   postWriterId: 9021279491,
-  commentInfo: userComment,
+  commentInfo: comment,
 };

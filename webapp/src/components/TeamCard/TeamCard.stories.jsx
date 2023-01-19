@@ -1,4 +1,4 @@
-import { teamsList } from 'mocks/teamHandler.mock/teamsList';
+import { createRandomTeamCard } from 'mocks/teamHandler.mock/team.mock';
 import React from 'react';
 import TeamCard from './index';
 
@@ -22,5 +22,5 @@ function Template(args) {
 
 export const Default = Template.bind({});
 Default.args = {
-  cardInfo: teamsList[3],
+  cardInfo: createRandomTeamCard(),
 };
