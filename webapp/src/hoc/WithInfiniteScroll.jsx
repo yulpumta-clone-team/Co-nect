@@ -98,11 +98,12 @@ export default function WithInfiniteScroll({
           clickLink={clickLink}
           emptyTrigger={emptyTrigger}
           isLoading={isLoading}
-        />
+        >
+          <RefContainer isShow={refDisplay} ref={loadMoreRef}>
+            {cardList.length !== 0 && isLoading && !error.isError && <CardLoader />}
+          </RefContainer>
+        </CardsGrid>
       )}
-      <RefContainer isShow={refDisplay} ref={loadMoreRef}>
-        {isLoading && !error.isError && <CardLoader />}
-      </RefContainer>
       <UpperButton />
     </>
   );
