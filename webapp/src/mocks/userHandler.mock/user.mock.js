@@ -2,6 +2,21 @@ import { getRandomTechSkills } from 'utils';
 import { hopeSessionOption, jobOptions } from 'constant';
 import { faker } from '@faker-js/faker/locale/ko';
 
+export const createRandomUserId = () => ({ userId: faker.datatype.uuid() });
+
+export const createRandomUserIdList = (number) =>
+  Array.from({ length: number }, () => createRandomUserId());
+
+export const createRandomUserInfo = () => ({
+  id: faker.datatype.uuid(),
+  email: faker.internet.email(),
+  name: faker.name.fullName(),
+  image: faker.image.people(320, 320, true),
+});
+
+export const createRandomUserInfoList = (number) =>
+  Array.from({ length: number }, () => createRandomUserInfo());
+
 export const createRandomUser = () => ({
   id: faker.datatype.uuid(),
   email: faker.internet.email(),
@@ -10,7 +25,7 @@ export const createRandomUser = () => ({
   content: faker.lorem.paragraphs(4, '<br/>\n'),
   hopeSession: faker.helpers.arrayElement(hopeSessionOption.map(({ value }) => value)),
   job: faker.helpers.arrayElement(jobOptions.map(({ value }) => value)),
-  status: false,
+  status: Math.random() > 0.4,
   commentCnt: faker.datatype.number({ max: 1000 }),
   likeCnt: faker.datatype.number({ max: 1000 }),
   readCnt: faker.datatype.number({ max: 1000 }),
@@ -26,7 +41,7 @@ const createRandomUserCard = () => ({
   slogan: faker.lorem.sentence(5),
   hopeSession: faker.helpers.arrayElement(hopeSessionOption.map(({ value }) => value)),
   job: faker.helpers.arrayElement(jobOptions.map(({ value }) => value)),
-  status: false,
+  status: Math.random() > 0.4,
   commentCnt: faker.datatype.number({ max: 1000 }),
   likeCnt: faker.datatype.number({ max: 1000 }),
   readCnt: faker.datatype.number({ max: 1000 }),

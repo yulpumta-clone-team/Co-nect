@@ -1,14 +1,14 @@
 import { API, ROOT_API_URL } from 'constant/api.constant';
 import { getResponseWithData, randomResponse } from 'mocks/mockUtils';
 import { rest } from 'msw';
-import { teamComments } from './teamComments';
-import { userComments } from './userComments';
+import { createCommentList } from './comment.mock';
 
 const commentHandler = [
   // ------------ USER ------------
   // GET_USER_COMMENT
   rest.get(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
-    return randomResponse(res, ctx, userComments);
+    const commentList = createCommentList();
+    return randomResponse(res, ctx, commentList);
   }),
   // POST_USER_COMMENT
   rest.post(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}`, (req, res, ctx) => {
@@ -43,7 +43,8 @@ const commentHandler = [
   // ------------ TEAM ------------
   // GET_TEAM_COMMENT
   rest.get(`${ROOT_API_URL + API.TEAM.INDEX + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResponseWithData(teamComments)));
+    const commentList = createCommentList();
+    return randomResponse(res, ctx, commentList);
   }),
   // POST_TEAM_COMMENT
   rest.post(`${ROOT_API_URL + API.TEAM.INDEX + API.COMMENT.ORIGIN}`, (req, res, ctx) => {
