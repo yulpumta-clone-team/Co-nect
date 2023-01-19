@@ -5,6 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "msw": "cross-env REACT_APP_MOCK_TOOL=msw react-scripts start",
+    "build-demo": "cross-env REACT_APP_MOCK_TOOL=demo react-scripts build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
