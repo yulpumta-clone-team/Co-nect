@@ -1,7 +1,7 @@
 export const userComment = {
   userInfo: {
     id: 9021279491,
-    name: '이왜진123',
+    name: '찌미',
     image: '',
   },
   id: 849057383,
@@ -11,7 +11,7 @@ export const userComment = {
     {
       userInfo: {
         id: 9021279491,
-        name: '이왜진123',
+        name: '보리',
         image: '',
       },
       id: 7326788845,
@@ -24,8 +24,8 @@ export const userComment = {
     },
     {
       userInfo: {
-        id: 9021279491,
-        name: '이왜진123',
+        id: 199201927,
+        name: '보리',
         image: '',
       },
       id: 73267888123,
@@ -45,7 +45,7 @@ export const userComments = [
   {
     userInfo: {
       id: 9021279491,
-      name: '이왜진123',
+      name: '찌미',
       image: '',
     },
     id: 849057383,
@@ -55,7 +55,7 @@ export const userComments = [
       {
         userInfo: {
           id: 9021279491,
-          name: '이왜진123',
+          name: '찌미',
           image: '',
         },
         id: 7326788845,
@@ -73,7 +73,7 @@ export const userComments = [
   {
     userInfo: {
       id: 9021279491,
-      name: '이왜진123',
+      name: '찌미',
       image: '',
     },
     id: 4285334543,
@@ -83,7 +83,7 @@ export const userComments = [
       {
         userInfo: {
           id: 9021279491,
-          name: '이왜진123',
+          name: '찌미',
           image: '',
         },
         id: 4649148610,
@@ -105,7 +105,7 @@ export const userComments = [
   {
     userInfo: {
       id: 9021279491,
-      name: '이왜진123',
+      name: '찌미',
       image: '',
     },
     id: 8683220272,

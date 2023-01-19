@@ -11,15 +11,15 @@ NotAllow.propTypes = {
 
 export default function NotAllow({ warnMessage }) {
   const navigate = useNavigate();
-  const backToLogin = () => {
-    navigate(ROUTE.LOGIN);
+  const backToMain = () => {
+    navigate(ROUTE.HOME);
   };
   return (
     <S.Container>
       <h1>NotAllow</h1>
       <h3>{warnMessage}</h3>
-      <Button theme="primary" onClick={backToLogin} customStyle={S.SButton}>
-        로그인 페이지로 이동하기
+      <Button theme="primary" onClick={backToMain} customStyle={S.SButton}>
+        메인 페이지로 이동하기
       </Button>
     </S.Container>
   );

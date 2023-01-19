@@ -1,12 +1,7 @@
-import { API, ROOT_API_URL, TOKEN } from 'constant/api.constant';
-import {
-  getResponseWithData,
-  successResponseWithEmptyData,
-  errorResponse,
-  randomResponse,
-} from 'mocks/mockUtils';
+import { API, ROOT_API_URL } from 'constant/api.constant';
+import { getResponseWithData, successResponseWithEmptyData, randomResponse } from 'mocks/mockUtils';
 import { rest } from 'msw';
-import { mockLoginData, mockSignUpData } from './mockMyData';
+import { mockLoginResponse, mockLoginToken } from './mockMyData';
 
 const authHandler = [
   // 이메일 중복체크 요청
@@ -21,19 +16,13 @@ const authHandler = [
   rest.post(ROOT_API_URL + API.AUTH.LOGIN, (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.set({
-        [TOKEN.ACCESS]:
-          'eyJhbGciOiJIUzI1NiJ9.YXNkZkBhc2RmYXNkZi5jb20.h-oLZnV0pCeNKa_AM3ilQzerD2Uj7bKUn1xDft5DzOk',
-        [TOKEN.REFRESH]:
-          'eyJhbGciOiJIUzI1NiJ9.YXNkZkBhc2RmYXNkZi5jb20.h-oLZnV0pCeNKa_AM3ilQzerD2Uj7bKUn1xDft5DzOk',
-      }),
-      ctx.json(getResponseWithData(mockLoginData)),
+      ctx.set(mockLoginToken),
+      ctx.json(getResponseWithData(mockLoginResponse)),
     );
   }),
   // 회원가입 요청
   rest.post(ROOT_API_URL + API.AUTH.SIGNUP, (req, res, ctx) => {
-    // return res(ctx.status(200), ctx.json(getResonseWithData(mockSignUpData)));
-    return res(ctx.status(500), ctx.json(errorResponse));
+    return randomResponse(res, ctx, {}, '임시: 회원가입에 실패했습니다.');
   }),
   // 로그아웃 요청
   rest.get(ROOT_API_URL + API.AUTH.LOGOUT, (req, res, ctx) => {
