@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NestedCommentElement from '../CommentElement/Nested.CommentElement';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 NestedCommentList.propTypes = {
   postWriterId: PropTypes.number.isRequired,

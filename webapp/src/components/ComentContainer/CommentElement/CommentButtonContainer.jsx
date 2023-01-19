@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Provider';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 CommentButtonContainer.propTypes = {
   isNested: PropTypes.bool.isRequired,

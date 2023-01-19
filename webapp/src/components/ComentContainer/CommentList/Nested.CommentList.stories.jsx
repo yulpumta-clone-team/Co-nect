@@ -3,7 +3,7 @@ import CommentProvider from 'contexts/Comment/Comment.Provider';
 import { userComments } from 'mocks/commentHandler.mock/userComments';
 import RootCommentList from './Root.CommentList';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 export default {
   title: 'component/Root.NestedCommentList',

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
 import HeartFillSvg from 'assets/icons/HeartFillSvg';
 import HeartSvg from 'assets/icons/HeartSvg';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 CommentLikeSvg.propTypes = {
   commentId: PropTypes.number.isRequired,

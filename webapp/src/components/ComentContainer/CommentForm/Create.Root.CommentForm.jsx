@@ -5,7 +5,7 @@ import CheckInput from 'components/Common/CheckInput';
 import { commentFormValidation } from 'service/etc/comment.validation';
 import TextArea from 'components/Common/TextArea';
 import useForm from 'hooks/useForm';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 export default function CreateRootCommentForm() {
   const { createRootCommentSubmitCallback, forceRefetch } = useCommentsAction();

@@ -2,7 +2,7 @@ import React from 'react';
 import CommentProvider from 'contexts/Comment/Comment.Provider';
 import { userComment } from 'mocks/commentHandler.mock/userComments';
 import NestedCommentElement from './Nested.CommentElement';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 export default {
   title: 'component/Comment.NestedCommentElement',
