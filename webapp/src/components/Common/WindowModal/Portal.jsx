@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-Potal.propTypes = {
+Portal.propTypes = {
   children: PropTypes.element.isRequired,
   wrapperId: PropTypes.string.isRequired,
   isLock: PropTypes.bool.isRequired,
 };
 
-export default function Potal({ children, wrapperId, isLock }) {
-  const [potalWrapper, setPotalWrapper] = useState(null);
+export default function Portal({ children, wrapperId, isLock }) {
+  const [portalWrapper, setPortalWrapper] = useState(null);
 
   useEffect(() => {
     if (isLock) {
@@ -21,7 +21,7 @@ export default function Potal({ children, wrapperId, isLock }) {
 
   useLayoutEffect(() => {
     const { isCreated, wrapper } = getRootElementById(wrapperId);
-    setPotalWrapper(wrapper);
+    setPortalWrapper(wrapper);
     return () => {
       if (isCreated) {
         removeElement(wrapper);
@@ -29,9 +29,9 @@ export default function Potal({ children, wrapperId, isLock }) {
     };
   }, [wrapperId]);
 
-  if (!potalWrapper) return null;
+  if (!portalWrapper) return null;
 
-  return createPortal(children, potalWrapper);
+  return createPortal(children, portalWrapper);
 }
 
 const lockWindowScroll = () => {
