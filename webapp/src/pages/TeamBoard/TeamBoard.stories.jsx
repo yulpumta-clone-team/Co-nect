@@ -3,7 +3,7 @@ import TeamCard from 'components/TeamCard';
 import { ROUTE } from 'constant/route.constant';
 import { emptyTrigger } from 'constant/service.constant';
 import handlers from 'mocks/handlers';
-import { teamsList } from 'mocks/teamHandler.mock/teamsList';
+import { createRandomTeamList } from 'mocks/teamHandler.mock/team.mock';
 import React from 'react';
 import TeamBoard from './index';
 
@@ -15,6 +15,8 @@ export default {
     msw: handlers,
   },
 };
+
+const teamsList = createRandomTeamList(10);
 
 function Template(args) {
   return <TeamBoard {...args} />;

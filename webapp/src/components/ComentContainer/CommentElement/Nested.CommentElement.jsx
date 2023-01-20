@@ -7,7 +7,7 @@ import { ISOToyyyymmdd } from 'service/etc/time.util';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import SecretCommentElement from './Secret.CommentElement';
 import CommentLikeSvg from './CommentLikeSvg';
-import * as S from '../style';
+import * as S from '../Comment.style';
 import CommentButtonContainer from './CommentButtonContainer';
 
 NestedCommentElement.propTypes = {

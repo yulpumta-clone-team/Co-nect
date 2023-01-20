@@ -6,7 +6,7 @@ import { commentFormValidation } from 'service/etc/comment.validation';
 import TextArea from 'components/Common/TextArea';
 import CheckInput from 'components/Common/CheckInput';
 import Button from 'components/Common/Button';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 EditCommentForm.propTypes = {
   initialText: PropTypes.string.isRequired,

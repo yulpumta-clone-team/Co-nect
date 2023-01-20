@@ -9,7 +9,8 @@ const ProfileImg = forwardRef(({ src, alt, customStyle, isAssets = false }, ref)
     event.target.onerror = null;
     event.target.src = DefaultProfileImage;
   };
-  const imageSrc = isAssets ? src : S3IMAGE_URL(src);
+  const isMock = src?.substring(0, 5) === 'https'; // mock api로 실행할 때 이미지 보여지게 하는 용도
+  const imageSrc = isAssets || isMock ? src : S3IMAGE_URL(src);
   return (
     <S.ProfileImg
       ref={ref}

@@ -4,7 +4,7 @@ import WithProvider from 'hoc/withProvider';
 import CommentProvider from 'contexts/Comment/Comment.Provider';
 import CreateRootCommentForm from './CommentForm/Create.Root.CommentForm';
 import HocLoadingCommentList from './LoadingCommentList';
-import * as S from './style';
+import * as S from './Comment.style';
 
 export default WithProvider({ Providers: [CommentProvider], Component: CommentContainer });
 

@@ -1,0 +1,44 @@
+name: sub-branch
+
+on:
+  push:
+    branches: ['fe-demo']
+  pull_request:
+    branches: ['fe-demo']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: mv dir
+        run: cd webapp
+        shell: bash
+
+      - name: Setting .env
+        run: |
+          echo "REACT_APP_SERVER_API=${{secrets.REACT_APP_SERVER_API}}" >> .env
+          cat .env
+
+      - name: npm Install
+        run: npm install
+          npm run build-demo
+
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.FE_DEMO_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.FE_DEMO_AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 sync ./build s3://conect-demo

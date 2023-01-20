@@ -1,5 +1,5 @@
 import { API, ROOT_API_URL } from 'constant/api.constant';
-import { getResponseWithData, randomResponse, successResponseWithEmptyData } from 'mocks/mockUtils';
+import { getResponseWithData, successResponseWithEmptyData } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { mockSkills } from './skill.mock';
 
@@ -12,7 +12,6 @@ const etcHandler = [
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   rest.get(ROOT_API_URL + API.TECH_STACK.ALL, (req, res, ctx) => {
-    // return randomResponse(res, ctx, mockSkills);
     return res(ctx.status(200), ctx.delay(1500), ctx.json(getResponseWithData(mockSkills)));
   }),
   rest.get(ROOT_API_URL + API.TECH_STACK.CATEGORY, (req, res, ctx) => {

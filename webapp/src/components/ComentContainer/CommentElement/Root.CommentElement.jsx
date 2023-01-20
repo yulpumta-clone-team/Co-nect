@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useCommentsState } from 'contexts/Comment/Comment.Provider';
 import { commentInfoType } from 'types/comment.type';
-import Image from 'components/Common/Image';
 import { parsedNumberToThreeDigits } from 'utils';
 import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
 import { ISOToyyyymmdd } from 'service/etc/time.util';
+import ProfileImg from 'components/Common/ProfileImg';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
 import NestedCommentList from '../CommentList/Nested.CommentList';
 import EditRootCommentForm from '../CommentForm/Edit.CommentForm';
 import SecretCommentElement from './Secret.CommentElement';
 import NestedCommentToggleButton from './NestedCommentToggleButton';
 import CommentLikeSvg from './CommentLikeSvg';
-import * as S from '../style';
+import * as S from '../Comment.style';
 import CommentButtonContainer from './CommentButtonContainer';
 
 RootCommentElement.propTypes = {
@@ -42,7 +42,11 @@ export default function RootCommentElement({ commentInfo, postWriterId }) {
 
   return (
     <S.CommentContainer>
-      <Image src={writerProfileImage} alt="작성자 프로필 이미지" customStyle={S.UserProfileImage} />
+      <ProfileImg
+        src={writerProfileImage}
+        alt="작성자 프로필 이미지"
+        customStyle={S.UserProfileImage}
+      />
       <S.RootCommentBox>
         <S.PublicCommentBox>
           <S.CommentTitle>

@@ -3,7 +3,7 @@ import UserCard from 'components/UserCard';
 import { ROUTE } from 'constant/route.constant';
 import { emptyTrigger } from 'constant/service.constant';
 import handlers from 'mocks/handlers';
-import { userList } from 'mocks/userHandler.mock/usersList';
+import { createRandomUserList } from 'mocks/userHandler.mock/user.mock';
 import React from 'react';
 import UserBoard from './index';
 
@@ -30,6 +30,8 @@ function EmptyTemplate(args) {
     />
   );
 }
+
+const userList = createRandomUserList(10);
 
 export const Default = Template.bind({});
 Default.args = {};

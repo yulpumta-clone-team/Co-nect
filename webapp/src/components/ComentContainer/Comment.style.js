@@ -4,6 +4,24 @@ export const Container = styled.div`
   width: 100%;
 `;
 
+export const HocContainer = styled.div`
+  width: 100%;
+  ${({ theme: { mixin } }) => mixin.flexCenter({})}
+  gap: 24px;
+  margin-bottom: 12px;
+  h1 {
+    ${({ theme: { fonts } }) => fonts.korean.emphasis}
+  }
+  h3 {
+    ${({ theme: { fonts } }) => fonts.korean.default}
+  }
+`;
+
+export const RefetchButton = css`
+  width: 120px;
+  height: 35px;
+`;
+
 export const FormBox = styled.form`
   width: 100%;
   background-color: ${({ theme: { colors } }) => colors.greyScale.background};

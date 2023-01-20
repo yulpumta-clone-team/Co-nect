@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentProvider from 'contexts/Comment/Comment.Provider';
-import { userComment } from 'mocks/commentHandler.mock/userComments';
+import { createComment } from 'mocks/commentHandler.mock/comment.mock';
 import RootCommentElement from './Root.CommentElement';
 
 export default {
@@ -18,20 +18,22 @@ function Template(args) {
   );
 }
 
+const comment = createComment();
+
 export const Default = Template.bind({});
 Default.args = {
   postWriterId: 9021279491,
-  commentInfo: { ...userComment, secret: false, replies: [] },
+  commentInfo: { ...comment, secret: false, replies: [] },
 };
 
 export const Secret = Template.bind({});
 Secret.args = {
   postWriterId: 9021279491,
-  commentInfo: { ...userComment, secret: true, replies: [] },
+  commentInfo: { ...comment, secret: true, replies: [] },
 };
 
 export const WithReplies = Template.bind({});
 WithReplies.args = {
   postWriterId: 9021279491,
-  commentInfo: { ...userComment, secret: false },
+  commentInfo: { ...comment, secret: false },
 };

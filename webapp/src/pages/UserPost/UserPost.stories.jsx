@@ -1,4 +1,4 @@
-import { userDetail } from 'mocks/userHandler.mock/userDetail';
+import { createRandomUser } from 'mocks/userHandler.mock/user.mock';
 import React from 'react';
 import UserPost from './UserPostDetail';
 
@@ -12,6 +12,8 @@ export default {
 function Template(args) {
   return <UserPost {...args} />;
 }
+
+const userDetail = createRandomUser();
 
 export const Default = Template.bind({});
 Default.args = {

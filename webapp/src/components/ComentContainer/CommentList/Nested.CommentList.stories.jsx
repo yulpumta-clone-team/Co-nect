@@ -1,9 +1,9 @@
 import React from 'react';
 import CommentProvider from 'contexts/Comment/Comment.Provider';
-import { userComments } from 'mocks/commentHandler.mock/userComments';
+import { createCommentList } from 'mocks/commentHandler.mock/comment.mock';
 import RootCommentList from './Root.CommentList';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 export default {
   title: 'component/Root.NestedCommentList',
@@ -23,8 +23,10 @@ function Template(args) {
   );
 }
 
+const commentList = createCommentList();
+
 export const Default = Template.bind({});
 Default.args = {
   postWriterId: 9021279491,
-  comments: userComments,
+  comments: commentList,
 };

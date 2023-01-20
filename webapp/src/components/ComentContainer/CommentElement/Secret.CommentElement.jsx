@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LockClosedSvg from 'assets/icons/LockClosedSvg';
 import { useCommentsAction } from 'contexts/Comment/Comment.Provider';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 SecretCommentElement.propTypes = {
   isNested: PropTypes.bool.isRequired,
