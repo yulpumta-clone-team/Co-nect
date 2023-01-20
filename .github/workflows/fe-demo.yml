@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      working-directory: webapp
 
     strategy:
       matrix:
@@ -23,6 +25,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: ${{ matrix.node-version }}/package-lock.json
       - name: mv dir
         run: cd webapp
         shell: bash
@@ -34,7 +37,11 @@ jobs:
 
       - name: npm Install
         run: npm install
-          npm run build-demo
+        working-directory: ${{ env.working-directory }}
+
+      - name: npm build
+        run: npm run build-demo
+        working-directory: ${{ env.working-directory }}
 
       - name: Deploy
         env:
