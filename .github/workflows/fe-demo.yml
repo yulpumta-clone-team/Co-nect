@@ -1,11 +1,15 @@
 name: sub-branch
 
+# Event for the workflow
 on:
   push:
-    branches: ['fe-demo']
+    branches: ['develop']
+    paths:
+      - './webapp/**'
   pull_request:
-    branches: ['fe-demo']
-
+    branches: ['develop']
+    paths:
+      - './webapp/**'
 jobs:
   build:
     runs-on: ubuntu-18.04
