@@ -9,23 +9,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      working-directory: webapp
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    defaults:
+      run:
+        working-directory: ./webapp
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v1
+      - name: Setup Node
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: ${{ matrix.node-version }}/package-lock.json
+          node-version: '16'
+
       - name: mv dir
         run: cd webapp
         shell: bash
@@ -37,11 +31,9 @@ jobs:
 
       - name: npm Install
         run: npm install
-        working-directory: ${{ env.working-directory }}
 
       - name: npm build
         run: npm run build-demo
-        working-directory: ${{ env.working-directory }}
 
       - name: Deploy
         env:
