@@ -1,5 +1,5 @@
 import { API, ROOT_API_URL } from 'constant/api.constant';
-import { getResponseWithData, randomResponse } from 'mocks/mockUtils';
+import { randomResponse } from 'mocks/mockUtils';
 import { rest } from 'msw';
 import { createCommentList } from './comment.mock';
 

@@ -11,7 +11,7 @@ export const createRandomUserInfo = () => ({
   id: faker.datatype.uuid(),
   email: faker.internet.email(),
   name: faker.name.fullName(),
-  image: faker.image.people(320, 320, true),
+  image: faker.image.avatar(),
 });
 
 export const createRandomUserInfoList = (number) =>
@@ -29,14 +29,14 @@ export const createRandomUser = () => ({
   commentCnt: faker.datatype.number({ max: 1000 }),
   likeCnt: faker.datatype.number({ max: 1000 }),
   readCnt: faker.datatype.number({ max: 1000 }),
-  image: faker.image.avatar,
+  image: faker.image.avatar(),
   name: faker.name.fullName(),
   skills: getRandomTechSkills(),
 });
 
 export const createRandomUserCard = () => ({
   id: faker.datatype.uuid(),
-  image: faker.image.avatar,
+  image: faker.image.avatar(),
   name: faker.name.fullName(),
   slogan: faker.lorem.sentence(5),
   hopeSession: faker.helpers.arrayElement(hopeSessionOption.map(({ value }) => value)),
