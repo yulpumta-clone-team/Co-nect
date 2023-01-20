@@ -14,7 +14,7 @@ export const createRandomTeamPost = () => ({
   commentCnt: faker.datatype.number({ max: 1000 }),
   likeCnt: faker.datatype.number({ max: 1000 }),
   readCnt: faker.datatype.number({ max: 1000 }),
-  image: faker.image.avatar,
+  image: faker.image.avatar(),
   skills: getRandomTechSkills(),
 });
 
@@ -22,7 +22,7 @@ export const createRandomTeamCard = () => ({
   id: faker.datatype.uuid(),
   name: faker.address.cityName(),
   userInfo: createRandomUserInfo(),
-  image: faker.image.avatar,
+  image: faker.image.avatar(),
   slogan: faker.lorem.sentence(5),
   session: faker.helpers.arrayElement(hopeSessionOption.map(({ value }) => value)),
   status: Math.random() > 0.6,
