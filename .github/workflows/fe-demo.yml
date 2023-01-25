@@ -1,51 +1,65 @@
 name: sub-branch
 
+# Event for the workflow
 on:
   push:
-    branches: ['fe-demo']
+    branches: ['develop']
+    paths:
+      - './webapp/**'
   pull_request:
-    branches: ['fe-demo']
-
+    branches: ['develop']
+    paths:
+      - './webapp/**'
 jobs:
   build:
-    runs-on: ubuntu-latest
-    env:
-      working-directory: ./webapp
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: ./webapp
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v1
+      - name: Setup Node
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: ${{ matrix.node-version }}/package-lock.json
-      - name: mv dir
-        run: cd webapp
-        shell: bash
+          node-version: '16'
 
       - name: Setting .env
         run: |
           echo "REACT_APP_SERVER_API=${{secrets.REACT_APP_SERVER_API}}" >> .env
           cat .env
 
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
+
       - name: npm Install
         run: npm install
-        working-directory: ${{ env.working-directory }}
 
       - name: npm build
         run: npm run build-demo
-        working-directory: ${{ env.working-directory }}
+        env:
+          CI: ''
 
       - name: Deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.FE_DEMO_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.FE_DEMO_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ap-northeast-2
         run: |
           aws s3 sync ./build s3://conect-demo

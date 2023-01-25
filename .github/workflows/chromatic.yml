@@ -6,9 +6,13 @@ name: 'Chromatic'
 # Event for the workflow
 on:
   push:
-    branches: ['fe-demo']
+    branches: ['develop']
+    paths:
+      - './webapp/**'
   pull_request:
-    branches: ['fe-demo']
+    branches: ['develop']
+    paths:
+      - './webapp/**'
 
 # List of jobs
 jobs:
