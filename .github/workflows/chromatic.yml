@@ -7,8 +7,12 @@ name: 'Chromatic'
 on:
   push:
     branches: ['develop']
+    paths:
+      - './webapp/**'
   pull_request:
     branches: ['develop']
+    paths:
+      - './webapp/**'
 
 # List of jobs
 jobs:
@@ -17,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: webapp
+        working-directory: ./webapp
     # Job steps
     steps:
       - uses: actions/checkout@v1
@@ -27,12 +31,8 @@ jobs:
           node-version: '16'
       - name: npm install
         run: npm install
-        # 👇 Runs npm in ./frontend
-        working-directory: webapp
       - name: npm run build-storybook
         run: npm run build-storybook
-        # 👇 Runs npm in ./frontend
-        working-directory: webapp
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         uses: chromaui/action@v1

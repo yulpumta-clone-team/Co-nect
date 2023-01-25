@@ -48,6 +48,9 @@ export const deepClone = (originalObject) => JSON.parse(JSON.stringify(originalO
 export const getTechSkillsWithCategory = (key) =>
   TECH_SKILLS.filter((techSkill) => techSkill.key >= key && techSkill.key < key + 100);
 
+export const getTechSkillWithKey = (keys) =>
+  TECH_SKILLS.filter((techSkill) => !!keys.find((key) => key === techSkill.key));
+
 export const getRandomTechSkills = () =>
   TECH_SKILLS.map((techSkill) => (Math.random() > 0.4 ? techSkill : undefined)).filter(
     (v) => v !== undefined,

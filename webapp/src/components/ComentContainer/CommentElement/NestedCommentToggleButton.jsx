@@ -5,7 +5,7 @@ import { useCommentsAction, useCommentsState } from 'contexts/Comment/Comment.Pr
 import { parsedNumberToThreeDigits } from 'utils';
 import CaretUpFillSvg from 'assets/icons/CaretUpFillSvg';
 import CreateReplyCommentForm from '../CommentForm/Create.Reply.CommentForm';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 NestedCommentToggleButton.propTypes = {
   replies: PropTypes.array.isRequired,

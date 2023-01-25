@@ -1,14 +1,14 @@
 import React from 'react';
-import NoutFound from './index';
+import NotFound from './index';
 
 export default {
-  title: 'pages/NoutFound',
-  component: NoutFound,
+  title: 'pages/NotFound',
+  component: NotFound,
   layout: 'fullscreen',
 };
 
 function Template(args) {
-  return <NoutFound {...args} />;
+  return <NotFound {...args} />;
 }
 
 export const Default = Template.bind({});

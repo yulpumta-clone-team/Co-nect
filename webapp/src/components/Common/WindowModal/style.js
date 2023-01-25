@@ -21,9 +21,10 @@ export const defaultStyle = {
   `,
   button: css`
     position: absolute;
-    right: 10px;
-    top: 6px;
-    font-size: 30px;
+    right: 2rem;
+    top: 1rem;
+    font-size: 3rem;
+    padding: 2rem;
   `,
 };
 
@@ -35,6 +36,6 @@ export const Content = styled.div`
   ${defaultStyle.content}
 `;
 
-export const CloseButton = styled.button`
+export const CloseButton = css`
   ${defaultStyle.button}
 `;

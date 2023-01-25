@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Potal from './Potal';
+import Portal from './Portal';
 import * as S from './style';
+import Button from '../Button';
 
 Modal.propTypes = {
   children: PropTypes.element.isRequired,
@@ -13,13 +14,15 @@ Modal.propTypes = {
 export default function Modal({ children, wrapperId, isOpen, onClose }) {
   if (!isOpen) return null;
   return (
-    <Potal wrapperId={wrapperId} isLock>
+    <Portal wrapperId={wrapperId} isLock>
       <S.Overlay onClick={onClose}>
         <S.Content onClick={(event) => event.stopPropagation()}>
-          <S.CloseButton onClick={onClose}>&times;</S.CloseButton>
+          <Button theme="primary" onClick={onClose} customStyle={S.CloseButton}>
+            &times;
+          </Button>
           {children}
         </S.Content>
       </S.Overlay>
-    </Potal>
+    </Portal>
   );
 }

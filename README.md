@@ -125,9 +125,9 @@
   
 <div>
   
-| 배포 페이지 | 노션 페이지 |
-| :---: | :---: |
-| <a>배포 페이지</a> | <a href="https://dear-phosphorus-929.notion.site/Matching-Project-bfe35250f60d4386a5e5cbc684366edf">👉 Notion Project 바로가기</a> |
+| 배포 페이지 | 데모 페이지 | 노션 페이지 |
+| :---:  |:---: | :---: |
+| <a>배포 페이지</a> | <a href="http://conect-demo.s3-website.ap-northeast-2.amazonaws.com"> 데모 페이지</a> | <a href="https://dear-phosphorus-929.notion.site/Matching-Project-bfe35250f60d4386a5e5cbc684366edf">👉 Notion Project 바로가기</a> |
 
  </div>
 <br/>

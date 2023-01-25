@@ -16,9 +16,17 @@ CardsGrid.propTypes = {
     triggerLink: PropTypes.string.isRequired,
     triggerMessage: PropTypes.string.isRequired,
   }),
+  children: PropTypes.node.isRequired,
 };
 
-export default function CardsGrid({ CardComponent, cards, isLoading, clickLink, emptyTrigger }) {
+export default function CardsGrid({
+  CardComponent,
+  cards,
+  isLoading,
+  clickLink,
+  emptyTrigger,
+  children,
+}) {
   const { emptyMessage, triggerLink, triggerMessage } = emptyTrigger;
   const navigate = useNavigate();
   const handleClickCardComponent = (cardId) => {
@@ -32,6 +40,7 @@ export default function CardsGrid({ CardComponent, cards, isLoading, clickLink, 
     return (
       <S.Cards>
         <SimpleListComponent Component={CardLoader} idx={3} />
+        {children}
       </S.Cards>
     );
 
@@ -53,6 +62,7 @@ export default function CardsGrid({ CardComponent, cards, isLoading, clickLink, 
           />
         ))
       )}
+      {children}
     </S.Cards>
   );
 }

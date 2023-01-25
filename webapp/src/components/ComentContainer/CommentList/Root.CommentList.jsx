@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RootCommentElement from '../CommentElement/Root.CommentElement';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 RootCommentList.propTypes = {
   postWriterId: PropTypes.number.isRequired,

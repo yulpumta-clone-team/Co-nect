@@ -1,27 +1,18 @@
 import { API, ROOT_API_URL } from 'constant/api.constant';
-import {
-  errorResponse,
-  getResponseWithData,
-  randomResponse,
-  successResponseWithEmptyData,
-} from 'mocks/mockUtils';
+import { randomResponse } from 'mocks/mockUtils';
 import { rest } from 'msw';
-import { teamComments } from './teamComments';
-import { userComments } from './userComments';
+import { createCommentList } from './comment.mock';
 
 const commentHandler = [
   // ------------ USER ------------
   // GET_USER_COMMENT
   rest.get(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
-    // return randomResponse(res, ctx, userComments);
-    return res(ctx.status(200), ctx.delay(1500), ctx.json(getResponseWithData(userComments)));
+    const commentList = createCommentList();
+    return randomResponse(res, ctx, commentList);
   }),
   // POST_USER_COMMENT
   rest.post(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}`, (req, res, ctx) => {
-    // return randomResponse(res, ctx, {});
-    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
-    // return res(ctx.status(403), ctx.json(errorResponse));
-    // return res(ctx.status(500), ctx.json(errorResponse));
+    return randomResponse(res, ctx, {});
   }),
   // DELETE_USER_COMMENT
   rest.delete(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
@@ -32,10 +23,7 @@ const commentHandler = [
     return randomResponse(res, ctx, {});
   }),
   // POST_USER_REPLY
-  rest.post(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.NESTED}`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
-    // return randomResponse(res, ctx, {});
-  }),
+  rest.post(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.NESTED}`, (req, res, ctx) => {}),
   // DELETE_USER_REPLY
   rest.delete(`${ROOT_API_URL + API.USER.INDEX + API.COMMENT.NESTED}/:id`, (req, res, ctx) => {
     return randomResponse(res, ctx, {});
@@ -55,7 +43,8 @@ const commentHandler = [
   // ------------ TEAM ------------
   // GET_TEAM_COMMENT
   rest.get(`${ROOT_API_URL + API.TEAM.INDEX + API.COMMENT.ORIGIN}/:id`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResponseWithData(teamComments)));
+    const commentList = createCommentList();
+    return randomResponse(res, ctx, commentList);
   }),
   // POST_TEAM_COMMENT
   rest.post(`${ROOT_API_URL + API.TEAM.INDEX + API.COMMENT.ORIGIN}`, (req, res, ctx) => {

@@ -5,7 +5,7 @@ import Button from 'components/Common/Button';
 import useForm from 'hooks/useForm';
 import { commentFormValidation } from 'service/etc/comment.validation';
 import TextArea from 'components/Common/TextArea';
-import * as S from '../style';
+import * as S from '../Comment.style';
 
 export default function CreateReplyCommentForm() {
   const { createReplyCommentSubmitCallback, resetCreateReplyTargetCommentId, forceRefetch } =
