@@ -132,6 +132,15 @@
  </div>
 <br/>
   
+## 🎥 영상
+  
+<div align="center">
+  <a href="https://youtu.be/4wAkjlLUjQA"><img width="523" alt="영상 시작 사진" src="https://user-images.githubusercontent.com/38005874/215108611-c62f5937-f19e-4045-b9b5-bae84d2d37cf.png">
+</a>
+</div>
+
+</br>
+  
 ## 👀 프로젝트 주요 기능
 
 | 화면                                                                                                                              | 기능                                                                         |
