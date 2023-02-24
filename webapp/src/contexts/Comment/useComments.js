@@ -32,7 +32,12 @@ const useComments = () => {
 
   // api관련 로직
   // Query 요청
-  const { state, handleState, forceRefetch } = useAxios({
+  const {
+    state,
+    handleState,
+    requestQuery: getCommentAPI,
+    forceRefetch,
+  } = useAxios({
     axiosInstance: commentApi.GET_COMMENT,
     axiosConfig: { postType, postId },
   });
@@ -105,6 +110,7 @@ const useComments = () => {
       content,
     });
     await postCommentApi({ newConfig: { postType, data: newCommentData } });
+    await getCommentAPI();
   };
 
   /**
@@ -121,6 +127,7 @@ const useComments = () => {
       content,
     });
     await postReplyApi({ newConfig: { postType, data: newCommentData } });
+    await getCommentAPI();
   };
 
   /**
@@ -141,6 +148,7 @@ const useComments = () => {
       newConfig: { postType, id: editTargetCommentId, data: newCommentData },
     });
     resetEditTargetCommentId();
+    await getCommentAPI();
   };
 
   /**
@@ -207,10 +215,11 @@ const useComments = () => {
    */
   const handleClickLikeThumb = async (likedUserIds, commentId, parentId) => {
     if (isLikedUserIdsContainLoggedInUserId(likedUserIds)) {
-      removeLike(postType, commentId, parentId);
+      await removeLike(postType, commentId, parentId);
     } else {
-      addLike(postType, commentId, parentId);
+      await addLike(postType, commentId, parentId);
     }
+    await getCommentAPI();
   };
 
   /**
