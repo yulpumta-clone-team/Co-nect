@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 const useCommentApi = (initKey, initInstance, initConfig) => {
   const notifyDispatch = useToastNotificationAction();
-  const { handleExiredToken } = useAuthService();
+  const { handleExpiredToken } = useAuthService();
   const getInstance = {
     key: initKey,
     instance: initInstance,
@@ -39,7 +39,7 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
     setAxiosInstance({ key: initKey, instance: initInstance, config: initConfig });
   };
 
-  const execution = async () => {
+  const requestCommand = async () => {
     let isOverStandard = true;
     setTimeout(() => {
       if (isOverStandard) notifyNewMessage(notifyDispatch, API_MESSAGE.LOADING, TOAST_TYPE.Info);
@@ -51,17 +51,17 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
       const { data: responseData } = await instance({ ...config, signal: ctrl.signal });
       console.log('data', responseData);
       notifyNewMessage(notifyDispatch, '요청 성공', TOAST_TYPE.Success);
-      getExecution();
+      requestQuery();
     } catch (error) {
       console.error(error);
-      handleExiredToken(error.httpStatus);
+      handleExpiredToken(error.httpStatus);
       notifyNewMessage(notifyDispatch, error.message, TOAST_TYPE.Error);
     } finally {
       isOverStandard = false;
     }
   };
 
-  const getExecution = async () => {
+  const requestQuery = async () => {
     setIsLoading(true);
     try {
       const ctrl = new AbortController();
@@ -90,9 +90,9 @@ const useCommentApi = (initKey, initInstance, initConfig) => {
 
   useEffect(() => {
     if (isGetRequest) {
-      getExecution();
+      requestQuery();
     } else {
-      execution();
+      requestCommand();
     }
     return () => controller && controller.abort();
   }, [trigger]);
