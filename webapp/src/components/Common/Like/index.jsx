@@ -14,11 +14,11 @@ Like.propTypes = {
 export default function Like({ id, initValue }) {
   const [isActive, setIsActive] = useState(initValue);
 
-  const { notGetExecution: addTeamLike } = useAxios({
+  const { requestCommand: addTeamLike } = useAxios({
     axiosInstance: teamApi.ADD_TEAM_LIKE,
     immediate: false,
   });
-  const { notGetExecution: deleteTeamLike } = useAxios({
+  const { requestCommand: deleteTeamLike } = useAxios({
     axiosInstance: teamApi.DELETE_TEAM_LIKE,
     immediate: false,
   });
