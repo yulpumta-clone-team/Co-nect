@@ -7,7 +7,7 @@ import RootCommentList from './CommentList/Root.CommentList';
 import * as S from './Comment.style';
 
 HocLoadingCommentList.propTypes = {
-  postWriterId: PropTypes.number.isRequired,
+  postWriterId: PropTypes.string.isRequired,
 };
 
 export default function HocLoadingCommentList({ postWriterId }) {
@@ -21,10 +21,10 @@ export default function HocLoadingCommentList({ postWriterId }) {
       </S.HocContainer>
     );
 
-  if (apiError.isError)
+  if (apiError)
     return (
       <S.HocContainer>
-        <h1>{apiError.msg}</h1>
+        <h1>{apiError.message}</h1>
         <Button theme="primary" onClick={forceRefetch} customStyle={S.RefetchButton}>
           재요청하기
         </Button>
