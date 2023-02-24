@@ -1,0 +1,18 @@
+{
+  "plugins": ["plugins/markdown"],
+  "source": {
+    "include": ["src/"],
+    "includePattern": ".js(x)?$",
+    "excludePattern": "^(node_modules|docs)"
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "theme": "cosmo"
+  }
+}
