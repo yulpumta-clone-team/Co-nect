@@ -1,7 +1,7 @@
 /**
  * 유저 필수 정보 서버측 스키마
  * @typedef UserInfoSchema
- * @property {number} id
+ * @property {string} id
  * @property {string} name
  * @property {string} image
  */
@@ -9,7 +9,7 @@
 /**
  * 유저의 서버측 스키마
  * @typedef UserSchema
- * @property {number} id
+ * @property {string} id
  * @property {string} name
  * @property {array} skills
  * @property {string} slogan
@@ -20,7 +20,7 @@
  * 유저 카드의 서버측 스키마
  * @typedef UserCardSchema
 
- * @property {number} id
+ * @property {string} id
  * @property {string} name
  * @property {array} skills
  * @property {string} slogan
@@ -33,7 +33,7 @@
 /**
  * 유저 디테일 페이지 서버측 스키마
  * @typedef UserDetailSchema
- * @property {number} id
+ * @property {string} id
  * @property {string} name
  * @property {array} skills
  * @property {string} slogan

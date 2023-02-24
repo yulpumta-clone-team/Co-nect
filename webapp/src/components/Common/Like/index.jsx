@@ -7,7 +7,7 @@ import HeartFillSvg from 'assets/icons/HeartFillSvg';
 import * as S from './style';
 
 Like.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   initValue: PropTypes.bool.isRequired,
 };
 

@@ -6,11 +6,11 @@ import HeartSvg from 'assets/icons/HeartSvg';
 import * as S from '../Comment.style';
 
 CommentLikeSvg.propTypes = {
-  commentId: PropTypes.number.isRequired,
-  parentId: PropTypes.number,
+  commentId: PropTypes.string.isRequired,
+  parentId: PropTypes.string,
   likedUserIds: PropTypes.arrayOf(
     PropTypes.shape({
-      userId: PropTypes.number.isRequired,
+      userId: PropTypes.string.isRequired,
     }),
   ),
 };

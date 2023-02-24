@@ -1,7 +1,7 @@
 /**
  * 팀 서버측 스키마
  * @typedef TeamSchema
- * @property {number} id
+ * @property {string} id
  * @property {string} name
  * @property {array} skills
  * @property {string} slogan
@@ -12,7 +12,7 @@
 /**
  * 팀 카드의 서버측 스키마
  * @typedef TeamCardSchema
- * @property {number} id
+ * @property {string} id
  * @property {string} name
  * @property {array} skills
  * @property {string} slogan
@@ -27,7 +27,7 @@
 /**
  * 팀 디테일 페이지 서버측 스키마
  * @typedef TeamDetailSchema
- * @property {number} id
+ * @property {string} id
  * @property {string} name
  * @property {array} skills
  * @property {string} slogan
