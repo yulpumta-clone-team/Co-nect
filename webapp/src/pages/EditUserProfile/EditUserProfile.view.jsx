@@ -72,7 +72,7 @@ export default function EditUserProfileView({
         <S.ProfileImageContainer>
           {profileImageSrc ? (
             <S.InputTypeImageHandler htmlFor="profileImage">
-              <Image alt="upload" src={profileImageSrc} customStyle={S.ImageThunbnail} />
+              <Image alt="upload" src={profileImageSrc} customStyle={S.ImageThumbnail} />
               <S.ImageEditButton onClick={onUploadButtonClick} type="button">
                 <EditImageSvg />
               </S.ImageEditButton>

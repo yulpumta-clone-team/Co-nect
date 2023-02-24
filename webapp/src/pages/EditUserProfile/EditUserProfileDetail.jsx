@@ -18,8 +18,8 @@ EditUserProfileDetail.propTypes = {
 };
 
 export default function EditUserProfileDetail({ targetUser }) {
-  const naviate = useNavigate();
-  const parsedTargerUserInfo = userDetailParser(targetUser);
+  const navigate = useNavigate();
+  const parsedTargetUserInfo = userDetailParser(targetUser);
   const {
     userId,
     nickname,
@@ -31,7 +31,7 @@ export default function EditUserProfileDetail({ targetUser }) {
     belongTeam,
     introduction,
     portfolio,
-  } = parsedTargerUserInfo;
+  } = parsedTargetUserInfo;
   const parsedSkillStack = skillStackParser(techSkills);
 
   const { isNicknameDuplicate, isNickNameSameWithOrigin, onClickCheckDuplicateNickname } =
@@ -63,7 +63,7 @@ export default function EditUserProfileDetail({ targetUser }) {
       successMessage: API_MESSAGE.SUCCESS_EDIT_USER,
     });
     setTimeout(() => {
-      naviate(ROUTE.USER);
+      navigate(ROUTE.USER);
     }, 1000);
   };
 
@@ -92,7 +92,6 @@ export default function EditUserProfileDetail({ targetUser }) {
   });
 
   const profileImageSrc = (imageFile && URL.createObjectURL(imageFile)) || inputValues.profileImage;
-
   return (
     <EditUserProfileView
       inputValues={inputValues}
