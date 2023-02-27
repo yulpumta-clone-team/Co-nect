@@ -37,7 +37,7 @@ const FORM_MODE = {
  * @property {Object} validateError   form에서 사용하는 input에 해당하는 에러 객체
  * @property {(Event) => void} onChangeHandler  inputValues 중 모든 text Input OnChange를 위한 함수
  * @property {(Event) => void} onChangeHandlerWithSelect  inputValues 중 모든 select 태그 OnChange를 위한 함수
- * @property {(Event) => Promise<void>} submitHandler  모든 validate 조건을 만족하면 submitcallback 실행
+ * @property {(Event) => Promise<void>} submitHandler  모든 validate 조건을 만족하면 submitCallback 실행
  * @property {(target: string) => boolean} isTargetSatisfyValidate  validation을 체크하고 싶은 input의 키 값을 넣으면 boolean을 반환
  * @property {boolean} satisfyAllValidates  validateError 객체에 있는 모든 데이터의 value가 ""이거나 null이면 true를 반환
  */
