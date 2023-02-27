@@ -26,7 +26,7 @@ import useAxios from './useAxios';
  * @property {() => Promise<void>} requestLogout 로그아웃 api 실행
  * @property {() => Promise<void>} saveJwtToken jwt토근을 프론트에 저장
  * @property {() => Promise<void>} checkIsFirstLogin 첫 로그인인지 확인하는 함수
- * @property {(httpStatus: number) => void} handleExiredToken httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
+ * @property {(httpStatus: number) => void} handleExpiredToken httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
  */
 
 /**
