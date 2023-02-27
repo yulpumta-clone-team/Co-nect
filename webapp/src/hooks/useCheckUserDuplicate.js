@@ -7,8 +7,8 @@ import { TOAST_TYPE } from 'contexts/ToastNotification/type';
 /**
  * useCheckNicknameDuplicate을 사용하는 곳에서 사용할 method 및 state
  * @typedef {Object} useCheckNicknameDuplicateReturns
- * @property {boolean} isNicknameDuplicate db에 중복되는 닉네임이 있는지 없는지
- * @property {boolean} isNickNameSameWithOrigin 초기값과 새로 입력 받은 값이 같은지 다른지
+ * @property {boolean} isNicknameDuplicate db에 중복되는 닉네임이 있는지 여부
+ * @property {boolean} isNickNameSameWithOrigin  초기값과 새로 입력 받은 값이 같은지 여부
  * @property {(event) => void} onChangeCheckNicknameDuplicate 새로 입력 받는 닉네임의 change핸들러
  * @property {() => Promise<void>} onClickCheckDuplicateNickname 입력받은 값이 중복되는지 확인 요청보내는 함수
  */
