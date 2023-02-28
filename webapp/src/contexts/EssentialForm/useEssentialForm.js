@@ -57,7 +57,7 @@ const useEssentialForm = () => {
   const uploadImageFileBeforeSubmit = async (submitData) => {
     const response = await uploadFileOnS3();
     if (response) {
-      const { id, path } = response;
+      const { path } = response;
       return { ...submitData, profileImage: path };
     }
     return submitData;

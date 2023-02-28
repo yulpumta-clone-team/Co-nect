@@ -1,8 +1,14 @@
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
+/**
+ * input 태그의 에러 체크를 언제할지 정하는 mode (onChange, onSubmit)
+ * @typedef {Object} FormMode
+ * @property {"onChange"} onChange 각각의 input 태그 에서 onchange이벤트가 발생할 때 onchange가 발생한 태그만 validation체크
+ * @property {"onSubmit"} onSubmit 제출할 때 모든 input태그의 validation 체크
+ */
 const FORM_MODE = {
   onChange: 'onChange',
   onSubmit: 'onSubmit',
@@ -21,7 +27,7 @@ const FORM_MODE = {
  * @property {Object} initialValues  form에서 사용할 input들의 객체
  * @property {(inputValues: Object) => Promise<void>} submitCallback  form에서 사용할 submit 함수
  * @property {ValidateChecker} validate  form에서 사용할 Input들의 객체에 대한 validation을 체크하는 함수
- * @property {string} mode 체크를 언제할지 정하는 mode (onChange, onSubmit)
+ * @property {FormMode} mode
  */
 
 /**
@@ -31,7 +37,7 @@ const FORM_MODE = {
  * @property {Object} validateError   form에서 사용하는 input에 해당하는 에러 객체
  * @property {(Event) => void} onChangeHandler  inputValues 중 모든 text Input OnChange를 위한 함수
  * @property {(Event) => void} onChangeHandlerWithSelect  inputValues 중 모든 select 태그 OnChange를 위한 함수
- * @property {(Event) => Promise<void>} submitHandler  모든 validate 조건을 만족하면 submitcallback 실행
+ * @property {(Event) => Promise<void>} submitHandler  모든 validate 조건을 만족하면 submitCallback 실행
  * @property {(target: string) => boolean} isTargetSatisfyValidate  validation을 체크하고 싶은 input의 키 값을 넣으면 boolean을 반환
  * @property {boolean} satisfyAllValidates  validateError 객체에 있는 모든 데이터의 value가 ""이거나 null이면 true를 반환
  */
@@ -83,26 +89,23 @@ const useForm = ({ initialValues, submitCallback, validate, mode = FORM_MODE.onC
 
   /**
    * inputValues 중 모든 text Input OnChange를 위한 함수
-   * @param {event}
+   * @param {Event}
    * @return {void}
    */
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setInputValues({ ...inputValues, [name]: value });
     onChangeError(name, value);
-    // const res = validate({ [name]: value });
-    // setValidateError({ ...validateError, [name]: res[name] });
   };
 
   /**
    * inputValues 중 모든 select 태그 OnChange를 위한 함수
-   * @param {event}
+   * @param {Event}
    * @return {void}
    */
   const onChangeHandlerWithSelect = ({ name, value }) => {
     setInputValues({ ...inputValues, [name]: value });
     onChangeError(name, value);
-    // setValidateError(validate({ ...validateError, [name]: value }));
   };
 
   const showEntireError = () => {
@@ -116,23 +119,21 @@ const useForm = ({ initialValues, submitCallback, validate, mode = FORM_MODE.onC
 
   /**
    * 모든 validate 조건을 만족하면 submitcallback 실행
-   * @param {event}
+   * @param {Event}
    * @return {void}
    */
-  const submitHandler = useCallback(
-    async (event) => {
-      event && event.preventDefault();
+  const submitHandler = async (event) => {
+    event && event.preventDefault();
 
-      if (!satisfyAllValidates) {
-        showEntireError();
-        return;
-      }
-      await submitCallback(inputValues);
-      resetInputValues();
-      resetValidateErrors();
-    },
-    [inputValues, resetInputValues, resetValidateErrors, satisfyAllValidates, submitCallback],
-  );
+    if (!satisfyAllValidates) {
+      showEntireError();
+      return;
+    }
+    await submitCallback(inputValues);
+    resetInputValues();
+    resetValidateErrors();
+  };
+
   return {
     inputValues,
     validateError,

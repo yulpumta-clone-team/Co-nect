@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from 'react';
  * @typedef {Object} useDropdownReturns
  * @property {Object} parent 부모에 등록할 useRef 객체
  * @property {boolean} isDropdownOpen 해당 dropdown 컴포넌트를 보여줄지 말지
- * @property {(Event) => void} handleClickOutside 요소 밖을 클릭했을 때 dropdown 컴포넌트를 닫는 함수
  * @property {(Event) => void} shouldCloseDropdown 요소 밖을 클릭했을 때 dropdown 컴포넌트를 닫는 함수
  * @property {() => void} openDropdown dropdown 컴포넌트를 여는 함수
  * @property {() => void} closeDropdown dropdown 컴포넌트를 닫는 함수
@@ -13,7 +12,7 @@ import { useState, useEffect, useRef } from 'react';
 
 /**
  * dropdown컴포넌트를 열고닫기 위한 hooks
- * @param {boolean} initialMode 최초에 보여줄지 말지
+ * @param {boolean} initialMode 최초에 드롭다운 모달을 보여주는지 여부
  * @returns {useDropdownReturns} useDropdown를 사용하는 곳에서 사용할 method 및 state
  */
 const useDropdown = (initialMode = false) => {
@@ -22,13 +21,6 @@ const useDropdown = (initialMode = false) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(initialMode);
 
   const shouldCloseDropdown = (event) => {
-    const isParentExistInComposedPath = event.composedPath().includes(parent.current);
-    if (!isParentExistInComposedPath) {
-      setIsDropdownOpen(false);
-    }
-  };
-
-  const handleClickOutside = (event) => {
     const isParentExistInComposedPath = event.composedPath().includes(parent.current);
     if (!isParentExistInComposedPath) {
       setIsDropdownOpen(false);
@@ -48,17 +40,16 @@ const useDropdown = (initialMode = false) => {
   };
 
   useEffect(() => {
-    window.addEventListener('click', handleClickOutside);
+    window.addEventListener('click', shouldCloseDropdown);
 
     return () => {
-      window.removeEventListener('click', handleClickOutside);
+      window.removeEventListener('click', shouldCloseDropdown);
     };
   }, [parent]);
 
   return {
     parent,
     isDropdownOpen,
-    handleClickOutside,
     shouldCloseDropdown,
     openDropdown,
     closeDropdown,

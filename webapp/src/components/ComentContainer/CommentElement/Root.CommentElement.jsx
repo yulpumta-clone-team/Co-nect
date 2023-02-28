@@ -24,7 +24,6 @@ RootCommentElement.propTypes = {
 export default function RootCommentElement({ commentInfo, postWriterId }) {
   const {
     id: commentId,
-    parentId,
     content,
     secret,
     userInfo: writerInfo,

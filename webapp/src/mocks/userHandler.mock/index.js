@@ -5,7 +5,7 @@ import {
   getResponseWithError,
   successResponseWithEmptyData,
 } from 'mocks/mockUtils';
-import { getTechSkillWithKey } from 'utils';
+import { fakerUniqueNumId, getTechSkillWithKey } from 'utils';
 import { createRandomUser, createRandomUserList } from './user.mock';
 
 let tempEssentialInfo;
@@ -13,12 +13,18 @@ let tempEssentialInfo;
 const userHandler = [
   // 유저 필수 정보 생성
   rest.post(ROOT_API_URL + API.USER.ESSENTIAL_INFO, (req, res, ctx) => {
-    tempEssentialInfo = { ...req.body, id: req.id, skills: getTechSkillWithKey(req.body.skills) };
+    tempEssentialInfo = {
+      ...req.body,
+      id: fakerUniqueNumId(),
+      skills: getTechSkillWithKey(req.body.skills),
+    };
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // 유저 필수 정보 조회
   rest.get(ROOT_API_URL + API.USER.ESSENTIAL_INFO, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(getResponseWithData(tempEssentialInfo)));
+    const randomUser = createRandomUser();
+    const mockUserDetail = tempEssentialInfo || randomUser;
+    return res(ctx.status(200), ctx.json(getResponseWithData(mockUserDetail)));
   }),
   // 유저 목록 조회
   rest.get(ROOT_API_URL + API.USER.INDEX, (req, res, ctx) => {
@@ -56,7 +62,6 @@ const userHandler = [
   }),
   // 유저 정보 수정 요청
   rest.post(`${ROOT_API_URL + API.USER.ESSENTIAL_INFO}/:id`, (req, res, ctx) => {
-    const randomUser = createRandomUser();
     tempEssentialInfo = { id: req.id, ...req.body };
     return res(ctx.status(200), ctx.json(getResponseWithData({ id: req.id, ...req.body })));
   }),

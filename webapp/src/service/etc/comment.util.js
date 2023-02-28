@@ -15,7 +15,7 @@ export const addLikeToComment = ({ prevComments, commentId, loggedInUserId }) =>
   return prevComments.map((comment) => {
     if (comment.id === commentId) {
       const clone = deepClone(comment);
-      clone.feelings.push(loggedInUserId);
+      clone.feelings.push({ userId: loggedInUserId });
       return clone;
     }
     return comment;
@@ -26,7 +26,7 @@ export const removeLikeToComment = ({ prevComments, commentId, loggedInUserId })
   return prevComments.map((comment) => {
     if (comment.id === commentId) {
       const clone = deepClone(comment);
-      clone.feelings = [...clone.feelings].filter((userId) => userId !== loggedInUserId);
+      clone.feelings = [...clone.feelings].filter((user) => user.userId !== loggedInUserId);
       return clone;
     }
     return comment;

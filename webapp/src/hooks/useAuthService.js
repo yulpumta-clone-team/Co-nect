@@ -26,7 +26,7 @@ import useAxios from './useAxios';
  * @property {() => Promise<void>} requestLogout 로그아웃 api 실행
  * @property {() => Promise<void>} saveJwtToken jwt토근을 프론트에 저장
  * @property {() => Promise<void>} checkIsFirstLogin 첫 로그인인지 확인하는 함수
- * @property {(httpStatus: number) => void} handleExiredToken httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
+ * @property {(httpStatus: number) => void} handleExpiredToken httpStatus가 401,403이면 유저정보 삭제 후 로그인페이지로 이동
  */
 
 /**
@@ -37,21 +37,21 @@ import useAxios from './useAxios';
 const useAuthService = () => {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
-  const { notGetExecution: signUpExecution } = useAxios({
+  const { requestCommand: signUpExecution } = useAxios({
     axiosInstance: authApi.signUp,
     immediate: false,
   });
-  const { notGetExecution: loginExecution } = useAxios({
+  const { requestCommand: loginExecution } = useAxios({
     axiosInstance: authApi.login,
     immediate: false,
   });
 
-  const { notGetExecution: updateUserProfileExecution } = useAxios({
+  const { requestCommand: updateUserProfileExecution } = useAxios({
     axiosInstance: userApi.POST_ESSENTIAL_INFO,
     immediate: false,
   });
 
-  const handleShowEssesntialModal = (isFirstLogin) => {
+  const handleShowEssentialModal = (isFirstLogin) => {
     navigate(ESSENTIAL_INFO_LINKS.NICKNAME, { state: { isFirstLogin } });
   };
 
@@ -98,7 +98,7 @@ const useAuthService = () => {
    * @param {number} httpStatus
    * @returns {Promise<void>}
    */
-  const handleExiredToken = (httpStatus) => {
+  const handleExpiredToken = (httpStatus) => {
     if (httpStatus !== 403 && httpStatus !== 401) {
       return;
     }
@@ -149,7 +149,7 @@ const useAuthService = () => {
   const checkIsFirstLogin = (isFirstLogin) => {
     setTimeout(() => {
       if (isFirstLogin) {
-        handleShowEssesntialModal(isFirstLogin);
+        handleShowEssentialModal(isFirstLogin);
       } else {
         handleUpdateUserInfo();
       }
@@ -184,7 +184,7 @@ const useAuthService = () => {
     requestUpdateUserProfile,
     handleUpdateUserInfo,
     handleDeleteUserInfo,
-    handleExiredToken,
+    handleExpiredToken,
     saveJwtToken,
     checkIsFirstLogin,
   };

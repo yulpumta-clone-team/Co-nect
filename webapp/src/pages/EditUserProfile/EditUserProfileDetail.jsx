@@ -18,8 +18,8 @@ EditUserProfileDetail.propTypes = {
 };
 
 export default function EditUserProfileDetail({ targetUser }) {
-  const naviate = useNavigate();
-  const parsedTargerUserInfo = userDetailParser(targetUser);
+  const navigate = useNavigate();
+  const parsedTargetUserInfo = userDetailParser(targetUser);
   const {
     userId,
     nickname,
@@ -31,14 +31,14 @@ export default function EditUserProfileDetail({ targetUser }) {
     belongTeam,
     introduction,
     portfolio,
-  } = parsedTargerUserInfo;
+  } = parsedTargetUserInfo;
   const parsedSkillStack = skillStackParser(techSkills);
 
   const { isNicknameDuplicate, isNickNameSameWithOrigin, onClickCheckDuplicateNickname } =
     useCheckUserDuplicate(nickname);
 
   // 수정 요청 api hooks
-  const { notGetExecution } = useAxios({
+  const { requestCommand } = useAxios({
     axiosInstance: userApi.EDIT_USER_PROFILE,
     immediate: false,
   });
@@ -58,12 +58,12 @@ export default function EditUserProfileDetail({ targetUser }) {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = userPostEditParser(changedProfileImageSubmitData);
-    await notGetExecution({
+    await requestCommand({
       newConfig: { data: parsedSubmitData },
       successMessage: API_MESSAGE.SUCCESS_EDIT_USER,
     });
     setTimeout(() => {
-      naviate(ROUTE.USER);
+      navigate(ROUTE.USER);
     }, 1000);
   };
 
@@ -92,7 +92,6 @@ export default function EditUserProfileDetail({ targetUser }) {
   });
 
   const profileImageSrc = (imageFile && URL.createObjectURL(imageFile)) || inputValues.profileImage;
-
   return (
     <EditUserProfileView
       inputValues={inputValues}

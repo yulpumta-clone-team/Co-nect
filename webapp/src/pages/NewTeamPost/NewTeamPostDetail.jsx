@@ -16,7 +16,7 @@ export default function NewTeamPostDetail() {
   const navigate = useNavigate();
   const notifyDispatch = useToastNotificationAction();
 
-  const { notGetExecution } = useAxios({
+  const { requestCommand } = useAxios({
     axiosInstance: teamApi.POST_TEAM_POST,
     immediate: false,
   });
@@ -40,7 +40,7 @@ export default function NewTeamPostDetail() {
   const submitCallback = async (submitData) => {
     const changedProfileImageSubmitData = await uploadImageFileBeforeSubmit(submitData);
     const parsedSubmitData = newTeamPostParser(changedProfileImageSubmitData);
-    await notGetExecution({
+    await requestCommand({
       newConfig: { data: parsedSubmitData },
       successMessage: API_MESSAGE.SUCCESS_NEW_TEAM,
     });

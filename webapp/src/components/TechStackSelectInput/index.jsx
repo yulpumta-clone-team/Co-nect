@@ -43,7 +43,7 @@ export default function TechStackSelectInput({
 
   const {
     state: techStackOptionsApiState,
-    getExecution,
+    requestQuery,
     forceRefetch: forceRefetchTeckStackOptions,
   } = useAxios({
     axiosInstance: etcApi.getTechStackAll,

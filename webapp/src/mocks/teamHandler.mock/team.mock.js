@@ -1,10 +1,10 @@
-import { getRandomTechSkills } from 'utils';
+import { fakerUniqueNumId, getRandomTechSkills } from 'utils';
 import { hopeSessionOption } from 'constant';
 import { faker } from '@faker-js/faker/locale/ko';
 import { createRandomUserInfo, createRandomUserInfoList } from 'mocks/userHandler.mock/user.mock';
 
 export const createRandomTeamPost = () => ({
-  id: faker.datatype.uuid(),
+  id: fakerUniqueNumId(),
   name: faker.address.cityName(),
   userInfo: createRandomUserInfo(),
   userTeamList: createRandomUserInfoList(3),
@@ -19,7 +19,7 @@ export const createRandomTeamPost = () => ({
 });
 
 export const createRandomTeamCard = () => ({
-  id: faker.datatype.uuid(),
+  id: fakerUniqueNumId(),
   name: faker.address.cityName(),
   userInfo: createRandomUserInfo(),
   image: faker.image.avatar(),

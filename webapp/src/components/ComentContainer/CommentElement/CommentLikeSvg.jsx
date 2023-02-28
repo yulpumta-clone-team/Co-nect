@@ -16,12 +16,12 @@ CommentLikeSvg.propTypes = {
 };
 
 export default function CommentLikeSvg({ commentId, parentId, likedUserIds }) {
-  const { isLikedUserIdsContainLoggnedInUserId, handleClickLikeThumb } = useCommentsAction();
+  const { isLikedUserIdsContainLoggedInUserId, handleClickLikeThumb } = useCommentsAction();
 
   const handleClickThumbSvg = () => {
     handleClickLikeThumb(likedUserIds, commentId, parentId);
   };
-  const isFillHeartSvg = isLikedUserIdsContainLoggnedInUserId(likedUserIds);
+  const isFillHeartSvg = isLikedUserIdsContainLoggedInUserId(likedUserIds);
 
   const LikeHeartSvg = isFillHeartSvg ? HeartFillSvg : HeartSvg;
   return (

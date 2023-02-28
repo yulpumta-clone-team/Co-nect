@@ -8,7 +8,7 @@ DemoAlert.propTypes = {};
 export default function DemoAlert(props) {
   const [isModalOpen, closeModal] = useModal(true);
   return (
-    <Modal isOpen={isModalOpen} onClose={closeModal}>
+    <Modal wrapperId="DemoAlert" isOpen={isModalOpen} onClose={closeModal}>
       <Container>
         <h1> 데모 버전입니다!</h1>
         <p> 실제 API가 아닌 MSW를 활용한 mock api를 활용했습니다. </p>

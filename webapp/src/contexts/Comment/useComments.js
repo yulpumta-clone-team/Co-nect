@@ -3,6 +3,7 @@ import commentApi from 'api/comment.api';
 import { useToastNotificationAction } from 'contexts/ToastNotification';
 import { notifyNewMessage } from 'contexts/ToastNotification/action';
 import { TOAST_TYPE } from 'contexts/ToastNotification/type';
+import useAxios from 'hooks/useAxios';
 import { useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getUserInfo } from 'service/auth';
@@ -12,7 +13,6 @@ import {
   removeLikeToComment,
 } from 'service/etc/comment.util';
 import { setPostIdOnSubmitData } from 'utils';
-import useCommentApi from './useCommentApi';
 
 const DEFAULT_TARGET = -1;
 const DEFAULT_PARENT_ID = 0; // 원본 댓글일 경우 0으로 고정
@@ -31,20 +31,43 @@ const useComments = () => {
   const notifyDispatch = useToastNotificationAction();
 
   // api관련 로직
-  const { comments, setComments, isLoading, apiError, changeApi, forceRefetch } = useCommentApi(
-    'getComments',
-    commentApi.GET_COMMENT,
-    { postType, postId },
-  );
-  const postCommentApi = (config) => changeApi('postComments', commentApi.POST_COMMENT, config);
-  const postReplyApi = (config) => changeApi('postReply', commentApi.POST_REPLY, config);
-  const patchCommentApi = (config) => changeApi('patchComments', commentApi.PATCH_COMMENT, config);
-  const deleteCommentApi = (config) =>
-    changeApi('deleteComment', commentApi.DELETE_COMMENT, config);
-  const patchCommentLikeApi = (config) =>
-    changeApi('patchCommentLikeApi', commentApi.PATCH_COMMENT_LIKE, config);
-  const patchCommentUnLikeApi = (config) =>
-    changeApi('patchCommentUnLikeApi', commentApi.PATCH_COMMENT_UN_LIKE, config); // : DELETE_COMMENT_UNLIKE가 아닌가요 ?
+  // Query 요청
+  const {
+    state,
+    handleState,
+    requestQuery: getCommentAPI,
+    forceRefetch,
+  } = useAxios({
+    axiosInstance: commentApi.GET_COMMENT,
+    axiosConfig: { postType, postId },
+  });
+  const { responseData: comments, isLoading, error: apiError } = state;
+
+  // Command 요청
+  const { requestCommand: postCommentApi } = useAxios({
+    axiosInstance: commentApi.POST_COMMENT,
+    immediate: false,
+  });
+  const { requestCommand: postReplyApi } = useAxios({
+    axiosInstance: commentApi.POST_REPLY,
+    immediate: false,
+  });
+  const { requestCommand: patchCommentApi } = useAxios({
+    axiosInstance: commentApi.PATCH_COMMENT,
+    immediate: false,
+  });
+  const { requestCommand: deleteCommentApi } = useAxios({
+    axiosInstance: commentApi.DELETE_COMMENT,
+    immediate: false,
+  });
+  const { requestCommand: patchCommentLikeApi } = useAxios({
+    axiosInstance: commentApi.PATCH_COMMENT_LIKE,
+    immediate: false,
+  });
+  const { requestCommand: patchCommentUnLikeApi } = useAxios({
+    axiosInstance: commentApi.PATCH_COMMENT_UN_LIKE,
+    immediate: false,
+  });
 
   // useState관련 로직
   const [targetReplyListId, setTargetReplyListId] = useState(DEFAULT_PARENT_ID); // 답글을 보여주는 원본댓글의 id
@@ -74,9 +97,9 @@ const useComments = () => {
 
   /**
    * 댓글 작성 form에서 사용하는 submit handler
-   * @param {Object} sumbitData form에서 제출할 데이터
-   * @param {string} sumbitData.content 댓글 내용
-   * @param {boolean} sumbitData.isSecret 비밀댓글 여부
+   * @param {Object} submitData form에서 제출할 데이터
+   * @param {string} submitData.content 댓글 내용
+   * @param {boolean} submitData.isSecret 비밀댓글 여부
    */
   const createRootCommentSubmitCallback = async ({ content, isSecret }) => {
     if (!checkExecuteSubmit) return;
@@ -86,14 +109,15 @@ const useComments = () => {
       secret: isSecret,
       content,
     });
-    await postCommentApi({ postType, data: newCommentData });
+    await postCommentApi({ newConfig: { postType, data: newCommentData } });
+    await getCommentAPI();
   };
 
   /**
    * 대댓글 작성 form에서 사용하는 submit handler
-   * @param {Object} sumbitData form에서 제출할 데이터
-   * @param {string} sumbitData.content 댓글 내용
-   * @param {boolean} sumbitData.isSecret 비밀댓글 여부
+   * @param {Object} submitData form에서 제출할 데이터
+   * @param {string} submitData.content 댓글 내용
+   * @param {boolean} submitData.isSecret 비밀댓글 여부
    */
   const createReplyCommentSubmitCallback = async ({ content, isSecret }) => {
     if (!checkExecuteSubmit) return;
@@ -102,14 +126,15 @@ const useComments = () => {
       parentId: createReplyTargetCommentId,
       content,
     });
-    await postReplyApi({ postType, data: newCommentData });
+    await postReplyApi({ newConfig: { postType, data: newCommentData } });
+    await getCommentAPI();
   };
 
   /**
    * 댓글 수정 form에서 사용하는 submit handler
-   * @param {Object} sumbitData form에서 제출할 데이터
-   * @param {string} sumbitData.content 댓글 내용
-   * @param {boolean} sumbitData.isSecret 비밀댓글 여부
+   * @param {Object} submitData form에서 제출할 데이터
+   * @param {string} submitData.content 댓글 내용
+   * @param {boolean} submitData.isSecret 비밀댓글 여부
    */
   const editCommentSubmitCallback = async ({ content, isSecret }) => {
     if (!checkExecuteSubmit) return;
@@ -119,47 +144,51 @@ const useComments = () => {
       content,
       parentId: targetReplyListId, // 원본 댓글일 경우 0으로 고정
     });
-    await patchCommentApi({ postType, id: editTargetCommentId, data: newCommentData });
+    await patchCommentApi({
+      newConfig: { postType, id: editTargetCommentId, data: newCommentData },
+    });
     resetEditTargetCommentId();
+    await getCommentAPI();
   };
 
   /**
    * (대)댓글 클릭하면 삭제하는 함수
-   * @param {Object} config postType, id
+   * @param {Object} newConfig postType, id
    * @param {string} config.postType 현재 포스트의 타입(user || team)
-   * @param {numner} config.id 선택한 댓글의 id
+   * @param {number} config.id 선택한 댓글의 id
    */
-  const handleClickDeleteTargetComment = (config) => {
-    deleteCommentApi(config);
+  const handleClickDeleteTargetComment = (newConfig) => {
+    deleteCommentApi({ newConfig });
   };
 
   const addLike = async (postType, commentId, parentId) => {
     await patchCommentLikeApi({
-      postType,
-      id: commentId,
+      newConfig: {
+        postType,
+        id: commentId,
+      },
     });
     if (parentId) {
       const callbackParams = { commentId, loggedInUserId };
-      setComments((prev) =>
+      handleState((prev) =>
         findParentAndDoCallback(prev, parentId, addLikeToComment, callbackParams),
       );
     } else {
-      setComments((prevComments) => addLikeToComment({ prevComments, commentId, loggedInUserId }));
+      handleState((prevComments) => addLikeToComment({ prevComments, commentId, loggedInUserId }));
     }
   };
 
   const removeLike = async (postType, commentId, parentId) => {
     await patchCommentUnLikeApi({
-      postType,
-      id: commentId,
+      newConfig: { postType, id: commentId },
     });
     if (parentId) {
       const callbackParams = { commentId, loggedInUserId };
-      setComments((prev) =>
+      handleState((prev) =>
         findParentAndDoCallback(prev, parentId, removeLikeToComment, callbackParams),
       );
     } else {
-      setComments((prevComments) =>
+      handleState((prevComments) =>
         removeLikeToComment({ prevComments, commentId, loggedInUserId }),
       );
     }
@@ -173,7 +202,7 @@ const useComments = () => {
    * @param {UserId[]} likedUserIds 삭제하고자 하는 댓글의 종아요 누른 유저객체 배열
    * @returns {boolean} 포함되어있으면 true 아니면 false
    */
-  const isLikedUserIdsContainLoggnedInUserId = (likedUserIds) => {
+  const isLikedUserIdsContainLoggedInUserId = (likedUserIds) => {
     const findUser = likedUserIds.find((user) => user.userId === loggedInUserId);
     return !!findUser;
   };
@@ -185,10 +214,10 @@ const useComments = () => {
    * @param {number} parentId 삭제하고자 하는 댓글의 부모 id
    */
   const handleClickLikeThumb = async (likedUserIds, commentId, parentId) => {
-    if (isLikedUserIdsContainLoggnedInUserId(likedUserIds)) {
-      removeLike(postType, commentId, parentId);
+    if (isLikedUserIdsContainLoggedInUserId(likedUserIds)) {
+      await removeLike(postType, commentId, parentId);
     } else {
-      addLike(postType, commentId, parentId);
+      await addLike(postType, commentId, parentId);
     }
   };
 
@@ -247,7 +276,7 @@ const useComments = () => {
       handleClickDeleteTargetComment,
       handleClickLikeThumb,
       isShowSecretComment,
-      isLikedUserIdsContainLoggnedInUserId,
+      isLikedUserIdsContainLoggedInUserId,
       isCommentLoginUserWrote,
     }),
     [
@@ -262,7 +291,7 @@ const useComments = () => {
       editCommentSubmitCallback,
       handleClickLikeThumb,
       isShowSecretComment,
-      isLikedUserIdsContainLoggnedInUserId,
+      isLikedUserIdsContainLoggedInUserId,
       isCommentLoginUserWrote,
     ],
   );

@@ -1,27 +1,28 @@
 import { faker } from '@faker-js/faker/locale/ko';
 import { createRandomUserIdList, createRandomUserInfo } from 'mocks/userHandler.mock/user.mock';
+import { fakerUniqueNumId } from 'utils';
 
 export const createComment = () => {
-  const id = faker.datatype.uuid();
+  const id = fakerUniqueNumId();
   return {
     id,
     userInfo: createRandomUserInfo(),
     secret: Math.random() > 0.5,
     content: faker.lorem.sentence(5),
     updatedAt: faker.datatype.datetime(),
-    feelings: createRandomUserIdList(),
+    feelings: createRandomUserIdList().map((id) => ({ userId: id })),
     replies: createReplyList(id),
   };
 };
 
 export const createReply = (parentId) => ({
   parentId,
-  id: faker.datatype.uuid(),
+  id: fakerUniqueNumId(),
   userInfo: createRandomUserInfo(),
   secret: Math.random() > 0.5,
   content: faker.lorem.sentence(5),
   updatedAt: faker.datatype.datetime(),
-  feelings: createRandomUserIdList(),
+  feelings: createRandomUserIdList().map((id) => ({ userId: id })),
 });
 
 export const createCommentList = () =>
