@@ -1,14 +1,14 @@
-import { getRandomTechSkills } from 'utils';
+import { fakerUniqueNumId, getRandomTechSkills } from 'utils';
 import { hopeSessionOption, jobOptions } from 'constant';
 import { faker } from '@faker-js/faker/locale/ko';
 
-export const createRandomUserId = () => ({ userId: faker.datatype.uuid() });
+export const createRandomUserId = () => ({ userId: fakerUniqueNumId() });
 
 export const createRandomUserIdList = (number) =>
   Array.from({ length: number }, () => createRandomUserId());
 
 export const createRandomUserInfo = () => ({
-  id: faker.datatype.uuid(),
+  id: fakerUniqueNumId(),
   email: faker.internet.email(),
   name: faker.name.fullName(),
   image: faker.image.avatar(),
@@ -18,7 +18,7 @@ export const createRandomUserInfoList = (number) =>
   Array.from({ length: number }, () => createRandomUserInfo());
 
 export const createRandomUser = () => ({
-  id: faker.datatype.uuid(),
+  id: fakerUniqueNumId(),
   email: faker.internet.email(),
   portfolio: faker.internet.email(),
   slogan: faker.lorem.sentence(5),
@@ -35,7 +35,7 @@ export const createRandomUser = () => ({
 });
 
 export const createRandomUserCard = () => ({
-  id: faker.datatype.uuid(),
+  id: fakerUniqueNumId(),
   image: faker.image.avatar(),
   name: faker.name.fullName(),
   slogan: faker.lorem.sentence(5),

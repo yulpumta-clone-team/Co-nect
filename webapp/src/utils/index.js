@@ -1,6 +1,13 @@
+import { faker } from '@faker-js/faker/locale/ko';
 import { DOMAIN_TYPE } from 'constant';
 import { S3_IMAGE_SERVER_URL } from 'constant/api.constant';
 import { TECH_SKILLS } from 'constant/techskill.constant';
+
+// Set a unique seed value, such as the current timestamp
+const seed = Date.now();
+
+// Generate a random number ID between 1000 and 9999 using the seed value
+export const fakerUniqueNumId = () => faker.datatype.number({ min: 1000, max: 9999, seed });
 
 /**
  * 유저글인지 팀 공고글인지 확인하는 함수

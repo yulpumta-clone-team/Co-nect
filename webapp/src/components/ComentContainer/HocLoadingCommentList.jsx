@@ -7,7 +7,7 @@ import RootCommentList from './CommentList/Root.CommentList';
 import * as S from './Comment.style';
 
 HocLoadingCommentList.propTypes = {
-  postWriterId: PropTypes.string.isRequired,
+  postWriterId: PropTypes.number.isRequired,
 };
 
 export default function HocLoadingCommentList({ postWriterId }) {

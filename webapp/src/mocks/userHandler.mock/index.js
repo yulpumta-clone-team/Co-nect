@@ -5,7 +5,7 @@ import {
   getResponseWithError,
   successResponseWithEmptyData,
 } from 'mocks/mockUtils';
-import { getTechSkillWithKey } from 'utils';
+import { fakerUniqueNumId, getTechSkillWithKey } from 'utils';
 import { createRandomUser, createRandomUserList } from './user.mock';
 
 let tempEssentialInfo;
@@ -13,7 +13,11 @@ let tempEssentialInfo;
 const userHandler = [
   // 유저 필수 정보 생성
   rest.post(ROOT_API_URL + API.USER.ESSENTIAL_INFO, (req, res, ctx) => {
-    tempEssentialInfo = { ...req.body, id: req.id, skills: getTechSkillWithKey(req.body.skills) };
+    tempEssentialInfo = {
+      ...req.body,
+      id: fakerUniqueNumId(),
+      skills: getTechSkillWithKey(req.body.skills),
+    };
     return res(ctx.status(200), ctx.json(successResponseWithEmptyData));
   }),
   // 유저 필수 정보 조회
