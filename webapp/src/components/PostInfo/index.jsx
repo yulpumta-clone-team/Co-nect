@@ -6,7 +6,7 @@ import ChatBubbleOvalSvg from 'assets/icons/ChatBubbleOvalSvg';
 import * as S from './PostInfo.style';
 
 PostInfo.propTypes = {
-  postId: PropTypes.string.isRequired,
+  postId: PropTypes.number.isRequired,
   readCnt: PropTypes.string.isRequired,
   likeCnt: PropTypes.string.isRequired,
   commentCnt: PropTypes.string.isRequired,

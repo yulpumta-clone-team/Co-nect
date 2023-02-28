@@ -8,8 +8,8 @@ SecretCommentElement.propTypes = {
   isNested: PropTypes.bool.isRequired,
   content: PropTypes.string.isRequired,
   isSecret: PropTypes.bool.isRequired,
-  postWriterId: PropTypes.string.isRequired,
-  writerId: PropTypes.string.isRequired,
+  postWriterId: PropTypes.number.isRequired,
+  writerId: PropTypes.number.isRequired,
 };
 
 export default function SecretCommentElement({

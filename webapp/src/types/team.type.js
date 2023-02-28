@@ -5,7 +5,7 @@ import { rawResponseTechStackType } from './techSkill.type';
  * @type {TeamSchema}
  */
 const teamSchema = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   image: PropTypes.string,
   name: PropTypes.string.isRequired,
   skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,
@@ -32,7 +32,7 @@ const teamCardTypeSchema = {
  * @type {TeamDetailSchema}
  */
 const teamDetailTypeSchema = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   image: PropTypes.string,
   name: PropTypes.string.isRequired,
   skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,
@@ -40,7 +40,7 @@ const teamDetailTypeSchema = {
   slogan: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   userInfo: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     image: PropTypes.string,
     name: PropTypes.string.isRequired,
   }),

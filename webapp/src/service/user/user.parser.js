@@ -70,7 +70,7 @@ export const userDetailParser = (targetUserInfo) => {
   const slogan = targetUserInfo.slogan || '입력된 슬로건이 없네요.';
   const hopeSession = targetUserInfo.hopeSession || hopeSessionOption[0].value;
   const job = targetUserInfo.job || jobOptions[0].value;
-  const belongTeam = targetUserInfo.status;
+  const belongTeam = targetUserInfo.status === 'Active';
   const introduction = targetUserInfo.content || '입력된 자기소개가 없네요.';
   const portfolio = targetUserInfo.portfolio || '';
   const commentCnt = parsedNumberToThreeDigits(targetUserInfo.commentCnt);

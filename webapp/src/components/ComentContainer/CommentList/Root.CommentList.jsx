@@ -4,7 +4,7 @@ import RootCommentElement from '../CommentElement/Root.CommentElement';
 import * as S from '../Comment.style';
 
 RootCommentList.propTypes = {
-  postWriterId: PropTypes.string.isRequired,
+  postWriterId: PropTypes.number.isRequired,
   comments: PropTypes.array.isRequired,
 };
 

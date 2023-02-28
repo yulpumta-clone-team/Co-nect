@@ -2,11 +2,11 @@ import PropTypes, { shape } from 'prop-types';
 
 const commonCommentSchema = {
   content: PropTypes.string.isRequired,
-  feelings: PropTypes.arrayOf(PropTypes.shape({ userId: PropTypes.string })),
-  id: PropTypes.string.isRequired,
+  feelings: PropTypes.arrayOf(PropTypes.shape({ userId: PropTypes.number })),
+  id: PropTypes.number.isRequired,
   secret: PropTypes.bool.isRequired,
   userInfo: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }),
@@ -14,18 +14,18 @@ const commonCommentSchema = {
 
 const commentInfoSchema = {
   ...commonCommentSchema,
-  parentId: PropTypes.string,
+  parentId: PropTypes.number,
   replies: PropTypes.array.isRequired,
 };
 
-const replyCommentInfoSchema = {
+const replycommentInfoSchema = {
   ...commonCommentSchema,
-  parentId: PropTypes.string.isRequired,
+  parentId: PropTypes.number.isRequired,
   replies: PropTypes.array,
 };
 
 const commentSchema = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   isSecret: PropTypes.bool.isRequired,
   postType: PropTypes.string.isRequired,
   postId: PropTypes.number.isRequired,
@@ -34,6 +34,6 @@ const commentSchema = {
 
 export const commentInfoType = shape(commentInfoSchema);
 
-export const replyCommentInfoType = shape(replyCommentInfoSchema);
+export const replyCommentInfoType = shape(replycommentInfoSchema);
 
 export const commentType = shape(commentSchema);

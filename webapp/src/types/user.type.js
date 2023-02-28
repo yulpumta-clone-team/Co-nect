@@ -2,7 +2,7 @@ import PropTypes, { shape } from 'prop-types';
 import { rawResponseTechStackType } from './techSkill.type';
 
 export const loggedUserType = shape({
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   nickname: PropTypes.string.isRequired,
   profileImg: PropTypes.string,
 });
@@ -11,7 +11,7 @@ export const loggedUserType = shape({
  * @type {UserSchema}
  */
 const userSchema = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,
   slogan: PropTypes.string.isRequired,
@@ -31,10 +31,10 @@ const userCardTypeSchema = {
  * @type {UserDetailSchema}
  */
 const userDetailTypeSchema = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   skills: PropTypes.arrayOf(rawResponseTechStackType).isRequired,
   slogan: PropTypes.string.isRequired,
-  status: PropTypes.bool.isRequired,
+  status: PropTypes.string.isRequired,
   commentCnt: PropTypes.number.isRequired,
   content: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
@@ -44,7 +44,7 @@ const userDetailTypeSchema = {
   portfolio: PropTypes.string.isRequired,
   readCnt: PropTypes.number.isRequired,
   userInfo: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }),

@@ -17,7 +17,7 @@ import CommentButtonContainer from './CommentButtonContainer';
 
 RootCommentElement.propTypes = {
   commentInfo: commentInfoType.isRequired,
-  postWriterId: PropTypes.string.isRequired,
+  postWriterId: PropTypes.number.isRequired,
 };
 
 // 답글보여주기 상태에 따른 컴포넌트 렌더링
