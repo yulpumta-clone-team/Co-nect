@@ -114,18 +114,9 @@ export const userDetailParser = (targetUserInfo) => {
  */
 
 export const userPostEditParser = (userInfoRawData) => {
-  const {
-    introduction,
-    hopeSession,
-    profileImage,
-    job,
-    nickname,
-    portfolio,
-    slogan,
-    techSkills,
-    belongTeam,
-  } = userInfoRawData;
-  const paresedTechSkills = skillStackParserToIds(techSkills);
+  const { introduction, hopeSession, profileImage, job, nickname, portfolio, slogan, techSkills } =
+    userInfoRawData;
+  const parsedTechSkills = skillStackParserToIds(techSkills);
   return {
     content: introduction,
     hope_session: hopeSession,
@@ -134,7 +125,7 @@ export const userPostEditParser = (userInfoRawData) => {
     name: nickname,
     portfolio,
     slogan,
-    skills: paresedTechSkills,
+    skills: parsedTechSkills,
   };
 };
 
@@ -158,18 +149,9 @@ export const userPostEditParser = (userInfoRawData) => {
  */
 
 export const essentialInfoParser = (essentialInfoRawData) => {
-  const {
-    introduction,
-    hopeSession,
-    profileImage,
-    job,
-    nickname,
-    portfolio,
-    slogan,
-    techSkills,
-    belongTeam,
-  } = essentialInfoRawData;
-  const paresedTechSkills = skillStackParserToIds(techSkills);
+  const { introduction, hopeSession, profileImage, job, nickname, portfolio, slogan, techSkills } =
+    essentialInfoRawData;
+  const parsedTechSkills = skillStackParserToIds(techSkills);
   return {
     content: introduction || '자기소개를 입력하지 않았네요!',
     hope_session: hopeSession || hopeSessionOption[0].value,
@@ -178,6 +160,6 @@ export const essentialInfoParser = (essentialInfoRawData) => {
     name: nickname,
     portfolio: portfolio || 'EMPTY',
     slogan,
-    skills: paresedTechSkills,
+    skills: parsedTechSkills,
   };
 };

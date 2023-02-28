@@ -26,7 +26,7 @@ export default function NestedCommentElement({ commentInfo, postWriterId }) {
     updatedAt,
     feelings: likedUserIds,
   } = commentInfo;
-  const { id: writerId, image: writerProfileImage, name: writerName } = writerInfo;
+  const { id: writerId, name: writerName } = writerInfo;
   const likesCount = likedUserIds.length;
   const isEditTargetComment = commentId === editTargetCommentId;
 

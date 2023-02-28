@@ -79,8 +79,7 @@ const useFileUploader = () => {
    */
   const deleteFileOnS3 = async () => {
     try {
-      const response = await etcApi.deleteImage();
-      console.log('response :>> ', response);
+      await etcApi.deleteImage();
     } catch (apiError) {
       console.error(apiError);
       notifyNewMessage(notifyDispatch, apiError.message, TOAST_TYPE.Error);
