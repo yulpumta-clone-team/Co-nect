@@ -219,7 +219,6 @@ const useComments = () => {
     } else {
       await addLike(postType, commentId, parentId);
     }
-    await getCommentAPI();
   };
 
   /**
