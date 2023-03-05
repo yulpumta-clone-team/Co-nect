@@ -9,13 +9,15 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`
-  max-width: 1180px;
+  max-width: 1700px;
   margin: 0 auto;
   padding-top: 30px;
+  display: flex;
+  justify-content: center;
 `;
 
 export const Full = styled.main`
-  max-width: 1180px;
+  max-width: 1700px;
   height: 100vh;
   margin: 0 auto;
   ${({ theme: { mixin } }) => mixin.flexCenter({})}

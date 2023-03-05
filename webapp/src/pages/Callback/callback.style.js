@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro';
 
 export const Container = styled.div`
-  max-width: 1180px;
+  width: 100%;
   height: 100vh;
   ${({ theme: { mixin } }) => mixin.flexCenter({})}
   gap: 24px;
