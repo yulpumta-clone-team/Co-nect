@@ -375,7 +375,7 @@ export const Card = styled.div`
   width: 70%;
   height: 580px;
   background-color: black;
-  border-radius: 2%;
+  border-radius: 3%;
 
   overflow: hidden;
   box-sizing: border-box;
