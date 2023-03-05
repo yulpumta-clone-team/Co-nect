@@ -373,7 +373,7 @@ export const Card = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 70%;
-  height: 450px;
+  height: 580px;
   background-color: black;
   border-radius: 2%;
 
