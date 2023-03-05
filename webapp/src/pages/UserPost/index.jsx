@@ -19,7 +19,7 @@ export default function UserPost() {
 
   return (
     <S.Container>
-      <BackButton />
+      <BackButton top="100px" />
       <UserPostDetailWithLoading />
     </S.Container>
   );

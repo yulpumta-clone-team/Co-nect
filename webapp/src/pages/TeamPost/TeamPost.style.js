@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components/macro';
 export const Container = styled.div`
   margin: 0 auto;
   padding-bottom: 10px; // postContainer아래 border가 짤려서 어쩔 수 없이 pading속성 추가
-  position: relative;
   width: 100%;
   display: flex;
   justify-content: center;

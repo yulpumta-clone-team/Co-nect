@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 
 export const Container = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
 `;
