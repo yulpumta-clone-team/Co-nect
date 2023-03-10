@@ -23,7 +23,7 @@ export const InformationBox = styled.ul`
     ${({ theme: { fonts } }) => fonts.korean.default};
     > span:not(:first-child) {
       display: inline-flex;
-      width: 98px;
+      width: 110px;
     }
     > a {
       &:hover {
@@ -37,4 +37,8 @@ export const Name = styled.span`
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
   display: inline-flex;
   width: 64px;
+`;
+
+export const Service_info = styled.span`
+  color: ${({ theme: { colors } }) => colors.greyScale.guide};
 `;
