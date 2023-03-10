@@ -81,17 +81,14 @@ function Main() {
       </S.Header>
       <S.MainSection>
         <S.Section>
-          <S.Wave>
-            <SimpleListComponent Component={S.Curve} idx={4} />
-          </S.Wave>
           <S.Contents>
             <S.Logo />
             <S.MainText>
               {MAIN_TEXT.split('').map((t, i) => (
                 // eslint-disable-next-line react/no-array-index-key
-                <S.GhostEffects key={i} index={i}>
+                <span key={i} index={i}>
                   {t}
-                </S.GhostEffects>
+                </span>
               ))}
             </S.MainText>
             <S.SubText>
@@ -101,20 +98,15 @@ function Main() {
             </S.SubText>
           </S.Contents>
         </S.Section>
-        <S.ScrollDown>
-          <S.Indicator />
-          <S.Indicator />
-          <S.Indicator />
-        </S.ScrollDown>
       </S.MainSection>
       <S.PurposeSection>
         <S.StartQuestion>
           <S.Image3D>
             <p>
               {KOR_TITLE_CONECT.split('').map((s, i) => (
-                <S.MoveText key={s} index={i}>
+                <span key={s} index={i}>
                   {s}
-                </S.MoveText>
+                </span>
               ))}
               는 무엇을 위해 만들어졌을까요?
             </p>
