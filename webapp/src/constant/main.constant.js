@@ -12,6 +12,12 @@ export const CREATOR_INFO = [
   { name: '윤효정', field: 'BACKEND', contact: 'https://github.com/hyojeongyun' },
   { name: '정영혜', field: 'DESIGNER', contact: 'younghye.hello@gmail.com' },
 ];
+export const SERVICE_INFO = [
+  { text: '서비스 이용약관' },
+  { text: '개인정보 처리방침' },
+  { text: '이용자의 권리 및 유의사항' },
+  { text: '데이터 서비스 이용약관' },
+];
 
 export const MAIN_SERVICE_LINKS = [
   { icon: 'signUp', route: ROUTE.SIGN_UP },

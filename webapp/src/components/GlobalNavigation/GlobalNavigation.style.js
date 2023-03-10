@@ -104,11 +104,20 @@ export const UserName = styled.div`
 export const UserInfoDropdown = {
   overlayStyle: css`
     position: absolute;
+    display: flex;
+    align-items: center;
     top: 64px;
     right: -10px;
   `,
   contentStyle: css`
-    height: 135px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 250px;
+    gap: 20%;
+    border-color: ${({ theme: { colors } }) => colors.primary.normal};
     ${({ theme: { fonts } }) => fonts.korean.emphasis};
   `,
 };
@@ -116,4 +125,20 @@ export const UserInfoDropdown = {
 export const AssignListButton = css`
   width: 99px;
   height: 35px;
+`;
+
+export const LogoutButton = css`
+  width: 99px;
+  cursor: pointer;
+`;
+
+export const ProfileImg = css`
+  width: 80px;
+  height: 80px;
+`;
+export const Edit = styled.div`
+  display: absolute;
+  width: 24px;
+  right: -60px;
+  cursor: pointer;
 `;

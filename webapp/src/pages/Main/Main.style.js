@@ -82,7 +82,7 @@ export const SubText = styled.div`
 `;
 
 export const PurposeSection = styled.div`
-  height: 260vh;
+  height: 220vh;
   width: 100%;
   background-color: #262c41;
 `;
@@ -102,7 +102,7 @@ export const Image3D = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  height: 130vh;
   ${({ theme: { fonts } }) => fonts.main.title};
   & p {
     position: absolute;
@@ -122,7 +122,7 @@ export const Benefit = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80vh;
+  height: 65vh;
   background-color: #262c41;
 `;
 
@@ -202,9 +202,9 @@ export const Card = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 70%;
-  height: 450px;
+  height: 580px;
   background-color: black;
-  border-radius: 2%;
+  border-radius: 3%;
 
   overflow: hidden;
   box-sizing: border-box;
