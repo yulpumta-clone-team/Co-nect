@@ -10,6 +10,7 @@ import MessageIcon from 'assets/images/feedback-message.png';
 import SignUpIcon from 'assets/images/signup-link.png';
 import BoardIcon from 'assets/images/board-link.png';
 import PostIcon from 'assets/images/post-link.png';
+import Gradation from 'assets/images/main-gradient.png';
 
 export const MainContainer = styled.div`
   width: 100vw;
@@ -30,8 +31,15 @@ export const Header = styled.header`
 export const MainSection = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: black;
+  background-image: url(${Gradation});
 `;
+
+// export const Gradient = styled.img.attrs({ src: `${Gradation}` })`
+//   position: relative;
+//   display: flex;
+//   top: -30px;
+//   width: 100%;
+// `;
 
 export const Section = styled.section`
   position: relative;

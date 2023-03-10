@@ -16,7 +16,6 @@ import ToastNotificationProvider, {
 import { deleteMessage } from 'contexts/ToastNotification/action';
 import ToastNotification from 'components/ToastNotification';
 import { throttle } from 'lodash';
-import SimpleListComponent from 'hoc/SimpleListComponent';
 import Footer from 'components/Footer';
 import * as S from './Main.style';
 
