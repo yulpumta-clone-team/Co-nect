@@ -6,7 +6,6 @@ import UpperButton from 'components/Common/UpperButton';
 import Callback from 'pages/Callback';
 import CardsGrid from 'components/CardsGrid';
 import CardLoader from 'components/Common/Loader/CardLoader';
-import SimpleListComponent from './SimpleListComponent';
 
 WithInfiniteScroll.propTypes = {
   CardComponent: PropTypes.func.isRequired,
@@ -101,9 +100,7 @@ export default function WithInfiniteScroll({
           isLoading={isLoading}
         >
           <RefContainer isShow={refDisplay} ref={loadMoreRef}>
-            {cardList.length !== 0 && isLoading && !error.isError && (
-              <SimpleListComponent Component={CardLoader} idx={1} />
-            )}
+            {cardList.length !== 0 && isLoading && !error.isError && <CardLoader />}
           </RefContainer>
         </CardsGrid>
       )}
@@ -114,4 +111,5 @@ export default function WithInfiniteScroll({
 
 const RefContainer = styled.div`
   display: ${({ isShow }) => isShow};
+  padding: 12px 0;
 `;

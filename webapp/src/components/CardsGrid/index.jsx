@@ -39,7 +39,7 @@ export default function CardsGrid({
   if (cards.length === 0 && isLoading)
     return (
       <S.Cards>
-        <SimpleListComponent Component={CardLoader} idx={4} />
+        <SimpleListComponent Component={CardLoader} idx={3} />
         {children}
       </S.Cards>
     );
