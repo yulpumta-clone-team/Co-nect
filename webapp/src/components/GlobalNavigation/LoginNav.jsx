@@ -49,6 +49,7 @@ export default function LoginNav({ userInfo }) {
           isDropdownOpen={isDropdownOpen}
           shouldCloseDropdown={shouldCloseDropdown}
           closeDropdown={closeDropdown}
+          userInfo={userInfo}
         />
       </S.AssignList>
     </S.BoardList>
