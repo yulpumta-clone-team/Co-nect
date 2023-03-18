@@ -5,7 +5,6 @@ import com.projectmatching.app.domain.comment.entity.UserComment;
 import com.projectmatching.app.domain.history.entity.UserHistory;
 import com.projectmatching.app.domain.liking.entity.UserCommentLiking;
 import com.projectmatching.app.domain.liking.entity.UserLiking;
-import com.projectmatching.app.domain.techStack.dto.TechStackDto;
 import com.projectmatching.app.domain.user.Role;
 import com.projectmatching.app.domain.user.dto.UserEssentialDto;
 import com.projectmatching.app.util.IdGenerator;
@@ -14,7 +13,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter @Setter
 @Entity

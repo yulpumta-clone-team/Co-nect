@@ -11,8 +11,6 @@ import com.projectmatching.app.util.IdGenerator;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
-import java.util.List;
-
 import static com.projectmatching.app.constant.ServiceConstant.REGEX_EMAIL;
 import static com.projectmatching.app.constant.ServiceConstant.REGEX_PWD;
 
@@ -22,7 +20,6 @@ import static com.projectmatching.app.constant.ServiceConstant.REGEX_PWD;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL) //null 이면 생성되지 않음
-
 public class UserJoinDto implements Validatable {
 
     @JsonIgnore
@@ -33,13 +30,14 @@ public class UserJoinDto implements Validatable {
     private String pwd;
 
 
-
-    public static UserJoinDto createEmpty() { return new UserJoinDto();}
+    public static UserJoinDto createEmpty() {
+        return new UserJoinDto();
+    }
 
     //dto를 entity로
-    public User asEntity(Role role){
+    public User asEntity(Role role) {
         User user = new User();
-        BeanUtils.copyProperties(this,user);
+        BeanUtils.copyProperties(this, user);
         user.setRole(role);
         return user;
 
@@ -47,7 +45,7 @@ public class UserJoinDto implements Validatable {
 
 
     //entity를 dto로
-    public static UserJoinDto of(User user){
+    public static UserJoinDto of(User user) {
         UserJoinDto userJoinDto = createEmpty();
         BeanUtils.copyProperties(user, userJoinDto);
         return userJoinDto;
@@ -60,11 +58,11 @@ public class UserJoinDto implements Validatable {
      */
     @Override
     public void validate() {
-        if(!REGEX_EMAIL.matcher(this.email).matches()){
+        if (!REGEX_EMAIL.matcher(this.email).matches()) {
             throw new ResponeException(ResponseTemplateStatus.EMAIL_FORM_INVALID);
         }
 
-        if(!REGEX_PWD.matcher(this.pwd).matches()){
+        if (!REGEX_PWD.matcher(this.pwd).matches()) {
             throw new ResponeException(ResponseTemplateStatus.PWD_FORM_INVALID);
         }
 

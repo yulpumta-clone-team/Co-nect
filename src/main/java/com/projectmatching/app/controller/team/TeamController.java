@@ -104,7 +104,7 @@ public class TeamController {
         teamService.cancelTeamLiking(userDetails, teamId);
         return ResponseTemplate.of(SUCCESS);
     }
-    
+
 //    @ApiOperation(value = "내가 좋아요한 팀 목록")
 //    @GetMapping("team/favorite")
 //    public ResponseTemplate<List<Team>> getMyFavoriteTeam(@AuthenticationPrincipal UserDetailsImpl userDetails){
