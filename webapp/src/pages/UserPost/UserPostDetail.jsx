@@ -43,16 +43,11 @@ export default function UserPostDetail({ targetUser }) {
       </S.ProfileImageContainer>
       <S.InfoContainer>
         <S.UserInfoContainer>
+          <S.Slogan>{slogan}</S.Slogan>
           <S.SingleInfo>
             <S.SingleInfoTitle>포트폴리오</S.SingleInfoTitle>
             <div>
               <S.PortfolioLink href={portfolio}>{portfolio}</S.PortfolioLink>
-            </div>
-          </S.SingleInfo>
-          <S.SingleInfo>
-            <S.SingleInfoTitle>슬로건</S.SingleInfoTitle>
-            <div>
-              <span>{slogan}</span>
             </div>
           </S.SingleInfo>
           <S.SingleInfo>

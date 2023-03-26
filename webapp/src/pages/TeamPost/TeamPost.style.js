@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components/macro';
 export const Container = styled.div`
   margin: 0 auto;
   padding-bottom: 10px; // postContainer아래 border가 짤려서 어쩔 수 없이 pading속성 추가
-  position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -12,7 +11,7 @@ export const Container = styled.div`
 export const PostContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 800px;
+  width: 1100px;
   background-color: ${({ theme: { colors } }) => colors.greyScale.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
@@ -63,7 +62,7 @@ export const TeamInfoContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 `;
 
 export const CommentDivider = css`
@@ -75,31 +74,24 @@ export const SingleInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+
   > div {
     width: 70%;
   }
 `;
 
-export const SingleInfoTitle = styled.span`
+export const SingleInfoTitle = styled.h5`
   color: ${({ theme: { colors } }) => colors.primary.normal};
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
-  font-weight: 700;
 `;
 
-export const TeamName = styled(SingleInfoTitle)`
+export const TeamName = styled.h2`
   ${({ theme: { fonts } }) => fonts.korean.title};
-  font-size: 4rem;
   font-weight: 400;
-  color: #3c3c3c;
+  font-size: 40px;
+  line-height: 32px;
 `;
 
-export const Slogan = styled(SingleInfoTitle)`
-  ${({ theme: { fonts } }) => fonts.korean.subTitle};
-  font-weight: 700;
-  color: #3c3c3c;
-`;
-
-export const TeamSkillSession = styled(SingleInfoTitle)`
-  position: relative;
-  width: 3%;
+export const Slogan = styled.h4`
+  ${({ theme: { fonts } }) => fonts.korean.title};
 `;

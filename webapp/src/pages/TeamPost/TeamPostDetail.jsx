@@ -45,7 +45,7 @@ export default function TeamPostDetail({ targetTeam }) {
       </S.ImgContainer>
       <S.TeamInfoContainer>
         <S.TeamName>{teamName}</S.TeamName>
-        <Divider />
+        <Divider marginTop="14px" />
         <S.SingleInfo>
           <S.SingleInfoTitle>기술 스택</S.SingleInfoTitle>
           <TechSkills skills={techSkills} imageSize="40px" />
@@ -54,7 +54,7 @@ export default function TeamPostDetail({ targetTeam }) {
           <S.SingleInfoTitle>희망 작업 기간</S.SingleInfoTitle>
           <span>{hopeSession}</span>
         </S.SingleInfo>
-        <Divider />
+        <Divider marginBottom="10px" marginTop="10px" />
         <S.Slogan>{slogan}</S.Slogan>
         <MarkdownEditor onlyViewer content={content} />
         <Divider customStyle={S.CommentDivider} />

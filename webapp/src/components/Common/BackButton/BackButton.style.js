@@ -2,10 +2,11 @@ import styled from 'styled-components/macro';
 
 export const Container = styled.button`
   position: absolute;
-  left: 1.56%;
-  top: 3.33%;
-
-  ${({ theme: { mixin } }) => mixin.flexCenter({})}
+  left: ${({ left }) => left || '40px'};
+  top: ${({ top }) => top || '40px'};
+  && {
+    ${({ customStyle }) => customStyle}
+  }
   > svg {
     width: 30px;
     height: 30px;
