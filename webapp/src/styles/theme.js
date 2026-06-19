@@ -19,7 +19,7 @@ export const FONT = {
     // html {font-size: 10px}
     BASE: '1.6rem',
     MEDIUM: '2.4rem',
-    MEDIUM_LARGE: '3rem',
+    MEDIUM_LARGE: '3.2rem',
     LARGE: '3.6rem',
     X_LARGE: '4.8rem',
     TX_LARGE: '6.4rem',
@@ -73,7 +73,7 @@ const fonts = {
       font-family: ${FONT.FAMILY.KOREAN};
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
-      font-size: ${FONT.SIZE.X_LARGE};
+      font-size: ${FONT.SIZE.MEDIUM};
       line-height: ${FONT.HEIGHT.LARGE};
     `,
     subTitle: css`
@@ -99,13 +99,6 @@ const fonts = {
     `,
   },
   english: {
-    main: css`
-      font-family: ${FONT.FAMILY.ENGLISH};
-      font-style: ${FONT.STYLE.BASE};
-      font-weight: ${FONT.WEIGHT.BOLD};
-      font-size: ${FONT.SIZE.TX_LARGE};
-      line-height: ${FONT.HEIGHT.TTX_LARGE};
-    `,
     title: css`
       font-family: ${FONT.FAMILY.ENGLISH};
       font-style: ${FONT.STYLE.BASE};
@@ -118,7 +111,7 @@ const fonts = {
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
       font-size: ${FONT.SIZE.BASE};
-      line-height: ${FONT.HEIGHT.LARGE};
+      line-height: ${FONT.HEIGHT.MEDIUM};
     `,
     default: css`
       font-family: ${FONT.FAMILY.ENGLISH};
@@ -154,7 +147,7 @@ const fonts = {
       font-family: ${FONT.FAMILY.ENGLISH};
       font-style: ${FONT.STYLE.BASE};
       font-weight: ${FONT.WEIGHT.BOLD};
-      font-size: ${FONT.SIZE.MEDIUM_LARGE};
+      font-size: ${FONT.SIZE.MEDIUM};
       line-height: ${FONT.HEIGHT.X_LARGE};
     `,
     default: css`

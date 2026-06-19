@@ -6,9 +6,11 @@ import * as S from './BackButton.style';
 
 BackButton.propTypes = {
   url: PropTypes.string,
+  left: PropTypes.string,
+  top: PropTypes.string,
 };
 
-export default function BackButton({ url }) {
+export default function BackButton({ url, left, top }) {
   const navigate = useNavigate();
 
   const handleOnClickBack = () => {
@@ -16,7 +18,7 @@ export default function BackButton({ url }) {
     navigate(backUrl);
   };
   return (
-    <S.Container onClick={handleOnClickBack}>
+    <S.Container onClick={handleOnClickBack} left={left} top={top}>
       <ArrowLeftSvg />
     </S.Container>
   );

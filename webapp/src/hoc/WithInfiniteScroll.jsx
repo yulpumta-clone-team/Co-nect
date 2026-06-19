@@ -111,5 +111,4 @@ export default function WithInfiniteScroll({
 
 const RefContainer = styled.div`
   display: ${({ isShow }) => isShow};
-  padding: 12px 0;
 `;

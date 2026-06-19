@@ -19,7 +19,7 @@ export default function TeamPost() {
 
   return (
     <S.Container>
-      <BackButton />
+      <BackButton top="100px" />
       <TeamPostDetailWithLoading />
     </S.Container>
   );

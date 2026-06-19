@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 
 export const Container = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
 `;
@@ -57,13 +56,19 @@ export const UserInfoContainer = styled.div`
   width: 100%;
 `;
 
+export const Slogan = styled.h3`
+  width: 100%;
+  ${({ theme: { fonts } }) => fonts.korean.title}
+  margin-bottom: 24px;
+`;
+
 export const SingleInfo = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   gap: 24px;
   margin-bottom: 20px;
-  > span {
+  > h5 {
     width: 30%;
   }
   > div {
@@ -77,9 +82,10 @@ export const PortfolioLink = styled.a`
   }
 `;
 
-export const SingleInfoTitle = styled.span`
+export const SingleInfoTitle = styled.h5`
   color: ${({ theme: { colors } }) => colors.primary.normal};
   ${({ theme: { fonts } }) => fonts.korean.emphasis};
+  align-self: flex-start;
 `;
 
 export const CommentDivder = css`
